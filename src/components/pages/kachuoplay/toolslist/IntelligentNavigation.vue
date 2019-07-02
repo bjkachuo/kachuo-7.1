@@ -15,15 +15,6 @@
 let map = null,walking=null;
 let scenicDataObj = {};
 
-// import {SCENICSPOT as SCENICSPOT_A, SCENICLINE as SCENICLINE_A} from "@/assets/scencedata/cangyanshan";
-// import {SCENICSPOT as SCENICSPOT_B, SCENICLINE as SCENICLINE_B} from "@/assets/scencedata/huizhou";
-// import {SCENICSPOT as SCENICSPOT_C, SCENICLINE as SCENICLINE_C} from "@/assets/scencedata/penglai";
-// import {SCENICSPOT as SCENICSPOT_D, SCENICLINE as SCENICLINE_D} from "@/assets/scencedata/shaolin";
-// import {SCENICSPOT as SCENICSPOT_E, SCENICLINE as SCENICLINE_E} from "@/assets/scencedata/shenhu";
-// import {SCENICSPOT as SCENICSPOT_F, SCENICLINE as SCENICLINE_F} from "@/assets/scencedata/yunwushan";
-// import {SCENICSPOT as SCENICSPOT_G, SCENICLINE as SCENICLINE_G} from "@/assets/scencedata/sankong";
-// import {SCENICSPOT as SCENICSPOT_H, SCENICLINE as SCENICLINE_H} from "@/assets/scencedata/yungang";
-
 import Header from "@/components/common/Header";
 import NavigationTab from "@/components/common/NavigationTab";
 import Popup from "@/components/common/Popup";
@@ -102,44 +93,7 @@ export default {
     NavigationTab
   },
   methods: {
-    importDataSync(id) {
-      let dataObj = {}
-      // switch (id) {
-      //   case "22":
-      //     this.SCENICSPOT = SCENICSPOT_A;
-      //     this.SCENICLINE = SCENICLINE_A;
-      //     break;
-      //   case "23":
-      //     this.SCENICSPOT = SCENICSPOT_B;
-      //     this.SCENICLINE = SCENICLINE_B;
-      //     break;
-      //   case "24":
-      //     this.SCENICSPOT = SCENICSPOT_C;
-      //     this.SCENICLINE = SCENICLINE_C;
-      //     break;
-      //   case "25":
-      //     this.SCENICSPOT = SCENICSPOT_D;
-      //     this.SCENICLINE = SCENICLINE_D;
-      //     break;
-      //   case "26":
-      //     this.SCENICSPOT = SCENICSPOT_E;
-      //     this.SCENICLINE = SCENICLINE_E;
-      //     break;
-      //   case "27":
-      //     this.SCENICSPOT = SCENICSPOT_F;
-      //     this.SCENICLINE = SCENICLINE_F;
-      //     break;
-      //   case "35":
-      //     this.SCENICSPOT = SCENICSPOT_G;
-      //     this.SCENICLINE = SCENICLINE_G;
-      //     break;
-      //   case "66":
-      //     this.SCENICSPOT = SCENICSPOT_H;
-      //     this.SCENICLINE = SCENICLINE_H;
-      //     break;
-      // }
-      return dataObj;
-    },
+
     initLocalData() {
       let scenicId = sessionStorage.getItem("currentScenic");
       // let data = this.importDataSync(scenicId);
@@ -163,7 +117,7 @@ export default {
         pitch:30,
         rotateEnable:true,
         pitchEnable:true,
-        //viewMode:'3D',//开启3D视图,默认为关闭
+        viewMode:'3D',//开启3D视图,默认为关闭
         buildingAnimation:true,//楼块出现是否带动画
         showBuildingBlock:true,
       });
@@ -306,10 +260,10 @@ export default {
         });
     },
     showPath(index) {
-      this.navIndex= index;
-      this.roadPath = [];
-      this.roadPath = this.SCENICLINE[index].path;
-      this.init(this.mapCenter, this.path,index);
+      this.navIndex = index;
+      // this.roadPath = [];
+      // this.roadPath = this.SCENICLINE[index].path;
+      this.init(this.mapCenter, this.path,index)
     },
     showModel(name,position) {
       this.clickPosition = {
