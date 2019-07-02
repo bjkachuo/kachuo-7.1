@@ -163,12 +163,13 @@ export default {
           anchor:'bottom-center',
           offset:  new AMap.Pixel(0,-52)
         })
-        text.on('click',item2=>{
-          console.log(item);
+        text.on('touchstart',item2=>{
+          // console.log(item);
           this.showModel(item.id);
         })
         map.add(marker);        
-        marker.on("click", item2 => {
+        marker.on("touchstart", item2 => {
+          // alert(1)
           // for (var i = 0; i < markers.length; i++) {
           //     markers[i].setIcon(new AMap.Icon({            
           //     image: normalIcon,
@@ -187,32 +188,6 @@ export default {
          map.setFitView();
       });
     },
-
-    // //绘制路线
-    // drawMap(Tlng,Tlat) { // 专车--画地图
-    //      //构造路线导航类
-        
-    //     if(walking){
-    //       //调用clear()函数清除上一次结果，可以清除地图上绘制的路线以及路径文本结果
-    //         walking.clear();         
-    //     }
-    //     walking = new AMap.Walking({
-    //       map: map,   
-    //       hideMarkers: false,
-    //       isOutline: true,
-    //       outlineColor: '#ffeeee',
-    //       autoFitView: true
-    //     });
-    //     walking.search([this.mapCenter[0], this.mapCenter[1]], [Tlng, Tlat], function(status, result) {
-    //         // result即是对应的步行路线数据信息，相关数据结构文档请参考  https://lbs.amap.com/api/javascript-api/reference/route-search#m_WalkingResult
-    //         if (status === 'complete') {
-    //             console.log('绘制路线完成')
-    //         } else {
-    //             console.log('获取数据失败：' + result)
-    //         }
-    //     });
-    // },
-
 
     init(type) {
       //获取地图初始化中心点

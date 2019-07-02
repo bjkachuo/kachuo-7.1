@@ -46,8 +46,8 @@ export default {
       getScenicPointDetails({
         longitude: obj.lng,
         latitude: obj.lat
-      })
-        .then(res => {
+      }) .then(res => {
+
           console.log(res);
           if (res.result === 1) {
             this.showBottom = true;

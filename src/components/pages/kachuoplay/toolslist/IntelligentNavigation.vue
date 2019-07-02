@@ -15,38 +15,14 @@
 let map = null,walking=null;
 let scenicDataObj = {};
 
-import {
-  SCENICSPOT as SCENICSPOT_A,
-  SCENICLINE as SCENICLINE_A
-} from "@/assets/scencedata/cangyanshan";
-import {
-  SCENICSPOT as SCENICSPOT_B,
-  SCENICLINE as SCENICLINE_B
-} from "@/assets/scencedata/huizhou";
-import {
-  SCENICSPOT as SCENICSPOT_C,
-  SCENICLINE as SCENICLINE_C
-} from "@/assets/scencedata/penglai";
-import {
-  SCENICSPOT as SCENICSPOT_D,
-  SCENICLINE as SCENICLINE_D
-} from "@/assets/scencedata/shaolin";
-import {
-  SCENICSPOT as SCENICSPOT_E,
-  SCENICLINE as SCENICLINE_E
-} from "@/assets/scencedata/shenhu";
-import {
-  SCENICSPOT as SCENICSPOT_F,
-  SCENICLINE as SCENICLINE_F
-} from "@/assets/scencedata/yunwushan";
-import {
-  SCENICSPOT as SCENICSPOT_G,
-  SCENICLINE as SCENICLINE_G
-} from "@/assets/scencedata/sankong";
-import {
-  SCENICSPOT as SCENICSPOT_H,
-  SCENICLINE as SCENICLINE_H
-} from "@/assets/scencedata/yungang";
+// import {SCENICSPOT as SCENICSPOT_A, SCENICLINE as SCENICLINE_A} from "@/assets/scencedata/cangyanshan";
+// import {SCENICSPOT as SCENICSPOT_B, SCENICLINE as SCENICLINE_B} from "@/assets/scencedata/huizhou";
+// import {SCENICSPOT as SCENICSPOT_C, SCENICLINE as SCENICLINE_C} from "@/assets/scencedata/penglai";
+// import {SCENICSPOT as SCENICSPOT_D, SCENICLINE as SCENICLINE_D} from "@/assets/scencedata/shaolin";
+// import {SCENICSPOT as SCENICSPOT_E, SCENICLINE as SCENICLINE_E} from "@/assets/scencedata/shenhu";
+// import {SCENICSPOT as SCENICSPOT_F, SCENICLINE as SCENICLINE_F} from "@/assets/scencedata/yunwushan";
+// import {SCENICSPOT as SCENICSPOT_G, SCENICLINE as SCENICLINE_G} from "@/assets/scencedata/sankong";
+// import {SCENICSPOT as SCENICSPOT_H, SCENICLINE as SCENICLINE_H} from "@/assets/scencedata/yungang";
 
 import Header from "@/components/common/Header";
 import NavigationTab from "@/components/common/NavigationTab";
@@ -69,15 +45,7 @@ export default {
         showRightMore: true
       },
       navIndex:'0',
-      tabList: [
-        "全景图",
-        "登山图",
-        "寻花图",
-        "戏水图",
-        "访仙图",
-        "问佛图",
-        "探古图"
-      ],
+      tabList: ["全景图", "登山图", "寻花图", "戏水图", "访仙图", "问佛图", "探古图"],
       scenicList: [
         {
           id: "22",
@@ -135,57 +103,58 @@ export default {
   },
   methods: {
     importDataSync(id) {
-      let dataObj = {};
-      switch (id) {
-        case "22":
-          this.SCENICSPOT = SCENICSPOT_A;
-          this.SCENICLINE = SCENICLINE_A;
-          break;
-        case "23":
-          this.SCENICSPOT = SCENICSPOT_B;
-          this.SCENICLINE = SCENICLINE_B;
-          break;
-        case "24":
-          this.SCENICSPOT = SCENICSPOT_C;
-          this.SCENICLINE = SCENICLINE_C;
-          break;
-        case "25":
-          this.SCENICSPOT = SCENICSPOT_D;
-          this.SCENICLINE = SCENICLINE_D;
-          break;
-        case "26":
-          this.SCENICSPOT = SCENICSPOT_E;
-          this.SCENICLINE = SCENICLINE_E;
-          break;
-        case "27":
-          this.SCENICSPOT = SCENICSPOT_F;
-          this.SCENICLINE = SCENICLINE_F;
-          break;
-        case "35":
-          this.SCENICSPOT = SCENICSPOT_G;
-          this.SCENICLINE = SCENICLINE_G;
-          break;
-        case "66":
-          this.SCENICSPOT = SCENICSPOT_H;
-          this.SCENICLINE = SCENICLINE_H;
-          break;
-      }
+      let dataObj = {}
+      // switch (id) {
+      //   case "22":
+      //     this.SCENICSPOT = SCENICSPOT_A;
+      //     this.SCENICLINE = SCENICLINE_A;
+      //     break;
+      //   case "23":
+      //     this.SCENICSPOT = SCENICSPOT_B;
+      //     this.SCENICLINE = SCENICLINE_B;
+      //     break;
+      //   case "24":
+      //     this.SCENICSPOT = SCENICSPOT_C;
+      //     this.SCENICLINE = SCENICLINE_C;
+      //     break;
+      //   case "25":
+      //     this.SCENICSPOT = SCENICSPOT_D;
+      //     this.SCENICLINE = SCENICLINE_D;
+      //     break;
+      //   case "26":
+      //     this.SCENICSPOT = SCENICSPOT_E;
+      //     this.SCENICLINE = SCENICLINE_E;
+      //     break;
+      //   case "27":
+      //     this.SCENICSPOT = SCENICSPOT_F;
+      //     this.SCENICLINE = SCENICLINE_F;
+      //     break;
+      //   case "35":
+      //     this.SCENICSPOT = SCENICSPOT_G;
+      //     this.SCENICLINE = SCENICLINE_G;
+      //     break;
+      //   case "66":
+      //     this.SCENICSPOT = SCENICSPOT_H;
+      //     this.SCENICLINE = SCENICLINE_H;
+      //     break;
+      // }
       return dataObj;
     },
     initLocalData() {
       let scenicId = sessionStorage.getItem("currentScenic");
-      let data = this.importDataSync(scenicId);
+      // let data = this.importDataSync(scenicId);
       for (let i = 0; i < this.scenicList.length; i++) {
         if (this.scenicList[i].id == scenicId) {
           this.mapCenter = this.scenicList[i].position;
         }
       }
       this.path = this.SCENICSPOT;
-      this.SCENICLINE = this.SCENICLINE;
-      this.roadPath = this.SCENICLINE[0].path;
+      console.log(2);
+      // this.roadPath = this.SCENICLINE[0].path;
       this.init(this.mapCenter, this.path,this.navIndex);
     },
     init(mapCenter,path,navIndex) {
+
       map = new AMap.Map("container", {
         center: this.mapCenter,
         resizeEnable: true,
@@ -194,24 +163,14 @@ export default {
         pitch:30,
         rotateEnable:true,
         pitchEnable:true,
-        viewMode:'3D',//开启3D视图,默认为关闭
+        //viewMode:'3D',//开启3D视图,默认为关闭
         buildingAnimation:true,//楼块出现是否带动画
         showBuildingBlock:true,
       });
       let markers=[];
 
       map.clearMap();
-      // let setmarker = new AMap.Marker({
-      //     icon: new AMap.Icon({            
-      //       image: inlocationIcon,
-      //       size: new AMap.Size(20,28),  //图标大小
-      //       imageSize: new AMap.Size(20,28)
-      //     }),
-      //     position:this.mapCenter,
-      //     offset: new AMap.Pixel(-13, -30)
-      // });
-      // setmarker.setMap(map);      
-      //定位点
+
       var options = {
         'showButton': true,//是否显示定位按钮
         'buttonPosition': 'LB',//定位按钮的位置
@@ -224,21 +183,8 @@ export default {
         'content':`<img src=${inlocationIcon} style="width:25px;height:32px;background-color:transparent"/>`
         },
       }
-      map.plugin(["AMap.ToolBar", "AMap.Scale","AMap.Geolocation","AMap.ControlBar"], function() {
-        map.addControl(new AMap.ToolBar({
-            // 简易缩放模式，默认为 false
-            liteStyle: true
-        }));
-        map.addControl(new AMap.Scale());
-        map.addControl(new AMap.ControlBar({
-          showControlButton:true,
-          showZoomBar:false,
-        }))
-        var geolocation = new AMap.Geolocation(options);
-        map.addControl(geolocation);
-        //geolocation.getCurrentPosition()
-      });  
-      if (this.roadPath.length) {  
+      console.log(this.SCENICLINE);
+      if (this.SCENICLINE.length) {
         let loadPath=[];
         let lng=null,lat=null
         this.roadPath.forEach((kpath,kindex)=>{
@@ -253,18 +199,18 @@ export default {
             loadPath.push(lng+'&'+lat)
           }
         })
-        let flag=false;
-        this.path.forEach((item, index) => {
-          let backpath=item.position[0]+'&'+item.position[1];
-          if(loadPath.length>0&&loadPath.indexOf(backpath)>-1){
+        let flag = false;
+
+
+
+        this.SCENICLINE.forEach((item, index) => {
 
 
             var text = new AMap.Text({
               map: map,
               position: [item.position[0], item.position[1]],
               text : item.label,
-              anchor:'bottom-center',
-              offset:  new AMap.Pixel(0,-52)
+              offset:  new AMap.Pixel(0,-50)
             })
 
             var marker = new AMap.Marker({
@@ -272,80 +218,44 @@ export default {
               icon: new AMap.Icon({            
                 image: scenicIcon,
                 size: new AMap.Size(30,35),  //图标大小
-                  anchor:[15,35], // 设置锚点方位
+                anchor:[15,35], // 设置锚点方位
                 imageSize: new AMap.Size(30,35),
               }),
               position: [item.position[0], item.position[1]],
               offset: new AMap.Pixel(-15,-35), //设置偏移量
-              // label: {
-              //   anchor:'bottom-center', // 设置锚点方位
-              //   offset:  new AMap.Pixel(0,-20)
-              // }
+
             });            
             markers.push(marker)
-            // marker.setLabel({
-            //   content: item.label
-            // })
-            text.on('click',item=>{
-              let con = item.label
-              // marker.setIcon( new AMap.Icon({
-              //   image: scenicActiveIcon,
-              //   size: new AMap.Size(30,35),  //图标大小
-              //   imageSize: new AMap.Size(30,35),
-              //   anchor:[15,35], // 设置锚点方位
-              // }),)
-              this.showModel(con,item.target.Uh.position);
-            })
-            marker.on("click", item => {
 
-              for (var i = 0; i < markers.length; i++) {
-                  markers[i].setIcon(new AMap.Icon({            
-                  image: scenicIcon,
-                  size: new AMap.Size(30,35),  //图标大小
-                  anchor:[15,35], // 设置锚点方位
-                }));
-              }
-              let con = item.label
-              marker.setIcon( new AMap.Icon({           //选中marker放大
-                  image: scenicActiveIcon,
-                  size: new AMap.Size(30,35),  //图标大小
-                  imageSize: new AMap.Size(30,35),
-                  anchor:[15,35], // 设置锚点方位
-                }),)
-              this.showModel(con,item.target.Uh.position);    
-            })
+            text.on('touchstart',item2=>{
 
+              let con = item2.label
+
+              this.showModel(con,item2.target.Uh.position)
+            })
+            marker.on("touchstart", item2 => {
+
+              let con = item2.label
+
+              this.showModel( con,item2.target.Uh.position )
+            })
             flag=true
-          }
+
+        });
+
+        map.plugin(["AMap.ToolBar", "AMap.Scale","AMap.Geolocation","AMap.ControlBar"], function() {
+          map.addControl(new AMap.ToolBar({
+            // 简易缩放模式，默认为 false
+            liteStyle: true
+          }));
+          map.addControl(new AMap.Scale());
+
+          var geolocation = new AMap.Geolocation(options);
+          map.addControl(geolocation);
+          //geolocation.getCurrentPosition()
+        });
 
 
-          // if (item.label.indexOf("卡戳文化艺术馆") != -1) {
-          //   //规划路线
-          //   var marker = new AMap.Marker({
-          //     map: map,
-          //     icon: new AMap.Icon({            
-          //       image: scenicIcon,
-          //       size: new AMap.Size(25,28),  //图标大小
-          //       imageSize: new AMap.Size(25,28)
-          //     }),
-          //     size: new AMap.Size(25,28),
-          //     position: [item.position[0], item.position[1]],
-          //     offset: new AMap.Pixel(-13, -30)
-          //   });
-          // } else {
-          //   var marker = new AMap.Marker({
-          //     map: map,
-          //     icon: new AMap.Icon({            
-          //       image: scenicIcon,
-          //       size: new AMap.Size(25,28),  //图标大小
-          //       imageSize: new AMap.Size(25,28),
-          //       offset: new AMap.Pixel(-13, -30),
-          //     }),
-          //     position: [item.position[0], item.position[1]],
-          //     offset: new AMap.Pixel(-13, -30)
-          //     });
-          // }
-        });    
         if(flag&&navIndex>0){   
           let bezierCurve = new AMap.BezierCurve({
               path: this.roadPath,
@@ -365,14 +275,15 @@ export default {
             map.setFitView([bezierCurve]);
         }      
       } else {
-        this.$vux.toast.text("暂无推荐路线", "middle");
+        this.$vux.toast.text("暂无推荐路线", "middle")
         setTimeout(() => {
-          this.$vux.toast.hide();
-        }, 1000);
+          this.$vux.toast.hide()
+        }, 1000)
       }
     },
     //绘制路线
-    drawMap(Tlng,Tlat) { // 专车--画地图
+    drawMap(Tlng,Tlat) {
+      // 专车--画地图
          //构造路线导航类
         if(walking){
           //调用clear()函数清除上一次结果，可以清除地图上绘制的路线以及路径文本结果
@@ -408,12 +319,23 @@ export default {
       }
       this.$refs.videoWrap.getScenicDetails(this.clickPosition);
     },
-    addMarker() {
-      let marker = {
-        position: []
-      };
-      this.markers.push(marker);
+
+    getMarkerList(){
+      this.$http.get("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.site.site_list&type=")
+        .then(({ data }) => {
+          console.log(data);
+          let arr = []
+
+          data.data.forEach(item=>{
+            arr.push({position:[ item.longitude,item.latitude ],label:item.title})
+          })
+
+          this.SCENICLINE = arr
+          console.log(this.SCENICLINE);
+          this.initLocalData()
+        })
     }
+
   },
   computed: {
     setMapHeight() {
@@ -427,7 +349,7 @@ export default {
     }
   },
   mounted() {
-    this.initLocalData();
+    this.getMarkerList()
   }
 };
 </script>

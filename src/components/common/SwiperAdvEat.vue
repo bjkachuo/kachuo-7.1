@@ -70,7 +70,7 @@ export default {
           console.log(data.data);
           this.AdvOptions = data.data;
           console.log(this.AdvOptions);
-        });
+        })
     }
   },
   mounted() {
