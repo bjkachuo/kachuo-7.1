@@ -102,8 +102,7 @@ export default {
           this.mapCenter = this.scenicList[i].position;
         }
       }
-      this.path = this.SCENICSPOT;
-      console.log(2);
+
       // this.roadPath = this.SCENICLINE[0].path;
       this.init(this.mapCenter, this.path,this.navIndex);
     },
@@ -137,7 +136,7 @@ export default {
         'content':`<img src=${inlocationIcon} style="width:25px;height:32px;background-color:transparent"/>`
         },
       }
-      console.log(this.SCENICLINE);
+
       if (this.SCENICLINE.length) {
         let loadPath=[];
         let lng=null,lat=null
@@ -154,8 +153,6 @@ export default {
           }
         })
         let flag = false;
-
-
 
         this.SCENICLINE.forEach((item, index) => {
 
@@ -178,8 +175,7 @@ export default {
               position: [item.position[0], item.position[1]],
               offset: new AMap.Pixel(-15,-35), //设置偏移量
 
-            });            
-            markers.push(marker)
+            })
 
             text.on('touchstart',item2=>{
 
