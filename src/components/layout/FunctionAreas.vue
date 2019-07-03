@@ -5,7 +5,8 @@ flex布局功能区域
   <flexbox :gutter="0" wrap="wrap" class="function-areas-wrap">
     <flexbox-item :span="1/4" v-for="(item,index) in dataList" :key="index">
       <div class="flex-wrap-for" @click="getItem(item.link)">
-        <span :class="item.class" style="font"></span>
+        <!-- <span :class="item.class" style="font"></span> -->
+        <img :src="item.imgSrc" alt="" class="flex-wrap-img">
         <p class="flex-wrap-name">{{item.name}}</p>
       </div>
     </flexbox-item>
@@ -26,56 +27,68 @@ export default {
             "http://f.hiphotos.baidu.com/image/pic/item/359b033b5bb5c9eab0b192c9db39b6003af3b35e.jpg",
           name: "票务系统",
           link: "/ticketsdiscount",
-          class: "iconfont iconmenpiao btn1"
+          // class: "iconfont iconmenpiao btn1",
+          imgSrc: require("@/assets/images/门票打折@2x_7.png")
         },
         {
           imgUrl:
             "http://f.hiphotos.baidu.com/image/pic/item/359b033b5bb5c9eab0b192c9db39b6003af3b35e.jpg",
           name: "智慧导航",
           link: "/intelligentnavigation",
-          class: "iconfont iconzhihuidaohang btn2"
+          // class: "iconfont iconzhihuidaohang btn2",
+          imgSrc: require("@/assets/images/智慧导航@2x.png")
+
         },
         {
           imgUrl:
             "http://f.hiphotos.baidu.com/image/pic/item/359b033b5bb5c9eab0b192c9db39b6003af3b35e.jpg",
           name: "景区发布",
           link: "/scencerelease",
-          class: "iconfont iconjingqufabu"
+          // class: "iconfont iconjingqufabu"
+          imgSrc: require("@/assets/images/景区发布@2x_1.png")
+
         },
         {
           imgUrl:
             "http://f.hiphotos.baidu.com/image/pic/item/359b033b5bb5c9eab0b192c9db39b6003af3b35e.jpg",
           name: "景区服务",
           link: "/scenceservice?type=1",
-          class: "iconfont iconjingqufuwu"
+          // class: "iconfont iconjingqufuwu"
+          imgSrc: require("@/assets/images/景区服务@2x_2.png")
+
         },
         {
           imgUrl:
             "http://f.hiphotos.baidu.com/image/pic/item/359b033b5bb5c9eab0b192c9db39b6003af3b35e.jpg",
           name: "记住的",
           link: "/remember?type=5&branch=1",
-          class: "iconfont iconjizhude"
+          // class: "iconfont iconjizhude"
+          imgSrc: require("@/assets/images/记住的@2x_3.png")
         },
         {
           imgUrl:
             "http://f.hiphotos.baidu.com/image/pic/item/359b033b5bb5c9eab0b192c9db39b6003af3b35e.jpg",
           name: "了解的",
           link: "/understand?type=7&branch=2",
-          class: "iconfont iconliaojiede"
+          imgSrc: require("@/assets/images/了解的@2x_4.png")
+          // class: "iconfont iconliaojiede"
         },
         {
           imgUrl:
             "http://f.hiphotos.baidu.com/image/pic/item/359b033b5bb5c9eab0b192c9db39b6003af3b35e.jpg",
           name: "带走的",
           link: "/takeaway?carousel=2",
-          class: "iconfont icondaizoude"
+          // class: "iconfont icondaizoude"
+          imgSrc: require("@/assets/images/带走的@2x_5.png")
         },
         {
           imgUrl:
             "http://f.hiphotos.baidu.com/image/pic/item/359b033b5bb5c9eab0b192c9db39b6003af3b35e.jpg",
           name: "周边服务",
           link: "/servicesurround?type=4",
-          class: "iconfont iconzhoubianfuwu"
+          // class: "iconfont iconzhoubianfuwu"
+          imgSrc: require("@/assets/images/周边服务@2x_6.png")
+
         }
       ]
     };
@@ -125,10 +138,14 @@ export default {
   width: 100%;
   height: 20px;
   text-align: center;
-  line-height: 20px;
+  line-height: 32px;
   font-size: 13px;
 }
 .flex-wrap-for span {
   font-size: 44px;
+}
+.flex-wrap-img{
+  width: 45px;
+  height: 45px;
 }
 </style>

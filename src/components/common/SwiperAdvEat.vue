@@ -4,6 +4,7 @@
       <swiper-slide
         v-for="(item,index) in AdvOptions[type]"
         :key="index"
+        @click.native="test"
       >{{item}}</swiper-slide>
     </swiper>
 
@@ -64,19 +65,23 @@ export default {
   //   }
   // },
   methods:{
-    get(){
-      this.$http.get("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.index.get_recommend_business")
-        .then(({ data }) => {
-          console.log(data.data);
-          this.AdvOptions = data.data;
-          console.log(this.AdvOptions);
-        });
+    // get(){
+    // }
+    test(){
+      console.log("我点到广告位了")
     }
   },
   mounted() {
 
     this.$nextTick(() => {
-    this.get()
+        this.$http.get("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.index.get_recommend_business")
+        .then(({ data }) => {
+          console.log(data);
+          this.AdvOptions = data.data;
+          console.log(this.AdvOptions);
+        });
+
+    // this.get()
 
     });
   }

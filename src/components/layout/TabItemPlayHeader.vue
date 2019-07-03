@@ -3,8 +3,9 @@
     <SwiperImg class="tab-item-play-swiper"></SwiperImg>
     <div class="tab-item-play-header-title">
       <div class="location-icon text-align-center" @click="locationSelf">
-        <span class="iconfont icondingwei"></span>
+        <!-- <span class=""></span> -->
         <span class="scenic-name">{{scenicName}}</span>
+        <i class="el-icon-arrow-down"></i>
       </div>
       <div class="search-icon text-align-center" @click="searchScence">输入作品/作者/景区</div>
       <div class="message-icon text-align-center" @click="appMessageCenter">
@@ -100,13 +101,14 @@ export default {
   justify-content: space-between;
   align-items: center;
   color: #fff;
-  background: rgba(0, 0, 0, 0.4);
+  background: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0));
 }
 .text-align-center {
   text-align: center;
 }
 .location-icon {
   flex: 1;
+  margin-left: 10px;
 }
 .message-icon {
   flex: 1;
@@ -120,6 +122,7 @@ export default {
   border-radius: 20px;
   font-size: 12px;
   color: #999;
+  margin-left: 30px;
 }
 .tab-item-play-swiper {
   width: 100%;
@@ -132,6 +135,6 @@ export default {
   background: #999;
 }
 .scenic-name {
-  font-size: 12px;
+  font-size: 16px;
 }
 </style>

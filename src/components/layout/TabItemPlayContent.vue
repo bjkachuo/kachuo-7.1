@@ -46,17 +46,17 @@ export default {
         {
           title: "吃吧",
           icon: "iconfont iconchiba",
-          link: "/scenceservice?type=1"
+          link: "/suerroundBusiness?type=1"
         },
         {
           title: "喝吧",
           icon: "iconfont iconheba",
-          link: "/scenceservice?type=2"
+          link: "/suerroundBusiness?type=2"
         },
         {
           title: "玩吧",
           icon: "iconfont iconwanba",
-          link: "/scenceservice?type=3"
+          link: "/suerroundBusiness?type=3"
         }
       ],
       cellListAround: [

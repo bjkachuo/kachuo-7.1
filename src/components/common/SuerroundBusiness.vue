@@ -9,8 +9,8 @@
       <div class="content-one">
         <div class="swp-wrap">
           <swiper :options="swiperOption">
-            <swiper-slide v-for="(item,index) in advSwiper" :key="index" width="345px">
-              <img :src="item" alt width="100%">
+            <swiper-slide v-for="(item,index) in advSwiper" :key="index">
+              <img :src="item" alt>
             </swiper-slide>
             <div class="swiper-pagination swiper-pagination-bullets" slot="pagination"></div>
           </swiper>
@@ -19,7 +19,7 @@
           <div class="Selected-title">商户精选</div>
           <scroller lock-y :scrollbar-x="false">
             <div class="Selected-business-list">
-              <div class="business" v-for="(item,index) in recommend" :key="index">
+              <div class="business" v-for="(item,index) in recommend" :key="index" @click="details(item.id)">
                 <img :src="item.video_image" alt>
                 <span class="price">{{item.price}}￥/人</span>
                 <span class="name">{{item.name}}</span>
@@ -31,8 +31,7 @@
       <div class="content-two">
         <div class="content-two-head">
           <div class="head-left">
-            <popup-radio :options="this.checkList" v-model="option2" placeholder="选择分类">
-                
+            <popup-radio :options="this.checkList" v-model="option2" placeholder="分类" @on-hide="change">
             </popup-radio>
             <!-- <el-dropdown trigger="click" @command="handleCommand">
               <span class="el-dropdown-link">
@@ -63,8 +62,9 @@
             </el-dropdown>-->
           </div>
         </div>
+      <scroller lock-x height="-378" > 
         <div class="store-list-warp">
-          <div class="store" v-for="(item,index) in BusinessList" :key="index"  @click="details">
+          <div class="store" v-for="(item,index) in BusinessList" :key="index"  @click="details(item.id)">
             <div class="store-img-warp">
               <img :src="item.video_image" alt>
             </div>
@@ -90,6 +90,7 @@
             </div>
           </div>
         </div>
+     </scroller>
       </div>
     </div>
   </div>
@@ -129,13 +130,14 @@ export default {
           dynamicBullets: true
         },
         autoplay: {
-          disableOnInteraction: false //触碰后继续轮播
+          disableOnInteraction: true //触碰后继续轮播
         },
         speed: 600,
         loop: true, //循环模式
         observer: true, //修改swiper自己或子元素时，自动初始化swiper
         observeParents: true, //修改swiper的父元素时，自动初始化swiper
-        centeredSlides: true //元素居中
+        centeredSlides: true, //元素居中
+        slidesPerView: '1'      
       }
     };
   },
@@ -145,8 +147,7 @@ export default {
     swiperSlide,
     Scroller,
     PopupRadio,
-    PopupPicker
-    
+    PopupPicker,
   },
 
   computed: {},
@@ -176,7 +177,7 @@ export default {
           return { key: item.id ,value: item.name};
         });
         // this.checkList = data.data.category;
-        console.log(data)
+        // console.log(data)
         console.log(this.checkList)
         // console.log(this.checkList);
       });
@@ -202,10 +203,26 @@ export default {
   },
 
   methods: {
-      details(){
+    //传递id给详情页
+      details(id){
         this.$router.push({
-            path:'/storeDetails'
+            path:'/storeDetails',
+            query:{
+              idNum:id
+            }
         })
+      },
+      //点击获取不同id切换类别
+      change(){
+      console.log(this.option2);    
+      this.$http
+      .post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.index.around_service_list&type="+this.option2)
+      .then(({ data }) => {
+        // console.log(data.data.list);
+        this.BusinessList = data.data.list;
+        // console.log(this.BusinessList);
+      });
+
       }
     // handleCommand(index) {
     //         console.log(index);
@@ -216,37 +233,47 @@ export default {
 };
 </script>
 <style lang="css" scoped>
-.scence-service-wrap {
+img{
   width: 100%;
+  height: 100%;
+}
+.scence-service-wrap {
+  /* width: 100%; */
   height: 100%;
   overflow: hidden;
 }
 .scence-service-content {
-  width: 375px;
+  /* width: 375px; */
   height: 100%;
   margin-top: 46px;
   border-top: 1px solid #eeeeee;
   background: #f5f5f5;
 }
 .scence-service-content .content-one {
-  width: 375px;
+  /* width: 375px; */
   height: 277px;
   margin-top: 1px;
   background: #ffffff;
 }
 .scence-service-content .swp-wrap {
-  width: 375px;
+  /* width: 375px; */
   height: 90px;
 }
 .scence-service-content .swp-wrap img {
-  width: 345px;
+  /* width: 345px; */
   height: 80px;
-  margin: 14px 0 0 15px;
+  margin-top: 14px;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
   border-radius: 8px;
-}
+  /* margin-left: 15px; */
+  }
+.swiper-slide{
+    width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
 .scence-service-content .content-one .Selected-warp {
-  width: 375px;
+  /* width: 375px; */
   height: 160px;
   margin-top: 10px;
 }
@@ -318,13 +345,13 @@ export default {
   line-height: 13px;
 }
 .scence-service-content .content-two {
-  width: 375px;
+  /* width: 375px; */
   height: 100%;
   margin-top: 10px;
   background: #ffffff;
 }
 .scence-service-content .content-two .content-two-head {
-  width: 375px;
+  /* width: 375px; */
   height: 45px;
   background: #ffffff;
   border-bottom: 1px solid #e5e5e5;
@@ -368,13 +395,13 @@ export default {
   margin-bottom: 20px;
 }
 .scence-service-content .content-two .store-list-warp {
-  width: 375px;
-  height: 290px;
+  /* width: 375px; */
+  /* height: 290px; */
   background: #ffffff;
   overflow-y: scroll;
 }
 .scence-service-content .content-two .store-list-warp .store {
-  width: 375px;
+  /* width: 375px; */
   height: 145px;
   border-bottom: 1px solid #e5e5e5;
   overflow: hidden;
@@ -399,6 +426,7 @@ export default {
   .store-title {
   height: 19px;
   margin-bottom: 15px;
+  overflow: hidden;
 }
 .scence-service-content
   .content-two
@@ -492,5 +520,12 @@ export default {
   font-size: 15px;
   margin-right: 0px;
   line-height: 4px;
+}
+</style>
+<style lang="less">
+.weui-cell{
+  .weui-cell__ft{
+  color: #666666;
+}
 }
 </style>
