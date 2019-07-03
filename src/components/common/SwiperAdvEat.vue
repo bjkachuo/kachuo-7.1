@@ -65,20 +65,13 @@ export default {
   //   }
   // },
   methods:{
-<<<<<<< HEAD
-    // get(){
-    // }
-    test(){
-      console.log("我点到广告位了")
-=======
-    get(){
+    get() {
       this.$http.get("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.index.get_recommend_business")
-        .then(({ data }) => {
+        .then(({data}) => {
           console.log(data.data);
           this.AdvOptions = data.data;
           console.log(this.AdvOptions);
         })
->>>>>>> 8d5567e7b93aa0dd7d9367ebdf4ddea20f0e604f
     }
   },
   mounted() {

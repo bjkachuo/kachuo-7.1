@@ -130,7 +130,7 @@ Vue.use(VueAMap);
 VueAMap.initAMapApiLoader({
   key: '956cab63ef78320624fb7d7dff4c25b5',
   plugin: ['AMap.Scale', 'AMap.OverView', 'AMap.ToolBar', 'AMap.MapType', 'AMap.Autocomplete', 'AMap.PlaceSearch', 'AMap.PolyEditor', 'AMap.CircleEditor', 'AMap.Geolocation'],
-  uiVersion: '1.0', // ui库版本，不配置不加载
+  uiVersion: '1.0.11', // ui库版本，不配置不加载
   v: '1.4.4'
 });
 //awesome-swiper插件
