@@ -149,7 +149,6 @@ export default {
                 text : item.label,
                 offset:  new AMap.Pixel(0,-50)
               })
-
               var marker = new AMap.Marker({
                 map: map,
                 icon: new AMap.Icon({
@@ -167,23 +166,24 @@ export default {
               var text = new AMap.Text({
                 map: map,
                 position: [item.position[0], item.position[1]],
-                text : index+1+'',
-                zIndex:200,
-                offset:  index > 8 ? new AMap.Pixel(-10,-20) : new AMap.Pixel(0,-20)
+                text : item.label,
+                offset:  new AMap.Pixel(0,-52),
+                topWhenClick:true
               })
               console.log(text);
+
               text.Cv.style.border = 'none'
-              text.Cv.style.background = 'transparent'
+             // text.Cv.style.background = 'transparent'
 
               var marker = new AMap.Marker({
                 map: map,
-                icon: new AMap.Icon({
-                  image: sortIcon,
-                  size: new AMap.Size(30,35),  //图标大小
-                  anchor:[15,35], // 设置锚点方位
-                  imageSize: new AMap.Size(30,35),
-                }),
-
+                // icon: new AMap.Icon({
+                //   image: sortIcon,
+                //   size: new AMap.Size(30,35),  //图标大小
+                //   anchor:[15,35], // 设置锚点方位
+                //   imageSize: new AMap.Size(30,35),
+                // }),
+                content:'<div style="width: 23px;height: 23px;border-radius: 50%;background-color: #e4794b;text-align: center;color: #fff;border: 1px solid #fff;">'+(index+1)+'</div>',
                 position: [item.position[0], item.position[1]],
                 offset: new AMap.Pixel(-15,-35), //设置偏移量
               })
