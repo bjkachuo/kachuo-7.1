@@ -20,6 +20,7 @@ import NavigationTab from "@/components/common/NavigationTab";
 import Popup from "@/components/common/Popup";
 import locationIcon from "@/assets/images/amap-icon/location-icon.png";
 import scenicIcon from "@/assets/images/amap-icon/scenic.png";
+import sortIcon from '@/assets/images/amap-icon/map-sort-icon@2x .png'
 import scenicActiveIcon from "@/assets/images/amap-icon/scenicActive.png";
 import inlocationIcon from "@/assets/images/amap-icon/inlocation-icon.png";
 
@@ -96,7 +97,7 @@ export default {
 
     initLocalData() {
       let scenicId = sessionStorage.getItem("currentScenic");
-      // let data = this.importDataSync(scenicId);
+       //let data = this.importDataSync(scenicId);
       for (let i = 0; i < this.scenicList.length; i++) {
         if (this.scenicList[i].id == scenicId) {
           this.mapCenter = this.scenicList[i].position;
@@ -104,9 +105,8 @@ export default {
       }
 
       // this.roadPath = this.SCENICLINE[0].path;
-      this.init(this.mapCenter, this.path,this.navIndex);
     },
-    init(mapCenter,path,navIndex) {
+    init() {
 
       map = new AMap.Map("container", {
         center: this.mapCenter,
@@ -120,8 +120,7 @@ export default {
         buildingAnimation:true,//楼块出现是否带动画
         showBuildingBlock:true,
       });
-      let markers=[];
-
+      console.log(this.mapCenter);
       map.clearMap();
 
       var options = {
@@ -138,58 +137,70 @@ export default {
       }
 
       if (this.SCENICLINE.length) {
-        let loadPath=[];
-        let lng=null,lat=null
-        this.roadPath.forEach((kpath,kindex)=>{
-          if(Array.isArray(kpath)&&Object.prototype.toString.call(kpath) == '[object Array]'){
-            lng=kpath[0]
-            lat=kpath[1]
-          }else{
-            lng=kpath.lng
-            lat=kpath.lat
-          }
-          if(lng&&lat){
-            loadPath.push(lng+'&'+lat)
-          }
-        })
-        let flag = false;
+
 
         this.SCENICLINE.forEach((item, index) => {
 
 
-            var text = new AMap.Text({
-              map: map,
-              position: [item.position[0], item.position[1]],
-              text : item.label,
-              offset:  new AMap.Pixel(0,-50)
-            })
+            if(this.navIndex == 0){
+              var text = new AMap.Text({
+                map: map,
+                position: [item.position[0], item.position[1]],
+                text : item.label,
+                offset:  new AMap.Pixel(0,-50)
+              })
 
-            var marker = new AMap.Marker({
-              map: map,
-              icon: new AMap.Icon({            
-                image: scenicIcon,
-                size: new AMap.Size(30,35),  //图标大小
-                anchor:[15,35], // 设置锚点方位
-                imageSize: new AMap.Size(30,35),
-              }),
-              position: [item.position[0], item.position[1]],
-              offset: new AMap.Pixel(-15,-35), //设置偏移量
+              var marker = new AMap.Marker({
+                map: map,
+                icon: new AMap.Icon({
+                  image: scenicIcon,
+                  size: new AMap.Size(30,35),  //图标大小
+                  anchor:[15,35], // 设置锚点方位
+                  imageSize: new AMap.Size(30,35),
+                }),
+                position: [item.position[0], item.position[1]],
+                offset: new AMap.Pixel(-15,-35), //设置偏移量
+              })
 
-            })
 
-            text.on('touchstart',item2=>{
+            }else{
+              var text = new AMap.Text({
+                map: map,
+                position: [item.position[0], item.position[1]],
+                text : index+1+'',
+                zIndex:200,
+                offset:  index > 8 ? new AMap.Pixel(-10,-20) : new AMap.Pixel(0,-20)
+              })
+              console.log(text);
+              text.Cv.style.border = 'none'
+              text.Cv.style.background = 'transparent'
 
-              let con = item2.label
+              var marker = new AMap.Marker({
+                map: map,
+                icon: new AMap.Icon({
+                  image: sortIcon,
+                  size: new AMap.Size(30,35),  //图标大小
+                  anchor:[15,35], // 设置锚点方位
+                  imageSize: new AMap.Size(30,35),
+                }),
 
-              this.showModel(con,item2.target.Uh.position)
-            })
-            marker.on("touchstart", item2 => {
+                position: [item.position[0], item.position[1]],
+                offset: new AMap.Pixel(-15,-35), //设置偏移量
+              })
+            }
+
+          text.on('touchend',item2=>{
+
+            let con = item2.label
+
+            this.showModel(con,item2.target.Uh.position)
+          })
+            marker.on("touchend", item2 => {
 
               let con = item2.label
 
               this.showModel( con,item2.target.Uh.position )
             })
-            flag=true
 
         });
 
@@ -204,28 +215,8 @@ export default {
           map.addControl(geolocation);
           //geolocation.getCurrentPosition()
         });
-
-
-        if(flag&&navIndex>0){   
-          let bezierCurve = new AMap.BezierCurve({
-              path: this.roadPath,
-              isOutline: true,
-              outlineColor: "#fff",
-              borderWeight: 0,
-              strokeColor: "#666",
-              strokeOpacity: 1,
-              strokeWeight: 2,
-              strokeStyle: "dashed",
-              strokeDasharray: [10, 10],
-              lineJoin: "round",
-              lineCap: "round",
-              zIndex: 50
-            });
-            bezierCurve.setMap(map);
-            map.setFitView([bezierCurve]);
-        }      
       } else {
-        this.$vux.toast.text("暂无推荐路线", "middle")
+        this.$vux.toast.text("暂无相应景点", "middle")
         setTimeout(() => {
           this.$vux.toast.hide()
         }, 1000)
@@ -257,9 +248,8 @@ export default {
     },
     showPath(index) {
       this.navIndex = index;
-      // this.roadPath = [];
-      // this.roadPath = this.SCENICLINE[index].path;
-      this.init(this.mapCenter, this.path,index)
+      this.getMarkerList(index)
+      // this.init(this.mapCenter, index)
     },
     showModel(name,position) {
       this.clickPosition = {
@@ -270,19 +260,28 @@ export default {
       this.$refs.videoWrap.getScenicDetails(this.clickPosition);
     },
 
-    getMarkerList(){
-      this.$http.get("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.site.site_list&type=")
+    getMarkerList(type){
+      this.$http.get("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.site.site_list&type="+type)
         .then(({ data }) => {
-          console.log(data);
+          var data = data.data
           let arr = []
+          if(data == ''){
+            data = []
+          }
 
-          data.data.forEach(item=>{
+          data.forEach(item=>{
             arr.push({position:[ item.longitude,item.latitude ],label:item.title})
           })
 
           this.SCENICLINE = arr
           console.log(this.SCENICLINE);
-          this.initLocalData()
+          if(type == '') this.initLocalData()
+          else{
+            this.mapCenter = arr.length ? arr[0].position : this.mapCenter
+          }
+
+          this.init();
+
         })
     }
 
@@ -299,7 +298,7 @@ export default {
     }
   },
   mounted() {
-    this.getMarkerList()
+    this.getMarkerList('')
   }
 };
 </script>
