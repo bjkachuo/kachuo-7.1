@@ -42,29 +42,39 @@ export default {
   },
   methods: {
     getScenicDetails(obj) {
+      console.log(obj);
+
+      console.log(obj);
+
       this.descDetails = null;
       getScenicPointDetails({
         longitude: obj.lng,
         latitude: obj.lat
-      })
-        .then(res => {
-          console.log(res);
-          if (res.result === 1) {
-            this.showBottom = true;
-            if (res.data) {
-              this.$store.commit("changeNavigationDetailsState", true);
-              this.descDetails = res.data;
-              this.content = res.data.content;
-              this.createVideoDom(true, res.data);
-            }
-          } else {
-            this.showBottom = false;
-            this.$vux.toast.show({
-              type: "text",
-              text: "暂无介绍",
-              time: 1000
-            });
-          }
+      }) .then(res => {
+      if(!res.scenic_video){
+         this.$vux.toast.text("暂无相应景点", "middle")
+         setTimeout(() => {
+           this.$vux.toast.hide()
+         }, 1000)
+         return
+       }
+
+      if (res.result === 1) {
+        this.showBottom = true;
+        if (res.data) {
+          this.$store.commit("changeNavigationDetailsState", true);
+          this.descDetails = res.data;
+          this.content = res.data.content;
+          this.createVideoDom(true, res.data);
+        }
+      } else {
+        this.showBottom = false;
+        this.$vux.toast.show({
+          type: "text",
+          text: "暂无介绍",
+          time: 1000
+        });
+      }
         })
         .catch(err => {
           console.log(err);

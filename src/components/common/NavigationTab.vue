@@ -1,11 +1,6 @@
 <template>
   <tab :line-width="3" bar-position="top" custom-bar-width="40px">
-    <tab-item
-      v-for="(item,index) in dataList"
-      :selected="index === selectIndex"
-      :key="index"
-      @on-item-click="onItemClick"
-    >{{item}}</tab-item>
+    <tab-item v-for="(item,index) in dataList" :selected="index === selectIndex" :key="index" @on-item-click="onItemClick">{{item}}</tab-item>
   </tab>
 </template>
 
