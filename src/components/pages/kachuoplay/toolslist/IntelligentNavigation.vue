@@ -147,6 +147,7 @@ export default {
       this.$refs.videoWrap.getScenicDetails(this.clickPosition);
     },
     showPath(index) {
+      this.markers = []
       this.navIndex = index;
       this.getMarkerList(index)
       // this.init(this.mapCenter, index)
