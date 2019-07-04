@@ -59,23 +59,7 @@ export default {
     swiper,
     swiperSlide
   },
-  // methods:{
-  //   changeRouter(){
-  //     alert("我是轮播图 我被点了");
-  //   }
-  // },
-  methods:{
 
-    get() {
-      this.$http.get("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.index.get_recommend_business")
-        .then(({data}) => {
-          console.log(data.data);
-          this.AdvOptions = data.data;
-          console.log(this.AdvOptions);
-        })
-
-    }
-  },
   mounted() {
 
     this.$nextTick(() => {
