@@ -22,9 +22,13 @@ module.exports = {
     // https server
     https:true,
     // Various Dev Server settings
+<<<<<<< HEAD
 
     host: '192.168.1.112', // can be overwritten by process.env.HOST
 
+=======
+    host: '192.168.1.122', // can be overwritten by process.env.HOST
+>>>>>>> 7080c3fba1351c5f8a5fd23b0be5cb663bb5c5d1
     port: 8888, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: true,
     errorOverlay: true,

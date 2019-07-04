@@ -401,7 +401,7 @@ img{
   overflow-y: scroll;
 }
 .scence-service-content .content-two .store-list-warp .store {
-  /* width: 375px; */
+  width: 120%;
   height: 145px;
   border-bottom: 1px solid #e5e5e5;
   overflow: hidden;
