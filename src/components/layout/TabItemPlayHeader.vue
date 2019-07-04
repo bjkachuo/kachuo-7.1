@@ -5,7 +5,8 @@
       <div class="location-icon text-align-center" @click="locationSelf">
         <!-- <span class=""></span> -->
         <span class="scenic-name">{{scenicName}}</span>
-        <i class="el-icon-arrow-down"></i>
+        <x-icon type="ios-arrow-down" size="13" color="white"></x-icon>
+        <!-- <i class="el-icon-arrow-down"></i> -->
       </div>
       <div class="search-icon text-align-center" @click="searchScence">输入作品/作者/景区</div>
       <div class="message-icon text-align-center" @click="appMessageCenter">
@@ -108,7 +109,7 @@ export default {
 }
 .location-icon {
   flex: 1;
-  margin-left: 10px;
+  margin-left: 4px;
 }
 .message-icon {
   flex: 1;
@@ -136,5 +137,8 @@ export default {
 }
 .scenic-name {
   font-size: 16px;
+}
+.vux-x-icon {
+  fill: #fff;
 }
 </style>
