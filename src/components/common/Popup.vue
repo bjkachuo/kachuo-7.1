@@ -42,10 +42,6 @@ export default {
   },
   methods: {
     getScenicDetails(obj) {
-      console.log(obj);
-
-      console.log(obj);
-
       this.descDetails = null;
       getScenicPointDetails({
         longitude: obj.lng,
