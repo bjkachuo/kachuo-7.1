@@ -82,7 +82,31 @@ export default {
                   id: res.data[i].id
                 });
               }
-               this.showMarker(markerArr,type); 
+              this.markerArr = markerArr
+              this.showMarker(markerArr,type);
+
+              setTimeout(()=>{
+                let dom  = document.getElementsByClassName('amap-overlay-text-container')
+                for(var i=0;i<dom.length;i++){
+                  dom[i].style.boxShadow = '2px 2px 2px #ccc'
+                  dom[i].style.padding = '6px 7px'
+                  dom[i].style.borderRadius = '6px'
+
+
+                  this.markerArr.forEach((item,index)=>{
+                    if(item.label == dom[i].innerText) dom[i].index = index
+                  })
+
+                  dom[i].ontouchstart = (e) =>{
+
+                    console.log(e.target.index);
+                    let index = e.target.index
+                    this.showModel(this.markerArr[index].id)
+                  }
+                }
+              },800)
+
+
             } else {
               this.$vux.toast.show({
                 type:"text",
@@ -161,27 +185,12 @@ export default {
           position: [item.position[0], item.position[1]],
           text : item.label,
           anchor:'bottom-center',
-          offset:  new AMap.Pixel(0,-52)
+          offset:  new AMap.Pixel(0,-55)
         })
-        text.on('touchstart',item2=>{
-          // console.log(item);
-          this.showModel(item.id);
-        })
+
         map.add(marker);        
         marker.on("touchstart", item2 => {
-          // alert(1)
-          // for (var i = 0; i < markers.length; i++) {
-          //     markers[i].setIcon(new AMap.Icon({            
-          //     image: normalIcon,
-          //     size: new AMap.Size(10,18),  //图标大小
-          //     imageSize: new AMap.Size(10,28)
-          //   }));
-          // }
-          // marker.setIcon( new AMap.Icon({            
-          //   image: activeIcon,
-          //   size: new AMap.Size(35,40),  //图标大小
-          //   imageSize: new AMap.Size(35,40),
-          // }),)
+
           this.showModel(item.id);
           // this.drawMap(item.lnglat.lng,item.lnglat.lat)
         });
@@ -227,10 +236,10 @@ export default {
             liteStyle: true
         }));
         map.addControl(new AMap.Scale());
-        map.addControl(new AMap.ControlBar({
-          showControlButton:false,
-          // showZoomBar:false
-        }))
+        // map.addControl(new AMap.ControlBar({
+        //   showControlButton:false,
+        //   // showZoomBar:false
+        // }))
         var geolocation = new AMap.Geolocation(options);
         map.addControl(geolocation);
         console.log(map);

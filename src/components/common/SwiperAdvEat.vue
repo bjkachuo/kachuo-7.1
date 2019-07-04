@@ -65,10 +65,22 @@ export default {
   //   }
   // },
   methods:{
+<<<<<<< HEAD
     // get(){
     // }
     test(){
       console.log("我点到广告位了")
+=======
+
+    get() {
+      this.$http.get("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.index.get_recommend_business")
+        .then(({data}) => {
+          console.log(data.data);
+          this.AdvOptions = data.data;
+          console.log(this.AdvOptions);
+        })
+
+>>>>>>> 47bcc9d63453467163666637fa7c11e6292a1588
     }
   },
   mounted() {

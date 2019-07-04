@@ -17,17 +17,9 @@
           <div class="marker-icon-sort">{{index}}</div>
         </div>
       </el-amap-marker>
-      <el-amap-marker v-for="(marker,index) in markers" :position="marker.position" :vid="index" :offset="[-15,-65]" anchor="bottom-center">
-        <div @touchstart="showModel(marker.label,marker.position)">
-          <div :style="{width : marker.label.length+1+'em'}" style="background: #fff;padding: 2px 0.5em;">{{marker.label}}</div>
-        </div>
-      </el-amap-marker>
+      <el-amap-text v-for="text in markers" :text="text.label" :position="text.position"  :offset="[0,-55]" ></el-amap-text>
+
     </el-amap>
-
-
-
-
-<!--    <div id="container" :style="setMapHeight" class="amap-demo"></div>-->
     <Popup class="content-model" ref="videoWrap" v-show="showModelFlag" :dataPosition="clickPosition"></Popup>
     <NavigationTab :dataList="tabList" v-on:changePath="showPath"></NavigationTab>
   </div>
@@ -52,9 +44,10 @@ import { setTimeout } from "timers";
 export default {
   name: "amap-page",
   data() {
+    let self = this;
     return {
       zoom: 16,
-      center: [121.59996, 31.197646],
+      center: [0,0],
       markers: [],
       markerRefs: [],
       source: 'click',
@@ -66,7 +59,38 @@ export default {
             console.log(instance);
           }
         }
-      }],
+      },
+      {
+          pName: 'Geolocation',
+          events: {
+            init(o) {
+              // o 是高德地图定位插件实例
+              console.log(o);
+              // o.getCurrentPosition((status, result) => {
+              //   if (result && result.position) {
+              //
+              //     self.center = [result.position.lng, result.position.lat];
+              //     self.loaded = true;
+              //     self.$nextTick();
+              //   }
+              // });
+              document.getElementsByClassName('amap-geolocation-con')[0].onclick = () =>{
+                console.log(1);
+                o.getCurrentPosition((status, result) => {
+                  if (result && result.position) {
+
+                    self.center = [result.position.lng, result.position.lat];
+                    self.loaded = true;
+                    self.$nextTick();
+                  }
+                });
+              }
+            },
+            click(){
+              console.log(1);
+            }
+          }
+        }],
       TitleObjData: {
         titleContent: "智慧导航",
         showLeftBack: true,
@@ -100,14 +124,11 @@ export default {
 
     initLocalData() {
       let scenicId = sessionStorage.getItem("currentScenic");
-       //let data = this.importDataSync(scenicId);
       for (let i = 0; i < this.scenicList.length; i++) {
         if (this.scenicList[i].id == scenicId) {
           this.center = this.scenicList[i].position;
         }
       }
-
-      // this.roadPath = this.SCENICLINE[0].path;
     },
     init() {
 
@@ -115,19 +136,30 @@ export default {
 
         this.markers = []
         this.SCENICLINE.forEach((item, index) => {
+          this.markers.push({
+            position:[item.position[0], item.position[1]],
+            label:item.label,
+          })
 
-            if(this.navIndex == 0){
-                this.markers.push({
-                  position:[item.position[0], item.position[1]],
-                  label:item.label
-                })
-            }else{
-              this.markers.push({
-                position:[item.position[0], item.position[1]],
-                label:item.label
+          setTimeout(()=>{
+            let dom  = document.getElementsByClassName('amap-overlay-text-container')
+            for(var i=0;i<dom.length;i++){
+              dom[i].style.boxShadow = '2px 2px 2px #ccc'
+              dom[i].style.padding = '6px 7px'
+              dom[i].style.borderRadius = '6px'
+              this.markers.forEach((item,index)=>{
+                if(item.label == dom[i].innerText) dom[i].index = index
               })
+
+              dom[i].ontouchstart = (e) =>{
+
+                console.log(e.target.innerText);
+                let index = e.target.index
+                this.showModel(this.SCENICLINE[index].label,this.SCENICLINE[index].position)
+              }
             }
-        });
+          },800)
+        })
 
       } else {
         this.$vux.toast.text("暂无相应景点", "middle")
@@ -139,6 +171,7 @@ export default {
     //绘制路线
 
     showModel(name,position) {
+      console.log(name);
       this.clickPosition = {
         name:name,
         lat:position[1],
@@ -160,20 +193,17 @@ export default {
           if(data == ''){
             data = []
           }
-
           data.forEach(item=>{
             arr.push({position:[ item.longitude,item.latitude ],label:item.title})
           })
 
           this.SCENICLINE = arr
           console.log(this.SCENICLINE);
-          if(type == '') this.initLocalData()
+          if(type == 0) this.initLocalData()
           else{
             this.center = arr.length ? arr[0].position : this.center
           }
-
           this.init();
-
         })
     }
 
@@ -194,7 +224,7 @@ export default {
   }
 };
 </script>
-<style lang="css" scoped>
+<style scoped>
   .marker-icon-ta{
     width: 30px;
     height: 35px;
@@ -226,5 +256,6 @@ export default {
   position: relative;
   z-index: 9999;
 }
+
 
 </style>
