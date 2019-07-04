@@ -47,7 +47,7 @@ export default {
         longitude: obj.lng,
         latitude: obj.lat
       }) .then(res => {
-      if(!res.scenic_video){
+      if(!res.data.scenic_video){
          this.$vux.toast.text("暂无相应景点", "middle")
          setTimeout(() => {
            this.$vux.toast.hide()
