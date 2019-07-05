@@ -13,6 +13,15 @@ import { Checklist } from "vux";
 import { getAddressList, setDefaultAddr } from "@/servers/api";
 
 export default {
+
+  data() {
+    return {
+      commonList: [],
+      radioValue: [""],
+      flag:false,
+    };
+  },
+
   created() {
     this.getAddressList();
   },
@@ -22,6 +31,10 @@ export default {
   },
   methods: {
     changeVal(val, label) {
+      if(!this.flag){
+        this.flag = true
+        return
+      }
       this.$emit("getSetVal",val);
     },
     getAddressList() {
@@ -51,25 +64,11 @@ export default {
         });
     }
   },
-  data() {
-    return {
-      commonList: [],
-      radioValue: [""]
-    };
-  },
   watch:{
-      
-      "$route": function(){
-        this.commonList = []
-        this.getAddressList()
-      }
-
-	  // '$route' (to, from) { //监听路由是否变化
-		//   if(to.query.id != from.query.id){
-		// 	  this.id = to.query.id;
-		// 	  this.init();//重新加载数据
-		//   }
-	  // }
+    "$router":function(){
+      this.commonList = []
+      this.getAddressList()
+    }
   }
 };
 </script>

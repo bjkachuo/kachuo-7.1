@@ -2,11 +2,11 @@
   <div v-transfer-dom>
     <popup v-model="isShow" :hide-on-blur="true" @on-hide="hide">
       <div class="popup2" v-show="showBottom">
-        <div class="video" id="wrapper"></div>
+        <div class="video" id="wrapper" v-if=""></div>
         <div class="navigaion-video-detail-wrap">
           <p class="navigaion-video-detail-p">
             <span class="dot"></span>
-            <span>{{dataPosition.name}}</span>
+            <span>{{label}}</span>
           </p>
           <p class="navigaion-video-detail-con">{{content}}</p>
         </div>
@@ -26,7 +26,7 @@ export default {
   directives: {
     TransferDom
   },
-  props: ["dataPosition"],
+
   components: {
     Popup,
     VideoPlayer
@@ -37,16 +37,20 @@ export default {
       isControls: true,
       content: "",
       descDetails: {},
-      showBottom: true
+      showBottom: true,
+      label:'',
     };
   },
   methods: {
     getScenicDetails(obj) {
       this.descDetails = null;
+      this.label = obj.name
       getScenicPointDetails({
         longitude: obj.lng,
         latitude: obj.lat
       }) .then(res => {
+
+
       if(!res.data.scenic_video){
          this.$vux.toast.text("暂无相应景点", "middle")
          setTimeout(() => {
@@ -69,7 +73,7 @@ export default {
           type: "text",
           text: "暂无介绍",
           time: 1000
-        });
+        })
       }
         })
         .catch(err => {

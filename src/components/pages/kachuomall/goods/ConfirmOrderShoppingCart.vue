@@ -189,14 +189,10 @@ export default {
     }
   },
 
-  created(){
-    console.log(1)
-  },
-
   watch: {
-    "$route": function(){
-        console.log(1)
-      }
+    '$store.state.address':function () {
+      this.getAddressDefaultFn()
+    }
   }
 };
 </script>

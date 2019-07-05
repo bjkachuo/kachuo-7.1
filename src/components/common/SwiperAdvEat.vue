@@ -58,15 +58,6 @@ export default {
     swiper,
     swiperSlide
   },
-  // methods:{
-  //   changeRouter(){
-  //     alert("我是轮播图 我被点了");
-  //   }
-  // },
-  methods:{
-    // get(){
-    // }
-  },
   mounted() {
 
     this.$nextTick(() => {

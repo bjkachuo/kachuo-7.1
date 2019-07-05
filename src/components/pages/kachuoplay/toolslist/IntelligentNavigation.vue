@@ -6,7 +6,7 @@
       :showRightMore="TitleObjData.showRightMore"
     ></Header>
 
-    <el-amap vid="amapDemo"  :center="center"  :zoom="zoom" class="amap-demo" :style="setMapHeight" :plugin="plugin" >
+    <el-amap vid="amapDemo"  :center="center"  :zoom="zoom" class="amap-demo" :style="setMapHeight" :plugin="plugin"  :events="events">
       <el-amap-marker v-for="(marker,index) in markers" :position="marker.position" :vid="index" :offset="taOffset" v-if="navIndex == 0">
         <div @touchstart="showModel(marker.label,marker.position)">
           <div class="marker-icon-ta"></div>
@@ -20,7 +20,7 @@
       <el-amap-text v-for="text in markers" :text="text.label" :position="text.position"  :offset="[0,-55]" ></el-amap-text>
 
     </el-amap>
-    <Popup class="content-model" ref="videoWrap" v-show="showModelFlag" :dataPosition="clickPosition"></Popup>
+    <Popup class="content-model" ref="videoWrap" v-show="showModelFlag"></Popup>
     <NavigationTab :dataList="tabList" v-on:changePath="showPath"></NavigationTab>
   </div>
 </template>
@@ -50,6 +50,14 @@ export default {
       center: [0,0],
       markers: [],
       markerRefs: [],
+      events:{
+        'moveend': () => {
+          this.domBindEvent()
+        },
+        'zoomend':()=>{
+          this.domBindEvent()
+        }
+      },
       source: 'click',
       taOffset : [-15,-35],
       plugin: [{
@@ -64,16 +72,6 @@ export default {
           pName: 'Geolocation',
           events: {
             init(o) {
-              // o 是高德地图定位插件实例
-              console.log(o);
-              // o.getCurrentPosition((status, result) => {
-              //   if (result && result.position) {
-              //
-              //     self.center = [result.position.lng, result.position.lat];
-              //     self.loaded = true;
-              //     self.$nextTick();
-              //   }
-              // });
               document.getElementsByClassName('amap-geolocation-con')[0].onclick = () =>{
                 console.log(1);
                 o.getCurrentPosition((status, result) => {
@@ -85,9 +83,6 @@ export default {
                   }
                 });
               }
-            },
-            click(){
-              console.log(1);
             }
           }
         }],
@@ -112,7 +107,6 @@ export default {
       path: [],
       SCENICSPOT: [],
       SCENICLINE: [],
-      clickPosition:{}
     };
   },
   components: {
@@ -123,13 +117,34 @@ export default {
   methods: {
 
     initLocalData() {
-      let scenicId = sessionStorage.getItem("currentScenic");
+      let scenicId = sessionStorage.getItem("currentScenic")
       for (let i = 0; i < this.scenicList.length; i++) {
         if (this.scenicList[i].id == scenicId) {
           this.center = this.scenicList[i].position;
         }
       }
     },
+
+    domBindEvent(){
+      setTimeout(()=>{
+        let dom  = document.getElementsByClassName('amap-overlay-text-container')
+
+        for(var i=0;i<dom.length;i++){
+          dom[i].style.boxShadow = '2px 2px 2px #ddd'
+          dom[i].style.padding = '5px 7px'
+          dom[i].style.borderRadius = '6px'
+          this.markers.forEach((item,index)=>{
+            if(item.label == dom[i].innerText) dom[i].index = index
+          })
+
+          dom[i].ontouchstart = (e) =>{
+            let index = e.target.index
+            this.showModel(this.SCENICLINE[index].label,this.SCENICLINE[index].position)
+          }
+        }
+      },1000)
+    },
+
     init() {
 
       if (this.SCENICLINE.length) {
@@ -140,26 +155,9 @@ export default {
             position:[item.position[0], item.position[1]],
             label:item.label,
           })
-
-          setTimeout(()=>{
-            let dom  = document.getElementsByClassName('amap-overlay-text-container')
-            for(var i=0;i<dom.length;i++){
-              dom[i].style.boxShadow = '2px 2px 2px #ccc'
-              dom[i].style.padding = '6px 7px'
-              dom[i].style.borderRadius = '6px'
-              this.markers.forEach((item,index)=>{
-                if(item.label == dom[i].innerText) dom[i].index = index
-              })
-
-              dom[i].ontouchstart = (e) =>{
-
-                console.log(e.target.innerText);
-                let index = e.target.index
-                this.showModel(this.SCENICLINE[index].label,this.SCENICLINE[index].position)
-              }
-            }
-          },800)
         })
+
+        this.domBindEvent()
 
       } else {
         this.$vux.toast.text("暂无相应景点", "middle")
@@ -171,13 +169,13 @@ export default {
     //绘制路线
 
     showModel(name,position) {
-      console.log(name);
-      this.clickPosition = {
+
+      let clickPosition = {
         name:name,
         lat:position[1],
         lng:position[0]
       }
-      this.$refs.videoWrap.getScenicDetails(this.clickPosition);
+      this.$refs.videoWrap.getScenicDetails(clickPosition);
     },
     showPath(index) {
       this.markers = []
