@@ -97,8 +97,10 @@ export const vueCordovaFunction = {
    * 社会化分享
    */
   socialShare: function (goodObj) {
+    console.log(window.plugins);
     document.addEventListener("deviceready", onDeviceReady, false);
     function onDeviceReady() {
+
       window.plugins.socialsharing.share(goodObj.title, null, goodObj.thumb_url[0], 'https://core.kachuo.com/share/index.html?id=' + goodObj.id);
     }
   },
