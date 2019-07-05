@@ -225,7 +225,11 @@ export default {
     }
   },
 
-  watch: {}
+  watch: {
+    '$store.state.address':function () {
+      this.getAddressDefaultFn()
+    }
+  }
 };
 </script>
 <style lang='css' scoped>
