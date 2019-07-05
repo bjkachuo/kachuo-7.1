@@ -25,7 +25,9 @@ export default {
   created() {
     this.getAddressList();
   },
-  mounted() {},
+  mounted() {
+    console.log(this.$router);
+  },
   components: {
     Checklist
   },
@@ -62,10 +64,20 @@ export default {
         .catch(err => {
           console.log(err);
         });
-    }
+    },
+
+
+
   },
   watch:{
+<<<<<<< HEAD
     "$router":function(){
+=======
+    '$store.state.address':function () {
+
+      console.log(1);
+
+>>>>>>> 415c67ae868c2654db569b49ddbc5fa4f50e9540
       this.commonList = []
       this.getAddressList()
     }
