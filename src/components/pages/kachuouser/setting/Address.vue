@@ -6,7 +6,7 @@
       :showRightMore="TitleObjData.showRightMore"
     ></Header>
     <div class="address-con" :style="conHei">
-      <CheckList v-on:getSetVal="setDefAdd"></CheckList>
+      <CheckList @getSetVal="setDefAdd"></CheckList>
       <div class="btn-wrap">
         <x-button class="btn" type="primary" @click.native="addNewAddress">添加新地址</x-button>
       </div>
@@ -68,6 +68,9 @@ export default {
               time: 1000,
               isShowMask: true
             });
+            this.$store.state.address ++
+            this.$router.goBack()
+
           }
         })
         .catch(err => {

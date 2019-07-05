@@ -13,6 +13,15 @@ import { Checklist } from "vux";
 import { getAddressList, setDefaultAddr } from "@/servers/api";
 
 export default {
+
+  data() {
+    return {
+      commonList: [],
+      radioValue: [""],
+      flag:false,
+    };
+  },
+
   created() {
     this.getAddressList();
   },
@@ -22,6 +31,10 @@ export default {
   },
   methods: {
     changeVal(val, label) {
+      if(!this.flag){
+        this.flag = true
+        return
+      }
       this.$emit("getSetVal",val);
     },
     getAddressList() {
@@ -51,12 +64,7 @@ export default {
         });
     }
   },
-  data() {
-    return {
-      commonList: [],
-      radioValue: [""]
-    };
-  }
+
 };
 </script>
 
