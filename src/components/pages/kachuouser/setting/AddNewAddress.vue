@@ -94,7 +94,6 @@ export default {
         address: this.maskValueDetails
       })
         .then(res => {
-          console.log(res);
           if (res.result === 1) {
             this.$vux.toast.show({
               type: "success",
@@ -102,6 +101,7 @@ export default {
               time: 1000,
               isShowMask: true,
               onHide: () => {
+                this.$store.state.address ++
                 this.$router.goBack();
               }
             });
