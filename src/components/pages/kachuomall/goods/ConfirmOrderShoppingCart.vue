@@ -189,7 +189,15 @@ export default {
     }
   },
 
-  watch: {}
+  created(){
+    console.log(1)
+  },
+
+  watch: {
+    "$route": function(){
+        console.log(1)
+      }
+  }
 };
 </script>
 <style lang='css' scoped>

@@ -122,7 +122,12 @@ export default {
     }
   },
 
-  watch: {}
+  watch: {
+      "$route": function(){
+        this.maskValueAddress = []
+        this.getSelAddress()
+      }
+  }
 };
 </script>
 <style lang='css' scoped>

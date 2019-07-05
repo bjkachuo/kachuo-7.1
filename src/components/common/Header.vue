@@ -67,6 +67,7 @@ export default {
       console.log(str);
     },
     click(key) {
+      alert("1111");
       vueCordovaFunction.socialShare(this.$parent.goodsData);
     }
   }

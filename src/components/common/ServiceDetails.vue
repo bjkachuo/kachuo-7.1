@@ -114,33 +114,7 @@
                 >
               </div>
               <div class="name-star-wrap">
-                <span class="name">水子菲菲</span>
-                <span>
-                  <el-rate v-model="value2" disabled></el-rate>
-                </span>
-              </div>
-              <div class="point-time">
-                <div>
-                  <i class="el-icon-more"></i>
-                </div>
-                <div class="time">2019-05-24</div>
-              </div>
-            </div>
-            <div class="row-two">
-              <p>蓬莱小面很好吃，好评，价格也不贵。</p>
-            </div>
-            <div class="line-two"></div>
-          </li>
-          <li>
-            <div class="row-one">
-              <div class="head-img">
-                <img
-                  src="https://core.kachuo.com/attachment/images/5/2019/03/q8YnUIgoZB8eazNvc78uNG8i0tU9Ib.png"
-                  alt
-                >
-              </div>
-              <div class="name-star-wrap">
-                <span class="name">水子菲菲</span>
+                <span class="name">木子菲菲</span>
                 <span>
                   <el-rate v-model="value2" disabled></el-rate>
                 </span>
@@ -166,7 +140,33 @@
                 >
               </div>
               <div class="name-star-wrap">
-                <span class="name">水子菲菲</span>
+                <span class="name">木子菲菲</span>
+                <span>
+                  <el-rate v-model="value2" disabled></el-rate>
+                </span>
+              </div>
+              <div class="point-time">
+                <div>
+                  <i class="el-icon-more"></i>
+                </div>
+                <div class="time">2019-05-24</div>
+              </div>
+            </div>
+            <div class="row-two">
+              <p>蓬莱小面很好吃，好评，价格也不贵。</p>
+            </div>
+            <div class="line-two"></div>
+          </li>
+          <li>
+            <div class="row-one">
+              <div class="head-img">
+                <img
+                  src="https://core.kachuo.com/attachment/images/5/2019/01/IYex5YpbY0cAYa5XssqEY2E2AycCD2.jpg"
+                  alt
+                >
+              </div>
+              <div class="name-star-wrap">
+                <span class="name">木子菲菲</span>
                 <span>
                   <el-rate v-model="value2" disabled></el-rate>
                 </span>
@@ -192,7 +192,7 @@
                 >
               </div>
               <div class="name-star-wrap">
-                <span class="name">水子菲菲</span>
+                <span class="name">木子菲菲</span>
                 <span>
                   <el-rate v-model="value2" disabled></el-rate>
                 </span>

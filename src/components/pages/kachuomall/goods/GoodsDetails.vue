@@ -662,7 +662,7 @@ export default {
   overflow: hidden;
 .swiper-pagination{
     bottom: 10px;
-    left: 330px;
+    left: 310px;
     width: 40px;
     background: rgba(0,0,0,0.5);
     color: white;

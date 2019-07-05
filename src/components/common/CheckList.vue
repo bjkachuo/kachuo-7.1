@@ -56,6 +56,20 @@ export default {
       commonList: [],
       radioValue: [""]
     };
+  },
+  watch:{
+      
+      "$route": function(){
+        this.commonList = []
+        this.getAddressList()
+      }
+
+	  // '$route' (to, from) { //监听路由是否变化
+		//   if(to.query.id != from.query.id){
+		// 	  this.id = to.query.id;
+		// 	  this.init();//重新加载数据
+		//   }
+	  // }
   }
 };
 </script>

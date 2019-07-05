@@ -353,11 +353,25 @@ export default [
     component: resolve => require(['@/components/pages/kachuoincome/caiyuangongxiang/OrderList'], resolve),
   },
   {
+    //景区服务列表页
+    path: '/scenicService',
+    name: 'ScenicService',
+    component: resolve => require(['@/components/common/ScenicService'], resolve),
+  },
+  {
+    //景区商家详情页
+    path: '/serviceDetails',
+    name: 'ServiceDetails',
+    component: resolve => require(['@/components/common/serviceDetails'], resolve),
+  },
+  {
+    //周边服务商家列表页
     path: '/suerroundBusiness',
-    name :'SuerroundBusiness',
+    name:'SuerroundBusiness',
     component: resolve => require(['@/components/common/suerroundBusiness'], resolve),
   },
   {
+    //周边服务商家详情页
     path: '/storeDetails',
     name :'StoreDetails',
     component: resolve => require(['@/components/common/storeDetails'], resolve),
