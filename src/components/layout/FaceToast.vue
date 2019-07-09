@@ -32,7 +32,9 @@ export default {
 
   computed: {},
   created() {
-    this.showFaceCheck();
+    setTimeout(()=>{
+      this.showFaceCheck();
+    })
   },
   beforeMount() {},
 
