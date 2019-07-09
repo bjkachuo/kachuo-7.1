@@ -73,14 +73,13 @@ export default {
       this.payRequest("21");
     },
     // 支付失败回调
-    errorToast() {
+    errorToast(res) {
       this.$vux.toast.show({
-        text: "支付成功",
-        type: "success",
-        time: 1000,
-        onHide: () => {
-          this.$router.push("/orderlist");
-        }
+        text: res,
+        type: "text",
+        width: "15em",
+        position: "middle",
+        time: 3000
       });
     },
     // 支付成功回调
@@ -88,7 +87,9 @@ export default {
       this.$vux.toast.show({
         text: "支付成功",
         type: "success",
-        time: 1000,
+        width: "15em",
+        position: "middle",
+        time: 3000,
         onHide: () => {
           this.$router.push("/orderlist");
         }
@@ -108,12 +109,11 @@ export default {
       function onDeviceReady() {
         Wechat.sendPaymentRequest(
           WXparams,
-          s => {
+          function () {
             that.successToast();
+          }, function (reason) {
+            that.errorToast(reason);
           },
-          e => {
-            that.errorToast();
-          }
         );
       }
     },
@@ -124,7 +124,17 @@ export default {
       function onDeviceReady() {
         cordova.plugins.alipay.payment(
           aliInfo,
-          function success(e) {
+          function () {
+            that.successToast();
+          }, function (reason) {
+            if(reason.resultStatus == "6001"){
+              that.errorToast("您点击取消并返回");
+            }
+            else{
+              that.errorToast(reason.memo);
+            }
+          },
+          /*function success(e) {
             if (e.resultStatus === 9000) {
               that.successToast();
             } else {
@@ -134,7 +144,7 @@ export default {
           function error(e) {
             console.log(e);
             that.errorToast();
-          }
+          }*/
         );
       }
     }
