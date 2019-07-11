@@ -34,7 +34,7 @@ export default {
   created() {
     setTimeout(()=>{
       this.showFaceCheck();
-    })
+    },1000)
   },
   beforeMount() {},
 
@@ -42,15 +42,15 @@ export default {
 
   methods: {
     showFaceCheck() {
-      let flag = JSON.parse(sessionStorage.getItem("userLoginInfo")).discern;
-      let flagLocal = sessionStorage.getItem("closeFace");
+      let flag = JSON.parse(sessionStorage.getItem("userLoginInfo")).discern
+      let flagLocal = sessionStorage.getItem("closeFace")
       if (flagLocal) {
-        this.showFlag = false;
+        this.showFlag = false
       } else {
         if (flag === 1) {
-          this.showFlag = true;
+          this.showFlag = true
         } else {
-          this.showFlag = false;
+          this.showFlag = false
         }
       }
     },
