@@ -51,7 +51,7 @@ export const vueCordovaFunction = {
     }
     document.addEventListener("deviceready", onDeviceReady, false);
     function onDeviceReady() {
-      cordova.plugins.CDVWechat.sendPaymentRequest(WXparams, (s) => {
+      cordova.plugins.Wechat.sendPaymentRequest(WXparams, (s) => {
         this.$vux.toast.show({
           text: '支付成功',
           type: 'success',

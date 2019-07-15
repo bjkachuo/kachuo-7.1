@@ -126,8 +126,7 @@ export default {
     InlineLoading,
     Cell
   },
-  watch: {
-  },
+
   computed: {
     mapHeight() {
       return { height: document.documentElement.clientHeight - 90 + "px" };
@@ -145,7 +144,7 @@ export default {
   methods: {
     // 溯源抢单
     ccc(index){
-      this.showToast=true
+      this.showToast = true
       if(index==1){
         this.qwe = this.dataObj.grant_img
       }else{
@@ -164,27 +163,35 @@ export default {
     },
     getScenceDataMark() {
       this.init().then(res => {
-        this.showMarker(SCENICLIST);
+        this.showMarker(SCENICLIST)
       });
     },
     getSYData() {
       Promise.all([this.init(), this.getSYOrderList()]).then(res => {
         let markArr = res[1];
         markArr.forEach((item, index) => {
+          console.log('foreach');
           var marker = new AMap.Marker({
             map: map,
-            icon: locationIcon,
+              icon: new AMap.Icon({
+                image: locationIcon,
+                size: new AMap.Size(30,35),  //图标大小
+                imageSize: new AMap.Size(30,35),
+                //anchor:[15,35], // 设置锚点方位
+              }),
             position: [item.position[0], item.position[1]],
             offset: new AMap.Pixel(-13, -30)
           });
           marker.setLabel({
-            offset: new AMap.Pixel(20, 20),
+            offset: new AMap.Pixel(0, -20),
             content: item.name,
             id: item.id,
             position: [item.position[0], item.position[1]]
           });
+
           marker.on("click", item => {
-            this.samePosition = [];
+            this.samePosition = []
+            console.log(item)
             for (let i = 0; i < this.SYOrderListData.length; i++) {
               if (
                 this.SYOrderListData[i].position.join(",") ===
@@ -271,18 +278,24 @@ export default {
         });
     },
     showModel(id, name) {
+      console.log('click');
       this.getdataList(this.$parent.tabIndex, id, name);
     },
     showMarker(markArr) {
       markArr.forEach((item, index) => {
         var marker = new AMap.Marker({
           map: map,
-          icon: locationIcon,
+          icon: new AMap.Icon({
+            image: locationIcon,
+            size: new AMap.Size(30,35),  //图标大小
+            imageSize: new AMap.Size(30,35),
+            //anchor:[15,35], // 设置锚点方位
+          }),
           position: [item.position[0], item.position[1]],
           offset: new AMap.Pixel(-13, -30)
         });
         marker.setLabel({
-          offset: new AMap.Pixel(20, 20),
+          offset: new AMap.Pixel(0, -20),
           content: item.name,
           id: item.id
         });

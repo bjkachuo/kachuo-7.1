@@ -63,6 +63,7 @@ export default {
 
   methods: {
     onItemClick(index) {
+      console.log('itemclick');
       this.tabIndex = index + 1;
       if (index === 2) {
         this.$refs.map.getSYData();
