@@ -152,13 +152,14 @@ export default {
         this.qwe = this.dataObjYC.arr[0].grant_img
       }
       console.log(this.dataObjYC.arr)
+      // alert(11111)
     },
     SYGet(item) {
       this.$router.push({
         path: "/SuYuanQiangdan",
         query: {
           item:JSON.stringify(item)
-        }
+               },
       });
     },
     getScenceDataMark() {

@@ -28,7 +28,7 @@ export default {
           name: "票务系统",
           link: "/ticketsdiscount",
           // class: "iconfont iconmenpiao btn1",
-          imgSrc: require("@/assets/images/门票打折@2x_7.png")
+          imgSrc: require("@/assets/images/打折门票-圆角1.png")
         },
         {
           imgUrl:
@@ -36,7 +36,7 @@ export default {
           name: "智慧导航",
           link: "/intelligentnavigation",
           // class: "iconfont iconzhihuidaohang btn2",
-          imgSrc: require("@/assets/images/智慧导航@2x.png")
+          imgSrc: require("@/assets/images/智慧导航-圆角1.png")
 
         },
         {
@@ -45,7 +45,7 @@ export default {
           name: "景区发布",
           link: "/scencerelease",
           // class: "iconfont iconjingqufabu"
-          imgSrc: require("@/assets/images/景区发布@2x_1.png")
+          imgSrc: require("@/assets/images/景区发布-圆角1.png")
 
         },
         {
@@ -54,7 +54,7 @@ export default {
           name: "景区服务",
           link: "/scenceservice?type=1",
           // class: "iconfont iconjingqufuwu"
-          imgSrc: require("@/assets/images/景区服务@2x_2.png")
+          imgSrc: require("@/assets/images/景区服务-圆角1.png")
 
         },
         {
@@ -63,14 +63,14 @@ export default {
           name: "记住的",
           link: "/remember?type=5&branch=1",
           // class: "iconfont iconjizhude"
-          imgSrc: require("@/assets/images/记住的@2x_3.png")
+          imgSrc: require("@/assets/images/记住的-圆角1.png")
         },
         {
           imgUrl:
             "http://f.hiphotos.baidu.com/image/pic/item/359b033b5bb5c9eab0b192c9db39b6003af3b35e.jpg",
           name: "了解的",
           link: "/understand?type=7&branch=2",
-          imgSrc: require("@/assets/images/了解的@2x_4.png")
+          imgSrc: require("@/assets/images/了解的-圆角1.png")
           // class: "iconfont iconliaojiede"
         },
         {
@@ -79,7 +79,7 @@ export default {
           name: "带走的",
           link: "/takeaway?carousel=2",
           // class: "iconfont icondaizoude"
-          imgSrc: require("@/assets/images/带走的@2x_5.png")
+          imgSrc: require("@/assets/images/带走的-圆角1.png")
         },
         {
           imgUrl:
@@ -87,7 +87,7 @@ export default {
           name: "周边服务",
           link: "/servicesurround?type=4",
           // class: "iconfont iconzhoubianfuwu"
-          imgSrc: require("@/assets/images/周边服务@2x_6.png")
+          imgSrc: require("@/assets/images/周边服务--圆角1.png")
 
         }
       ]
@@ -120,6 +120,7 @@ export default {
   background: #fff;
   position: relative;
   z-index: 999;
+  height: 200px;
 }
 .flex-wrap-for {
   width: 100%;
@@ -132,7 +133,7 @@ export default {
 .flex-wrap-img {
   width: 50px;
   height: 50px;
-  border-radius: 50%;
+  /* border-radius: 50%; */
 }
 .flex-wrap-name {
   width: 100%;
@@ -148,4 +149,14 @@ export default {
   width: 45px;
   height: 45px;
 }
+</style>
+<style lang="less">
+// .vux-flexbox{
+//   height: 200px;
+//   .vux-flexbox-item{
+//     margin-top: 0!important;
+
+//   }
+
+// }
 </style>

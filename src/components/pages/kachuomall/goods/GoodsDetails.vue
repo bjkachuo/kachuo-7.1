@@ -20,13 +20,7 @@
       <div class="swiper-pagination swiper-pagination-bullets" slot="pagination"></div> 
     </swiper>
     </div>
-
-
       <previewer ref="previewer" :list="list2" :options="options"></previewer>
-
-
-
-
       <div class="goods-details-desc">
         <p class="goods-name text-overflow-hidden">{{goodsData.title}}</p>
         <p class="goods-price" v-if="routeQueryPrice">
@@ -69,6 +63,7 @@
         <span>产品文案</span>
       </div>
       <p style="margin-top:10px" v-html="goodsData.content">{{goodsData.content}}</p>
+      
     </div>
     <div class="good-details-boot">
       <p class="goods-action">
@@ -267,6 +262,7 @@ export default {
 
   mounted() {
     this.getGoodsDetailsInfo();
+    // console.log(this.getGoodsDetailsInfo())
   },
 
   methods: {
@@ -440,12 +436,12 @@ export default {
                 });
               }
               this.SwiperImgData.ImgList = JSON.parse(JSON.stringify(arr));
-              console.log(this.SwiperImgData.ImgList);
+              // console.log(this.SwiperImgData.ImgList);
               this.list = this.SwiperImgData.ImgList;
               this.SwiperImgData.ImgList.forEach(item=>{
                 this.list2.push({src:item.img})
               })
-              console.log(this.list)
+              // console.log(this.list)
             }
             this.$nextTick(() => {
               this.goodsData = res.data;

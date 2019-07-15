@@ -5,13 +5,14 @@
       :showLeftBack="TitleObjData.showLeftBack"
       :showRightMore="TitleObjData.showRightMore"
     ></Header>
-    <scroller lock-x height="-10">
+    <scroller lock-x height="-10"  @on-scroll-bottom="onScrollBottom" ref="scrollerBottom" :scroll-bottom-offst="-10">
      <div class="store-details-content">
       <div class="video-wrap">
         <video
           :src="this.storeDetails.video"
           :poster="this.storeDetails.video_image"
           controls="controls"
+          @ended="test()"
         ></video>
       </div>
       <div class="storeIntroduce-wrap">
@@ -20,7 +21,7 @@
         </div>
         <div class="star-price">
           <div class="star-wrap">
-            <el-rate v-model="value" disabled text-color="#ff9900"></el-rate>
+            <el-rate v-model="value1" disabled text-color="#ff9900"></el-rate>
           </div>
           <dir class="price-wrap">
             <p>{{this.storeDetails.price}}¥/人</p>
@@ -46,10 +47,10 @@
         <div class="contact">
           <div class="contact-left">
             <p>联系方式</p>
-            <p>{{this.storeDetails.phone}}</p>
+            <p><a :href="'tel:'+ this.storeDetails.phone">{{this.storeDetails.phone}}</a></p>
           </div>
           <div class="contact-right">
-            <i class="el-icon-phone-outline"></i>
+            <a :href="'tel:'+ this.storeDetails.phone"><i class="el-icon-phone-outline"></i></a>
           </div>
         </div>
         <div class="line-one"></div>
@@ -58,7 +59,7 @@
             <p>详细地址</p>
           </div>
           <div class="adress-details">
-            <p>{{this.storeDetails.address}}</p>
+            <a :href="'https://uri.amap.com/marker?position='+this.storeDetails.latitude+','+this.storeDetails.longitude+'&name='+this.storeDetails.address"><p>{{this.storeDetails.address}}</p></a>
           </div>
         </div>
         <div></div>
@@ -74,141 +75,38 @@
         </div>
         <div class="big-star">
           <div class="block">
-            <el-rate v-model="value1"></el-rate>
+            <el-rate v-model="value1"  disabled ></el-rate>
           </div>
           <div class="line-two"></div>
         </div>
         <ul class="user-evaluate-wrap">
-          <li>
+          <li  v-for="(item,index) in commentList" :key="index">
             <div class="row-one">
               <div class="head-img">
                 <img
-                  src="https://core.kachuo.com/attachment/images/5/2019/01/IYex5YpbY0cAYa5XssqEY2E2AycCD2.jpg"
+                  :src="item.avatar"
                   alt
                 >
               </div>
               <div class="name-star-wrap">
-                <span class="name">木子菲菲</span>
+                <span class="name">{{item.nickname}}</span>
                 <span>
-                  <el-rate v-model="value2" disabled></el-rate>
+                  <el-rate v-model=item.score disabled></el-rate>
                 </span>
               </div>
               <div class="point-time">
                 <div>
                   <i class="el-icon-more"></i>
                 </div>
-                <div class="time">2019-05-24</div>
+                <div class="time">{{item.date}}</div>
               </div>
             </div>
             <div class="row-two">
-              <p>蓬莱小面很好吃，好评，价格也不贵。</p>
+              <p>{{item.content}}</p>
             </div>
             <div class="line-two"></div>
           </li>
-          <li>
-            <div class="row-one">
-              <div class="head-img">
-                <img
-                  src="https://core.kachuo.com/attachment/images/5/2019/01/IYex5YpbY0cAYa5XssqEY2E2AycCD2.jpg"
-                  alt
-                >
-              </div>
-              <div class="name-star-wrap">
-                <span class="name">木子菲菲</span>
-                <span>
-                  <el-rate v-model="value2" disabled></el-rate>
-                </span>
-              </div>
-              <div class="point-time">
-                <div>
-                  <i class="el-icon-more"></i>
-                </div>
-                <div class="time">2019-05-24</div>
-              </div>
-            </div>
-            <div class="row-two">
-              <p>蓬莱小面很好吃，好评，价格也不贵。</p>
-            </div>
-            <div class="line-two"></div>
-          </li>
-          <li>
-            <div class="row-one">
-              <div class="head-img">
-                <img
-                  src="https://core.kachuo.com/attachment/images/5/2019/01/IYex5YpbY0cAYa5XssqEY2E2AycCD2.jpg"
-                  alt
-                >
-              </div>
-              <div class="name-star-wrap">
-                <span class="name">木子菲菲</span>
-                <span>
-                  <el-rate v-model="value2" disabled></el-rate>
-                </span>
-              </div>
-              <div class="point-time">
-                <div>
-                  <i class="el-icon-more"></i>
-                </div>
-                <div class="time">2019-05-24</div>
-              </div>
-            </div>
-            <div class="row-two">
-              <p>蓬莱小面很好吃，好评，价格也不贵。</p>
-            </div>
-            <div class="line-two"></div>
-          </li>
-          <li>
-            <div class="row-one">
-              <div class="head-img">
-                <img
-                  src="https://core.kachuo.com/attachment/images/5/2019/01/IYex5YpbY0cAYa5XssqEY2E2AycCD2.jpg"
-                  alt
-                >
-              </div>
-              <div class="name-star-wrap">
-                <span class="name">木子菲菲</span>
-                <span>
-                  <el-rate v-model="value2" disabled></el-rate>
-                </span>
-              </div>
-              <div class="point-time">
-                <div>
-                  <i class="el-icon-more"></i>
-                </div>
-                <div class="time">2019-05-24</div>
-              </div>
-            </div>
-            <div class="row-two">
-              <p>好评，价格也不贵!!!!!</p>
-            </div>
-            <div class="line-two"></div>
-          </li>
-          <li>
-            <div class="row-one">
-              <div class="head-img">
-                <img
-                  src="https://core.kachuo.com/attachment/images/5/2019/01/IYex5YpbY0cAYa5XssqEY2E2AycCD2.jpg"
-                  alt
-                >
-              </div>
-              <div class="name-star-wrap">
-                <span class="name">木子菲菲</span>
-                <span>
-                  <el-rate v-model="value2" disabled></el-rate>
-                </span>
-              </div>
-              <div class="point-time">
-                <div>
-                  <i class="el-icon-more"></i>
-                </div>
-                <div class="time">2019-05-24</div>
-              </div>
-            </div>
-            <div class="row-two">
-              <p>蓬莱小面很好吃，好评，价格也不贵。</p>
-            </div>
-            <div class="line-two"></div>
-          </li>
+          <load-more tip="loading"></load-more>
         </ul>
       </div>
      </div>
@@ -217,13 +115,20 @@
 </template>
 <script>
 import Header from "@/components/common/Header";
-import { Scroller } from 'vux';
+import { Scroller,LoadMore } from 'vux';
 export default {
   data() {
     return {
       //获取到的商家id
       idNum:"",
+      //商家详情数组
       storeDetails:[],
+      //评论列表数组
+      commentList:[],
+      //上拉刷新
+      page : "1",
+      
+      //头部信息设置
       TitleObjData: {
         titleContent: "商家详情",
         showLeftBack: true,
@@ -232,34 +137,83 @@ export default {
       //星星的评级1-5
       value: 5,
       //大星星
-      value1: 4.7,
+      value1: 4.6,
       //单用户评分
-      value2: 5
+      // value2: null
     };
   },
   components: {
     Header,
-    Scroller
+    Scroller,
+    LoadMore
   },
   created() {},
-  methods: {},
+  methods: {
+    onScrollBottom () {
+      if (this.onFetching) {
+        // do nothing
+        // console.log(1);
+      } else {
+        this.onFetching = true
+        setTimeout(() => {
+          this.bottomCount += 5
+          this.$nextTick(() => {
+            this.$refs.scrollerBottom.reset()
+          })
+          this.onFetching = false
+        }, 2000)
+        console.log(2);
+        this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.index.buscommentlist&page="+this.page+"&id="+this.idNum)
+        .then(({data})=>{
+          console.log(data);
+          this.page = data.data.currentpage +=1
+          console.log(this.page)
+          this.commentList = data.data.comment
+        })
+      }
+    },
+    test(){
+      alert(1111)
+    }
+
+  },
   mounted(){
     //获取列表页传来的id
     // console.log(this.$route.query.idNum);
     this.idNum = this.$route.query.idNum;
-    // console.log(this.idNum)
+    console.log(this.idNum)
     //获取商家详情！
     this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.index.business_info&id="+this.idNum)
     .then(({data})=>{
       // console.log(data.data);
       this.storeDetails = data.data;
-      console.log(this.storeDetails)
+      // console.log(this.storeDetails)
     })
-    //获取id
+    //获取评论列表
+    this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.index.buscommentlist&page=1&id="+this.idNum)
+    .then(({data})=>{
+      console.log(data)
+      this.commentList = data.data.comment
+      console.log(this.commentList)
+      //获取用户评分
+      //   this.value2 =  parseInt(this.commentList.score)
+      // console.log(this.value2)
+      //大星星平均值
+      this.value1 = data.data.member_first
+      // console.log(this.value1)
+    })
+    this.$nextTick(() => {
+      this.$refs.scrollerBottom.reset({top: 0})
+    })
+    // console.log(this.commentList.index)
   }
 };
 </script>
 <style lang='css' scoped>
+a{
+  text-decoration:none; 
+  color: #111111;
+}
 li {
   list-style: none;
 }
@@ -277,7 +231,7 @@ li {
 }
 .video-wrap {
   /* width: 375px; */
-  /* height: 210px; */
+  height: 210px;
 }
 video{
   object-fit:fill;
@@ -503,7 +457,7 @@ video{
   border-radius: 50%;
 }
 .name-star-wrap {
-  width: 88px;
+  /* width: 88px; */
   height: 35px;
   float: left;
   margin: 13px 0 0 11px;
@@ -541,7 +495,7 @@ video{
 .el-rate__icon {
   font-size: 14px;
   margin-right: 0px;
-  line-height: 1px;
+  /* line-height: 1px; */
 }
 .block .el-rate__icon {
   font-size: 28px;

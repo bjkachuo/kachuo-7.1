@@ -1,10 +1,11 @@
 <template>
   <div class="login-wrap" :style="backSty">
-    <p class="login-wrap-title">快捷登录</p>
-    <div style="width:100%;background:none">
+    <p class="login-wrap-title-one">Hi！</p>
+    <p class="login-wrap-title">登录开启更多精彩</p>
+    <div style="width:100%;background:none;margin-left:10%;position:relative">
       <x-input title="验证码" style="display:none"></x-input>
       <x-input
-        title="请输入手机号"
+        placeholder="请输入手机号"
         class="weui-vcode"
         v-model="phoneValue"
         :max="13"
@@ -12,25 +13,31 @@
         :show-clear="false"
         novalidate
       ></x-input>
+      <div class="wrap-two">
       <x-input
-        title="请输入验证码"
+        placeholder="请输入验证码"
         class="input-qr-code"
         novalidate
         v-model="veriValue"
         :show-clear="false"
       >
-        <x-button
+      </x-input>
+      <x-button
+          plain="false"
           slot="right"
           type="primary"
           mini
           :disabled="veritfyCode"
           @click.native="sendVeriCode"
           class="veri-btn"
-        >{{veritfyCodeTxt}}</x-button>
-      </x-input>
+          >{{veritfyCodeTxt}}</x-button>       
+      </div>
+       <span class="One"></span>
+       <span class="Two"></span>
     </div>
     <x-button type="primary" class="sub-btn-wrap" @click.native="requestLogin">登录</x-button>
     <p class="visitor-login" @click="visitorLogin">游客登录</p>
+    
   </div>
 </template>
 
@@ -51,8 +58,8 @@ export default {
       veriValue: "",
       backSty: {
         backgroundImage:
-          "url(" + require("@/assets/images/loginback.png") + ")",
-        backgroundSize: "100%",
+          "url(" + require("@/assets/images/loginbackOne.png") + ")",
+        backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center"
       }
@@ -243,38 +250,99 @@ export default {
   padding: 0 15px;
   box-sizing: border-box;
 }
+.login-wrap-title-one{
+  margin-top: 92px;
+  margin-left: 8%;
+  font-size:60px;
+  font-family:PingFang-SC-Heavy;
+  font-weight:800;
+  color:rgba(255,255,255,1);
+  line-height:21px;
+}
 .login-wrap-title {
   font-size: 24px;
-  margin-top: 120px;
-  color: #fff;
-  font-weight: bold;
+  margin-left: 8%;
+  margin-top: 40px;
+  font-family:PingFang-SC-Heavy;
+  color:rgba(255,255,255,1);
+  font-weight:800;
 }
 .weui-vcode,
 .input-qr-code {
-  width: 100%;
-  border-bottom: 1px solid #fff;
+  /* width: 100%;
+  border-bottom: 1px solid #fff; */
   margin-top: 20px;
+  padding-left: 40px;
+  border-radius:8px;
+  background:rgba(255,255,255,0.5);
+  color: #FFFFFF;
+  height: 52px;
+  font-size: 16px;
+
+
+}
+.input-qr-code{
+  width: 49%;
+  float: left;
+
 }
 .weui-vcode {
-  margin-top: 80px;
+  margin-top: 50px;
+  width: 80%;
+
 }
 .sub-btn-wrap {
-  margin-top: 60px;
-  background: #fff;
+  margin-top: 25px;
+  margin-left: 10%;
+  background:rgba(255,255,255,0.5);
   color: #000;
+  width: 81%;
+  height: 46px;
+  font-family:PingFang-SC-Medium;
+  font-size: 16px;
 }
+
 .veri-btn {
-  width: 100px;
-  display: inline-block;
-  background: #fff;
-  color: #000;
+width:30%;
+height:52px;
+background:rgba(255,255,255,0.5);
+/* opacity:0.5; */
+border-radius:8px;
+color: #fff;
+float: left;
+margin-top: 20px;
+margin-left: 5px;
+font-size: 10px;
+border: none;
+}
+.wrap-two{
+  /* position: relative; */
 }
 .visitor-login {
-  width: 100%;
-  height: 20px;
-  font-size: 14px;
+  width: 20%;
+  height: 16px;
+  font-size: 16px;
   text-align: center;
   color: #fff;
-  margin-top: 20px;
+  margin-top: 30px;
+  margin-left: 41%;
+}
+.One{
+  width: 19px;
+  height: 19px;
+  position: absolute;
+  top: 38.4%;
+  left: 2.8%;
+  background: url("../../assets/images/账号@2x.png") no-repeat;
+  background-size: 19px 19px;
+}
+.Two{
+  width: 16px;
+  height: 20px;
+  position: absolute;
+  top: 79.3%;
+  left: 3%;
+  background: url("../../assets/images/验证码@2x.png") no-repeat;
+  background-size: 16px 20px;
 }
 </style>
