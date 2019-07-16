@@ -116,6 +116,7 @@ export default {
       let amount = 0;
       for (let i = 0; i < this.checkFlagArr.length; i++) {
         if (this.checkFlagArr[i]) {
+          console.log(this.dataList[i]);
           amount += this.numArr[i] * parseInt(this.dataList[i].marketprice, 10);
         }
       }
@@ -123,6 +124,7 @@ export default {
     },
     updateList(index) {
       this.dataList.splice(index, 1);
+      this.checkFlagArr.splice(index, 1);
       this.numArr.splice(index, 1);
     },
     // 获取列表
