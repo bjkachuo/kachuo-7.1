@@ -29,7 +29,9 @@
             <inline-loading></inline-loading>
           </p>
           <img :src="dataObj.details" alt srcset>
-          <x-button class="btn" type="primary" @click.native="submit(dataObj.jq_id)">我要抢单</x-button>
+          <div class="btn-box">
+            <x-button class="btn" type="primary" @click.native="submit(dataObj.jq_id)">我要抢单</x-button>
+          </div>
         </div>
       </popup>
     </div>
@@ -370,9 +372,15 @@ export default {
     margin-bottom: 8px;
   }
 }
+.btn-box{
+  width: 100%;
+  position: fixed;
+  padding: 20px;
+  background-color: #fff;
+  bottom: 0;
+}
 .btn {
   width: 80%;
-  margin-top: 20px;
 }
 .order-list {
   width: 100%;
