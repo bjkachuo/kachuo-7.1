@@ -1,7 +1,21 @@
 <template>
   <div>
     <div class="amap-page-container">
-      <div id="container" :style="mapHeight" class="amap-demo"></div>
+      <el-amap vid="amapDemo"  :center="mapCenter"  :zoom="zoom" class="amap-demo" :style="mapHeight" :events="events">
+        <el-amap-marker v-for="(marker,index) in markers" :position="marker.position" :vid="index" :offset="taOffset" :key="marker.id" v-if="tabIndex != 3 & !showPopup & !showPopupYC">
+          <div @touchstart="showModel(marker.id,marker.name)">
+            <div class="marker-icon"></div>
+          </div>
+        </el-amap-marker>
+        <el-amap-marker v-for="(marker,index) in SYOrderListData" :position="marker.position" :vid="index" :offset="taOffset" :key="marker.id" v-if="tabIndex == 3 & !showPopupSY">
+          <div @touchstart="showModel(marker.id,marker.name)">
+            <div class="marker-icon"></div>
+          </div>
+        </el-amap-marker>
+        <el-amap-text v-for="text in markers" :text="text.name" :position="text.position"  :offset="[0,-54]" v-if="tabIndex !=3"></el-amap-text>
+        <el-amap-text v-for="text in SYOrderListData" :text="text.name" :position="text.position"  :offset="[0,-54]" v-if="tabIndex == 3"></el-amap-text>
+      </el-amap>
+
     </div>
     <!-- 文创订单详情 -->
     <div v-transfer-dom>
@@ -78,9 +92,7 @@
   </div>
 </template>
 <script>
-let map = null;
-let SYOrderListData = [];
-import locationIcon from "@/assets/images/kachuo-location-icon.png";
+
 import {
   TransferDom,
   Popup,
@@ -96,12 +108,15 @@ export default {
   directives: {
     TransferDom
   },
-  name: "",
-  props: [],
+  name: "initMap",
+  props: ['tabIndex'],
   data() {
     return {
+      events:{},
       mapCenter: [116.397045, 39.917959],
-      markerArr: [],
+      markers: [],
+      taOffset: [-15,-35],
+      zoom:4,
       showPopup: false,
       showToast: false,
       showPopupYC: false,
@@ -118,14 +133,7 @@ export default {
     };
   },
 
-  components: {
-    Popup,
-    Group,
-    XDialog,
-    XButton,
-    InlineLoading,
-    Cell
-  },
+  components: { Popup, Group, XDialog, XButton, InlineLoading, Cell },
 
   computed: {
     mapHeight() {
@@ -133,16 +141,61 @@ export default {
     }
   },
 
-  beforeMount() {},
-  created() {},
   mounted() {
-    this.init().then(res => {
-      this.showMarker(SCENICLIST);
-    });
+    this.init()
   },
 
   methods: {
     // 溯源抢单
+
+    init(){
+
+      this.markers = []
+      let strArr = JSON.stringify(this.SYOrderListData)
+      this.SYOrderListData = []
+      setTimeout(()=>{
+        this.markers = SCENICLIST
+        this.SYOrderListData = JSON.parse(strArr)
+        this.domBindEvent()
+      },1000)
+
+    },
+
+    domBindEvent(){
+      setTimeout(()=>{
+        let dom  = document.getElementsByClassName('amap-overlay-text-container')
+
+        for(var i=0;i<dom.length;i++){
+          dom[i].style.boxShadow = '2px 2px 2px #ddd'
+          dom[i].style.padding = '5px 7px'
+          dom[i].style.borderRadius = '6px'
+
+
+          if(this.tabIndex != 3){
+            this.markers.forEach((item,index)=>{
+              if(item.name == dom[i].innerText) dom[i].index = index
+            })
+
+            dom[i].ontouchstart = (e) =>{
+              let index = e.target.index
+              this.showModel(this.markers[index].id,this.markers[index].name)
+            }
+          }else{
+            this.SYOrderListData.forEach((item,index)=>{
+              if(item.name == dom[i].innerText) dom[i].index = index
+            })
+
+            dom[i].ontouchstart = (e) =>{
+              let index = e.target.index
+              this.showModel(this.SYOrderListData[index].id,this.SYOrderListData[index].name)
+            }
+          }
+
+
+        }
+      },800)
+    },
+
     ccc(index){
       this.showToast = true
       if(index==1){
@@ -151,86 +204,47 @@ export default {
         this.qwe = this.dataObjYC.arr[0].grant_img
       }
       console.log(this.dataObjYC.arr)
-      // alert(11111)
     },
     SYGet(item) {
       this.$router.push({
         path: "/SuYuanQiangdan",
-        query: {
-          item:JSON.stringify(item)
-               },
+        query: { item:JSON.stringify(item) },
       });
     },
-    getScenceDataMark() {
-      this.init().then(res => {
-        this.showMarker(SCENICLIST)
-      });
-    },
-    getSYData() {
-      Promise.all([this.init(), this.getSYOrderList()]).then(res => {
-        let markArr = res[1];
-        markArr.forEach((item, index) => {
-          console.log('foreach');
-          var marker = new AMap.Marker({
-            map: map,
-              icon: new AMap.Icon({
-                image: locationIcon,
-                size: new AMap.Size(30,35),  //图标大小
-                imageSize: new AMap.Size(30,35),
-                //anchor:[15,35], // 设置锚点方位
-              }),
-            position: [item.position[0], item.position[1]],
-            offset: new AMap.Pixel(-13, -30)
-          });
-          marker.setLabel({
-            offset: new AMap.Pixel(0, -20),
-            content: item.name,
-            id: item.id,
-            position: [item.position[0], item.position[1]]
-          });
 
-          marker.on("click", item => {
-            this.samePosition = []
-            console.log(item)
-            for (let i = 0; i < this.SYOrderListData.length; i++) {
-              if (
-                this.SYOrderListData[i].position.join(",") ===
-                item.target.Uh.label.position.join(",")
-              ) {
-                this.samePosition.push(this.SYOrderListData[i]);
-              }
-            }
-            this.showPopupSY = true;
-          });
-        });
+    getSYData() {
+
+      this.SYOrderListData = [];
+
+      SYorderList({}).then(res => {
+
+        if (res.result === 1) {
+
+          res.data.data.forEach(item=>{
+            this.SYOrderListData.push({
+              id: item.yc_id+'',
+              name: item.category,
+              date: item.date,
+              position: item.ip.split(","),
+              order: item.order,
+              address: item.address
+            });
+          })
+
+          this.samePosition = [];
+          for (let i = 0; i < this.SYOrderListData.length; i++) {
+            this.samePosition.push(this.SYOrderListData[i])
+          }
+          this.domBindEvent()
+        }
+      }).catch(err => {
+
+        console.log(err);
       });
+
     },
     // 溯源订单列表
-    getSYOrderList() {
-      this.SYOrderListData = [];
-      return new Promise((resolve, reject) => {
-        SYorderList({})
-          .then(res => {
-            console.log(res);
-            if (res.result === 1) {
-              for (let i = 0; i < res.data.data.length; i++) {
-                this.SYOrderListData.push({
-                  id: res.data.data[i].yc_id,
-                  name: res.data.data[i].category,
-                  date: res.data.data[i].date,
-                  position: res.data.data[i].ip.split(","),
-                  order: res.data.data[i].order,
-                  address: res.data.data[i].address
-                });
-              }
-              resolve(this.SYOrderListData);
-            }
-          })
-          .catch(err => {
-            console.log(err);
-          });
-      });
-    },
+
     ycqdFn(item) {
       console.log(item);
       this.$router.push({
@@ -249,28 +263,33 @@ export default {
         text: "toast"
       });
     },
-    getdataList(type, id, name) {
-      GetSoliciList({
-        type: type
-      })
-        .then(res => {
+    getdataList( id, name) {
+      GetSoliciList({ type: this.tabIndex  }).then(res => {
+
           if (res.result === 1) {
-            if (type === 1) {
+
+            if (this.tabIndex == 1) {
               this.showPopup = true;
               for (let i = 0; i < res.data.result.length; i++) {
                 if (res.data.result[i].jq_id == id) {
                   this.dataObj = res.data.result[i];
                 }
               }
-            } else if (type === 2) {
+            } else if (this.tabIndex == 2) {
+
               this.showPopupYC = true;
               for (let i in res.data.result) {
+
                 if (i == name) {
+
                   this.dataObjYC.name = i;
                   this.dataObjYC.arr = res.data.result[i];
                 }
               }
+            }else{
+              this.showPopupSY = true
             }
+
           }
         })
         .catch(err => {
@@ -278,58 +297,28 @@ export default {
         });
     },
     showModel(id, name) {
-      console.log('click');
-      this.getdataList(this.$parent.tabIndex, id, name);
+      this.getdataList( id, name);
     },
-    showMarker(markArr) {
-      markArr.forEach((item, index) => {
-        var marker = new AMap.Marker({
-          map: map,
-          icon: new AMap.Icon({
-            image: locationIcon,
-            size: new AMap.Size(30,35),  //图标大小
-            imageSize: new AMap.Size(30,35),
-            //anchor:[15,35], // 设置锚点方位
-          }),
-          position: [item.position[0], item.position[1]],
-          offset: new AMap.Pixel(-13, -30)
-        });
-        marker.setLabel({
-          offset: new AMap.Pixel(0, -20),
-          content: item.name,
-          id: item.id
-        });
-        marker.on("click", item => {
-          this.showModel(item.target.Uh.label.id, item.target.Uh.label.content);
-        });
-      });
-    },
-    init() {
-      //获取地图初始化中心点
-      // 初始化地图
-      return new Promise((resolve, reject) => {
-        map = new AMap.Map("container", {
-          center: this.mapCenter,
-          resizeEnable: true,
-          expandZoomRange:true,
-          zoom: 4,
-          features: ["bg", "road", "building", "point"]
-        });
-        map.clearMap();
-        map.plugin(["AMap.ToolBar", "AMap.Scale"], function() {
-          map.addControl(new AMap.ToolBar());
-          map.addControl(new AMap.Scale());
-        });
-        resolve(map);
-      });
-    }
+
   },
-  updated() {},
- 
+  
+  watch:{
+    'showPopupSY': function (to) {
+
+    }
+  }
 };
 </script>
 <style lang='less' scoped>
 @import "~vux/src/styles/close";
+
+.marker-icon{
+  width: 30px;
+  height: 35px;
+  background-image: url("../../assets/images/kachuo-location-icon.png");
+  background-size: 100% 100%;
+}
+
 .amap-page-container {
   position: relative;
 }

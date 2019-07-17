@@ -71,7 +71,6 @@ export default {
   },
   watch:{
     '$store.state.address':function () {
-      console.log(1);
       this.commonList = []
       this.getAddressList()
     }

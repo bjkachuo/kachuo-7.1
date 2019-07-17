@@ -1,10 +1,6 @@
 <template>
   <div class="amap-page-container">
-    <Header
-      :titleContent="TitleObjData.titleContent"
-      :showLeftBack="TitleObjData.showLeftBack"
-      :showRightMore="TitleObjData.showRightMore"
-    ></Header>
+    <Header :titleContent="TitleObjData.titleContent" :showLeftBack="TitleObjData.showLeftBack" :showRightMore="TitleObjData.showRightMore"></Header>
 
     <el-amap vid="amapDemo"  :center="center"  :zoom="zoom" class="amap-demo" :style="setMapHeight" :plugin="plugin"  :events="events">
       <el-amap-marker v-for="(marker,index) in markers" :position="marker.position" :vid="index" :offset="taOffset" v-if="navIndex == 0">
@@ -18,7 +14,6 @@
         </div>
       </el-amap-marker>
       <el-amap-text v-for="text in markers" :text="text.label" :position="text.position"  :offset="[0,-55]" ></el-amap-text>
-
     </el-amap>
     <Popup class="content-model" ref="videoWrap" v-show="showModelFlag"></Popup>
     <NavigationTab :dataList="tabList" v-on:changePath="showPath"></NavigationTab>
@@ -26,19 +21,9 @@
 </template>
 
 <script>
-let map = null,walking = null;
-let scenicDataObj = {};
-
 import Header from "@/components/common/Header";
 import NavigationTab from "@/components/common/NavigationTab";
 import Popup from "@/components/common/Popup";
-import locationIcon from "@/assets/images/amap-icon/location-icon.png";
-import scenicIcon from "@/assets/images/amap-icon/scenic.png";
-import sortIcon from '@/assets/images/amap-icon/map-sort-icon@2x .png'
-import scenicActiveIcon from "@/assets/images/amap-icon/scenicActive.png";
-import inlocationIcon from "@/assets/images/amap-icon/inlocation-icon.png";
-
-import { CheckByLocation } from "@/servers/api";
 import { setTimeout } from "timers";
 
 export default {

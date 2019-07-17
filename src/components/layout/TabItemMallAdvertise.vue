@@ -11,7 +11,7 @@ import AdvertiseSwiper from "@/components/layout/AdvertiseSwiper";
 
 export default {
   name: "",
-  props: [""],
+
   data() {
     return {
 
@@ -31,9 +31,6 @@ export default {
     this.getBannerImgFn("3");
   },
 
-  methods: {},
-
-  watch: {}
 };
 </script>
 <style lang='css' scoped>

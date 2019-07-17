@@ -1,18 +1,6 @@
-<!--
- * @Description: 
- * @Author: lpb
- * @Github: https://github.com/lpb273
- * @LastEditors: lpb
- * @Date: 2019-05-07 11:08:15
- * @LastEditTime: 2019-05-07 11:10:57
- -->
 <template>
   <div class="photo-album-wrap">
-    <Header
-      :titleContent="TitleObjData.titleContent"
-      :showLeftBack="TitleObjData.showLeftBack"
-      :showRightMore="TitleObjData.showRightMore"
-    ></Header>
+    <Header :titleContent="TitleObjData.titleContent" :showLeftBack="TitleObjData.showLeftBack" :showRightMore="TitleObjData.showRightMore"></Header>
     <div class="photo-album-content" :style="conHei">
       <tab :line-width="3" custom-bar-width="50px">
         <tab-item selected @on-item-click="onItemClick">文创征集</tab-item>
@@ -20,7 +8,7 @@
         <tab-item @on-item-click="onItemClick">产品溯源</tab-item>
       </tab>
       <div>
-        <InitMap ref="map"></InitMap>
+        <InitMap ref="map" :tabIndex="tabIndex"></InitMap>
       </div>
     </div>
   </div>
@@ -63,12 +51,12 @@ export default {
 
   methods: {
     onItemClick(index) {
-      console.log('itemclick');
+
       this.tabIndex = index + 1;
       if (index === 2) {
         this.$refs.map.getSYData();
       } else {
-        this.$refs.map.getScenceDataMark();
+        this.$refs.map.init()
       }
     }
   },

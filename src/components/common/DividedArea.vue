@@ -13,17 +13,6 @@
       };
     },
 
-    components: {},
-
-    computed: {},
-
-    beforeMount() {},
-
-    mounted() {},
-
-    methods: {},
-
-    watch: {}
 
   }
 

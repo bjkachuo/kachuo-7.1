@@ -94,7 +94,7 @@ export default {
         }
       }
       sessionStorage.setItem("shoppingCartOrderList", JSON.stringify(arr));
-      this.$router.push("/confirmordershoppingcart");
+      this.$router.push("/confirmordershoppingcart")
     },
     // 商品推荐
     getGoodsComm() {
@@ -103,11 +103,11 @@ export default {
       })
         .then(res => {
           if (res.result === 1) {
-            this.goodsListData = res.data.result;
+            this.goodsListData = res.data.result
           }
         })
         .catch(err => {
-          console.log(err);
+          console.log(err)
         });
     },
 
@@ -116,16 +116,16 @@ export default {
       let amount = 0;
       for (let i = 0; i < this.checkFlagArr.length; i++) {
         if (this.checkFlagArr[i]) {
-          console.log(this.dataList[i]);
-          amount += this.numArr[i] * parseInt(this.dataList[i].marketprice, 10);
+          console.log(this.dataList[i])
+          amount += this.numArr[i] * parseInt(this.dataList[i].marketprice, 10)
         }
       }
-      this.marketTotalPrice = amount.toFixed(2);
+      this.marketTotalPrice = amount.toFixed(2)
     },
     updateList(index) {
-      this.dataList.splice(index, 1);
-      this.checkFlagArr.splice(index, 1);
-      this.numArr.splice(index, 1);
+      this.dataList.splice(index, 1)
+      this.checkFlagArr.splice(index, 1)
+      this.numArr.splice(index, 1)
     },
     // 获取列表
     getDataList() {
@@ -146,12 +146,11 @@ export default {
         })
         .catch(err => {
           console.log(err);
-        });
+        })
     }
   },
 
-  watch: {}
-};
+}
 </script>
 <style lang='css' scoped>
 .order-list-wrap {
