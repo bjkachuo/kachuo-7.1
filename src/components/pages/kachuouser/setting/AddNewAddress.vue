@@ -7,12 +7,9 @@
     ></Header>
     <div class="add-address-con" :style="conHei">
       <group title style="margin-top:10px">
-        <x-input title="姓名" v-model="maskValueName" :max="10" is-type :show-clear="false"></x-input>
+        <x-input title="姓名" v-model="maskValueName" :max="10" is-type :show-clear="false" @on-focus="inpclick" ref="inp"></x-input>
         <x-input title="手机号" v-model="maskValuePhone" :max="11" is-type :show-clear="false"></x-input>
-        <Address
-          style="height:44px;line-height:24px;font-size:17px"
-          v-on:selectAddress="getSelAddress"
-        ></Address>
+        <Address style="height:44px;line-height:24px;font-size:17px" v-on:selectAddress="getSelAddress"></Address>
         <x-input title="详细地址" v-model="maskValueDetails" :max="11" is-type :show-clear="false"></x-input>
       </group>
       <div class="add-btn-wrap">
@@ -63,9 +60,15 @@ export default {
 
   beforeMount() {},
 
-  mounted() {},
+  mounted() {
+
+  },
 
   methods: {
+    inpclick(){
+      console.log(1);
+      this.$refs.inp.focus()
+    },
     formateData() {
       if (!this.maskValueName) {
         this.showTip("请输入收货人姓名");
