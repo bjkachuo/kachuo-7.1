@@ -65,7 +65,9 @@ export default {
   },
   beforeMount() {},
 
-  mounted() {},
+  mounted() {
+          console.log(this.$store.state.userLoginInfo);
+  },
 
   methods: {
 
