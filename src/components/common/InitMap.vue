@@ -258,6 +258,12 @@ export default {
       });
     },
     submit(id) {
+      //实名认证
+      this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=goods.real.real_FirstOne")
+        .then(({data})=>{
+          console.log(data);
+        })
+
       this.$router.push("/wenchuangqiangdan?id=" + id);
     },
     doShowToast() {
