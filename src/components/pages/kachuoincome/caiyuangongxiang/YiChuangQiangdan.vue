@@ -27,6 +27,7 @@ export default {
         showRightMore: false
       },
       confirmShow:false,
+      msg:'',
       iconType: "",
       imgList: [],
       label: "",
