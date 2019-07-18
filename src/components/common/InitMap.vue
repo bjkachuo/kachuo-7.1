@@ -91,19 +91,15 @@
         </div>
       </x-dialog>
     </div>
+
+    <confirm v-model="nameRuleShow" @on-confirm="nameRuleOnConfirm">
+      <p style="text-align:center;">{{msg}}</p>
+    </confirm>
   </div>
 </template>
 <script>
 
-import {
-  TransferDom,
-  Popup,
-  Group,
-  XDialog,
-  XButton,
-  InlineLoading,
-  Cell
-} from "vux";
+import {TransferDom, Popup, Group, XDialog, XButton, InlineLoading, Cell, Confirm} from "vux";
 import { SCENICLIST } from "@/assets/data/scenic";
 import { GetSoliciList, SYorderList } from "@/servers/api";
 export default {
@@ -131,11 +127,13 @@ export default {
       },
       qwe:"",
       SYOrderListData: [],
-      samePosition: []
+      samePosition: [],
+      nameRuleShow:false,
+      msg:''
     };
   },
 
-  components: { Popup, Group, XDialog, XButton, InlineLoading, Cell },
+  components: { Popup, Group, XDialog, XButton, InlineLoading, Cell, Confirm },
 
   computed: {
     mapHeight() {
@@ -171,7 +169,6 @@ export default {
           dom[i].style.boxShadow = '2px 2px 2px #ddd'
           dom[i].style.padding = '5px 7px'
           dom[i].style.borderRadius = '6px'
-
 
           if(this.tabIndex != 3){
             this.markers.forEach((item,index)=>{
@@ -262,10 +259,19 @@ export default {
       this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=goods.real.real_FirstOne")
         .then(({data})=>{
           console.log(data);
+          if( data.result == 0 ){
+            this.msg = data.msg
+            this.nameRuleShow = true
+          }else{
+            this.$router.push("/wenchuangqiangdan?id=" + id);
+          }
         })
-
-      this.$router.push("/wenchuangqiangdan?id=" + id);
     },
+
+    nameRuleOnConfirm(){
+      this.$router.push("/realnameauth")
+    },
+
     doShowToast() {
       this.$vux.toast.show({
         text: "toast"
