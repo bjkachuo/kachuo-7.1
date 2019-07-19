@@ -139,7 +139,7 @@ Vue.use(VueAwesomeSwiper);
 import 'swiper/dist/css/swiper.css'
 
 
-
+require('../src/assets/js/rongCloud')
 Vue.config.productionTip = false;
 
 /* eslint-disable no-new */

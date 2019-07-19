@@ -255,7 +255,7 @@ export default [
   {
     path: '/goodsdetails',
     name: 'GoodsDetails',
-    component: resolve => require(['@/components/pages/kachuomall/goods/GoodsDetails'], resolve),
+    component: resolve => require(['@/components/pages/kachuomall/goods/GoodsDetails/GoodsDetails'], resolve),
   },
   {
     path: '/confirmorder',

@@ -9,11 +9,11 @@
       <!-- <VideoPlayer :isControls="true" v-if="goodsData.ar_image" class="video-player-wrap"></VideoPlayer> -->
       <!-- <SwiperImg 
       :SwiperImgDataList="SwiperImgData"
-       v-if="SwiperImgData.ImgList.length"
-      >
+       v-if="SwiperImgData.ImgList.length">
+
       </SwiperImg>     -->
     <div>
-      <swiper :options="swiperOption" class="swp-wall" v-if="list.length>0" >
+      <swiper :options="swiperOption" class="swp-wall" v-if="list.length > 0" >
       <swiper-slide class="swp-warp" v-for="(item,index) in list" :key="index">
           <img :src="item.img" alt="" width="100%" height="100%" class="previewer-delete-icon" @click.prevent.stop="previewImg(index)">
       </swiper-slide>
@@ -65,27 +65,8 @@
       <p style="margin-top:10px" v-html="goodsData.content">{{goodsData.content}}</p>
       
     </div>
-    <div class="good-details-boot">
-      <p class="goods-action">
-        <span style="font-size:14px;" class="iconfont iconkefu"></span>
-        <span style="font-size:12px">客服</span>
-      </p>
-      <p class="goods-action" @click="collectGoods">
-        <span v-if="!collectState" style="font-size:14px" class="iconfont iconshoucang1"></span>
-        <span
-          v-else-if="collectState"
-          style="font-size:14px"
-          class="iconfont iconshoucang-xuanzhong"
-        ></span>
-        <span style="font-size:12px">收藏</span>
-      </p>
-      <p class="goods-action-right" @click="addShoppingCart">
-        <span>加入购物车</span>
-      </p>
-      <p class="goods-action-right-buy" @click="confirmOrder">
-        <span>立即购买</span>
-      </p>
-    </div>
+
+    <bottom-menu :collectState="collectState"></bottom-menu>
     <!-- 选择类型弹层 -->
     <div v-transfer-dom>
       <popup v-model="showPopup" position="bottom">
@@ -136,13 +117,14 @@
 
 <script>
 import ChimeeMobilePlayer from "chimee-mobile-player";
-import "../../../../../node_modules/chimee-mobile-player/lib/chimee-mobile-player.browser.css";
+import "chimee-mobile-player/lib/chimee-mobile-player.browser.css";
 import Header from "@/components/common/Header";
 import VideoPlayer from "@/components/common/VideoPlayer";
 // import SwiperImg from "@/components/common/SwiperImgGoodDetails";
-import { getDetail, CollectionGoods, SaveShopping } from "@/servers/api";
+import { getDetail } from "@/servers/api";
 import Divider from "@/components/common/DividedArea";
 import { vueCordovaFunction } from "@/assets/js/vuecordova";
+import bottomMenu from './bottomMenu'
 import {
   Cell,
   CellBox,
@@ -242,7 +224,8 @@ export default {
     XButton,
     XDialog,
     swiper,
-    swiperSlide
+    swiperSlide,
+    bottomMenu
   },
 
   computed: {
@@ -257,8 +240,6 @@ export default {
       }
     }
   },
-  created() {},
-  beforeMount() {},
 
   mounted() {
     this.getGoodsDetailsInfo();
@@ -332,75 +313,7 @@ export default {
         }, 1000);
       }
     },
-    // 确认清单
-    confirmOrder() {
-      if (this.$route.query.price) {
-        this.$router.push(
-          "/confirmorder?id=" +
-            this.$route.query.id +
-            "&priceback=" +
-            this.$route.query.price
-        );
-      } else {
-        this.$router.push("/confirmorder?id=" + this.$route.query.id);
-      }
-    },
-    // 添加购物车
-    addShoppingCart() {
-      SaveShopping({
-        gid: this.goodsData.id
-      })
-        .then(res => {
-          if (res.result === 1) {
-            this.$vux.toast.show({
-              type: "success",
-              text: "添加成功",
-              time: 1000
-            });
-          } else {
-            this.$vux.toast.show({
-              type: "warn",
-              text: res.msg,
-              time: 1000
-            });
-          }
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    },
-    // 收藏
-    collectGoods() {
-      this.collectState = !this.collectState;
-      let type = this.collectState === false ? 0 : 1;
-      this.collectionGoodsMethod(type);
-    },
-    collectionGoodsMethod(type) {
-      CollectionGoods({
-        goodsid: this.goodsData.id,
-        type: 1
-      })
-        .then(res => {
-          if (res.result === 1) {
-            if (type === 1) {
-              this.$vux.toast.show({
-                type: "success",
-                text: "收藏成功",
-                time: 1000
-              });
-            } else {
-              this.$vux.toast.show({
-                type: "success",
-                text: "取消收藏",
-                time: 1000
-              });
-            }
-          }
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    },
+
     setForItem(name, id) {
       this.selName = name;
       setTimeout(() => {
@@ -417,9 +330,7 @@ export default {
       this.showPopup = true;
     },
     getGoodsDetailsInfo() {
-      getDetail({
-        goods_id: this.$route.query.id
-      })
+      getDetail({ goods_id: this.$route.query.id  })
         .then(res => {
           let arr = [];
           // console.log(res);
@@ -454,7 +365,6 @@ export default {
     }
   },
 
-  watch: {}
 };
 </script>
 <style lang='less' scoped>
@@ -562,45 +472,7 @@ export default {
   display: inline-block;
   border-bottom: 4px solid #000;
 }
-.good-details-boot {
-  width: 100%;
-  height: 50px;
-  border-top: 1px solid #eee;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  background: #fff;
-  box-sizing: border-box;
-}
-.goods-action {
-  flex: 1;
-  height: 60%;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  border-right: 1px solid #eee;
-}
-.goods-action span {
-  font-size: 12px;
-}
-.goods-action-right {
-  flex: 2;
-  text-align: center;
-}
-.goods-action-right-buy {
-  height: 100%;
-  line-height: 50px;
-  flex: 2;
-  text-align: center;
-  background: #222;
-  color: #fff;
-}
+
 .demo1-item {
   border: 1px solid #ececec;
   padding: 5px 15px;
@@ -656,24 +528,21 @@ export default {
 .swp-wall{
   height: 344px;
   overflow: hidden;
-.swiper-pagination{
+  .swiper-pagination{
     bottom: 10px;
     left: 310px;
     width: 40px;
     background: rgba(0,0,0,0.5);
     color: white;
     border-radius: 40%;
-
-}
-.swp-warp{
+  }
+  .swp-warp{
     height: 344px;
     width: 100%;
     img{
       width: 100%;
       height: 344px;
     }
+  }
 }
-
-}
-
 </style>

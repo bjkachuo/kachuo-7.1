@@ -41,11 +41,6 @@ export default {
       return this.$store.state.userLoginInfo;
     }
   },
-  created() {},
-  beforeMount() {},
-
-  mounted() {
-  },
 
   methods: {
     setting() {
@@ -56,8 +51,6 @@ export default {
     }
   },
 
-  watch: {},
-  updated() {}
 };
 </script>
 <style lang='css' scoped>
