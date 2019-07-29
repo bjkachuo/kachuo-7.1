@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="amap-page-container">
+    <div class="amap-page-container" v-if="tabIndex != 4">
       <el-amap vid="amapDemo"  :center="mapCenter"  :zoom="zoom" class="amap-demo" :style="mapHeight" :events="events">
         <el-amap-marker v-for="(marker,index) in markers" :position="marker.position" :vid="index" :offset="taOffset" :key="marker.id" v-if="tabIndex != 3 & !showPopup & !showPopupYC">
           <div @touchstart="showModel(marker.id,marker.name)">
@@ -17,6 +17,7 @@
       </el-amap>
 
     </div>
+    <famous-family v-if="tabIndex == 4"></famous-family>
     <!-- 文创订单详情 -->
     <div v-transfer-dom>
       <popup v-model="showPopup" position="bottom" max-height="93%" :hide-on-blur="true">
@@ -102,6 +103,7 @@
 import {TransferDom, Popup, Group, XDialog, XButton, InlineLoading, Cell, Confirm} from "vux";
 import { SCENICLIST } from "@/assets/data/scenic";
 import { GetSoliciList, SYorderList } from "@/servers/api";
+import famousFamily from './famousFamily'
 export default {
   directives: {
     TransferDom
@@ -133,7 +135,7 @@ export default {
     };
   },
 
-  components: { Popup, Group, XDialog, XButton, InlineLoading, Cell, Confirm },
+  components: { Popup, Group, XDialog, XButton, InlineLoading, Cell, Confirm ,famousFamily},
 
   computed: {
     mapHeight() {
@@ -189,8 +191,6 @@ export default {
               this.showModel(this.SYOrderListData[index].id,this.SYOrderListData[index].name)
             }
           }
-
-
         }
       },800)
     },
@@ -329,7 +329,7 @@ export default {
 .marker-icon{
   width: 30px;
   height: 35px;
-  background-image: url("../../assets/images/kachuo-location-icon.png");
+  background-image: url("../../../../assets/images/kachuo-location-icon.png");
   background-size: 100% 100%;
 }
 

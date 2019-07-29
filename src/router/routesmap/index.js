@@ -258,6 +258,11 @@ export default [
     component: resolve => require(['@/components/pages/kachuomall/goods/GoodsDetails/GoodsDetails'], resolve),
   },
   {
+    path: '/customerService',
+    name: 'CustomerService',
+    component: resolve => require(['@/components/pages/customerService/customerService'], resolve),
+  },
+  {
     path: '/confirmorder',
     name: 'ConfirmOrder',
     component: resolve => require(['@/components/pages/kachuomall/goods/ConfirmOrder'], resolve),
@@ -325,7 +330,17 @@ export default [
   {
     path: '/yaoyuechuangzuo',
     name: 'YaoYueChuangZuo',
-    component: resolve => require(['@/components/pages/kachuoincome/YaoYueChuangZuo'], resolve),
+    component: resolve => require(['@/components/pages/kachuoincome/YaoYueChuangZuo/YaoYueChuangZuo'], resolve),
+  },
+  {
+    path: '/yaoyuechuangzuo/culturalCreativity',
+    name: 'culturalCreativity',
+    component: resolve => require(['@/components/pages/kachuoincome/YaoYueChuangZuo/culturalCreativity/culturalCreativity'], resolve),
+  },
+  {
+    path: '/yaoyuechuangzuo/art',
+    name: 'art',
+    component: resolve => require(['@/components/pages/kachuoincome/YaoYueChuangZuo/art/art'], resolve),
   },
   {
     path: '/wenchuangqiangdan',

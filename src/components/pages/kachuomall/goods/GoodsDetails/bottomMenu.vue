@@ -1,6 +1,6 @@
 <template>
   <div class="good-details-boot">
-    <p class="goods-action">
+    <p class="goods-action" @click="customerService">
       <span style="font-size:14px;" class="iconfont iconkefu"></span>
       <span style="font-size:12px">客服</span>
     </p>
@@ -67,7 +67,6 @@
               this.$router.push("/confirmorder?id=" + this.$route.query.id);
             }
           },
-
           // 添加购物车
           addShoppingCart() {
             SaveShopping({gid: this.$route.query.id})
@@ -90,8 +89,16 @@
                 console.log(err);
               });
           },
-        }
 
+          customerService(){
+            window.qimoChatClick()
+            //this.$router.push("/customerService?id=" + this.$route.query.id);
+          }
+        },
+
+        created() {
+          window.qimoClientId = this.GLOBAL.getSession("userLoginInfo").mobile
+        }
     }
 </script>
 

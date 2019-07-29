@@ -160,12 +160,7 @@ export default {
             clickable: true,
             dynamicBullets: true,
             type: 'fraction',
-
-            // renderBullet(index, className) {
-            //   return `<span class="${className} swiper-pagination-bullet-custom">${index + 1}</span>`
-            // }
         },
-
         speed: 600,
         loop: true, //循环模式
         // autoHeight: true, //自动高度

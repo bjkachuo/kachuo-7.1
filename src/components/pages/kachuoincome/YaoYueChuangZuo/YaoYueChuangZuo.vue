@@ -6,6 +6,7 @@
         <tab-item selected @on-item-click="onItemClick">文创征集</tab-item>
         <tab-item @on-item-click="onItemClick">艺品创作</tab-item>
         <tab-item @on-item-click="onItemClick">产品溯源</tab-item>
+        <tab-item @on-item-click="onItemClick">名家妙藏</tab-item>
       </tab>
       <div>
         <InitMap ref="map" :tabIndex="tabIndex"></InitMap>
@@ -16,7 +17,7 @@
 
 <script>
 import Header from "@/components/common/Header";
-import InitMap from "@/components/common/InitMap";
+import InitMap from "@/components/pages/kachuoincome/YaoYueChuangZuo/InitMap";
 import { Tab, TabItem } from "vux";
 export default {
   name: "",
@@ -45,23 +46,24 @@ export default {
     }
   },
 
-  beforeMount() {},
-
-  mounted() {},
-
   methods: {
     onItemClick(index) {
 
       this.tabIndex = index + 1;
       if (index === 2) {
         this.$refs.map.getSYData();
-      } else {
+      } else if(index === 3){
+
+      }else{
         this.$refs.map.init()
       }
     }
   },
 
-  watch: {}
+  created() {
+
+  }
+
 };
 </script>
 <style lang='css' scoped>
