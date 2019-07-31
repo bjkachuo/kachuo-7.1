@@ -4,7 +4,14 @@
     <div class="content">
       <popup-radio title="选择分类" :options="options1" v-model="option1" class="popop"></popup-radio>
       <x-input title="描述"  placeholder="说点什么..." class="describe"></x-input>
-      <VideoUploader></VideoUploader>
+      <div>
+        <p class="video-upload-title">
+          <span>上传视频</span>
+          <span class="video-upload-weak-tip">( 视频大小不能超过30M )</span>
+        </p>
+        <VideoUploader></VideoUploader>
+      </div>
+
     </div>
   </div>
 </template>
