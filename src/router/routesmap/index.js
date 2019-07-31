@@ -150,7 +150,7 @@ export default [
   {
     path: '/hundredshall',
     name: 'HundredsHall',
-    component: resolve => require(['@/components/pages/kachuoincome/HundredsHall'], resolve),
+    component: resolve => require(['@/components/pages/kachuoincome/HundredsHall/HundredsHall'], resolve),
   },
   {
     path: '/releasevideo',
@@ -391,5 +391,10 @@ export default [
     name :'StoreDetails',
     component: resolve => require(['@/components/common/storeDetails'], resolve),
   },
+  {
+    path:'/hundredshall/add',
+    name:'hundredshallAdd',
+    component: resolve => require(['@/components/pages/kachuoincome/HundredsHall/hundredshallAdd'], resolve),
+  }
 
 ]

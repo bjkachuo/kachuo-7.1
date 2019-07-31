@@ -35,7 +35,8 @@
     "vuex-persistedstate": "^2.5.4",
     "vux": "^2.2.0",
     "vux-uploads": "^1.0.8",
-    "w-previewimg": "^1.1.2"
+    "w-previewimg": "^1.1.2",
+    "js-md5": "latest"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

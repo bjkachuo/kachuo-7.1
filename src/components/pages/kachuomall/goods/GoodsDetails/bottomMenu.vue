@@ -19,6 +19,9 @@
     <p class="goods-action-right-buy" @click="confirmOrder">
       <span>立即购买</span>
     </p>
+
+    <iframe v-if='iframeShow' :src="usermobile" style="position: fixed;z-index: 99998;top: 0;left: 0;width: 100%;height: 100%;"></iframe>
+    <div style="position: fixed;line-height: 50px;right: 20px;z-index: 999999;top: 0;color: #fff" v-if="iframeShow" @click="iframeShow = false">关闭</div>
   </div>
 </template>
 
@@ -26,6 +29,13 @@
   import {  CollectionGoods, SaveShopping } from "@/servers/api";
     export default {
         name: "bottomMenu",
+
+        data(){
+          return{
+            iframeShow:false,
+            usermobile:''
+          }
+        },
 
         props:['collectState'],
 
@@ -91,14 +101,18 @@
           },
 
           customerService(){
-            window.qimoChatClick()
+            // window.qimoChatClick()
             //this.$router.push("/customerService?id=" + this.$route.query.id);
+           // window.location.href = 'https://webchat.7moor.com/wapchat.html?accessId=2afa4960-b1df-11e9-9f4b-b35872e70bca&fromUrl=&urlTitle='+this.GLOBAL.getSession("userLoginInfo").mobile
+            this.iframeShow = true
+
           }
         },
 
         created() {
-          window.qimoClientId = this.GLOBAL.getSession("userLoginInfo").mobile
+          this.usermobile = 'https://webchat.7moor.com/wapchat.html?accessId=2afa4960-b1df-11e9-9f4b-b35872e70bca&fromUrl=&urlTitle='+ this.GLOBAL.getSession("userLoginInfo").mobile
         }
+
     }
 </script>
 
