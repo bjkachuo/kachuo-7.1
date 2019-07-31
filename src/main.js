@@ -138,14 +138,6 @@ import VueAwesomeSwiper from 'vue-awesome-swiper';
 Vue.use(VueAwesomeSwiper);
 import 'swiper/dist/css/swiper.css'
 
-
-require('../src/assets/js/jmessage-sdk-web.2.6.0.min')
-window.JIM = new JMessage({
-  debug : true
-});
-
-
-
 Vue.config.productionTip = false;
 
 /* eslint-disable no-new */
