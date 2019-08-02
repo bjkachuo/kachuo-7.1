@@ -23,7 +23,7 @@
       >
       </x-input>
       <x-button
-          plain="false"
+          :plain="false"
           slot="right"
           type="primary"
           mini
