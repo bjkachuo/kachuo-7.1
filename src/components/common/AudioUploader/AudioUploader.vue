@@ -1,9 +1,9 @@
 <template>
   <div class="control-form">
 
-     <input type="file" class="upload" @change="addVideo" multiple="false" ref="inputer" accept="audio/mp3">
+     <input type="file" class="upload" @change="addAudio" multiple="false" ref="inputer" accept="audio/mp3">
      <div class="add">
-       <i class="add-icon"></i>
+       <i class="add-icon" :class="{'uploaded': audioUploadStatus}"></i>
        <span>立即上传</span>
      </div>
 
@@ -20,12 +20,12 @@
         imgLen: 0,
         videoUrl: "",
         posterImg: "",
-        audioUploadUrl:
-          "https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=util.Uploader.uploadm_audio"
+        audioUploadUrl: "https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=util.Uploader.uploadm_audio",
+        audioUploadStatus :false
       };
     },
     methods: {
-      addVideo(event) {
+      addAudio(event) {
         let inputDOM = this.$refs.inputer;
         this.fil = inputDOM.files;
         let oldLen = this.imgLen;
@@ -93,8 +93,7 @@
             Authorization: localStorage.getItem("token")
           }
         };
-        axios
-          .post(this.videoUploadUrl, this.formData, config)
+        axios.post(this.audioUploadUrl, this.formData, config)
           .then(res => {
             if (res.data.result === 1) {
               this.$vux.loading.hide();
@@ -127,7 +126,7 @@
     }
   };
 </script>
-<style lang='css' scoped>
+<style lang='less' scoped>
   .upload {
     opacity: 0;
   }
@@ -141,7 +140,22 @@
      width: 194px;
      height: 40px;
      margin: 0 auto;
+     text-align: center;
      border:1px solid rgba(204,204,204,1);
+     line-height: 40px;
+     .add-icon {
+       display: inline-block;
+       height: 18px;
+       width: 12px;
+       background-size: 100% 100%;
+       background-image: url("./audio-icon1.png");
+       position: relative;
+       top: 4px;
+     }
+     span{
+       font-size: 14px;
+       padding-left: 4px;
+     }
   }
    .upload {
     position: absolute;
@@ -152,7 +166,5 @@
   }
 
 
-  .add-icon {
 
-  }
 </style>
