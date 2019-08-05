@@ -94,7 +94,6 @@ export default {
         text: "正在上传"
       });
       for (let key in this.imgs) {
-        let name = key.split("?")[0];
         this.formData.append("file", this.imgs[key]);
       }
       let config = {

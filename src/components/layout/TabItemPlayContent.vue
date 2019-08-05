@@ -103,7 +103,7 @@ export default {
   watch: {}
 };
 </script>
-<style lang='css' scoped>
+<style lang='less' scoped>
 .tab-item-play-content-tools {
   width: 100%;
   height: 40px;
@@ -126,8 +126,8 @@ export default {
 .tab-item-play-content-title {
   font-weight: bold;
 }
-.tab-item-play-content-cell {
-  margin-top: -20px;
+.tab-item-paly-content /deep/ .weui-cells{
+  margin-top: 0;
 }
 .tab-item-play-content-tip-wrap {
   width: 100%;

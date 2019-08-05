@@ -1,12 +1,11 @@
 <template>
   <div class="control-form">
-
-     <input type="file" class="upload" @change="addAudio" multiple="false" ref="inputer" accept="audio/mp3">
-     <div class="add">
-       <i class="add-icon" :class="{'uploaded': audioUploadStatus}"></i>
+     <input type="file" class="upload" @change="addAudio" multiple="false" ref="inputer" accept="audio/mp3" :disabled="audioFlag">
+     <div class="add " :class="{'uploaded': audioFlag}">
+       <i class="add-icon" ></i>
        <span>立即上传</span>
      </div>
-
+     <audio src="" @canplaythrough="audioReady" ref="audio"></audio>
   </div>
 </template>
 
@@ -17,58 +16,40 @@
       return {
         formData: new FormData(),
         imgs: {},
-        imgLen: 0,
-        videoUrl: "",
-        posterImg: "",
+        audioFlag:false,
         audioUploadUrl: "https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=util.Uploader.uploadm_audio",
-        audioUploadStatus :false
       };
     },
     methods: {
-      addAudio(event) {
+      //当音频文件可以被播放的时候获取音频时长
+      audioReady(){
+        console.log(this.$refs.audio.duration);
+        if(this.$refs.audio.duration <= 1800){
+          this.submit();
+        }else{
+          this.$vux.loading.show({
+            text: "音频时长不能超过30分钟"
+          });
+          setTimeout(() => {
+            this.$vux.loading.hide();
+          }, 2000);
+        }
+      },
+      addAudio() {
         let inputDOM = this.$refs.inputer;
         this.fil = inputDOM.files;
-        let oldLen = this.imgLen;
-        let len = this.fil.length + oldLen;
-        for (let i = 0; i < this.fil.length; i++) {
-          let size = Math.floor(this.fil[i].size / 1024);
-          if (size > 30 * 1024 * 1024) {
-            this.showToast("请选择10M以内的视频！");
-            return false;
-          }
-          this.imgLen++;
-          this.$set(
-            this.imgs,
-            this.fil[i].name + "?" + new Date().getTime() + i,
-            this.fil[i]
-          );
-        }
-        this.submit();
+        let url = URL.createObjectURL(this.fil[0])
+
+        this.$set(this.imgs, this.fil[0].name + "?" + new Date().getTime() + 0, this.fil[0])
+
+        this.$refs.audio.src = url
       },
-      getObjectURL(file) {
-        var url = null;
-        if (window.createObjectURL != undefined) {
-          // basic
-          url = window.createObjectURL(file);
-        } else if (window.URL != undefined) {
-          // mozilla(firefox)
-          url = window.URL.createObjectURL(file);
-        } else if (window.webkitURL != undefined) {
-          // webkit or chrome
-          url = window.webkitURL.createObjectURL(file);
-        }
-        return url;
-      },
-      delImg(key) {
-        this.$delete(this.imgs, key);
-        this.imgLen--;
-      },
+
       showLoading() {
-        this.$vux.loading.show({
-          text: "上传中"
-        });
+        this.$vux.loading.show({ text: "上传中"  });
+
         setTimeout(() => {
-          this.$vux.loading.hide();
+          this.$vux.loading.hide()
         }, 2000);
       },
       showToast(content) {
@@ -77,14 +58,12 @@
           this.$vux.toast.hide();
         }, 2000);
       },
-      postData() {},
+
       submit() {
-        this.$vux.loading.show({
-          text: "正在上传"
-        });
+        this.$vux.loading.show({ text: "正在上传"  })
+
         for (let key in this.imgs) {
-          let name = key.split("?")[0];
-          this.formData.append("file", this.imgs[key]);
+          this.formData.append("file", this.imgs[key])
         }
         let config = {
           timeout: 10000,
@@ -97,15 +76,10 @@
           .then(res => {
             if (res.data.result === 1) {
               this.$vux.loading.hide();
-              this.$vux.toast.show({
-                type: "success",
-                text: "上传成功",
-                time: 1000
-              });
-              this.videoUrl = res.data.data.files[0].url;
-              this.posterImg = res.data.data.files[0].cover_image;
-              // console.log(this.videoUrl);
+              this.$vux.toast.show({type: "success", text: "上传成功", time: 1000})
+
               this.$emit("getVideoUploadUrl", res.data.data.files[0].url);
+              this.audioFlag = true
             } else {
               this.$vux.loading.hide();
               this.$vux.toast.show({
@@ -157,6 +131,16 @@
        padding-left: 4px;
      }
   }
+   .add.uploaded{
+      .add-icon{
+        background-image: url("./audio-icon2.png");
+      }
+     span{
+       color:rgba(204,204,204,1);
+     }
+   }
+
+
    .upload {
     position: absolute;
     left: 50%;
