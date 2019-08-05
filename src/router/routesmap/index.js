@@ -392,7 +392,6 @@ export default [
     component: resolve => require(['@/components/common/storeDetails'], resolve),
   },
   {
-<<<<<<< HEAD
     //商品分类页
     path: '/goodsSlassification',
     name :'GoodsSlassification',
@@ -410,11 +409,12 @@ export default [
     path: '/footprint',
     name: '/FootPrint',
     component: resolve =>require(['@/components/common/FootPrint'],resolve)
-=======
+  },
+   //
+  {
     path:'/hundredshall/add',
     name:'hundredshallAdd',
     component: resolve => require(['@/components/pages/kachuoincome/HundredsHall/hundredshallAdd'], resolve),
->>>>>>> df06510c2e67fab7ed39b36f2893d8c0493750f6
   }
 
 ]
