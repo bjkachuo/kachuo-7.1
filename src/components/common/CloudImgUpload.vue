@@ -2,7 +2,8 @@
   <div class="control-form">
     <ul class="upload-imgs">
       <li>
-        <input type="file" class="upload" @change="addImg" ref="inputer" accept="image/*">
+
+        <input type="file" class="upload" @change="addImg" ref="inputer" accept="image/*" capture="camera">
         <a class="add">
           <p class="add-icon">+</p>
         </a>
@@ -154,7 +155,14 @@ export default {
         });
     }
   },
-  mounted() {}
+  mounted() {
+    var ua = navigator.userAgent.toLowerCase();
+    //判断是否是苹果手机，是则是true
+    var isIos = (ua.indexOf('iphone') != -1) || (ua.indexOf('ipad') != -1);
+    if (isIos) {
+      // this.$refs.inputer.setAttribute("capture",'');
+    };
+  }
 };
 </script>
 <style lang='css' scoped>

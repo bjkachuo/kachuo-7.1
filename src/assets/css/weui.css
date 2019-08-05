@@ -2957,3 +2957,10 @@ input[type="search"]::-webkit-search-results-decoration {
   text-align: center;
   font-size: 14px;
 }
+.weui-textarea,weui-input{
+  -webkit-user-select: auto;
+  -khtml-user-select: auto;
+  -moz-user-select: auto;
+  -ms-user-select: auto;
+  user-select: auto;
+}

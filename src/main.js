@@ -138,8 +138,6 @@ import VueAwesomeSwiper from 'vue-awesome-swiper';
 Vue.use(VueAwesomeSwiper);
 import 'swiper/dist/css/swiper.css'
 
-
-
 Vue.config.productionTip = false;
 
 /* eslint-disable no-new */

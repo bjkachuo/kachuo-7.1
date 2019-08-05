@@ -150,7 +150,7 @@ export default [
   {
     path: '/hundredshall',
     name: 'HundredsHall',
-    component: resolve => require(['@/components/pages/kachuoincome/HundredsHall'], resolve),
+    component: resolve => require(['@/components/pages/kachuoincome/HundredsHall/HundredsHall'], resolve),
   },
   {
     path: '/releasevideo',
@@ -255,7 +255,12 @@ export default [
   {
     path: '/goodsdetails',
     name: 'GoodsDetails',
-    component: resolve => require(['@/components/pages/kachuomall/goods/GoodsDetails'], resolve),
+    component: resolve => require(['@/components/pages/kachuomall/goods/GoodsDetails/GoodsDetails'], resolve),
+  },
+  {
+    path: '/customerService',
+    name: 'CustomerService',
+    component: resolve => require(['@/components/pages/customerService/customerService'], resolve),
   },
   {
     path: '/confirmorder',
@@ -325,7 +330,17 @@ export default [
   {
     path: '/yaoyuechuangzuo',
     name: 'YaoYueChuangZuo',
-    component: resolve => require(['@/components/pages/kachuoincome/YaoYueChuangZuo'], resolve),
+    component: resolve => require(['@/components/pages/kachuoincome/YaoYueChuangZuo/YaoYueChuangZuo'], resolve),
+  },
+  {
+    path: '/yaoyuechuangzuo/culturalCreativity',
+    name: 'culturalCreativity',
+    component: resolve => require(['@/components/pages/kachuoincome/YaoYueChuangZuo/culturalCreativity/culturalCreativity'], resolve),
+  },
+  {
+    path: '/yaoyuechuangzuo/art',
+    name: 'art',
+    component: resolve => require(['@/components/pages/kachuoincome/YaoYueChuangZuo/art/art'], resolve),
   },
   {
     path: '/wenchuangqiangdan',
@@ -377,6 +392,7 @@ export default [
     component: resolve => require(['@/components/common/storeDetails'], resolve),
   },
   {
+<<<<<<< HEAD
     //商品分类页
     path: '/goodsSlassification',
     name :'GoodsSlassification',
@@ -394,6 +410,11 @@ export default [
     path: '/footprint',
     name: '/FootPrint',
     component: resolve =>require(['@/components/common/FootPrint'],resolve)
+=======
+    path:'/hundredshall/add',
+    name:'hundredshallAdd',
+    component: resolve => require(['@/components/pages/kachuoincome/HundredsHall/hundredshallAdd'], resolve),
+>>>>>>> df06510c2e67fab7ed39b36f2893d8c0493750f6
   }
 
 ]

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="amap-page-container">
+    <div class="amap-page-container" v-if="tabIndex != 4">
       <el-amap vid="amapDemo"  :center="mapCenter"  :zoom="zoom" class="amap-demo" :style="mapHeight" :events="events">
         <el-amap-marker v-for="(marker,index) in markers" :position="marker.position" :vid="index" :offset="taOffset" :key="marker.id" v-if="tabIndex != 3 & !showPopup & !showPopupYC">
           <div @touchstart="showModel(marker.id,marker.name)">
@@ -17,6 +17,7 @@
       </el-amap>
 
     </div>
+    <famous-family v-if="tabIndex == 4"></famous-family>
     <!-- 文创订单详情 -->
     <div v-transfer-dom>
       <popup v-model="showPopup" position="bottom" max-height="93%" :hide-on-blur="true">
@@ -29,7 +30,9 @@
             <inline-loading></inline-loading>
           </p>
           <img :src="dataObj.details" alt srcset>
-          <x-button class="btn" type="primary" @click.native="submit(dataObj.jq_id)">我要抢单</x-button>
+          <div class="btn-box">
+            <x-button class="btn" type="primary" @click.native="submit(dataObj.jq_id)">我要抢单</x-button>
+          </div>
         </div>
       </popup>
     </div>
@@ -89,21 +92,18 @@
         </div>
       </x-dialog>
     </div>
+
+    <confirm v-model="nameRuleShow" @on-confirm="nameRuleOnConfirm">
+      <p style="text-align:center;">{{msg}}</p>
+    </confirm>
   </div>
 </template>
 <script>
 
-import {
-  TransferDom,
-  Popup,
-  Group,
-  XDialog,
-  XButton,
-  InlineLoading,
-  Cell
-} from "vux";
+import {TransferDom, Popup, Group, XDialog, XButton, InlineLoading, Cell, Confirm} from "vux";
 import { SCENICLIST } from "@/assets/data/scenic";
 import { GetSoliciList, SYorderList } from "@/servers/api";
+import famousFamily from './famousFamily'
 export default {
   directives: {
     TransferDom
@@ -129,11 +129,13 @@ export default {
       },
       qwe:"",
       SYOrderListData: [],
-      samePosition: []
+      samePosition: [],
+      nameRuleShow:false,
+      msg:''
     };
   },
 
-  components: { Popup, Group, XDialog, XButton, InlineLoading, Cell },
+  components: { Popup, Group, XDialog, XButton, InlineLoading, Cell, Confirm ,famousFamily},
 
   computed: {
     mapHeight() {
@@ -170,7 +172,6 @@ export default {
           dom[i].style.padding = '5px 7px'
           dom[i].style.borderRadius = '6px'
 
-
           if(this.tabIndex != 3){
             this.markers.forEach((item,index)=>{
               if(item.name == dom[i].innerText) dom[i].index = index
@@ -190,8 +191,6 @@ export default {
               this.showModel(this.SYOrderListData[index].id,this.SYOrderListData[index].name)
             }
           }
-
-
         }
       },800)
     },
@@ -256,8 +255,23 @@ export default {
       });
     },
     submit(id) {
-      this.$router.push("/wenchuangqiangdan?id=" + id);
+      //实名认证
+      this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=goods.real.real_FirstOne")
+        .then(({data})=>{
+          console.log(data);
+          if( data.result == 0 ){
+            this.msg = data.msg
+            this.nameRuleShow = true
+          }else{
+            this.$router.push("/wenchuangqiangdan?id=" + id);
+          }
+        })
     },
+
+    nameRuleOnConfirm(){
+      this.$router.push("/realnameauth")
+    },
+
     doShowToast() {
       this.$vux.toast.show({
         text: "toast"
@@ -315,7 +329,7 @@ export default {
 .marker-icon{
   width: 30px;
   height: 35px;
-  background-image: url("../../assets/images/kachuo-location-icon.png");
+  background-image: url("../../../../assets/images/kachuo-location-icon.png");
   background-size: 100% 100%;
 }
 
@@ -370,9 +384,15 @@ export default {
     margin-bottom: 8px;
   }
 }
+.btn-box{
+  width: 100%;
+  position: fixed;
+  padding: 20px;
+  background-color: #fff;
+  bottom: 0;
+}
 .btn {
   width: 80%;
-  margin-top: 20px;
 }
 .order-list {
   width: 100%;

@@ -97,7 +97,8 @@ export default new Vuex.Store({
       state.toastInfo = {
         type: Payload.type,
         text: Payload.text,
-        show: Payload.show
+        show: Payload.show,
+        time: Payload.time
       }
     },
     changeCurrentRouteVal(state, Payload) {

@@ -21,7 +21,6 @@
           class="camera-input"
           ref="cameraInput"
           accept="image/*"
-          capture="camera"
           @change="getFaceImg($event)"
         >
       </x-button>
@@ -75,7 +74,16 @@ export default {
 
   beforeMount() {},
 
-  mounted() {},
+  mounted() {
+
+    // var ua = navigator.userAgent.toLowerCase();
+    //判断是否是苹果手机，是则是true
+    // var isIos = (ua.indexOf('iphone') != -1) || (ua.indexOf('ipad') != -1);
+    // if (isIos) {
+    //   this.$refs.cameraInput.setAttribute("capture",'');
+    // };
+
+  },
 
   methods: {
     checkFaceRequest(imgUrl) {

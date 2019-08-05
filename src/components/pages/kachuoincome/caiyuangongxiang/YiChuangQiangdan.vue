@@ -1,30 +1,19 @@
-<!--
- * @Description: 
- * @Author: lpb
- * @Github: https://github.com/lpb273
- * @LastEditors: lpb
- * @Date: 2019-05-07 11:08:15
- * @LastEditTime: 2019-05-07 11:10:57
- -->
 <template>
   <div class="photo-album-wrap">
-    <Header
-      :titleContent="TitleObjData.titleContent"
-      :showLeftBack="TitleObjData.showLeftBack"
-      :showRightMore="TitleObjData.showRightMore"
-    ></Header>
+    <Header :titleContent="TitleObjData.titleContent" :showLeftBack="TitleObjData.showLeftBack" :showRightMore="TitleObjData.showRightMore"></Header>
     <div class="photo-album-content" :style="conHei">
-      <p v-html="imgList">
-        
-      </p>
+      <p v-html="imgList"></p>
       <x-button type="primary" class="submit" @click.native="formData">我要抢单</x-button>
     </div>
+    <confirm v-model="confirmShow" @on-confirm="onConfirm">
+      <p style="text-align:center;">{{msg}}</p>
+    </confirm>
   </div>
 </template>
 
 <script>
 import Header from "@/components/common/Header";
-import { XInput, Group, XButton, Cell } from "vux";
+import { XInput, Group, XButton, Cell, Confirm } from "vux";
 import ImageUploader from "@/components/common/ImageUploader";
 import { SaveYcOrder } from "@/servers/api";
 export default {
@@ -37,13 +26,15 @@ export default {
         showLeftBack: true,
         showRightMore: false
       },
+      confirmShow:false,
+      msg:'',
       iconType: "",
       imgList: [],
       label: "",
       explain: "",
       elem: "",
       desc: ""
-    };
+    }
   },
 
   components: {
@@ -52,6 +43,7 @@ export default {
     XInput,
     XButton,
     Cell,
+    Confirm,
     ImageUploader
   },
 
@@ -61,15 +53,27 @@ export default {
     }
   },
 
-  beforeMount() {},
-
   mounted() {
     this.imgList = this.$route.query.arr;
   },
 
   methods: {
     formData() {
-      this.$router.push("/yichuangqiangdaninput?id="+this.$route.query.id);
+
+      this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=goods.real.admission_FirstOne")
+        .then(({data})=>{
+          console.log(data);
+          if( data.result == 0 ){
+            this.msg = data.msg
+            this.confirmShow = true
+          }else{
+            this.$router.push("/yichuangqiangdaninput?id="+this.$route.query.id);
+          }
+        })
+
+    },
+    onConfirm(){
+      // this.$router.push("/") 暂无页面
     }
   },
 

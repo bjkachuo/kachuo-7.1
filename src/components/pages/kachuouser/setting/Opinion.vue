@@ -57,6 +57,9 @@ export default {
   mounted() {},
 
   methods: {
+    foc(){
+      alert(1)
+    },
     onEvent(event) {
       // console.log(this.val);
     },
@@ -116,4 +119,5 @@ export default {
   width: 80%;
   margin-top: 80px;
 }
+
 </style>

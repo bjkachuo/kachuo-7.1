@@ -25,7 +25,7 @@
       <span class="image-upload-weak-tip">( 视频大小不能超过30M )</span>
     </p>
     <VideoUploader ref="imgUpload" v-on:getVideoUploadUrl="getVideoUrl"></VideoUploader>
-    <Address v-on:selectAddress="getVideoAddress"></Address>
+    <Address @selectAddress="getVideoAddress"></Address>
     <x-button type="primary" class="submit-btn" @click.native="formData">发布</x-button>
   </div>
 </template>

@@ -149,7 +149,7 @@ export default {
       });
     },
     releaseContent() {
-      this.$router.push("/releasevideo??branch=9");
+      this.$router.push("/releasevideo?branch=9");
     },
     back() {
       this.$router.goBack();
