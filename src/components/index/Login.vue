@@ -12,17 +12,32 @@
         is-type="china-mobile"
         :show-clear="false"
         novalidate
-      ></x-input>
-      <div class="wrap-two">
-      <x-input
-        placeholder="请输入验证码"
-        class="input-qr-code"
-        novalidate
-        v-model="veriValue"
-        :show-clear="false"
       >
+        <img
+          slot="label"
+          style="padding-right:10px;display:block;background:none;margin-left:5px;height:100%; width:75%;"  
+          src="../../assets/images/账号@2x.png"
+          width="38"
+          height="38"
+        />
       </x-input>
-      <x-button
+      <div class="wrap-two">
+        <x-input
+          placeholder="请输入验证码"
+          class="input-qr-code"
+          novalidate
+          v-model="veriValue"
+          :show-clear="false"
+        >
+          <img
+            slot="label"
+            style="padding-right:11px;display:block;background:none;margin-left:7px;height:100%;width:75%;"
+            src="../../assets/images/验证码@2x.png"
+            width="38"
+            height="38"
+          />
+        </x-input>
+        <x-button
           :plain="false"
           slot="right"
           type="primary"
@@ -30,14 +45,13 @@
           :disabled="veritfyCode"
           @click.native="sendVeriCode"
           class="veri-btn"
-          >{{veritfyCodeTxt}}</x-button>       
+        >{{veritfyCodeTxt}}</x-button>
       </div>
-       <span class="One"></span>
-       <span class="Two"></span>
+      <!-- <span class="One"></span>
+      <span class="Two"></span>-->
     </div>
     <x-button type="primary" class="sub-btn-wrap" @click.native="requestLogin">登录</x-button>
     <p class="visitor-login" @click="visitorLogin">游客登录</p>
-    
   </div>
 </template>
 
@@ -250,72 +264,71 @@ export default {
   padding: 0 15px;
   box-sizing: border-box;
 }
-.login-wrap-title-one{
+.login-wrap-title-one {
   margin-top: 92px;
   margin-left: 8%;
-  font-size:60px;
-  font-family:PingFang-SC-Heavy;
-  font-weight:800;
-  color:rgba(255,255,255,1);
-  line-height:21px;
+  font-size: 60px;
+  font-family: PingFang-SC-Heavy;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 1);
+  line-height: 21px;
 }
 .login-wrap-title {
   font-size: 24px;
   margin-left: 8%;
   margin-top: 40px;
-  font-family:PingFang-SC-Heavy;
-  color:rgba(255,255,255,1);
-  font-weight:800;
+  font-family: PingFang-SC-Heavy;
+  color: rgba(255, 255, 255, 1);
+  font-weight: 800;
 }
 .weui-vcode,
 .input-qr-code {
   /* width: 100%;
   border-bottom: 1px solid #fff; */
   margin-top: 20px;
-  padding-left: 12%;
-  border-radius:8px;
-  background:rgba(255,255,255,0.5);
-  color: #FFFFFF;
+  /* padding-left: 12%; */
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.5);
+  color: #ffffff;
   height: 52px;
   font-size: 16px;
-
-
 }
-.input-qr-code{
+.input-qr-code {
   width: 49%;
   float: left;
-
 }
 .weui-vcode {
   margin-top: 50px;
   width: 80%;
-
 }
 .sub-btn-wrap {
   margin-top: 25px;
   margin-left: 10%;
-  background:rgba(255,255,255,0.5);
+  background: rgba(255, 255, 255, 0.5);
   color: #000;
   width: 81%;
   height: 46px;
-  font-family:PingFang-SC-Medium;
+  font-family: PingFang-SC-Medium;
   font-size: 16px;
 }
 
 .veri-btn {
-width:30%;
-height:52px;
-background:rgba(255,255,255,0.5);
-/* opacity:0.5; */
-border-radius:8px;
-color: #fff;
-float: left;
-margin-top: 20px;
-margin-left: 5px;
-font-size: 10px;
-border: none;
+  width: 30%;
+  height: 52px;
+  background: rgba(255, 255, 255, 0.5);
+  /* opacity:0.5; */
+  border-radius: 8px;
+  color: #fff;
+  float: left;
+  margin-top: 20px;
+  margin-left: 5px;
+  font-size: 10px;
+  border: none;
 }
-.wrap-two{
+/* .veri-btn weui-btn_primary{
+    background-color: rgba(255, 255, 255, 0.5);
+} */
+.wrap-two {
   /* position: relative; */
 }
 .visitor-login {
@@ -327,7 +340,13 @@ border: none;
   margin-top: 30px;
   margin-left: 41%;
 }
-.One{
+.wrap-two img {
+  /* width: 100%; */
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+/* .One {
   width: 19px;
   height: 19px;
   position: absolute;
@@ -336,7 +355,7 @@ border: none;
   background: url("../../assets/images/账号@2x.png") no-repeat;
   background-size: 19px 19px;
 }
-.Two{
+.Two {
   width: 16px;
   height: 20px;
   position: absolute;
@@ -344,5 +363,11 @@ border: none;
   left: 3%;
   background: url("../../assets/images/验证码@2x.png") no-repeat;
   background-size: 16px 20px;
+} */
+</style>
+<style lang="less" scoped>
+.weui-btn_disabled.weui-btn_primary {
+  background-color: rgba(255, 255, 255, 0.5);
 }
 </style>
+
