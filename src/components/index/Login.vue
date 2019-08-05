@@ -272,7 +272,7 @@ export default {
   /* width: 100%;
   border-bottom: 1px solid #fff; */
   margin-top: 20px;
-  padding-left: 40px;
+  padding-left: 12%;
   border-radius:8px;
   background:rgba(255,255,255,0.5);
   color: #FFFFFF;

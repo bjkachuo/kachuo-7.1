@@ -376,5 +376,24 @@ export default [
     name :'StoreDetails',
     component: resolve => require(['@/components/common/storeDetails'], resolve),
   },
+  {
+    //商品分类页
+    path: '/goodsSlassification',
+    name :'GoodsSlassification',
+    component: resolve => require(['@/components/pages/kachuomall/GoodsSlassification'], resolve),
+  },
+  {
+    //商品分类列表页面
+    path:'/categoryList',
+    name:'CategoryList',
+    component: resolve => require(['@/components/common/CategoryList'],resolve)
+
+  },
+  {
+    //商品足迹页面
+    path: '/footprint',
+    name: '/FootPrint',
+    component: resolve =>require(['@/components/common/FootPrint'],resolve)
+  }
 
 ]

@@ -38,6 +38,11 @@ export default {
           link: "/ShoppingCart"
         },
         {
+          title: "我的足迹",
+          icon : "iconfont icongouwuche",
+          link :"/FootPrint",
+        },
+        {
           title: "商品订单",
           icon: "iconfont icondingdan",
           link: "/orderlist"

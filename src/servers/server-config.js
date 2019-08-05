@@ -139,6 +139,7 @@ http.post = (url, data) => {
           if (res.data.integral) {
             showTip('奖励' + res.data.integral + '积分');
           }
+          console.log(res.data.integral)
           removeMarkModel();
           resolve(res.data);
         }

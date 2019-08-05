@@ -24,7 +24,7 @@
       </div>
       <div class="goods-details-wrap">
         <div class="goods-details-left">
-          <img class="goods-details-img" :src="imgUrl" :alt="goodsDetails.title">
+          <img class="goods-details-img" :src="imgUrl" :alt="goodsDetails.title" />
         </div>
         <div class="goods-details-mid">
           <p>{{goodsDetails.title}}</p>
@@ -56,9 +56,14 @@
           <span>优惠</span>
           <span>-¥0.00</span>
         </p>
-        <p style="border:none">
+        <p>
           <span>运费</span>
           <span>¥0.00</span>
+        </p>
+        <p>
+          <span>积分抵扣</span>       
+          <span><x-switch title=""></x-switch></span>      
+          <!-- <span><x-switch v-model="goodsDetails.marketprice" title="" :value-map="[goodsDetails.marketprice, this.value1]"></x-switch></span>       -->
         </p>
       </div>
     </div>
@@ -71,13 +76,14 @@
       <p
         class="confirm-order-desc"
         v-if="this.$route.query.priceback"
-      >应付：¥{{this.$route.query.priceback}}</p>
+      >应付：¥{{this.value2}}</p>
       <p class="confirm-order-btn" @click="confirmOrder">立即下单</p>
     </div>
   </div>
 </template>
 
 <script>
+import { XSwitch } from "vux";
 import Header from "@/components/common/Header";
 import { getDetail, getAddressDefault, AddShop } from "@/servers/api";
 export default {
@@ -85,6 +91,8 @@ export default {
   props: [""],
   data() {
     return {
+      value1:"2222",
+      value2:"",
       TitleObjData: {
         titleContent: "确认订单",
         showLeftBack: true,
@@ -97,7 +105,8 @@ export default {
   },
 
   components: {
-    Header
+    Header,
+    XSwitch
   },
 
   computed: {
@@ -134,12 +143,12 @@ export default {
             } else {
               if (res.code === "50103") {
                 this.$vux.confirm.show({
-                  title:"提示",
-                  content:"订单中该商品未付款，是否到订单中心查看？",
-                  onCancel:()=> {
+                  title: "提示",
+                  content: "订单中该商品未付款，是否到订单中心查看？",
+                  onCancel: () => {
                     return;
                   },
-                  onConfirm:()=> {
+                  onConfirm: () => {
                     this.$router.push("/orderlist");
                   }
                 });
@@ -180,7 +189,9 @@ export default {
       } else if (this.$route.query.priceback) {
         return this.$route.query.priceback;
       } else {
-        return this.goodsDetails.marketprice;
+        // return this.goodsDetails.marketprice;
+        return this.value2 = this.goodsDetails.marketprice;
+
       }
     },
     selAddress() {
@@ -226,8 +237,8 @@ export default {
   },
 
   watch: {
-    '$store.state.address':function () {
-      this.getAddressDefaultFn()
+    "$store.state.address": function() {
+      this.getAddressDefaultFn();
     }
   }
 };
@@ -297,7 +308,7 @@ export default {
 }
 .goods-details-desc {
   width: 100%;
-  height: 150px;
+  height: 200px;
   padding-left: 15px;
   box-sizing: border-box;
   background: #fff;
