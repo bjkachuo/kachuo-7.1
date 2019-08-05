@@ -94,6 +94,9 @@ export default {
       this.$router.push("/tokenqrcode");
     }
   },
+  mounted(){
+    console.log(this.GLOBAL.getSession("userLoginInfo"))    
+  },
 
   watch: {}
 };

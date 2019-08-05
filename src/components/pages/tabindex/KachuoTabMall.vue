@@ -6,6 +6,10 @@
     <DividedArea></DividedArea>
     <Divider :content="dividerContent"></Divider>
     <GoodsList :goodList="goodsListData"></GoodsList>
+    <span class="btn-wrap" @click="classification">
+      <p class="btn">分类</p>
+      <!-- <x-icon type="ios-arrow-down" size="30"></x-icon> -->
+    </span>
   </div>
 </template>
 
@@ -56,7 +60,7 @@ export default {
     DividedArea,
     CellDivider,
     Divider,
-    GoodsList
+    GoodsList,
   },
 
   computed: {},
@@ -81,6 +85,9 @@ export default {
         .catch(err => {
           console.log(err);
         });
+    },
+    classification(){
+      this.$router.push("/goodsSlassification")
     }
   },
 
@@ -91,5 +98,27 @@ export default {
 .tab-item-mall-wrap {
   padding-bottom: 30px;
   box-sizing: border-box;
+  position: relative;
 }
+.btn-wrap{
+  position: absolute;
+  top:0px;
+  left:10px;
+  width: 14%;
+  height: 45px;
+}
+.btn{
+  line-height: 45px;
+  text-align: center;
+  font-size: 16px;
+  width: 66%;
+  float: left;
+  }
 </style>
+<style lang="less" scoped>
+.vux-x-icon{
+  float: left;
+  width:34%;
+  margin-top: 8px;
+}
+</style>  

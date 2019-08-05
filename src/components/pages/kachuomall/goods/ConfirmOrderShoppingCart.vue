@@ -40,8 +40,12 @@
           <span>优惠</span>
           <span>-¥0.00</span>
         </p>
-        <p style="border:none">
+        <p>
           <span>运费</span>
+          <span>¥0.00</span>
+        </p>
+        <p>
+          <span>积分抵扣</span>
           <span>¥0.00</span>
         </p>
       </div>
@@ -261,7 +265,7 @@ export default {
 }
 .goods-details-desc {
   width: 100%;
-  height: 150px;
+  height: 200px;
   padding-left: 15px;
   box-sizing: border-box;
   background: #fff;
