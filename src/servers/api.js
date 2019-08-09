@@ -9,6 +9,10 @@ export const login = (data) => http.post('login.logintel', data);
 // 获取用户信息
 export const getUserInfo = (data) => http.post('member.realname.login', data);
 
+//panhuisen 2019.07.17
+//上传推送RegistrationID
+export const uploadRegistrationID = (data) => http.post('member.realname.get_reg_id', data);
+
 // 名家商城首页
 export const getFamousMallDate = () => http.post('home.celebrity');
 
