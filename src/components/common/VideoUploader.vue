@@ -88,7 +88,7 @@ export default {
         this.$vux.toast.hide();
       }, 2000);
     },
-    postData() {},
+
     submit() {
       this.$vux.loading.show({
         text: "正在上传"
@@ -159,7 +159,7 @@ export default {
   display: block;
   background-color: #f9f9f9;
   color: #ffffff;
-  height: 94px;
+  height: 90px;
 }
 .upload-imgs li .upload {
   position: absolute;

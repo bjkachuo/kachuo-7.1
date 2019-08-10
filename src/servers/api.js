@@ -16,13 +16,13 @@ export const getFamousMallDate = () => http.post('home.celebrity');
 export const getScenicMallDate = () => http.post('home.Scenic');
 
 //景区商城列表
-export const getScenicList = (data) => http.post("goods.index.get_list", data)
+export const getScenicList = (data) => http.post("index.get_list", data)
 
 //app新闻动态
-export const getKaChuoNews = (data) => http.post("dynamic.index", data)
+export const getKaChuoNews = (data) => http.post("index", data)
 
 //商品详情
-export const getDetail = (data) => http.post("shop.index.detail", data)
+export const getDetail = (data) => http.post("index.detail", data)
 
 //防伪查询
 export const Anti = (data) => http.post("goods.details.get_fw", data);
@@ -67,13 +67,13 @@ export const Notify = (data) => http.post("goods.buy.notify", data);
 export const aliNotify = (data) => http.post("goods.buy.aliNotify", data);
 
 //频类首页图
-export const Frequency = (data) => http.post("video.index", data);
+export const Frequency = (data) => http.post("index", data);
 
 //频类详情
-export const FrequencyDetail = (data) => http.post("video.index.getvideo", data);
+export const FrequencyDetail = (data) => http.post("index.getvideo", data);
 
 //频类评论
-export const FrequencyComment = (data) => http.post("video.index.subcomment", data)
+export const FrequencyComment = (data) => http.post("index.subcomment", data)
 
 //实名认证
 export const RealName = (data) => http.post("member.realname.isSmAuth", data);
@@ -82,28 +82,28 @@ export const RealName = (data) => http.post("member.realname.isSmAuth", data);
 export const getVideo = (data) => http.post("video.show", data);
 
 //文化梳理
-export const Culture = (data) => http.post("verify.index.culture", data);
+export const Culture = (data) => http.post("index.culture", data);
 
 //艺品创作
-export const Author = (data) => http.post("verify.index.author", data);
+export const Author = (data) => http.post("index.author", data);
 
 //艺品溯源
-export const Suyuan = (data) => http.post("verify.index.suyuan", data);
+export const Suyuan = (data) => http.post("index.suyuan", data);
 
 //艺品防伪
-export const Attestation = (data) => http.post("verify.index.attestation", data);
+export const Attestation = (data) => http.post("index.attestation", data);
 
 // 首页频类列表
-export const VideoListIndex = (data) => http.post("video.index", data);
+export const VideoListIndex = (data) => http.post("index", data);
 
 // 动态详情页
-export const newsDetails = (data) => http.post("dynamic.index.dynamic_details", data);
+export const newsDetails = (data) => http.post("index.dynamic_details", data);
 
 // 回购
 export const buyBack = (data) => http.post("goods.repurchase.slide_list", data);
 
 // 回购列表
-export const buyBackList = (data) => http.post("buyback.index.activity", data);
+export const buyBackList = (data) => http.post("index.activity", data);
 
 // 申请回购
 export const buyBackSubmit = (data) => http.post("goods.repurchase.submit", data);
@@ -118,13 +118,13 @@ export const goodsBucketDelete = (data) => http.post("goods.details.del_shop", d
 export const goodsBucketRecomm = (data) => http.post("goods.details.PickShop", data);
 
 // 文链查证列表未售
-export const blockChainList = (data) => http.post("verify.index", data);
+export const blockChainList = (data) => http.post("index", data);
 
 // 文链查证列表已售
-export const blockChainInfoGoods = (data) => http.post("verify.index.sold", data);
+export const blockChainInfoGoods = (data) => http.post("index.sold", data);
 
 // 查看商品详情
-export const blockChainInfo = (data) => http.post("verify.index.info", data);
+export const blockChainInfo = (data) => http.post("index.info", data);
 
 // 版本更新信息
 export const getUpdateInfo = (data) => http.post("renovate", data);
@@ -139,7 +139,7 @@ export const Confirmation = (data) => http.post("goods.buy.is_Confirmation", dat
 export const marketList = () => http.post("goods.market.slide_list");
 
 // 租赁列表
-export const LeasetList = (data) => http.post("lease.index.lease_list", data);
+export const LeasetList = (data) => http.post("index.lease_list", data);
 
 //一件寄卖
 export const shotMarket = () => http.post("goods.market.OneShotMarket");
@@ -187,13 +187,13 @@ export const imageUploadTimeline = (data) => http.post("util.uploader.uploadtow"
 export const CollectionGoods = (data) => http.post("member.realname.member_favorite", data);
 
 // 搜索
-export const SearchGoodsList = (data) => http.post("goods.index.sel_list", data);
+export const SearchGoodsList = (data) => http.post("index.sel_list", data);
 
 // 视频点赞
-export const VideoPraise = (data) => http.post("video.index.praise", data);
+export const VideoPraise = (data) => http.post("index.praise", data);
 
 // 视频评论
-export const VideoComment = (data) => http.post("video.index.subcomment", data);
+export const VideoComment = (data) => http.post("index.subcomment", data);
 
 // 分销商申请
 export const JoinKachuo = (data) => http.post("member.realname.save_distributor", data);
@@ -205,31 +205,31 @@ export const KachuoJoinInfo = (data) => http.post("member.realname.get_distribut
 export const orderExpressInfo = (data) => http.post("goods.details.get_logistics", data);
 
 // 用户提交个人动态
-export const userSubmitNews = (data) => http.post("friend.index.friendadd", data);
+export const userSubmitNews = (data) => http.post("index.friendadd", data);
 
 // 获取朋友圈列表
-export const userFriendTimeLine = (data) => http.post("friend.index.friendlist", data);
+export const userFriendTimeLine = (data) => http.post("index.friendlist", data);
 
 // 获取朋友圈列表详细
-export const userFriendTimeLineDetails = (data) => http.post("friend.index.friendcon", data);
+export const userFriendTimeLineDetails = (data) => http.post("index.friendcon", data);
 
 // 景区故事列表
 export const scenceStoryList = (data) => http.post("dynamic.dynamiclist", data);
 
 // 景区故事详情
-export const scenceStoryDetalis = (data) => http.post("season.index.seasoncon", data);
+export const scenceStoryDetalis = (data) => http.post("index.seasoncon", data);
 
 // 商品区块链信息
-export const verifyGoodsDetalis = (data) => http.post("verify.index.getDetail", data);
+export const verifyGoodsDetalis = (data) => http.post("index.getDetail", data);
 
 // 查询商品编码
 export const GoodsBianMa = (data) => http.post("cygx.real.GoodsBianMa", data);
 
 // 自定义景区故事
-export const scenceStoryAdd = (data) => http.post("season.index.seasonadd", data);
+export const scenceStoryAdd = (data) => http.post("index.seasonadd", data);
 
 // 景区故事列表
-export const seasonIndexList = (data) => http.post("season.index.seasonlist", data);
+export const seasonIndexList = (data) => http.post("index.seasonlist", data);
 
 // 上传视频
 export const VideoUpload = (data) => http.post("util.Uploader.uploadm", data);
@@ -271,19 +271,19 @@ export const SeourceCreatedSubmit = (data) => http.post("video.show.videoAdd1", 
 export const SeourceCreatedListDetails = (data) => http.post("video.show.videodet", data);
 
 // 商品列表
-export const ShopGoodsList = (data) => http.post("shop.index.get_list_by_category", data);
+export const ShopGoodsList = (data) => http.post("index.get_list_by_category", data);
 
 // 推荐商品
-export const ShopGoodsListPush = (data) => http.post("shop.index.get_home_list", data);
+export const ShopGoodsListPush = (data) => http.post("index.get_home_list", data);
 
 // 景区消费分类
-export const ScenceGoodsClass = () => http.post("shop.index.get_category");
+export const ScenceGoodsClass = () => http.post("index.get_category");
 
 // 景区发布列表
-export const ScenceReleaseList = (data) => http.post("release.index.index", data);
+export const ScenceReleaseList = (data) => http.post("index.index", data);
 
 // 景区发布列表详情
-export const ScenceReleaseListDetails = (data) => http.post("release.index.show", data);
+export const ScenceReleaseListDetails = (data) => http.post("index.show", data);
 
 // 记住的了解的
 export const ScenceRememberAndLearn = (data) => http.post("videoservice.remknow.remknowlist", data);
@@ -295,16 +295,16 @@ export const ScenceRememberAndLearnDetails = (data) => http.post("videoservice.r
 export const AdvertiseLoop = (data) => http.post("carousel", data);
 
 // 带走的商品列表
-export const TakeAwayGoodsList = (data) => http.post("shop.index.get_goods_by_scenic", data);
+export const TakeAwayGoodsList = (data) => http.post("index.get_goods_by_scenic", data);
 
 // 分类列表
 export const GoodsClassList = (data) => http.post("goods.details.getGoodsCode", data);
 
 // 信息消费
-export const InformationConsum = (data) => http.post("video.index.Information_list", data);
+export const InformationConsum = (data) => http.post("index.Information_list", data);
 
 // 根据用户经纬度判断当前用户位置
-export const CheckByLocation = (data) => http.post("scenic.index.current_scenic", data);
+export const CheckByLocation = (data) => http.post("index.current_scenic", data);
 
 // 获取景区景点对应的详情
 export const getScenicPointDetails = (data) => http.post("scenic.site", data);
@@ -313,13 +313,13 @@ export const getScenicPointDetails = (data) => http.post("scenic.site", data);
 export const setNickName = (data) => http.post("member.realname.upd_member_information", data);
 
 // 获取景区商家数据列表
-export const getScenicMerchants = (data) => http.post("scenic.index", data);
+export const getScenicMerchants = (data) => http.post("index", data);
 
 // 获取景区商家数据详情
-export const getScenicMerchantsDetails = (data) => http.post("scenic.index.business_info", data);
+export const getScenicMerchantsDetails = (data) => http.post("index.business_info", data);
 
 // 人脸识别
-export const faceCheck = (data) => http.post("discern.index", data);
+export const faceCheck = (data) => http.post("index", data);
 
 // 门票列表
 export const TicketsList = (data) => http.post("goods.buy.getDoorList", data);
@@ -331,7 +331,7 @@ export const CollectionList = (data) => http.post("member.realname.getMember_fav
 export const GetCollectionInit = (data) => http.post("member.realname.get_favoriteState", data);
 
 // 意见反馈
-export const OpinionBack = (data) => http.post("dynamic.index.YjFk_save", data);
+export const OpinionBack = (data) => http.post("index.YjFk_save", data);
 
 // 文创/艺创列表接口
 export const GetSoliciList = (data) => http.post("goods.real.get_soliciList", data);
@@ -358,7 +358,7 @@ export const CYGXorderList = (data) => http.post("goods.real.get_OrderList", dat
 export const FamousListData = (data) => http.post("home.celebrity", data);
 
 // 云相册上传图片获取链接
-export const CloudUploadImg = (data) => http.post("album.index", data);
+export const CloudUploadImg = (data) => http.post("index", data);
 
 // 获取相册列表
 export const GetCloudUploadImg = (data) => http.post("album.album_list", data);

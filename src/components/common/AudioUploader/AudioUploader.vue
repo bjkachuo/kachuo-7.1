@@ -3,7 +3,7 @@
      <input type="file" class="upload" @change="addAudio" multiple="false" ref="inputer" accept="audio/mp3" :disabled="audioFlag">
      <div class="add " :class="{'uploaded': audioFlag}">
        <i class="add-icon" ></i>
-       <span>立即上传</span>
+       <span>{{audioFlag ? '已上传' : '立即上传'}}</span>
      </div>
      <audio src="" @canplaythrough="audioReady" ref="audio"></audio>
   </div>
