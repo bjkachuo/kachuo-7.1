@@ -61,10 +61,15 @@
           <span>¥0.00</span>
         </p>
         <p>
-          <span>积分抵扣</span>       
-          <span><x-switch title=""></x-switch></span>      
+          <span>积分抵扣</span>    
+          <span @click="ok"><check-icon :value.sync="demo1"></check-icon></span>   
+          <!-- <span><x-switch title=""></x-switch></span>       -->
           <!-- <span><x-switch v-model="goodsDetails.marketprice" title="" :value-map="[goodsDetails.marketprice, this.value1]"></x-switch></span>       -->
         </p>
+        <!-- <p>
+          {{this.demo1}}
+          {{this.value2}}
+        </p> -->
       </div>
     </div>
     <div class="confirm-order-btn-wrap">
@@ -83,7 +88,7 @@
 </template>
 
 <script>
-import { XSwitch } from "vux";
+import { XSwitch,CheckIcon } from "vux";
 import Header from "@/components/common/Header";
 import { getDetail, getAddressDefault, AddShop } from "@/servers/api";
 export default {
@@ -91,7 +96,8 @@ export default {
   props: [""],
   data() {
     return {
-      value1:"2222",
+      demo1:false,
+      value1:"999999",
       value2:"",
       TitleObjData: {
         titleContent: "确认订单",
@@ -106,7 +112,8 @@ export default {
 
   components: {
     Header,
-    XSwitch
+    XSwitch,
+    CheckIcon
   },
 
   computed: {
@@ -114,15 +121,28 @@ export default {
       return { height: document.documentElement.clientHeight - 45 + "px" };
     }
   },
+  created(){
+
+  },
 
   beforeMount() {},
 
   mounted() {
     this.getGoodsDetailsInfo();
     this.getAddressDefaultFn();
+    this.value2 = this.goodsDetails.marketprice
   },
 
   methods: {
+    ok(){
+      if(this.demo1 == false){
+        this.value2 = this.goodsDetails.marketprice
+        console.log("111111")
+      }else{
+        this.value2 = this.value1;
+        console.log("2222");
+      }
+    },
     // 下单
     confirmOrder() {
       console.log(this.goodsDetails.id);

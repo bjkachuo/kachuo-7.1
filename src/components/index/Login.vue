@@ -15,7 +15,7 @@
       >
         <img
           slot="label"
-          style="padding-right:10px;display:block;background:none;margin-left:5px;height:100%; width:75%;"  
+          style="padding-right:5px;display:block;background:none;margin-left:10px;height:100%; width:60%;"  
           src="../../assets/images/账号@2x.png"
           width="38"
           height="38"
@@ -31,7 +31,7 @@
         >
           <img
             slot="label"
-            style="padding-right:11px;display:block;background:none;margin-left:7px;height:100%;width:75%;"
+            style="padding-right:6px;display:block;background:none;margin-left:11px;height:100%;width:60%;"
             src="../../assets/images/验证码@2x.png"
             width="38"
             height="38"
@@ -75,7 +75,8 @@ export default {
           "url(" + require("@/assets/images/loginbackOne.png") + ")",
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
-        backgroundPosition: "center"
+        backgroundPosition: "center",
+        // minHeight:"100%"
       }
     };
   },
@@ -253,9 +254,13 @@ export default {
 };
 </script>
 <style lang='css' scoped>
+body{
+  min-height: 100%;
+}
 .login-wrap {
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
+  min-height:100%;
   overflow: hidden;
   display: flex;
   flex-direction: column;
