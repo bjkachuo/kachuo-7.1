@@ -10,12 +10,7 @@
     <!-- <p style="width:100%;text-align:center;" v-show="goodList.length === 0">
       <span style="vertical-align:middle;display:inline-block;font-size:14px;">暂无数据</span>
     </p> -->
-    <div
-      class="goods-list"
-      v-for="(item,index) in goodList"
-      :key="index"
-      @click="watchGoodsDetails(item.goods_id,item.id,item.rent,item)"
-    >
+    <div class="goods-list" v-for="(item,index) in goodList" :key="index" @click="watchGoodsDetails(item.goods_id,item.id,item.rent,item)">
       <img class="goods-img" v-lazy="item.thumb">
       <div class="good-desc-wrap">
         <p class="goods-name">{{item.goods_name ? item.goods_name : item.title}}</p>
@@ -40,12 +35,6 @@ export default {
     Divider,
     InlineLoading
   },
-
-  computed: {},
-
-  beforeMount() {},
-
-  mounted() {},
 
   methods: {
     watchGoodsDetails(goodsId, id, rent, item) {
@@ -95,7 +84,7 @@ export default {
 }
 .goods-price {
   font-size: 14px;
-  color:#b7090a;
+  color:#222;
   margin-top: 10px;
 }
 </style>

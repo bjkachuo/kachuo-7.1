@@ -1,5 +1,5 @@
 <template>
-  <Header :titleContent="titleContent"></Header>
+  <Header :titleContent="titleContent" :rightText="rightText"></Header>
 </template>
 
 <script>
@@ -11,7 +11,8 @@
 
         data(){
           return{
-            titleContent:'景区信息'
+            titleContent:'景区信息',
+            rightText:'编辑'
           }
         },
     }
