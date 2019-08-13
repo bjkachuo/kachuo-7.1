@@ -2,11 +2,13 @@
   <div class="tab-item-mall-wrap">
 <!--    <TabItemMallHeader></TabItemMallHeader>-->
 <!--    <TabItemMallAdvertise></TabItemMallAdvertise>-->
-    <scroller lock-y :scrollbar-x=false>
-      <div class="box1">
-        <div class="box1-item" v-for="i in 7" style="float: left;"><span>{{' ' + i + ' '}}</span></div>
+    <div style="background: #fff;">
+      <div style="width: 76%;margin: 0 auto;">
+        <tab :scroll-threshold="5" class="custom">
+          <tab-item v-for="n in 7" :key="n" :selected="n===1">已发货{{ n }}</tab-item>
+        </tab>
       </div>
-    </scroller>
+    </div>
     <div style="width:92%;margin: 15px auto 30px;" >
       <swiper auto height="100px" class="custom">
         <swiper-item class="black"><h2 class="title fadeInUp animated">它无孔不入</h2></swiper-item>
@@ -16,7 +18,7 @@
     </div>
     <ul class="goods-type">
       <li v-for="item in cellListTools">
-        <div class="goods-type-icon"></div>
+        <div class="goods-type-icon" :class="item.icon" @click="goodsTypeGo(item.link)"></div>
         <div style="text-align: center">{{item.title}}</div>
       </li>
     </ul>
@@ -24,17 +26,17 @@
     <DividedArea></DividedArea>
 <!--    <Divider :content="dividerContent"></Divider>-->
     <GoodsList :goodList="goodsListData"></GoodsList>
-    <span class="btn-wrap" @click="classification">
+<!--    <span class="btn-wrap" @click="classification">-->
 <!--      <p class="btn">分类</p>-->
       <!-- <x-icon type="ios-arrow-down" size="30"></x-icon> -->
-    </span>
+<!--    </span>-->
   </div>
 </template>
 
 <script>
 //import TabItemMallHeader from "@/components/layout/TabItemMallHeader";
 // import TabItemMallAdvertise from "@/components/layout/TabItemMallAdvertise";
-import {Scroller,Swiper,SwiperItem} from 'vux'
+import {Scroller,Swiper,SwiperItem,Tab, TabItem} from 'vux'
 import DividedArea from "@/components/common/DividedArea";
 import CellDivider from "@/components/common/CellDivider";
 // import Divider from "@/components/common/Divider";
@@ -49,39 +51,25 @@ export default {
       cellListTools: [
         {
           title: "品类视频",
-          icon: "iconfont iconpinleishipin",
+          icon: "shipin",
           link: "/goodsVideoclassify?title=品类视频"
         },
         {
-          title: "景区消费",
-          icon: "iconfont iconjingquxiaofei",
+          title: "游园消费",
+          icon: "youyuan",
           link: "/scenceconsum?title=景区消费&carousel=4"
         },
         {
           title: "景区好礼",
-          icon: "iconfont iconjingquhaoli",
+          icon: "haoli",
           link: "/scencegifts?title=景区好礼&carousel=5"
         },
         {
           title: "名家妙藏",
-          icon: "iconfont iconmingjiamiaocang",
+          icon: "miaocang",
           link: "/famouscollection?title=名家妙藏&carousel=6"
         }
       ],
-      demo01_list:[{
-        url: 'javascript:',
-        img: 'https://ww1.sinaimg.cn/large/663d3650gy1fq66vvsr72j20p00gogo2.jpg',
-        title: '送你一朵fua'
-      }, {
-        url: 'javascript:',
-        img: 'https://ww1.sinaimg.cn/large/663d3650gy1fq66vw1k2wj20p00goq7n.jpg',
-        title: '送你一辆车'
-      }, {
-        url: 'javascript:',
-        img: 'https://static.vux.li/demo/5.jpg', // 404
-        title: '送你一次旅行',
-        fallbackImg: 'https://ww1.sinaimg.cn/large/663d3650gy1fq66vw50iwj20ff0aaaci.jpg'
-      }],
       dividerContent: "猜你喜欢",
       goodsListData: []
     };
@@ -92,6 +80,8 @@ export default {
     // TabItemMallAdvertise,
     DividedArea,
     CellDivider,
+    Tab,
+    TabItem,
     // Divider,
     GoodsList,
     Scroller,
@@ -122,9 +112,13 @@ export default {
           console.log(err);
         });
     },
-    classification(){
-      this.$router.push("/goodsSlassification")
+    goodsTypeGo(link){
+      this.$router.push(link)
+      // console.log(link);
     }
+    // classification(){
+    //   this.$router.push("/goodsSlassification")
+    // }
   },
 
   watch: {}
@@ -150,6 +144,15 @@ export default {
       width: 15px!important;
       height: 3px!important;
     }
+    /deep/ .vux-tab-ink-bar{
+      display: none;
+    }
+    /deep/ .vux-tab{
+      background: transparent;
+      .vux-tab-item{
+        background: transparent;
+      }
+    }
  }
 .goods-type{
   width: 92%;
@@ -163,7 +166,23 @@ export default {
     .goods-type-icon{
       width: 26px;
       height: 26px;
-      margin: 0 auto;
+      margin: 21px auto 8px;
+    }
+    .shipin{
+      background-image: url("./shipin.png");
+      background-size: 100% 100%;
+    }
+    .youyuan{
+      background-image: url("./youyuan.png");
+      background-size: 100% 100%;
+    }
+    .haoli{
+      background-image: url("./haoli.png");
+      background-size: 100% 100%;
+    }
+    .miaocang{
+      background-image: url("./haoli.png");
+      background-size: 100% 100%;
     }
   }
 }

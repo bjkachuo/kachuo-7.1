@@ -1,63 +1,44 @@
 <template>
   <div class="tab-bar-wrap">
-    <div
-      v-for="(item,index) in tabItem"
-      :key="index"
-      class="tab-bar-item"
-      @click="changeTabIndex(index)"
-    >
-      <span
-        :class="item.class"
-        style="width:22px;height:22px;display:inline-block;font-size:20px;margin-bottom:2px"
-      ></span>
-      <span :class="{normal:!item.isActive,active:item.isActive}">{{item.title}}</span>
+    <div v-for="(item,index) in tabItem" :key="index" class="tab-bar-item" @click="changeTabIndex(index)">
+      <span :class="[{'active' : item.isActive},item.classd]" class="iconb"></span>
+      <span>{{item.title}}</span>
     </div>
   </div>
 </template>
 
 <script>
-import { Tabbar, TabbarItem, Group, Cell } from "vux";
+import { Tabbar, TabbarItem } from "vux";
 import { getUserInfo } from "@/servers/api";
 export default {
-  name: "",
-  props: [""],
+
   data() {
     return {
       tabItem: [
         {
           title: "游园",
           isActive: true,
-          normal: "iconfont iconyouyuan-weixuan",
-          class: "iconfont iconyouyuan-yixuan",
-          classActive: "iconfont iconyouyuan-yixuan"
+          classd: "youyuan",
         },
         {
           title: "商城",
           isActive: false,
-          normal: "iconfont iconshangcheng-weixuan",
-          class: "iconfont iconshangcheng-weixuan",
-          classActive: "iconfont iconshangcheng-yixuan"
+          classd: "shangcheng",
         },
         {
           title: "变现",
           isActive: false,
-          normal: "iconfont iconbianxian-weixuan",
-          class: "iconfont iconbianxian-weixuan",
-          classActive: "iconfont iconbianxian-yixuan"
+          classd: "bianxian",
         },
         {
           title: "创收",
           isActive: false,
-          normal: "iconfont iconchuangshou-weixuan",
-          class: "iconfont iconchuangshou-weixuan",
-          classActive: "iconfont iconchuangshou-yixuan"
+          classd: "chuangshou",
         },
         {
           title: "我的",
           isActive: false,
-          normal: "iconfont iconwode-weixuan",
-          class: "iconfont iconwode-weixuan",
-          classActive: "iconfont iconwode-yixuan"
+          classd: "wode",
         }
       ],
       tabIndex: 0
@@ -136,13 +117,13 @@ export default {
 <style lang='css' scoped>
 .tab-bar-wrap {
   width: 100%;
-  height: 46px;
+  height: 48px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
   overflow: hidden;
-  padding-top: 2px;
+  padding-top: 3px;
   background: #fff;
   border-top: 1px solid #eee;
   box-sizing: border-box;
@@ -156,6 +137,53 @@ export default {
   justify-content: center;
   align-items: center;
 }
+.iconb{
+  width:22px;
+  height:22px;
+  display:inline-block;
+  font-size:20px;
+  background-repeat: no-repeat;
+}
+.youyuan{
+  background-image: url("./youyuan.png");
+  background-size: 100% 90%;
+  background-position: 0 2px;
+}
+.youyuan.active{
+  background-image: url("./youyuan-active.png");
+}
+.shangcheng{
+  background-image: url("./shangcheng.png");
+  background-size: 100% 90%;
+  background-position: 0 2px;
+}
+.shangcheng.active{
+  background-image: url("./shangcheng-active.png");
+}
+.bianxian{
+  background-size: 90% 90%;
+  background-position: 1px 2px;
+  background-image: url("./bianxian.png");
+}
+.bianxian.active{
+  background-image: url("./bianxian-active.png");
+}
+.chuangshou{
+  background-size: 100% 80%;
+  background-position: 0 4px;
+  background-image: url("./chuangshou.png");
+}
+.chuangshou.active{
+  background-image: url("./chuangshou-active.png");
+}
+.wode{
+  background-size: 80% 80%;
+  background-position: 2px 4px;
+  background-image: url("./wode.png");
+}
+.wode.active{
+  background-image: url("./wode-active.png");
+}
 .tab-bar-item-img {
   width: 22px;
   height: 22px;
@@ -166,9 +194,5 @@ export default {
   margin-top: 2px;
   color: #999;
 }
-.active {
-  font-size: 12px;
-  margin-top: 2px;
-  color: #ff2020;
-}
+
 </style>

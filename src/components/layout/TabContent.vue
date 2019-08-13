@@ -12,7 +12,7 @@
 import store from "@/store/index";
 import { Tabbar, TabbarItem, Group, Cell } from "vux";
 import KachuoTabPlay from "@/components/pages/tabindex/KachuoTabPlay";
-import KachuoTabMall from "@/components/pages/tabindex/KachuoTabMall";
+import KachuoTabMall from "@/components/pages/tabindex/KachuoTabMall/KachuoTabMall";
 import KachuoTabCash from "@/components/pages/tabindex/KachuoTabCash";
 import KachuoTabIncome from "@/components/pages/tabindex/KachuoTabIncome";
 import KachuoTabPersonalCenter from "@/components/pages/tabindex/KachuoTabPersonalCenter";

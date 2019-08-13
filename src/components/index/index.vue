@@ -9,7 +9,7 @@
 import { XHeader, TransferDom } from "vux";
 import TabContent from "@/components/layout/TabContent";
 import Header from "@/components/common/Header";
-import KachuoBottomTab from "@/components/pages/tabindex/KachuoBottomTab";
+import KachuoBottomTab from "@/components/pages/tabindex/KachuoBottomTab/KachuoBottomTab";
 import Vue from "vue";
 import { getLocation } from "@/assets/js/tools";
 import { uploadRegistrationID } from "@/servers/api";
