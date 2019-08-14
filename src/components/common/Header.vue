@@ -30,7 +30,7 @@ titleContent（string）：标题内容
 import { XHeader, TransferDom, Actionsheet } from "vux";
 import Popup from "@/components/common/PupupRescue";
 import { vueCordovaFunction } from "@/assets/js/vuecordova";
-export default {
+export default  {
   props: ["titleContent", "showLeftBack", "showRightMore"],
   directives: {
     TransferDom

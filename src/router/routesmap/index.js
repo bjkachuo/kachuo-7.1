@@ -415,6 +415,19 @@ export default [
     path:'/hundredshall/add',
     name:'hundredshallAdd',
     component: resolve => require(['@/components/pages/kachuoincome/HundredsHall/hundredshallAdd'], resolve),
-  }
+  },
 
+
+  //景区后台
+  {
+    path:'/scenicSpot/index',
+    name:'scenicSpotIndex',
+    component: resolve => require(['@/admin/scenicSpot/page/index/index'], resolve),
+  },
+  //景区信息
+  {
+    path:'/scenicSpot/information',
+    name:'information',
+    component: resolve => require(['@/admin/scenicSpot/page/information/information'], resolve),
+  }
 ]

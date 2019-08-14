@@ -2,7 +2,7 @@
   <div class="amap-page-container">
     <Header :titleContent="TitleObjData.titleContent" :showLeftBack="TitleObjData.showLeftBack" :showRightMore="TitleObjData.showRightMore"></Header>
 
-    <el-amap vid="amapDemo"  :center="center"  :zoom="zoom" class="amap-demo" :style="setMapHeight" :plugin="plugin"  :events="events">
+    <el-amap vid="amapDemo"  :center="center"  :zoom="zoom" class="amap-demo" ref="amap" :style="setMapHeight" :plugin="plugin"  :events="events" :aMapManager="AMapManager">
       <el-amap-marker v-for="(marker,index) in markers" :position="marker.position" :vid="index" :offset="taOffset" v-if="navIndex == 0">
         <div @touchstart="showModel(marker.label,marker.position)">
           <div class="marker-icon-ta"></div>
@@ -25,12 +25,16 @@ import Header from "@/components/common/Header";
 import NavigationTab from "@/components/common/NavigationTab";
 import Popup from "@/components/common/Popup";
 import { setTimeout } from "timers";
+import {AMapManager} from 'vue-amap'
 
+console.log(AMapManager);
 export default {
+
   name: "amap-page",
   data() {
     let self = this;
     return {
+      AMapManager,
       zoom: 16,
       center: [0,0],
       markers: [],
@@ -41,6 +45,8 @@ export default {
         },
         'zoomend':()=>{
           this.domBindEvent()
+          console.log(this.$refs.amap.$$getInstance())
+          console.log(this.$refs.amap.$$getInstance().getZoom())
         }
       },
       source: 'click',
@@ -202,6 +208,7 @@ export default {
       set: function() {}
     }
   },
+
   mounted() {
     this.getMarkerList('')
   }
