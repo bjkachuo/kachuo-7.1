@@ -11,7 +11,7 @@
       <span style="vertical-align:middle;display:inline-block;font-size:14px;">暂无数据</span>
     </p> -->
     <div class="goods-list" v-for="(item,index) in goodList" :key="index" @click="watchGoodsDetails(item.goods_id,item.id,item.rent,item)">
-      <img class="goods-img" v-lazy="item.thumb">
+      <div class="radiusBox"><img class="goods-img" v-lazy="item.thumb"></div>
       <div class="good-desc-wrap">
         <p class="goods-name">{{item.goods_name ? item.goods_name : item.title}}</p>
         <p class="goods-price" v-show="item.marketprice">¥{{item.marketprice}}</p>
@@ -51,7 +51,7 @@ export default {
   watch: {}
 };
 </script>
-<style lang='css' scoped>
+<style lang='less' scoped>
 .goods-list-wrap {
   width: 100%;
   height: auto;
@@ -68,13 +68,7 @@ export default {
   height: auto;
   margin-bottom: 20px;
 }
-.goods-img {
-  width: 100%;
-  height: 180px;
-  display: inline-block;
-  object-fit: contain;
-  background: none;
-}
+
 .goods-name {
   width: 100%;
   font-size: 12px;
@@ -86,5 +80,16 @@ export default {
   font-size: 14px;
   color:#222;
   margin-top: 10px;
+}
+.radiusBox{
+  overflow: hidden;
+  border-radius: 8px 8px 0 0;
+  .goods-img {
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+    object-fit: contain;
+    background: none;
+  }
 }
 </style>
