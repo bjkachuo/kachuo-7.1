@@ -162,7 +162,11 @@ Vue.component('x-dialog', XDialog);
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUI);
-// new Vue({
-//   el: '#app',
-//   render: h => h(App)
-// });
+
+
+//微信授权登录
+// import wechatAuth from './servers/wechatAuth'//微信登录插件
+// const qs= require('qs');
+
+// Vue.use(wechatAuth, {appid: XXXXXXXXX});
+

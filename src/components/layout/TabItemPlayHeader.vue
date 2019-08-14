@@ -1,18 +1,20 @@
 <template>
   <div class="tab-item-play-header-wrap">
-    <SwiperImg class="tab-item-play-swiper"></SwiperImg>
     <div class="tab-item-play-header-title">
-      <div class="location-icon text-align-center" @click="locationSelf">
+      <div class="location-icon" @click="locationSelf">
         <!-- <span class=""></span> -->
         <span class="scenic-name">{{scenicName}}</span>
-        <x-icon type="ios-arrow-down" size="13" color="white"></x-icon>
+        <x-icon type="ios-arrow-down" size="13" color="#222222"></x-icon>
         <!-- <i class="el-icon-arrow-down"></i> -->
       </div>
-      <div class="search-icon text-align-center" @click="searchScence">输入作品/作者/景区</div>
-      <div class="message-icon text-align-center" @click="appMessageCenter">
-        <!-- <span class="iconfont iconxiaoxi"></span> -->
-      </div>
+      <!-- <div class="message-icon text-align-center" @click="appMessageCenter">
+        <span class="iconfont iconxiaoxi"></span>
+      </div>-->
     </div>
+    <div>
+      <div class="search-icon text-align-center" @click="searchScence">输入作品/作者/景区</div>
+    </div>
+    <SwiperImg class="tab-item-play-swiper"></SwiperImg>
   </div>
 </template>
 
@@ -84,50 +86,54 @@ export default {
 <style lang='css' scoped>
 .tab-item-play-header-wrap {
   width: 100%;
-  height: 220px;
+  height: 225px;
   overflow: hidden;
   position: relative;
   top: 0;
   left: 0;
+  background: #FFFFFF;
 }
 .tab-item-play-header-title {
   width: 100%;
   height: 45px;
-  position: absolute;
-  z-index: 9999;
+  /* position: absolute; */
+  /* z-index: 9999;
   top: 0;
-  left: 0;
-  display: flex;
+  left: 0; */
+  /* display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
-  color: #fff;
-  background: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0));
+  align-items: center; */
+  color:#222222;
+  background: #FFFFFF;
 }
 .text-align-center {
   text-align: center;
 }
 .location-icon {
-  flex: 1;
-  margin-left: 4px;
+  /* flex: 1; */
+  margin-left: 16px;
 }
 .message-icon {
-  flex: 1;
+  /* flex: 1; */
 }
 .search-icon {
   flex: 3;
-  width: 300px;
-  height: 26px;
-  line-height: 26px;
-  background: #fff;
+  width: 92%;
+  height: 28px;
+  line-height: 28px;
+  background: #E5E5E5;
   border-radius: 20px;
   font-size: 12px;
-  color: #999;
-  margin-left: 30px;
+  color: #66666699;
+  margin: 0 auto;
 }
 .tab-item-play-swiper {
-  width: 100%;
-  height: 100%;
+  width: 92%;
+  height: 50%;
+  border-radius: 5px;
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 .tab-item-play-content {
   width: 100%;
@@ -137,8 +143,9 @@ export default {
 }
 .scenic-name {
   font-size: 16px;
+  line-height: 45px;
 }
 .vux-x-icon {
-  fill: #fff;
+  fill: #222222;
 }
 </style>

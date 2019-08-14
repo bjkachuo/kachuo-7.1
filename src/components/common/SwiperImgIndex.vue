@@ -1,7 +1,7 @@
 <template>
   <swiper :options="swiperOption">
-    <swiper-slide v-for="(item, index) in swiperSlides" :key="index">
-      <img :src="item.img" alt srcset @click="getToItem(index)">
+    <swiper-slide v-for="(item, index) in swiperSlides" :key="index" style="width=100%">
+      <img :src="item.img" alt srcset @click="getToItem(index)" />
     </swiper-slide>
     <div class="swiper-pagination" slot="pagination"></div>
   </swiper>
@@ -25,7 +25,7 @@ export default {
           this.$router.push("/intelligentnavigation");
           break;
         case 1:
-        this.$store.commit("changeTabIndex", 1);
+          this.$store.commit("changeTabIndex", 1);
           break;
         case 2:
           break;

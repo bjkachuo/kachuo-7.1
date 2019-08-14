@@ -1,10 +1,79 @@
 <template>
   <div class="tab-personal-center-wrap" :style="heightSty">
     <TabPersonCenterHeader></TabPersonCenterHeader>
-    <AppUserInfo></AppUserInfo>
-    <Cell class="margin-top-10px" :cellList="cellListToolsA"></Cell>
+    <!-- <AppUserInfo></AppUserInfo> -->
+    <div class="content-card">
+      <div class="content-card-top">
+        <div class="content-card-top-left">
+          <p>
+            <img class="content-card-top-left-img" :src="userInfo.avatar ? userInfo.avatar : ''" />
+          </p>
+          <div class="content-card-top-left-txt">
+            <p class="p-one">{{userInfo.nickname}}</p>
+            <p class="p-two">{{userInfo.levelname}}</p>
+          </div>
+        </div>
+        <div class="content-card-top-right">
+          <span
+            class="iconfont iconerweima"
+            @click="getQRcode"
+            style="font-size:45px;margin-left:10px;color:#80BFFF"
+          ></span>
+        </div>
+      </div>
+      <div class="content-card-mid">
+        <span class="token-num">ID:{{userInfo.accessToken.slice(0,19)}}...</span>
+        <span
+          class="iconfont iconliulan"
+          @click="watchAllCode"
+          style="font-size:12px;margin-left:10px"
+        ></span>
+      </div>
+      <div class="content-card-bot">
+        <span>积分：{{userInfo.credit1}}</span>
+      </div>
+      <XDialog style="display:none" :showDialog="showDialogFlag" ref="dialogCon"></XDialog>
+    </div>
+    <div class="line-one">
+      <flexbox>
+        <flexbox-item v-for="(item,index) in dataListOne" :key="index">
+          <div class="flex-demo" @click="getItem(item.link)">
+            <div class="img-wrap">
+              <img :src="item.imgSrc" alt />
+            </div>
+            <p>{{item.name}}</p>
+          </div>
+        </flexbox-item>
+      </flexbox>
+    </div>
+    <div class="line-two">
+      <flexbox>
+        <flexbox-item v-for="(item,index) in dataListTwo" :key="index">
+          <div class="flex-demo" @click="getItem(item.link)">
+            <div class="img-wrap">
+              <img :src="item.imgSrc" alt />
+            </div>
+            <p>{{item.name}}</p>
+          </div>
+        </flexbox-item>
+      </flexbox>
+    </div>
+    <div class="line-three">
+      <flexbox :gutter="0">
+        <flexbox-item v-for="(item,index) in dataListThree" :key="index" :span="1/4">
+          <div class="flex-demo" @click="getItem(item.link)">
+            <div class="img-wrap">
+              <img :src="item.imgSrc" alt />
+            </div>
+            <p>{{item.name}}</p>
+          </div>
+        </flexbox-item>
+      </flexbox>
+    </div>
+
+    <!-- <Cell class="margin-top-10px" :cellList="cellListToolsA"></Cell>
     <Cell class="margin-top-10px" :cellList="cellListToolsB"></Cell>
-    <Cell class="margin-top-10px" :cellList="cellListToolsC"></Cell>
+    <Cell class="margin-top-10px" :cellList="cellListToolsC"></Cell>-->
   </div>
 </template>
 
@@ -13,73 +82,132 @@ import TabPersonCenterHeader from "@/components/layout/TabItemPersonHeader.vue";
 import AppUserInfo from "@/components/layout/AppUserInfo.vue";
 import DividedArea from "@/components/common/DividedArea.vue";
 import Cell from "@/components/common/Cell.vue";
-
+import XDialog from "@/components/common/XDialog";
+import { Flexbox, FlexboxItem } from "vux";
 export default {
   name: "",
   props: [""],
   data() {
     return {
-      cellListToolsA: [
+      showDialogFlag: false,
+      userInfo: null,
+      dataListOne: [
         {
-          title: "通证",
-          icon: "iconfont icontongzheng",
-          link: "/usertoken"
+          name: "游园日记",
+          link: "",
+          imgSrc: require("@/assets/images/订单1@2x.png")
         },
         {
-          title: "积分",
-          icon: "iconfont iconjifen",
-          link: "/userintegral"
+          name: "我的资产",
+          link: "",
+          imgSrc: require("@/assets/images/赠送@2x.png")
+        },
+        {
+          name: "我的评论",
+          link: "",
+          imgSrc: require("@/assets/images/留言@2x.png")
+        },
+        {
+          name: "我的收藏",
+          link: "/collection",
+          imgSrc: require("@/assets/images/标星@2x.png")
         }
       ],
-      cellListToolsB: [
+      dataListTwo: [
         {
-          title: "购物车",
-          icon: "iconfont icongouwuche",
-          link: "/ShoppingCart"
+          name: "商城管理",
+          link: "/orderlist",
+          imgSrc: require("@/assets/images/购物袋@2x.png")
         },
         {
-          title: "我的足迹",
-          icon : "iconfont icongouwuche",
-          link :"/FootPrint",
+          name: "变现管理",
+          link: "/ticketsdiscount",
+          imgSrc: require("@/assets/images/变现管理@2x.png")
         },
         {
-          title: "商品订单",
-          icon: "iconfont icondingdan",
-          link: "/orderlist"
+          name: "创收管理",
+          link: "/ticketsdiscount",
+          imgSrc: require("@/assets/images/创收管理@2x.png")
         },
         {
-          title: "文创订单",
-          icon: "iconfont iconwenhuashuli",
-          link: "/orderlistcaiyuan?type=1"
-        },
-        {
-          title: "艺创订单",
-          icon: "iconfont iconyishuchuangzuo",
-          link: "/orderlistcaiyuan?type=2"
-        },
-        {
-          title: "溯源订单",
-          icon: "iconfont iconchanpinsuyuan",
-          link: "/orderlistcaiyuan?type=3"
-        },
-        {
-          title: "我的门票",
-          icon: "iconfont iconmenpiaodingdan",
-          link: "/ticketsorder"
+          name: "地址管理",
+          link: "/address",
+          imgSrc: require("@/assets/images/地址管理@2x.png")
         }
       ],
-      cellListToolsC: [
+      dataListThree: [
         {
-          title: "收藏",
-          icon: "iconfont iconshoucang",
-          link: "/collection"
+          name: "我的客服",
+          link: "/ticketsdiscount",
+          imgSrc: require("@/assets/images/客服@2x.png")
         },
         {
-          title: "云相册",
-          icon: "iconfont iconyunxiangce",
-          link: "/photoalbum"
+          name: "云相册",
+          link: "/photoalbum",
+          imgSrc: require("@/assets/images/图片@2x.png")
         }
       ]
+      // cellListToolsA: [
+      //   {
+      //     title: "通证",
+      //     icon: "iconfont icontongzheng",
+      //     link: "/usertoken"
+      //   },
+      //   {
+      //     title: "积分",
+      //     icon: "iconfont iconjifen",
+      //     link: "/userintegral"
+      //   }
+      // ],
+      // cellListToolsB: [
+      //   {
+      //     title: "购物车",
+      //     icon: "iconfont icongouwuche",
+      //     link: "/ShoppingCart"
+      //   },
+      //   {
+      //     title: "我的足迹",
+      //     icon: "iconfont icongouwuche",
+      //     link: "/FootPrint"
+      //   },
+      //   {
+      //     title: "商品订单",
+      //     icon: "iconfont icondingdan",
+      //     link: "/orderlist"
+      //   },
+      //   {
+      //     title: "文创订单",
+      //     icon: "iconfont iconwenhuashuli",
+      //     link: "/orderlistcaiyuan?type=1"
+      //   },
+      //   {
+      //     title: "艺创订单",
+      //     icon: "iconfont iconyishuchuangzuo",
+      //     link: "/orderlistcaiyuan?type=2"
+      //   },
+      //   {
+      //     title: "溯源订单",
+      //     icon: "iconfont iconchanpinsuyuan",
+      //     link: "/orderlistcaiyuan?type=3"
+      //   },
+      //   {
+      //     title: "我的门票",
+      //     icon: "iconfont iconmenpiaodingdan",
+      //     link: "/ticketsorder"
+      //   }
+      // ],
+      // cellListToolsC: [
+      //   {
+      //     title: "收藏",
+      //     icon: "iconfont iconshoucang",
+      //     link: "/collection"
+      //   },
+      //   {
+      //     title: "云相册",
+      //     icon: "iconfont iconyunxiangce",
+      //     link: "/photoalbum"
+      //   }
+      // ]
     };
   },
 
@@ -87,22 +215,42 @@ export default {
     TabPersonCenterHeader,
     AppUserInfo,
     DividedArea,
-    Cell
+    Cell,
+    XDialog,
+    Flexbox,
+    FlexboxItem
   },
 
   computed: {
-    heightSty(){
+    heightSty() {
       return {
-        height:document.documentElement.clientHeight - 45 + 'px'
-      }
+        height: document.documentElement.clientHeight - 45 + "px"
+      };
     }
   },
 
   beforeMount() {},
+  created() {
+    this.getUserInfo();
+  },
+  mounted() {
+    console.log(this.GLOBAL.getSession("userLoginInfo"));
+  },
 
-  mounted() {},
-
-  methods: {},
+  methods: {
+    getUserInfo() {
+      this.userInfo = this.GLOBAL.getSession("userLoginInfo");
+    },
+    watchAllCode() {
+      this.$refs.dialogCon.showToastFn(this.userInfo.accessToken);
+    },
+    getQRcode() {
+      this.$router.push("/tokenqrcode");
+    },
+    getItem(link) {
+      this.$router.push(link);
+    }
+  },
 
   watch: {}
 };
@@ -119,7 +267,142 @@ export default {
 .margin-top-10px {
   margin-top: 10px;
 }
-.vux-label{
+.vux-label {
   font-weight: 300;
+}
+.content-card {
+  width: 92%;
+  height: 180px;
+  background: linear-gradient(
+    90deg,
+    rgba(31, 100, 255, 1),
+    rgba(39, 141, 255, 1)
+  );
+  border-radius: 4px;
+  padding: 10px;
+  box-sizing: border-box;
+  margin: 28px auto 20px;
+  box-shadow: 0px 10px 25px 0px rgba(57, 118, 255, 0.5);
+}
+.content-card {
+  display: flex;
+  flex-direction: column;
+}
+.content-card-top {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.content-card-mid {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: #80bfff;
+  overflow: hidden;
+  font-size: 14px;
+}
+.content-card-bot {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-end;
+  /* color: #ffebb5;
+  font-size: 12px; */
+}
+.content-card-bot span {
+  width: 130px;
+  height: 25px;
+  border-radius: 13px;
+  opacity: 0.7;
+  background: rgba(25, 94, 242, 1);
+  color: #80BFFF;
+  text-align: center;
+  line-height: 25px;
+  font-size: 14px;
+}
+.content-card-top-left {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.content-card-top-left-img {
+  width: 50px;
+  height: 50px;
+  display: inline-block;
+  border-radius: 50%;
+}
+.content-card-top-left-txt {
+  color: #ffebb5;
+  font-size: 12px;
+  margin-left: 8px;
+}
+.content-card-top-left-txt .p-one {
+  font-size: 18px;
+  color: #ffffff;
+  font-family: PingFangSC-Heavy;
+}
+.content-card-top-left-txt .p-two {
+  font-size: 12px;
+  color: #80bfff;
+  font-family: PingFangSC-Regular;
+}
+.line-one {
+  width: 92%;
+  height: 90px;
+  border-radius: 8px;
+  background: #ffffff;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  box-shadow: 0px 10px 20px 0px rgba(0, 101, 255, 0.06);
+}
+.line-two {
+  width: 92%;
+  height: 90px;
+  border-radius: 8px;
+  background: #ffffff;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  box-shadow: 0px 10px 20px 0px rgba(0, 101, 255, 0.06);
+}
+.line-three {
+  width: 92%;
+  height: 90px;
+  border-radius: 8px;
+  background: #ffffff;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  box-shadow: 0px 10px 20px 0px rgba(0, 101, 255, 0.06);
+}
+</style>
+<style lang="less" scoped>
+.flex-demo {
+  text-align: center;
+  color: #222222;
+  // background-color: #20b907;
+  background-clip: padding-box;
+  width: 55px;
+  height: 50px;
+  margin: 0 auto;
+  margin-top: 23%;
+}
+.flex-demo .img-wrap {
+  width: 29px;
+  height: 30px;
+  margin-left: 13px;
+  margin-bottom: 9px;
+}
+.flex-demo .img-wrap img {
+  background: none;
+  width: 100%;
+}
+.flex-demo p {
+  font-family: PingFangSC-Medium;
+  font-size: 12px;
+  color: #222222;
 }
 </style>

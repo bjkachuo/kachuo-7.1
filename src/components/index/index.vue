@@ -46,39 +46,6 @@ export default {
     .then(({data})=>{
       // console.log(data);
     });
-
-
-
-    // //景区导航分类测试
-    // this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=shop.show.wigoodsType")
-    // .then(({data})=>{
-    //   console.log(data);
-    //   console.log(1)
-    // })
-    // //数字音频上传测试
-    // this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=util.Uploader.uploadm_audio")
-    // .then(({data})=>{
-    //   console.log(data);
-    //   console.log(2)
-
-    // })
-    // //实名认证测试
-    // this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=goods.real.real_firstOne")
-    // .then(({data})=>{
-    //   console.log(data);
-    //   console.log(3)
-
-    // })
-    // //入会认证验证接口测试
-    // this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=goods.real.Admission_FirstOne")
-    // .then(({data})=>{
-    //   console.log(data);
-    //   console.log(4)
-
-    // })
-
-
-
     },
   computed: {
     showCurrentTitle() {
