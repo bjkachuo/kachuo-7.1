@@ -1,6 +1,6 @@
 <template>
   <div class="tab-item-mall-wrap">
-<!--    <TabItemMallHeader></TabItemMallHeader>-->
+    <TabItemMallHeader></TabItemMallHeader>
 <!--    <TabItemMallAdvertise></TabItemMallAdvertise>-->
     <div style="background: #fff;">
       <div style="width: 76%;margin: 0 auto;">
@@ -34,7 +34,7 @@
 </template>
 
 <script>
-//import TabItemMallHeader from "@/components/layout/TabItemMallHeader";
+import TabItemMallHeader from "@/components/layout/TabItemMallHeader";
 // import TabItemMallAdvertise from "@/components/layout/TabItemMallAdvertise";
 import {Scroller,Swiper,SwiperItem,Tab, TabItem} from 'vux'
 import DividedArea from "@/components/common/DividedArea";
@@ -76,7 +76,7 @@ export default {
   },
 
   components: {
-    // TabItemMallHeader,
+    TabItemMallHeader,
     // TabItemMallAdvertise,
     DividedArea,
     CellDivider,

@@ -3,12 +3,14 @@
     <span class="tab-item-cash-header-left"></span>
     <span class="tab-item-cash-header-mid font-weight-36px">变现</span>
     <span class="tab-item-cash-header-right">
-      <span class="iconfont iconxiaoxi" @click="appMessageCenter"></span>
+<!--      <span class="iconfont iconxiaoxi" @click="appMessageCenter"></span>-->
+      <customerService style="float: right"></customerService>
     </span>
   </div>
 </template>
 
 <script>
+  import customerService from '@/components/common/customerService/customerService'
 export default {
   name: "",
   props: [""],
@@ -16,7 +18,7 @@ export default {
     return {};
   },
 
-  components: {},
+  components: {customerService},
 
   computed: {},
 

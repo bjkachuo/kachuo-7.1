@@ -1,6 +1,6 @@
 <template>
   <div class="good-details-boot">
-    <p class="goods-action" @click="customerService">
+    <p class="goods-action" @click="iframeShow = true">
       <span style="font-size:14px;" class="iconfont iconkefu"></span>
       <span style="font-size:12px">客服</span>
     </p>
@@ -100,13 +100,6 @@
               });
           },
 
-          customerService(){
-            // window.qimoChatClick()
-            //this.$router.push("/customerService?id=" + this.$route.query.id);
-           // window.location.href = 'https://webchat.7moor.com/wapchat.html?accessId=2afa4960-b1df-11e9-9f4b-b35872e70bca&fromUrl=&urlTitle='+this.GLOBAL.getSession("userLoginInfo").mobile
-            this.iframeShow = true
-
-          }
         },
 
         created() {
