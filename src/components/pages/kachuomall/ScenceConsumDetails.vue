@@ -29,7 +29,7 @@ import TabItemMallAdvertise from "@/components/layout/TabItemMallAdvertise";
 import DividedArea from "@/components/common/DividedArea";
 import Divider from "@/components/common/Divider";
 import Scroll from "@/components/common/Scroller";
-import GoodsList from "@/components/layout/GoodsList";
+import GoodsList from "@/components/layout/GoodsList/GoodsList";
 import GoodsListWrap from "@/components/layout/GoodsListWrap";
 import FamousActivity from "@/components/layout/FamousActivity";
 

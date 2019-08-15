@@ -40,7 +40,7 @@ import {Scroller,Swiper,SwiperItem,Tab, TabItem} from 'vux'
 import DividedArea from "@/components/common/DividedArea";
 import CellDivider from "@/components/common/CellDivider";
 // import Divider from "@/components/common/Divider";
-import GoodsList from "@/components/layout/GoodsList";
+import GoodsList from "@/components/layout/GoodsList/GoodsList";
 import { goodsBucketRecomm } from "@/servers/api";
 
 export default {
@@ -164,25 +164,22 @@ export default {
   li{
     flex: 1;
     .goods-type-icon{
-      width: 26px;
-      height: 26px;
+      width: 27px;
+      height: 27px;
       margin: 21px auto 8px;
+      background-size: 100% 100%;
     }
     .shipin{
       background-image: url("./shipin.png");
-      background-size: 100% 100%;
     }
     .youyuan{
       background-image: url("./youyuan.png");
-      background-size: 100% 100%;
     }
     .haoli{
       background-image: url("./haoli.png");
-      background-size: 100% 100%;
     }
     .miaocang{
-      background-image: url("./haoli.png");
-      background-size: 100% 100%;
+      background-image: url("./miaocang.png");
     }
   }
 }

@@ -17,7 +17,7 @@
 </template>
  
 <script>
-import GoodsList from "@/components/layout/GoodsList";
+import GoodsList from "@/components/layout/GoodsList/GoodsList";
 import { LeasetList } from "@/servers/api";
 let totalCount = 0;
 export default {

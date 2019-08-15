@@ -11,10 +11,13 @@
       <span style="vertical-align:middle;display:inline-block;font-size:14px;">暂无数据</span>
     </p> -->
     <div class="goods-list" v-for="(item,index) in goodList" :key="index" @click="watchGoodsDetails(item.goods_id,item.id,item.rent,item)">
-      <div class="radiusBox"><img class="goods-img" v-lazy="item.thumb"></div>
+      <div class="img-posution">
+        <i class="suyuan"></i>
+        <img class="goods-img" v-lazy="item.thumb">
+      </div>
       <div class="good-desc-wrap">
         <p class="goods-name">{{item.goods_name ? item.goods_name : item.title}}</p>
-        <p class="goods-price" v-show="item.marketprice">¥{{item.marketprice}}</p>
+        <p class="goods-price" v-show="item.marketprice">¥{{item.marketprice.split('.')[0]}}.<span style="font-size: 14px">{{item.marketprice.split('.')[1]}}</span></p>
       </div>
     </div>
   </div>
@@ -48,7 +51,7 @@ export default {
     }
   },
 
-  watch: {}
+
 };
 </script>
 <style lang='less' scoped>
@@ -61,35 +64,52 @@ export default {
   justify-content: space-between;
   padding: 0 15px;
   box-sizing: border-box;
-}
-.goods-list {
-  width: 49%;
-  min-height: 80px;
-  height: auto;
-  margin-bottom: 20px;
-}
-
-.goods-name {
-  width: 100%;
-  font-size: 12px;
-  line-height: 15px;
-  word-break: break-all;
-  margin-top: 10px;
-}
-.goods-price {
-  font-size: 14px;
-  color:#222;
-  margin-top: 10px;
-}
-.radiusBox{
-  overflow: hidden;
-  border-radius: 8px 8px 0 0;
-  .goods-img {
-    width: 100%;
-    height: 100%;
-    display: inline-block;
-    object-fit: contain;
-    background: none;
+  .goods-list {
+    width: 49%;
+    min-height: 80px;
+    height: auto;
+    margin-bottom: 20px;
+    background-color: #ffffff;
+    overflow: hidden;
+    border-radius: 8px;
+    .img-posution{
+      position: relative;
+      .suyuan{
+        background-image: url("./suyuan.png");
+        background-size: 100% 100%;
+        position: absolute;
+        width: 55px;
+        height: 24px;
+      }
+      .goods-img {
+        width: 100%;
+        height: 100%;
+        display: inline-block;
+        object-fit: contain;
+        background: none;
+      }
+    }
+    .goods-name {
+      width: 100%;
+      font-size: 12px;
+      line-height: 15px;
+      word-break: break-all;
+      margin-top: 10px;
+      padding: 0 10px;
+    }
+    .goods-price {
+      font-size: 18px;
+      color:#FF3939;
+      font-weight: 800;
+      margin-top: 10px;
+      padding: 0 10px 20px;
+    }
   }
 }
+
+
+
+
+
+
 </style>

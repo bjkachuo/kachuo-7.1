@@ -18,7 +18,7 @@
  
 <script>
 import { ShopGoodsList, getScenicList } from "@/servers/api";
-import GoodsList from "@/components/layout/GoodsList";
+import GoodsList from "@/components/layout/GoodsList/GoodsList";
 let totalCount = 0;
 let totalPage = 0;
 export default {

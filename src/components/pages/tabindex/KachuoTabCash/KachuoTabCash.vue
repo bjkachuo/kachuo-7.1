@@ -82,7 +82,10 @@ export default {
   methods: {
     previewMethod() {},
     addImageMethod() {},
-    removeImageMethod() {}
+    removeImageMethod() {},
+    goodsTypeGo(){
+      this.$router.push(link)
+    }
   },
 
   watch: {}
@@ -103,6 +106,8 @@ export default {
     height: 20px;
     background-image: url("./guess-you.png");
     background-size: 100% 100%;
+    position: relative;
+    top: 9px;
   }
 }
 .custom  {

@@ -33,7 +33,7 @@ import Header from "@/components/common/Header";
 import TabItemMallAdvertise from "@/components/layout/TabItemMallAdvertise";
 import DividedArea from "@/components/common/DividedArea";
 import Divider from "@/components/common/Divider";
-import GoodsList from "@/components/layout/GoodsList";
+import GoodsList from "@/components/layout/GoodsList/GoodsList";
 import { TakeAwayGoodsList } from "@/servers/api";
 export default {
   name: "",

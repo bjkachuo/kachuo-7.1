@@ -23,7 +23,7 @@ import DividedArea from "@/components/common/DividedArea";
 import FlexWrap from "@/components/layout/FlexWrap";
 import Divider from "@/components/common/Divider";
 import Scroll from "@/components/common/Scroller";
-import GoodsList from "@/components/layout/GoodsList";
+import GoodsList from "@/components/layout/GoodsList/GoodsList";
 import { goodsBucketRecomm } from "@/servers/api";
 
 export default {

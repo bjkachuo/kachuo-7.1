@@ -30,7 +30,7 @@ import Header from "@/components/common/Header";
 import SwiperOut from "@/components/common/SwiperOut";
 import DividedArea from "@/components/common/DividedArea";
 import Divider from "@/components/common/Divider";
-import GoodsList from "@/components/layout/GoodsList";
+import GoodsList from "@/components/layout/GoodsList/GoodsList";
 import { ShopList, goodsBucketRecomm, goodsBucketSubmit } from "@/servers/api";
 import { parse } from "path";
 
