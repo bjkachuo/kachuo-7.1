@@ -1,11 +1,7 @@
 <template>
   <div class="user-location-wrap">
-    <Header
-      :titleContent="TitleObjData.titleContent"
-      :showLeftBack="TitleObjData.showLeftBack"
-      :showRightMore="TitleObjData.showRightMore"
-    ></Header>
-    <SearchButton></SearchButton>
+    <Header :titleContent="TitleObjData.titleContent" :showLeftBack="TitleObjData.showLeftBack" :showRightMore="TitleObjData.showRightMore"></Header>
+<!--    <SearchButton></SearchButton>-->
     <ScenceHotSearch></ScenceHotSearch>
   </div>
 </template>

@@ -34,7 +34,6 @@
 <style scoped lang="less">
   .customStyle /deep/ .vux-header-title{
     color: #fff;
-    line-height: 40px!important;
     font-weight: 500!important;
   }
   .customStyle /deep/ .vux-header-right a{

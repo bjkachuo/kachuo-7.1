@@ -1,30 +1,42 @@
 <template>
   <div class="scence-release-wrap">
-    <Header
-      :titleContent="TitleObjData.titleContent"
-      :showLeftBack="TitleObjData.showLeftBack"
-      :showRightMore="TitleObjData.showRightMore"
-    ></Header>
-    <main class="position-box" :style="contentNoHeaderHeight">
-      <vue-better-scroll
-        class="wrapper"
-        ref="scroll"
-        :scrollbar="scrollbarObj"
-        :pullDownRefresh="pullDownRefreshObj"
-        :pullUpLoad="pullUpLoadObj"
-        :startY="parseInt(startY)"
-        @pullingDown="onPullingDown"
-        @pullingUp="onPullingUp"
-      >
-        <ScenceRelease :dataList="items"></ScenceRelease>
-      </vue-better-scroll>
-    </main>
+<!--    <Header :titleContent="TitleObjData.titleContent" :showLeftBack="TitleObjData.showLeftBack" :showRightMore="TitleObjData.showRightMore"></Header>-->
+    <div class="banner">
+      <swiper auto height="234px" v-model="swiperIndex" class="custom">
+        <swiper-item class="black"><h2 class="title fadeInUp animated">它无孔不入</h2></swiper-item>
+        <swiper-item class="black"><h2 class="title fadeInUp animated">你无处可藏</h2></swiper-item>
+        <swiper-item class="black"><h2 class="title fadeInUp animated">不是它可恶</h2></swiper-item>
+      </swiper>
+      <div class="swiper-index">{{swiperIndex + 1}}/3</div>
+      <div class="back">
+        <x-icon type="ios-arrow-left" size="28"></x-icon>
+      </div>
+    </div>
+    <div class="detile">
+      <h2 class="title">{{name}} <div class="leave">{{leave}}</div></h2>
+
+    </div>
+<!--    <main class="position-box" :style="contentNoHeaderHeight">-->
+<!--      <vue-better-scroll-->
+<!--        class="wrapper"-->
+<!--        ref="scroll"-->
+<!--        :scrollbar="scrollbarObj"-->
+<!--        :pullDownRefresh="pullDownRefreshObj"-->
+<!--        :pullUpLoad="pullUpLoadObj"-->
+<!--        :startY="parseInt(startY)"-->
+<!--        @pullingDown="onPullingDown"-->
+<!--        @pullingUp="onPullingUp"-->
+<!--      >-->
+<!--        <ScenceRelease :dataList="items"></ScenceRelease>-->
+<!--      </vue-better-scroll>-->
+<!--    </main>-->
   </div>
 </template>
 
 <script>
 let totalCount = 0;
-import Header from "@/components/common/Header";
+import { Swiper,SwiperItem } from 'vux'
+// import Header from "@/components/common/Header";
 import ScenceRelease from "@/components/layout/ScenceRelease";
 import { ScenceReleaseList } from "@/servers/api";
 
@@ -33,6 +45,11 @@ export default {
   props: [""],
   data() {
     return {
+      swiperIndex:0,
+      name:'蓬莱阁',
+      leave:'5A',
+
+
       page: 0,
       list: [],
       refreshText: "下拉刷新",
@@ -66,7 +83,9 @@ export default {
   },
 
   components: {
-    Header,
+    // Header,
+    Swiper,
+    SwiperItem,
     ScenceRelease
   },
 
@@ -140,7 +159,64 @@ export default {
   watch: {}
 };
 </script>
-<style lang='css' scoped>
+<style lang='less' scoped>
+.banner{
+  position: relative;
+  .custom{
+    /deep/.vux-indicator{
+      display: none;
+    }
+    .black{
+      background-color: red;
+    }
+  }
+  .back{
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    position: absolute;
+    background-color: rgba(0,0,0,.5);
+    left: 15px;
+    top: 31px;
+    /deep/.vux-x-icon-ios-arrow-left {
+      fill: #fff;
+      margin-left: 2px;
+      margin-top: 2px;
+    }
+  }
+  .swiper-index{
+    display: inline-block;
+    height:22px;
+    background:rgba(0,0,0,.5);
+    border-radius:11px;
+    line-height: 22px;
+    padding: 0 16px;
+    color: #fff;
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
+  }
+}
+
+.detile{
+  margin-top: 5px ;
+  .title{
+    font-size: 24px;
+    color: #222222;
+    .leave{
+      font-size: 12px;
+      line-height: 19px;
+      text-align: center;
+      display: inline-block;
+      width:30px;
+      height:19px;
+      background:linear-gradient(90deg,rgba(255,202,0,1) 0%,rgba(244,224,43,1) 100%);
+      border-radius:9.5px 9.5px 9.5px 4px;
+    }
+  }
+}
+
+
 .scence-release-wrap {
   width: 100%;
   height: 100%;

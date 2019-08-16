@@ -83,7 +83,7 @@ export default {
     previewMethod() {},
     addImageMethod() {},
     removeImageMethod() {},
-    goodsTypeGo(){
+    goodsTypeGo(link){
       this.$router.push(link)
     }
   },
@@ -141,7 +141,6 @@ export default {
     .huigou{
       background-image: url("./huigou.png");
       background-size: 100% 100%;
-      width: 29px;
     }
     .zulin{
       background-image: url("./zulin.png");
