@@ -55,7 +55,22 @@ export default [
   {
     path: '/scencerelease',
     name: 'scencerelease',
-    component: resolve => require(['@/components/pages/kachuoplay/toolslist/ScenceRelease'], resolve),
+    component: resolve => require(['@/components/pages/kachuoplay/toolslist/ScenceRelease/ScenceRelease'], resolve),
+  },
+  {
+    path: '/scencerelease/dynamic',
+    name: 'dynamic',
+    component: resolve => require(['@/components/pages/kachuoplay/toolslist/ScenceRelease/dynamic/dynamic'], resolve),
+  },
+  {
+    path: '/scencerelease/guideList',
+    name: 'guideList',
+    component: resolve => require(['@/components/pages/kachuoplay/toolslist/ScenceRelease/guideList/guideList'], resolve),
+  },
+  {
+    path: '/scencerelease/guideList/guideDetile',
+    name: 'guideDetile',
+    component: resolve => require(['@/components/pages/kachuoplay/toolslist/ScenceRelease/guideList/guideDetile/guideDetile'], resolve),
   },
   {
     path: '/scenceservice',

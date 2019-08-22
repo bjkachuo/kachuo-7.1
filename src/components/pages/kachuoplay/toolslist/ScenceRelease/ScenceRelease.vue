@@ -14,7 +14,41 @@
     </div>
     <div class="detile">
       <h2 class="title">{{name}} <div class="leave">{{leave}}</div></h2>
-
+      <div style="border-bottom: 1px solid #ddd">
+        <div class="synopsis">
+          <div style="color:#222;display: inline-block;width: calc(100% - 4em);overflow: hidden; white-space: nowrap; text-overflow: ellipsis;line-height: 30px">1231231231231123123123123112312312312311231231231231</div>
+          <div style="display: inline-block;width: 4em;float: right;text-align: right">简介<x-icon type="ios-arrow-right" size="20"></x-icon></div>
+        </div>
+        <div class="synopsis">
+          <div style="color:#222;display: inline-block;width: calc(100% - 5em);overflow: hidden; white-space: nowrap; text-overflow: ellipsis;line-height: 30px">1231231231231123123123123112312312312311231231231231</div>
+          <div style="display: inline-block;width: 5em;float: right;text-align: right">服务项<x-icon type="ios-arrow-right" size="20"></x-icon></div>
+        </div>
+      </div>
+      <div class="tel-box">
+        <span>服务电话：</span>
+        <span>(0535)5666900</span>
+        <div class="shu">
+          <i></i>
+        </div>
+      </div>
+    </div>
+    <div class="dynamic" @click="goPage('/scencerelease/dynamic')">
+      <h2>景区动态</h2>
+      <div style="display: inline-block;width: 4em;float: right;text-align: right;font-size: 16px;">资讯<x-icon type="ios-arrow-right" size="20"></x-icon></div>
+    </div>
+    <div class="guide">
+      <span>“资质齐全，价格公开透明”</span>
+      <div>
+        <i class="guide-icon"></i>
+        <span>预约导游</span>
+      </div>
+    </div>
+    <div class="map">
+      <span>“资质齐全，价格公开透明”</span>
+      <div>
+        <i class="map-icon"></i>
+        <span>景区卫生间、救助站、周边交通</span>
+      </div>
     </div>
 <!--    <main class="position-box" :style="contentNoHeaderHeight">-->
 <!--      <vue-better-scroll-->
@@ -48,7 +82,6 @@ export default {
       swiperIndex:0,
       name:'蓬莱阁',
       leave:'5A',
-
 
       page: 0,
       list: [],
@@ -102,6 +135,12 @@ export default {
   },
 
   methods: {
+
+    goPage(src){
+      this.$router.push(src)
+    },
+
+
     // 滚动到页面顶部
     scrollTo() {
       this.$refs.scroll.scrollTo(
@@ -200,6 +239,7 @@ export default {
 
 .detile{
   margin-top: 5px ;
+  padding: 0 15px;
   .title{
     font-size: 24px;
     color: #222222;
@@ -212,11 +252,90 @@ export default {
       height:19px;
       background:linear-gradient(90deg,rgba(255,202,0,1) 0%,rgba(244,224,43,1) 100%);
       border-radius:9.5px 9.5px 9.5px 4px;
+      position: relative;
+      top: -4px;
+    }
+  }
+  .synopsis{
+    font-size: 16px;
+    color: rgba(153,153,153,1);
+  }
+  /deep/.vux-x-icon-ios-arrow-right{
+    position: relative;
+    top: 5px;
+    fill: rgba(153,153,153,1);
+  }
+  .tel-box{
+    font-size: 16px;
+    line-height: 51px;
+    color:rgba(102,102,102,1);
+    .shu{
+      height: 20px;
+      display: inline-block;
+      float: right;
+      width: 72px;
+      margin: 15px auto;
+      border-left: 2px solid rgba(229,229,229,1);
+      i{
+        display: block;
+        width: 12px;
+        height: 12px;
+        background-size:100% 100%;
+        margin: 4px auto;
+        background-image: url("./tel-icon.png");
+      }
     }
   }
 }
-
-
+.dynamic,.map{
+  height: 55px;
+  line-height: 55px;
+  background-color: #FFECD8;
+  padding: 0 15px;
+  color: #E4A983;
+  border-radius:0px 0px 8px 8px;
+  h2{
+    color: #E4A983;
+    font-size: 16px;
+    font-weight: bold;
+    float: left;
+    line-height: 55px;
+  }
+  /deep/.vux-x-icon-ios-arrow-right{
+    position: relative;
+    top: 5px;
+    fill: #E4A983;
+  }
+}
+.guide{
+  line-height: 55px;
+  background-color: #fff;
+  margin-top: 10px;
+  border-radius: 8px;
+  font-size: 16px;
+  padding: 0 15px;
+  div{
+    float: right;
+    line-height: 55px;
+    font-weight:500;
+    color: #3976FF;
+  }
+  i{
+     display: inline-block;
+     width: 15px;
+     height: 15px;
+     background-size: 100% 100%;
+     position: relative;
+     top: 2px;
+  }
+  .guide-icon{
+    background-image: url("guide.png");
+  }
+  .map-icon{
+    width: 12px;
+    background-image: url("guide.png");
+  }
+}
 .scence-release-wrap {
   width: 100%;
   height: 100%;
