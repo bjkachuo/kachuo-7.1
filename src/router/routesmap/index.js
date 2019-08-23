@@ -73,6 +73,11 @@ export default [
     component: resolve => require(['@/components/pages/kachuoplay/toolslist/ScenceRelease/guideList/guideDetile/guideDetile'], resolve),
   },
   {
+    path: '/scencerelease/guideList/guideDetile/appointment',
+    name: 'appointment',
+    component: resolve => require(['@/components/pages/kachuoplay/toolslist/ScenceRelease/guideList/guideDetile/appointment/appointment'], resolve),
+  },
+  {
     path: '/scenceservice',
     name: 'scenceservice',
     component: resolve => require(['@/components/pages/kachuoplay/toolslist/ScenceService'], resolve),
