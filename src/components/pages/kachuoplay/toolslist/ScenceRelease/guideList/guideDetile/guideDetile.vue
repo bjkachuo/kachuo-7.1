@@ -24,7 +24,7 @@
           </div>
           <div class="btn-menu" @click="zk = !zk" >{{zk?'收起':'展开'}}</div>
         </div>
-        <div class="yuyue">
+        <div class="yuyue" @click="yuyue">
           <i></i>
           <span>预约导游</span>
         </div>
@@ -52,6 +52,12 @@
               showRightMore: false
             },
             zk:false
+          }
+        },
+
+        methods:{
+          yuyue(){
+            this.$router.push('/scencerelease/guideList/guideDetile/appointment')
           }
         }
     }
@@ -164,6 +170,15 @@
       border-radius:8px;
       color: #fff;
       text-align: center;
+      i{
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        position: relative;
+        background-size: 100% 100%;
+        background-image: url("./time.png");
+        top: 3px;
+      }
     }
   }
 </style>

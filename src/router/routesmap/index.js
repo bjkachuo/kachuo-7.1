@@ -67,15 +67,23 @@ export default [
     name: 'guideList',
     component: resolve => require(['@/components/pages/kachuoplay/toolslist/ScenceRelease/guideList/guideList'], resolve),
   },
+  //导游详情
   {
     path: '/scencerelease/guideList/guideDetile',
     name: 'guideDetile',
     component: resolve => require(['@/components/pages/kachuoplay/toolslist/ScenceRelease/guideList/guideDetile/guideDetile'], resolve),
   },
+  //预约导游
   {
     path: '/scencerelease/guideList/guideDetile/appointment',
     name: 'appointment',
     component: resolve => require(['@/components/pages/kachuoplay/toolslist/ScenceRelease/guideList/guideDetile/appointment/appointment'], resolve),
+  },
+  //名家入驻
+  {
+    path: '/checkIn/minjia',
+    name: 'appointment',
+    component: resolve => require(['@/components/pages/tabindex/KachuoTabIncome/mingjia/mingjia'], resolve),
   },
   {
     path: '/scenceservice',

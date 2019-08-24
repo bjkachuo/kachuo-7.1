@@ -1,7 +1,7 @@
 <template>
   <div class="tab-item-mall-wrap">
     <TabItemMallHeader></TabItemMallHeader>
-<!--    <TabItemMallAdvertise></TabItemMallAdvertise>-->
+
     <div style="background: #fff;">
       <div style="width: 76%;margin: 0 auto;">
         <tab :scroll-threshold="5" class="custom">
@@ -35,7 +35,7 @@
 
 <script>
 import TabItemMallHeader from "@/components/layout/TabItemMallHeader";
-// import TabItemMallAdvertise from "@/components/layout/TabItemMallAdvertise";
+
 import {Scroller,Swiper,SwiperItem,Tab, TabItem} from 'vux'
 import DividedArea from "@/components/common/DividedArea";
 import CellDivider from "@/components/common/CellDivider";

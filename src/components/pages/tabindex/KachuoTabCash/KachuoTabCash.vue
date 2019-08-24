@@ -29,7 +29,7 @@
 <script>
 
 import TabItemCashHeader from "@/components/layout/TabItemCashHeader";
-import TabItemMallAdvertise from "@/components/layout/TabItemMallAdvertise";
+
 import DividedArea from "@/components/common/DividedArea";
 import CellDivider from "@/components/common/CellDivider";
 import {Swiper,SwiperItem} from 'vux'
@@ -65,7 +65,7 @@ export default {
 
   components: {
     TabItemCashHeader,
-    TabItemMallAdvertise,
+
     DividedArea,
     CellDivider,
     Swiper,SwiperItem

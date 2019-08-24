@@ -9,7 +9,7 @@
           <popup-picker title="选择时长" :data="timeList" v-model="timeNum" placeholder="123" :columns="1" show-name class="pop"></popup-picker>
       </div>
       <div class="bottom-btn-menu">
-        <div class="left-menu"><span  style="color: #222;">合计：</span><span>￥</span><span>200.</span><span>00</span></div>
+        <p class="left-menu"><span  style="color: #222;">合计：</span><span style="font-size: 14px">￥</span><span style="font-size: 20px;font-weight: bold;">200.</span><span style="font-size: 14px">00</span></p>
         <div class="right-menu">立即预约</div>
       </div>
     </div>
@@ -51,7 +51,8 @@
                 parent: 0
               }
             ],
-            personNum:[]
+            personNum:[],
+            timeNum:[]
           }
         }
     }
@@ -107,6 +108,8 @@
     box-shadow:0px 5px 15px 0px rgba(0, 0, 0, 0.06);
     .left-menu{
       flex: 1;
+      text-indent: 15px;
+      line-height: 55px;
       span{
         color: #FF3939;
       }

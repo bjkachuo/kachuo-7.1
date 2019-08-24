@@ -36,7 +36,7 @@
       <h2>景区动态</h2>
       <div style="display: inline-block;width: 4em;float: right;text-align: right;font-size: 16px;">资讯<x-icon type="ios-arrow-right" size="20"></x-icon></div>
     </div>
-    <div class="guide">
+    <div class="guide" @click="goPage('/scencerelease/guideList')">
       <span>“资质齐全，价格公开透明”</span>
       <div>
         <i class="guide-icon"></i>
@@ -50,20 +50,6 @@
         <span>景区卫生间、救助站、周边交通</span>
       </div>
     </div>
-<!--    <main class="position-box" :style="contentNoHeaderHeight">-->
-<!--      <vue-better-scroll-->
-<!--        class="wrapper"-->
-<!--        ref="scroll"-->
-<!--        :scrollbar="scrollbarObj"-->
-<!--        :pullDownRefresh="pullDownRefreshObj"-->
-<!--        :pullUpLoad="pullUpLoadObj"-->
-<!--        :startY="parseInt(startY)"-->
-<!--        @pullingDown="onPullingDown"-->
-<!--        @pullingUp="onPullingUp"-->
-<!--      >-->
-<!--        <ScenceRelease :dataList="items"></ScenceRelease>-->
-<!--      </vue-better-scroll>-->
-<!--    </main>-->
   </div>
 </template>
 

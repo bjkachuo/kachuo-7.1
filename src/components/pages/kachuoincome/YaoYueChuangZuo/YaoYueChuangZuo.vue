@@ -25,7 +25,7 @@ export default {
   data() {
     return {
       TitleObjData: {
-        titleContent: "邀约创作",
+        titleContent: "要约创作",
         showLeftBack: true,
         showRightMore: false
       },
