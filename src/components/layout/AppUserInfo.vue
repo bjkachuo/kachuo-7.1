@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import ImageUpload from "@/components/common/UploadImgOne";
+import ImageUpload from "@/components/common/UploadImgOne/UploadImgOne";
 
 export default {
   name: "",

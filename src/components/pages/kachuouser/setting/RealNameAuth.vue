@@ -24,7 +24,7 @@
 <script>
 import Header from "@/components/common/Header";
 import PopupPicker from "@/components/common/PopupPicker";
-import UploadImgOne from "@/components/common/UploadImgOne";
+import UploadImgOne from "@/components/common/UploadImgOne/UploadImgOne";
 import { XButton } from "vux";
 
 import { getUserRule, AuthSubmit } from "@/servers/api";

@@ -2,16 +2,11 @@
   <div class="control-form">
     <ul class="upload-imgs">
       <li>
-        <input
-          type="file"
-          class="upload"
-          @change="addImg"
-          ref="inputer"
-          accept="image/*"
-        >
-        <a class="add">
+        <input type="file" class="upload" @change="addImg" ref="inputer" accept="image/*">
+        <a class="add" v-if="!plus">
           <p class="add-icon">+</p>
         </a>
+        <slot name="bg"></slot>
       </li>
     </ul>
   </div>
@@ -31,6 +26,9 @@ export default {
         "https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=util.uploader.uploadm"
     };
   },
+
+  props:['plus'],
+
   methods: {
     updataUserImg(val) {
       setNickName({
@@ -75,24 +73,7 @@ export default {
       }
       this.submit();
     },
-    getObjectURL(file) {
-      var url = null;
-      if (window.createObjectURL != undefined) {
-        // basic
-        url = window.createObjectURL(file);
-      } else if (window.URL != undefined) {
-        // mozilla(firefox)
-        url = window.URL.createObjectURL(file);
-      } else if (window.webkitURL != undefined) {
-        // webkit or chrome
-        url = window.webkitURL.createObjectURL(file);
-      }
-      return url;
-    },
-    delImg(key) {
-      this.$delete(this.imgs, key);
-      this.imgLen--;
-    },
+
     showLoading() {
       this.$vux.loading.show({
         text: "上传中"
@@ -152,6 +133,7 @@ export default {
 <style lang='css' scoped>
 .upload {
   opacity: 0;
+  z-index: 99;
 }
 .upload-imgs {
   overflow: hidden;
@@ -159,11 +141,11 @@ export default {
 }
 .upload-imgs li {
   position: relative;
-  width: 110px;
-  height: 110px;
+  width: 94px;
+  height: 94px;
   font-size: 14px;
   display: inline-block;
-  padding: 10px;
+  padding-left: 16px;
   text-align: center;
   vertical-align: middle;
 }

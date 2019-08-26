@@ -82,7 +82,7 @@ export default [
   //名家入驻
   {
     path: '/checkIn/minjia',
-    name: 'appointment',
+    name: 'checkInMinjia',
     component: resolve => require(['@/components/pages/tabindex/KachuoTabIncome/mingjia/mingjia'], resolve),
   },
   {
