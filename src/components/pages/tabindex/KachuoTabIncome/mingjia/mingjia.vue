@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
   <div>
     <Header style="margin-bottom: 46px" :titleContent="TitleObjData.titleContent" :showLeftBack="TitleObjData.showLeftBack" :showRightMore="TitleObjData.showRightMore"></Header>
     <div class="content">
@@ -27,10 +28,15 @@
     </div>
 
   </div>
+=======
+  <Header style="margin-bottom: 46px" :titleContent="TitleObjData.titleContent" :showLeftBack="TitleObjData.showLeftBack" :showRightMore="TitleObjData.showRightMore"></Header>
+
+>>>>>>> 50416cc0f9e2a61401eb29d49e6d42d0a6016436
 </template>
 
 <script>
   import Header from "@/components/common/Header";
+<<<<<<< HEAD
   import UploadImgOne from "@/components/common/UploadImgOne/UploadImgOne";
   import { XInput,PopupPicker } from 'vux'
   import Address from "@/components/common/Address";
@@ -143,5 +149,25 @@
       }
     }
   }
+=======
+    export default {
+        name: "mingjia",
+
+        components:{ Header },
+
+        data(){
+          return{
+            TitleObjData: {
+              titleContent: "名家入驻",
+              showLeftBack: true,
+              showRightMore: false
+            },
+          }
+        }
+    }
+</script>
+
+<style scoped>
+>>>>>>> 50416cc0f9e2a61401eb29d49e6d42d0a6016436
 
 </style>

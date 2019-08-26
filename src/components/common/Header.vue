@@ -14,7 +14,7 @@ titleContent（string）：标题内容
       @on-click-more="showBottom"
       slot="header"
       style="width: 100%;position: absolute;left: 0;top: 0;z-index: 100;font-size: 20px;"
-    >{{titleContent}}<a slot="right" style="position: relative;top: -5px;"><customerService></customerService></a></x-header>
+    >{{titleContent}}</x-header>
     <Popup :showRescue="showRescueP"></Popup>
     <actionsheet
       v-model="showShare"
@@ -27,7 +27,6 @@ titleContent（string）：标题内容
 </template>
 
 <script>
-import customerService from '@/components/common/customerService/customerService'
 import { XHeader, TransferDom, Actionsheet } from "vux";
 import Popup from "@/components/common/PupupRescue";
 import { vueCordovaFunction } from "@/assets/js/vuecordova";
@@ -39,8 +38,7 @@ export default  {
   components: {
     XHeader,
     Popup,
-    Actionsheet,
-    customerService
+    Actionsheet
   },
   data() {
     return {
