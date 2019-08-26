@@ -6,15 +6,14 @@
  * @Date: 2019-02-27 14:46:25
  * @LastEditTime: 2019-05-07 11:10:07
  */
-export default [
-  {
+export default [{
     path: '/',
     name: 'login',
     component: resolve => require(['@/components/index/Login'], resolve)
   },
   {
     path: '/indextab',
-    name: 'indextab', 
+    name: 'indextab',
     component: resolve => require(['@/components/index/index'], resolve)
   },
   {
@@ -82,7 +81,7 @@ export default [
   //名家入驻
   {
     path: '/checkIn/minjia',
-    name: 'checkInMinjia',
+    name: 'appointment',
     component: resolve => require(['@/components/pages/tabindex/KachuoTabIncome/mingjia/mingjia'], resolve),
   },
   {
@@ -396,66 +395,95 @@ export default [
     component: resolve => require(['@/components/pages/kachuoincome/caiyuangongxiang/OrderList'], resolve),
   },
   {
-    //景区服务列表页
+    //游园服务一级表页
     path: '/scenicService',
     name: 'ScenicService',
     component: resolve => require(['@/components/common/ScenicService'], resolve),
   },
   {
-    //景区商家详情页
-    path: '/serviceDetails',
-    name: 'ServiceDetails',
-    component: resolve => require(['@/components/common/serviceDetails'], resolve),
+    //游园服务二级列表页吃喝玩住行切换
+    path: '/businessList',
+    name: 'BusinessList',
+    component: resolve => require(['@/components/common/businessList'], resolve),
+
   },
   {
-    //周边服务商家列表页
-    path: '/suerroundBusiness',
-    name:'SuerroundBusiness',
-    component: resolve => require(['@/components/common/suerroundBusiness'], resolve),
+    //吃喝家详情页
+    path: '/eatDrinkDetails',
+    name: 'EatDrinkDetails',
+    component: resolve => require(['@/components/common/eatDrinkDetails'], resolve),
   },
   {
-    //周边服务商家详情页
-    path: '/storeDetails',
-    name :'StoreDetails',
-    component: resolve => require(['@/components/common/storeDetails'], resolve),
+    //吃吧喝吧订单确认页
+    path: '/eatDrinkOrders',
+    name: 'EatDrinkOrders',
+    component: resolve => require(['@/components/common/eatDrinkOrders'], resolve),
   },
+
+  {
+    //住详情页
+    path: '/hotelDetails',
+    name: 'HotelDetails',
+    component: resolve => require(['@/components/common/hotelDetails'], resolve),
+
+  },
+  {
+    //支付订单成功页
+    path: '/ordersSucess',
+    name: 'OrdersSucess',
+    component: resolve => require(['@/components/common/ordersSucess'], resolve),
+
+  },
+
+  // {
+  //   //周边服务商家列表页
+  //   path: '/suerroundBusiness',
+  //   name:'SuerroundBusiness',
+  //   component: resolve => require(['@/components/common/suerroundBusiness'], resolve),
+  // },
+  // {
+  //   //周边服务商家详情页
+  //   path: '/storeDetails',
+  //   name :'StoreDetails',
+  //   component: resolve => require(['@/components/common/storeDetails'], resolve),
+  // },
   {
     //商品分类页
     path: '/goodsSlassification',
-    name :'GoodsSlassification',
+    name: 'GoodsSlassification',
     component: resolve => require(['@/components/pages/kachuomall/GoodsSlassification'], resolve),
   },
   {
     //商品分类列表页面
-    path:'/categoryList',
-    name:'CategoryList',
-    component: resolve => require(['@/components/common/CategoryList'],resolve)
+    path: '/categoryList',
+    name: 'CategoryList',
+    component: resolve => require(['@/components/common/CategoryList'], resolve)
 
   },
   {
     //商品足迹页面
     path: '/footprint',
     name: '/FootPrint',
-    component: resolve =>require(['@/components/common/FootPrint'],resolve)
+    component: resolve => require(['@/components/common/FootPrint'], resolve)
   },
-   //
+  //
   {
-    path:'/hundredshall/add',
-    name:'hundredshallAdd',
+    path: '/hundredshall/add',
+    name: 'hundredshallAdd',
     component: resolve => require(['@/components/pages/kachuoincome/HundredsHall/hundredshallAdd'], resolve),
   },
 
 
   //景区后台
   {
-    path:'/scenicSpot/index',
-    name:'scenicSpotIndex',
+    path: '/scenicSpot/index',
+    name: 'scenicSpotIndex',
     component: resolve => require(['@/admin/scenicSpot/page/index/index'], resolve),
   },
   //景区信息
   {
-    path:'/scenicSpot/information',
-    name:'information',
+    path: '/scenicSpot/information',
+    name: 'information',
     component: resolve => require(['@/admin/scenicSpot/page/information/information'], resolve),
   }
 ]

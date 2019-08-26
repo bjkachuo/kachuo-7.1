@@ -5,8 +5,34 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.2/css/swiper.css"
     />
     <div class="line-one">
+      <flexbox :gutter="0" wrap="wrap">
+        <flexbox-item :span="1/3">
+          <div class="flex-demo flex-one" @click="Ticket">门票认证</div>
+        </flexbox-item>
+        <flexbox-item :span="1/3">
+          <div class="flex-demo flex-two" @click="Navigation">智慧导航</div>
+        </flexbox-item>
+        <flexbox-item :span="1/3">
+          <div class="flex-demo flex-three" @click="service">游园服务</div>
+        </flexbox-item>
+        <flexbox-item :span="1/3">
+          <div class="flex-demo flex-four" @click="Remember">记住的</div>
+        </flexbox-item>
+        <flexbox-item :span="1/3">
+          <div class="flex-demo flex-five" @click="Understand">了解的</div>
+        </flexbox-item>
+        <flexbox-item :span="1/3">
+          <div class="flex-demo flex-six" @click="TakeAway">带走的</div>
+        </flexbox-item>
+      </flexbox>
+
+      <!-- <div class="line-one-a">
+        <div class="navs">门票认证</div>
+        <div class="navs">智慧导航</div>
+        <div class="navs">游园服务</div>
+      </div>-->
       <!-- <div class="line-one-content"></div> -->
-      <flexbox>
+      <!-- <flexbox>
         <flexbox-item v-for="(item,index) in dataList" :key="index">
           <div class="flex-demo" @click="getItem(item.link)">
             <div class="img-wrap">
@@ -15,12 +41,12 @@
             <p>{{item.name}}</p>
           </div>
         </flexbox-item>
-      </flexbox>
+      </flexbox>-->
       <!-- <div class="line-one-box">
       </div>-->
     </div>
-    <div class="line-two">
-      <flexbox :gutter="15">
+    <!-- <div class="line-two"> -->
+    <!-- <flexbox :gutter="15">
         <flexbox-item v-for="(item,index) in dataListTwo" :key="index">
           <div class="flex-demo-two" @click="getItem(item.link)">
             <div class="flex-demo-two-content-wrap">
@@ -32,15 +58,38 @@
                 <img :src="item.imgSrc" alt />
               </div>
             </div>
-          </div>
-        </flexbox-item>
-        <!-- <flexbox-item>
+    </div>-->
+    <!-- </flexbox-item> -->
+    <!-- <flexbox-item>
           <div class="flex-demo-two">2</div>
-        </flexbox-item>-->
-      </flexbox>
+    </flexbox-item>-->
+    <!-- </flexbox> -->
+    <!-- </div> -->
+    <div class="Selected">
+      <p>精选推荐</p>
     </div>
     <div class="line-three">
-      <div class="tab-wrap">
+      <div class="recommend" v-for="(item,index) in recommend" :key="index">
+        <div class="inLeft">
+          <img :src="item.video_image" alt />
+          <p>{{item.typename}}</p>
+        </div>
+        <div class="inMid">
+          <p>{{item.name}}</p>
+          <i>人均18元</i>
+          <span>
+            <div class="house">
+              <img src="../../assets/images/fangzi.png" alt />
+            </div>
+            <div class="characteristic">特色：地方菜、面馆</div>
+          </span>
+        </div>
+        <div class="inRight" @click="details(item.id,item.type)">
+          <p>进店</p>
+        </div>
+      </div>
+
+      <!-- <div class="tab-wrap">
         <tab>
           <tab-item
             v-for="(item,index) in tiltleList"
@@ -50,8 +99,8 @@
             line-width="4"
           >{{item}}</tab-item>
         </tab>
-      </div>
-      <div class="store-wrap"></div>
+      </div>-->
+      <!-- <div class="store-wrap"></div> -->
     </div>
     <!-- <FunctionAreas class="tab-item-play-content-tools-wrap"></FunctionAreas> -->
     <!-- <div class="tab-item-play-content-tip-wrap">
@@ -92,6 +141,9 @@ export default {
   props: [""],
   data() {
     return {
+      //推荐商家列表：
+      recommend: [],
+
       // cellListScence: [
       //   {
       //     title: "吃吧",
@@ -217,8 +269,8 @@ export default {
           text: "景区符号文化"
           // class: "iconfont iconliaojiede"
         }
-      ],
-      tiltleList: ["吃吧", "喝吧", "玩吧", "住吧", "游吧"]
+      ]
+      // tiltleList: ["吃吧", "喝吧", "玩吧", "住吧", "游吧"]
     };
   },
 
@@ -238,8 +290,71 @@ export default {
 
   beforeMount() {},
 
-  mounted() {},
+  mounted() {
+    //获取推荐商家：
+    this.$http
+      .post(
+        "https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.index.scenic_service"
+        // "http://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=scenic.index.scenic_service_list&"
+      )
+      .then(({ data }) => {
+        this.recommend = data.data.recommend_business;
+        console.log(this.recommend);
+        console.log(data);
+      });
+  },
   methods: {
+    //跳转门票认证
+    Ticket() {
+      this.$router.push("/ticketsdiscount");
+    },
+    //跳转智慧导航
+    Navigation() {
+      this.$router.push("/intelligentnavigation");
+    },
+    //跳转游园服务
+    service() {
+      this.$router.push("/scenicService");
+    },
+    //跳转记住的
+
+    Remember() {
+      this.$router.push("/remember?type=5&branch=1");
+    },
+    //跳转了解的
+    Understand() {
+      this.$router.push("/understand?type=7&branch=2");
+    },
+    //跳转带走的
+    TakeAway() {
+      this.$router.push("/takeaway?carousel=2");
+    },
+
+    //跳转详情页
+    details(id, type) {
+      if (type == 1 || type == 2) {
+        this.$router.push({
+          path: "/eatDrinkDetails",
+          query: {
+            idNum: id,
+            typeNum: type
+          }
+        });
+      } else if (type == 3) {
+        alert("跳转玩");
+      } else if (type == 4) {
+        this.$router.push({
+          path: "/hotelDetails",
+          query: {
+            idNum: id,
+            typeNum: type
+          }
+        });
+        // alert("跳转住");
+      } else if (type == 5) {
+        alert("跳转游");
+      }
+    },
     getItem(link) {
       this.$router.push(link);
     },
@@ -252,14 +367,25 @@ export default {
 };
 </script>
 <style lang="css" scoped>
+.tab-item-paly-content {
+  margin-top: 5px;
+}
 .line-one {
   width: 92%;
-  height: 90px;
+  height: 142px;
   background: #ffffff;
   margin: 0 auto;
   border-radius: 8px;
   overflow: hidden;
-  margin-bottom: 11px;
+  margin-bottom: 20px;
+}
+.line-one-a {
+  width: 100%;
+  height: 70px;
+  margin-bottom: 1px;
+  background: red;
+}
+.navs {
 }
 .line-two {
   width: 92%;
@@ -268,16 +394,139 @@ export default {
   margin: 0 auto;
   border-radius: 8px;
 }
+.Selected {
+  width: 100%;
+}
+.Selected p {
+  text-align: center;
+  color: #222222ff;
+  font-size: 14px;
+  font-weight: 800;
+}
 .line-three {
   width: 99%;
-  height: 208px;
+  /* height: 208px; */
   margin: 0 auto;
   border-radius: 5px;
-  background: darkgreen;
+  /* background: darkgreen; */
   overflow: hidden;
   margin-left: 4px;
-  margin-top: 10px;
-  margin-bottom: 35px;
+  margin-top: 11px;
+  /* margin-bottom: 35px; */
+}
+.recommend {
+  width: 92%;
+  height: 100px;
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0px 10px 20px 0px rgba(0, 101, 255, 0.08);
+  border-radius: 8px;
+  /* margin-bottom: 10px; */
+  overflow: hidden;
+  margin: 0 auto 10px;
+}
+.inLeft {
+  width: 23.19%;
+  height: 50px;
+  margin: 15px 3.19% 0 4.35%;
+  float: left;
+  border-radius: 4px;
+  position: relative;
+}
+.inLeft img {
+  width: 100%;
+  background: none;
+  border-radius: 4px;
+}
+.inLeft p {
+  width: 38px;
+  height: 20px;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(51, 51, 51, 1) 100%
+  );
+  border-radius: 4px 0px 16px 0px;
+  color: rgba(255, 255, 255, 1);
+  font-size: 12px;
+  font-family: PingFangSC-Medium;
+  line-height: 20px;
+  text-align: center;
+  position: absolute;
+  top: -7%;
+  left: -4%;
+}
+.inMid {
+  width: 41.58%;
+  height: 66px;
+  float: left;
+  margin-top: 14px;
+  margin-right: 7.25%;
+}
+.inMid p {
+  font-size: 14px;
+  color: #222222ff;
+  font-weight: bold;
+  font-family: PingFangSC-Heavy;
+  /* margin-bottom: 4px; */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.inMid i {
+  font-style: normal;
+  font-size: 12px;
+  color: #222222ff;
+  font-weight: normal;
+  font-family: PingFangSC-Medium;
+}
+.inMid span {
+  width: 100%;
+  height: 25px;
+  display: block;
+  /* width: 140px; */
+  /* height: 25px; */
+  /* background: rgba(245, 245, 245, 1); */
+  font-size: 12px;
+  color: #666666ff;
+  font-weight: normal;
+  font-family: PingFangSC-Medium;
+  text-align: center;
+  /* line-height: 25px; */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  /* border-radius: 8px; */
+}
+.inMid span .house {
+  width: 13px;
+  height: 12px;
+  float: left;
+}
+.inMid span .house img {
+  background: none;
+  width: 100%;
+}
+.inMid span .characteristic {
+  float: left;
+  line-height: 22px;
+  text-indent: 4%;
+}
+.inRight {
+  width: 18%;
+  height: 30;
+  margin-top: 35px;
+  height: 30px;
+  float: left;
+  background: #6396ffff;
+  border-radius: 4px;
+}
+.inRight p {
+  color: #ffffffff;
+  font-size: 12px;
+  text-align: center;
+  font-family: PingFangSC-Medium;
+  font-weight: 400;
+  line-height: 30px;
 }
 </style>
 
@@ -285,14 +534,60 @@ export default {
 @import "~vux/src/styles/1px.less";
 @import "~vux/src/styles/center.less";
 .flex-demo {
-  text-align: center;
-  color: #222222;
-  // background-color: #20b907;
+  // text-align: center;
+  color: rgba(255, 255, 255, 1);
+  text-shadow: 0px 8px 8px rgba(0, 0, 0, 0.24); // background-color: #20b907;
   background-clip: padding-box;
-  width: 55px;
-  height: 50px;
-  margin: 0 auto;
-  margin-top: 23%;
+  width: 98%;
+  height: 70px;
+  margin: 1px;
+  // margin-top: 23%;
+  background: cadetblue;
+  font-size: 16px;
+  line-height: 2;
+  text-indent: 8px;
+}
+.flex-one {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 82, 101, 1) 0%,
+    rgba(255, 113, 99, 1) 100%
+  );
+}
+.flex-two {
+  background: linear-gradient(
+    90deg,
+    rgba(253, 111, 99, 1) 0%,
+    rgba(255, 113, 99, 1) 100%
+  );
+}
+.flex-three {
+  background: linear-gradient(
+    90deg,
+    rgba(252, 128, 99, 1) 100%,
+    rgba(252, 112, 99, 1) 0%
+  );
+}
+.flex-four {
+  background: linear-gradient(
+    90deg,
+    rgba(98, 144, 255, 1) 0%,
+    rgba(48, 168, 255, 1) 100%
+  );
+}
+.flex-five {
+  background: linear-gradient(
+    90deg,
+    rgba(48, 168, 255, 1) 0%,
+    rgba(48, 168, 255, 1) 100%
+  );
+}
+.flex-six {
+  background: linear-gradient(
+    90deg,
+    rgba(48, 194, 255, 1) 100%,
+    rgba(48, 168, 255, 1) 0%
+  );
 }
 .flex-demo .img-wrap {
   width: 28px;
@@ -363,7 +658,7 @@ export default {
   height: 30px;
   line-height: 30px;
 }
-/deep/ .scrollable .vux-tab-item{
+/deep/ .scrollable .vux-tab-item {
   height: 30px;
   line-height: 30px;
 }

@@ -5,102 +5,184 @@
       :showLeftBack="TitleObjData.showLeftBack"
       :showRightMore="TitleObjData.showRightMore"
     ></Header>
-    <scroller lock-x height="-4">
-      <div class="scence-service-content">
-        <div class="content-one">
-          <div class="swp-wrap">
-            <swiper :options="swiperOption">
-              <swiper-slide v-for="(item,index) in advSwiper" :key="index">
-                <img :src="item" alt />
-              </swiper-slide>
-              <div class="swiper-pagination swiper-pagination-bullets" slot="pagination"></div>
-            </swiper>
-          </div>
-          <div class="Selected-warp">
-            <div class="Selected-title">商户精选</div>
-            <scroller lock-y :scrollbar-x="false">
-              <div class="Selected-business-list">
-                <div
-                  class="business"
-                  v-for="(item,index) in recommend"
-                  :key="index"
-                  @click="details(item.id)"
-                >
-                  <img :src="item.video_image" alt />
-                  <span class="price">{{item.price}}￥/人</span>
-                  <span class="name">{{item.name}}</span>
-                </div>
-              </div>
-            </scroller>
-          </div>
+    <!-- <scroller lock-x height="-4"> -->
+    <div class="scence-service-content">
+      <div class="content-one">
+        <div class="swp-wrap">
+          <swiper :options="swiperOption">
+            <swiper-slide>
+              <img src="../../assets/images/banner图@2x.png" alt />
+            </swiper-slide>
+            <div class="swiper-pagination swiper-pagination-bullets" slot="pagination"></div>
+          </swiper>
         </div>
-        <div class="content-two">
-          <div class="content-two-head">
-            <div class="head-left">
-              <popup-radio
-                :options="this.checkList"
-                v-model="option2"
-                placeholder="分类"
-                @on-hide="change"
-              ></popup-radio>
-            </div>
-            <div class="head-right">
-              <popup-radio :options="this.sortList" v-model="option3" placeholder="排序" @on-hide="sort"></popup-radio>
-            </div>
-          </div>
-          <div class="store-list-warp">
-            <div
-              class="store"
-              v-for="(item,index) in BusinessList"
-              :key="index"
-              @click="details(item.id)"
-            >
-              <div class="store-img-warp">
+        <div class="Selected-warp">
+          <flexbox>
+            <flexbox-item v-for="(item,index) in dataListOne" :key="index">
+              <div class="flex-demo" @click="getItem(item.link)">
+                <div class="img-wrap">
+                  <img :src="item.imgSrc" alt />
+                </div>
+                <p>{{item.name}}</p>
+              </div>
+            </flexbox-item>
+          </flexbox>
+
+          <!-- <div class="Selected-title">商户精选</div>
+          <scroller lock-y :scrollbar-x="false">
+            <div class="Selected-business-list">
+              <div
+                class="business"
+                v-for="(item,index) in recommend"
+                :key="index"
+                @click="details(item.id)"
+              >
                 <img :src="item.video_image" alt />
-              </div>
-              <div class="store-msg-warp">
-                <div class="store-title">
-                  <h3>{{item.name}}</h3>
-                </div>
-                <div class="star-price-warp">
-                  <div class="star">
-                    <!-- 星级评分组建 -->
-                    <rater v-model="item.score" :font-size="11" disabled></rater>
-                  </div>
-                  <div class="store-price">
-                    <p>{{item.price}}￥/人</p>
-                  </div>
-                </div>
-                <div class="store-time">
-                  <span>联系电话：{{item.phone}}</span>
-                </div>
-                <div class="tip">
-                  <span>商家地址：{{item.address}}</span>
-                </div>
+                <span class="price">{{item.price}}￥/人</span>
+                <span class="name">{{item.name}}</span>
               </div>
             </div>
-          </div>
+          </scroller>-->
         </div>
       </div>
-    </scroller>
+      <div class="content-two">
+        <div class="nearby">
+          <p>附近商家</p>
+          <span>排序</span>
+        </div>
+        <!-- <div class="content-two-head">
+          <div class="head-left">
+            <popup-radio
+              :options="this.checkList"
+              v-model="option2"
+              placeholder="分类"
+              @on-hide="change"
+            ></popup-radio>
+          </div>
+          <div class="head-right">
+            <popup-radio
+              :options="this.sortList"
+              v-model="option3"
+              placeholder="排序"
+              @on-hide="sort"
+            ></popup-radio>
+          </div>
+        </div>-->
+        <div class="store-list-warp">
+          <div
+            class="recommend"
+            v-for="(item,index) in recommend"
+            :key="index"
+            @click="details(item.id,item.type)"
+          >
+            <div class="inLeft">
+              <img :src="item.video_image" alt />
+              <p>{{item.typename}}</p>
+            </div>
+            <div class="inMid">
+              <p>{{item.name}}</p>
+              <i>人均18元</i>
+              <span>
+                <div class="house">
+                  <img src="../../assets/images/fangzi.png" alt />
+                </div>
+                <div class="characteristic">特色：地方菜、面馆</div>
+              </span>
+            </div>
+            <div class="inRight">
+              <p>190m</p>
+            </div>
+          </div>
+
+          <!-- <div
+            class="store"
+            v-for="(item,index) in BusinessList"
+            :key="index"
+            @click="details(item.id)"
+          >
+            <div class="store-img-warp">
+              <img :src="item.video_image" alt />
+            </div>
+            <div class="store-msg-warp">
+              <div class="store-title">
+                <h3>{{item.name}}</h3>
+              </div>
+              <div class="star-price-warp">
+                <div class="star">
+                  <rater v-model="item.score" :font-size="11" disabled></rater>
+                </div>
+                <div class="store-price">
+                  <p>{{item.price}}￥/人</p>
+                </div>
+              </div>
+              <div class="store-time">
+                <span>联系电话：{{item.phone}}</span>
+              </div>
+              <div class="tip">
+                <span>商家地址：{{item.address}}</span>
+              </div>
+            </div>
+          </div>-->
+        </div>
+      </div>
+    </div>
+    <!-- </scroller> -->
   </div>
 </template>
 <script>
 import Header from "@/components/common/Header";
 import { swiper, swiperSlide } from "vue-awesome-swiper";
-import { Scroller, PopupRadio, PopupPicker, Rater } from "vux";
+import {
+  Scroller,
+  PopupRadio,
+  PopupPicker,
+  Rater,
+  Flexbox,
+  FlexboxItem
+} from "vux";
 // import "element-ui/lib/theme-chalk/index.css";
 export default {
   name: "",
   props: [""],
   data() {
     return {
+      //推荐商家列表：
+      recommend: [],
+
+      dataListOne: [
+        {
+          name: "吃吧",
+          link: "/businessList?type=1&name=吃吧",
+          imgSrc: require("@/assets/images/chi.png")
+        },
+        {
+          name: "喝吧",
+          link: "/businessList?type=2&&name=喝吧",
+          imgSrc: require("@/assets/images/he.png")
+        },
+        {
+          name: "玩吧",
+          link: "/businessList?type=3&&name=玩吧",
+          imgSrc: require("@/assets/images/wan.png")
+        },
+        {
+          name: "住吧",
+          link: "/businessList?type=4&name=住吧",
+          imgSrc: require("@/assets/images/zhu.png")
+        },
+        {
+          name: "游吧",
+          link: "/businessList?type=5&&name=游吧",
+          imgSrc: require("@/assets/images/you.png")
+        }
+      ],
+
       //商家type
       typeNum: "",
       //选择分类绑定
       option2: "",
       //排序绑定
-      option3:"",
+      option3: "",
       //选择类别列表
       checkList: [],
       //排序列表
@@ -114,7 +196,7 @@ export default {
       //商家打分数据：1~5
       value: 5,
       TitleObjData: {
-        titleContent: "景区服务",
+        titleContent: "游园服务",
         showLeftBack: true,
         showRightMore: false
       },
@@ -143,7 +225,9 @@ export default {
     Scroller,
     PopupRadio,
     PopupPicker,
-    Rater
+    Rater,
+    Flexbox,
+    FlexboxItem
   },
 
   computed: {},
@@ -154,41 +238,42 @@ export default {
     //商家type值
     this.typeNum = this.$route.query.type;
     //获取景区服务轮播图；
-    this.$http
-      .post(
-        "https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=carousel&type=41"
-      )
-      .then(({ data }) => {
-        // console.log(data.data.data.carousel);
-        this.advSwiper = data.data.data.carousel;
-        // console.log(this.advSwiper)
-      });
-    //获取选择分类！
-    this.$http.post(
-        "https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.index.scenic_service"
-      )
-      .then(({ data }) => {
-        // console.log(data.data.category);
+    // this.$http
+    //   .post(
+    //     "https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=carousel&type=41"
+    //   )
+    //   .then(({ data }) => {
+    //     // console.log(data.data.data.carousel);
+    //     this.advSwiper = data.data.data.carousel;
+    //     // console.log(this.advSwiper)
+    //   });
+    // //获取选择分类！
+    // this.$http
+    //   .post(
+    //     "https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.index.scenic_service"
+    //   )
+    //   .then(({ data }) => {
+    //     // console.log(data.data.category);
 
-        this.checkList = data.data.category.map(item => {
-          return { key: item.id, value: item.name };
-        });
-        // this.checkList = data.data.category;
-        console.log(this.checkList);
-        // console.log(this.checkList);
-      });
-    //获取排序分类
-    this.$http
-      .post(
-        "https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.index.scenic_service"
-      )
-      .then(({ data }) => {
-        console.log(data);
-        this.sortList = data.data.orderby.map(item => {
-          return { key: item.type_score, value: item.name };
-        });
-        console.log(this.sortList);
-      });
+    //     this.checkList = data.data.category.map(item => {
+    //       return { key: item.id, value: item.name };
+    //     });
+    //     // this.checkList = data.data.category;
+    //     console.log(this.checkList);
+    //     // console.log(this.checkList);
+    //   });
+    // //获取排序分类
+    // this.$http
+    //   .post(
+    //     "https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.index.scenic_service"
+    //   )
+    //   .then(({ data }) => {
+    //     console.log(data);
+    //     this.sortList = data.data.orderby.map(item => {
+    //       return { key: item.type_score, value: item.name };
+    //     });
+    //     console.log(this.sortList);
+    //   });
     //获取推荐商家：
     this.$http
       .post(
@@ -213,15 +298,44 @@ export default {
   },
 
   methods: {
-    //传递id给详情页
-    details(id) {
-      this.$router.push({
-        path: "/ServiceDetails",
-        query: {
-          idNum: id
-        }
-      });
+    details(id, type) {
+      if (type == 1 || type == 2) {
+        this.$router.push({
+          path: "/eatDrinkDetails",
+          query: {
+            idNum: id,
+            typeNum: type
+          }
+        });
+      } else if (type == 3) {
+        alert("跳转玩");
+      } else if (type == 4) {
+        this.$router.push({
+          path: "/hotelDetails",
+          query: {
+            idNum: id,
+            typeNum: type
+          }
+        });
+        // alert("跳转住");
+      } else if (type == 5) {
+        alert("跳转游");
+      }
     },
+
+    //跳转列表页
+    getItem(link) {
+      this.$router.push(link);
+    },
+    // //传递id给详情页
+    // details(id) {
+    //   this.$router.push({
+    //     path: "/ServiceDetails",
+    //     query: {
+    //       idNum: id
+    //     }
+    //   });
+    // },
     //点击获取不同id切换类别
     change() {
       console.log(this.option2);
@@ -235,15 +349,22 @@ export default {
           // console.log(this.BusinessList);
         });
     },
-    sort(){
+    sort() {
       // console.log(this.option3);
       // console.log(11111111)
-      this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.index.scenic_service_list&&type="+this.option2+"&"+"type_score="+this.option3)
-      .then(({data})=>{
-        console.log(data);
-        this.BusinessList = data.data.list;
-        console.log(this.BusinessList);
-      })
+      this.$http
+        .post(
+          "https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.index.scenic_service_list&&type=" +
+            this.option2 +
+            "&" +
+            "type_score=" +
+            this.option3
+        )
+        .then(({ data }) => {
+          console.log(data);
+          this.BusinessList = data.data.list;
+          console.log(this.BusinessList);
+        });
     }
   },
 
@@ -266,22 +387,25 @@ img {
   margin-top: 46px;
   border-top: 1px solid #eeeeee;
   background: #f5f5f5;
+  overflow: auto;
 }
 .scence-service-content .content-one {
   /* width: 375px; */
-  height: 277px;
-  margin-top: 1px;
-  background: #ffffff;
+  height: 210px;
+  margin: 0px auto 20px;
 }
 .scence-service-content .swp-wrap {
   /* width: 375px; */
-  height: 90px;
+  width: 92%;
+  height: 110px;
+  margin: 15px auto 28px;
+  border-radius: 8px;
 }
 .scence-service-content .swp-wrap img {
-  /* width: 345px; */
-  height: 80px;
-  margin-top: 14px;
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  width: 100%;
+  height: 110px;
+  margin: 0 auto;
+  /* box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1); */
   border-radius: 8px;
   /* margin-left: 15px; */
 }
@@ -292,8 +416,10 @@ img {
 }
 .scence-service-content .content-one .Selected-warp {
   /* width: 375px; */
-  height: 160px;
-  margin-top: 10px;
+  height: 79px;
+  width: 92%;
+  margin: 0 auto;
+  /* margin-top: 28px; */
 }
 .scence-service-content .content-one .Selected-warp .Selected-title {
   height: 30px;
@@ -364,10 +490,149 @@ img {
 }
 .scence-service-content .content-two {
   /* width: 375px; */
-  height: 100%;
-  margin-top: 10px;
-  background: #ffffff;
+  height: 84%;
+  /* margin-top: 10px; */
+  background: #f5f5f5;
 }
+.nearby {
+  width: 92%;
+  height: 55px;
+  margin: 0 auto 5px;
+  background: #ffffffff;
+  border-radius: 8px;
+  box-shadow: 0px 10px 20px 0px rgba(0, 101, 255, 0.08);
+}
+.nearby p {
+  display: block;
+  color: #222222ff;
+  font-size: 16px;
+  font-weight: 800;
+  float: left;
+  line-height: 55px;
+  margin-left: 4.35%;
+}
+.nearby span {
+  display: block;
+  color: #222222ff;
+  font-size: 14px;
+  font-weight: 400;
+  float: right;
+  line-height: 55px;
+  margin-right: 4.35%;
+}
+.recommend {
+  width: 100%;
+  height: 100px;
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0px 10px 20px 0px rgba(0, 101, 255, 0.08);
+  border-radius: 8px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+.inLeft {
+  width: 23.19%;
+  height: 50px;
+  margin: 15px 3.19% 0 4.35%;
+  float: left;
+  border-radius: 4px;
+  position: relative;
+}
+.inLeft img {
+  width: 100%;
+  background: none;
+  border-radius: 4px;
+}
+.inLeft p {
+  width: 38px;
+  height: 20px;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(51, 51, 51, 1) 100%
+  );
+  border-radius: 4px 0px 16px 0px;
+  color: rgba(255, 255, 255, 1);
+  font-size: 12px;
+  font-family: PingFangSC-Medium;
+  line-height: 20px;
+  text-align: center;
+  position: absolute;
+  top: -7%;
+  left: -4%;
+}
+.inMid {
+  width: 41.58%;
+  height: 66px;
+  float: left;
+  margin-top: 14px;
+  margin-right: 7.25%;
+}
+.inMid p {
+  font-size: 14px;
+  color: #222222ff;
+  font-weight: bold;
+  font-family: PingFangSC-Heavy;
+  /* margin-bottom: 4px; */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.inMid i {
+  font-style: normal;
+  font-size: 12px;
+  color: #222222ff;
+  font-weight: normal;
+  font-family: PingFangSC-Medium;
+}
+.inMid span {
+  width: 100%;
+  height: 25px;
+  display: block;
+  /* width: 140px; */
+  /* height: 25px; */
+  /* background: rgba(245, 245, 245, 1); */
+  font-size: 12px;
+  color: #666666ff;
+  font-weight: normal;
+  font-family: PingFangSC-Medium;
+  text-align: center;
+  /* line-height: 25px; */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  /* border-radius: 8px; */
+}
+.inMid span .house {
+  width: 13px;
+  height: 12px;
+  float: left;
+}
+.inMid span .house img {
+  background: none;
+  width: 100%;
+}
+.inMid span .characteristic {
+  float: left;
+  line-height: 22px;
+  text-indent: 4%;
+}
+.inRight {
+  width: 15.945%;
+  height: 22px;
+  margin-top: 15px;
+  float: left;
+  background: #f5f5f5ff;
+  border-radius: 4px;
+}
+.inRight p {
+  color: #222222ff;
+  font-size: 12px;
+  text-align: center;
+  font-family: PingFangSC-Medium;
+  font-weight: 400;
+  line-height: 22px;
+}
+
 .scence-service-content .content-two .content-two-head {
   /* width: 375px; */
   height: 45px;
@@ -417,6 +682,8 @@ img {
   /* height: 290px; */
   background: #ffffff;
   overflow-y: scroll;
+  width: 92%;
+  margin: 0 auto;
 }
 .scence-service-content .content-two .store-list-warp .store {
   width: 120%;
@@ -532,6 +799,10 @@ img {
   color: #999999;
   line-height: 12px;
 }
+.swiper-slide {
+  padding-left: 0px;
+  padding-right: 0px;
+}
 </style>
 <style>
 /* .el-rate__icon {
@@ -551,5 +822,34 @@ img {
     display: block;
     line-height: 1;
   }
+}
+.flex-demo {
+  text-align: center;
+  color: #222222;
+  background-clip: padding-box;
+  width: 51px;
+  height: 72px;
+  margin: 0 auto;
+}
+.flex-demo .img-wrap {
+  width: 51px;
+  height: 51px;
+  margin-left: 13px;
+  margin-bottom: 9px;
+  background: #ffffff;
+  border-radius: 16px;
+  margin: 0 auto;
+}
+.flex-demo .img-wrap img {
+  background: none;
+  width: 31px;
+  height: 31px;
+  margin: 8px auto 0;
+}
+.flex-demo p {
+  font-family: PingFangSC-Medium;
+  font-size: 14px;
+  color: #222222ff;
+  line-height: 2;
 }
 </style>

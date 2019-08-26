@@ -8,7 +8,7 @@
     <div class="businessList-content">
       <div class="classificationSorting-wrap">
         <div class="left">
-          <popup-radio :options="options2" v-model="option2" placeholder="全部分类"></popup-radio>
+          <popup-radio :options="options2" v-model="option2" placeholder="全部分类" ></popup-radio>
         </div>
         <div class="right">
           <popup-radio :options="options3" v-model="option3" placeholder="智能排序"></popup-radio>
@@ -108,7 +108,7 @@ export default {
     details(id, type) {
       if (type == 1 || type == 2) {
         this.$router.push({
-          path: "/ServiceDetails",
+          path: "/eatDrinkDetails",
           query: {
             idNum: id,
             typeNum: type
