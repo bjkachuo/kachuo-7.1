@@ -9,7 +9,6 @@
     placeholder="请选择地址"
     inline-desc
     :show.sync="showAddress"
-    style="font-size:12px"
   ></x-address>
 </template>
 

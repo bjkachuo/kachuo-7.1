@@ -17,7 +17,12 @@
         <h2>基本信息</h2>
         <x-input title="姓名:" name="username" placeholder="请输入姓名" is-type="china-name" label-width="5em"></x-input>
         <x-input title="手机号码:" name="mobile" placeholder="请输入手机号码" keyboard="number" is-type="china-mobile"  mask="999 9999 9999" label-width="5em"></x-input>
-
+        <Address v-on:selectAddress="getSelAddress"></Address>
+        <x-input title="详细地址:" name="username" placeholder="街道、门牌号等" label-width="5em"></x-input>
+        <x-input title="身份证号:" name="username" placeholder="请输入证件号码" label-width="5em"></x-input>
+      </div>
+      <div class="master">
+        <h2>师承信息</h2>
       </div>
     </div>
 
@@ -28,10 +33,11 @@
   import Header from "@/components/common/Header";
   import UploadImgOne from "@/components/common/UploadImgOne/UploadImgOne";
   import { XInput,PopupPicker } from 'vux'
+  import Address from "@/components/common/Address";
   export default {
       name: "mingjia",
 
-      components:{ Header,UploadImgOne,XInput,PopupPicker },
+      components:{ Header,UploadImgOne,Address,XInput,PopupPicker },
 
       data(){
         return{
@@ -48,6 +54,9 @@
         getImgVal(val) {
           console.log(val);
           this.imgUrl = val;
+        },
+        getSelAddress(val) {
+          this.maskValueAddress = val;
         },
       }
   }
@@ -114,8 +123,23 @@
         font-size: 16px;
         line-height: 44px;
       }
-      .weui-cell{
+      /deep/.weui-cell{
         padding: 16px 15px;
+      }
+    }
+    .master{
+      box-shadow:0px 5px 10px 0px rgba(0,101,255,0.06);
+      border-radius:8px;
+      width: 92%;
+      margin: 10px auto;
+      background-color: #fff;
+      box-sizing: border-box;
+      padding: 0 16px;
+      h2{
+        color: #222;
+        font-weight: 800;
+        font-size: 16px;
+        line-height: 44px;
       }
     }
   }
