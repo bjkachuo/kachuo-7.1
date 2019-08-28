@@ -95,7 +95,7 @@
           background-image: url("./camera.png");
           background-size: 100% 100%;
         }
-      }
+      } 
     }
   }
 </style>
