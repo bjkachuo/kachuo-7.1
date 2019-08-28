@@ -90,6 +90,12 @@ export default [{
     name: 'checkInminjia',
     component: resolve => require(['@/components/pages/tabindex/KachuoTabIncome/mingjia/mingjia'], resolve),
   },
+  //景区入驻
+  {
+    path: '/checkIn/jingqu',
+    name: 'checkInjingqu',
+    component: resolve => require(['@/components/pages/tabindex/KachuoTabIncome/jingqu/jingqu'], resolve),
+  },
   {
     path: '/scenceservice',
     name: 'scenceservice',

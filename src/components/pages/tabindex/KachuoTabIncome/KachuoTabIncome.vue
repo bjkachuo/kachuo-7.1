@@ -44,7 +44,7 @@ export default {
       ],
       btnList:[
         {title:'名家入驻',link:'/checkIn/minjia'},
-        {title:'景区入驻',link:''},
+        {title:'景区入驻',link:'/checkIn/jingqu'},
         {title:'商家入驻',link:''},
         {title:'墨客入驻',link:''},
         {title:'匠人入驻',link:''},

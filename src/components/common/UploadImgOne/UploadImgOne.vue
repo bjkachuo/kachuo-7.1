@@ -140,8 +140,6 @@ export default {
 }
 .upload-imgs li {
   position: relative;
-  width: 94px;
-  height: 94px;
   font-size: 14px;
   display: inline-block;
   margin-left: 16px;
