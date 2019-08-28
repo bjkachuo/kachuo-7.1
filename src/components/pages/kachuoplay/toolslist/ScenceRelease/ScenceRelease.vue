@@ -8,7 +8,7 @@
         <swiper-item class="black"><h2 class="title fadeInUp animated">不是它可恶</h2></swiper-item>
       </swiper>
       <div class="swiper-index">{{swiperIndex + 1}}/3</div>
-      <div class="back">
+      <div class="back" @click="goBack">
         <x-icon type="ios-arrow-left" size="28"></x-icon>
       </div>
     </div>
@@ -125,7 +125,9 @@ export default {
     goPage(src){
       this.$router.push(src)
     },
-
+    goBack(){
+      this.$router.go(-1)
+    },
 
     // 滚动到页面顶部
     scrollTo() {

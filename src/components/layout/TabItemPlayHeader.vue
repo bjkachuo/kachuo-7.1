@@ -32,7 +32,7 @@
       </div>-->
     </div>
     <div class="white">
-      <div class="server-wrap">
+      <div class="server-wrap" @click="goScencerelease">
         <img src="../../assets/images/fabu.png" alt />
       </div>
     </div>
@@ -112,6 +112,9 @@ export default {
     },
     appMessageCenter() {
       this.$router.push("/appmessage");
+    },
+    goScencerelease(){
+      this.$router.push('/scencerelease')
     }
   },
 

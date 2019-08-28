@@ -6,11 +6,11 @@
       :showRightMore="TitleObjData.showRightMore"
     ></Header>
     <div class="real-name-auth-con" :style="conHei">
-      <PopupPicker :dataOpion="dataOpA" v-on:givePickerVal="getPickValA"></PopupPicker>
-      <PopupPicker :dataOpion="dataOpB" v-on:givePickerVal="getPickValB"></PopupPicker>
-      <PopupPicker :dataOpion="dataOpC" v-on:givePickerVal="getPickValC"></PopupPicker>
-      <PopupPicker :dataOpion="dataOpD" v-on:givePickerVal="getPickValD"></PopupPicker>
-      <PopupPicker :dataOpion="dataOpE" v-on:givePickerVal="getPickValE"></PopupPicker>
+      <PopupPicker :dataOpion="dataOpA" @givePickerVal="getPickValA"></PopupPicker>
+      <PopupPicker :dataOpion="dataOpB" @givePickerVal="getPickValB"></PopupPicker>
+      <PopupPicker :dataOpion="dataOpC" @givePickerVal="getPickValC"></PopupPicker>
+      <PopupPicker :dataOpion="dataOpD" @givePickerVal="getPickValD"></PopupPicker>
+      <PopupPicker :dataOpion="dataOpE" @givePickerVal="getPickValE"></PopupPicker>
       <p class="id-card-img">身份证正面照片</p>
       <img class="upload-img" v-if="imgUrl" :src="imgUrl" alt srcset>
       <UploadImgOne v-else-if="!imgUrl" v-on:getHeaderImgUrl="getImgVal"></UploadImgOne>
@@ -125,6 +125,7 @@ export default {
           console.log(res);
           if (res.result === 1) {
             let dataResult = formData(res.data.list);
+            console.log(dataResult);
             dataResult.forEach((item, index) => {
               switch (item.name) {
                 case "学历":

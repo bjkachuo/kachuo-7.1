@@ -1,7 +1,7 @@
 import { resolve } from "path";
 
 // 格式化师承返回数据
-export const formData = (dataArr) => {
+export const formData = dataArr => {
   let resultArr = new Array();
   let flagIndexArr = new Array();
   dataArr.forEach(function (item, index) {

@@ -9,11 +9,17 @@
 export default [{
     path: '/',
     name: 'login',
+    meta: {
+      auth: true // 如果此路由需要微信授权请设置为true,默认为false
+    },
     component: resolve => require(['@/components/index/Login'], resolve)
   },
   {
     path: '/indextab',
     name: 'indextab',
+    meta: {
+      auth: true // 如果此路由需要微信授权请设置为true,默认为false
+    },
     component: resolve => require(['@/components/index/index'], resolve)
   },
   {
@@ -81,7 +87,7 @@ export default [{
   //名家入驻
   {
     path: '/checkIn/minjia',
-    name: 'appointment',
+    name: 'checkInminjia',
     component: resolve => require(['@/components/pages/tabindex/KachuoTabIncome/mingjia/mingjia'], resolve),
   },
   {

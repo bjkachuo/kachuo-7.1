@@ -165,8 +165,9 @@ Vue.use(ElementUI);
 
 
 //微信授权登录
-// import wechatAuth from './servers/wechatAuth'//微信登录插件
-// const qs= require('qs');
+import wechatAuth from './servers/wechatAuth'//微信登录插件
+const qs= require('qs');
 
-// Vue.use(wechatAuth, {appid: XXXXXXXXX});
+Vue.use(wechatAuth, {appid: 'XXXXXXXXX'});
+
 

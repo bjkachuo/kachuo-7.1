@@ -244,6 +244,22 @@ export default {
           this.veritfyCode = false;
         }
       }, 1000);
+    },
+
+    handleWechat(){
+      Wechat.isInstalled(function (installed) {
+        alert("Wechat installed: " + (installed ? "Yes" : "No"));
+        let scope = "snsapi_userinfo",
+          state = "_" + (+new Date());
+        Wechat.auth(scope, state, function (response) {
+          // you may use response.code to get the access token.
+          alert(JSON.stringify(response));
+        }, function (reason) {
+          alert("Failed: " + reason);
+        });
+      }, function (reason) {
+        alert("Failed: " + reason);
+      });
     }
   },
 

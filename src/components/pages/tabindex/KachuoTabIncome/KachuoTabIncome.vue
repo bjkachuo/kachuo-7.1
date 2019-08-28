@@ -69,6 +69,7 @@ export default {
     },
     checkIn(){
       if(this.btnIndex == -1) return
+      console.log(this.btnList[this.btnIndex].link);
       this.$router.push(this.btnList[this.btnIndex].link)
     }
   },

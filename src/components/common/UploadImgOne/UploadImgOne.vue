@@ -3,6 +3,7 @@
     <ul class="upload-imgs">
       <li>
         <input type="file" class="upload" @change="addImg" ref="inputer" accept="image/*">
+        <img class="upload-img"  v-if="imgUrl" :src="imgUrl" >
         <a class="add" v-if="!plus">
           <p class="add-icon">+</p>
         </a>
@@ -21,6 +22,7 @@ export default {
       formData: new FormData(),
       imgs: {},
       imgLen: 0,
+      imgUrl:'',
       getImg: "",
       videoUploadUrl:
         "https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=util.uploader.uploadm"
@@ -111,6 +113,7 @@ export default {
               time: 1000
             });
             this.getImg = res.data.data.files[0];
+            this.imgUrl = res.data.data.files[0].url
             this.$store.commit("changeUserAvatar", res.data.data.files[0].url);
             this.$emit("getHeaderImgUrl", res.data.data.files[0].url);
             this.updataUserImg(res.data.data.files[0].url);
@@ -131,10 +134,6 @@ export default {
 };
 </script>
 <style lang='css' scoped>
-.upload {
-  opacity: 0;
-  z-index: 99;
-}
 .upload-imgs {
   overflow: hidden;
   font-size: 0;
@@ -145,7 +144,7 @@ export default {
   height: 94px;
   font-size: 14px;
   display: inline-block;
-  padding-left: 16px;
+  margin-left: 16px;
   text-align: center;
   vertical-align: middle;
 }
@@ -157,13 +156,15 @@ export default {
   border: 1px solid #eee;
 }
 .upload-imgs li .upload {
+  opacity: 0;
+  z-index: 99;
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  width: 118px;
-  height: 118px;
+  width: 100%;
+  height: 100%;
 }
 .upload-imgs .img {
   position: relative;
@@ -195,4 +196,8 @@ export default {
   font-size: 50px;
   color: #999;
 }
+  .upload-img{
+    background-image: none;
+    background-color: transparent;
+  }
 </style>
