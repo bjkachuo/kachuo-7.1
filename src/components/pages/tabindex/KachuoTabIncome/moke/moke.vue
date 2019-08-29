@@ -1,82 +1,58 @@
 <template>
-    <div>
-      <Header style="margin-bottom: 46px" :titleContent="TitleObjData.titleContent" :showLeftBack="TitleObjData.showLeftBack" :showRightMore="TitleObjData.showRightMore"></Header>
-      <div class="content">
-        <div class="up-avata">
-          <p><span class="blod">上传申请人头像</span><span>(温馨提示：照片不能大于1M)</span></p>
-          <UploadImgOne  v-on:getHeaderImgUrl="getImgVal" :plus="true">
-            <div slot="bg">
-              <div class="up-avata-bg">
-                <div class="camera"></div>
-              </div>
-            </div>
-          </UploadImgOne>
-        </div>
-        <div class="information">
-          <h2>基本信息</h2>
-          <x-input title="姓名:" name="username" placeholder="请输入姓名" is-type="china-name" label-width="5em"></x-input>
-          <x-input title="手机号码:" name="mobile" placeholder="请输入手机号码" keyboard="number" is-type="china-mobile"  mask="999 9999 9999" label-width="5em"></x-input>
-          <Address v-on:selectAddress="getSelAddress"></Address>
-          <x-input title="详细地址:" name="username" placeholder="街道、门牌号等" label-width="5em"></x-input>
-          <x-input title="身份证号:" name="mobile" keyboard="number" is-type="china-mobile"  label-width="5em"></x-input>
-        </div>
-        <div class="up-avata">
-          <p><span class="blod">上传景区资质</span></p>
-          <UploadImgOne  v-on:getHeaderImgUrl="getImgVal" :plus="true">
-            <div slot="bg">
-              <div class="up-avata-bg">
-                <div class="camera"></div>
-              </div>
-            </div>
-          </UploadImgOne>
-        </div>
-        <div class="information">
-          <h2>景区信息</h2>
-          <x-input title="景区名称:" name="username" placeholder="请输入姓名" is-type="china-name" label-width="5em"></x-input>
-          <PopupPicker :dataOpion="dataOpF" @givePickerVal="getPickValF"></PopupPicker>
-          <PopupPicker :dataOpion="dataOpG" @givePickerVal="getPickValG"></PopupPicker>
-          <x-input title="景点数量:" name="username"  label-width="5em"></x-input>
-          <x-input title="年游客量:" name="username" placeholder="街道、门牌号等" label-width="5em"></x-input>
-        </div>
+  <div>
+    <Header style="margin-bottom: 46px" :titleContent="TitleObjData.titleContent" :showLeftBack="TitleObjData.showLeftBack" :showRightMore="TitleObjData.showRightMore"></Header>
+    <div class="content">
+      <div class="up-avata">
+        <p><span class="blod">上传头像</span><span>(温馨提示：照片不能大于1M)</span></p>
 
-        <div class="btn">提交申请</div>
+        <UploadImgOne  v-on:getHeaderImgUrl="getImgVal" :plus="true">
+          <div slot="bg">
+            <div class="up-avata-bg">
+              <div class="camera"></div>
+            </div>
+          </div>
+        </UploadImgOne>
       </div>
+      <div class="information">
+        <h2>基本信息</h2>
+        <x-input title="姓名:" name="username" placeholder="请输入姓名" is-type="china-name" label-width="5em"></x-input>
+        <x-input title="手机号码:" name="mobile" placeholder="请输入手机号码" keyboard="number" is-type="china-mobile"  mask="999 9999 9999" label-width="5em"></x-input>
+        <Address v-on:selectAddress="getSelAddress"></Address>
+        <x-input title="详细地址:" name="username" placeholder="街道、门牌号等" label-width="5em"></x-input>
+        <x-input title="身份证号:" name="mobile" keyboard="number" is-type="china-mobile"  label-width="5em"></x-input>
+      </div>
+      <div class="master">
+        <h2>师承信息</h2>
+        <PopupPicker :dataOpion="dataOpE" @givePickerVal="getPickValE"></PopupPicker>
+      </div>
+      <div class="btn">立即入驻</div>
     </div>
+  </div>
 </template>
 
 <script>
   import Header from "@/components/common/Header";
-  import PopupPicker from "@/components/common/PopupPicker";
-  import { XInput } from 'vux'
   import UploadImgOne from "@/components/common/UploadImgOne/UploadImgOne";
+  import { XInput } from 'vux'
   import Address from "@/components/common/Address";
   import { getUserRule } from "@/servers/api";
   import { formData } from "@/assets/js/tools";
+  import PopupPicker from "@/components/common/PopupPicker";
     export default {
-        name: "scenicSpot",
+        name: "moke",
 
-        components:{ Header,UploadImgOne,Address,PopupPicker,XInput },
+        components:{Header,UploadImgOne,XInput,PopupPicker,Address},
 
         data(){
           return{
             TitleObjData: {
-              titleContent: "景区入驻",
+              titleContent: "墨客入驻",
               showLeftBack: true,
               showRightMore: false
             },
             maskValueAddress:[],
-            pickValF:[],
-            pickValG:[],
-            dataOpE:{
-
-            },
-            dataOpF: {
-              title: "职称/职务",
-              columns: 4,
-              data: []
-            },
-            dataOpG: {
-              title: "行业",
+            dataOpE: {
+              title: "师承",
               columns: 4,
               data: []
             },
@@ -84,6 +60,17 @@
         },
 
         methods:{
+          getImgVal(val) {
+            console.log(val);
+            this.imgUrl = val;
+          },
+          getSelAddress(val) {
+            this.maskValueAddress = val;
+          },
+          getPickValE(val) {
+            console.log(val);
+            this.pickValE = val;
+          },
           getDataList() {
             getUserRule({})
               .then(res => {
@@ -111,24 +98,10 @@
                 console.log(err);
               });
           },
-          getImgVal(val) {
-            console.log(val);
-            this.imgUrl = val;
-          },
-          getSelAddress(val) {
-            this.maskValueAddress = val;
-          },
-          getPickValF(val) {
-            console.log(val);
-            this.pickValE = val;
-          },
-          getPickValG(val) {
-            console.log(val);
-            this.pickValE = val;
-          },
         }
     }
 </script>
+
 <style scoped>
   .content{
     height: calc(100% - 46px)
@@ -188,6 +161,21 @@
       }
     }
     .information{
+      box-shadow:0px 5px 10px 0px rgba(0,101,255,0.06);
+      border-radius:8px;
+      width: 92%;
+      margin: 10px auto;
+      background-color: #fff;
+      box-sizing: border-box;
+      padding: 0 16px;
+      /deep/.weui-cell{
+        padding: 16px 15px;
+      }
+      /deep/.weui-cells{
+        margin-top: 0;
+      }
+    }
+    .master{
       box-shadow:0px 5px 10px 0px rgba(0,101,255,0.06);
       border-radius:8px;
       width: 92%;
