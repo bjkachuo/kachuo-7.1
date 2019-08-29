@@ -90,11 +90,23 @@ export default [{
     name: 'checkInminjia',
     component: resolve => require(['@/components/pages/tabindex/KachuoTabIncome/mingjia/mingjia'], resolve),
   },
+  //商家入驻
+  {
+    path: '/checkIn/shangjia',
+    name: 'checkInshangjia',
+    component: resolve => require(['@/components/pages/tabindex/KachuoTabIncome/shangjia/shangjia'], resolve),
+  },
   //景区入驻
   {
     path: '/checkIn/jingqu',
     name: 'checkInjingqu',
     component: resolve => require(['@/components/pages/tabindex/KachuoTabIncome/jingqu/jingqu'], resolve),
+  },
+  //墨客入驻
+  {
+    path: '/checkIn/moke',
+    name: 'checkInmoke',
+    component: resolve => require(['@/components/pages/tabindex/KachuoTabIncome/moke/moke'], resolve),
   },
   {
     path: '/scenceservice',

@@ -3,7 +3,8 @@
       <Header style="margin-bottom: 46px" :titleContent="TitleObjData.titleContent" :showLeftBack="TitleObjData.showLeftBack" :showRightMore="TitleObjData.showRightMore"></Header>
       <div class="content">
         <div class="up-avata">
-          <p><span class="blod">上传申请人头像</span><span>(温馨提示：照片不能大于1M)</span></p>
+          <p><span class="blod">上传头像</span><span>(温馨提示：照片不能大于1M)</span></p>
+
           <UploadImgOne  v-on:getHeaderImgUrl="getImgVal" :plus="true">
             <div slot="bg">
               <div class="up-avata-bg">
@@ -20,8 +21,21 @@
           <x-input title="详细地址:" name="username" placeholder="街道、门牌号等" label-width="5em"></x-input>
           <x-input title="身份证号:" name="mobile" keyboard="number" is-type="china-mobile"  label-width="5em"></x-input>
         </div>
+        <div class="information">
+          <h2>商铺信息</h2>
+          <x-input title="商铺名称:" name="username" placeholder="请填写商铺名称"  label-width="5em"></x-input>
+          <x-input title="经营项目:" name="mobile" placeholder="请填写经营项目" keyboard="number" label-width="5em"></x-input>
+          <Address v-on:selectAddress="getSelAddress"></Address>
+          <x-input title="详细地址:" name="username" placeholder="街道、门牌号等" label-width="5em"></x-input>
+        </div>
+        <div class="information">
+          <h2>账户信息</h2>
+          <x-input title="开户行:" name="username" placeholder="请填写商铺名称"  label-width="5em"></x-input>
+          <x-input title="银行卡:" name="mobile" placeholder="请填写经营项目" keyboard="number" label-width="5em"></x-input>
+        </div>
         <div class="up-avata">
-          <p><span class="blod">上传景区资质</span></p>
+          <p><span class="blod">上传营业资质</span></p>
+
           <UploadImgOne  v-on:getHeaderImgUrl="getImgVal" :plus="true">
             <div slot="bg">
               <div class="up-avata-bg">
@@ -30,101 +44,40 @@
             </div>
           </UploadImgOne>
         </div>
-        <div class="information">
-          <h2>景区信息</h2>
-          <x-input title="景区名称:" name="username" placeholder="请输入姓名" is-type="china-name" label-width="5em"></x-input>
-          <PopupPicker :dataOpion="dataOpF" @givePickerVal="getPickValF"></PopupPicker>
-          <PopupPicker :dataOpion="dataOpG" @givePickerVal="getPickValG"></PopupPicker>
-          <x-input title="景点数量:" name="username"  label-width="5em"></x-input>
-          <x-input title="年游客量:" name="username" placeholder="街道、门牌号等" label-width="5em"></x-input>
-        </div>
-
         <div class="btn">提交申请</div>
       </div>
+
     </div>
 </template>
 
 <script>
-  import Header from "@/components/common/Header";
-  import PopupPicker from "@/components/common/PopupPicker";
-  import { XInput } from 'vux'
-  import UploadImgOne from "@/components/common/UploadImgOne/UploadImgOne";
   import Address from "@/components/common/Address";
-  import { getUserRule } from "@/servers/api";
-  import { formData } from "@/assets/js/tools";
+  import Header from "@/components/common/Header";
+  import UploadImgOne from "@/components/common/UploadImgOne/UploadImgOne";
+  import { XInput } from 'vux'
     export default {
-        name: "scenicSpot",
+        name: "shangjia",
 
-        components:{ Header,UploadImgOne,Address,PopupPicker,XInput },
+        components:{ Header,UploadImgOne,Address,XInput },
 
         data(){
           return{
             TitleObjData: {
-              titleContent: "景区入驻",
+              titleContent: "商家入驻",
               showLeftBack: true,
               showRightMore: false
             },
-            maskValueAddress:[],
-            pickValF:[],
-            pickValG:[],
-            dataOpE:{
-
-            },
-            dataOpF: {
-              title: "职称/职务",
-              columns: 4,
-              data: []
-            },
-            dataOpG: {
-              title: "行业",
-              columns: 4,
-              data: []
-            },
+            maskValueAddress:[]
           }
         },
 
         methods:{
-          getDataList() {
-            getUserRule({})
-              .then(res => {
-                if (res.result === 1) {
-                  let dataResult = formData(res.data.list);
-                  console.log(dataResult);
-                  dataResult.forEach(item => {
-                    switch (item.name) {
-                      case "师承":
-                        this.dataOpE.data = item.data;
-                        break;
-                      case "职称":
-                        this.dataOpF.data = item.data;
-                        break;
-                      case "行业":
-                        this.dataOpG.data = item.data;
-                        break;
-                      default:
-                        return;
-                    }
-                  });
-                }
-              })
-              .catch(err => {
-                console.log(err);
-              });
-          },
           getImgVal(val) {
             console.log(val);
             this.imgUrl = val;
           },
           getSelAddress(val) {
             this.maskValueAddress = val;
-          },
-          getPickValF(val) {
-            console.log(val);
-            this.pickValE = val;
-          },
-          getPickValG(val) {
-            console.log(val);
-            this.pickValE = val;
           },
         }
     }
