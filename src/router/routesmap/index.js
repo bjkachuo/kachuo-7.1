@@ -237,6 +237,11 @@ export default [{
     component: resolve => require(['@/components/pages/kachuouser/PhotoAlbum'], resolve),
   },
   {
+    path: '/CreateIncome',
+    name: 'CreateIncome',
+    component: resolve => require(['@/components/pages/kachuouser/CreateIncome'], resolve),
+  },
+  {
     path: '/tokenqrcode',
     name: 'TokenQrcode',
     component: resolve => require(['@/components/pages/kachuouser/TokenQrcode'], resolve),

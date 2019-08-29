@@ -126,7 +126,7 @@ export default {
         },
         {
           name: "创收管理",
-          link: "/ticketsdiscount",
+          link: "/CreateIncome",
           imgSrc: require("@/assets/images/创收管理@2x.png")
         },
         {
