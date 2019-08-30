@@ -56,6 +56,8 @@
               columns: 4,
               data: []
             },
+            type:'',
+            pickValE:[1]
           }
         },
 
@@ -98,6 +100,13 @@
                 console.log(err);
               });
           },
+        },
+
+        created() {
+          this.type = this.$route.query.type
+          this.type == 'moke' ? this.TitleObjData.titleContent = '墨客入驻' : null
+          this.type == 'jiangren' ? this.TitleObjData.titleContent = '匠人入驻' : null
+          this.type == 'paike' ? this.TitleObjData.titleContent = '拍客入驻' : null
         }
     }
 </script>
