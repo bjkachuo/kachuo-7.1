@@ -15,6 +15,19 @@
         <li v-for="(item,index) in btnList" :class="{'active':index == btnIndex}" @click="btnIndex = index">{{item.title}}</li>
       </ul>
     </div>
+    <div class="mask">
+      <div class="alert-box">
+        <div class="top-bg">卡戳APP入驻服务协议</div>
+        <div class="alert-content">
+          <div class="title">
+            <p>在您成为卡戳APP入驻用户之前，您需要通 过阅读卡戳APP入驻服务协议并点击同意的 形式在线签署以下协议，请您务必仔细阅读 并点击同意的形式在线签署以下协议，请您务必仔细阅读并理解协议中的条款内容后再点击同意。</p>
+          </div>
+        </div>
+        <div class="xieyi">《卡戳APP入驻服务协议》</div>
+        <div class="agree">同意并继续</div>
+        <div class="veto">我再想想</div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -147,6 +160,62 @@ export default {
 .tab-item-mall-wrap {
   background: #f5f5f5;
   padding-bottom: 10px;
+  .mask{
+    background-color: rgba(0,0,0,0.5);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 99999;
+    .alert-box{
+      width: 92%;
+      margin: 30% auto 0;
+      border-radius: 16px;
+      background-color: #fff;
+      overflow: hidden;
+      .top-bg{
+        line-height: 95px;
+        background-size: 100% 100%;
+        background-image: url("./bluebg.png");
+        text-align: center;
+        font-size: 20px;
+        color: #fff;
+      }
+      .alert-content{
+        .title{
+          padding: 20px 20px 0 20px;
+          p{
+            border-bottom:1px solid #ddd;
+            padding-bottom: 20px;
+          }
+        }
+      }
+      .xieyi{
+        line-height: 43px;
+        font-size: 14px;
+        color: #3976FF;
+        width: 92%;
+        margin-left: 4%;
+      }
+      .agree{
+        line-height: 50px;
+        color: #fff;
+        background:linear-gradient(90deg,rgba(57,118,255,1) 0%,rgba(57,150,255,1) 100%);
+        width: 92%;
+        margin: 15px auto 0;
+        border-radius: 25px;
+        text-align: center;
+        font-size: 16px;
+      }
+      .veto{
+        color: #3976FF;
+        line-height: 50px;
+        text-align: center;
+        font-size: 16px;
+      }
+    }
+  }
 }
 .settled-in{
   width: 92%;
