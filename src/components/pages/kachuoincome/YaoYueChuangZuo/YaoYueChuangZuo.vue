@@ -66,7 +66,15 @@ export default {
 
 };
 </script>
-<style lang='css' scoped>
+<style lang='less' scoped>
+
+.photo-album-content{
+  /deep/ .vux-tab-bar-inner{
+    background-color :#3976FF
+  }
+}
+
+
 .photo-album-wrap {
   width: 100%;
   height: 100%;

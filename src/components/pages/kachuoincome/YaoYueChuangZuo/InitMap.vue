@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="amap-page-container" v-if="tabIndex != 4">
+    <div class="amap-page-container" v-if="tabIndex != 4 && !listShow">
       <el-amap vid="amapDemo"  :center="mapCenter"  :zoom="zoom" class="amap-demo" :style="mapHeight" :events="events">
         <el-amap-marker v-for="(marker,index) in markers" :position="marker.position" :vid="index" :offset="taOffset" :key="marker.id" v-if="tabIndex != 3 & !showPopup & !showPopupYC">
           <div @touchstart="showModel(marker.id,marker.name)">
@@ -15,8 +15,9 @@
         <el-amap-text v-for="text in markers" :text="text.name" :position="text.position"  :offset="[0,-54]" v-if="tabIndex !=3"></el-amap-text>
         <el-amap-text v-for="text in SYOrderListData" :text="text.name" :position="text.position"  :offset="[0,-54]" v-if="tabIndex == 3"></el-amap-text>
       </el-amap>
-
+      <div class="list-bg" @click="listShow = true"></div>
     </div>
+    <list-show :tabIndex="tabIndex" v-if="listShow" :listData="markers" :SYOrderListData="SYOrderListData"></list-show>
     <famous-family v-if="tabIndex == 4"></famous-family>
     <!-- 文创订单详情 -->
     <div v-transfer-dom>
@@ -48,36 +49,21 @@
             <inline-loading></inline-loading>
           </p>
           <group class="ycqd-group">
-            <cell
-              v-for="(item,index) in dataObjYC.arr"
-              :key="index"
-              :title="item.jq_name"
-              is-link
-              @click.native="ycqdFn(item)"
-            >{{item.label}}</cell>
+            <cell v-for="(item,index) in dataObjYC.arr" :key="index" :title="item.jq_name" is-link @click.native="ycqdFn(item)">{{item.label}}</cell>
           </group>
         </div>
       </popup>
     </div>
     <!-- 溯源订单详情 -->
-    <div v-transfer-dom>
-      <popup v-model="showPopupSY" position="bottom" max-height="50%" :hide-on-blur="true">
+    <div v-transfer-dom class="custom">
+      <popup v-model="showPopupSY" position="bottom" :hide-on-blur="true">
         <div class="popup2">
-          <p class="title">
-            <span style="font-size:16px">当前位置溯源列表</span>
-          </p>
-          <p style="text-align:center;" v-show="!samePosition">
-            <inline-loading></inline-loading>
-          </p>
-          <group class="ycqd-group">
-            <cell
-              v-for="(item,index) in samePosition"
-              :key="index"
-              :title="item.name"
-              is-link
-              @click.native="SYGet(item)"
-            >时间：{{item.date}}</cell>
-          </group>
+          <div class="address"><label>详细地址</label><span>{{SYItemDetile.address}}</span></div>
+          <div class="cycle"><label>创作周期</label><span>{{SYItemDetile.work_time}}</span></div>
+          <div class="cycle"><label>创作时间</label><span>{{ SYItemDetile.date }}</span></div>
+          <div class="cycle"><label>作品类别</label><span>{{ SYItemDetile.name }}</span></div>
+          <div class="cycle" style="border-bottom: 0;"><label>溯源佣金</label><span>{{ SYItemDetile.yj_price }}</span></div>
+          <div class="btn">立即抢单</div>
         </div>
       </popup>
     </div>
@@ -102,6 +88,7 @@
 
 import {TransferDom, Popup, Group, XDialog, XButton, InlineLoading, Cell, Confirm} from "vux";
 import { SCENICLIST } from "@/assets/data/scenic";
+import listShow from './listShow'
 import { GetSoliciList, SYorderList } from "@/servers/api";
 import famousFamily from './famousFamily'
 export default {
@@ -113,6 +100,7 @@ export default {
   data() {
     return {
       events:{},
+      listShow:false,
       mapCenter: [116.397045, 39.917959],
       markers: [],
       taOffset: [-15,-35],
@@ -121,6 +109,7 @@ export default {
       showToast: false,
       showPopupYC: false,
       showPopupSY: false,
+      SYItemDetile:{},
       clickPosition: {},
       dataObj: {},
       dataObjYC: {
@@ -135,7 +124,7 @@ export default {
     };
   },
 
-  components: { Popup, Group, XDialog, XButton, InlineLoading, Cell, Confirm ,famousFamily},
+  components: { Popup, Group, XDialog, XButton, InlineLoading, Cell, Confirm ,famousFamily,listShow },
 
   computed: {
     mapHeight() {
@@ -155,11 +144,11 @@ export default {
       this.markers = []
       let strArr = JSON.stringify(this.SYOrderListData)
       this.SYOrderListData = []
+      this.domBindEvent()
       setTimeout(()=>{
         this.markers = SCENICLIST
         this.SYOrderListData = JSON.parse(strArr)
-        this.domBindEvent()
-      },1000)
+      },100)
 
     },
 
@@ -226,7 +215,9 @@ export default {
               date: item.date,
               position: item.ip.split(","),
               order: item.order,
-              address: item.address
+              address: item.address,
+              work_time: item.work_time,
+              yj_price: item.yj_price
             });
           })
 
@@ -254,6 +245,9 @@ export default {
         }
       });
     },
+
+
+
     submit(id) {
       //实名认证
       this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=goods.real.real_FirstOne")
@@ -301,6 +295,9 @@ export default {
                 }
               }
             }else{
+              this.SYOrderListData.forEach(item=>{
+                item.id ==  id ? this.SYItemDetile = item : null
+              })
               this.showPopupSY = true
             }
 
@@ -315,16 +312,55 @@ export default {
     },
 
   },
-  
-  watch:{
-    'showPopupSY': function (to) {
 
+  watch:{
+    'listShow':function (to) {
+      this.init()
     }
   }
 };
 </script>
 <style lang='less' scoped>
 @import "~vux/src/styles/close";
+.custom{
+  /deep/.vux-popup-dialog{
+    border-radius: 8px 8px 0 0;
+    .address{
+      padding: 20px 0;
+      margin: 0 15px;
+      line-height: 21px;
+      font-size: 16px;
+      display: flex;
+      border-bottom: 1px solid #E5E5E5;
+      color: #222;
+      label{
+        width: 5em;
+        color: #666666;
+      }
+    }
+    .cycle{
+      font-size: 16px;
+      display: flex;
+      margin: 0 15px;
+      line-height: 55px;
+      margin: 0 15px;
+      border-bottom: 1px solid #E5E5E5;
+      color: #222;
+      label{
+        width: 5em;
+        color: #666666;
+      }
+    }
+    .btn{
+      background-color: #3976FF;
+      line-height: 60px;
+      text-align: center;
+      font-size: 16px;
+      color: #fff;
+      width: 100%;
+    }
+  }
+}
 
 .marker-icon{
   width: 30px;
@@ -332,7 +368,15 @@ export default {
   background-image: url("../../../../assets/images/kachuo-location-icon.png");
   background-size: 100% 100%;
 }
-
+.list-bg{
+  background-image: url("./list.png");
+  background-size: 100% 100%;
+  width: 40px;
+  height: 50px;
+  position: fixed;
+  top: 108px;
+  right: 15px;
+}
 .amap-page-container {
   position: relative;
 }
@@ -341,8 +385,6 @@ export default {
   z-index: 9999;
 }
 .popup2 {
-  padding-bottom: 20px;
-  height: 50%;
   overflow: hidden;
   overflow-y: scroll;
   background: #fff;

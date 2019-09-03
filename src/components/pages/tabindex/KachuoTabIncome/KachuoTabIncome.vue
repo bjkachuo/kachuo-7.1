@@ -15,7 +15,7 @@
         <li v-for="(item,index) in btnList" :class="{'active':index == btnIndex}" @click="btnIndex = index">{{item.title}}</li>
       </ul>
     </div>
-    <div class="mask">
+    <div class="mask" v-if="alertFlag" >
       <div class="alert-box">
         <div class="top-bg">卡戳APP入驻服务协议</div>
         <div class="alert-content">
@@ -23,9 +23,9 @@
             <p>在您成为卡戳APP入驻用户之前，您需要通 过阅读卡戳APP入驻服务协议并点击同意的 形式在线签署以下协议，请您务必仔细阅读 并点击同意的形式在线签署以下协议，请您务必仔细阅读并理解协议中的条款内容后再点击同意。</p>
           </div>
         </div>
-        <div class="xieyi">《卡戳APP入驻服务协议》</div>
-        <div class="agree">同意并继续</div>
-        <div class="veto">我再想想</div>
+        <div class="xieyi" @click="xieyi">《卡戳APP入驻服务协议》</div>
+        <div class="agree" @click="agree">同意并继续</div>
+        <div class="veto" @click="alertFlag = false">我再想想</div>
       </div>
     </div>
   </div>
@@ -63,7 +63,8 @@ export default {
         {title:'匠人入驻',link:'/checkIn/moke?type=jiangren'},
         {title:'拍客入驻',link:'/checkIn/moke?type=paike'},
       ],
-      btnIndex:-1
+      btnIndex:-1,
+      alertFlag : false
     };
   },
 
@@ -77,17 +78,22 @@ export default {
   },
 
   methods: {
-    //跳转景区后台
-    Backstage(){
-      this.$router.push("/jingquBsIndex")
-    },
     goLink(linkStr){
       this.$router.push(linkStr)
     },
     checkIn(){
       if(this.btnIndex == -1) return
-      console.log(this.btnList[this.btnIndex].link);
+      this.alertFlag = true
+    },
+    agree(){
+      this.alertFlag = false
       this.$router.push(this.btnList[this.btnIndex].link)
+    },
+    Backstage(){
+      this.$router.push("/jingquBsIndex")
+    },
+    xieyi(){
+      this.$router.push('/checkIn/agreement')
     }
   },
 
