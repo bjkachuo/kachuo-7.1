@@ -6,7 +6,7 @@
        <li v-for="item in cellListTools" :class="item.icon" @click="goLink(item.link )"></li>
     </ul>
     <div class="mg">
-      <div class="content"><span>MG动画</span></div>
+      <div class="content" @click="Backstage"><span>MG动画</span></div>
       <div class="btn-menu" @click="checkIn"></div>
     </div>
     <div class="settled-in">
@@ -77,6 +77,10 @@ export default {
   },
 
   methods: {
+    //跳转景区后台
+    Backstage(){
+      this.$router.push("/jingquBsIndex")
+    },
     goLink(linkStr){
       this.$router.push(linkStr)
     },

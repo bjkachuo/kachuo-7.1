@@ -162,8 +162,15 @@ Vue.component('x-dialog', XDialog);
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUI);
-
-
+//引入富文本编辑器
+import VueQuillEditor from 'vue-quill-editor'
+// require styles
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
+Vue.use(VueQuillEditor, {
+  placeholder: '请输入内容',
+});
 //微信授权登录
 import wechatAuth from './servers/wechatAuth'//微信登录插件
 const qs= require('qs');
