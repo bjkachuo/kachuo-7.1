@@ -7,7 +7,7 @@
     ></Header>
     <div class="back-lease-details-content" :style="conHeight">
       <div class="back-lease-details-content-top">
-        <img :src="goodsData.thumb" alt srcset>
+        <img :src="goodsData.thumb" alt srcset />
         <p class="goods-name">{{goodsData.goods_name}}</p>
       </div>
       <div class="divider-area"></div>
@@ -130,10 +130,11 @@ export default {
         this.$vux.confirm.show({
           title: "提示",
           content: con,
-          onCancel: () => {
-          },
+          onCancel: () => {},
           onConfirm: () => {
-            this.$router.push("/confirmorder?id=" + this.goodsData.goods + "&price="+price);
+            this.$router.push(
+              "/confirmorder?id=" + this.goodsData.goods + "&price=" + price
+            );
           }
         });
       }
@@ -219,5 +220,6 @@ export default {
   bottom: 0;
   left: 0;
   border-radius: 0;
+  background-color: #3976ff;
 }
 </style>

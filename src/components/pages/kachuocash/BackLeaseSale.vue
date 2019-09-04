@@ -8,6 +8,19 @@
     <div class="back-lease-sale-content-wrap" :style="scrollContentHeight">
       <TabItemMallAdvertise></TabItemMallAdvertise>
       <DividedArea></DividedArea>
+      <div style="width:92%;margin: 15px auto 30px;">
+        <swiper auto height="100px" class="custom">
+          <swiper-item class="black">
+            <h2 class="title fadeInUp animated">它无孔不入</h2>
+          </swiper-item>
+          <swiper-item class="black">
+            <h2 class="title fadeInUp animated">你无处可藏</h2>
+          </swiper-item>
+          <swiper-item class="black">
+            <h2 class="title fadeInUp animated">不是它可恶</h2>
+          </swiper-item>
+        </swiper>
+      </div>
       <Divider :content="TitleObjData.titleContent"></Divider>
       <div class="scroll-wrap-con" :style="scrollWrapHeight">
         <GoodsListWrapBack v-if="this.TitleObjData.titleContent === '艺品回购'"></GoodsListWrapBack>
@@ -26,6 +39,7 @@ import GoodsListWrapLease from "@/components/layout/GoodsListWrapLease";
 import GoodsListWrapSent from "@/components/layout/GoodsListWrapSent";
 import DividedArea from "@/components/common/DividedArea";
 import Divider from "@/components/common/Divider";
+import { Swiper, SwiperItem } from "vux";
 
 export default {
   name: "",
@@ -47,7 +61,9 @@ export default {
     GoodsListWrapBack,
     GoodsListWrapLease,
     GoodsListWrapSent,
-    Divider
+    Divider,
+    Swiper,
+    SwiperItem
   },
 
   computed: {
@@ -77,7 +93,6 @@ export default {
         this.getBannerImgFn("10");
       }
     }
-    
   },
 
   watch: {
@@ -94,5 +109,20 @@ export default {
 }
 .scence-release-content {
   margin-top: 300px;
+}
+</style>
+<style lang="less" scoped>
+.custom {
+  overflow: inherit;
+
+  /deep/ .vux-indicator {
+    right: 50%;
+    margin-right: -32px;
+    bottom: -27px;
+  }
+  /deep/ .vux-icon-dot {
+    width: 15px !important;
+    height: 3px !important;
+  }
 }
 </style>

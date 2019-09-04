@@ -1,12 +1,18 @@
 <template>
   <div class="tab-item-mall-wrap">
     <TabItemCashHeader></TabItemCashHeader>
-<!--    <TabItemMallAdvertise></TabItemMallAdvertise>-->
-    <div style="width:92%;margin: 15px auto 30px;" >
+    <!--    <TabItemMallAdvertise></TabItemMallAdvertise>-->
+    <div style="width:92%;margin: 15px auto 30px;">
       <swiper auto height="100px" class="custom">
-        <swiper-item class="black"><h2 class="title fadeInUp animated">它无孔不入</h2></swiper-item>
-        <swiper-item class="black"><h2 class="title fadeInUp animated">你无处可藏</h2></swiper-item>
-        <swiper-item class="black"><h2 class="title fadeInUp animated">不是它可恶</h2></swiper-item>
+        <swiper-item class="black">
+          <h2 class="title fadeInUp animated">它无孔不入</h2>
+        </swiper-item>
+        <swiper-item class="black">
+          <h2 class="title fadeInUp animated">你无处可藏</h2>
+        </swiper-item>
+        <swiper-item class="black">
+          <h2 class="title fadeInUp animated">不是它可恶</h2>
+        </swiper-item>
       </swiper>
     </div>
 
@@ -21,18 +27,20 @@
       <div class="guess-you-bgc"></div>
       <span>猜你喜欢</span>
     </div>
-<!--    <CellDivider :cellList="cellListTools" class="tab-item-mall-tools-wrap"></CellDivider>-->
+    <GoodsList :goodList="goodsListData"></GoodsList>
 
+    <!--    <CellDivider :cellList="cellListTools" class="tab-item-mall-tools-wrap"></CellDivider>-->
   </div>
 </template>
 
 <script>
-
 import TabItemCashHeader from "@/components/layout/TabItemCashHeader";
-
 import DividedArea from "@/components/common/DividedArea";
 import CellDivider from "@/components/common/CellDivider";
-import {Swiper,SwiperItem} from 'vux'
+import GoodsList from "@/components/layout/GoodsList/GoodsList";
+import { goodsBucketRecomm } from "@/servers/api";
+
+import { Swiper, SwiperItem } from "vux";
 export default {
   name: "",
   props: [""],
@@ -59,7 +67,8 @@ export default {
           icon: "xinxi",
           link: "/informationconsum?carousel=11"
         }
-      ]
+      ],
+      goodsListData: []
     };
   },
 
@@ -68,7 +77,9 @@ export default {
 
     DividedArea,
     CellDivider,
-    Swiper,SwiperItem
+    Swiper,
+    SwiperItem,
+    GoodsList
   },
 
   computed: {},
@@ -77,15 +88,36 @@ export default {
 
   mounted() {
     this.getBannerImgFn("7");
+    this.getGoodsComm();
+
   },
 
   methods: {
     previewMethod() {},
     addImageMethod() {},
     removeImageMethod() {},
+    goodsTypeGo(link) {
+      this.$router.push(link);
+    },
+        // 商品推荐
+    getGoodsComm() {
+      goodsBucketRecomm({
+        type: 2
+      })
+        .then(res => {
+          if (res.result === 1) {
+            this.goodsListData = res.data.result;
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
     goodsTypeGo(link){
       this.$router.push(link)
+      // console.log(link);
     }
+
   },
 
   watch: {}
@@ -97,10 +129,10 @@ export default {
   height: 100%;
   background: #f5f5f5;
 }
-.guess-you{
+.guess-you {
   width: 100px;
   margin: 20px auto 0;
-  .guess-you-bgc{
+  .guess-you-bgc {
     display: inline-block;
     width: 17px;
     height: 20px;
@@ -110,47 +142,47 @@ export default {
     top: 9px;
   }
 }
-.custom  {
+.custom {
   overflow: inherit;
 
-  /deep/ .vux-indicator{
+  /deep/ .vux-indicator {
     right: 50%;
     margin-right: -32px;
     bottom: -27px;
   }
-  /deep/ .vux-icon-dot{
-    width: 15px!important;
-    height: 3px!important;
+  /deep/ .vux-icon-dot {
+    width: 15px !important;
+    height: 3px !important;
   }
 }
 
-.goods-type{
+.goods-type {
   width: 92%;
   margin: 0 auto;
   border-radius: 8px;
   background-color: #fff;
   height: 90px;
   display: flex;
-  li{
+  li {
     flex: 1;
-    .goods-type-icon{
+    .goods-type-icon {
       width: 26px;
       height: 26px;
       margin: 21px auto 8px;
     }
-    .huigou{
+    .huigou {
       background-image: url("./huigou.png");
       background-size: 100% 100%;
     }
-    .zulin{
+    .zulin {
       background-image: url("./zulin.png");
       background-size: 100% 100%;
     }
-    .jimai{
+    .jimai {
       background-image: url("./jimai.png");
       background-size: 100% 100%;
     }
-    .xinxi{
+    .xinxi {
       background-image: url("./xinxi.png");
       background-size: 100% 100%;
     }

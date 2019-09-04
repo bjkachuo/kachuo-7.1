@@ -26,7 +26,7 @@ export const getScenicList = (data) => http.post("index.get_list", data)
 export const getKaChuoNews = (data) => http.post("index", data)
 
 //商品详情
-export const getDetail = (data) => http.post("index.detail", data)
+export const getDetail = (data) => http.post("shop.index.detail", data)
 
 //防伪查询
 export const Anti = (data) => http.post("goods.details.get_fw", data);
@@ -107,7 +107,7 @@ export const newsDetails = (data) => http.post("index.dynamic_details", data);
 export const buyBack = (data) => http.post("goods.repurchase.slide_list", data);
 
 // 回购列表
-export const buyBackList = (data) => http.post("index.activity", data);
+export const buyBackList = (data) => http.post("buyback.index.activity", data);
 
 // 申请回购
 export const buyBackSubmit = (data) => http.post("goods.repurchase.submit", data);
@@ -143,7 +143,7 @@ export const Confirmation = (data) => http.post("goods.buy.is_Confirmation", dat
 export const marketList = () => http.post("goods.market.slide_list");
 
 // 租赁列表
-export const LeasetList = (data) => http.post("index.lease_list", data);
+export const LeasetList = (data) => http.post("lease.index.lease_list", data);
 
 //一件寄卖
 export const shotMarket = () => http.post("goods.market.OneShotMarket");
@@ -305,7 +305,7 @@ export const TakeAwayGoodsList = (data) => http.post("index.get_goods_by_scenic"
 export const GoodsClassList = (data) => http.post("goods.details.getGoodsCode", data);
 
 // 信息消费
-export const InformationConsum = (data) => http.post("index.Information_list", data);
+export const InformationConsum = (data) => http.post("video.index.Information_list", data);
 
 // 根据用户经纬度判断当前用户位置
 export const CheckByLocation = (data) => http.post("index.current_scenic", data);

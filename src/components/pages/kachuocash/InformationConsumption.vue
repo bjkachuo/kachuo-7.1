@@ -8,6 +8,20 @@
     <div class="scence-consum-content" :style="scenceConsumHeight">
       <TabItemMallAdvertise></TabItemMallAdvertise>
       <DividedArea></DividedArea>
+      <div style="width:92%;margin: 15px auto 30px;">
+        <swiper auto height="100px" class="custom">
+          <swiper-item class="black">
+            <h2 class="title fadeInUp animated">它无孔不入</h2>
+          </swiper-item>
+          <swiper-item class="black">
+            <h2 class="title fadeInUp animated">你无处可藏</h2>
+          </swiper-item>
+          <swiper-item class="black">
+            <h2 class="title fadeInUp animated">不是它可恶</h2>
+          </swiper-item>
+        </swiper>
+      </div>
+
       <Divider :content="title"></Divider>
       <main class="position-box">
         <vue-better-scroll
@@ -36,6 +50,8 @@ import Divider from "@/components/common/Divider";
 import Scroll from "@/components/common/Scroller";
 import VideoListWrap from "@/components/common/VideoListWrap";
 import { InformationConsum } from "@/servers/api";
+import { Swiper, SwiperItem } from "vux";
+
 export default {
   name: "",
   props: [""],
@@ -47,7 +63,7 @@ export default {
         showLeftBack: true,
         showRightMore: false
       },
-      page:1,
+      page: 1,
       scrollbarObj: {
         fade: true
       },
@@ -76,7 +92,9 @@ export default {
     DividedArea,
     Divider,
     Scroll,
-    VideoListWrap
+    VideoListWrap,
+    Swiper,
+    SwiperItem
   },
 
   computed: {
@@ -106,7 +124,7 @@ export default {
       return new Promise(resolve => {
         let arr = [];
         InformationConsum({
-          page:this.page
+          page: this.page
         })
           .then(res => {
             console.log(res);
@@ -147,15 +165,13 @@ export default {
       });
     }
   },
-  beforeDestroy() {
-
-  },
+  beforeDestroy() {},
 
   watch: {}
 };
 </script>
 <style lang='css' scoped>
-.scence-consum-wrap{
+.scence-consum-wrap {
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -176,5 +192,20 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
+}
+</style>
+<style lang="less" scoped>
+.custom {
+  overflow: inherit;
+
+  /deep/ .vux-indicator {
+    right: 50%;
+    margin-right: -32px;
+    bottom: -27px;
+  }
+  /deep/ .vux-icon-dot {
+    width: 15px !important;
+    height: 3px !important;
+  }
 }
 </style>

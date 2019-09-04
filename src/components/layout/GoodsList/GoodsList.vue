@@ -17,7 +17,7 @@
       </div>
       <div class="good-desc-wrap">
         <p class="goods-name">{{item.goods_name ? item.goods_name : item.title}}</p>
-        <p class="goods-price" v-show="item.marketprice">¥{{item.marketprice.split('.')[0]}}.<span style="font-size: 14px">{{item.marketprice.split('.')[1]}}</span></p>
+        <!-- <p class="goods-price" v-show="item.y_rent">¥{{item.y_rent.split('.')[0]}}.<span style="font-size: 14px">{{item.y_rent.split('.')[1]}}</span></p> -->
       </div>
     </div>
   </div>
