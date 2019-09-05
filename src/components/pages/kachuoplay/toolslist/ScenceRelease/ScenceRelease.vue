@@ -3,9 +3,9 @@
 <!--    <Header :titleContent="TitleObjData.titleContent" :showLeftBack="TitleObjData.showLeftBack" :showRightMore="TitleObjData.showRightMore"></Header>-->
     <div class="banner">
       <swiper auto height="234px" v-model="swiperIndex" class="custom">
-        <swiper-item class="black"><h2 class="title fadeInUp animated">它无孔不入</h2></swiper-item>
-        <swiper-item class="black"><h2 class="title fadeInUp animated">你无处可藏</h2></swiper-item>
-        <swiper-item class="black"><h2 class="title fadeInUp animated">不是它可恶</h2></swiper-item>
+        <swiper-item class="black"><img src="../../../../../assets/images/蓬莱阁.jpg" alt=""></swiper-item>
+        <swiper-item class="black"><img src="../../../../../assets/images/蓬莱阁.jpg" alt=""></swiper-item>
+        <swiper-item class="black"><img src="../../../../../assets/images/蓬莱阁.jpg" alt=""></swiper-item>
       </swiper>
       <div class="swiper-index">{{swiperIndex + 1}}/3</div>
       <div class="back" @click="goBack">
@@ -17,7 +17,7 @@
       <div style="border-bottom: 1px solid #ddd">
         <div class="synopsis">
           <div style="color:#222;display: inline-block;width: calc(100% - 4em);overflow: hidden; white-space: nowrap; text-overflow: ellipsis;line-height: 30px">1231231231231123123123123112312312312311231231231231</div>
-          <div style="display: inline-block;width: 4em;float: right;text-align: right">简介<x-icon type="ios-arrow-right" size="20"></x-icon></div>
+          <div style="display: inline-block;width: 4em;float: right;text-align: right" @click="goPage('/scencerelease/dynamic/ScenicContent')">简介<x-icon type="ios-arrow-right" size="20"></x-icon></div>
         </div>
         <div class="synopsis">
           <div style="color:#222;display: inline-block;width: calc(100% - 5em);overflow: hidden; white-space: nowrap; text-overflow: ellipsis;line-height: 30px">1231231231231123123123123112312312312311231231231231</div>
@@ -121,7 +121,6 @@ export default {
   },
 
   methods: {
-
     goPage(src){
       this.$router.push(src)
     },

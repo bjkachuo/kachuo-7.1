@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import ImgAndTxtList from "@/components/layout/ImgAndTxtList";
+import ImgAndTxtList from "@/components/layout/ImgAndTxtList/ImgAndTxtList";
 import DividedArea from "@/components/common/DividedArea";
 import Divider from "@/components/common/DividedArea";
 export default {

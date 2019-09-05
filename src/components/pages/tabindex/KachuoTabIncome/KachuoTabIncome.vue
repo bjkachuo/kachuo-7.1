@@ -44,11 +44,11 @@ export default {
       cellListTools: [
         {
           icon: "png1",
-          link: "/videocreated?branch=9"
+          link: "/imageandtext?branch=10"
         },
         {
           icon: "png2",
-          link: "/imageandtext?branch=10"
+          link: "/videocreated?branch=9"
         },
         {
           icon: "png3",

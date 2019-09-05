@@ -9,11 +9,11 @@
       <div class="list-box">
         <div class="title">蓬莱阁旅游景区，是国家级5A级风景区位于 山东省蓬莱市，小城在海边</div>
         <ul>
-          <li></li>
-          <li></li>
-          <li></li>
+          <li @click="go"></li>
+          <li @click="go"></li>
+          <li @click="go"></li>
         </ul>
-        <VideoPlayer :isControls="true"></VideoPlayer>
+<!--        <VideoPlayer :isControls="true"></VideoPlayer>-->
         <div>
           <span class="name">蓬莱阁景区</span>
           <span class="comment">29评论</span>
@@ -37,6 +37,12 @@
               showLeftBack: true,
               showRightMore: false
             },
+          }
+        },
+
+        methods:{
+          go(){
+            this.$router.push('/scencerelease/dynamic/DynamicDetails')
           }
         }
     }

@@ -1,21 +1,6 @@
-<!--
- * @Description: 
- * @Author: lpb
- * @Github: https://github.com/lpb273
- * @LastEditors: lpb
- * @Date: 2019-03-15 13:34:24
- * @LastEditTime: 2019-05-07 09:10:31
- -->
 <template>
   <div class="img-and-text-wrap">
-    <x-header
-      :left-options="{showBack: true,preventGoBack:true}"
-      :right-options="{showMore: false}"
-      @on-click-back="back"
-      @on-click-more="showMenus = true"
-      slot="header"
-      style="width:100%;position:absolute;left:0;top:0;z-index:100;"
-    >
+    <x-header :left-options="{showBack: true,preventGoBack:true}" :right-options="{showMore: false}" @on-click-back="back" @on-click-more="showMenus = true" slot="header" style="width:100%;position:absolute;left:0;top:0;z-index:100;">
       <a slot="right" @click="releaseContent" style="font-size:16px">发布</a>
     </x-header>
     <div class="img-and-text-content" :style="conHeight">
@@ -26,7 +11,7 @@
 
 <script>
 import { XHeader } from "vux";
-import ImgAndTxtList from "@/components/layout/ImgAndTxtList";
+import ImgAndTxtList from "@/components/layout/ImgAndTxtList/ImgAndTxtList";
 import DividedArea from "@/components/common/DividedArea";
 import Scroll from "@/components/common/Scroller";
 
