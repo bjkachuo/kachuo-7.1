@@ -842,9 +842,6 @@ img {
   padding-left: 0px;
   padding-right: 0px;
 } */
-.swiper-main /deep/ .vux-slider {
-  border-radius: 8px;
-}
 .swiper-main {
   overflow: hidden;
   border-radius: 8px;
@@ -856,7 +853,7 @@ img {
   height: 110px;
   border-radius: 8px;
 }
-.swiper-main /deep/ .vux-slider > .vux-indicator > a > .vux-icon-dot,
+/* .swiper-main /deep/ .vux-slider > .vux-indicator > a > .vux-icon-dot,
 .swiper-main /deep/ .vux-slider .vux-indicator-right > a > .vux-icon-dot {
   width: 15px;
   height: 3px;
@@ -872,7 +869,7 @@ img {
   > a
   > .vux-icon-dot.active {
   opacity: 1;
-}
+} */
 .swiper-main /deep/ .vux-slider > .vux-indicator,
 .swiper-main /deep/ .vux-slider .vux-indicator-right {
   bottom: 5px;
@@ -885,11 +882,31 @@ img {
   line-height: 4px;
 } */
 </style>
-<style lang="less">
-/deep/.vux-slider > .vux-indicator > a > .vux-icon-dot,
+<style lang="less" scoped>
+/deep/ .vux-slider > .vux-indicator > a > .vux-icon-dot,
+.swiper-main /deep/ .vux-slider .vux-indicator-right > a > .vux-icon-dot {
+  width: 15px;
+  height: 3px;
+  background: rgba(34, 34, 34, 1);
+  opacity: 0.2;
+  border-radius: 3px;
+}
+/deep/ .vux-slider > .vux-indicator > a > .vux-icon-dot.active,
+.swiper-main
+  /deep/
+  .vux-slider
+  .vux-indicator-right
+  > a
+  > .vux-icon-dot.active {
+  opacity: 1;
+}
+/deep/ .vux-slider > .vux-indicator > a > .vux-icon-dot,
 .vux-slider .vux-indicator-right > a > .vux-icon-dot {
   width: 12px;
   height: 3px;
+}
+/deep/ .vux-slider {
+  border-radius: 8px;
 }
 
 .weui-cell {

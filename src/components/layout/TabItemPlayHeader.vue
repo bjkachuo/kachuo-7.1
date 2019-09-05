@@ -11,10 +11,11 @@
         <!-- <i class="el-icon-arrow-down"></i> -->
       </div>
       <div class="help-wrap" style="margin-left=25px;">
-        <div class="setUp-img">
+        <customerService></customerService>
+        <!-- <div class="setUp-img">
           <img src="../../assets/images/帮助中心@2x.png" alt />
         </div>
-        <span>帮助</span>
+        <span>帮助</span>-->
       </div>
 
       <!-- <div class="weather"> -->
@@ -47,6 +48,8 @@
 import SwiperImg from "@/components/common/SwiperImgIndex";
 import { vueCordovaFunction } from "@/assets/js/vuecordova";
 import { getScenicNameByScenicId } from "@/assets/js/common";
+import customerService from "@/components/common/customerService/customerService";
+
 export default {
   name: "",
   props: [""],
@@ -58,7 +61,8 @@ export default {
   },
 
   components: {
-    SwiperImg
+    SwiperImg,
+    customerService
   },
   created() {
     this.getUserInfo();
@@ -113,8 +117,8 @@ export default {
     appMessageCenter() {
       this.$router.push("/appmessage");
     },
-    goScencerelease(){
-      this.$router.push('/scencerelease')
+    goScencerelease() {
+      this.$router.push("/scencerelease");
     }
   },
 
@@ -181,7 +185,7 @@ iframe {
   height: 38px;
   float: right;
   margin-right: 4.2%;
-  margin-top: 2px;
+  margin-top: 8px;
 }
 .setUp-img {
   width: 18px;
