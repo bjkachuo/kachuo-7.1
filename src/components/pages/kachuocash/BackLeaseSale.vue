@@ -11,13 +11,13 @@
       <div style="width:92%;margin: 15px auto 30px;">
         <swiper auto height="100px" class="custom">
           <swiper-item class="black">
-            <h2 class="title fadeInUp animated">它无孔不入</h2>
+            <h2 class="title fadeInUp animated"></h2>
           </swiper-item>
           <swiper-item class="black">
-            <h2 class="title fadeInUp animated">你无处可藏</h2>
+            <h2 class="title fadeInUp animated"></h2>
           </swiper-item>
           <swiper-item class="black">
-            <h2 class="title fadeInUp animated">不是它可恶</h2>
+            <h2 class="title fadeInUp animated"></h2>
           </swiper-item>
         </swiper>
       </div>
@@ -114,7 +114,11 @@ export default {
 <style lang="less" scoped>
 .custom {
   overflow: inherit;
-
+  h2{
+    background:linear-gradient(90deg,rgba(57,118,255,1) 0%,rgba(57,62,255,1) 100%);
+    width: 100%;
+    height: 100%;
+  }
   /deep/ .vux-indicator {
     right: 50%;
     margin-right: -32px;

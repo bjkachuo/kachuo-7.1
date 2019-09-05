@@ -119,11 +119,6 @@ export default [{
     name: 'remember',
     component: resolve => require(['@/components/pages/kachuoplay/toolslist/Remember'], resolve),
   },
-  {
-    path: '/understand',
-    name: 'understand',
-    component: resolve => require(['@/components/pages/kachuoplay/toolslist/Understand'], resolve),
-  },
   //带走的
   {
     path: '/takeaway',
@@ -135,11 +130,6 @@ export default [{
     path: '/takeaway/takeaList',
     name: 'takeaList',
     component: resolve => require(['@/components/pages/kachuoplay/toolslist/TakeAway/takeList'], resolve),
-  },
-  {
-    path: '/servicesurround',
-    name: 'servicesurround',
-    component: resolve => require(['@/components/pages/kachuoplay/toolslist/ServiceSurround'], resolve),
   },
   {
     path: '/scencereleasedetals',
@@ -451,7 +441,7 @@ export default [{
   //名家入驻
   {
     path: '/checkIn/minjia',
-    name: 'appointment',
+    name: 'minjia',
     component: resolve => require(['@/components/pages/tabindex/KachuoTabIncome/mingjia/mingjia'], resolve),
   },
   //景区后台首页
@@ -556,27 +546,12 @@ export default [{
   name: 'understand',
   component: resolve => require(['@/components/pages/kachuoplay/toolslist/Understand'], resolve),
 },
-{
-  path: '/takeaway',
-  name: 'takeaway',
-  component: resolve => require(['@/components/pages/kachuoplay/toolslist/TakeAway/TakeAway'], resolve),
-},
+
 {
   path: '/servicesurround',
   name: 'servicesurround',
   component: resolve => require(['@/components/pages/kachuoplay/toolslist/ServiceSurround'], resolve),
 },
-{
-  path: '/orderlistcaiyuan',
-  name: 'OrderListCY',
-  component: resolve => require(['@/components/pages/kachuoincome/caiyuangongxiang/OrderList'], resolve),
-},
-
-  {
-    path: '/understand',
-    name: 'understand',
-    component: resolve => require(['@/components/pages/kachuoplay/toolslist/Understand'], resolve),
-  },
   {
     //吃喝家详情页
     path: '/eatDrinkDetails',

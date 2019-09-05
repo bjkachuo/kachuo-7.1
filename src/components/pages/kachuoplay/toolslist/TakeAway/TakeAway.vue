@@ -7,25 +7,26 @@
       </div>
       <flexbox class="cc-flex" :gutter="10">
         <flexbox-item>
-          <router-link class="cc-item" to="/takeaway/takeaList?index=1">
-            <img src="./ts_text.png" alt="">
-          </router-link>
+<!--          <router-link class="cc-item" to="/takeaway/takeaList?index=1">-->
+          <a class="cc-item"> <img src="./ts_text.png" alt=""></a>
+
+<!--          </router-link>-->
         </flexbox-item>
         <flexbox-item>
-          <router-link class="cc-item" to="/takeaway/takeaList?index=2">
-            <img src="./wc_text.png" alt="">
-          </router-link>
+<!--          <router-link class="cc-item" to="/takeaway/takeaList?index=2">-->
+          <a class="cc-item"><img src="./wc_text.png" alt=""></a>
+<!--          </router-link>-->
         </flexbox-item>
       </flexbox>
       <div class="take-list">
         <div class="li" v-for="(item,index) in lists" :key="index">
           <div class="take-card" @click="url(item.url)">
             <div class="take-photo">
-              <img :src="item.src" alt="">
+              <img :src="item.thumb" alt="">
             </div>
             <div class="take-intro">
               <div class="t-title">{{item.title}}</div>
-              <div class="t-price">￥<span>{{item.price}}</span></div>
+              <div class="t-price">￥<span>{{item.marketprice}}</span></div>
             </div>
           </div>
         </div>
@@ -39,6 +40,9 @@
   import Header from "@/components/common/Header";
   import { Swiper, GroupTitle, SwiperItem, XButton, Divider } from 'vux'
   import { Flexbox, FlexboxItem } from 'vux'
+
+  import { TakeAwayGoodsList } from "@/servers/api";
+
   import {
     Panel
   } from 'vux'
@@ -108,6 +112,20 @@
         };
       }
     },
+    created() {
+      TakeAwayGoodsList({
+        scenic_id:sessionStorage.currentScenic
+      })
+        .then(res => {
+          if (res.result === 1) {
+            console.log(res);
+            this.lists = res.data.result
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
   };
 </script>
 <style lang='css' scoped>
