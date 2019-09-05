@@ -129,10 +129,17 @@ export default [{
     name: 'understand',
     component: resolve => require(['@/components/pages/kachuoplay/toolslist/Understand'], resolve),
   },
+  //带走的
   {
     path: '/takeaway',
     name: 'takeaway',
-    component: resolve => require(['@/components/pages/kachuoplay/toolslist/TakeAway'], resolve),
+    component: resolve => require(['@/components/pages/kachuoplay/toolslist/TakeAway/TakeAway'], resolve),
+  },
+  //地方特色，自营文创
+  {
+    path: '/takeaway/takeaList',
+    name: 'takeaList',
+    component: resolve => require(['@/components/pages/kachuoplay/toolslist/TakeAway/takeList'], resolve),
   },
   {
     path: '/servicesurround',
@@ -559,7 +566,7 @@ export default [{
 {
   path: '/takeaway',
   name: 'takeaway',
-  component: resolve => require(['@/components/pages/kachuoplay/toolslist/TakeAway'], resolve),
+  component: resolve => require(['@/components/pages/kachuoplay/toolslist/TakeAway/TakeAway'], resolve),
 },
 {
   path: '/servicesurround',
