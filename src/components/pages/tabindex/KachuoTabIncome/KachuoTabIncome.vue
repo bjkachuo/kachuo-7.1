@@ -6,7 +6,7 @@
        <li v-for="item in cellListTools" :class="item.icon" @click="goLink(item.link )"></li>
     </ul>
     <div class="mg">
-      <div class="content" @click="Backstage"><span>MG动画</span></div>
+      <div class="content" @click="Backstage" style="overflow: hidden;"><img :src="btnList[btnIndex].src" v-if="btnIndex  != -1" alt="" ></div>
       <div class="btn-menu" @click="checkIn"></div>
     </div>
     <div class="settled-in">
@@ -56,12 +56,12 @@ export default {
         }
       ],
       btnList:[
-        {title:'名家入驻',link:'/checkIn/minjia'},
-        {title:'景区入驻',link:'/checkIn/jingqu'},
-        {title:'商家入驻',link:'/checkIn/shangjia'},
-        {title:'墨客入驻',link:'/checkIn/moke?type=moke'},
-        {title:'匠人入驻',link:'/checkIn/moke?type=jiangren'},
-        {title:'拍客入驻',link:'/checkIn/moke?type=paike'},
+        {title:'名家入驻',link:'/checkIn/minjia',src:require('@/components/pages/tabindex/KachuoTabIncome/mingjia.jpg')},
+        {title:'景区入驻',link:'/checkIn/jingqu',src:require('@/components/pages/tabindex/KachuoTabIncome/jingqu.jpg')},
+        {title:'商家入驻',link:'/checkIn/shangjia',src:require('@/components/pages/tabindex/KachuoTabIncome/shangjia.jpg')},
+        {title:'墨客入驻',link:'/checkIn/moke?type=moke',src:require('@/components/pages/tabindex/KachuoTabIncome/moke.jpg')},
+        {title:'匠人入驻',link:'/checkIn/moke?type=jiangren',src:require('@/components/pages/tabindex/KachuoTabIncome/jiangren.jpg')},
+        {title:'拍客入驻',link:'/checkIn/moke?type=paike',src:require('@/components/pages/tabindex/KachuoTabIncome/paike.jpg')},
       ],
       btnIndex:-1,
       alertFlag : false
@@ -134,23 +134,17 @@ export default {
 
 }
 .mg{
-  background:linear-gradient(90deg,rgba(255,210,241,1) 0%,rgba(255,210,210,1) 100%);
   width: 92%;
-  padding-bottom: 47.8%;
+  height: 165px;
   margin: 10px auto;
   position: relative;
   border-radius: 8px;
-
+  background-image: url("mingjia.jpg");
+  background-size: 100% 100%;
   .content{
-    position: absolute;
-    top: 0;
-    font-size: 25px;
-    font-weight: bold;
-    color: #fff;
-    top: 50%;
-    margin-top: -16.5px;
+
+    border-radius: 8px;
     width: 100%;
-    text-align: center;
     vertical-align:middle;
   }
 
