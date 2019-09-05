@@ -7,12 +7,12 @@
       </div>
       <flexbox class="cc-flex" :gutter="10">
         <flexbox-item>
-          <router-link class="cc-item" to="/takeaway/takeaList">
+          <router-link class="cc-item" to="/takeaway/takeaList?index=1">
             <img src="./ts_text.png" alt="">
           </router-link>
         </flexbox-item>
         <flexbox-item>
-          <router-link class="cc-item" to="/takeaway/takeaList">
+          <router-link class="cc-item" to="/takeaway/takeaList?index=2">
             <img src="./wc_text.png" alt="">
           </router-link>
         </flexbox-item>

@@ -32,11 +32,7 @@
 
   export default {
     props: [""],
-    methods: {
-      url(link) {
-        this.$router.push(link);
-      }
-    },
+
     data() {
       return {
         TitleObjData: {
@@ -44,7 +40,8 @@
           showLeftBack: true,
           showRightMore: false
         },
-        lists: [{
+        lists: [
+          {
           src: require('./slide.png'),
           title: '蓬莱阁景区纪念品复古中国风创意金属书签',
           price:"98.00",
@@ -84,6 +81,11 @@
       Flexbox,
       FlexboxItem
     },
+    methods: {
+      url(link) {
+        this.$router.push(link);
+      }
+    },
     computed: {
       conHei() {
         return {
@@ -91,6 +93,12 @@
         };
       }
     },
+
+    mounted() {
+      console.log(this.$route.query.index);
+      this.$route.query.index == 1 ? this.TitleObjData.titleContent = '地方特色': this.TitleObjData.titleContent = '自营文创'
+    }
+
   };
 </script>
 <style lang='css' scoped>

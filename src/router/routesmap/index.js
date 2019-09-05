@@ -47,7 +47,7 @@ export default [{
   {
     path: '/intelligentnavigation',
     name: 'intelligentnavigation',
-    component: resolve => require(['@/components/pages/kachuoplay/toolslist/IntelligentNavigation'], resolve),
+    component: resolve => require(['@/components/pages/kachuoplay/toolslist/IntelligentNavigation/IntelligentNavigation'], resolve),
   },
   //景区发布
   {

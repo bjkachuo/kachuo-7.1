@@ -23,7 +23,7 @@
 <script>
 import Header from "@/components/common/Header";
 import NavigationTab from "@/components/common/NavigationTab";
-import Popup from "@/components/common/Popup";
+import Popup from "./popup";
 import { setTimeout } from "timers";
 import {AMapManager} from 'vue-amap'
 
@@ -31,6 +31,7 @@ console.log(AMapManager);
 export default {
 
   name: "amap-page",
+
   data() {
     let self = this;
     return {
@@ -43,7 +44,7 @@ export default {
         'moveend': () => {
           this.domBindEvent()
         },
-        'zoomend':()=>{
+        'zoomend':() => {
           this.domBindEvent()
           console.log(this.$refs.amap.$$getInstance())
           console.log(this.$refs.amap.$$getInstance().getZoom())
@@ -218,7 +219,7 @@ export default {
   .marker-icon-ta{
     width: 30px;
     height: 35px;
-    background-image: url("../../../../assets/images/amap-icon/scenic.png");
+    background-image: url("../../../../../assets/images/amap-icon/scenic.png");
     background-size: 100% 100%;
   }
   .marker-icon-sort{
