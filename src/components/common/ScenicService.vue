@@ -9,12 +9,14 @@
     <div class="scence-service-content">
       <div class="content-one">
         <div class="swp-wrap">
-          <swiper :options="swiperOption">
+          <swiper :list="baseList" height="110px" loop auto dots-position="center"></swiper>
+
+          <!-- <swiper :options="swiperOption">
             <swiper-slide>
               <img src="../../assets/images/banner图@2x.png" alt />
             </swiper-slide>
             <div class="swiper-pagination swiper-pagination-bullets" slot="pagination"></div>
-          </swiper>
+          </swiper>-->
         </div>
         <div class="Selected-warp">
           <flexbox>
@@ -131,7 +133,9 @@
 </template>
 <script>
 import Header from "@/components/common/Header";
-import { swiper, swiperSlide } from "vue-awesome-swiper";
+// import { swiper, swiperSlide } from "vue-awesome-swiper";
+import { Swiper, GroupTitle, SwiperItem, XButton, Cell } from "vux";
+
 import {
   Scroller,
   PopupRadio,
@@ -148,6 +152,20 @@ export default {
     return {
       //推荐商家列表：
       recommend: [],
+      baseList: [
+        {
+          url: "javascript:",
+          img: require("../../assets/images/svslide.jpg")
+        },
+        {
+          url: "javascript:",
+          img: require("../../assets/images/svslide.jpg")
+        },
+        {
+          url: "javascript:",
+          img: require("../../assets/images/svslide.jpg")
+        }
+      ],
 
       dataListOne: [
         {
@@ -172,7 +190,7 @@ export default {
         },
         {
           name: "游吧",
-          link: "/businessList?type=5&&name=游吧",
+          link: "/TourList",
           imgSrc: require("@/assets/images/you.png")
         }
       ],
@@ -199,35 +217,40 @@ export default {
         titleContent: "游园服务",
         showLeftBack: true,
         showRightMore: false
-      },
-      swiperOption: {
-        pagination: {
-          el: ".swiper-pagination",
-          clickable: true,
-          dynamicBullets: true
-        },
-        autoplay: {
-          disableOnInteraction: true //触碰后继续轮播
-        },
-        speed: 600,
-        loop: true, //循环模式
-        observer: true, //修改swiper自己或子元素时，自动初始化swiper
-        observeParents: true, //修改swiper的父元素时，自动初始化swiper
-        centeredSlides: true, //元素居中
-        slidesPerView: "1"
       }
+      // swiperOption: {
+      //   pagination: {
+      //     el: ".swiper-pagination",
+      //     clickable: true,
+      //     dynamicBullets: true
+      //   },
+      //   autoplay: {
+      //     disableOnInteraction: true //触碰后继续轮播
+      //   },
+      //   speed: 600,
+      //   loop: true, //循环模式
+      //   observer: true, //修改swiper自己或子元素时，自动初始化swiper
+      //   observeParents: true, //修改swiper的父元素时，自动初始化swiper
+      //   centeredSlides: true, //元素居中
+      //   slidesPerView: "1"
+      // }
     };
   },
   components: {
     Header,
-    swiper,
-    swiperSlide,
+    // swiper,
+    // swiperSlide,
     Scroller,
     PopupRadio,
     PopupPicker,
     Rater,
     Flexbox,
-    FlexboxItem
+    FlexboxItem,
+    Swiper,
+    GroupTitle,
+    SwiperItem,
+    XButton,
+    Cell
   },
 
   computed: {},
@@ -308,10 +331,18 @@ export default {
           }
         });
       } else if (type == 3) {
-        alert("跳转玩");
+        this.$router.push({
+          path: "/PlayDetails",
+          query: {
+            idNum: id,
+            typeNum: type
+          }
+        });
+
+        // alert("跳转玩");
       } else if (type == 4) {
         this.$router.push({
-          path: "/hotelDetails",
+          path: "/ResideDetails",
           query: {
             idNum: id,
             typeNum: type
@@ -319,7 +350,15 @@ export default {
         });
         // alert("跳转住");
       } else if (type == 5) {
-        alert("跳转游");
+        this.$router.push({
+          path: "/TourList",
+          query: {
+            idNum: id,
+            typeNum: type
+          }
+        });
+
+        // alert("跳转游");
       }
     },
 
@@ -409,11 +448,11 @@ img {
   border-radius: 8px;
   /* margin-left: 15px; */
 }
-.swiper-slide {
+/* .swiper-slide {
   width: 100%;
   padding-left: 15px;
   padding-right: 15px;
-}
+} */
 .scence-service-content .content-one .Selected-warp {
   /* width: 375px; */
   height: 79px;
@@ -799,9 +838,44 @@ img {
   color: #999999;
   line-height: 12px;
 }
-.swiper-slide {
+/* .swiper-slide {
   padding-left: 0px;
   padding-right: 0px;
+} */
+.swiper-main /deep/ .vux-slider {
+  border-radius: 8px;
+}
+.swiper-main {
+  overflow: hidden;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  box-shadow: 0px 6px 10px 0px rgba(0, 0, 0, 0.1);
+}
+.swiper-main img {
+  width: 100%;
+  height: 110px;
+  border-radius: 8px;
+}
+.swiper-main /deep/ .vux-slider > .vux-indicator > a > .vux-icon-dot,
+.swiper-main /deep/ .vux-slider .vux-indicator-right > a > .vux-icon-dot {
+  width: 15px;
+  height: 3px;
+  background: rgba(34, 34, 34, 1);
+  opacity: 0.2;
+  border-radius: 3px;
+}
+.swiper-main /deep/ .vux-slider > .vux-indicator > a > .vux-icon-dot.active,
+.swiper-main
+  /deep/
+  .vux-slider
+  .vux-indicator-right
+  > a
+  > .vux-icon-dot.active {
+  opacity: 1;
+}
+.swiper-main /deep/ .vux-slider > .vux-indicator,
+.swiper-main /deep/ .vux-slider .vux-indicator-right {
+  bottom: 5px;
 }
 </style>
 <style>
@@ -812,6 +886,12 @@ img {
 } */
 </style>
 <style lang="less">
+/deep/.vux-slider > .vux-indicator > a > .vux-icon-dot,
+.vux-slider .vux-indicator-right > a > .vux-icon-dot {
+  width: 12px;
+  height: 3px;
+}
+
 .weui-cell {
   .weui-cell__ft {
     color: #666666;

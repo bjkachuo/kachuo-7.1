@@ -8,7 +8,7 @@
     <div class="businessList-content">
       <div class="classificationSorting-wrap">
         <div class="left">
-          <popup-radio :options="options2" v-model="option2" placeholder="全部分类" ></popup-radio>
+          <popup-radio :options="options2" v-model="option2" placeholder="全部分类"></popup-radio>
         </div>
         <div class="right">
           <popup-radio :options="options3" v-model="option3" placeholder="智能排序"></popup-radio>
@@ -115,10 +115,18 @@ export default {
           }
         });
       } else if (type == 3) {
-        alert("跳转玩");
+        this.$router.push({
+          path: "/PlayDetails",
+          query: {
+            idNum: id,
+            typeNum: type
+          }
+        });
+
+        // alert("跳转玩");
       } else if (type == 4) {
         this.$router.push({
-          path: "/hotelDetails",
+          path: "/ResideDetails",
           query: {
             idNum: id,
             typeNum: type
@@ -126,7 +134,15 @@ export default {
         });
         // alert("跳转住");
       } else if (type == 5) {
-        alert("跳转游");
+        this.$router.push({
+          path: "/TourList",
+          query: {
+            idNum: id,
+            typeNum: type
+          }
+        });
+
+        // alert("跳转游");
       }
     }
   },
@@ -161,11 +177,16 @@ export default {
   height: 45px;
   float: left;
   margin-left: -18px;
+  background: url(../../assets/images/down@2x.png) right center no-repeat;
+  background-size: 12px 6px;
 }
 .right {
   width: 110px;
   height: 45px;
   float: right;
+  background: url(../../assets/images/down@2x.png) right center no-repeat;
+  background-size: 12px 6px;
+  margin-right: 4%;
 }
 .recommend {
   width: 100%;
@@ -290,5 +311,10 @@ export default {
 }
 .weui-cell__ft:after {
   border-style: hidden;
+}
+/deep/ .weui-cell_access .weui-cell__ft:after {
+  height: 0px;
+  width: 0px;
+  border-width: 0px 0px 0 0;
 }
 </style>

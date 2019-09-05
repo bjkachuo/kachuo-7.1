@@ -341,10 +341,18 @@ export default {
           }
         });
       } else if (type == 3) {
-        alert("跳转玩");
+        this.$router.push({
+          path: "/PlayDetails",
+          query: {
+            idNum: id,
+            typeNum: type
+          }
+        });
+
+        // alert("跳转玩");
       } else if (type == 4) {
         this.$router.push({
-          path: "/hotelDetails",
+          path: "/ResideDetails",
           query: {
             idNum: id,
             typeNum: type
@@ -352,7 +360,14 @@ export default {
         });
         // alert("跳转住");
       } else if (type == 5) {
-        alert("跳转游");
+        this.$router.push({
+          path: "/TourList",
+          query: {
+            idNum: id,
+            typeNum: type
+          }
+        });
+        // alert("跳转游");
       }
     },
     getItem(link) {
