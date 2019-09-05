@@ -1,7 +1,7 @@
 <template>
   <div class="login-wrap" :style="backSty">
     <p class="login-wrap-title-one">Hi！</p>
-    <p class="login-wrap-title">登录开启更多精彩</p>
+    <p class="login-wrap-title">卡戳有你 游园伴侣</p>
     <div style="width:100%;background:none;margin-left:10%;position:relative">
       <x-input title="验证码" style="display:none"></x-input>
       <x-input
@@ -16,7 +16,7 @@
         <img
           slot="label"
           style="padding-right:5px;display:block;background:none;margin-left:10px;height:100%; width:60%;"  
-          src="../../assets/images/账号@2x.png"
+          src="../../assets/images/indexZH.png"
           width="38"
           height="38"
         />
@@ -32,7 +32,7 @@
           <img
             slot="label"
             style="padding-right:6px;display:block;background:none;margin-left:11px;height:100%;width:60%;"
-            src="../../assets/images/验证码@2x.png"
+            src="../../assets/images/indexMM.png"
             width="38"
             height="38"
           />
@@ -72,7 +72,7 @@ export default {
       veriValue: "",
       backSty: {
         backgroundImage:
-          "url(" + require("@/assets/images/loginbackOne.png") + ")",
+          "url(" + require("@/assets/images/indexImg.png") + ")",
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
@@ -291,15 +291,15 @@ body{
   font-size: 60px;
   font-family: PingFang-SC-Heavy;
   font-weight: 800;
-  color: rgba(255, 255, 255, 1);
+  color: rgba(57,118,255,1);;
   line-height: 21px;
 }
 .login-wrap-title {
-  font-size: 24px;
+  font-size: 30px;
   margin-left: 8%;
   margin-top: 40px;
   font-family: PingFang-SC-Heavy;
-  color: rgba(255, 255, 255, 1);
+  color: rgba(57,118,255,1);
   font-weight: 800;
 }
 .weui-vcode,
@@ -310,7 +310,7 @@ body{
   /* padding-left: 12%; */
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.5);
-  color: #ffffff;
+  color: rgba(57,118,255,1);
   height: 52px;
   font-size: 16px;
 }
@@ -339,7 +339,7 @@ body{
   background: rgba(255, 255, 255, 0.5);
   /* opacity:0.5; */
   border-radius: 8px;
-  color: #fff;
+  color: rgba(57,118,255,1);
   float: left;
   margin-top: 20px;
   margin-left: 5px;
@@ -357,7 +357,7 @@ body{
   height: 16px;
   font-size: 16px;
   text-align: center;
-  color: #fff;
+  color: rgba(57,118,255,1);
   margin-top: 30px;
   margin-left: 41%;
 }

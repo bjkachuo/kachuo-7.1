@@ -5,11 +5,11 @@
     <div style="background: #fff;">
       <div style="width: 76%;margin: 0 auto;">
         <tab :scroll-threshold="5" class="custom">
-          <tab-item v-for="n in 7" :key="n" :selected="n===1">已发货{{ n }}</tab-item>
+          <tab-item v-for="(item,index) in CommodityCategory" :key="index" :selected="index===1">{{item.name}}</tab-item>
         </tab>
       </div>
     </div>
-    <div style="width:92%;margin: 15px auto 30px;" >
+    <div style="width:92%;margin: 15px auto 30px;">
       <swiper auto height="100px" class="custom">
         <swiper-item class="black"><img src="./banner.png" alt=""></swiper-item>
         <swiper-item class="black"><img src="./banner.png" alt=""></swiper-item>
@@ -22,21 +22,21 @@
         <div style="text-align: center">{{item.title}}</div>
       </li>
     </ul>
-<!--    <CellDivider :cellList="cellListTools" class="tab-item-mall-tools-wrap"></CellDivider>-->
+    <!--    <CellDivider :cellList="cellListTools" class="tab-item-mall-tools-wrap"></CellDivider>-->
     <DividedArea></DividedArea>
-<!--    <Divider :content="dividerContent"></Divider>-->
+    <!--    <Divider :content="dividerContent"></Divider>-->
     <GoodsList :goodList="goodsListData"></GoodsList>
-<!--    <span class="btn-wrap" @click="classification">-->
-<!--      <p class="btn">分类</p>-->
-      <!-- <x-icon type="ios-arrow-down" size="30"></x-icon> -->
-<!--    </span>-->
+    <!--    <span class="btn-wrap" @click="classification">-->
+    <!--      <p class="btn">分类</p>-->
+    <!-- <x-icon type="ios-arrow-down" size="30"></x-icon> -->
+    <!--    </span>-->
   </div>
 </template>
 
 <script>
 import TabItemMallHeader from "@/components/layout/TabItemMallHeader";
 
-import {Scroller,Swiper,SwiperItem,Tab, TabItem} from 'vux'
+import { Scroller, Swiper, SwiperItem, Tab, TabItem } from "vux";
 import DividedArea from "@/components/common/DividedArea";
 import CellDivider from "@/components/common/CellDivider";
 // import Divider from "@/components/common/Divider";
@@ -48,6 +48,30 @@ export default {
   props: [""],
   data() {
     return {
+      //商品类别
+      CommodityCategory: [
+        {
+          name: "书法"
+        },
+        {
+          name: "绘画"
+        },
+        {
+          name: "陶瓷"
+        },
+        {
+          name: "雕刻"
+        },
+        {
+          name: "陶器"
+        },
+        {
+          name: "刺绣"
+        },
+        {
+          name: "非遗"
+        }
+      ],
       cellListTools: [
         {
           title: "品类视频",
@@ -112,8 +136,8 @@ export default {
           console.log(err);
         });
     },
-    goodsTypeGo(link){
-      this.$router.push(link)
+    goodsTypeGo(link) {
+      this.$router.push(link);
       // console.log(link);
     }
     // classification(){
@@ -125,60 +149,60 @@ export default {
 };
 </script>
 <style lang='less' scoped>
- .box1{
-   width: 1000px;
- }
-.box1-item{
+.box1 {
+  width: 1000px;
+}
+.box1-item {
   margin: 0 20px;
   line-height: 44px;
 }
-.custom{
+.custom {
   overflow: inherit;
   border-radius: 8px;
-    /deep/ .vux-indicator{
-      right: 50%;
-      margin-right: -32px;
-      bottom: -27px;
-    }
-    /deep/ .vux-icon-dot{
-      width: 15px!important;
-      height: 3px!important;
-    }
-    /deep/ .vux-tab-ink-bar{
-      display: none;
-    }
-    /deep/ .vux-tab{
+  /deep/ .vux-indicator {
+    right: 50%;
+    margin-right: -32px;
+    bottom: -27px;
+  }
+  /deep/ .vux-icon-dot {
+    width: 15px !important;
+    height: 3px !important;
+  }
+  /deep/ .vux-tab-ink-bar {
+    display: none;
+  }
+  /deep/ .vux-tab {
+    background: transparent;
+    .vux-tab-item {
       background: transparent;
-      .vux-tab-item{
-        background: transparent;
-      }
     }
- }
-.goods-type{
+  }
+}
+.goods-type {
   width: 92%;
   margin: 0 auto;
   border-radius: 8px;
   background-color: #fff;
   height: 90px;
   display: flex;
-  li{
+  li {
     flex: 1;
-    .goods-type-icon{
+    .goods-type-icon {
       width: 27px;
       height: 27px;
       margin: 21px auto 8px;
       background-size: 100% 100%;
     }
-    .shipin{
+    .shipin {
       background-image: url("./shipin.png");
     }
-    .youyuan{
+    .youyuan {
       background-image: url("./youyuan.png");
     }
-    .haoli{
+    .haoli {
       background-image: url("./haoli.png");
     }
-    .miaocang{
+    .miaocang {
       background-image: url("./miaocang.png");
     }
   }
@@ -187,26 +211,26 @@ export default {
   padding-bottom: 30px;
   box-sizing: border-box;
   position: relative;
-  background:rgba(245,245,245,1);
+  background: rgba(245, 245, 245, 1);
 }
-.btn-wrap{
+.btn-wrap {
   position: absolute;
-  top:0px;
-  left:10px;
+  top: 0px;
+  left: 10px;
   width: 14%;
   height: 45px;
 }
-.btn{
+.btn {
   line-height: 45px;
   text-align: center;
   font-size: 16px;
   width: 66%;
   float: left;
-  }
- .vux-x-icon{
-   float: left;
-   width:34%;
-   margin-top: 8px;
- }
+}
+.vux-x-icon {
+  float: left;
+  width: 34%;
+  margin-top: 8px;
+}
 </style>
 
