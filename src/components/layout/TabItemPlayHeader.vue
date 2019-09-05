@@ -117,8 +117,8 @@ export default {
     appMessageCenter() {
       this.$router.push("/appmessage");
     },
-    goScencerelease() {
-      this.$router.push("/scencerelease");
+    goScencerelease(){
+      // this.$router.push('/scencerelease')
     }
   },
 
