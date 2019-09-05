@@ -60,10 +60,24 @@
           <li @click="cur=1" :class="{active:cur==1}">商家</li>
         </ul>
         <div class="tab-content">
-          <b v-show="cur==0">内容一</b>
+          <b v-show="cur==0">
+            <div class="dc-panel">
+              <div class="dc-navbar">
+                <div
+                  v-for="(tab ,index) in tabs"
+                  :class="{cur:iscur==index}"
+                  @click="iscur=index,tabChange('list' + (index + 1))"
+                  :key="index"
+                >{{tab.name}}</div>
+              </div>
+              <div class="dc-cells">
+                <component v-bind:is="tabView"></component>
+              </div>
+            </div>
+          </b>
           <b v-show="cur==1">
             <div class="line-a">
-              <cell title="联系方式:" is-link>
+              <cell title="联系方式:" is-link class="store-msg">
                 <img
                   slot="icon"
                   width="20"
@@ -74,7 +88,7 @@
                   <a :href="'tel:'+ this.storeDetails.phone">{{this.storeDetails.phone}}</a>
                 </span>
               </cell>
-              <cell title="商家地址:">
+              <cell title="商家地址:" class="store-msg">
                 <img
                   slot="icon"
                   width="20"
@@ -85,7 +99,7 @@
               </cell>
             </div>
             <div class="line-b">
-              <cell title="营业资质">
+              <cell title="营业资质" @click.native="fications" class="store-msg">
                 <img
                   slot="icon"
                   width="20"
@@ -212,9 +226,27 @@
 <script>
 import Header from "@/components/common/Header";
 import { Scroller, LoadMore, Rater, Cell } from "vux";
+import list1 from "@/components/common/goods/list1.vue";
+import list2 from "@/components/common/goods/list2.vue";
+import list3 from "@/components/common/goods/list3.vue";
+import list4 from "@/components/common/goods/list4.vue";
+import list5 from "@/components/common/goods/list5.vue";
+import { XButton, XInput, Group, Actionsheet } from "vux";
+
 export default {
   data() {
     return {
+      tabView: "list1",
+      tabs: [
+        { name: "锅底" },
+        { name: "肉串类" },
+        { name: "荤菜类" },
+        { name: "素菜类" },
+        { name: "盘类" },
+        { name: "主食类" },
+        { name: "蘸料" }
+      ],
+      iscur: 0,
       cur: 0, //默认选中第一个tab
       //星星评分
       data42: 3.5,
@@ -246,14 +278,31 @@ export default {
     Scroller,
     LoadMore,
     Rater,
-    Cell
+    Cell,
+    XInput,
+    XButton,
+    Group,
+    Rater,
+    Actionsheet,
+    list1,
+    list2,
+    list3,
+    list4,
+    list5
   },
   created() {},
   methods: {
+    tabChange: function(tab) {
+      this.tabView = tab;
+    },
     //去吃喝订单页
     goEatOrder() {
       this.$router.push("/eatDrinkOrders");
     },
+    //跳转资质页面
+    fications() {
+      this.$router.push("/Qualifications");
+    }
     // onScrollBottom() {
     //   if (this.onFetching) {
     //     // do nothing
@@ -826,6 +875,38 @@ video {
   font-size: 14px;
   color: #333333;
 }
+.dc-navbar {
+  position: absolute;
+  left: 10px;
+  top: 0;
+  width: 80px;
+  text-align: center;
+  box-shadow: 0px 5px 10px 0px rgba(0, 101, 255, 0.06);
+  border-radius: 8px;
+  background-color: #ffffff;
+  overflow: hidden;
+}
+.dc-navbar div {
+  height: 50px;
+  line-height: 50px;
+  font-size: 14px;
+}
+.dc-navbar .cur {
+  background-color: #ccdcff;
+  font-weight: bold;
+}
+.dc-panel {
+  position: relative;
+  min-height: 440px;
+  padding: 0 10px 10px 100px;
+}
+.order-pic {
+  border-radius: 4px;
+  display: block;
+  width: 80px;
+  height: 50px;
+  margin-right: 10px;
+}
 </style>
 <style lang="less" scoped>
 .el-rate__icon {
@@ -857,16 +938,19 @@ video {
 /deep/ .vux-rater {
   display: block;
 }
-/deep/ .weui-cell__hd img {
+/deep/ .store-msg img {
   background: none;
   width: 12px;
   height: 12px;
 }
 /deep/ .vux-cell-primary {
-  flex: none;
-  -webkit-box-flex: none;
-  -webkit-flex: none;
-  margin-right: 5%;
+  // flex: none;
+  // -webkit-box-flex: none;
+  // -webkit-flex: none;
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  // margin-right: 5%;
 }
 /deep/ .weui-cell {
   // height: 50%;
