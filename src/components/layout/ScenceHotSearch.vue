@@ -3,7 +3,7 @@
     <p class="search-hot-title">全部景区</p>
     <div class="search-hot-list-wrap">
       <div class="list-item" v-for="(item,index) in dataList" :key="index" @click="selectScenic(item)">
-        <div class="img"></div>
+        <div class="img"><img :src="item.imgSrc" alt=""></div>
         <span>{{item.name}}</span>
       </div>
     </div>
@@ -19,14 +19,14 @@ export default {
     return {
       changeAreadata:{},
       dataList: [
-        {id: "22", name: "苍岩山", position: [114.145831, 37.831976]},
-        {id: "23", name: "徽州古城", position: [118.434598, 29.867]},
-        {id: "24", name: "蓬莱", position: [120.752564, 37.825461]},
-        {id: "25", name: "少林", position: [112.95978, 34.520026]},
-        {id: "26", name: "神垕", position: [113.228142, 34.118356]},
-        {id: "27", name: "云雾山", position: [114.214391, 31.12476]},
-        {id: "35", name: "三孔", position: [116.989873, 35.590745]},
-        {id: "66", name: "云冈石窟", position: [113.144103, 40.109236]}
+        {id: "22", name: "苍岩山", position: [114.145831, 37.831976], imgSrc: require("@/assets/images/苍岩山.jpg")},
+        {id: "23", name: "徽州古城", position: [118.434598, 29.867], imgSrc: require("@/assets/images/徽州古城.jpg")},
+        {id: "24", name: "蓬莱", position: [120.752564, 37.825461],imgSrc: require("@/assets/images/蓬莱阁.jpg")},
+        {id: "25", name: "少林", position: [112.95978, 34.520026],imgSrc: require("@/assets/images/少林寺.jpg")},
+        {id: "26", name: "神垕", position: [113.228142, 34.118356],imgSrc: require("@/assets/images/神垕.png")},
+        {id: "27", name: "云雾山", position: [114.214391, 31.12476],imgSrc: require("@/assets/images/云雾山.jpg")},
+        {id: "35", name: "三孔", position: [116.989873, 35.590745],imgSrc: require("@/assets/images/三孔.jpg")},
+        {id: "66", name: "云冈石窟", position: [113.144103, 40.109236],imgSrc: require("@/assets/images/云冈石窟.jpg")}
       ]
     };
   },
@@ -74,8 +74,8 @@ export default {
   text-align: center;
   .img{
     border-radius: 4px;
-    background-color: #0BB20C;
-    padding-top: 62.6%;
+    height: 62.6%;
+    overflow: hidden;
   }
   span{
     line-height: 30px;

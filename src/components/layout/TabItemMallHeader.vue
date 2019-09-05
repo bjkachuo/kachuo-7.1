@@ -21,6 +21,7 @@
 import Popup from "@/components/layout/Popup";
 import { getScenicNameByScenicId } from "@/assets/js/common";
 import customerService from '@/components/common/customerService/customerService'
+import { vueCordovaFunction } from "@/assets/js/vuecordova";
 import {Icon} from 'vux'
 export default {
   name: "",
