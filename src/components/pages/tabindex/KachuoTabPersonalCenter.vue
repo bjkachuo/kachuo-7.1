@@ -121,7 +121,7 @@ export default {
         },
         {
           name: "变现管理",
-          link: "/ticketsdiscount",
+          link: "",
           imgSrc: require("@/assets/images/变现管理@2x.png")
         },
         {
@@ -138,7 +138,7 @@ export default {
       dataListThree: [
         {
           name: "我的客服",
-          link: "/ticketsdiscount",
+          link: "",
           imgSrc: require("@/assets/images/客服@2x.png")
         },
         {

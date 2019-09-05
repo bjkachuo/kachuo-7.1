@@ -1,9 +1,9 @@
 <template>
   <div class="tab-item-play-header-wrap">
     <div class="tab-item-play-header-title">
-      <div class="head-img" @click="setting">
+      <!-- <div class="head-img" @click="setting">
         <img class="content-card-top-left-img" :src="userInfo.avatar ? userInfo.avatar : ''" />
-      </div>
+      </div>-->
       <div class="location-icon" @click="locationSelf">
         <!-- <span class=""></span> -->
         <span class="scenic-name">{{scenicName}}</span>
@@ -117,7 +117,7 @@ export default {
     appMessageCenter() {
       this.$router.push("/appmessage");
     },
-    goScencerelease(){
+    goScencerelease() {
       // this.$router.push('/scencerelease')
     }
   },
@@ -176,6 +176,7 @@ export default {
   height: 45px;
   width: 70px;
   float: left;
+  margin-left: 5%;
 }
 iframe {
   margin-top: 13px;

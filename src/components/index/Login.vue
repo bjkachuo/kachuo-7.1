@@ -51,7 +51,7 @@
       <span class="Two"></span>-->
     </div>
     <x-button type="primary" class="sub-btn-wrap" @click.native="requestLogin">登录</x-button>
-    <p class="visitor-login" @click="visitorLogin">游客登录</p>
+    <!-- <p class="visitor-login" @click="visitorLogin">游客登录</p> -->
   </div>
 </template>
 
@@ -72,7 +72,7 @@ export default {
       veriValue: "",
       backSty: {
         backgroundImage:
-          "url(" + require("@/assets/images/indexImg.png") + ")",
+          "url(" + require("@/assets/images/indexImg.jpeg") + ")",
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",

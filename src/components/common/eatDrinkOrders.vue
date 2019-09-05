@@ -219,7 +219,7 @@ export default {
   watch: {},
   methods: {
       goEatDrinkSucess(){
-          this.$router.push("/ordersSucess")
+          this.$router.push("/ReserveResult")
       }
   },
   components: {

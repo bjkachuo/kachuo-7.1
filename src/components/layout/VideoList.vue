@@ -135,6 +135,7 @@ export default {
   left: 10px;
   color: #fff;
   font-size: 12px;
+  display: none;
 }
 .img-desc-img {
   width: 20px;

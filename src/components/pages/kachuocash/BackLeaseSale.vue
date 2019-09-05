@@ -11,13 +11,13 @@
       <div style="width:92%;margin: 15px auto 30px;">
         <swiper auto height="100px" class="custom">
           <swiper-item class="black">
-            <h2 class="title fadeInUp animated"></h2>
+            <img src="./bianxian.png" alt="">
           </swiper-item>
           <swiper-item class="black">
-            <h2 class="title fadeInUp animated"></h2>
+            <img src="./bianxian.png" alt="">
           </swiper-item>
           <swiper-item class="black">
-            <h2 class="title fadeInUp animated"></h2>
+            <img src="./bianxian.png" alt="">
           </swiper-item>
         </swiper>
       </div>
