@@ -278,7 +278,7 @@ export default {
     rgba(31, 100, 255, 1),
     rgba(39, 141, 255, 1)
   );
-  border-radius: 4px;
+  border-radius: 10px;
   padding: 10px;
   box-sizing: border-box;
   margin: 28px auto 20px;
@@ -320,7 +320,7 @@ export default {
   border-radius: 13px;
   opacity: 0.7;
   background: rgba(25, 94, 242, 1);
-  color: #80BFFF;
+  color: #80bfff;
   text-align: center;
   line-height: 25px;
   font-size: 14px;
@@ -391,10 +391,10 @@ export default {
   margin-top: 23%;
 }
 .flex-demo .img-wrap {
-  width: 29px;
+  width: 30px;
   height: 30px;
-  margin-left: 13px;
   margin-bottom: 9px;
+  margin: 0 auto 9px;
 }
 .flex-demo .img-wrap img {
   background: none;
