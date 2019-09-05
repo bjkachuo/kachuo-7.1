@@ -20,7 +20,7 @@
       </flexbox>
       <div class="take-list">
         <div class="li" v-for="(item,index) in lists" :key="index">
-          <div class="take-card" @click="url(item.url)">
+          <div class="take-card" @click="url(item.id)">
             <div class="take-photo">
               <img :src="item.thumb" alt="">
             </div>
@@ -43,18 +43,11 @@
 
   import { TakeAwayGoodsList } from "@/servers/api";
 
-  import {
-    Panel
-  } from 'vux'
-  import {
-    Rater
-  } from 'vux'
-
   export default {
     props: [""],
     methods: {
-      url(link) {
-        this.$router.push(link);
+      url(id) {
+        this.$router.push('/goodsdetails?id='+id);
       }
     },
     data() {
@@ -75,27 +68,7 @@
           img: require('./slide.png'),
         }
         ],
-        lists: [{
-          src: require('./slide.png'),
-          title: '蓬莱阁景区纪念品复古中国风创意金属书签',
-          price:"98.00",
-          url: '/GoodsContent'
-        },{
-          src: require('./slide.png'),
-          title: '蓬莱阁景区水晶限量收 藏纪念品',
-          price:"98.00",
-          url: '/GoodsContent'
-        },{
-          src: require('./slide.png'),
-          title: '蓬莱阁景区纪念品复古中国风创意金属书签',
-          price:"98.00",
-          url: '/GoodsContent'
-        },{
-          src: require('./slide.png'),
-          title: '蓬莱阁景区水晶限量收 藏纪念品',
-          price:"98.00",
-          url: '/GoodsContent'
-        }],
+        lists: [],
       };
     },
     components: {
