@@ -23,7 +23,8 @@
 <script>
 import Header from "@/components/common/Header";
 import NavigationTab from "@/components/common/NavigationTab";
-import Popup from "./popup";
+// import Popup from "./popup";
+import Popup from "@/components/common/Popup";
 import { setTimeout } from "timers";
 import {AMapManager} from 'vue-amap'
 
