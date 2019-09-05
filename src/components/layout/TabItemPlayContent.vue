@@ -1,9 +1,6 @@
 <template>
   <div class="tab-item-paly-content">
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.2/css/swiper.css"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.2/css/swiper.css"/>
     <div class="line-one">
       <flexbox :gutter="0" wrap="wrap">
         <flexbox-item :span="1/3">

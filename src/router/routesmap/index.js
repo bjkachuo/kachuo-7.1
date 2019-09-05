@@ -91,12 +91,6 @@ export default [{
     name: 'appointment',
     component: resolve => require(['@/components/pages/kachuoplay/toolslist/ScenceRelease/guideList/guideDetile/appointment/appointment'], resolve),
   },
-  //名家入驻
-  {
-    path: '/checkIn/minjia',
-    name: 'checkInminjia',
-    component: resolve => require(['@/components/pages/tabindex/KachuoTabIncome/mingjia/mingjia'], resolve),
-  },
   //商家入驻
   {
     path: '/checkIn/shangjia',
@@ -276,6 +270,11 @@ export default [{
     path: '/signin',
     name: 'SignIn',
     component: resolve => require(['@/components/pages/kachuouser/SignIn'], resolve),
+  },
+  {
+    path: '/checkIn/agreement',
+    name: 'agreement',
+    component: resolve => require(['@/components/pages/tabindex/KachuoTabIncome/agreement'], resolve),
   },
   {
     path: '/integraldesc',

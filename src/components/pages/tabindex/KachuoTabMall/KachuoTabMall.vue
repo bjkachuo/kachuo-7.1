@@ -11,9 +11,9 @@
     </div>
     <div style="width:92%;margin: 15px auto 30px;" >
       <swiper auto height="100px" class="custom">
-        <swiper-item class="black"><h2 class="title fadeInUp animated">它无孔不入</h2></swiper-item>
-        <swiper-item class="black"><h2 class="title fadeInUp animated">你无处可藏</h2></swiper-item>
-        <swiper-item class="black"><h2 class="title fadeInUp animated">不是它可恶</h2></swiper-item>
+        <swiper-item class="black"><img src="./banner.png" alt=""></swiper-item>
+        <swiper-item class="black"><img src="./banner.png" alt=""></swiper-item>
+        <swiper-item class="black"><img src="./banner.png" alt=""></swiper-item>
       </swiper>
     </div>
     <ul class="goods-type">
