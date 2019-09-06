@@ -45,10 +45,16 @@ export default [{
     name: 'ticketsdiscount',
     component: resolve => require(['@/components/pages/kachuoplay/toolslist/TicketsDiscount'], resolve),
   },
+  //智慧导航
   {
     path: '/intelligentnavigation',
     name: 'intelligentnavigation',
     component: resolve => require(['@/components/pages/kachuoplay/toolslist/IntelligentNavigation/IntelligentNavigation'], resolve),
+  },
+  {
+    path: '/intelligentnavigation/veidoPlay',
+    name: 'VeidoPlay',
+    component: resolve => require(['@/components/pages/kachuoplay/toolslist/IntelligentNavigation/veidoPlay'], resolve),
   },
   //景区发布
   {

@@ -1,8 +1,9 @@
 <template>
   <div class="amap-page-container">
     <Header :titleContent="TitleObjData.titleContent" :showLeftBack="TitleObjData.showLeftBack" :showRightMore="TitleObjData.showRightMore"></Header>
-
-    <el-amap vid="amapDemo"  :center="center"  :zoom="zoom" class="amap-demo" ref="amap" :style="setMapHeight" :plugin="plugin"  :events="events" :aMapManager="AMapManager">
+    <div class="custom-ctrl" @click="status == 0 ? status = 1 : status = 0">{{status== 0 ? '静态':'动态'}}<br>地图</div>
+    <static-map :markers="markers" v-if="status == 1"></static-map>
+    <el-amap vid="amapDemo"  :center="center"  :zoom="zoom" class="amap-demo" ref="amap" :style="setMapHeight" :plugin="plugin"  :events="events" :aMapManager="AMapManager" v-show="status == 0">
       <el-amap-marker v-for="(marker,index) in markers" :position="marker.position" :vid="index" :offset="taOffset" v-if="navIndex == 0">
         <div @touchstart="showModel(marker.label,marker.position)">
           <div class="marker-icon-ta"></div>
@@ -21,9 +22,10 @@
 </template>
 
 <script>
-import Header from "@/components/common/Header";
-import NavigationTab from "@/components/common/NavigationTab";
+import Header from "@/components/common/Header"
+import NavigationTab from "@/components/common/NavigationTab"
 import Popup from "./popup";
+import staticMap from './staticMap'
 // import Popup from "@/components/common/Popup"
 import { setTimeout } from "timers";
 import { AMapManager } from 'vue-amap'
@@ -36,6 +38,7 @@ export default {
   data() {
     let self = this;
     return {
+      status:0,
       AMapManager,
       zoom: 16,
       center: [0,0],
@@ -102,10 +105,12 @@ export default {
       SCENICLINE: [],
     };
   },
+
   components: {
     Header,
     Popup,
-    NavigationTab
+    NavigationTab,
+    staticMap
   },
   methods: {
 
@@ -146,6 +151,8 @@ export default {
         this.SCENICLINE.forEach((item, index) => {
           this.markers.push({
             position:[item.position[0], item.position[1]],
+            left:item.left,
+            top:item.top,
             label:item.label,
           })
         })
@@ -185,7 +192,7 @@ export default {
             data = []
           }
           data.forEach(item=>{
-            arr.push({position:[ item.longitude,item.latitude ],label:item.title})
+            arr.push({position:[ item.longitude,item.latitude ],label:item.title,left:item.left,top:item.top})
           })
 
           this.SCENICLINE = arr
@@ -217,6 +224,19 @@ export default {
 };
 </script>
 <style scoped>
+
+  .custom-ctrl{
+    background: rgba(0,0,0,.5);
+    color: #fff;
+    position: absolute;
+    right: 15px;
+    z-index: 99999;
+    /*width: 2em;*/
+    padding: 10px 8px;
+    top: 84px;
+    border-radius: 4px;
+  }
+
   .marker-icon-ta{
     width: 30px;
     height: 35px;

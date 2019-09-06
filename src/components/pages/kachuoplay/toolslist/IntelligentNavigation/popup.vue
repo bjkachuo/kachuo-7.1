@@ -7,7 +7,7 @@
           <p class="navigaion-video-detail-p">{{descDetails.title}}</p>
           <ul>
             <li>
-              <img :src="descDetails.scenic_image" alt="">
+              <img :src="descDetails.scenic_image" alt="" @click="goPlay">
               <div class="content">
                 <div class="title">{{ descDetails.scenic_name }}</div>
                 <div class="jifen">免费观看</div>
@@ -82,6 +82,12 @@
             console.log(err);
           });
       },
+
+      goPlay(){
+        sessionStorage.veido = JSON.stringify(this.descDetails)
+        this.$router.push('/intelligentnavigation/veidoPlay')
+      },
+
       hide() {
         this.$store.commit("changeNavigationDetailsState", false);
       },
