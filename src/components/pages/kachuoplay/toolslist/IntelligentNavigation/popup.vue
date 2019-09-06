@@ -4,11 +4,15 @@
       <div class="popup2" v-show="showBottom">
 <!--        <div class="video" id="wrapper" v-if=""></div>-->
         <div class="navigaion-video-detail-wrap">
-          <p class="navigaion-video-detail-p">{{descDetails.scenic_name}}</p>
+          <p class="navigaion-video-detail-p">{{descDetails.title}}</p>
           <ul>
             <li>
               <img :src="descDetails.scenic_image" alt="">
-              <div class="content"></div>
+              <div class="content">
+                <div class="title">{{ descDetails.scenic_name }}</div>
+                <div class="jifen">免费观看</div>
+                <div class="bottom"><span>0人点赞</span><span>0条留言</span></div>
+              </div>
             </li>
           </ul>
         </div>
@@ -121,13 +125,34 @@
       display: flex;
       width: 92%;
       margin: 0 auto;
+      padding: 15px 0;
       img{
         width: 90px;
         height: 90px;
         border-radius: 4px;
       }
       .content{
-
+        flex: 1;
+        margin-left: 10px;
+        position: relative;
+        .title{
+          font-weight: bold;
+          font-size: 16px;
+          color: #222;
+        }
+        .jifen{
+          color: #FFA238;
+          font-size: 12px;
+        }
+        .bottom{
+          position: absolute;
+          bottom: 0;
+          span{
+            margin-right: 20px;
+            color: #666;
+            font-size: 14px;
+          }
+        }
       }
     }
   }
