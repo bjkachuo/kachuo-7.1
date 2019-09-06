@@ -6,9 +6,23 @@
       :showRightMore="TitleObjData.showRightMore"
     ></Header>
     <div class="scence-consum-content" :style="scenceConsumHeight">
-      <TabItemMallAdvertise class="z-index-99"></TabItemMallAdvertise>
-      <DividedArea class="z-index-99"></DividedArea>
-      <!-- <Divider :content="title"></Divider> -->
+      <div style="width:92%;margin: 15px auto 30px;">
+        <swiper auto height="100px" class="custom">
+          <swiper-item class="black">
+            <img src="./jqyl.jpg" alt />
+          </swiper-item>
+          <swiper-item class="black">
+            <img src="./jqyl.jpg" alt />
+          </swiper-item>
+          <swiper-item class="black">
+            <img src="./jqyl.jpg" alt />
+          </swiper-item>
+        </swiper>
+      </div>
+
+      <!-- <TabItemMallAdvertise class="z-index-99"></TabItemMallAdvertise>
+      <DividedArea class="z-index-99"></DividedArea>-->
+      <Divider :content="title"></Divider>
       <tab :line-width="3" custom-bar-width="30px" class="tab-style" v-if="showTab != 2">
         <tab-item selected @on-item-click="getTabIndex">商城</tab-item>
       </tab>
@@ -23,7 +37,7 @@
 </template>
 
 <script>
-import { Tab, TabItem } from "vux";
+import { Tab, TabItem, Swiper, SwiperItem } from "vux";
 import Header from "@/components/common/Header";
 import TabItemMallAdvertise from "@/components/layout/TabItemMallAdvertise";
 import DividedArea from "@/components/common/DividedArea";
@@ -62,7 +76,9 @@ export default {
     GoodsListWrap,
     Tab,
     TabItem,
-    FamousActivity
+    FamousActivity,
+    Swiper,
+    SwiperItem
   },
 
   computed: {
@@ -118,5 +134,20 @@ export default {
 .tab-content {
   padding-top: 10px;
   box-sizing: border-box;
+}
+</style>
+<style lang="less" scoped>
+.custom {
+  // overflow: inherit;
+  border-radius: 8px;
+  /deep/ .vux-indicator {
+    right: 50%;
+    margin-right: -32px;
+    bottom: -27px;
+  }
+  /deep/ .vux-icon-dot {
+    width: 15px !important;
+    height: 3px !important;
+  }
 }
 </style>

@@ -55,7 +55,7 @@
         <p class="goods-about-list-p">
           <span @click="blockChainInfoFn">文链查证</span>
           <span @click="showSourceVideo">溯源视频</span>
-          <span class="goods-about-list-p-span-noborder">文化构思</span>
+          <!-- <span class="goods-about-list-p-span-noborder">文化构思</span> -->
         </p>
       </div>
       <div class="divider-area-wrap"></div>

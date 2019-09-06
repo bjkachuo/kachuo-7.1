@@ -3,12 +3,19 @@
     <HeaderTR></HeaderTR>
     <div class="normal-content" :style="conHei">
       <div class="swiper-main">
-        <swiper :list="baseList" height="235px" loop dots-position="center"></swiper>
+          <video
+          :src="this.storeDetails.video"
+          :poster="this.storeDetails.video_image"
+          controls="controls"
+          controlslist="nofullscreen"
+        ></video>
+
+        <!-- <swiper :list="baseList" height="235px" loop dots-position="center"></swiper> -->
       </div>
       <div class="kc-panel">
         <cell align-items="start">
           <template slot="after-title">
-            <div class="page-title">蓬莱欧乐堡梦幻世界</div>
+            <div class="page-title">{{this.storeDetails.name}}</div>
             <div class="list-flexs">
               <flexbox :gutter="0">
                 <flexbox-item>
@@ -46,14 +53,14 @@
         </cell>
       </div>
       <div class="kc-panel">
-        <cell title="联系电话:(0535)5666900" link="###">
+        <cell title="联系电话:" link="" :value="this.storeDetails.phone" value-align="left">
           <img slot="icon" class="tel-icon" src="../../assets/images/telicon@2x.png">
         </cell>
       </div>
       <div class="kc-panel">
-        <cell title="" link="###" >
+        <cell title="" link="" >
           <template slot="inline-desc">
-            <div class="nav-address">山东省蓬莱市海滨路南区巷6号</div>
+            <div class="nav-address">{{this.storeDetails.address}}</div>
           </template>
           <template slot="default">
             <div class="nav-link">地图/导航</div>
@@ -104,6 +111,22 @@
         this.listnumber += this.listnumber
       },
     },
+    mounted(){
+      //查看传来的id
+      console.log(this.$route.query);
+      this.idNum = this.$route.query.idNum;
+    //获取商家详情！
+    this.$http
+      .post(
+        "https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.index.business_info&id=" +
+          this.idNum
+      )
+      .then(({ data }) => {
+        console.log(data);
+        this.storeDetails = data.data;
+        console.log(this.storeDetails);
+      });
+    },
     data() {
       return {
         menus: {
@@ -111,6 +134,10 @@
           menu2:'夜场票',
           menu3:'双人套票'
         },
+        //获取到的商家id
+        idNum: "",
+        //商家详情
+        storeDetails: [],
         show1:false,
         data1:"4",
         toggle:false,
@@ -185,6 +212,12 @@
   };
 </script>
 <style lang='css' scoped>
+video{
+  object-fit:fill;
+    height: 206px;
+    width: 100%;
+    }
+
   .normal-content {
     width: 100%;
     background: #F5F5F5;

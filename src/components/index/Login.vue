@@ -99,10 +99,10 @@ export default {
 
   methods: {
     // 游客登录
-    visitorLogin() {
-      this.$router.push("/indextab");
-      // this.$router.push({path:'/indextab'})
-    },
+    // visitorLogin() {
+    //   this.$router.push("/indextab");
+    //   // this.$router.push({path:'/indextab'})
+    // },
     // token存在，直接登录
     checkTokenLogin() {
       let token = localStorage.getItem("token");
@@ -387,6 +387,9 @@ body{
 } */
 </style>
 <style lang="less" scoped>
+/deep/ .weui-input{
+  color: rgba(57,118,255,1);
+}
 .weui-btn_disabled.weui-btn_primary {
   background-color: rgba(255, 255, 255, 0.5);
 }

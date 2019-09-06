@@ -529,11 +529,11 @@ export default {
   margin-top: 35px;
   height: 30px;
   float: left;
-  background: #6396ffff;
+  background: rgba(99,150,255);
   border-radius: 4px;
 }
 .inRight p {
-  color: #ffffffff;
+  color: #ffffff;
   font-size: 12px;
   text-align: center;
   font-family: PingFangSC-Medium;

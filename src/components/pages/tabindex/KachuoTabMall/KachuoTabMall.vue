@@ -11,9 +11,9 @@
     </div>
     <div style="width:92%;margin: 15px auto 30px;">
       <swiper auto height="100px" class="custom">
-        <swiper-item class="black"><img src="./banner.png" alt=""></swiper-item>
-        <swiper-item class="black"><img src="./banner.png" alt=""></swiper-item>
-        <swiper-item class="black"><img src="./banner.png" alt=""></swiper-item>
+        <swiper-item class="black"><img src="./mallone.jpg" alt=""></swiper-item>
+        <swiper-item class="black"><img src="./malltwo.jpg" alt=""></swiper-item>
+        <swiper-item class="black"><img src="./mallthree.jpg" alt=""></swiper-item>
       </swiper>
     </div>
     <ul class="goods-type">
@@ -157,7 +157,7 @@ export default {
   line-height: 44px;
 }
 .custom {
-  overflow: inherit;
+  // overflow: inherit;
   border-radius: 8px;
   /deep/ .vux-indicator {
     right: 50%;

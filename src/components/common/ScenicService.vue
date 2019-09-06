@@ -155,15 +155,15 @@ export default {
       baseList: [
         {
           url: "javascript:",
-          img: require("../../assets/images/svslide.jpg")
+          img: require("../../assets/images/yyone.jpg")
         },
         {
           url: "javascript:",
-          img: require("../../assets/images/svslide.jpg")
+          img: require("../../assets/images/yytwo.jpg")
         },
         {
           url: "javascript:",
-          img: require("../../assets/images/svslide.jpg")
+          img: require("../../assets/images/yythree.jpg")
         }
       ],
 

@@ -26,7 +26,7 @@ export default {
   data() {
     return {
       TitleObjData: {
-        titleContent: "收获地址",
+        titleContent: "收货地址",
         showLeftBack: true,
         showRightMore: false
       }

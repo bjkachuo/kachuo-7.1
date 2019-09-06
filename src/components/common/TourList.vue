@@ -2,26 +2,26 @@
   <div class="wrap">
     <Header :titleContent="TitleObjData.titleContent" :showLeftBack="TitleObjData.showLeftBack" :showRightMore="TitleObjData.showRightMore"></Header>
     <div class="list-filter">
-      <div class="list-click" @click="cateClick">全部</div>
+      <!-- <div class="list-click" @click="cateClick">全部</div> -->
       <div class="list-click" @click="odsClick">智能排序</div>
     </div>
     <div class="normal-content" :style="conHei">
       <div class="guide-list">
-        <div class="guide-cell" v-for="(item,index) in list">
+        <div class="guide-cell" v-for="(item,index) in TList" :key="index" @click="details(item.id)">
           <div class="guide-photo">
-            <img :src="item.src" alt="">
+            <img :src="item.tour_path" alt="">
 
-            <div :class="'g-tag '+item.tag" v-if="item.tag=='normal'">空闲</div>
-            <div :class="'g-tag '+item.tag" v-if="item.tag=='full'">期满</div>
-            <div :class="'g-tag '+item.tag" v-if="item.tag=='disable'">休息</div>
+            <div :class="'g-tag-'+item.status" v-if="item.status=='0'">空闲</div>
+            <div :class="'g-tag-'+item.status" v-if="item.status=='1'">期满</div>
+            <div :class="'g-tag-'+item.status" v-if="item.status=='2'">休息</div>
           </div>
           <div class="guide-cell-bd">
             <div class="g-name">{{item.name}}</div>
             <div class="g-raty">
-              <rater v-model="item.raty" star='<i class="star"></i>' active-color="red" :margin="0" disabled></rater>
+              <rater v-model="item.score"  active-color="#ffc800" :margin="0" disabled :font-size="15"></rater>
             </div>
             <div class="g-comment">17人评论</div>
-            <div class="g-str">"{{item.desc}}"</div>
+            <div class="g-str">最低预约时长:{{item.lowest_time}}/时<br>价格:{{item.price}}¥/时</div>
           </div>
           <div class="g-right">
             <div class="g-more">详情</div>
@@ -29,7 +29,7 @@
         </div>
       </div>
     </div>
-    <actionsheet v-model="show1" :menus="menus" @on-click-menu="click" show-cancel></actionsheet>
+    <!-- <actionsheet v-model="show1" :menus="menus" @on-click-menu="click" show-cancel></actionsheet> -->
     <actionsheet v-model="show2" :menus="menus2" @on-click-menu="click" show-cancel></actionsheet>
   </div>
 </template>
@@ -42,13 +42,22 @@
   export default {
     props: [""],
     methods: {
+      //跳转导游详情
+      details(id){
+        this.$router.push({
+          path: "/GuideContent",
+          query: {
+            idNum: id
+          }
+        });
+      },
       url(link) {
         this.$router.push(link);
       },
-      // 分类
-      cateClick () {
-        this.show1 = !this.show1
-      },
+      // // 分类
+      // cateClick () {
+      //   this.show1 = !this.show1
+      // },
       // 排序
       odsClick () {
         this.show2 = !this.show2
@@ -64,7 +73,7 @@
           showLeftBack: true,
           showRightMore: false
         },
-        show1:false,
+        // show1:false,
         show2:false,
         menus: {
           menu1: '吃吧',
@@ -103,7 +112,23 @@
           desc: '资质齐全，价格公开透明',
           url: '/'
         }],
+        TList:[
+
+        ],
       };
+    },
+    mounted(){
+    //获取导游列表
+    this.$http
+      .post(
+        "https://core.kachuo.com/app/ewei_shopv2_app.php?i=8&c=site&a=entry&m=ewei_shopv2&do=mobile&r=tourguide.index.getlist&scenic_id=24"
+      )
+      .then(({ data }) => {
+        console.log(data);
+        this.TList = data.data.list;
+        console.log(this.TList)
+      });
+
     },
     components: {
       Header,
@@ -184,13 +209,12 @@
     overflow: hidden;
     border-radius: 6px;
   }
-  .g-tag{
+  .g-tag-0{
     position: absolute;
     top: 0;
     left: 0;
     text-align: center;
     border-bottom-right-radius: 25px;
-    background-color: #51D840;
     color: #FFFFFF;
     font-size: 12px;
     width:50px;
@@ -198,11 +222,39 @@
     line-height: 25px;
     box-sizing: border-box;
     padding-right: 10px;
+    background-color: #51D840;
+
   }
-  .g-tag.full{
+  .g-tag-1{
+    position: absolute;
+    top: 0;
+    left: 0;
+    text-align: center;
+    border-bottom-right-radius: 25px;
+    color: #FFFFFF;
+    font-size: 12px;
+    width:50px;
+    height: 25px;
+    line-height: 25px;
+    box-sizing: border-box;
+    padding-right: 10px;
+
     background-color: #FF4D4D;
   }
-  .g-tag.disable{
+  .g-tag-2{
+    position: absolute;
+    top: 0;
+    left: 0;
+    text-align: center;
+    border-bottom-right-radius: 25px;
+    color: #FFFFFF;
+    font-size: 12px;
+    width:50px;
+    height: 25px;
+    line-height: 25px;
+    box-sizing: border-box;
+    padding-right: 10px;
+
     background-color: #999;
   }
   .guide-photo img{
@@ -227,7 +279,7 @@
   .g-str{
     background-color: #F5F5F5;
     border-radius: 6px;
-    padding: 4px 8px;
+    padding: 4px 4px;
     font-size: 12px;
     color: #666666;
     text-align: center;

@@ -3,7 +3,7 @@
     <Header :titleContent="TitleObjData.titleContent" :showLeftBack="TitleObjData.showLeftBack" :showRightMore="TitleObjData.showRightMore"></Header>
     <div class="normal-content" :style="conHei">
       <div class="swiper-main">
-        <swiper :list="baseList" height="110px" loop="true" dots-position="center"></swiper>
+        <swiper :list="baseList" height="110px" :loop="true" dots-position="center"></swiper>
       </div>
       <flexbox class="cc-flex" :gutter="10">
         <flexbox-item>
@@ -59,13 +59,10 @@
         },
         baseList : [{
           url: 'javascript:',
-          img: require('./slide.png'),
+          img: require('./takeone.jpg'),
         },{
           url: 'javascript:',
-          img: require('./slide.png'),
-        },{
-          url: 'javascript:',
-          img: require('./slide.png'),
+          img: require('./taketwo.jpg'),
         }
         ],
         lists: [],

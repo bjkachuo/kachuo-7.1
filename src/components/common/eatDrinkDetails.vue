@@ -17,7 +17,7 @@
         <img :src="this.storeDetails.video_image" alt />
         <div class="card">
           <div class="card-title">
-            <p>成都麻辣串(蓬莱阁店)</p>
+            <p>{{this.storeDetails.name}}</p>
           </div>
           <div class="card-mid">
             <div class="card-mid-img-wrap">
@@ -25,7 +25,7 @@
             </div>
             <div class="card-mid-text-wrap">
               <div class="card-mid-text-one">
-                <p>4分</p>
+                <p>{{this.storeDetails.score}}</p>
                 <i>
                   <rater
                     v-model="data42"
@@ -95,7 +95,7 @@
                   style="display:block;margin-right:5px;"
                   src="../../assets/images/定位icon@2x.png"
                 />
-                <span>山东省蓬莱市海滨路南区巷6号</span>
+                <span>{{this.storeDetails.address}}</span>
               </cell>
             </div>
             <div class="line-b">
@@ -350,6 +350,8 @@ export default {
       .then(({ data }) => {
         // console.log(data.data);
         this.storeDetails = data.data;
+
+        this.data42 = this.storeDetails.score;
         console.log(this.storeDetails);
       });
     //获取评论列表
@@ -418,11 +420,12 @@ b {
 .card {
   width: 92%;
   height: 160px;
-  background: #ffffffff;
+  background: rgba(255, 255, 255);
   border-radius: 8px;
   position: absolute;
   top: 41%;
   left: 4%;
+  box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.1);
 }
 .card-title p {
   font-size: 20px;
@@ -438,7 +441,7 @@ b {
 .card-mid-img-wrap {
   float: left;
   width: 23.2%;
-  height: 50px;
+  height: 58px;
   margin-left: 4.3%;
   margin: 0 3% 0 4.3%;
 }
@@ -560,14 +563,14 @@ ul li {
 .line-a {
   /* height: 110px; */
   width: 100%;
-  background: #ffffffff;
+  background: rgba(255, 255, 255);
   margin-bottom: 10px;
   border-radius: 8px;
 }
 .line-b {
   /* height: 55px; */
   width: 100%;
-  background: #ffffffff;
+  background: rgba(255, 255, 255);
   border-radius: 8px;
 }
 
@@ -579,11 +582,12 @@ ul li {
   bottom: 0%;
   left: 0%;
   z-index: 100;
+  box-shadow: 0px -10px 20px 0px rgba(0, 101, 255, 0.16);
 }
 .bottom-inner-left {
   width: 70%;
   height: 60px;
-  background: #ffffffff;
+  background: rgba(255, 255, 255);
   float: left;
 }
 .bottom-inner-left p {
@@ -606,12 +610,12 @@ ul li {
 .bottom-inner-right {
   width: 30%;
   height: 60px;
-  background: #3976ffff;
+  background: #3976ff;
   float: left;
 }
 .bottom-inner-right p {
   text-align: center;
-  color: #ffffffff;
+  color: rgba(255, 255, 255);
   font-size: 16px;
   line-height: 60px;
   font-weight: 800;
@@ -926,10 +930,10 @@ video {
   background: rgba(90, 90, 54, 0);
 }
 /deep/ .vux-header .vux-header-left .vux-header-back {
-  color: #ffffffff;
+  color: #ffffff;
 }
 /deep/ .vux-header .vux-header-title {
-  color: #ffffffff;
+  color: #ffffff;
 }
 /deep/ .vux-header .vux-header-left .left-arrow:before {
   border: solid white;

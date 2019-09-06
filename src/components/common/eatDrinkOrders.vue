@@ -252,7 +252,7 @@ b {
   width: 92%;
   height: 145px;
   margin: 0 auto;
-  background: #ffffffff;
+  background: rgba(255,255,255);
   box-shadow: 0px 10px 20px 0px rgba(0, 101, 255, 0.08);
   border-radius: 8px;
   margin-top: 15px;
@@ -263,7 +263,7 @@ b {
   /* height: 92%; */
   /* height: 300px; */
   margin: 0 auto;
-  background: #ffffffff;
+  background: rgba(255,255,255);
   margin-bottom: 10px;
 }
 .list-title {
@@ -367,7 +367,7 @@ b {
   width: 92%;
   height: 55px;
   margin: 0 auto 25px;
-  background: #ffffffff;
+  background: rgba(255,255,255);
   border-radius: 8px;
 }
 .integral-left {
@@ -398,7 +398,7 @@ b {
 .bottom-inner-left {
   width: 70%;
   height: 60px;
-  background: #ffffffff;
+  background: rgba(255,255,255);
   float: left;
 }
 .bottom-inner-left p {
@@ -421,12 +421,12 @@ b {
 .bottom-inner-right {
   width: 30%;
   height: 60px;
-  background: #3976ffff;
+  background: rgba(57,118,255);
   float: left;
 }
 .bottom-inner-right p {
   text-align: center;
-  color: #ffffffff;
+  color: rgba(255,255,255);
   font-size: 16px;
   line-height: 60px;
   font-weight: 800;

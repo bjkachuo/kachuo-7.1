@@ -9,7 +9,7 @@
             <div class="cell-title">青椒牛肉</div>
             <div class="list-foot">
               <div class="cell-price"><span>￥</span>1.5</div>
-              <x-number width="30px" min="0" class="x-number" v-model="roundValue" button-style="round"></x-number>
+              <x-number width="30px" :min="0" class="x-number" v-model="roundValue" button-style="round"></x-number>
             </div>
           </template>
         </cell>
@@ -19,7 +19,7 @@
             <div class="cell-title">青椒牛肉</div>
             <div class="list-foot">
               <div class="cell-price"><span>￥</span>1.5</div>
-              <x-number width="30px" min="0" class="x-number" v-model="roundValue" button-style="round"></x-number>
+              <x-number width="30px" :min="0" class="x-number" v-model="roundValue" button-style="round"></x-number>
             </div>
           </template>
         </cell>
@@ -29,7 +29,7 @@
             <div class="cell-title">青椒牛肉</div>
             <div class="list-foot">
               <div class="cell-price"><span>￥</span>1.5</div>
-              <x-number width="30px" min="0" class="x-number" v-model="roundValue" button-style="round"></x-number>
+              <x-number width="30px" :min="0" class="x-number" v-model="roundValue" button-style="round"></x-number>
             </div>
           </template>
         </cell>
@@ -39,7 +39,7 @@
             <div class="cell-title">青椒牛肉</div>
             <div class="list-foot">
               <div class="cell-price"><span>￥</span>1.5</div>
-              <x-number width="30px" min="0" class="x-number" v-model="roundValue" button-style="round"></x-number>
+              <x-number width="30px" :min="0" class="x-number" v-model="roundValue" button-style="round"></x-number>
             </div>
           </template>
         </cell>

@@ -6,18 +6,18 @@
       :showRightMore="TitleObjData.showRightMore"
     ></Header>
     <div class="back-lease-sale-content-wrap" :style="scrollContentHeight">
-      <TabItemMallAdvertise></TabItemMallAdvertise>
-      <DividedArea></DividedArea>
+      <!-- <TabItemMallAdvertise></TabItemMallAdvertise>
+      <DividedArea></DividedArea>-->
       <div style="width:92%;margin: 15px auto 30px;">
         <swiper auto height="100px" class="custom">
           <swiper-item class="black">
-            <img src="./bianxian.png" alt="">
+            <img src="./bianxiantwo.jpg" alt />
           </swiper-item>
           <swiper-item class="black">
-            <img src="./bianxian.png" alt="">
+            <img src="./bianxiantwo.jpg" alt />
           </swiper-item>
           <swiper-item class="black">
-            <img src="./bianxian.png" alt="">
+            <img src="./bianxiantwo.jpg" alt />
           </swiper-item>
         </swiper>
       </div>
@@ -113,9 +113,14 @@ export default {
 </style>
 <style lang="less" scoped>
 .custom {
-  overflow: inherit;
-  h2{
-    background:linear-gradient(90deg,rgba(57,118,255,1) 0%,rgba(57,62,255,1) 100%);
+  border-radius: 8px;
+  // overflow: inherit;
+  h2 {
+    background: linear-gradient(
+      90deg,
+      rgba(57, 118, 255, 1) 0%,
+      rgba(57, 62, 255, 1) 100%
+    );
     width: 100%;
     height: 100%;
   }

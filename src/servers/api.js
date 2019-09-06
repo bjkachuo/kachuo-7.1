@@ -20,10 +20,10 @@ export const getFamousMallDate = () => http.post('home.celebrity');
 export const getScenicMallDate = () => http.post('home.Scenic');
 
 //景区商城列表
-export const getScenicList = (data) => http.post("index.get_list", data)
+export const getScenicList = (data) => http.post("goods.index.get_list", data)
 
 //app新闻动态
-export const getKaChuoNews = (data) => http.post("index", data)
+export const getKaChuoNews = (data) => http.post("dynamic.index", data)
 
 //商品详情
 export const getDetail = (data) => http.post("shop.index.detail", data)
@@ -74,10 +74,10 @@ export const aliNotify = (data) => http.post("goods.buy.aliNotify", data);
 export const Frequency = (data) => http.post("index", data);
 
 //频类详情
-export const FrequencyDetail = (data) => http.post("index.getvideo", data);
+export const FrequencyDetail = (data) => http.post("video.index.getvideo", data);
 
 //频类评论
-export const FrequencyComment = (data) => http.post("index.subcomment", data)
+export const FrequencyComment = (data) => http.post("video.index.subcomment", data)
 
 //实名认证
 export const RealName = (data) => http.post("member.realname.isSmAuth", data);
@@ -125,10 +125,10 @@ export const goodsBucketRecomm = (data) => http.post("goods.details.PickShop", d
 export const blockChainList = (data) => http.post("index", data);
 
 // 文链查证列表已售
-export const blockChainInfoGoods = (data) => http.post("index.sold", data);
+export const blockChainInfoGoods = (data) => http.post("verify.index.sold", data);
 
 // 查看商品详情
-export const blockChainInfo = (data) => http.post("index.info", data);
+export const blockChainInfo = (data) => http.post("verify.index.info", data);
 
 // 版本更新信息
 export const getUpdateInfo = (data) => http.post("renovate", data);
@@ -224,7 +224,7 @@ export const scenceStoryList = (data) => http.post("dynamic.dynamiclist", data);
 export const scenceStoryDetalis = (data) => http.post("index.seasoncon", data);
 
 // 商品区块链信息
-export const verifyGoodsDetalis = (data) => http.post("index.getDetail", data);
+export const verifyGoodsDetalis = (data) => http.post("verify.index.getDetail", data);
 
 // 查询商品编码
 export const GoodsBianMa = (data) => http.post("cygx.real.GoodsBianMa", data);
@@ -317,10 +317,10 @@ export const getScenicPointDetails = (data) => http.post("scenic.site", data);
 export const setNickName = (data) => http.post("member.realname.upd_member_information", data);
 
 // 获取景区商家数据列表
-export const getScenicMerchants = (data) => http.post("index", data);
+export const getScenicMerchants = (data) => http.post("scenic.index", data);
 
 // 获取景区商家数据详情
-export const getScenicMerchantsDetails = (data) => http.post("index.business_info", data);
+export const getScenicMerchantsDetails = (data) => http.post("scenic.index.business_info", data);
 
 // 人脸识别
 export const faceCheck = (data) => http.post("index", data);

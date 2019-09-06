@@ -547,17 +547,17 @@ export default [{
     name: 'jingquBsGuideOrder',
     component: resolve => require(['@/components/pages/tabindex/KachuoTabIncome/jingquBackstage/jingqudingdan/jingquBsGuideOrder'], resolve),
   },
-{
-  path: '/understand',
-  name: 'understand',
-  component: resolve => require(['@/components/pages/kachuoplay/toolslist/Understand'], resolve),
-},
+  {
+    path: '/understand',
+    name: 'understand',
+    component: resolve => require(['@/components/pages/kachuoplay/toolslist/Understand'], resolve),
+  },
 
-{
-  path: '/servicesurround',
-  name: 'servicesurround',
-  component: resolve => require(['@/components/pages/kachuoplay/toolslist/ServiceSurround'], resolve),
-},
+  {
+    path: '/servicesurround',
+    name: 'servicesurround',
+    component: resolve => require(['@/components/pages/kachuoplay/toolslist/ServiceSurround'], resolve),
+  },
   {
     //吃喝家详情页
     path: '/eatDrinkDetails',
@@ -613,6 +613,20 @@ export default [{
     component: resolve => require(['@/components/common/TourList'], resolve),
   },
   {
+    //游吧导游详情页
+    path: '/GuideContent',
+    name: 'GuideContent',
+    component: resolve => require(['@/components/common/GuideContent'], resolve),
+
+  },
+  {
+    //预约导游订单页面
+    path: '/GuideForm',
+    name: 'GuideForm',
+    component: resolve => require(['@/components/common/GuideForm'], resolve),
+
+  },
+  {
     //吃吧喝吧营业资质
     path: '/Qualifications',
     name: 'Qualifications',
@@ -633,6 +647,7 @@ export default [{
     component: resolve => require(['@/components/common/PlayReserve'], resolve),
 
   },
+
 
   // {
   //   //周边服务商家列表页

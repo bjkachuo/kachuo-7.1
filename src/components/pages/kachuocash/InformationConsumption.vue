@@ -6,18 +6,18 @@
       :showRightMore="TitleObjData.showRightMore"
     ></Header>
     <div class="scence-consum-content" :style="scenceConsumHeight">
-      <TabItemMallAdvertise></TabItemMallAdvertise>
-      <DividedArea></DividedArea>
+      <!-- <TabItemMallAdvertise></TabItemMallAdvertise>
+      <DividedArea></DividedArea> -->
       <div style="width:92%;margin: 15px auto 30px;">
         <swiper auto height="100px" class="custom">
           <swiper-item class="black">
-            <img src="./xinxixiaofei.png" alt="">
+            <img src="./xinxixiaofeitwo.jpg" alt="">
           </swiper-item>
           <swiper-item class="black">
-            <img src="./xinxixiaofei.png" alt="">
+            <img src="./xinxixiaofeitwo.jpg" alt="">
           </swiper-item>
           <swiper-item class="black">
-            <img src="./xinxixiaofei.png" alt="">
+            <img src="./xinxixiaofeitwo.jpg" alt="">
           </swiper-item>
         </swiper>
       </div>
@@ -201,8 +201,8 @@ h2{
 </style>
 <style lang="less" scoped>
 .custom {
-  overflow: inherit;
-
+  // overflow: inherit;
+  border-radius: 8px;
   /deep/ .vux-indicator {
     right: 50%;
     margin-right: -32px;

@@ -4,9 +4,15 @@
     <!--    <TabItemMallAdvertise></TabItemMallAdvertise>-->
     <div style="width:92%;margin: 15px auto 30px;">
       <swiper auto height="100px" class="custom">
-        <swiper-item class="black"><img src="./banner.png" alt=""></swiper-item>
-        <swiper-item class="black"><img src="./banner.png" alt=""></swiper-item>
-        <swiper-item class="black"><img src="./banner.png" alt=""></swiper-item>
+        <swiper-item class="black">
+          <img src="./banner.png" alt />
+        </swiper-item>
+        <swiper-item class="black">
+          <img src="./banner.png" alt />
+        </swiper-item>
+        <swiper-item class="black">
+          <img src="./banner.png" alt />
+        </swiper-item>
       </swiper>
     </div>
 
@@ -83,7 +89,6 @@ export default {
   mounted() {
     this.getBannerImgFn("7");
     this.getGoodsComm();
-
   },
 
   methods: {
@@ -93,7 +98,7 @@ export default {
     goodsTypeGo(link) {
       this.$router.push(link);
     },
-        // 商品推荐
+    // 商品推荐
     getGoodsComm() {
       goodsBucketRecomm({
         type: 2
@@ -107,11 +112,10 @@ export default {
           console.log(err);
         });
     },
-    goodsTypeGo(link){
-      this.$router.push(link)
+    goodsTypeGo(link) {
+      this.$router.push(link);
       // console.log(link);
     }
-
   },
 
   watch: {}
@@ -137,8 +141,8 @@ export default {
   }
 }
 .custom {
-  overflow: inherit;
-
+  // overflow: inherit;
+  border-radius: 8px;
   /deep/ .vux-indicator {
     right: 50%;
     margin-right: -32px;

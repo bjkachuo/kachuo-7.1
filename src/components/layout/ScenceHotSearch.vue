@@ -23,7 +23,7 @@ export default {
         {id: "23", name: "徽州古城", position: [118.434598, 29.867], imgSrc: require("@/assets/images/徽州古城.jpg")},
         {id: "24", name: "蓬莱", position: [120.752564, 37.825461],imgSrc: require("@/assets/images/蓬莱阁.jpg")},
         {id: "25", name: "少林", position: [112.95978, 34.520026],imgSrc: require("@/assets/images/少林寺.jpg")},
-        {id: "26", name: "神垕", position: [113.228142, 34.118356],imgSrc: require("@/assets/images/神垕.png")},
+        {id: "26", name: "神垕", position: [113.228142, 34.118356],imgSrc: require("@/assets/images/神垕.jpg")},
         {id: "27", name: "云雾山", position: [114.214391, 31.12476],imgSrc: require("@/assets/images/云雾山.jpg")},
         {id: "35", name: "三孔", position: [116.989873, 35.590745],imgSrc: require("@/assets/images/三孔.jpg")},
         {id: "66", name: "云冈石窟", position: [113.144103, 40.109236],imgSrc: require("@/assets/images/云冈石窟.jpg")}
