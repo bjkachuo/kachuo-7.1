@@ -266,7 +266,7 @@ export default {
 }
 .content-model {
   position: relative;
-  z-index: 9999;
+  z-index: 9999
 }
 
 

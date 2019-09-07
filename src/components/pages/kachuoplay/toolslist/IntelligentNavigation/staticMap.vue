@@ -4,8 +4,8 @@
       <div class="relative" style="width: 833px">
         <img src="./2.jpg" alt="" width="833" height="1000" style="width: 833px">
         <div  v-for="item in markers" v-if="item.left != '0.00'">
-          <div class="title" :style="{top: item.top+'%',left: item.left+'%',marginLeft: 'calc('+ -item.label.length / 2 +'em' +  ' - '+ (10+'px') +')' }">{{item.label}}</div>
-          <div class="icon" :style="{top: item.top+'%',left: item.left+'%'}"></div>
+          <div class="title" :style="{top: item.top+'%',left: item.left+'%',marginLeft: 'calc('+ -item.label.length / 2 +'em' +  ' - '+ (10+'px') +')' }" @click="showModel(item.label,item.position)">{{item.label}}</div>
+          <div class="icon" :style="{top: item.top+'%',left: item.left+'%'}" @click="showModel(item.label,item.position)"></div>
         </div>
       </div>
     </div>
@@ -26,6 +26,9 @@
     methods:{
       start(e){
         console.log(e);
+      },
+      showModel(label,position){
+        this.$parent.showModel(label,position)
       }
     },
 

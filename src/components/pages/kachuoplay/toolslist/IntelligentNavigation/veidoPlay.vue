@@ -1,10 +1,9 @@
 <template>
     <div>
-      <div class="head" style="position: absolute;z-index: 9999999;">
-        <span @click="back" style="line-height: 45px;margin-left: 15px;color: #fff;">返回</span>
-<!--        <span>返回</span>-->
+      <div class="head" @click="back">
+          <x-icon type="ios-arrow-left" size="30"></x-icon>
       </div>
-      <div class="video" id="wrapper" v-if=""></div>
+      <div class="video" id="wrapper" ></div>
     </div>
 </template>
 
@@ -31,7 +30,7 @@
               x5VideoPlayerFullscreen: true,
               x5VideoOrientation: "landscape|portrait",
               xWebkitAirplay: true,
-              muted: false
+              muted: false,
             });
 
           },
@@ -39,18 +38,32 @@
             this.$router.go(-1)
           }
 
-
         },
 
         created() {
 
           this.$nextTick(()=>{
-            this.createVideoDom(true,JSON.parse(sessionStorage.veido))
+            this.createVideoDom( true,JSON.parse(sessionStorage.veido) )
           })
+
         }
     }
 </script>
 
 <style scoped>
-
+  .vux-x-icon {
+    fill: #Fff;
+    margin-top: 2px;
+    margin-left: 2px;
+  }
+.head{
+  position: absolute;
+  z-index: 9999999;
+  background-color: rgba(0,0,0,.5);
+  width: 35px;
+  height:35px;
+  border-radius: 50%;
+  top: 15px;
+  left: 15px;
+}
 </style>
