@@ -11,19 +11,19 @@
 
     <tabbar @on-index-change="tabChange">
       <tabbar-item  selected>
-<!--        <img slot="icon" src="../../../assets/images/tabbar/file.png">-->
-<!--        <img slot="icon-active" src="../../../assets/images/tabbar/file_h.png">-->
+        <img slot="icon" src="../tabBottom-icon/file.png">
+        <img slot="icon-active" src="../tabBottom-icon/file_h.png">
         <span slot="label">订单管理</span>
       </tabbar-item>
       <tabbar-item >
-<!--        <img slot="icon" src="../../../assets/images/tabbar/cart.png">-->
-<!--        <img slot="icon-active" src="../../../assets/images/tabbar/cart_h.png">-->
+        <img slot="icon" src="../tabBottom-icon/cart.png">
+        <img slot="icon-active" src="../tabBottom-icon/cart_h.png">
         <span slot="label">购物车</span>
       </tabbar-item>
 
       <tabbar-item>
-<!--        <img slot="icon" src="../../../assets/images/tabbar/key.png">-->
-<!--        <img slot="icon-active" src="../../../assets/images/tabbar/key_h.png">-->
+        <img slot="icon" src="../tabBottom-icon/key.png">
+        <img slot="icon-active" src="../tabBottom-icon/key_h.png">
         <span slot="label">一键寄卖</span>
       </tabbar-item>
     </tabbar>
