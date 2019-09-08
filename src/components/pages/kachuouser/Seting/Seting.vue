@@ -14,7 +14,7 @@
         <cell title="分享APP二维码" is-link></cell>
       </div>
       <div class="set-cells">
-        <div class="login-out">退出登录</div>
+        <div class="login-out" @click="loginOut">退出登录</div>
       </div>
     </div>
   </div>
@@ -42,9 +42,10 @@ export default {
   },
 
   methods:{
-    about(){
-      alert(1)
-      this.$router.push('')
+    loginOut(){
+      localStorage.removeItem("token");
+      this.$store.commit("changeTabIndex", 0);
+      this.$router.push("/");
     }
   },
 

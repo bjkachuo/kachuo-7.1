@@ -2,7 +2,6 @@
   <div v-transfer-dom>
     <popup v-model="isShow" :hide-on-blur="true" @on-hide="hide">
       <div class="popup2" v-show="showBottom">
-<!--        <div class="video" id="wrapper" v-if=""></div>-->
         <div class="navigaion-video-detail-wrap">
           <p class="navigaion-video-detail-p">{{descDetails.title}}</p>
           <ul>
@@ -65,8 +64,6 @@
             if (res.data) {
               this.$store.commit("changeNavigationDetailsState", true);
               this.descDetails = res.data;
-
-              // this.createVideoDom(true, res.data);
             }
           } else {
             this.showBottom = false;
@@ -90,21 +87,6 @@
       hide() {
         this.$store.commit("changeNavigationDetailsState", false);
       },
-      createVideoDom(flag, videoObj) {
-      //   new ChimeeMobilePlayer({
-      //     wrapper: "#wrapper",
-      //     src: videoObj.scenic_video,
-      //     autoplay: false,
-      //     poster: videoObj.scenic_image,
-      //     controls: flag,
-      //     playsInline: true,
-      //     preload: "auto",
-      //     x5VideoPlayerFullscreen: true,
-      //     x5VideoOrientation: "landscape|portrait",
-      //     xWebkitAirplay: true,
-      //     muted: false
-      //   });
-      }
     },
     computed: {
       isShow: {

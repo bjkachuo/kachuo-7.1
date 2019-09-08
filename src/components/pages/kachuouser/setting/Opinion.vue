@@ -12,9 +12,15 @@
       <div class="tab-card">
         <div class="upload-cells">
           <div class="upl-text">上传图片</div>
-          <div class="upload-cell">
 
-          </div>
+            <UploadImgOne  v-on:getHeaderImgUrl="getImgVal" :plus="true" class="class">
+              <div slot="bg">
+                <div class="up-avata-bg">
+                  <div class="camera"></div>
+                </div>
+              </div>
+            </UploadImgOne>
+
         </div>
       </div>
       <div class="tab-card input-card ">
@@ -30,6 +36,7 @@
 
 <script>
   import Header from "@/components/common/Header";
+  import UploadImgOne from "@/components/common/UploadImgOne/UploadImgOne";
   import { Cell ,XInput,XButton,XTextarea} from 'vux'
   export default {
     data() {
@@ -53,13 +60,18 @@
           this.disable001 = true
         }
       },
+      getImgVal(val) {
+        console.log(val);
+        this.imgUrl = val;
+      },
     },
     components: {
       Header,
       Cell,
       XInput,
       XTextarea,
-      XButton
+      XButton,
+      UploadImgOne
     },
     computed: {
       conHei() {
@@ -68,7 +80,33 @@
     },
   };
 </script>
-<style lang='css' scoped>
+<style lang='less' scoped>
+
+    .class{
+      margin-left: -16px;
+    }
+    .upload-img {
+      width: 94px;
+      height: 94px;
+      display: inline-block;
+      object-fit: cover;
+      margin: 0 0 0 20px;
+    }
+    .up-avata-bg{
+      width: 90px;
+      height: 90px;
+      border-radius: 4px;
+      background-color: #EBEEF5;
+      .camera{
+        width: 46px;
+        height: 46px;
+        margin: 0 auto;
+        position: relative;
+        top: 22px;
+        background-image: url("./camera.png");
+        background-size: 100% 100%;
+      }
+    }
   .normal-content{
     width: 100%;
     background: #F5F5F5;
