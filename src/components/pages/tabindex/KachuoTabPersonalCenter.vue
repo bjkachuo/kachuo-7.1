@@ -94,7 +94,7 @@ export default {
       dataListOne: [
         {
           name: "游园日记",
-          link: "",
+          link: "/GardenJournal",
           imgSrc: require("@/assets/images/订单1@2x.png")
         },
         {

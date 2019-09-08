@@ -40,7 +40,7 @@ export default {
 
   methods: {
     setting() {
-      this.$router.push("/setting");
+      this.$router.push("/Seting");
     },
     message() {
       this.$router.push("/appmessage");

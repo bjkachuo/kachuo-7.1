@@ -7,9 +7,9 @@
           <p class="navigaion-video-detail-p">{{descDetails.title}}</p>
           <ul>
             <li>
-              <img :src="descDetails.scenic_image" alt="" @click="goPlay">
+              <img :src="descDetails.siteMsg.scenic_image" alt="" @click="goPlay(descDetails.siteMsg)">
               <div class="content">
-                <div class="title">{{ descDetails.scenic_name }}</div>
+                <div class="title">{{ descDetails.siteMsg.scenic_name }}</div>
                 <div class="jifen">免费观看</div>
                 <div class="bottom"><span>0人点赞</span><span>0条留言</span></div>
               </div>
@@ -40,7 +40,6 @@
       return {
         show: false,
         isControls: true,
-        content: "",
         descDetails: {},
         showBottom: true,
         label:'',
@@ -53,7 +52,7 @@
           longitude: obj.lng,
           latitude: obj.lat
         }) .then(res => {
-          if(!res.data.scenic_video){
+          if(!res.data.siteMsg.scenic_video){
             this.$vux.toast.text("暂无相应景点", "middle")
             setTimeout(() => {
               this.$vux.toast.hide()
@@ -66,8 +65,8 @@
             if (res.data) {
               this.$store.commit("changeNavigationDetailsState", true);
               this.descDetails = res.data;
-              this.content = res.data.content;
-              this.createVideoDom(true, res.data);
+
+              // this.createVideoDom(true, res.data);
             }
           } else {
             this.showBottom = false;
@@ -83,8 +82,8 @@
           });
       },
 
-      goPlay(){
-        sessionStorage.veido = JSON.stringify(this.descDetails)
+      goPlay(veido){
+        sessionStorage.veido = JSON.stringify(veido)
         this.$router.push('/intelligentnavigation/veidoPlay')
       },
 

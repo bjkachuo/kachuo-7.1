@@ -264,10 +264,17 @@ export default [{
       name: 'MyCreation',
       component: resolve => require(['@/components/pages/kachuouser/CreateIncome/MyCreation'], resolve),
   },
+  //创作收集
   {
       path: '/CreateIncome/CreationCollection',
       name: 'CreationCollection',
       component: resolve => require(['@/components/pages/kachuouser/CreateIncome/CreationCollection'], resolve),
+  },
+  //游园日记
+  {
+    path: '/GardenJournal',
+    name: 'GardenJournal',
+    component: resolve => require(['@/components/pages/kachuouser/GardenJournal/GardenJournal'], resolve),
   },
   {
     path: '/tokenqrcode',
@@ -289,10 +296,15 @@ export default [{
     name: 'IntegralDesc',
     component: resolve => require(['@/components/pages/kachuouser/IntegralDesc'], resolve),
   },
+  // {
+  //   path: '/setting',
+  //   name: 'Setting',
+  //   component: resolve => require(['@/components/pages/kachuouser/Setting'], resolve),
+  // },
   {
-    path: '/setting',
-    name: 'Setting',
-    component: resolve => require(['@/components/pages/kachuouser/Setting'], resolve),
+    path: '/seting',
+    name: 'Seting',
+    component: resolve => require(['@/components/pages/kachuouser/Seting/Seting'], resolve),
   },
   {
     path: '/realnameauth',
@@ -304,11 +316,13 @@ export default [{
     name: 'Address',
     component: resolve => require(['@/components/pages/kachuouser/setting/Address'], resolve),
   },
+  //关于我们
   {
     path: '/aboutus',
     name: 'AboutUs',
     component: resolve => require(['@/components/pages/kachuouser/setting/AboutUs'], resolve),
   },
+  //意见反馈
   {
     path: '/opinion',
     name: 'Opinion',
