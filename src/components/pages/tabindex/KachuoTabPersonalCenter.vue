@@ -99,7 +99,7 @@ export default {
         },
         {
           name: "我的资产",
-          link: "",
+          link: "/userintegral",
           imgSrc: require("@/assets/images/赠送@2x.png")
         },
         {
