@@ -63,15 +63,13 @@ export default {
     },
     // 模拟数据请求
     getData() {
-      return new Promise(resolve => {
         setTimeout(() => {
           const arr = [];
           for (let i = 0; i < 100; i++) {
             arr.push(count++);
           }
-          resolve(arr);
+          return arr
         }, 1000);
-      });
     },
     onPullingDown() {
       // 模拟下拉刷新

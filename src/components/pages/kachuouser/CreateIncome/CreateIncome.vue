@@ -1,11 +1,8 @@
 <template>
   <div class="photo-album-wrap">
-    <Header
-      :titleContent="TitleObjData.titleContent"
-      :showLeftBack="TitleObjData.showLeftBack"
-      :showRightMore="TitleObjData.showRightMore"
-    ></Header>
+    <Header :titleContent="TitleObjData.titleContent" :showLeftBack="TitleObjData.showLeftBack" :showRightMore="TitleObjData.showRightMore"></Header>
     <div class="normal-content" :style="conHei">
+
 		<div class="content-card">
 			<div class="card-row">
 				<div class="account-box">
@@ -22,18 +19,15 @@
 				<div class="btn-link"><span>申请提现</span></div>
 			</div>
 		</div>
+
 		<div class="c-panel">
 			<div class="c-header">我的创作</div>
 			<div class="c-body">
 			<flexbox :gutter="0">
 				<flexbox-item v-for="(item,index) in myData" :key="index" :span="1/3">
-				  <div class="c-card">
-					<div class="c-number">
-					  {{item.number}}
-					</div>
-					<div class="c-text">
-					  {{item.text}}
-					</div>
+				  <div class="c-card" @click="myCreation(index)">
+					  <div class="c-number">{{item.number}}</div>
+					  <div class="c-text">{{item.text}}</div>
 				  </div>
 				</flexbox-item>
 			  </flexbox>
@@ -43,14 +37,10 @@
 			<div class="c-header">创作收集</div>
 			<div class="c-body">
 			<flexbox :gutter="0">
-				<flexbox-item v-for="(item,index) in CData" :key="index" :span="1/3">
-				  <div class="c-card">
-					<div class="c-number">
-					  {{item.number}}
-					</div>
-					<div class="c-text">
-					  {{item.text}}
-					</div>
+				<flexbox-item v-for="(item,index) in CData" :key="index" :span="1/3" >
+				  <div class="c-card" @click="CreationCollection(index)">
+					<div class="c-number">{{item.number}}</div>
+					<div class="c-text">{{item.text}}</div>
 				  </div>
 				</flexbox-item>
 			  </flexbox>
@@ -113,16 +103,20 @@ export default {
   computed: {
     conHei() {
       return { height: document.documentElement.clientHeight - 45 + "px" };
-    }
+    },
   },
 
-  beforeMount() {},
-
   mounted() {
-    
+
   },
 
   methods: {
+    myCreation(index){
+      this.$router.push('/CreateIncome/MyCreation?status='+index)
+    },
+    CreationCollection(index){
+      this.$router.push('/CreateIncome/CreationCollection?status='+index)
+    }
   },
 
   watch: {}
@@ -153,7 +147,7 @@ export default {
 	padding:15px 0;
 	text-align:center;
 	background:rgba(255,255,255,1);
-	box-shadow:0px 2px 20px 0px rgba(57,118,255,0.08);
+	box-shadow:0px 2px 20px 0px rgba(57,118,255,0.16);
 	border-radius:4px;
 	line-height:1.2;
 }
@@ -237,7 +231,7 @@ export default {
 	color:#80BFFF;
 	display:inline-block;
 	padding-left:16px;
-	background:url(../../../assets/images/price@2x.png) left center no-repeat;
+	background:url(../../../../assets/images/price@2x.png) left center no-repeat;
 	background-size:12px 12px;
 	height:25px;
 	line-height:25px;

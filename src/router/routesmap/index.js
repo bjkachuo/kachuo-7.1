@@ -252,10 +252,22 @@ export default [{
     name: 'PhotoAlbum',
     component: resolve => require(['@/components/pages/kachuouser/PhotoAlbum'], resolve),
   },
+  //创收管理
   {
     path: '/CreateIncome',
     name: 'CreateIncome',
-    component: resolve => require(['@/components/pages/kachuouser/CreateIncome'], resolve),
+    component: resolve => require(['@/components/pages/kachuouser/CreateIncome/CreateIncome'], resolve),
+  },
+  //我的创作
+  {
+      path: '/CreateIncome/MyCreation',
+      name: 'MyCreation',
+      component: resolve => require(['@/components/pages/kachuouser/CreateIncome/MyCreation'], resolve),
+  },
+  {
+      path: '/CreateIncome/CreationCollection',
+      name: 'CreationCollection',
+      component: resolve => require(['@/components/pages/kachuouser/CreateIncome/CreationCollection'], resolve),
   },
   {
     path: '/tokenqrcode',
