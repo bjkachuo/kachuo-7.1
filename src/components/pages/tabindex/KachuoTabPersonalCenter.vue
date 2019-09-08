@@ -1,6 +1,6 @@
 <template>
   <div class="tab-personal-center-wrap" :style="heightSty">
-    <TabPersonCenterHeader></TabPersonCenterHeader>
+    <TabPersonCenterHeader ref="header"></TabPersonCenterHeader>
     <!-- <AppUserInfo></AppUserInfo> -->
     <div class="content-card">
       <div class="content-card-top">
@@ -104,7 +104,7 @@ export default {
         },
         {
           name: "我的评论",
-          link: "",
+          link: "/MyMessage",
           imgSrc: require("@/assets/images/留言@2x.png")
         },
         {
@@ -138,7 +138,7 @@ export default {
       dataListThree: [
         {
           name: "我的客服",
-          link: "",
+          link: "kefu",
           imgSrc: require("@/assets/images/客服@2x.png")
         },
         {
@@ -248,7 +248,11 @@ export default {
       this.$router.push("/tokenqrcode");
     },
     getItem(link) {
-      this.$router.push(link);
+      if(link == 'kefu'){
+        this.$refs.header.$refs.service.iframeShow = true
+      }else{
+        this.$router.push(link);
+      }
     }
   },
 

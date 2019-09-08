@@ -7,30 +7,27 @@
       </div>
       <span>设置</span>
     </div>
-    <div class="msg-wrap" style="margin-left=263px;" @click="message">
+    <customerService style="float: right;margin: 15px;" ref="service"></customerService>
+    <div class="msg-wrap" style="float: right" @click="message">
       <div class="setUp-img">
         <img src="../../assets/images/通知@2x.png" alt />
       </div>
       <span>消息</span>
     </div>
-    <div class="help-wrap" style="margin-left=25px;">
-      <div class="setUp-img">
-        <img src="../../assets/images/帮助中心@2x.png" alt />
-      </div>
-      <span>帮助</span>
-    </div>
+
   </div>
 </template>
 
 <script>
+  import customerService from '@/components/common/customerService/customerService'
 export default {
   name: "",
-  props: [""],
+
   data() {
     return {};
   },
 
-  components: {},
+  components: {customerService},
 
   computed: {},
 
@@ -81,15 +78,6 @@ export default {
   margin-top: 11px;
   /* background: chartreuse; */
   float: left;
-  margin-left: 67.9%;
-}
-.help-wrap {
-  width: 24px;
-  height: 38px;
-  margin-top: 11px;
-  /* background: chartreuse; */
-  float: left;
-  margin-left: 7.2%;
 }
 .setUp-img {
   width: 18px;

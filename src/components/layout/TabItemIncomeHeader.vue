@@ -10,7 +10,7 @@
 </template>
 
 <script>
-  import customerService from '@/components/common/customerService/customerService'
+import customerService from '@/components/common/customerService/customerService'
 export default {
   name: "",
   props: [""],

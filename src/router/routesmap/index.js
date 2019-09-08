@@ -316,6 +316,12 @@ export default [{
     name: 'Address',
     component: resolve => require(['@/components/pages/kachuouser/setting/Address'], resolve),
   },
+  //我的留言
+  {
+    path: '/MyMessage',
+    name: 'MyMessage',
+    component: resolve => require(['@/components/pages/kachuouser/MyMessage/MyMessage'], resolve),
+  },
   //关于我们
   {
     path: '/aboutus',
