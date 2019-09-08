@@ -121,7 +121,7 @@ export default {
         },
         {
           name: "变现管理",
-          link: "",
+          link: "/Liquidation",
           imgSrc: require("@/assets/images/变现管理@2x.png")
         },
         {

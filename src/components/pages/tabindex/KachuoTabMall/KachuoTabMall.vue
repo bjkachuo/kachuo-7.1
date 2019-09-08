@@ -137,6 +137,7 @@ export default {
         });
     },
     goodsTypeGo(link) {
+      alert(link)
       this.$router.push(link);
       // console.log(link);
     }

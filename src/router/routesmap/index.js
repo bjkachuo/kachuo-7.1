@@ -237,10 +237,23 @@ export default [{
     name: 'ShoppingCart',
     component: resolve => require(['@/components/pages/kachuouser/ShoppingCart'], resolve),
   },
+  //商城管理
   {
     path: '/orderlist',
     name: 'OrderList',
-    component: resolve => require(['@/components/pages/kachuouser/OrderList'], resolve),
+    component: resolve => require(['@/components/pages/kachuouser/mallAdmin/mallAdmin'], resolve),
+  },
+  //变现管理
+  {
+    path: '/Liquidation',
+    name: 'Liquidation',
+    component: resolve => require(['@/components/pages/kachuouser/Liquidation/Liquidation'], resolve),
+  },
+  //我要寄卖
+  {
+    path: '/Liquidation/ConsignContent',
+    name: 'ConsignContent',
+    component: resolve => require(['@/components/pages/kachuouser/Liquidation/ConsignContent'], resolve),
   },
   {
     path: '/collection',
