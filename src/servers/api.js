@@ -71,7 +71,7 @@ export const Notify = (data) => http.post("goods.buy.notify", data);
 export const aliNotify = (data) => http.post("goods.buy.aliNotify", data);
 
 //频类首页图
-export const Frequency = (data) => http.post("index", data);
+export const Frequency = (data) => http.post("video.index", data);
 
 //频类详情
 export const FrequencyDetail = (data) => http.post("video.index.getvideo", data);
@@ -98,10 +98,10 @@ export const Suyuan = (data) => http.post("index.suyuan", data);
 export const Attestation = (data) => http.post("index.attestation", data);
 
 // 首页频类列表
-export const VideoListIndex = (data) => http.post("index", data);
+export const VideoListIndex = (data) => http.post("video.index", data);
 
 // 动态详情页
-export const newsDetails = (data) => http.post("index.dynamic_details", data);
+export const newsDetails = (data) => http.post("dynamic.index.dynamic_details", data);
 
 // 回购
 export const buyBack = (data) => http.post("goods.repurchase.slide_list", data);
@@ -275,19 +275,19 @@ export const SeourceCreatedSubmit = (data) => http.post("video.show.videoAdd1", 
 export const SeourceCreatedListDetails = (data) => http.post("video.show.videodet", data);
 
 // 商品列表
-export const ShopGoodsList = (data) => http.post("index.get_list_by_category", data);
+export const ShopGoodsList = (data) => http.post("shop.index.get_list_by_category", data);
 
 // 推荐商品
-export const ShopGoodsListPush = (data) => http.post("index.get_home_list", data);
+export const ShopGoodsListPush = (data) => http.post("shop.index.get_home_list", data);
 
 // 景区消费分类
-export const ScenceGoodsClass = () => http.post("index.get_category");
+export const ScenceGoodsClass = () => http.post("shop.index.get_category");
 
 // 景区发布列表
-export const ScenceReleaseList = (data) => http.post("index.index", data);
+export const ScenceReleaseList = (data) => http.post("release.index.index", data);
 
 // 景区发布列表详情
-export const ScenceReleaseListDetails = (data) => http.post("index.show", data);
+export const ScenceReleaseListDetails = (data) => http.post("release.index.show", data);
 
 // 记住的了解的
 export const ScenceRememberAndLearn = (data) => http.post("videoservice.remknow.remknowlist", data);
@@ -362,7 +362,7 @@ export const CYGXorderList = (data) => http.post("goods.real.get_OrderList", dat
 export const FamousListData = (data) => http.post("home.celebrity", data);
 
 // 云相册上传图片获取链接
-export const CloudUploadImg = (data) => http.post("index", data);
+export const CloudUploadImg = (data) => http.post("album.index", data);
 
 // 获取相册列表
 export const GetCloudUploadImg = (data) => http.post("album.album_list", data);

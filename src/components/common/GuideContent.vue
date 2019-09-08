@@ -4,7 +4,7 @@
     <div class="normal-content" :style="conHei">
       <div class="inner-wrap">
         <div class="guide-grid">
-          <img src="../../assets/images/daoyouinfo.jpg" alt="">
+          <img :src="this.DList.tour_path" alt="">
           <div class="btn-click"><span class="icon-thumb"></span><span>{{this.DList.zan}}</span></div>
         </div>
         <div class="bs-panel">
@@ -40,16 +40,16 @@
           <div class="mess-title">评论(2条)</div>
         </div>
         <div class="mess-body">
-          <div class="mess-group">
-            <cell @cell-label-color title="木子菲菲" inline-desc="2019-05-24">
-              <img slot="icon" class="mess-avatar" src="../../assets/images/touxiang.jpg">
+          <div class="mess-group" v-for="(item,index) in DList.comm" :key="index">
+            <cell @cell-label-color :title="item.nickname" :inline-desc="item.created_at">
+              <img slot="icon" class="mess-avatar" :src="item.avatar">
               <template slot="default">
                 <div class="cared-number">12</div>
               </template>
             </cell>
-            <cell title="点赞仙文化"></cell>
+            <cell :value="item.content" value-align="left"></cell>
           </div>
-          <div class="mess-group">
+          <!-- <div class="mess-group">
             <cell title="木子菲菲" inline-desc="2019-05-24">
               <img slot="icon" class="mess-avatar" src="../../assets/images/touxiang.jpg">
               <template slot="default">
@@ -57,7 +57,7 @@
               </template>
             </cell>
             <cell title="点赞仙文化"></cell>
-          </div>
+          </div> -->
         </div>
       </div>
       <div class="btn-space">

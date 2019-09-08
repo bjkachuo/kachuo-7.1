@@ -118,10 +118,11 @@
       };
     },
     mounted(){
+    console.log(sessionStorage.currentScenic);
     //获取导游列表
     this.$http
       .post(
-        "https://core.kachuo.com/app/ewei_shopv2_app.php?i=8&c=site&a=entry&m=ewei_shopv2&do=mobile&r=tourguide.index.getlist&scenic_id=24"
+        "https://core.kachuo.com/app/ewei_shopv2_app.php?i=8&c=site&a=entry&m=ewei_shopv2&do=mobile&r=tourguide.index.getlist&scenic_id="+sessionStorage.currentScenic
       )
       .then(({ data }) => {
         console.log(data);

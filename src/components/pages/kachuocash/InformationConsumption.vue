@@ -7,17 +7,17 @@
     ></Header>
     <div class="scence-consum-content" :style="scenceConsumHeight">
       <!-- <TabItemMallAdvertise></TabItemMallAdvertise>
-      <DividedArea></DividedArea> -->
+      <DividedArea></DividedArea>-->
       <div style="width:92%;margin: 15px auto 30px;">
         <swiper auto height="100px" class="custom">
           <swiper-item class="black">
-            <img src="./xinxixiaofeitwo.jpg" alt="">
+            <img src="./xinxixiaofeitwo.jpg" alt />
           </swiper-item>
           <swiper-item class="black">
-            <img src="./xinxixiaofeitwo.jpg" alt="">
+            <img src="./xinxixiaofeitwo.jpg" alt />
           </swiper-item>
           <swiper-item class="black">
-            <img src="./xinxixiaofeitwo.jpg" alt="">
+            <img src="./xinxixiaofeitwo.jpg" alt />
           </swiper-item>
         </swiper>
       </div>
@@ -176,8 +176,12 @@ export default {
   height: 100%;
   overflow: hidden;
 }
-h2{
-  background:linear-gradient(90deg,rgba(57,118,255,1) 0%,rgba(57,62,255,1) 100%);
+h2 {
+  background: linear-gradient(
+    90deg,
+    rgba(57, 118, 255, 1) 0%,
+    rgba(57, 62, 255, 1) 100%
+  );
   width: 100%;
   height: 100%;
 }
@@ -200,8 +204,11 @@ h2{
 }
 </style>
 <style lang="less" scoped>
+/deep/ .vux-swiper {
+  border-radius: 8px;
+}
 .custom {
-  // overflow: inherit;
+  overflow: inherit;
   border-radius: 8px;
   /deep/ .vux-indicator {
     right: 50%;

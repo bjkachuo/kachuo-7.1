@@ -20,16 +20,37 @@
             <p>{{this.storeDetails.name}}</p>
           </div>
           <div class="card-mid">
-            <div class="card-mid-img-wrap">
+            <div class="card-mid-img-wrap" @click="showDialogStyle = !showDialogStyle">
               <img :src="this.storeDetails.video_image" alt />
+              <div class="play-img">
+                <img src="../../assets/images/playv.png" alt />
+              </div>
             </div>
+            <x-dialog
+              v-model="showDialogStyle"
+              hide-on-blur
+              :dialog-style="{'max-width': '100%', width: '100%', height: '50%', 'background-color': 'transparent'}"
+            >
+              <p style="color:#fff;text-align:center;" @click="showDialogStyle = false">
+                <video
+                  :src="this.storeDetails.video"
+                  :poster="this.storeDetails.video_image"
+                  controlslist="nodownload"
+                  preload="none"
+                  controls="controls"
+                  x5-video-orientation="landscape"
+                  autoplay="autoplay"
+                ></video>
+                <!-- <span class="vux-close" @click="showToast=false"></span> -->
+              </p>
+            </x-dialog>
             <div class="card-mid-text-wrap">
               <div class="card-mid-text-one">
                 <p>{{this.storeDetails.score}}</p>
                 <i>
                   <rater
-                    v-model="data42"
-                    active-color="#FF9900"
+                    v-model="this.starNum"
+                    active-color="#ffc800"
                     :font-size="10"
                     :margin="0"
                     disabled
@@ -225,17 +246,17 @@
 </template>
 <script>
 import Header from "@/components/common/Header";
-import { Scroller, LoadMore, Rater, Cell } from "vux";
+import { Scroller,LoadMore,Rater,Cell, XDialog,XButton,XInput,Group,Actionsheet,} from "vux";
 import list1 from "@/components/common/goods/list1.vue";
 import list2 from "@/components/common/goods/list2.vue";
 import list3 from "@/components/common/goods/list3.vue";
 import list4 from "@/components/common/goods/list4.vue";
 import list5 from "@/components/common/goods/list5.vue";
-import { XButton, XInput, Group, Actionsheet } from "vux";
 
 export default {
   data() {
     return {
+      showDialogStyle: false,
       tabView: "list1",
       tabs: [
         { name: "锅底" },
@@ -249,7 +270,7 @@ export default {
       iscur: 0,
       cur: 0, //默认选中第一个tab
       //星星评分
-      data42: 3.5,
+      starNum:0,
       //获取到的商家id
       idNum: "",
       //商家详情数组
@@ -288,7 +309,8 @@ export default {
     list2,
     list3,
     list4,
-    list5
+    list5,
+    XDialog
   },
   created() {},
   methods: {
@@ -303,38 +325,6 @@ export default {
     fications() {
       this.$router.push("/Qualifications");
     }
-    // onScrollBottom() {
-    //   if (this.onFetching) {
-    //     // do nothing
-    //     // console.log(1);
-    //   } else {
-    //     this.onFetching = true;
-    //     setTimeout(() => {
-    //       this.bottomCount += 5;
-    //       this.$nextTick(() => {
-    //         this.$refs.scrollerBottom.reset();
-    //       });
-    //       this.onFetching = false;
-    //     }, 2000);
-    //     console.log(2);
-    //     this.$http
-    //       .post(
-    //         "https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.index.buscommentlist&page=" +
-    //           this.page +
-    //           "&id=" +
-    //           this.idNum
-    //       )
-    //       .then(({ data }) => {
-    //         console.log(data);
-    //         this.page = data.data.currentpage += 1;
-    //         console.log(this.page);
-    //         this.commentList = data.data.comment;
-    //       });
-    //   }
-    // },
-    // test() {
-    //   alert(1111);
-    // }
   },
   mounted() {
     //获取列表页传来的id
@@ -350,31 +340,11 @@ export default {
       .then(({ data }) => {
         // console.log(data.data);
         this.storeDetails = data.data;
-
-        this.data42 = this.storeDetails.score;
         console.log(this.storeDetails);
+
+        this.starNum = parseFloat(this.storeDetails.score);
+        console.log(this.starNum);
       });
-    //获取评论列表
-    // this.$http
-    //   .post(
-    //     "https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.index.buscommentlist&page=1&id=" +
-    //       this.idNum
-    //   )
-    //   .then(({ data }) => {
-    //     console.log(data);
-    //     this.commentList = data.data.comment;
-    //     console.log(this.commentList);
-    //     //获取用户评分
-    //     //   this.value2 =  parseInt(this.commentList.score)
-    //     // console.log(this.value2)
-    //     //大星星平均值
-    //     this.value1 = data.data.member_first;
-    //     // console.log(this.value1)
-    //   });
-    // this.$nextTick(() => {
-    //   this.$refs.scrollerBottom.reset({ top: 0 });
-    // });
-    // console.log(this.commentList.index)
   }
 };
 </script>
@@ -391,6 +361,17 @@ i {
 }
 b {
   font-weight: normal;
+}
+.play-img {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: 25%;
+  left: 30%;
+}
+.play-img img {
+  width: 100%;
+  background: none;
 }
 .store-details-wrap {
   width: 100%;
@@ -435,7 +416,7 @@ b {
 }
 .card-mid {
   width: 100%;
-  height: 50px;
+  height: 58px;
   margin-bottom: 15px;
 }
 .card-mid-img-wrap {
@@ -444,6 +425,7 @@ b {
   height: 58px;
   margin-left: 4.3%;
   margin: 0 3% 0 4.3%;
+  position: relative;
 }
 .card-mid-img-wrap img {
   background: none;
@@ -626,6 +608,7 @@ video {
   object-fit: fill;
   width: 100%;
   height: 100%;
+  margin-top: 40%;
 }
 .storeIntroduce-wrap {
   /* width: 375px; */

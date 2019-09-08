@@ -537,7 +537,7 @@ img {
   width: 92%;
   height: 55px;
   margin: 0 auto 5px;
-  background: #ffffffff;
+  background: #ffffff;
   border-radius: 8px;
   box-shadow: 0px 10px 20px 0px rgba(0, 101, 255, 0.08);
 }
@@ -571,7 +571,7 @@ img {
 .inLeft {
   width: 23.19%;
   height: 50px;
-  margin: 15px 3.19% 0 4.35%;
+  margin: 22px 3.19% 0 4.35%;
   float: left;
   border-radius: 4px;
   position: relative;

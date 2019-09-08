@@ -6,8 +6,22 @@
       :showRightMore="TitleObjData.showRightMore"
     ></Header>
     <div class="scence-gifts-content" :style="scenceGiftsContent">
-      <TabItemMallAdvertise></TabItemMallAdvertise>
-      <DividedArea></DividedArea>
+      <div style="width:92%;margin: 15px auto 30px;">
+        <swiper auto height="100px" class="custom">
+          <swiper-item class="black">
+            <img src="./ming1.jpg" alt />
+          </swiper-item>
+          <swiper-item class="black">
+            <img src="./ming2.jpg" alt />
+          </swiper-item>
+          <swiper-item class="black">
+            <img src="./ming3.jpg" alt />
+          </swiper-item>
+        </swiper>
+      </div>
+
+      <!-- <TabItemMallAdvertise></TabItemMallAdvertise>
+      <DividedArea></DividedArea>-->
       <FlexWrap :dataListCon="dataList" ref="dataList"></FlexWrap>
       <DividedArea></DividedArea>
       <Divider :content="title"></Divider>
@@ -25,6 +39,7 @@ import Divider from "@/components/common/Divider";
 import Scroll from "@/components/common/Scroller";
 import GoodsList from "@/components/layout/GoodsList/GoodsList";
 import { goodsBucketRecomm, FamousListData } from "@/servers/api";
+import { Swiper, SwiperItem } from "vux";
 
 export default {
   name: "",
@@ -53,7 +68,9 @@ export default {
     FlexWrap,
     Divider,
     Scroll,
-    GoodsList
+    GoodsList,
+    Swiper,
+    SwiperItem
   },
 
   computed: {
@@ -81,7 +98,13 @@ export default {
               this.dataList.push({
                 icon: res.data[i].list_img,
                 name: res.data[i].list_name,
-                link: "/scenceconsumdetails?title="+res.data[i].list_name+"&id="+res.data[i].type_id+"&type=2&flag=2&carousel="+res.data[i].carousel_type
+                link:
+                  "/scenceconsumdetails?title=" +
+                  res.data[i].list_name +
+                  "&id=" +
+                  res.data[i].type_id +
+                  "&type=2&flag=2&carousel=" +
+                  res.data[i].carousel_type
               });
             }
           }
@@ -132,10 +155,38 @@ export default {
   overflow-y: scroll;
   box-sizing: border-box;
 }
-.vux-flexbox{
+.vux-flexbox {
   overflow: scroll;
   overflow: scroll;
   height: 156px;
   flex-wrap: wrap;
+}
+</style>
+<style lang="less" scoped>
+/deep/ .vux-swiper {
+  border-radius: 8px;
+}
+
+.custom {
+  // border-radius: 8px;
+  overflow: inherit;
+  h2 {
+    background: linear-gradient(
+      90deg,
+      rgba(57, 118, 255, 1) 0%,
+      rgba(57, 62, 255, 1) 100%
+    );
+    width: 100%;
+    height: 100%;
+  }
+  /deep/ .vux-indicator {
+    right: 50%;
+    margin-right: -32px;
+    bottom: -27px;
+  }
+  /deep/ .vux-icon-dot {
+    width: 15px !important;
+    height: 3px !important;
+  }
 }
 </style>

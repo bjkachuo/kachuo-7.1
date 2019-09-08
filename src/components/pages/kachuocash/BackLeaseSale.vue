@@ -112,9 +112,13 @@ export default {
 }
 </style>
 <style lang="less" scoped>
-.custom {
+/deep/ .vux-swiper {
   border-radius: 8px;
-  // overflow: inherit;
+}
+
+.custom {
+  // border-radius: 8px;
+  overflow: inherit;
   h2 {
     background: linear-gradient(
       90deg,

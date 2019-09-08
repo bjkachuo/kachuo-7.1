@@ -6,8 +6,22 @@
       :showRightMore="TitleObjData.showRightMore"
     ></Header>
     <div class="scence-gifts-content" :style="scenceGiftsContent">
-      <TabItemMallAdvertise></TabItemMallAdvertise>
-      <DividedArea></DividedArea>
+      <div style="width:92%;margin: 15px auto 30px;">
+        <swiper auto height="100px" class="custom">
+          <swiper-item class="black">
+            <img src="./youxiaoone.jpg" alt />
+          </swiper-item>
+          <swiper-item class="black">
+            <img src="./youxiaotwo.jpg" alt />
+          </swiper-item>
+          <swiper-item class="black">
+            <img src="./youxiaothree.jpg" alt />
+          </swiper-item>
+        </swiper>
+      </div>
+
+      <!-- <TabItemMallAdvertise></TabItemMallAdvertise>
+      <DividedArea></DividedArea>-->
       <FlexWrap :dataListCon="dataList" ref="dataList"></FlexWrap>
       <DividedArea></DividedArea>
       <div v-for="(item,index) in goodsListData" :key="index">
@@ -27,6 +41,7 @@ import Divider from "@/components/common/Divider";
 import Scroll from "@/components/common/Scroller";
 import GoodsList from "@/components/layout/GoodsList/GoodsList";
 import { ShopGoodsListPush, ScenceGoodsClass } from "@/servers/api";
+import { Swiper, SwiperItem } from "vux";
 
 export default {
   name: "",
@@ -34,7 +49,7 @@ export default {
   data() {
     return {
       TitleObjData: {
-        titleContent: "景区消费",
+        titleContent: "游园消费",
         showLeftBack: true,
         showRightMore: false
       },
@@ -42,22 +57,26 @@ export default {
       dataList: [
         {
           name: "景区有礼",
-          link: "/scenceconsumdetails?title=景区有礼&id=38&type=1&flag=3&carousel=14",
+          link:
+            "/scenceconsumdetails?title=景区有礼&id=38&type=1&flag=3&carousel=14",
           class: "iconfont iconjingquhaoli1"
         },
         {
           name: "节日佳品",
-          link: "/scenceconsumdetails?title=节日佳品&id=40&type=1&flag=3&carousel=15",
+          link:
+            "/scenceconsumdetails?title=节日佳品&id=40&type=1&flag=3&carousel=15",
           class: "iconfont iconjierijiapin"
         },
         {
           name: "地方好物",
-          link: "/scenceconsumdetails?title=地方好物&id=64&type=1&flag=3&carousel=16",
+          link:
+            "/scenceconsumdetails?title=地方好物&id=64&type=1&flag=3&carousel=16",
           class: "iconfont icondifanghaowu"
         },
         {
           name: "欣怡开市",
-          link: "/scenceconsumdetails?title=欣怡开市&id=85&type=1&flag=3&carousel=17",
+          link:
+            "/scenceconsumdetails?title=欣怡开市&id=85&type=1&flag=3&carousel=17",
           class: "iconfont iconxinyikaishi"
         }
       ],
@@ -72,7 +91,9 @@ export default {
     FlexWrap,
     Divider,
     Scroll,
-    GoodsList
+    GoodsList,
+    Swiper,
+    SwiperItem
   },
 
   computed: {
@@ -143,5 +164,33 @@ export default {
   overflow: hidden;
   overflow-y: scroll;
   box-sizing: border-box;
+}
+</style>
+<style lang="less" scoped>
+/deep/ .vux-swiper {
+  border-radius: 8px;
+}
+
+.custom {
+  // border-radius: 8px;
+  overflow: inherit;
+  h2 {
+    background: linear-gradient(
+      90deg,
+      rgba(57, 118, 255, 1) 0%,
+      rgba(57, 62, 255, 1) 100%
+    );
+    width: 100%;
+    height: 100%;
+  }
+  /deep/ .vux-indicator {
+    right: 50%;
+    margin-right: -32px;
+    bottom: -27px;
+  }
+  /deep/ .vux-icon-dot {
+    width: 15px !important;
+    height: 3px !important;
+  }
 }
 </style>

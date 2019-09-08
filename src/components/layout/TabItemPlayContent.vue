@@ -439,7 +439,7 @@ export default {
 .inLeft {
   width: 23.19%;
   height: 50px;
-  margin: 15px 3.19% 0 4.35%;
+  margin: 22px 3.19% 0 4.35%;
   float: left;
   border-radius: 4px;
   position: relative;

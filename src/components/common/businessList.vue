@@ -169,7 +169,7 @@ export default {
 .classificationSorting-wrap {
   width: 100%;
   height: 45px;
-  background: #ffffffff;
+  background: #ffffff;
   margin-bottom: 10px;
 }
 .left {

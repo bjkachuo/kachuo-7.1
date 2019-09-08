@@ -157,9 +157,13 @@ export default {
   margin: 0 20px;
   line-height: 44px;
 }
-.custom {
-  // overflow: inherit;
+/deep/ .vux-swiper {
   border-radius: 8px;
+}
+
+.custom {
+  overflow: inherit;
+  // border-radius: 8px;
   /deep/ .vux-indicator {
     right: 50%;
     margin-right: -32px;

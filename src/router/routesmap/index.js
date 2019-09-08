@@ -744,5 +744,36 @@ export default [{
     path: '/scenicSpot/information',
     name: 'information',
     component: resolve => require(['@/admin/scenicSpot/page/information/information'], resolve),
-  }
+  },
+  {
+    //票务系统电子票
+    path: '/electronicsTicket',
+    name: '/electronicsTicket',
+    component: resolve => require(['@/components/pages/kachuoplay/toolslist/electronicsTicket'], resolve),
+
+  },
+  {
+    //票务系统纸质票
+    path: '/paperTicket',
+    name: '/paperTicket',
+    component: resolve => require(['@/components/pages/kachuoplay/toolslist/paperTicket'], resolve),
+
+  },
+  {
+    //票务系统免费票
+    path: '/freeTickets',
+    name: '/freeTickets',
+    component: resolve => require(['@/components/pages/kachuoplay/toolslist/freeTickets'], resolve),
+
+  },
+  {
+    //票务系统现场票
+    path: '/onsiteTickets',
+    name: '/onsiteTickets',
+    component: resolve => require(['@/components/pages/kachuoplay/toolslist/onsiteTickets'], resolve),
+
+  },
+  
+
+
 ]
