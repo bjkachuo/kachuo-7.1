@@ -6,7 +6,7 @@
       <div class="content-card-top">
         <div class="content-card-top-left">
           <p>
-            <img class="content-card-top-left-img" :src="userInfo.avatar ? userInfo.avatar : ''" />
+            <img class="content-card-top-left-img" :src="userInfo.avatar ? userInfo.avatar : ''"  @click="goCenter"/>
           </p>
           <div class="content-card-top-left-txt">
             <p class="p-one">{{userInfo.nickname}}</p>
@@ -229,10 +229,11 @@ export default {
     }
   },
 
-  beforeMount() {},
+
   created() {
     this.getUserInfo();
   },
+
   mounted() {
     console.log(this.GLOBAL.getSession("userLoginInfo"));
   },
@@ -241,6 +242,11 @@ export default {
     getUserInfo() {
       this.userInfo = this.GLOBAL.getSession("userLoginInfo");
     },
+
+    goCenter(){
+      this.$router.push('')
+    },
+
     watchAllCode() {
       this.$refs.dialogCon.showToastFn(this.userInfo.accessToken);
     },

@@ -340,7 +340,7 @@ export default [{
   {
     path: '/address',
     name: 'Address',
-    component: resolve => require(['@/components/pages/kachuouser/setting/Address'], resolve),
+    component: resolve => require(['@/components/pages/kachuouser/address/Address'], resolve),
   },
   //我的留言
   {
