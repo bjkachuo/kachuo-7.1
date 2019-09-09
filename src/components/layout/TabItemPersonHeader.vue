@@ -14,28 +14,14 @@
       </div>
       <span>消息</span>
     </div>
-<<<<<<< Updated upstream
 
-=======
-    <div class="help-wrap" style="margin-left=25px;">
-      <customerService></customerService>
-
-      <!-- <div class="setUp-img"> -->
-      <!-- <img src="../../assets/images/帮助中心@2x.png" alt /> -->
-      <!-- </div> -->
-      <!-- <span>帮助</span> -->
-    </div>
->>>>>>> Stashed changes
   </div>
 </template>
 
 <script>
-<<<<<<< Updated upstream
-  import customerService from '@/components/common/customerService/customerService'
-=======
+
 import customerService from "@/components/common/customerService/customerService";
 
->>>>>>> Stashed changes
 export default {
   name: "",
 
@@ -43,19 +29,10 @@ export default {
     return {};
   },
 
-<<<<<<< Updated upstream
+
   components: {customerService},
-=======
-  components: {
-    customerService
-  },
->>>>>>> Stashed changes
 
-  computed: {},
 
-  beforeMount() {},
-
-  mounted() {},
 
   methods: {
     setting() {
@@ -100,9 +77,6 @@ export default {
   margin-top: 11px;
   /* background: chartreuse; */
   float: left;
-<<<<<<< Updated upstream
-=======
-  margin-left: 67.9%;
 }
 .help-wrap {
   width: 24px;
@@ -111,7 +85,6 @@ export default {
   /* background: chartreuse; */
   float: left;
   margin-left: 7.2%;
->>>>>>> Stashed changes
 }
 .setUp-img {
   width: 18px;

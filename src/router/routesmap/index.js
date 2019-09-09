@@ -51,6 +51,19 @@ export default [{
     name: 'intelligentnavigation',
     component: resolve => require(['@/components/pages/kachuoplay/toolslist/IntelligentNavigation/IntelligentNavigation'], resolve),
   },
+  //景点列表
+  {
+    path: '/intelligentnavigation/listShow',
+    name: 'intelligentnavigationListShow',
+    component: resolve => require(['@/components/pages/kachuoplay/toolslist/IntelligentNavigation/scenicSpot'], resolve),
+  },
+  //景点视频列表
+  {
+    path: '/intelligentnavigation/veidoList',
+    name: 'intelligentnavigationVeidoList',
+    component: resolve => require(['@/components/pages/kachuoplay/toolslist/IntelligentNavigation/veidoList'], resolve),
+  },
+  //视频播放
   {
     path: '/intelligentnavigation/veidoPlay',
     name: 'VeidoPlay',

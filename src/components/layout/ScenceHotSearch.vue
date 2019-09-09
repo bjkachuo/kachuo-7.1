@@ -33,32 +33,29 @@ export default {
 
 
   mounted() {
-    // this.changeArea(item.id)
-   // this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.index.get_recommend_business&scenic_id=24&scenic.index.change_scenic")
-    // .then(({data})=>{
-    //   console.log(data.data);
-    //   this.changeAreadata = data.data;
-    //   console.log(this.changeAreadata);
-    // })
+   this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.index.get_recommend_business&scenic_id=24&scenic.index.change_scenic")
+    .then(({data})=>{
+
+      this.changeAreadata = data.data;
+
+    })
   },
 
   methods: {
     selectScenic(item) {
-      sessionStorage.removeItem("currentScenic");
+
       sessionStorage.setItem("currentScenic", item.id);
       setTimeout(() =>{
        this.$router.push("/indextab");
       },300)
       this.changeArea(item.id);
-      console.log(item.id)
+
     },
     changeArea(id){
       this.$http.get("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.index.change_scenic&scenic_id="+id)
       .then(({data})=>{
-        console.log(data);
-        console.log("点击获取景区数据成功");
+
         this.changeAreadata = data;
-        console.log(this.changeAreadata);
       })
     }
   },

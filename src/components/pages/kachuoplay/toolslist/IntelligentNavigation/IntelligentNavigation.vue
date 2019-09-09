@@ -1,8 +1,12 @@
 <template>
   <div class="amap-page-container">
     <Header :titleContent="TitleObjData.titleContent" :showLeftBack="TitleObjData.showLeftBack" :showRightMore="TitleObjData.showRightMore"></Header>
-    <div class="custom-ctrl" @click="status == 0 ? status = 1 : status = 0">{{status== 0 ? '静态':'动态'}}<br>地图</div>
-    <static-map :markers="markers" v-if="status == 1"></static-map>
+    <div class="custom-ctrl" >
+      <div style="margin-bottom: 10px;" @click="status == 0 ? status = 1 : status = 0">{{status== 0 ? '静态':'动态'}}<br>地图</div>
+      <div style="padding-top: 10px;border-top: 1px solid #fff;" @click="goScenic">景点<br>列表</div>
+
+    </div>
+    <static-map :markers="markers" v-show="status == 1" :mapimg="mapimg"></static-map>
     <el-amap vid="amapDemo"  :center="center"  :zoom="zoom" class="amap-demo" ref="amap" :style="setMapHeight" :plugin="plugin"  :events="events" :aMapManager="AMapManager" v-show="status == 0">
       <el-amap-marker v-for="(marker,index) in markers" :position="marker.position" :vid="index" :offset="taOffset" v-if="navIndex == 0">
         <div @touchstart="showModel(marker.label,marker.position)">
@@ -16,7 +20,7 @@
       </el-amap-marker>
       <el-amap-text v-for="text in markers" :text="text.label" :position="text.position"  :offset="[0,-55]" ></el-amap-text>
     </el-amap>
-    <Popup class="content-model" ref="videoWrap" v-show="showModelFlag"></Popup>
+    <Popup class="content-model" ref="videoWrap"></Popup>
     <NavigationTab :dataList="tabList" v-on:changePath="showPath"></NavigationTab>
   </div>
 </template>
@@ -26,11 +30,13 @@ import Header from "@/components/common/Header"
 import NavigationTab from "@/components/common/NavigationTab"
 import Popup from "./popup";
 import staticMap from './staticMap'
+import scenicSpot from './scenicSpot'
 // import Popup from "@/components/common/Popup"
 import { setTimeout } from "timers";
 import { AMapManager } from 'vue-amap'
 
-console.log(AMapManager);
+console.log(AMapManager)
+
 export default {
 
   name: "amap-page",
@@ -40,6 +46,7 @@ export default {
     return {
       status:0,
       AMapManager,
+      mapimg:'',
       zoom: 16,
       center: [0,0],
       markers: [],
@@ -110,7 +117,7 @@ export default {
     Header,
     Popup,
     NavigationTab,
-    staticMap
+    staticMap,scenicSpot
   },
   methods: {
 
@@ -121,6 +128,10 @@ export default {
           this.center = this.scenicList[i].position;
         }
       }
+    },
+
+    goScenic(){
+      this.$router.push('/intelligentnavigation/listShow')
     },
 
     domBindEvent(){
@@ -140,14 +151,14 @@ export default {
             this.showModel(this.SCENICLINE[index].label,this.SCENICLINE[index].position)
           }
         }
-      },1000)
+      },800)
     },
 
     init() {
 
       if (this.SCENICLINE.length) {
-
         this.markers = []
+
         this.SCENICLINE.forEach((item, index) => {
           this.markers.push({
             position:[item.position[0], item.position[1]],
@@ -156,9 +167,7 @@ export default {
             label:item.label,
           })
         })
-
         this.domBindEvent()
-
       } else {
         this.$vux.toast.text("暂无相应景点", "middle")
         setTimeout(() => {
@@ -175,6 +184,7 @@ export default {
         lat:position[1],
         lng:position[0]
       }
+      console.log(this.$refs.videoWrap);
       this.$refs.videoWrap.getScenicDetails(clickPosition);
     },
     showPath(index) {
@@ -185,8 +195,10 @@ export default {
     },
     getMarkerList(type){
       this.$http.get("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.site.site_list&type="+type)
-        .then(({ data }) => {
-          var data = data.data
+        .then( datas  => {
+          console.log(datas);
+          this.mapimg = datas.data.mapimg
+          let data = datas.data.data
           let arr = []
           if(data == ''){
             data = []
@@ -194,7 +206,6 @@ export default {
           data.forEach(item=>{
             arr.push({position:[ item.longitude,item.latitude ],label:item.title,left:item.left,top:item.top})
           })
-
           this.SCENICLINE = arr
           console.log(this.SCENICLINE);
           if(type == 0) this.initLocalData()

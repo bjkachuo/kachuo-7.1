@@ -1,6 +1,6 @@
 <template>
   <div v-transfer-dom>
-    <popup v-model="isShow" :hide-on-blur="true" @on-hide="hide">
+    <popup v-model="isShow" :hide-on-blur="true" @on-hide="hide" v-if="descDetails.title">
       <div class="popup2" v-show="showBottom">
         <div class="navigaion-video-detail-wrap">
           <p class="navigaion-video-detail-p">{{descDetails.title}}</p>
