@@ -45,7 +45,6 @@
     },
     methods: {
       getScenicDetails(obj) {
-        console.log(obj);
         getScenicPointDetails({
           longitude: obj.lng,
           latitude: obj.lat

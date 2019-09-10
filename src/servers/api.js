@@ -3,6 +3,7 @@ import http from './server-config'
 // 获取验证码
 export const getVeriCode = (data) => http.post('sms.changemobile', data);
 
+
 // 登录
 export const login = (data) => http.post('login.logintel', data);
 
@@ -180,7 +181,8 @@ export const GetAuthState = (data) => http.post("login.getuserauth", data);
 
 // 实名认证提交
 export const AuthSubmit = (data) => http.post("login.saveuserauth", data);
-
+//提交名家入驻
+export const postMingjia = (data) => http.post('enter.celebrity', data);
 // 图片上传
 export const imageUpload = (data) => http.post("util.uploader.uploadm", data);
 
