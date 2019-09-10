@@ -35,7 +35,7 @@ import { XButton, XInput, Group,XSwitch } from "vux";
 
 export default {
   name: "",
-  props: [""],
+
   data() {
     return {
       TitleObjData: {

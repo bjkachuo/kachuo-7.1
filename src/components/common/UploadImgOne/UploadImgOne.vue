@@ -164,7 +164,7 @@ export default {
   width: 100%;
   height: 100%;
 }
-.upload-imgs .img {
+.upload-imgs img {
   position: relative;
   width: 94px;
   height: 94px;

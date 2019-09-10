@@ -4,10 +4,9 @@
     <div class="content">
       <div class="up-avata">
         <p><span class="blod">上传头像</span><span>(温馨提示：照片不能大于1M)</span></p>
-
         <UploadImgOne  v-on:getHeaderImgUrl="getImgVal" :plus="true">
           <div slot="bg">
-            <div class="up-avata-bg">
+            <div class="up-avata-bg" v-if="!form.user_path">
               <div class="camera"></div>
             </div>
           </div>
@@ -15,8 +14,8 @@
       </div>
       <div class="information">
         <h2>基本信息</h2>
-        <x-input title="姓名:" name="username" placeholder="请输入姓名" is-type="china-name" label-width="5em"></x-input>
-        <x-input title="手机号码:" name="mobile" placeholder="请输入手机号码" keyboard="number" is-type="china-mobile"  mask="999 9999 9999" label-width="5em"></x-input>
+        <x-input title="姓名:" name="username" placeholder="请输入姓名" is-type="china-name" label-width="5em" v-model="form.realname"></x-input>
+        <x-input title="手机号码:" name="mobile" placeholder="请输入手机号码" keyboard="number" is-type="china-mobile" v-model="form.mobile" mask="999 9999 9999" label-width="5em"></x-input>
         <Address v-on:selectAddress="getSelAddress"></Address>
         <x-input title="详细地址:" name="username" placeholder="街道、门牌号等" label-width="5em"></x-input>
         <x-input title="身份证号:" name="username" placeholder="请输入证件号码" label-width="5em"></x-input>
@@ -33,9 +32,9 @@
       <div class="up-avata">
         <p><span class="blod">上传资格认证材料</span></p>
         <img class="upload-img" v-if="imgUrl" :src="imgUrl" alt srcset>
-        <UploadImgOne v-else-if="!imgUrl" v-on:getHeaderImgUrl="getImgVal" :plus="true">
+        <UploadImgOne v-else-if="!imgUrl" v-on:getHeaderImgUrl="getAptitude" :plus="true">
           <div slot="bg">
-            <div class="up-avata-bg">
+            <div class="up-avata-bg" v-if="!form.aptitude">
               <div class="camera"></div>
             </div>
           </div>
@@ -44,9 +43,9 @@
       <div class="up-avata">
         <p><span class="blod">上传代表作品</span></p>
         <img class="upload-img" v-if="imgUrl" :src="imgUrl" alt srcset>
-        <UploadImgOne v-else-if="!imgUrl" v-on:getHeaderImgUrl="getImgVal" :plus="true">
+        <UploadImgOne v-else-if="!imgUrl" v-on:getHeaderImgUrl="getCele_production" :plus="true">
           <div slot="bg">
-            <div class="up-avata-bg">
+            <div class="up-avata-bg" v-if="!form.cele_production">
               <div class="camera"></div>
             </div>
           </div>
@@ -54,11 +53,11 @@
       </div>
       <div class="information">
         <h2>账号信息</h2>
-        <x-input title="开户行:" name="username" placeholder="请输入"  label-width="5em"></x-input>
-        <x-input title="银行卡:" name="mobile" placeholder="请输入银行卡号码" keyboard="number" is-type="china-mobile"  mask="999 9999 9999" label-width="5em"></x-input>
+        <x-input title="开户行:" v-model="shop_bank" name="username" placeholder="请输入"  label-width="5em"></x-input>
+        <x-input title="银行卡:" v-model="shop_bank_cardnumber" name="mobile" placeholder="请输入银行卡号码" keyboard="number" label-width="5em"></x-input>
       </div>
 
-      <div class="btn">立即入驻</div>
+      <div class="btn" @click="submit">立即入驻</div>
 
     </div>
 
@@ -85,7 +84,20 @@
             showLeftBack: true,
             showRightMore: false
           },
-          imgUrl:'',
+          form:{
+            user_path:'',
+            realname:'',
+            mobile:'',
+            region:'',
+            address:'',
+            teacher:'',
+            cele_duty:'',
+            cele_industry:'',
+            aptitude:'',
+            cele_production:'',
+            shop_bank:'',
+            shop_bank_cardnumber:''
+          },
           dataOpE: {
             title: "师承",
             columns: 4,
@@ -101,31 +113,31 @@
             columns: 4,
             data: []
           },
-          pickValE:[],
-          pickValF:[],
-          pickValG:[],
         }
       },
 
       methods:{
         getImgVal(val) {
-          console.log(val);
-          this.imgUrl = val;
+          this.form.user_path = val;
         },
+        getAptitude(val){
+          this.form.user_path = val;
+        },
+        getCele_production(val){
+          this.form.cele_production = val;
+        },
+
         getSelAddress(val) {
-          this.maskValueAddress = val;
+          this.form.region = val;
         },
         getPickValE(val) {
-          console.log(val);
-          this.pickValE = val;
+          this.form.teacher = val.toString();
         },
         getPickValF(val) {
-          console.log(val);
-          this.pickValE = val;
+          this.form.cele_duty = val.toString();
         },
         getPickValG(val) {
-          console.log(val);
-          this.pickValE = val;
+          this.form.cele_industry = val.toString();
         },
         getDataList() {
           getUserRule({})
@@ -154,6 +166,15 @@
               console.log(err);
             });
         },
+
+        submit(){
+          this.$http.post("http://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=enter.celebrity",{...this.form})
+            .then( res  => {
+              console.log(res);
+            });
+
+        }
+
       },
 
       mounted() {

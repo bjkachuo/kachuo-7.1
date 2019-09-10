@@ -26,7 +26,7 @@
         data(){
           return{
             TitleObjData: {
-              titleContent: "景点列表",
+              titleContent: "视频列表",
               showLeftBack: true,
               showRightMore: false
             },
