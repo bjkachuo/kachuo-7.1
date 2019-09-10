@@ -1,3 +1,5 @@
+const _import = require('../_import_' + process.env.NODE_ENV);
+
 export default [{
 
     path: '/',
@@ -337,6 +339,7 @@ export default [{
     name: 'RealNameAuth',
     component: resolve => require(['@/components/pages/kachuouser/setting/RealNameAuth'], resolve),
   },
+  //地址列表
   {
     path: '/address',
     name: 'Address',
@@ -365,10 +368,11 @@ export default [{
     name: 'RealNameAuthState',
     component: resolve => require(['@/components/pages/kachuouser/setting/RealNameAuthState'], resolve),
   },
+  //添加新地址
   {
     path: '/addnewaddress',
     name: 'AddNewAddress',
-    component: resolve => require(['@/components/pages/kachuouser/setting/AddNewAddress'], resolve),
+    component: _import('pages/kachuouser/setting/AddNewAddress')
   },
   {
     path: '/expressinfo',

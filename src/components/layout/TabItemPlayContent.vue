@@ -182,92 +182,46 @@ export default {
       // ],
       dataList: [
         {
-          imgUrl:
-            "http://f.hiphotos.baidu.com/image/pic/item/359b033b5bb5c9eab0b192c9db39b6003af3b35e.jpg",
+          imgUrl:"http://f.hiphotos.baidu.com/image/pic/item/359b033b5bb5c9eab0b192c9db39b6003af3b35e.jpg",
           name: "门票认证",
           link: "/ticketsdiscount",
-          // class: "iconfont iconmenpiao btn1",
           imgSrc: require("@/assets/images/券@2x.png")
         },
         {
-          imgUrl:
-            "http://f.hiphotos.baidu.com/image/pic/item/359b033b5bb5c9eab0b192c9db39b6003af3b35e.jpg",
+          imgUrl: "http://f.hiphotos.baidu.com/image/pic/item/359b033b5bb5c9eab0b192c9db39b6003af3b35e.jpg",
           name: "智慧导航",
           link: "/intelligentnavigation",
-          // class: "iconfont iconzhihuidaohang btn2",
           imgSrc: require("@/assets/images/坐标@2x.png")
         },
-        // {
-        //   imgUrl:
-        //     "http://f.hiphotos.baidu.com/image/pic/item/359b033b5bb5c9eab0b192c9db39b6003af3b35e.jpg",
-        //   name: "景区发布",
-        //   link: "/scencerelease",
-        //   // class: "iconfont iconjingqufabu"
-        //   imgSrc: require("@/assets/images/景区发布-圆角1.png")
-        // },
         {
-          imgUrl:
-            "http://f.hiphotos.baidu.com/image/pic/item/359b033b5bb5c9eab0b192c9db39b6003af3b35e.jpg",
+          imgUrl: "http://f.hiphotos.baidu.com/image/pic/item/359b033b5bb5c9eab0b192c9db39b6003af3b35e.jpg",
           name: "游园服务",
-          // link: "/scenceservice?type=1",
           link: "/scenicService",
-          // class: "iconfont iconjingqufuwu"
           imgSrc: require("@/assets/images/吃喝玩乐@2x.png")
         },
-        // {
-        //   imgUrl:
-        //     "http://f.hiphotos.baidu.com/image/pic/item/359b033b5bb5c9eab0b192c9db39b6003af3b35e.jpg",
-        //   name: "记住的",
-        //   link: "/remember?type=5&branch=1",
-        //   // class: "iconfont iconjizhude"
-        //   imgSrc: require("@/assets/images/记住的-圆角1.png")
-        // },
-        // {
-        //   imgUrl:
-        //     "http://f.hiphotos.baidu.com/image/pic/item/359b033b5bb5c9eab0b192c9db39b6003af3b35e.jpg",
-        //   name: "了解的",
-        //   link: "/understand?type=7&branch=2",
-        //   imgSrc: require("@/assets/images/了解的-圆角1.png")
-        //   // class: "iconfont iconliaojiede"
-        // },
         {
-          imgUrl:
-            "http://f.hiphotos.baidu.com/image/pic/item/359b033b5bb5c9eab0b192c9db39b6003af3b35e.jpg",
+          imgUrl: "http://f.hiphotos.baidu.com/image/pic/item/359b033b5bb5c9eab0b192c9db39b6003af3b35e.jpg",
           name: "带走的",
           link: "/takeaway?carousel=2",
-          // class: "iconfont icondaizoude"
           imgSrc: require("@/assets/images/带走的@2x.png")
         }
-        // {
-        //   imgUrl:
-        //     "http://f.hiphotos.baidu.com/image/pic/item/359b033b5bb5c9eab0b192c9db39b6003af3b35e.jpg",
-        //   name: "周边服务",
-        //   link: "/servicesurround?type=4",
-        //   // class: "iconfont iconzhoubianfuwu"
-        //   imgSrc: require("@/assets/images/周边服务--圆角1.png")
-        // }
       ],
       dataListTwo: [
         {
-          imgUrl:
-            "http://f.hiphotos.baidu.com/image/pic/item/359b033b5bb5c9eab0b192c9db39b6003af3b35e.jpg",
+          imgUrl: "http://f.hiphotos.baidu.com/image/pic/item/359b033b5bb5c9eab0b192c9db39b6003af3b35e.jpg",
           name: "记住的",
           link: "/remember?type=5&branch=1",
-          // class: "iconfont iconjizhude"
           imgSrc: require("@/assets/images/知识1@2x.png"),
           text: "景区一字文化"
         },
         {
-          imgUrl:
-            "http://f.hiphotos.baidu.com/image/pic/item/359b033b5bb5c9eab0b192c9db39b6003af3b35e.jpg",
+          imgUrl: "http://f.hiphotos.baidu.com/image/pic/item/359b033b5bb5c9eab0b192c9db39b6003af3b35e.jpg",
           name: "了解的",
           link: "/understand?type=7&branch=2",
           imgSrc: require("@/assets/images/攻略@2x.png"),
           text: "景区符号文化"
-          // class: "iconfont iconliaojiede"
         }
       ]
-      // tiltleList: ["吃吧", "喝吧", "玩吧", "住吧", "游吧"]
     };
   },
 
@@ -290,10 +244,7 @@ export default {
   mounted() {
     //获取推荐商家：
     this.$http
-      .post(
-        "https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.index.scenic_service"
-        // "http://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=scenic.index.scenic_service_list&"
-      )
+      .post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.index.scenic_service")
       .then(({ data }) => {
         this.recommend = data.data.recommend_business;
         console.log(this.recommend);

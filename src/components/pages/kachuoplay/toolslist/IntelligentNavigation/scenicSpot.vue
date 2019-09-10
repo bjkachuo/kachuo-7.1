@@ -3,17 +3,16 @@
       <Header :titleContent="TitleObjData.titleContent" :showLeftBack="TitleObjData.showLeftBack" :showRightMore="TitleObjData.showRightMore"></Header>
       <div class="normal-content" :style="conHei">
         <ul>
-          <li>
-            <img  alt="" @click="goPlay">
+          <li v-for="item in list">
+            <img  alt="" @click="goPlayList(item.id)" :src="item.scenic_image">
             <div class="content">
-              <div class="title"></div>
+              <div class="title">{{item.scenic_name}}</div>
               <div class="bottom">景点视频1个</div>
               <div class="btn">我要创作</div>
             </div>
           </li>
         </ul>
       </div>
-
     </div>
 </template>
 
@@ -31,8 +30,7 @@
               showLeftBack: true,
               showRightMore: false
             },
-            SCENICLINE:[],
-            markers:[]
+            list:[]
           }
         },
 
@@ -52,42 +50,15 @@
           getMarkerList(){
             this.$http.get("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.site.site_list")
               .then(({ data }) => {
-                let datas = data.data
-
-                let arr = []
-                if(datas == ''){
-                  datas = []
-                }
-                datas.forEach(item=>{
-                  arr.push({position:[ item.longitude,item.latitude ],label:item.title,left:item.left,top:item.top})
-                })
-                this.SCENICLINE = arr
-                console.log(this.SCENICLINE);
-
-                this.init();
+                this.list = data.data
               })
           },
-          init() {
 
-            if (this.SCENICLINE.length) {
-              this.markers = []
+          goPlayList(id){
+            this.$router.push('/intelligentnavigation/veidoList?id='+id)
+          }
 
-              this.SCENICLINE.forEach((item, index) => {
-                this.markers.push({
-                  position:[item.position[0], item.position[1]],
-                  left:item.left,
-                  top:item.top,
-                  label:item.label,
-                })
-              })
-              this.domBindEvent()
-            } else {
-              this.$vux.toast.text("暂无相应景点", "middle")
-              setTimeout(() => {
-                this.$vux.toast.hide()
-              }, 1000)
-            }
-          },
+
         }
     }
 </script>

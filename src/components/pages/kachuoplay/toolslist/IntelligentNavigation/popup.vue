@@ -1,7 +1,7 @@
 <template>
   <div v-transfer-dom>
-    <popup v-model="isShow" :hide-on-blur="true" @on-hide="hide" v-if="descDetails.title">
-      <div class="popup2" v-show="showBottom">
+    <popup v-model="isShow" :hide-on-blur="true" @on-hide="hide" v-if="descDetails.siteMsg && descDetails.siteMsg.title">
+      <div class="popup2">
         <div class="navigaion-video-detail-wrap">
           <p class="navigaion-video-detail-p">{{descDetails.title}}</p>
           <ul>
@@ -37,16 +37,15 @@
     },
     data() {
       return {
-        show: false,
+        show: true,
         isControls: true,
         descDetails: {},
-        showBottom: true,
         label:'',
       };
     },
     methods: {
       getScenicDetails(obj) {
-
+        console.log(obj);
         getScenicPointDetails({
           longitude: obj.lng,
           latitude: obj.lat
@@ -58,15 +57,15 @@
             }, 1000)
             return
           }
-
+          console.log(res);
           if (res.result === 1) {
-            this.showBottom = true;
+
             if (res.data) {
               this.$store.commit("changeNavigationDetailsState", true);
               this.descDetails = res.data;
             }
           } else {
-            this.showBottom = false;
+
             this.$vux.toast.show({
               type: "text",
               text: "暂无介绍",

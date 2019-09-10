@@ -31,7 +31,7 @@ import NavigationTab from "@/components/common/NavigationTab"
 import Popup from "./popup";
 import staticMap from './staticMap'
 import scenicSpot from './scenicSpot'
-// import Popup from "@/components/common/Popup"
+
 import { setTimeout } from "timers";
 import { AMapManager } from 'vue-amap'
 
@@ -67,7 +67,7 @@ export default {
         pName: 'ToolBar',
         events: {
           init(instance) {
-            console.log(instance);
+
           }
         }
       },
@@ -76,7 +76,7 @@ export default {
           events: {
             init(o) {
               document.getElementsByClassName('amap-geolocation-con')[0].onclick = () =>{
-                console.log(1);
+
                 o.getCurrentPosition((status, result) => {
                   if (result && result.position) {
 
@@ -249,8 +249,8 @@ export default {
   }
 
   .marker-icon-ta{
-    width: 30px;
-    height: 35px;
+    width: 24px;
+    height: 24px;
     background-image: url("../../../../../assets/images/amap-icon/scenic.png");
     background-size: 100% 100%;
   }

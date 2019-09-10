@@ -50,10 +50,10 @@
     position: relative;
   }
   .icon{
-    margin-top: -33px;
-    margin-left: -13px;
-    width: 26px;
-    height: 33px;
+    margin-top: -24px;
+    margin-left: -12px;
+    width: 24px;
+    height: 24px;
     background-image: url("./icon.png");
     background-size: 100% 100%;
     position: absolute;
@@ -65,7 +65,7 @@
     border-radius: 4px;
     background-color:#000;
     line-height: 24px;
-    margin-top: -60px;
+    margin-top: -50px;
   }
   img{
     height: auto;

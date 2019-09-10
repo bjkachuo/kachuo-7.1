@@ -10,36 +10,21 @@
       <div class="addr-card" v-for="item in commonList">
         <cell>
           <div slot="icon"><div class="name">{{item.realname}}</div></div>
-          <div slot="title"><span class="tel">171****1081</span><span class="tag-default">默认</span></div>
+          <div slot="title"><span class="tel">{{item.mobile}}</span><span class="tag-default" v-if="item.isdefault == 1">默认</span></div>
         </cell>
         <cell>
-          <div slot="title"><span class="addr-content">吉林市二道区城区  吉林大路2888号卡戳网公司</span></div>
+          <div slot="title"><span class="addr-content">{{item.inlineDesc}}</span></div>
           <div slot="default"><div class="addr-edit"></div></div>
         </cell>
+
+
+
+
       </div>
-      <div class="addr-card">
-        <cell>
-          <div slot="icon"><div class="name">对不对</div></div>
-          <div slot="title"><span class="tel">171****1081</span><span class="tag-normal">公司</span></div>
-        </cell>
-        <cell>
-          <div slot="title"><span class="addr-content">吉林市二道区城区  吉林大路2888号卡戳网公司</span></div>
-          <div slot="default"><div class="addr-edit"></div></div>
-        </cell>
-      </div>
-      <div class="addr-card">
-        <cell>
-          <div slot="icon"><div class="name">对不对</div></div>
-          <div slot="title"><span class="tel">171****1081</span><span class="tag-normal">家</span></div>
-        </cell>
-        <cell>
-          <div slot="title"><span class="addr-content">吉林市二道区城区  吉林大路2888号卡戳网公司</span></div>
-          <div slot="default"><div class="addr-edit"></div></div>
-        </cell>
-      </div>
+
     </div>
     <div class="bottom-wrap">
-      <x-button class="btn-add" link="/NewAddress">新增收货地址</x-button>
+      <x-button class="btn-add" link="/addnewaddress">新增收货地址</x-button>
     </div>
 
 <!--    <CheckList @getSetVal="setDefAdd"></CheckList>-->
@@ -77,7 +62,7 @@ export default {
 
   computed: {
     conHei() {
-      return { height: document.documentElement.clientHeight - 45 + "px" };
+      return { height: document.documentElement.clientHeight - 90 + "px" };
     }
   },
 
@@ -89,9 +74,7 @@ export default {
   },
 
   methods: {
-    addNewAddress() {
-      this.$router.push("/addnewaddress");
-    },
+
     setDefAdd(val) {
       this.setDefaultAddress(val);
     },
@@ -126,12 +109,13 @@ export default {
                 realname:item.realname,
                 key: item.id,
                 value: item.realname,
+                mobile:item.tel.slice(0,3)+'****'+item.tel.slice(7),
+                isdefault:item.isdefault,
                 inlineDesc:
                   item.province +
                   item.city +
                   item.area +
-                  item.address +"," +
-                  item.mobile
+                  item.address
               })
             })
           }
@@ -199,10 +183,7 @@ export default {
 }
 
 .tag-default{
-  min-width: 30px;
   text-align: center;
-  display: inline-block;
-  height:15px;
   line-height: 15px;
   background:#FF3939;
   color: #FFFFFF;
@@ -211,18 +192,6 @@ export default {
   padding: 0 5px;
 }
 
-.tag-normal{
-  min-width: 30px;
-  text-align: center;
-  display: inline-block;
-  height:15px;
-  line-height:15px;
-  background:#3976FF;
-  color: #FFFFFF;
-  font-size: 12px;
-  border-radius:2px;
-  padding: 0 5px;
-}
 .bottom-wrap{
   position: fixed;
   left: 0;

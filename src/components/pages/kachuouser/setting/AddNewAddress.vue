@@ -5,18 +5,25 @@
       :showLeftBack="TitleObjData.showLeftBack"
       :showRightMore="TitleObjData.showRightMore"
     ></Header>
-    <div class="add-address-con" :style="conHei">
-      <group title style="margin-top:10px">
-        <x-input title="姓名" v-model="maskValueName" :max="10" is-type :show-clear="false" @on-focus="inpclick" ref="inp"></x-input>
-        <x-input title="手机号" v-model="maskValuePhone" :max="11" is-type :show-clear="false"></x-input>
-        <Address style="height:44px;line-height:24px;font-size:17px" v-on:selectAddress="getSelAddress"></Address>
-        <x-input title="详细地址" v-model="maskValueDetails" :max="11" is-type :show-clear="false"></x-input>
-      </group>
-      <div class="add-btn-wrap">
-        <x-button class="add-btn" type="primary" @click.native="formateData">添加</x-button>
+
+
+      <div class="normal-content" :style="conHei">
+        <div class="addr-card">
+          <x-input title="收货人：" v-model="maskValueName" :max="10" placeholder="请填写收货人姓名"></x-input>
+          <x-input title="手机号码：" v-model="maskValuePhone" :max="11" placeholder="请填写收货人手机号码"></x-input>
+          <Address style="height:52px;line-height:24px;font-size:14px" v-on:selectAddress="getSelAddress" class="custom"></Address>
+          <x-input title="详细地址：" v-model="maskValueDetails" placeholder="街道、楼牌号等"></x-input>
+        </div>
+        <div class="addr-card">
+          <x-switch title="设为默认地址" :value-map="['0', '1']" v-model="stringValue"></x-switch>
+        </div>
       </div>
+      <div class="end-button">
+        <x-button @click.native="formateData">保存地址</x-button>
+      </div>
+
     </div>
-  </div>
+
 </template>
 
 <script>
@@ -24,7 +31,7 @@ import Header from "@/components/common/Header";
 import Address from "@/components/common/Address";
 import CheckList from "@/components/common/CheckList";
 import { updateAddress } from "@/servers/api";
-import { XButton, XInput, Group } from "vux";
+import { XButton, XInput, Group,XSwitch } from "vux";
 
 export default {
   name: "",
@@ -39,7 +46,8 @@ export default {
       maskValueName: "",
       maskValuePhone: "",
       maskValueDetails: "",
-      maskValueAddress: []
+      maskValueAddress: [],
+      stringValue:'0',
     };
   },
 
@@ -49,6 +57,7 @@ export default {
     XButton,
     XInput,
     Group,
+    XSwitch,
     Address
   },
 
@@ -58,17 +67,12 @@ export default {
     }
   },
 
-  beforeMount() {},
-
   mounted() {
 
   },
 
   methods: {
-    inpclick(){
-      console.log(1);
-      this.$refs.inp.focus()
-    },
+
     formateData() {
       if (!this.maskValueName) {
         this.showTip("请输入收货人姓名");
@@ -133,29 +137,77 @@ export default {
   }
 };
 </script>
-<style lang='css' scoped>
-.add-address-wrap {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
-.add-address-con {
-  width: 100%;
-  background: #f9f9f9;
-  margin-top: 50px;
-  overflow: hidden;
-  overflow-y: scroll;
-}
-.add-btn-wrap {
-  width: 100%;
-  height: 50px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  margin-top: 120px;
-}
-.add-btn {
-  width: 80%;
-}
+<style lang='less' scoped>
+  .custom/deep/.weui-cell{
+    padding: 15px 15px;
+  }
+  .normal-content{
+    width: 100%;
+    background: #F5F5F5;
+    margin-top: 45px;
+    overflow: hidden;
+    overflow-y: scroll;
+    box-sizing: border-box;
+    padding: 15px 0;
+  }
+  .addr-card{
+    margin-bottom: 10px;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .addr-card .weui-cell{
+    padding: 15px;
+  }
+  .addr-card /deep/ .vux-popup-picker-select{
+    text-align: left!important
+  }
+  .addr-card /deep/ .weui-label{
+    width: 84px!important
+  }
+  .demo1-item{
+    text-align: center;
+    width: 70px;
+    border: 1px solid #CCCCCC;
+    height: 28px;
+    border-radius: 28px;
+  }
+  .demo1-item{
+    text-align: center;
+    line-height: 28px;
+    margin-right: 15px;
+    width: 70px;
+    border: 1px solid #CCCCCC;
+    height: 28px;
+    border-radius: 28px;
+  }
+  .demo1-item-selected{
+    background-color: #3976FF;
+    border: 1px solid #3976FF;
+    color: #FFFFFF;
+  }
+  .addr-card /deep/ .weui-switch:checked,
+  .addr-card /deep/ .weui-switch-cp__input:checked ~ .weui-switch-cp__box{
+    border-color: #3976FF;
+    background-color: #3976FF;
+  }
+
+  /* button */
+  .end-button{
+    padding: 0 15px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 30px;
+  }
+  .end-button .weui-btn,
+  .end-button .weui-btn:active{
+    border: 0;
+    width: 100%;
+    background-color: #3976FF;
+    color: #FFFFFF;
+  }
+  .end-button .weui-btn_disabled{
+    opacity: .5;
+  }
 </style>

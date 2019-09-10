@@ -16,6 +16,7 @@
     "chimee-mobile-player": "^0.2.8",
     "element-ui": "^2.10.0",
     "fastclick": "^1.0.6",
+    "js-md5": "latest",
     "lib-flexible": "^0.3.2",
     "nprogress": "^0.2.0",
     "px2rem-loader": "^0.1.9",
@@ -27,6 +28,7 @@
     "vue-cordova": "^0.1.2",
     "vue-lazyload": "^1.2.6",
     "vue-navigation": "^1.1.4",
+    "vue-quill-editor": "^3.0.6",
     "vue-router": "^3.0.1",
     "vue-scroller": "^2.2.4",
     "vue2-better-scroll": "^1.1.0",
@@ -35,8 +37,7 @@
     "vuex-persistedstate": "^2.5.4",
     "vux": "^2.2.0",
     "vux-uploads": "^1.0.8",
-    "w-previewimg": "^1.1.2",
-    "js-md5": "latest"
+    "w-previewimg": "^1.1.2"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

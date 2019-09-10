@@ -6,7 +6,7 @@
         <tab-item selected @on-item-click="onItemClick">文创征集</tab-item>
         <tab-item @on-item-click="onItemClick">艺品创作</tab-item>
         <tab-item @on-item-click="onItemClick">产品溯源</tab-item>
-        <tab-item @on-item-click="onItemClick">名家妙藏</tab-item>
+<!--        <tab-item @on-item-click="onItemClick">名家妙藏</tab-item>-->
       </tab>
       <div>
         <InitMap ref="map" :tabIndex="tabIndex"></InitMap>
