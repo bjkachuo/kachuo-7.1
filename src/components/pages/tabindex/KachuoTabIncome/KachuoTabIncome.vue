@@ -6,7 +6,7 @@
        <li v-for="item in cellListTools" :class="item.icon" @click="goLink(item.link )"></li>
     </ul>
     <div class="mg">
-      <div class="content" @click="Backstage" style="overflow: hidden;"><img :src="btnList[btnIndex].src" v-if="btnIndex  != -1" alt="" ></div>
+      <div class="content" @click="Backstage" style="overflow: hidden;"><img :src="btnIndex != -1 ? btnList[btnIndex].src : btnList[0].src" alt="" ></div>
       <div class="btn-menu" @click="checkIn"></div>
     </div>
     <div class="settled-in">
