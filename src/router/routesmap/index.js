@@ -1,11 +1,7 @@
-<<<<<<< Updated upstream
-const _import = require('../_import_' + process.env.NODE_ENV);
-=======
 
 const _import = require('../_import_' + process.env.NODE_ENV);
 
-export default [{
->>>>>>> Stashed changes
+// export default [{
 
 export default [{
     path: '/',

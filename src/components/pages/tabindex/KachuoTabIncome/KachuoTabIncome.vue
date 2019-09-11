@@ -89,6 +89,7 @@ export default {
       this.alertFlag = false
       this.$router.push(this.btnList[this.btnIndex].link)
     },
+
     Backstage(){
       this.$router.push("/jingquBsIndex")
     },

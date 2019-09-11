@@ -113,7 +113,7 @@
         background-image: url("../../../../assets/images/蓬莱阁.jpg");
       }
       .嵩山少林{
-        background-image: url("../../../../assets/images/嵩山少林.jpg");
+        background-image: url("../../../../assets/images/少林寺.jpg");
       }
       .云雾山{
         background-image: url("../../../../assets/images/云雾山.jpg");
