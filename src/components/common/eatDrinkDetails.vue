@@ -245,7 +245,17 @@
 </template>
 <script>
 import Header from "@/components/common/Header";
-import { Scroller,LoadMore,Rater,Cell, XDialog,XButton,XInput,Group,Actionsheet,} from "vux";
+import {
+  Scroller,
+  LoadMore,
+  Rater,
+  Cell,
+  XDialog,
+  XButton,
+  XInput,
+  Group,
+  Actionsheet
+} from "vux";
 import list1 from "@/components/common/goods/list1.vue";
 import list2 from "@/components/common/goods/list2.vue";
 import list3 from "@/components/common/goods/list3.vue";
@@ -269,7 +279,7 @@ export default {
       iscur: 0,
       cur: 0, //默认选中第一个tab
       //星星评分
-      starNum:'0',
+      starNum: "0",
       //获取到的商家id
       idNum: "",
       //商家详情数组
@@ -341,7 +351,7 @@ export default {
         this.storeDetails = data.data;
         console.log(this.storeDetails);
 
-        this.starNum =  data.data.score -0;
+        this.starNum = data.data.score - 0;
         console.log(this.starNum);
       });
   }
@@ -606,7 +616,7 @@ ul li {
 video {
   object-fit: fill;
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
   margin-top: 40%;
 }
 .storeIntroduce-wrap {
@@ -951,5 +961,8 @@ video {
   word-break: break-all;
   font-size: 16px;
   color: #222222ff;
+}
+/deep/ .weui-dialog {
+  overflow: auto;
 }
 </style>
