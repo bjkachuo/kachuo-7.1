@@ -53,6 +53,7 @@
 <script>
 import Header from "@/components/common/Header";
 import { Cell, XButton, XInput, XTextarea, PopupPicker } from "vux";
+import {yuyueGuide} from '@/servers/api.js'
 export default {
   props: [""],
   data() {
@@ -138,29 +139,17 @@ export default {
       this.$router.push(link);
     },
     submit() {
-      
-      this.$http.post("http://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=tourguide.show.addorder",{
+
+      yuyueGuide({
         id:this.$route.query.id,
         realname:this.msgList.name,
         mobile:this.msgList.phone,
         content:this.msgList.content,
         message:{people:this.msgList.chooseList.numValue.toString(),time:this.msgList.chooseList.timeValue.toString()}
-      }
-            // this.$route.query.id +
-            // "&realname=" +
-            //  +
-            // "&mobile=" +
-            // this.msgList.phone +
-            // "&message=" +
-            // this.msgList.content +
-            // "&people=" +
-            // this.objOne +
-            // "&time=" +
-            // this.objTwo
-        )
-        .then(({ data }) => {
-          console.log(data);
-        });
+      })
+      .then(({ data }) => {
+        console.log(data);
+      });
     }
   },
 
