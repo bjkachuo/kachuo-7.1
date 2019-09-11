@@ -89,12 +89,10 @@ export default {
       this.alertFlag = false
       this.$router.push(this.btnList[this.btnIndex].link)
     },
-<<<<<<< Updated upstream
+
     Backstage(){
       this.$router.push("/jingquBsIndex")
     },
-=======
->>>>>>> Stashed changes
     xieyi(){
       this.$router.push('/checkIn/agreement')
     }
