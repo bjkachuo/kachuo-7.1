@@ -11,7 +11,7 @@
     </div>
     <div style="width:92%;margin: 15px auto 30px;">
       <swiper auto height="100px" class="custom">
-        <swiper-item class="black"><img src="./mallone.jpg" alt=""></swiper-item>
+        <swiper-item class="black"><img src="./mallone.png" alt=""></swiper-item>
         <swiper-item class="black"><img src="./malltwo.jpg" alt=""></swiper-item>
         <swiper-item class="black"><img src="./mallthree.jpg" alt=""></swiper-item>
       </swiper>
@@ -137,7 +137,7 @@ export default {
         });
     },
     goodsTypeGo(link) {
-      alert(link)
+      // alert(link)
       this.$router.push(link);
       // console.log(link);
     }

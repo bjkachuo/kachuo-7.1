@@ -22,7 +22,7 @@
         </div>
       </div>
       <div class="content-card-mid">
-        <span class="token-num">ID:{{userInfo.accessToken.slice(0,19)}}...</span>
+        <span class="token-num">ID:{{userInfo.block_key.slice(0,19)}}...</span>
         <span
           class="iconfont iconliulan"
           @click="watchAllCode"
@@ -248,7 +248,7 @@ export default {
     },
 
     watchAllCode() {
-      this.$refs.dialogCon.showToastFn(this.userInfo.accessToken);
+      this.$refs.dialogCon.showToastFn(this.userInfo.block_key);
     },
     getQRcode() {
       this.$router.push("/tokenqrcode");

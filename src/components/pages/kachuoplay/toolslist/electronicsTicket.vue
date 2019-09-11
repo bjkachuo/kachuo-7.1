@@ -17,25 +17,25 @@
     </tab>
     <div class="tab-content">
       <b v-show="cur==0">
-        <div class="t-content" v-for="(item,index) in dataList" :key="index">
+        <div class="t-content" v-for="(item,index) in dataListOne" :key="index">
           <div class="t-left">
             <div class="img-wrap">
-              <img :src="item.imgSrc" alt />
+              <img :src="item.ImgUrl" alt />
             </div>
             <div class="txt-wrap">
               <div class="t-one">
-                <p>{{item.name}}</p>
+                <p>{{item.Name}}</p>
               </div>
               <div class="t-two">
                 <p>当前景区</p>
               </div>
               <div class="t-three">
-                <p>{{item.price}}</p>
+                <p>¥{{item.MarketPrice}}</p>
               </div>
             </div>
           </div>
           <div class="t-right" @click="buyTickets(index)">
-            <p>购票</p>
+            <p>认证</p>
           </div>
         </div>
         <!-- <div class="order-content">
@@ -130,7 +130,7 @@
           <div class="text-bind">
             <p>扫描或输入其它平台购买的景区门票二维码、条形码或数字串码信息进行门票信息绑定</p>
           </div>
-          <div class="scann">
+          <div class="scann" @click="scan">
             <p>扫码识别</p>
           </div>
           <div class="num">
@@ -156,6 +156,7 @@ export default {
         showRightMore: false
       },
       cur: 0, //默认选中第一个tab
+      dataListOne: [],
       dataList: [
         {
           imgSrc: require("@/assets/images/蓬莱阁.jpg"),
@@ -218,9 +219,23 @@ export default {
   },
   computed: {},
   created() {},
-  mounted() {},
+  mounted() {
+    //票列表
+    this.$http
+      .post(
+        "http://core.kachuo.com/app/ewei_shopv2_app.php?i=8&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.ticket.getlist"
+      )
+      .then(({ data }) => {
+        console.log(data);
+        this.dataListOne = data.data;
+        console.log(this.dataListOne);
+      });
+  },
   watch: {},
   methods: {
+    scan(){
+      this.$router.push('/facecheck')
+    },
     //跳转购票页面
     buyTickets(index) {
       // var i = 0 ; i < this.dataList.length; i ++ ;
@@ -287,15 +302,17 @@ export default {
   width: 100%;
 }
 .txt-wrap {
-  width: 68px;
-  height: 90px;
+  width: 96px;
+  height: 101px;
   float: left;
   margin-left: 4%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .t-one p {
-  font-size: 16px;
+  font-size: 12px;
   color: #222222;
-  font-weight: 800;
+  font-weight: 600;
 }
 .t-two {
   width: 60px;

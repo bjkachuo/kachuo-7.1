@@ -9,6 +9,9 @@
       <div style="width:92%;margin: 10px auto 30px;">
         <swiper auto height="100px" class="custom">
           <swiper-item class="black">
+            <img src="./menren.jpeg" alt />
+          </swiper-item>
+          <swiper-item class="black">
             <img src="./renzhengone.jpg" alt />
           </swiper-item>
           <swiper-item class="black">

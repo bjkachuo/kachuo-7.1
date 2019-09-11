@@ -57,9 +57,6 @@
   export default {
     props: [""],
     methods: {
-      url(link) {
-        this.$router.push(link);
-      },
       onClick(){
         console.log()
       },
@@ -86,6 +83,9 @@
         numvalue:'',
         tvalue:'',
       };
+    },
+    mounted(){
+      console.log(this.$route)
     },
     components: {
       Header,

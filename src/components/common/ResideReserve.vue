@@ -52,6 +52,9 @@
         console.log()
       }
     },
+    mounted(){
+      console.log(this.$route)
+    },
     data() {
       return {
         roomValue:"1间房",

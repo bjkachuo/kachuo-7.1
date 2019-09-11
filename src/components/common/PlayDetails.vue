@@ -48,7 +48,7 @@
                 <div class="comment-item">(12条评价)</div>
               </div>
               <div class="raty-ft">
-                <rater v-model="this.storeDetails.score" star='<i class="star"></i>' active-color="red" :margin="0" disabled></rater>
+                <rater v-model="this.dataOne" star='<i class="star"></i>' active-color="red" :margin="0" disabled></rater>
               </div>
             </div>
           </template>
@@ -80,14 +80,14 @@
           <div class="kc-toggle" @click="cateClick">筛选</div>
         </div>
         <div class="list-body">
-          <cell class="list-cell" align-items="start" :link="item.url" v-for="(item,index) in list" v-if="index < listnumber">
+          <cell class="list-cell" align-items="start"  :link="{path:'/PlayReserve',query:{id:item.id}}" v-for="(item,index) in goodsList" :key="index"  v-if="index < listnumber">
             <template slot="icon">
-              <img :src="item.src" alt="">
+              <img :src="item.image" alt="">
             </template>
             <template slot="after-title">
-              <div class="list-title">{{item.title}}</div>
-              <div class="list-desc">{{item.desc}}</div>
-              <div class="list-price"><span>￥</span>167</div>
+              <div class="list-title">{{item.name}}</div>
+              <div class="list-desc">{{item.is_morning}}、{{item.is_window}}</div>
+              <div class="list-price"><span>￥</span>{{item.price}}</div>
             </template>
             <template slot="default">
               <x-button class="btn-link">预定</x-button>
@@ -129,8 +129,11 @@
         idNum: "",
         //商家详情
         storeDetails: [],
+         //商品详情
+        goodsList:[],
+
         show1:false,
-        data1:"4",
+        dataOne:"0",
         toggle:false,
         listnumber:3,
         list: [{
@@ -195,7 +198,8 @@
       .then(({ data }) => {
         console.log(data);
         this.storeDetails = data.data;
-        this.data1 = data.data.score;
+        this.goodsList = data.data.goods_msg;
+        this.dataOne = data.data.score - 0
         console.log(this.storeDetails);
       });
     },

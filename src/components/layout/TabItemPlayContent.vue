@@ -73,7 +73,7 @@
         </div>
         <div class="inMid">
           <p>{{item.name}}</p>
-          <i>人均18元</i>
+          <!-- <i>人均18元</i> -->
           <span>
             <div class="house">
               <img src="../../assets/images/fangzi.png" alt />
@@ -459,10 +459,11 @@ export default {
   text-overflow: ellipsis;
   white-space: nowrap;
   /* border-radius: 8px; */
+  margin-top: 10px;
 }
 .inMid span .house {
   width: 13px;
-  height: 12px;
+  height: 13px;
   float: left;
 }
 .inMid span .house img {

@@ -83,7 +83,7 @@
       <div class="text-bind">
         <p>扫描或输入景区门票二维码、条形码或数字串码 等识别码进行门票信息绑定</p>
       </div>
-      <div class="scann">
+      <div class="scann" @click="scan">
         <p>扫码识别</p>
       </div>
       <div class="num">
@@ -112,7 +112,11 @@ export default {
   created() {},
   mounted() {},
   watch: {},
-  methods: {},
+  methods: {
+    scan() {
+      this.$router.push("/facecheck");
+    }
+  },
   components: {
     Header,
     Tab,

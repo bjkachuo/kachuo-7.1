@@ -39,7 +39,6 @@
                   preload="none"
                   controls="controls"
                   x5-video-orientation="landscape"
-                  autoplay="autoplay"
                 ></video>
                 <!-- <span class="vux-close" @click="showToast=false"></span> -->
               </p>
@@ -270,7 +269,7 @@ export default {
       iscur: 0,
       cur: 0, //默认选中第一个tab
       //星星评分
-      starNum:0,
+      starNum:'0',
       //获取到的商家id
       idNum: "",
       //商家详情数组
@@ -342,7 +341,7 @@ export default {
         this.storeDetails = data.data;
         console.log(this.storeDetails);
 
-        this.starNum = parseFloat(this.storeDetails.score);
+        this.starNum =  data.data.score -0;
         console.log(this.starNum);
       });
   }

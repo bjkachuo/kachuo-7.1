@@ -83,14 +83,14 @@
           <div class="kc-toggle" @click="cateClick">筛选</div>
         </div>
         <div class="list-body">
-          <cell class="list-cell" align-items="start" :link="item.url" v-for="(item,index) in list" v-if="index < listnumber">
+          <cell class="list-cell" align-items="start" :link="{path:'/ResideReserve',query:{id:item.id}}" v-for="(item,index) in goodsList" :key="index" v-if="index < listnumber">
             <template slot="icon">
-              <img :src="item.src" alt="">
+              <img :src="item.image" alt="">
             </template>
             <template slot="after-title">
-              <div class="list-title">{{item.title}}</div>
-              <div class="list-desc">{{item.desc}}</div>
-              <div class="list-price"><span>￥</span>167</div>
+              <div class="list-title">{{item.name}}</div>
+              <div class="list-desc">{{item.is_morning}}、{{item.is_window}}</div>
+              <div class="list-price"><span>￥</span>{{item.price}}</div>
             </template>
             <template slot="default">
               <x-button class="btn-link">预定</x-button>
@@ -112,6 +112,10 @@
   export default {
     props: [""],
     methods: {
+      url(link) {
+        this.$router.push(link);
+      },
+
       cateClick () {
         this.show1 = !this.show1
       },click (key) {
@@ -124,14 +128,16 @@
     data() {
       return {
         menus: {
-          menu1: '白场票',
-          menu2:'夜场票',
-          menu3:'双人套票'
+          menu1: '大床房',
+          menu2:'双床房',
+          menu3:'其它特色床'
         },
         //获取到的商家id
         idNum: "",
         //商家详情
         storeDetails: [],
+        //商品详情
+        goodsList:[],
         show1:false,
         data1:0,
         toggle:false,
@@ -198,6 +204,8 @@
       .then(({ data }) => {
         console.log(data);
         this.storeDetails = data.data;
+        this.goodsList = data.data.goods_msg;
+        console.log(this.goodsList);
         console.log(this.storeDetails);
         this.data1 = parseFloat(this.storeDetails.score)
       });
@@ -361,7 +369,7 @@ video{
     margin-top: -4px;
   }
   .nav-address{
-    font-size: 16px;
+    font-size: 14px;
   }
   .zhu-icon{
     color: #222222;
