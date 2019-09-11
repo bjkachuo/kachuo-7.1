@@ -119,8 +119,8 @@
             </div>
           </div>
         </div>
-        <div class="int-botton">
-          <x-button @click="goPay">充值积分</x-button>
+        <div class="int-botton" @click="goPay">
+          <x-button >充值积分</x-button>
         </div>
       </div>
     </div>

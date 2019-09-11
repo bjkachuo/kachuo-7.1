@@ -132,11 +132,9 @@ export default {
   li:last-of-type{
     margin-right: 0;
   }
-
 }
 .mg{
   width: 92%;
-  height: 165px;
   margin: 10px auto;
   position: relative;
   border-radius: 8px;
