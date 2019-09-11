@@ -2,15 +2,18 @@
   <div class="tab-item-mall-wrap">
     <TabItemMallHeader></TabItemMallHeader>
 
-    <div style="background: #fff;">
-      <div style="width: 76%;margin: 0 auto;">
-        <tab :scroll-threshold="5" class="custom">
+    <div style="background: #fff;position:relative;">
+      <div style="width: 76%;margin: 0 0 0 4%;">
+        <tab :scroll-threshold="5" class="custom" custom-bar-width="50%">
           <tab-item v-for="(item,index) in CommodityCategory" :key="index" :selected="index===1">{{item.name}}</tab-item>
         </tab>
       </div>
+      <div class="classification" @click="classification">
+        <p>分类</p>
+      </div>
     </div>
-    <div style="width:92%;margin: 15px auto 30px;">
-      <swiper auto height="100px" class="custom">
+    <div style="width:92%;margin: 15px auto 10px;">
+      <swiper auto height="110px" class="custom">
         <swiper-item class="black"><img src="./mallone.png" alt=""></swiper-item>
         <swiper-item class="black"><img src="./malltwo.jpg" alt=""></swiper-item>
         <swiper-item class="black"><img src="./mallthree.jpg" alt=""></swiper-item>
@@ -122,6 +125,10 @@ export default {
   },
 
   methods: {
+    //跳转分类页面
+    classification(){
+      this.$router.push('/goodsSlassification')
+    },
     // 商品推荐
     getGoodsComm() {
       goodsBucketRecomm({
@@ -150,6 +157,13 @@ export default {
 };
 </script>
 <style lang='less' scoped>
+.classification{
+    position: absolute;
+    right: 3%;
+    top: 9px;
+    font-size: 16px;
+    font-weight: 800;
+}
 .box1 {
   width: 1000px;
 }
@@ -237,5 +251,11 @@ export default {
   width: 34%;
   margin-top: 8px;
 }
+/deep/ .custom .vux-indicator {
+  right: 50%;
+  margin-right: -32px;
+  bottom: 0px;
+}
+
 </style>
 

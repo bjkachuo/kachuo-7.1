@@ -70,7 +70,7 @@
         </div>
       </div>
       <div class="btn-space">
-        <x-button class="btn-default" :link="{path:'/GuideForm',query:{id:this.DList.id}}">
+        <x-button class="btn-default" :link="{path:'/GuideForm',query:{id:this.DList.id,price:this.DList.price}}">
           <i class="icon-time"></i>
           <span>预约导游</span>
         </x-button>

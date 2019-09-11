@@ -22,16 +22,16 @@
 
       <!-- <TabItemMallAdvertise class="z-index-99"></TabItemMallAdvertise>
       <DividedArea class="z-index-99"></DividedArea>-->
-      <Divider :content="title"></Divider>
-      <tab :line-width="3" custom-bar-width="30px" class="tab-style" v-if="showTab != 2">
+      <!-- <Divider :content="title"></Divider> -->
+      <!-- <tab :line-width="3" custom-bar-width="30px" class="tab-style" v-if="showTab != 2">
         <tab-item selected @on-item-click="getTabIndex">商城</tab-item>
       </tab>
       <tab :line-width="3" custom-bar-width="30px" class="tab-style" v-else-if="showTab == 2">
         <tab-item selected @on-item-click="getTabIndex">商城</tab-item>
         <tab-item @on-item-click="getTabIndex">动态</tab-item>
-      </tab>
+      </tab>-->
       <GoodsListWrap class="tab-content" v-if="tabIndex === 0"></GoodsListWrap>
-      <FamousActivity class="tab-content" v-if="tabIndex === 1"></FamousActivity>
+      <!-- <FamousActivity class="tab-content" v-if="tabIndex === 1"></FamousActivity> -->
     </div>
   </div>
 </template>
@@ -54,7 +54,7 @@ export default {
     return {
       title: "",
       TitleObjData: {
-        titleContent: "",
+        titleContent: this.$route.query.title,
         showLeftBack: true,
         showRightMore: false
       },
@@ -94,6 +94,7 @@ export default {
 
   mounted() {
     this.setTitle();
+    console.log(this.$route.query);
   },
 
   methods: {
@@ -138,16 +139,25 @@ export default {
 </style>
 <style lang="less" scoped>
 .custom {
-  // overflow: inherit;
+  overflow: inherit;
   border-radius: 8px;
   /deep/ .vux-indicator {
     right: 50%;
     margin-right: -32px;
-    bottom: -27px;
+    bottom: 0px;
   }
   /deep/ .vux-icon-dot {
     width: 15px !important;
     height: 3px !important;
   }
+  /deep/ .vux-swiper {
+    border-radius: 8px;
+  }
+}
+/deep/ .pulldown-wrapper {
+  z-index: -1;
+}
+/deep/ .scroll-wrapper {
+  height: 135%;
 }
 </style>

@@ -1,6 +1,10 @@
 <template>
   <div class="user-location-wrap">
-    <Header :titleContent="TitleObjData.titleContent" :showLeftBack="TitleObjData.showLeftBack" :showRightMore="TitleObjData.showRightMore"></Header>
+    <Header
+      :titleContent="TitleObjData.titleContent"
+      :showLeftBack="TitleObjData.showLeftBack"
+      :showRightMore="TitleObjData.showRightMore"
+    ></Header>
     <ScenceHotSearch></ScenceHotSearch>
   </div>
 </template>
@@ -41,10 +45,15 @@ export default {
 };
 </script>
 <style lang='css' scoped>
-.user-location-wrap{
+.user-location-wrap {
   width: 100%;
   height: 100%;
   overflow-y: scroll;
-  background: #f5f5f5;
+  background: #fff;
+}
+</style>
+<style lang="less" scoped>
+/deep/ .vux-header {
+  box-shadow: 0px 5px 10px 0px rgba(0, 101, 255, 0.06);
 }
 </style>

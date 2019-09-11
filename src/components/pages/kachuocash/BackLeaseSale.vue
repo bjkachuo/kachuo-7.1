@@ -8,7 +8,7 @@
     <div class="back-lease-sale-content-wrap" :style="scrollContentHeight">
       <!-- <TabItemMallAdvertise></TabItemMallAdvertise>
       <DividedArea></DividedArea>-->
-      <div style="width:92%;margin: 15px auto 30px;">
+      <div style="width:92%;margin: 15px auto 10px;">
         <swiper auto height="100px" class="custom">
           <swiper-item class="black">
             <img src="./bianxiantwo.jpg" alt />
@@ -131,7 +131,7 @@ export default {
   /deep/ .vux-indicator {
     right: 50%;
     margin-right: -32px;
-    bottom: -27px;
+    bottom: 0px;
   }
   /deep/ .vux-icon-dot {
     width: 15px !important;

@@ -371,3 +371,5 @@ export const GetCloudUploadImg = (data) => http.post("album.album_list", data);
 
 //预约导游
 export const yuyueGuide = (data) => http.post("tourguide.show.addorder", data);
+//住吧房间预约订单下单
+export const orderReside = (data) => http.post("scenic.index.addOrder", data);

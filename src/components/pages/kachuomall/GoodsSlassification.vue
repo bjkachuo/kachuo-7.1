@@ -108,7 +108,7 @@ export default {
         console.log(data.data);
         this.List = data.data
         // this.num = data.data.id
-        // console.log(this.num)
+        console.log(this.List)
       });
   },
   watch: {},
@@ -140,7 +140,7 @@ p {
   height: 100%;
 }
 .content-box {
-  height: 70%;
+  height: 270px;
   width: 92%;
   background: #ffffff;
   margin: 62px auto 0;

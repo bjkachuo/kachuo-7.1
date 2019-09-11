@@ -83,7 +83,7 @@
           <div class="kc-toggle" @click="cateClick">筛选</div>
         </div>
         <div class="list-body">
-          <cell class="list-cell" align-items="start" :link="{path:'/ResideReserve',query:{id:item.id}}" v-for="(item,index) in goodsList" :key="index" v-if="index < listnumber">
+          <cell class="list-cell" align-items="start" :link="{path:'/ResideReserve',query:{id:item.id,type:item.type,price:item.price,goodname:item.name,total:item.total,businessId:item.business_id}}" v-for="(item,index) in goodsList" :key="index" v-if="index < listnumber">
             <template slot="icon">
               <img :src="item.image" alt="">
             </template>

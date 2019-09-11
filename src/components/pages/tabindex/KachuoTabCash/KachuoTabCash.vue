@@ -2,16 +2,16 @@
   <div class="tab-item-mall-wrap">
     <TabItemCashHeader></TabItemCashHeader>
     <!--    <TabItemMallAdvertise></TabItemMallAdvertise>-->
-    <div style="width:92%;margin: 15px auto 30px;">
-      <swiper auto height="100px" class="custom">
+    <div style="width:92%;margin: 15px auto 10px;">
+      <swiper auto height="110px" class="custom">
         <swiper-item class="black">
-          <img src="./bianxian.png" alt />
+          <img src="./bianone.jpg" alt />
         </swiper-item>
         <swiper-item class="black">
-          <img src="./bianxian.png" alt />
+          <img src="./biantwo.jpg" alt />
         </swiper-item>
         <swiper-item class="black">
-          <img src="./bianxian.png" alt />
+          <img src="./bianthree.jpg" alt />
         </swiper-item>
       </swiper>
     </div>
@@ -129,7 +129,7 @@ export default {
 }
 .guess-you {
   width: 100px;
-  margin: 20px auto 0;
+  margin: 10px auto 10px;
   .guess-you-bgc {
     display: inline-block;
     width: 17px;
@@ -150,7 +150,7 @@ export default {
   /deep/ .vux-indicator {
     right: 50%;
     margin-right: -32px;
-    bottom: -27px;
+    bottom: 0px;
   }
   /deep/ .vux-icon-dot {
     width: 15px !important;

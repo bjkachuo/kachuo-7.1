@@ -6,7 +6,7 @@
       :showRightMore="TitleObjData.showRightMore"
     ></Header>
     <div class="tickets-discount-list" :style="contentNoHeaderHeight">
-      <div style="width:92%;margin: 10px auto 30px;">
+      <div style="width:92%;margin: 10px auto 10px;">
         <swiper auto height="100px" class="custom">
           <swiper-item class="black">
             <img src="./menren.jpeg" alt />
@@ -108,9 +108,9 @@ export default {
   methods: {
     //跳转各种类型票
     getItem(link) {
-      console.log(111111)
+      console.log(111111);
       this.$router.push(link);
-    },
+    }
   },
 
   watch: {}
@@ -183,5 +183,10 @@ export default {
   border-radius: 4px;
   background-clip: padding-box;
   margin: 5px auto;
+}
+/deep/ .custom .vux-indicator {
+  right: 50%;
+  margin-right: -32px;
+  bottom: 0px;
 }
 </style>

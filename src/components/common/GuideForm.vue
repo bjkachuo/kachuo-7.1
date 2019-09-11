@@ -97,7 +97,7 @@ export default {
     };
   },
   mounted() {
-    console.log(this.$route.query.id);
+    console.log(this.$route.query);
     this.gId = this.$route.query.id;
 
     // const obj = {};
@@ -145,7 +145,9 @@ export default {
         realname:this.msgList.name,
         mobile:this.msgList.phone,
         content:this.msgList.content,
-        message:{people:this.msgList.chooseList.numValue.toString(),time:this.msgList.chooseList.timeValue.toString()}
+        message:{people:this.msgList.chooseList.numValue.toString(),time:this.msgList.chooseList.timeValue.toString()},
+        type:5,
+        price:this.$route.query.price
       })
       .then(({ data }) => {
         console.log(data);

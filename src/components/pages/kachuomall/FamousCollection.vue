@@ -6,7 +6,7 @@
       :showRightMore="TitleObjData.showRightMore"
     ></Header>
     <div class="scence-gifts-content" :style="scenceGiftsContent">
-      <div style="width:92%;margin: 15px auto 30px;">
+      <div style="width:92%;margin: 15px auto 10px;">
         <swiper auto height="100px" class="custom">
           <swiper-item class="black">
             <img src="./ming1.jpg" alt />
@@ -182,7 +182,7 @@ export default {
   /deep/ .vux-indicator {
     right: 50%;
     margin-right: -32px;
-    bottom: -27px;
+    bottom: 0px;
   }
   /deep/ .vux-icon-dot {
     width: 15px !important;

@@ -1,10 +1,10 @@
 <template>
   <div class="wrap">
     <Header :titleContent="TitleObjData.titleContent" :showLeftBack="TitleObjData.showLeftBack" :showRightMore="TitleObjData.showRightMore"></Header>
-    <div class="list-filter">
+    <!-- <div class="list-filter"> -->
       <!-- <div class="list-click" @click="cateClick">全部</div> -->
-      <div class="list-click" @click="odsClick">智能排序</div>
-    </div>
+      <!-- <div class="list-click" @click="odsClick">智能排序</div>
+    </div> -->
     <div class="normal-content" :style="conHei">
       <div class="guide-list">
         <div class="guide-cell" v-for="(item,index) in TList" :key="index" @click="details(item.id)">
@@ -150,7 +150,7 @@
   .normal-content {
     width: 100%;
     background: #F5F5F5;
-    margin-top:90px;
+    margin-top:50px;
     overflow: hidden;
     padding: 15px 0;
     overflow-y: scroll;

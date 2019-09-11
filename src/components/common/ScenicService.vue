@@ -908,6 +908,10 @@ img {
 /deep/ .vux-slider {
   border-radius: 8px;
 }
+/deep/ .vux-slider > .vux-indicator > a > .vux-icon-dot.active,
+.vux-slider .vux-indicator-right > a > .vux-icon-dot.active {
+  background-color: #fff;
+}
 
 .weui-cell {
   .weui-cell__ft {

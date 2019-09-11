@@ -1,6 +1,9 @@
 <template>
   <div class="tab-item-paly-content">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.2/css/swiper.css"/>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.2/css/swiper.css"
+    />
     <div class="line-one">
       <flexbox :gutter="0" wrap="wrap">
         <flexbox-item :span="1/3">
@@ -182,25 +185,29 @@ export default {
       // ],
       dataList: [
         {
-          imgUrl:"http://f.hiphotos.baidu.com/image/pic/item/359b033b5bb5c9eab0b192c9db39b6003af3b35e.jpg",
+          imgUrl:
+            "http://f.hiphotos.baidu.com/image/pic/item/359b033b5bb5c9eab0b192c9db39b6003af3b35e.jpg",
           name: "门票认证",
           link: "/ticketsdiscount",
           imgSrc: require("@/assets/images/券@2x.png")
         },
         {
-          imgUrl: "http://f.hiphotos.baidu.com/image/pic/item/359b033b5bb5c9eab0b192c9db39b6003af3b35e.jpg",
+          imgUrl:
+            "http://f.hiphotos.baidu.com/image/pic/item/359b033b5bb5c9eab0b192c9db39b6003af3b35e.jpg",
           name: "智慧导航",
           link: "/intelligentnavigation",
           imgSrc: require("@/assets/images/坐标@2x.png")
         },
         {
-          imgUrl: "http://f.hiphotos.baidu.com/image/pic/item/359b033b5bb5c9eab0b192c9db39b6003af3b35e.jpg",
+          imgUrl:
+            "http://f.hiphotos.baidu.com/image/pic/item/359b033b5bb5c9eab0b192c9db39b6003af3b35e.jpg",
           name: "游园服务",
           link: "/scenicService",
           imgSrc: require("@/assets/images/吃喝玩乐@2x.png")
         },
         {
-          imgUrl: "http://f.hiphotos.baidu.com/image/pic/item/359b033b5bb5c9eab0b192c9db39b6003af3b35e.jpg",
+          imgUrl:
+            "http://f.hiphotos.baidu.com/image/pic/item/359b033b5bb5c9eab0b192c9db39b6003af3b35e.jpg",
           name: "带走的",
           link: "/takeaway?carousel=2",
           imgSrc: require("@/assets/images/带走的@2x.png")
@@ -208,14 +215,16 @@ export default {
       ],
       dataListTwo: [
         {
-          imgUrl: "http://f.hiphotos.baidu.com/image/pic/item/359b033b5bb5c9eab0b192c9db39b6003af3b35e.jpg",
+          imgUrl:
+            "http://f.hiphotos.baidu.com/image/pic/item/359b033b5bb5c9eab0b192c9db39b6003af3b35e.jpg",
           name: "记住的",
           link: "/remember?type=5&branch=1",
           imgSrc: require("@/assets/images/知识1@2x.png"),
           text: "景区一字文化"
         },
         {
-          imgUrl: "http://f.hiphotos.baidu.com/image/pic/item/359b033b5bb5c9eab0b192c9db39b6003af3b35e.jpg",
+          imgUrl:
+            "http://f.hiphotos.baidu.com/image/pic/item/359b033b5bb5c9eab0b192c9db39b6003af3b35e.jpg",
           name: "了解的",
           link: "/understand?type=7&branch=2",
           imgSrc: require("@/assets/images/攻略@2x.png"),
@@ -244,7 +253,9 @@ export default {
   mounted() {
     //获取推荐商家：
     this.$http
-      .post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.index.scenic_service")
+      .post(
+        "https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.index.scenic_service"
+      )
       .then(({ data }) => {
         this.recommend = data.data.recommend_business;
         console.log(this.recommend);
@@ -340,7 +351,7 @@ export default {
   margin: 0 auto;
   border-radius: 8px;
   overflow: hidden;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 .line-one-a {
   width: 100%;
@@ -374,7 +385,7 @@ export default {
   /* background: darkgreen; */
   overflow: hidden;
   margin-left: 4px;
-  margin-top: 11px;
+  margin-top: 10px;
   /* margin-bottom: 35px; */
 }
 .recommend {
@@ -423,7 +434,8 @@ export default {
   height: 66px;
   float: left;
   margin-top: 14px;
-  margin-right: 7.25%;
+  margin-right: 5.25%;
+  overflow: hidden;
 }
 .inMid p {
   font-size: 14px;
@@ -434,6 +446,7 @@ export default {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  margin-top: 6px;
 }
 .inMid i {
   font-style: normal;
@@ -459,7 +472,7 @@ export default {
   text-overflow: ellipsis;
   white-space: nowrap;
   /* border-radius: 8px; */
-  margin-top: 10px;
+  margin-top: 14px;
 }
 .inMid span .house {
   width: 13px;
@@ -481,7 +494,7 @@ export default {
   margin-top: 35px;
   height: 30px;
   float: left;
-  background: rgba(99,150,255);
+  background: #3976ff;
   border-radius: 4px;
 }
 .inRight p {

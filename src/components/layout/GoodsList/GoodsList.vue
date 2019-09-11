@@ -69,7 +69,7 @@ export default {
     width: 49%;
     min-height: 80px;
     height: auto;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     background-color: #ffffff;
     overflow: hidden;
     border-radius: 8px;
