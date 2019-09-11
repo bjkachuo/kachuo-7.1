@@ -15,7 +15,7 @@
           <x-input title="详细地址：" v-model="maskValueDetails" placeholder="街道、楼牌号等"></x-input>
         </div>
         <div class="addr-card">
-          <x-switch title="设为默认地址" :value-map="['0', '1']" v-model="stringValue"></x-switch>
+          <x-switch title="设为默认地址" :value-map="['0', '1']" v-model="isdefault"></x-switch>
         </div>
       </div>
       <div class="end-button">
@@ -47,7 +47,7 @@ export default {
       maskValuePhone: "",
       maskValueDetails: "",
       maskValueAddress: [],
-      stringValue:'0',
+      isdefault:'0',
     };
   },
 
@@ -98,7 +98,8 @@ export default {
         province: this.maskValueAddress[0],
         city: this.maskValueAddress[1],
         area: this.maskValueAddress[2],
-        address: this.maskValueDetails
+        address: this.maskValueDetails,
+        isdefault:this.isdefault
       })
         .then(res => {
           if (res.result === 1) {

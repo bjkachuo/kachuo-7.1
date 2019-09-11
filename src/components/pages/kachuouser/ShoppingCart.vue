@@ -129,9 +129,7 @@ export default {
     },
     // 获取列表
     getDataList() {
-      ShopList({
-        page: 1
-      })
+      ShopList({page: 1})
         .then(res => {
           if (res.result === 1) {
             let obj = res.data.result;

@@ -4,7 +4,7 @@
     <div class="normal-content" :style="conHei">
       <ul>
         <li v-for="item in list" @click="">
-          <img  alt="" @click="goPlay" :src="item.scenic_image">
+          <img  alt="" @click="goPlay(item)" :src="item.scenic_image">
           <div class="content">
             <div class="title">{{item.scenic_name}}</div>
             <div class="jifen">免费观看</div>
@@ -54,7 +54,11 @@
               .catch(err => {
                 console.log(err);
               });
-          }
+          },
+          goPlay(veido){
+            sessionStorage.veido = JSON.stringify(veido)
+            this.$router.push('/intelligentnavigation/veidoPlay')
+          },
         },
 
         computed: {

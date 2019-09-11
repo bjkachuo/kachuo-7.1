@@ -31,6 +31,7 @@
       </div>
       <div class="content-card-bot">
         <span>积分：{{userInfo.credit1}}</span>
+        <i @click="showjifen"></i>
       </div>
       <XDialog style="display:none" :showDialog="showDialogFlag" ref="dialogCon"></XDialog>
     </div>
@@ -70,7 +71,7 @@
         </flexbox-item>
       </flexbox>
     </div>
-
+    <IntegralDesc ref="alert"></IntegralDesc>
     <!-- <Cell class="margin-top-10px" :cellList="cellListToolsA"></Cell>
     <Cell class="margin-top-10px" :cellList="cellListToolsB"></Cell>
     <Cell class="margin-top-10px" :cellList="cellListToolsC"></Cell>-->
@@ -80,17 +81,19 @@
 <script>
 import TabPersonCenterHeader from "@/components/layout/TabItemPersonHeader.vue";
 import AppUserInfo from "@/components/layout/AppUserInfo.vue";
+import IntegralDesc from './IntegralDesc'
 import DividedArea from "@/components/common/DividedArea.vue";
 import Cell from "@/components/common/Cell.vue";
 import XDialog from "@/components/common/XDialog";
 import { Flexbox, FlexboxItem } from "vux";
 export default {
   name: "",
-  props: [""],
   data() {
     return {
       showDialogFlag: false,
       userInfo: null,
+      showJiFfen:false,
+
       dataListOne: [
         {
           name: "游园日记",
@@ -215,6 +218,7 @@ export default {
     TabPersonCenterHeader,
     AppUserInfo,
     DividedArea,
+    IntegralDesc,
     Cell,
     XDialog,
     Flexbox,
@@ -243,6 +247,10 @@ export default {
       this.userInfo = this.GLOBAL.getSession("userLoginInfo");
     },
 
+    showjifen(){
+      this.$refs.alert.show = true
+    },
+
     goCenter(){
       this.$router.push('')
     },
@@ -265,7 +273,7 @@ export default {
   watch: {}
 };
 </script>
-<style lang='css' scoped>
+<style lang='less' scoped>
 .tab-personal-center-wrap {
   width: 100%;
   overflow: hidden;
@@ -317,23 +325,28 @@ export default {
 }
 .content-card-bot {
   flex: 1;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: flex-end;
-  /* color: #ffebb5;
-  font-size: 12px; */
-}
-.content-card-bot span {
-  width: 130px;
-  height: 25px;
-  border-radius: 13px;
-  opacity: 0.7;
-  background: rgba(25, 94, 242, 1);
-  color: #80bfff;
-  text-align: center;
-  line-height: 25px;
-  font-size: 14px;
+  position: relative;
+  i{
+    position: absolute;
+    bottom: 0;
+    width: 28px;
+    height: 28px;
+    background-image: url("./icon.png");
+    background-size: 100% 100%;
+    right: 0;
+  }
+  span{
+    position: absolute;
+    bottom: 0;
+    height: 25px;
+    border-radius: 13px;
+    opacity: 0.7;
+    background: rgba(25, 94, 242, 1);
+    color: #80bfff;
+    padding: 0 16px;
+    line-height: 25px;
+    font-size: 14px;
+  }
 }
 .content-card-top-left {
   display: flex;

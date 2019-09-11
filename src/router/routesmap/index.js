@@ -785,12 +785,17 @@ export default [{
     component: resolve => require(['@/components/pages/kachuoplay/toolslist/freeTickets'], resolve),
 
   },
+  //票务系统现场票
   {
-    //票务系统现场票
     path: '/onsiteTickets',
     name: '/onsiteTickets',
     component: resolve => require(['@/components/pages/kachuoplay/toolslist/onsiteTickets'], resolve),
-
+  },
+  //积分充值
+  {
+    path: '/Recharge',
+    name: '/Recharge',
+    component: resolve => require(['@/components/pages/Recharge'], resolve),
   },
   
 

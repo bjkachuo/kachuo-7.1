@@ -46,6 +46,7 @@
 </template>
 
 <script>
+import { ShopList, goodsBucketRecomm, goodsBucketSubmit } from "@/servers/api";
 import { XHeader,Tabbar, TabbarItem ,Cell,XButton,InlineXNumber,CheckIcon} from 'vux'
 export default {
   name: "",
@@ -71,10 +72,35 @@ export default {
     onOver(){
       this.rText = "编辑"
       this.toggle = !this.toggle
+    },
+    getDataList() {
+      ShopList({page: 1})
+        .then(res => {
+          console.log(res);
+          if (res.result === 1) {
+            let obj = res.data.result;
+            for (let i in obj) {
+              for (let j in obj[i][0]) {
+                this.dataList.push(obj[i][0][j]);
+                this.numArr.push(parseInt(obj[i][0][j].total, 10));
+                this.checkFlagArr.push(true);
+              }
+            }
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        })
     }
   },
   components: {
     XHeader, XButton, Tabbar,TabbarItem ,Cell,InlineXNumber,CheckIcon
+  },
+  mounted(){
+    this.$nextTick(()=>{
+      console.log(1);
+      this.getDataList()
+    })
   },
   computed: {
     conHei() {

@@ -1,0 +1,188 @@
+<template>
+<div class="wrap">
+<Header
+      :titleContent="TitleObjData.titleContent"
+      :showLeftBack="TitleObjData.showLeftBack"
+      :showRightMore="TitleObjData.showRightMore"
+    ></Header>
+    <div class="normal-content" :style="conHei">
+        <div class="tab-card">
+          <div class="inner">
+            <div class="card-header">充值金额</div>
+              <checker v-model="demo1" default-item-class="rec-item" selected-item-class="rec-item-selected">
+                <checker-item value="1"><span>{{('10积分') }}</span></checker-item>
+                <checker-item value="2"><span>{{ ('30积分') }}</span></checker-item>
+                <checker-item value="3"><span>{{ ('50积分') }}</span></checker-item>
+                <checker-item value="4"><span>{{ ('100积分') }}</span></checker-item>
+                <checker-item value="5"><span>{{ ('500积分') }}</span></checker-item>
+                <checker-item value="6"><span>{{ ('1000积分') }}</span></checker-item>
+            </checker>
+          </div>
+        </div>
+        <div class="tab-card input-card ">
+          <x-input title="其它金额:" v-model="maskValue" placeholder="请输入充值金额(充值比例1:1积分)" @on-change="onChange()">
+          </x-input>
+        </div>
+        <div class="tab-card">
+          <div class="inner">
+            <div class="card-header">支付方式</div>
+            <radio :options="radio001"></radio>
+          </div>
+        </div>
+    </div>
+    <div class="end-button">
+      <x-button link="/RechargeResult" :disabled="disable001">确认充值</x-button>
+    </div>
+  </div>
+</template>
+
+<script>
+import Header from "@/components/common/Header";
+import { Cell ,XInput,XButton,Radio ,Checker, CheckerItem} from 'vux'
+export default {
+  data() {
+    return {
+      demo1: '',
+      TitleObjData: {
+        titleContent: "充值",
+        showLeftBack: true,
+        showRightMore: false
+      },
+      disable001:true,
+      maskValue:'',
+      radio001: [{
+        icon: 'http://www.zxdiv.com/alipay.png',
+        key: '001',
+        value: '支付宝支付'
+      }, {
+        icon: 'http://www.zxdiv.com/wxpay.png',
+        key: '002',
+        value: '微信支付'
+      }]
+    };
+  },
+  methods:{
+    onChange(){
+      if (this.maskValue != "") {
+        console.log('1111')
+        this.disable001 = false
+      } else{
+        console.log('222')
+        this.disable001 = true
+      }
+    },
+  },
+  components: {
+    Header,
+    Cell,
+    XInput,
+    XButton,
+    Radio,
+    Checker, CheckerItem
+  },
+  computed: {
+    conHei() {
+      return { height: document.documentElement.clientHeight - 45 + "px" };
+    }
+  },
+};
+</script>
+<style lang='css' scoped>
+.normal-content{
+  width: 100%;
+  background: #F5F5F5;
+  margin-top: 45px;
+  overflow: hidden;
+  overflow-y: scroll;
+  padding: 15px 0;
+  box-sizing: border-box;
+}
+.tab-card{
+  background:rgba(255,255,255,1);
+  box-shadow:0px 5px 10px 0px rgba(0,101,255,0.04);
+  border-radius:8px;
+  overflow: hidden;
+  margin-bottom: 15px;
+}
+.tab-card .inner{
+  padding: 15px;
+}
+.card-header{
+  font-size: 20px;
+  margin-bottom: 15px;
+  line-height: 1.2;
+}
+.tab-card /deep/ .weui-cell{
+  padding: 15px;
+}
+.tab-card /deep/ .weui-cells_radio{
+  margin-top: -10px;
+}
+.tab-card /deep/ .weui-cells_radio .weui-cell{
+  padding: 15px 0;
+}
+.tab-card /deep/ .weui-cells_radio .weui-cell:before{
+  left: 0;
+}
+
+/* button */
+.end-button{
+  padding: 0 15px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 30px;
+}
+.end-button .weui-btn,
+.end-button .weui-btn:active{
+  border: 0;
+  width: 100%;
+  background-color: #3976FF;
+  color: #FFFFFF;
+}
+.end-button .weui-btn_disabled{
+  opacity: .5;
+}
+.tab-card /deep/ .weui-icon-checked{
+  display: block;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  border-radius: 20px;
+  border: 1px solid #999999;
+}
+.tab-card /deep/ .weui-cells_radio .weui-check:checked + .weui-icon-checked{
+  background-color: #3976FF;
+  border: 1px solid #3976FF;
+}
+.tab-card /deep/ .weui-cells_radio .weui-check:checked + .weui-icon-checked:before{
+  color: #FFFFFF;
+  font-size: 14px;
+}
+.rec-item{
+  width: 33.33%;
+  padding: 4px 8px;
+  box-sizing: border-box;
+  float: left;
+}
+.vux-checker-box{
+  overflow: hidden;
+  margin-left: -8px;
+  margin-right: -8px;
+}
+.rec-item span{
+  display: block;
+  height: 50px;
+  border-radius: 4px;
+  border: 1px solid #9EBCFF;
+  line-height: 50px;
+  text-align: center;
+}
+.rec-item-selected span{
+  background: #3976FF;
+  color: #FFF;
+}
+.vux-tap-active:active{
+  background-color: transparent;
+}
+</style>
