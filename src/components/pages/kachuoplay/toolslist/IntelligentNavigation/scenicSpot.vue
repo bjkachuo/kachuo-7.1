@@ -3,8 +3,8 @@
       <Header :titleContent="TitleObjData.titleContent" :showLeftBack="TitleObjData.showLeftBack" :showRightMore="TitleObjData.showRightMore"></Header>
       <div class="normal-content" :style="conHei">
         <ul>
-          <li v-for="item in list">
-            <img  alt="" @click="goPlayList(item.id)" :src="item.scenic_image">
+          <li v-for="item in list" @click="goPlayList(item)">
+            <img :src="item.scenic_image">
             <div class="content">
               <div class="title">{{item.scenic_name}}</div>
               <div class="bottom">景点视频1个</div>
@@ -54,10 +54,9 @@
               })
           },
 
-          goPlayList(id){
-            this.$router.push('/intelligentnavigation/veidoList?id='+id)
+          goPlayList(item){
+            this.$router.push('/intelligentnavigation/veidoList?longitude='+item.longitude+'&latitude='+item.latitude)
           }
-
 
         }
     }
@@ -70,7 +69,6 @@
     margin-top: 45px;
     overflow: hidden;
     overflow-y: scroll;
-
     box-sizing: border-box;
   }
 
