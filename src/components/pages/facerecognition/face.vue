@@ -14,7 +14,8 @@
         >
       </div>
       <p class="face-desc">由本人亲自操作，请正对手机，确保光线充足</p>
-      <x-button type="primary" class="face-btn">
+      <x-button type="primary" class="face-btn" @click.native="faceLogin">开始拍摄</x-button>
+      <!--<x-button type="primary" class="face-btn">
         开始拍摄
         <input
           type="file"
@@ -23,7 +24,7 @@
           accept="image/*"
           @change="getFaceImg($event)"
         >
-      </x-button>
+      </x-button>-->
       <p class="face-tip">
         <span class="iconfont iconanquan"></span>
         信息已加密，仅用于身份验证
@@ -151,6 +152,69 @@ export default {
             console.log(err);
           });
       }
+    },
+    //人脸识别
+    faceLogin() {
+      cordova.plugins.FaceScan.faceLivingScan(
+        res => {
+          console.log(res);
+          this.$vux.loading.show({
+            text: "正在上传"
+          });
+          
+          //将base64转换为文件
+          let bstr = atob(res), n = bstr.length, u8arr = new Uint8Array(n);
+          /*this.$vux.toast.show({
+            type: "cancel",
+            text: "base64解码后大小 " + n,
+            time: 3000
+          });*/ 
+
+          while(n--){
+            u8arr[n] = bstr.charCodeAt(n);
+          }
+          let blob = new Blob([u8arr], {type: "JPEG" });
+
+          let file = new File(blob, "faceScan.JPEG");
+
+          /*this.$vux.toast.show({
+            type: "cancel",
+            text: "图片大小 " + file.size,
+            time: 3000
+          });*/
+
+          if (file.size > 10 * 1024 * 1024) {
+          this.$vux.loading.hide();
+          this.$vux.toast.show({
+            type: "cancel",
+            text: "图片过大",
+            time: 1000
+          });
+          return;
+        }
+        let formData = new FormData();
+        formData.append("file", file);
+        axios
+          .post(this.videoUploadUrl, formData, FACEUPLOADCONFIG)
+          .then(res => {
+            if (res.data.result === 1) {
+              this.checkFaceRequest(res.data.data.files[0].url);
+            } else {
+              this.$vux.loading.hide();
+              this.$vux.toast.show({
+                type: "warn",
+                text: "人脸验证失败请重试",
+                time: 1000
+              });
+            }
+          })
+          .catch(err => {
+            console.log(err);
+          });
+        }, err => {
+          console.log(err);
+        }
+      );
     }
   },
 

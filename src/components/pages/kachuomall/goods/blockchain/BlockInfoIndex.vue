@@ -207,8 +207,8 @@ export default {
               for (let i = 0; i < objData.rows.length; i++) {
                 dataArr.push({
                   owner: objData.rows[i].owner,
-                  strData: JSON.parse(objData.rows[i].strData),
-                  strType: objData.rows[i].strType
+                  strData: JSON.parse(objData.rows[i].abcdContext),
+                  strType: objData.rows[i].abcdWhat
                 });
               }
               console.log(dataArr);
