@@ -23,7 +23,7 @@
                   <div class="day-item">
                     <div class="item-more">
                       <calendar
-                        v-model="demo1"
+                        v-model="dataTime"
                         title="更多时间"
                         disable-past
                         placeholder="placeholder"
@@ -41,23 +41,56 @@
       <div class="form-panel">
         <div class="form-cells">
           <div class="form-header">基本信息</div>
-          <cell @click.native="tkClick" is-link>
+          <popup-picker
+            class="pickOne"
+            title="票数/张"
+            :data="menus2"
+            v-model="roomNum"
+            @on-show="onShow"
+            @on-hide="onHide"
+            @on-change="onChange"
+            placeholder="请选择"
+          ></popup-picker>
+          <!-- <cell @click.native="tkClick" is-link>
             <template slot="icon">
               <div class="room-text" style="margin-right: 15px;">门票数</div>
             </template>
             <template slot="after-title">
               <div class="tk-value">{{ppValue}}</div>
             </template>
-          </cell>
-          <x-input title="联系人" placeholder="请输入证件上的姓名"></x-input>
-          <x-input title="手机号" placeholder="用于接收预订信息"></x-input>
+          </cell>-->
+          <x-input
+            title="联系人"
+            placeholder="填写真实入住人姓名"
+            v-model="name"
+            type="text"
+            is-type="china-name"
+          ></x-input>
+          <x-input
+            title="手机号"
+            placeholder="用于接收预订信息"
+            v-model="phone"
+            :max="13"
+            is-type="china-mobile"
+          ></x-input>
         </div>
       </div>
       <div class="form-panel">
         <checklist label-position="left" :options="checklist"></checklist>
       </div>
       <div class="form-panel">
-        <cell is-link title="发票信息" :value="fapvalue" @click.native="infoClick"></cell>
+        <popup-picker
+          class="pickTwo"
+          title="发票信息"
+          :data="menus"
+          v-model="invoice"
+          @on-show="onShow"
+          @on-hide="onHide"
+          @on-change="onChange"
+          placeholder="请选择"
+        ></popup-picker>
+
+        <!-- <cell is-link title="发票信息" :value="fapvalue" @click.native="infoClick"></cell> -->
       </div>
     </div>
     <div class="btm-bar">
@@ -68,15 +101,17 @@
           <i>{{this.$route.query.price}}</i>
         </span>
       </div>
-      <x-button link="/ReserveResult">提交订单</x-button>
+      <x-button link="/ReserveResult" @click.native="submit">提交订单</x-button>
     </div>
-    <actionsheet v-model="show1" :menus="menus" @on-click-menu="Click" show-cancel></actionsheet>
-    <actionsheet v-model="show2" :menus="menus2" @on-click-menu="tkSelect" show-cancel></actionsheet>
+    <!-- <actionsheet v-model="show1" :menus="menus" @on-click-menu="Click" show-cancel></actionsheet>
+    <actionsheet v-model="show2" :menus="menus2" @on-click-menu="tkSelect" show-cancel></actionsheet>-->
   </div>
 </template>
 
 <script>
 import Header from "@/components/common/Header";
+import { orderReside } from "@/servers/api.js";
+
 import {
   Cell,
   XButton,
@@ -84,7 +119,8 @@ import {
   XTextarea,
   Checklist,
   Actionsheet,
-  Calendar
+  Calendar,
+  PopupPicker
 } from "vux";
 export default {
   props: [""],
@@ -111,43 +147,97 @@ export default {
       tvalue: "",
       show1: false,
       show2: false,
-      menus: {
-        menu1: "开发票",
-        menu2: "不需要发票"
-      },
-      menus2: {
-        menu1: "1张",
-        menu2: "2张"
-      }
+      //选择发票
+      menus: [["开发票", "不需要发票"]],
+      //选择票数
+      menus2: [["1", "2", "3", "4", "5", "6"]],
+      //实付价格
+      scorePrice: [],
+      //票数数
+      roomNum: [],
+      //发票信息
+      invoice: [],
+      //姓名
+      name: "",
+      //手机号
+      phone: "",
+      //商品id
+      storeId: "",
+      //商家id
+      businessId: "",
+      //价格
+      price: "",
+      //日期
+      dataTime: []
+
+      // menus: {
+      //   menu1: "开发票",
+      //   menu2: "不需要发票"
+      // },
+      // menus2: {
+      //   menu1: "1张",
+      //   menu2: "2张"
+      // }
     };
   },
-    mounted(){
-      console.log(this.$route.query)
-    },
-    methods: {
+  mounted() {
+    console.log(this.$route.query);
+    this.storeId = this.$route.query.id;
+    this.businessId = this.$route.query.storeId;
+    this.price = this.$route.query.price;
+  },
+  methods: {
     url(link) {
       this.$router.push(link);
     },
-    Click(key, item) {
-      console.log(key, item);
-      this.fapvalue = item;
+    //支付提交订单
+    submit() {
+      orderReside({
+        id: this.businessId,
+        type: 3,
+        mobile: this.phone,
+        price: this.price,
+        realname: this.name,
+        date: this.dataTime.toString(),
+        goods: [this.storeId, this.roomNum.toString()]
+      }).then(({ data }) => {
+        console.log(data);
+      });
+      
     },
-    infoClick() {
-      this.show1 = !this.show1;
+    //选择器显示时触发
+    onShow() {
+      console.log("on show");
     },
-    tkClick() {
-      this.show2 = !this.show2;
+    //选择器关闭时触发
+    onHide(type) {
+      console.log("on hide", type);
     },
-    tkSelect(key, item) {
-      console.log(key, item);
-      this.ppValue = item;
-    },
-    addClass(index) {
-      this.current = index;
-    },
-    onChange(val) {
-      console.log("on change", val);
+    onChange(val) {},
+    log(str) {
+      console.log(str);
     }
+
+    // Click(key, item) {
+    //   console.log(key, item);
+    //   this.fapvalue = item;
+    // },
+    // infoClick() {
+    //   this.show1 = !this.show1;
+    // },
+    // tkClick() {
+    //   this.show2 = !this.show2;
+    // },
+    // tkSelect(key, item) {
+    //   console.log(key, item);
+    //   this.ppValue = item;
+    // },
+    // addClass(index) {
+    //   this.current = index;
+    // },
+    // onChange(val) {
+    //   console.log("on change", val);
+    // }
   },
 
   components: {
@@ -158,7 +248,8 @@ export default {
     XTextarea,
     Checklist,
     Actionsheet,
-    Calendar
+    Calendar,
+    PopupPicker
   },
   computed: {
     conHei() {

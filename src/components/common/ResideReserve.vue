@@ -149,7 +149,9 @@ export default {
       //商品id
       storeId: "",
       //商家id
-      businessId: ""
+      businessId: "",
+      //价格
+      price: ""
     };
   },
   mounted() {
@@ -157,6 +159,7 @@ export default {
     // console.log(this.$route.query.id);
     this.storeId = this.$route.query.id;
     this.businessId = this.$route.query.businessId;
+    this.price = this.$route.query.price;
     console.log(this.storeId);
 
     console.log(this.businessId);
@@ -198,7 +201,7 @@ export default {
         id: this.businessId,
         type: 4,
         mobile: this.phone,
-        price: this.$route.query.price,
+        price: this.price,
         realname: this.name,
         goods: [this.storeId, this.roomNum.toString()]
       }).then(({ data }) => {

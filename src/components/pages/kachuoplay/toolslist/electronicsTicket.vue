@@ -4,6 +4,7 @@
       :titleContent="TitleObjData.titleContent"
       :showLeftBack="TitleObjData.showLeftBack"
       :showRightMore="TitleObjData.showRightMore"
+      style="top=-43px"
     ></Header>
     <tab
       :line-width="1"
@@ -12,11 +13,11 @@
       active-color="#222222FF"
       bar-active-color="#3976FFFF"
     >
-      <tab-item @click.native="cur=0" :class="{active:cur==0}" selected>在线购票</tab-item>
-      <tab-item @click.native="cur=1" :class="{active:cur==1}">智能验票</tab-item>
+      <tab-item @click.native="cur=0" :class="{active:cur==1}" selected>智能验票</tab-item>
+      <tab-item @click.native="cur=1" :class="{active:cur==0}">在线购票</tab-item>
     </tab>
     <div class="tab-content">
-      <b v-show="cur==0">
+      <b v-show="cur==1">
         <div class="t-content" v-for="(item,index) in dataListOne" :key="index">
           <div class="t-left">
             <div class="img-wrap">
@@ -34,8 +35,9 @@
               </div>
             </div>
           </div>
-          <div class="t-right" @click="buyTickets(index)">
-            <p>认证</p>
+          <div class="t-right">
+            <!-- @click="buyTickets(index)" -->
+            <p>购票</p>
           </div>
         </div>
         <!-- <div class="order-content">
@@ -47,7 +49,7 @@
           <div class="content-bottom"></div>
         </div>-->
       </b>
-      <b v-show="cur==1">
+      <b v-show="cur==0">
         <div class="explain-wrap">
           <div class="explain-one">
             <img src="./yanpiao.png" alt />
@@ -60,7 +62,7 @@
               <p>&nbsp;&nbsp;2.门票和人脸信息绑定，可通过景区闸机快速入园</p>
             </div>
           </div>
-          <div class="p-wrap">
+          <!-- <div class="p-wrap">
             <flexbox>
               <flexbox-item>
                 <div class="flex-demo">
@@ -106,11 +108,7 @@
                 </div>
               </flexbox-item>
             </flexbox>
-            <!-- <div class="p-img-wrap">
-                  <img src="" alt="">
-              </div>
-            <div class="p-text-wrap"><p>扫描人脸</p></div>-->
-          </div>
+          </div>-->
         </div>
         <div class="face-wrap">
           <div class="f-left">
@@ -138,6 +136,9 @@
           </div>
         </div>
       </b>
+    </div>
+    <div class="CheckTickets">
+      <p>立即购票</p>
     </div>
   </div>
 </template>
@@ -233,26 +234,26 @@ export default {
   },
   watch: {},
   methods: {
-    scan(){
-      this.$router.push('/facecheck')
-    },
-    //跳转购票页面
-    buyTickets(index) {
-      // var i = 0 ; i < this.dataList.length; i ++ ;
-      let a = 0;
-      for (let i = 0; i < this.dataList; i++) {
-        a + -i;
-        return a;
-      }
-      // console.log(11)
-      // console.log(a)
-      this.$router.push({
-        path: "/ticketsdetails",
-        query: {
-          type: this.dataList[index + a].type
-        }
-      });
+    scan() {
+      this.$router.push("/facecheck");
     }
+    //跳转购票页面
+    // buyTickets(index) {
+    //   // var i = 0 ; i < this.dataList.length; i ++ ;
+    //   let a = 0;
+    //   for (let i = 0; i < this.dataList; i++) {
+    //     a + -i;
+    //     return a;
+    //   }
+    //   // console.log(11)
+    //   // console.log(a)
+    //   this.$router.push({
+    //     path: "/ticketsdetails",
+    //     query: {
+    //       type: this.dataList[index + a].type
+    //     }
+    //   });
+    // }
   },
   components: {
     Header,
@@ -268,6 +269,7 @@ export default {
   width: 100%;
   height: 100%;
   background: #f5f5f5;
+  /* position: relative; */
 }
 .tab-content {
   width: 100%;
@@ -348,7 +350,7 @@ export default {
 }
 .explain-wrap {
   width: 92%;
-  height: 200px;
+  height: 110px;
   margin: 0 auto 10px;
   background: #ffffff;
   border-radius: 8px;
@@ -473,6 +475,19 @@ export default {
   color: #3976ff;
   font-size: 16px;
 }
+.CheckTickets {
+  height: 60px;
+  width: 100%;
+  position: absolute;
+  background: #cccccc;
+  bottom: 0px;
+}
+.CheckTickets p {
+  font-size: 16px;
+  color: #ffffff;
+  text-align: center;
+  line-height: 60px;
+}
 </style>
 <style scoped lang="less">
 /deep/ .vux-tab-wrap {
@@ -502,4 +517,8 @@ export default {
 .vux-x-icon {
   fill: #2ecc33;
 }
+// /deep/ Header {
+//   top: -43px;
+//   position: absolute;
+// }
 </style>
