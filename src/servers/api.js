@@ -181,8 +181,13 @@ export const GetAuthState = (data) => http.post("login.getuserauth", data);
 
 // 实名认证提交
 export const AuthSubmit = (data) => http.post("login.saveuserauth", data);
+
 //提交名家入驻
 export const postMingjia = (data) => http.post('enter.celebrity', data);
+
+//提交景区入驻
+export const postJingqu = (data) => http.post('enter.scenic', data);
+
 // 图片上传
 export const imageUpload = (data) => http.post("util.uploader.uploadm", data);
 

@@ -4,9 +4,9 @@
       <div class="content">
         <div class="up-avata">
           <p><span class="blod">上传申请人头像</span><span>(温馨提示：照片不能大于1M)</span></p>
-          <UploadImgOne  v-on:getHeaderImgUrl="getImgVal" :plus="true">
+          <UploadImgOne  v-on:getHeaderImgUrl="getUser_path" :plus="true">
             <div slot="bg">
-              <div class="up-avata-bg">
+              <div class="up-avata-bg" v-if="!form.user_path">
                 <div class="camera"></div>
               </div>
             </div>
@@ -14,17 +14,17 @@
         </div>
         <div class="information">
           <h2>基本信息</h2>
-          <x-input title="姓名:" name="username" placeholder="请输入姓名" is-type="china-name" label-width="5em"></x-input>
-          <x-input title="手机号码:" name="mobile" placeholder="请输入手机号码" keyboard="number" is-type="china-mobile"  mask="999 9999 9999" label-width="5em"></x-input>
-          <Address v-on:selectAddress="getSelAddress"></Address>
-          <x-input title="详细地址:" name="username" placeholder="街道、门牌号等" label-width="5em"></x-input>
-          <x-input title="身份证号:" name="mobile" keyboard="number" is-type="china-mobile"  label-width="5em"></x-input>
+          <x-input title="姓名:" v-model="form.realname" placeholder="请输入姓名" is-type="china-name" label-width="5em"></x-input>
+          <x-input title="手机号码:" v-model="form.mobile" placeholder="请输入手机号码" keyboard="number" is-type="china-mobile"  mask="999 9999 9999" label-width="5em"></x-input>
+          <Address v-on:selectAddress="getSelAddressG"></Address>
+          <x-input title="详细地址:" v-model="form.address" placeholder="街道、门牌号等" label-width="5em"></x-input>
+          <x-input title="身份证号:" v-model="form.idcard" keyboard="number" is-type="china-mobile"  label-width="5em"></x-input>
         </div>
         <div class="up-avata">
           <p><span class="blod">上传景区资质</span></p>
-          <UploadImgOne  v-on:getHeaderImgUrl="getImgVal" :plus="true">
+          <UploadImgOne  v-on:getHeaderImgUrl="getAptitude" :plus="true">
             <div slot="bg">
-              <div class="up-avata-bg">
+              <div class="up-avata-bg" v-if="!form.aptitude">
                 <div class="camera"></div>
               </div>
             </div>
@@ -32,14 +32,15 @@
         </div>
         <div class="information">
           <h2>景区信息</h2>
-          <x-input title="景区名称:" name="username" placeholder="请输入姓名" is-type="china-name" label-width="5em"></x-input>
+          <x-input title="景区名称:" v-model="form.scenic_title" placeholder="请输入姓名" is-type="china-name" label-width="5em"></x-input>
+          <Address v-on:selectAddress="getSelAddress"></Address>
           <PopupPicker :dataOpion="dataOpF" @givePickerVal="getPickValF"></PopupPicker>
           <PopupPicker :dataOpion="dataOpG" @givePickerVal="getPickValG"></PopupPicker>
-          <x-input title="景点数量:" name="username"  label-width="5em"></x-input>
-          <x-input title="年游客量:" name="username" placeholder="街道、门牌号等" label-width="5em"></x-input>
+          <PopupPicker :dataOpion="dataOpH" @givePickerVal="getPickValH"></PopupPicker>
+          <x-input title="景点数量:" v-model="form.scenic_num"  label-width="5em"></x-input>
+          <x-input title="年游客量:" v-model="form.year_num" placeholder="街道、门牌号等" label-width="5em"></x-input>
         </div>
-
-        <div class="btn">提交申请</div>
+        <div class="btn" @click="submit">提交申请</div>
       </div>
     </div>
 </template>
@@ -50,7 +51,7 @@
   import { XInput } from 'vux'
   import UploadImgOne from "@/components/common/UploadImgOne/UploadImgOne";
   import Address from "@/components/common/Address";
-  import { getUserRule } from "@/servers/api";
+  import { getUserRule,postJingqu } from "@/servers/api";
   import { formData } from "@/assets/js/tools";
     export default {
         name: "scenicSpot",
@@ -63,6 +64,17 @@
               titleContent: "景区入驻",
               showLeftBack: true,
               showRightMore: false
+            },
+            form:{
+              scenic_title:'',
+              region:'1',
+              user_path:'',
+              aptitude:'',
+              realname:'',
+              idcard:'',
+              address:'',
+              cele_industry:'',
+              cele_duty:''
             },
             maskValueAddress:[],
             pickValF:[],
@@ -80,7 +92,23 @@
               columns: 4,
               data: []
             },
+            dataOpH: {
+              title: "等级",
+              columns: 1,
+              data: [
+                {name:"5A", parent:"0", value:"5"},
+                {name:"4A", parent:"0", value:"4"},
+                {name:"3A", parent:"0", value:"3"},
+                {name:"2A", parent:"0", value:"2"},
+                {name:"1A", parent:"0", value:"1"},
+                ]
+            },
+
           }
+        },
+
+        mounted(){
+          this.getDataList()
         },
 
         methods:{
@@ -108,24 +136,50 @@
                 }
               })
               .catch(err => {
-                console.log(err);
-              });
+                console.log(err)
+              })
           },
-          getImgVal(val) {
-            console.log(val);
-            this.imgUrl = val;
+
+          submit(){
+            postJingqu({...this.form})
+              .then( res  => {
+                if (res.result == 1){
+                  this.showTip('入驻成功')
+                  this.$router.go(-1)
+                }else{
+                  this.showTip(res.msg)
+                }
+              })
+          },
+
+          showTip(conttentTip) {
+            this.$vux.toast.text(conttentTip, "middle")
+            setTimeout(() => {
+              this.$vux.toast.hide();
+            }, 1000)
+          },
+
+          getUser_path(val) {
+            this.form.user_path = val
+          },
+          getAptitude(val){
+            this.form.aptitude = val
+          },
+          getSelAddressG(val) {
+            this.form.region = val.toString();
           },
           getSelAddress(val) {
-            this.maskValueAddress = val;
+            this.form.location = val.toString();
           },
           getPickValF(val) {
-            console.log(val);
-            this.pickValE = val;
+            this.form.cele_duty = val.toString();
           },
           getPickValG(val) {
-            console.log(val);
-            this.pickValE = val;
+            this.form.cele_industry = val.toString();
           },
+          getPickValH(val){
+            this.form.scenic_level = val.toString();
+          }
         }
     }
 </script>
