@@ -17,7 +17,7 @@
           <p>2.门票和人脸信息绑定，可通过景区闸机快速入园</p>
         </div>
       </div>
-      <div class="p-wrap">
+      <!-- <div class="p-wrap">
         <flexbox>
           <flexbox-item>
             <div class="flex-demo">
@@ -63,7 +63,7 @@
             </div>
           </flexbox-item>
         </flexbox>
-      </div>
+      </div>-->
     </div>
     <div class="face-wrap">
       <div class="f-left">
@@ -89,6 +89,9 @@
       <div class="num">
         <p>数字串码</p>
       </div>
+    </div>
+    <div class="CheckTickets">
+      <p>立即购票</p>
     </div>
   </div>
 </template>
@@ -136,7 +139,7 @@ export default {
 }
 .explain-wrap {
   width: 92%;
-  height: 200px;
+  height: 130px;
   margin: 56px auto 10px;
   background: #ffffff;
   border-radius: 8px;
@@ -260,6 +263,19 @@ export default {
   line-height: 44px;
   color: #3976ff;
   font-size: 16px;
+}
+.CheckTickets {
+  height: 60px;
+  width: 100%;
+  position: absolute;
+  background: #cccccc;
+  bottom: 0px;
+}
+.CheckTickets p {
+  font-size: 16px;
+  color: #ffffff;
+  text-align: center;
+  line-height: 60px;
 }
 </style>
 <style scoped lang="less">
