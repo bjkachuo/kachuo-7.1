@@ -330,7 +330,7 @@ export const getScenicMerchants = (data) => http.post("scenic.index", data);
 export const getScenicMerchantsDetails = (data) => http.post("scenic.index.business_info", data);
 
 // 人脸识别
-export const faceCheck = (data) => http.post("index", data);
+export const faceCheck = (data) => http.post("member.realname.faceRecognition", data);
 
 // 门票列表
 export const TicketsList = (data) => http.post("goods.buy.getDoorList", data);

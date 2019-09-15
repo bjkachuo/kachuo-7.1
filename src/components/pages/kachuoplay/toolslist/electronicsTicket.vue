@@ -1,18 +1,7 @@
 <template>
   <div class="electronicsTicket-wrap">
-    <Header
-      :titleContent="TitleObjData.titleContent"
-      :showLeftBack="TitleObjData.showLeftBack"
-      :showRightMore="TitleObjData.showRightMore"
-      style="top=-43px"
-    ></Header>
-    <tab
-      :line-width="1"
-      custom-bar-width="100%"
-      default-color="#666666FF"
-      active-color="#222222FF"
-      bar-active-color="#3976FFFF"
-    >
+    <Header :titleContent="TitleObjData.titleContent" :showLeftBack="TitleObjData.showLeftBack" :showRightMore="TitleObjData.showRightMore" style="top:-43px"></Header>
+    <tab :line-width="1" custom-bar-width="100%" default-color="#666666FF" active-color="#222222FF" bar-active-color="#3976FFFF">
       <tab-item @click.native="cur=0" :class="{active:cur==1}" selected>智能验票</tab-item>
       <tab-item @click.native="cur=1" :class="{active:cur==0}">在线购票</tab-item>
     </tab>
@@ -218,24 +207,28 @@ export default {
       ]
     };
   },
-  computed: {},
-  created() {},
+
+
   mounted() {
     //票列表
-    this.$http
-      .post(
-        "http://core.kachuo.com/app/ewei_shopv2_app.php?i=8&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.ticket.getlist"
-      )
+    //
+    if(JSON.parse(sessionStorage.getItem("userLoginInfo")).discern == 0){
+      this.$router.push("/facecheck");
+    }else{
+
+    }
+
+    this.$http.post("http://core.kachuo.com/app/ewei_shopv2_app.php?i=8&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.ticket.getlist")
       .then(({ data }) => {
         console.log(data);
         this.dataListOne = data.data;
         console.log(this.dataListOne);
       });
   },
-  watch: {},
+
   methods: {
     scan() {
-      this.$router.push("/facecheck");
+
     }
     //跳转购票页面
     // buyTickets(index) {

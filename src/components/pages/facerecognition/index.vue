@@ -83,7 +83,7 @@ export default {
         backgroundPosition: "center"
       },
       videoUploadUrl:
-        "https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=util.uploader.uploadm",
+        "https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=member.realname.faceRecognition",
       formData: new FormData()
     };
   },
@@ -100,14 +100,14 @@ export default {
 
   methods: {
     jumpFacefn(){
-      this.$router.push("/indextab");
+      this.$router.push("/indextab")
     },
     getFaceImg(event) {
       console.log(event);
       const files = event.target.files;
-      this.$vux.loading.show({
-        text: "正在识别"
-      });
+      // this.$vux.loading.show({
+      //   text: "正在识别"
+      // });
       if (files && files.length > 0) {
         let file = files[0];
         let self = this;

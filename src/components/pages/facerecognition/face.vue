@@ -57,7 +57,7 @@ export default {
       },
       faceImg: require("@/assets/images/face-img/face-icon.png"),
       videoUploadUrl:
-        "https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=util.uploader.uploadm",
+        "https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=member.realname.faceRecognition",
       formData: new FormData()
     };
   },
@@ -118,24 +118,24 @@ export default {
         });
     },
     getFaceImg(event) {
-      const files = event.target.files;
-      this.$vux.loading.show({
-        text: "正在上传"
-      });
-      if (files && files.length > 0) {
-        let file = files[0];
-        if (file.size > 10 * 1024 * 1024) {
-          this.$vux.loading.hide();
-          this.$vux.toast.show({
-            type: "cancel",
-            text: "图片过大",
-            time: 1000
-          });
-          return;
-        }
-        this.formData.append("file", file);
+      // const files = event.target.files;
+      // this.$vux.loading.show({
+      //   text: "正在上传"
+      // });
+      // if (files && files.length > 0) {
+      //   let file = files[0];
+      //   if (file.size > 10 * 1024 * 1024) {
+      //     this.$vux.loading.hide();
+      //     this.$vux.toast.show({
+      //       type: "cancel",
+      //       text: "图片过大",
+      //       time: 1000
+      //     });
+      //     return;
+      //   }
+        // this.formData.append("file", file);
         axios
-          .post(this.videoUploadUrl, this.formData, FACEUPLOADCONFIG)
+          .post(this.videoUploadUrl, res, FACEUPLOADCONFIG)
           .then(res => {
             if (res.data.result === 1) {
               this.checkFaceRequest(res.data.data.files[0].url);
@@ -163,19 +163,19 @@ export default {
           });
           
           //将base64转换为文件
-          let bstr = atob(res), n = bstr.length, u8arr = new Uint8Array(n);
+          //let bstr = atob(res), n = bstr.length, u8arr = new Uint8Array(n);
           /*this.$vux.toast.show({
             type: "cancel",
             text: "base64解码后大小 " + n,
             time: 3000
           });*/ 
 
-          while(n--){
-            u8arr[n] = bstr.charCodeAt(n);
-          }
-          let blob = new Blob([u8arr], {type: "JPEG" });
-
-          let file = new File(blob, "faceScan.JPEG");
+          // while(n--){
+          //   u8arr[n] = bstr.charCodeAt(n);
+          // }
+          // let blob = new Blob([u8arr], {type: "JPEG" });
+          //
+          // let file = new File(blob, "faceScan.JPEG");
 
           /*this.$vux.toast.show({
             type: "cancel",
@@ -183,22 +183,22 @@ export default {
             time: 3000
           });*/
 
-          if (file.size > 10 * 1024 * 1024) {
-          this.$vux.loading.hide();
-          this.$vux.toast.show({
-            type: "cancel",
-            text: "图片过大",
-            time: 1000
-          });
-          return;
-        }
-        let formData = new FormData();
-        formData.append("file", file);
+        //   if (file.size > 10 * 1024 * 1024) {
+        //   this.$vux.loading.hide();
+        //   this.$vux.toast.show({
+        //     type: "cancel",
+        //     text: "图片过大",
+        //     time: 1000
+        //   });
+        //   return;
+        // }
+        // let formData = new FormData();
+        // formData.append("file", file);
         axios
-          .post(this.videoUploadUrl, formData, FACEUPLOADCONFIG)
+          .post(this.videoUploadUrl, res, FACEUPLOADCONFIG)
           .then(res => {
             if (res.data.result === 1) {
-              this.checkFaceRequest(res.data.data.files[0].url);
+              this.checkFaceRequest(res);
             } else {
               this.$vux.loading.hide();
               this.$vux.toast.show({
@@ -215,7 +215,7 @@ export default {
           console.log(err);
         }
       );
-    }
+    // }
   },
 
   watch: {}
