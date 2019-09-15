@@ -76,7 +76,7 @@ export default {
   beforeMount() {},
 
   mounted() {
-
+    console.log(1);
     // var ua = navigator.userAgent.toLowerCase();
     //判断是否是苹果手机，是则是true
     // var isIos = (ua.indexOf('iphone') != -1) || (ua.indexOf('ipad') != -1);
@@ -151,8 +151,8 @@ export default {
           .catch(err => {
             console.log(err);
           });
-      }
-    },
+      },
+    // },
     //人脸识别
     faceLogin() {
       cordova.plugins.FaceScan.faceLivingScan(
@@ -215,7 +215,7 @@ export default {
           console.log(err);
         }
       );
-    // }
+    }
   },
 
   watch: {}
