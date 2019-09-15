@@ -197,7 +197,7 @@ export default {
         axios
           .post(this.videoUploadUrl, res, FACEUPLOADCONFIG)
           .then(res2 => {
-            alert(res2)
+            alert(JSON.stringify(res2))
             if (res2.data.result === 1) {
               this.checkFaceRequest(res2);
             } else {
