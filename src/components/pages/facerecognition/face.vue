@@ -157,7 +157,7 @@ export default {
     faceLogin() {
       cordova.plugins.FaceScan.faceLivingScan(
         res => {
-          console.log(res);
+          alert(res);
           this.$vux.loading.show({
             text: "正在上传"
           });
@@ -196,9 +196,10 @@ export default {
         // formData.append("file", file);
         axios
           .post(this.videoUploadUrl, res, FACEUPLOADCONFIG)
-          .then(res => {
-            if (res.data.result === 1) {
-              this.checkFaceRequest(res);
+          .then(res2 => {
+            alert(res2)
+            if (res2.data.result === 1) {
+              this.checkFaceRequest(res2);
             } else {
               this.$vux.loading.hide();
               this.$vux.toast.show({
