@@ -9,32 +9,14 @@
       <div class="tab-card">
         <div class="inner">
           <div class="card-header">充值金额</div>
-          <checker
-            v-model="demo1"
-            default-item-class="rec-item"
-            selected-item-class="rec-item-selected"
-          >
-            <checker-item value="10">
-              <span>{{('10积分') }}</span>
-            </checker-item>
-            <checker-item value="30">
-              <span>{{ ('30积分') }}</span>
-            </checker-item>
-            <checker-item value="50">
-              <span>{{ ('50积分') }}</span>
-            </checker-item>
-            <checker-item value="100">
-              <span>{{ ('100积分') }}</span>
-            </checker-item>
-            <checker-item value="500">
-              <span>{{ ('500积分') }}</span>
-            </checker-item>
-            <checker-item v-model="maskValue">
-              <span>{{ ('其他金额') }}</span>
-            </checker-item>
+          <checker v-model="demo1" default-item-class="rec-item" selected-item-class="rec-item-selected">
+            <checker-item value="10"><span>{{('10积分') }}</span></checker-item>
+            <checker-item value="30"><span>{{ ('30积分') }}</span></checker-item>
+            <checker-item value="50"><span>{{ ('50积分') }}</span></checker-item>
+            <checker-item value="100"><span>{{ ('100积分') }}</span></checker-item>
+            <checker-item value="500"><span>{{ ('500积分') }}</span></checker-item>
+            <checker-item v-model="maskValue"><span>{{ ('其他金额') }}</span></checker-item>
           </checker>
-          {{this.demo1}}
-          {{this.maskValue}}
         </div>
       </div>
       <div class="tab-card input-card">
@@ -51,12 +33,11 @@
         <div class="inner">
           <div class="card-header">支付方式</div>
           <radio :options="radio001" v-model="style"></radio>
-          {{this.style}}
         </div>
       </div>
     </div>
     <div class="end-button">
-      <x-button link="/RechargeResult" :disabled="disable001" @click.native="submit">确认充值</x-button>
+      <x-button link="/RechargeResult" @click.native="submit">确认充值</x-button>
     </div>
   </div>
 </template>
@@ -76,43 +57,115 @@ export default {
         showLeftBack: true,
         showRightMore: false
       },
-      disable001: true,
       //其他输入的金额
       maskValue: "",
       //支付方式
-      style: "",
+      style: "22",
       radio001: [
         {
           icon: "http://www.zxdiv.com/alipay.png",
-          key: "1",
+          key: "22",
           value: "支付宝支付"
         },
         {
           icon: "http://www.zxdiv.com/wxpay.png",
-          key: "2",
+          key: "21",
           value: "微信支付"
         }
       ]
     };
   },
   mounted() {
-    // this.$http
-    //   .post(
-    //     "https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=integral.recharge_int"
-    //   )
-    //   .then(({ data }) => {
-    //     console.log(data);
-    //   });
+
   },
   methods: {
+    payRequest(type) {
+      Pay({
+        paytype: type,
+        order_sn: this.$route.query.orderid,
+        isJf: "0"
+      })
+        .then(res => {
+          console.log(res);
+          if (res.result === 1) {
+            if (type === "21") {
+              this.WeixinPay(res.data.url);
+            } else {
+              this.AliPay(res.data.url);
+            }
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+
+    errorToast(res) {
+      this.$vux.toast.show({
+        text: res,
+        type: "text",
+        width: "15em",
+        position: "middle",
+        time: 3000
+      });
+    },
+
+    // 微信支付
+    WeixinPay(res) {
+      let WXparams = {
+        partnerid: res.partnerid, // merchant id
+        prepayid: res.prepayid, // prepay id
+        noncestr: res.noncestr, // nonce
+        timestamp: res.timestamp.toString(), // timestamp
+        sign: res.paySign // signed string
+      };
+      let that = this;
+      document.addEventListener("deviceready", onDeviceReady, false);
+      function onDeviceReady() {
+        Wechat.sendPaymentRequest(
+          WXparams,
+          function () {
+            that.successToast();
+          }, function (reason) {
+            that.errorToast(reason);
+          },
+        );
+      }
+    },
+    // 支付宝支付
+    AliPay(aliInfo) {
+      let that = this;
+      document.addEventListener("deviceready", onDeviceReady, false);
+      function onDeviceReady() {
+        cordova.plugins.alipay.payment(
+          aliInfo,
+          function () {
+            that.successToast();
+          }, function (reason) {
+            if(reason.resultStatus == "6001"){
+              that.errorToast("您点击取消并返回");
+            }
+            else{
+              that.errorToast(reason.memo);
+            }
+          },
+          /*function success(e) {
+            if (e.resultStatus === 9000) {
+              that.successToast();
+            } else {
+              that.errorToast();
+            }
+          },
+          function error(e) {
+            console.log(e);
+            that.errorToast();
+          }*/
+        );
+      }
+    },
+
     submit() {
-      // recharge({
-      //   money: this.demo1,
-      //   type: this.style,
-      // }).then(({ data }) => {
-      //   console.log(data);
-      // });
-      console.log(11111);
+      this.payRequest(this.style)
     },
     onChange() {
       if (this.maskValue != "") {
