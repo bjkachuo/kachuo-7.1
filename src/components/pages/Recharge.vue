@@ -45,8 +45,7 @@
 <script>
 import Header from "@/components/common/Header";
 import { Cell, XInput, XButton, Radio, Checker, CheckerItem } from "vux";
-import { recharge } from "@/servers/api.js";
-import { type } from 'os';
+import { recharge } from "@/servers/api";
 export default {
   data() {
     return {
@@ -60,16 +59,16 @@ export default {
       //其他输入的金额
       maskValue: "",
       //支付方式
-      style: "22",
+      style: "2",
       radio001: [
         {
           icon: "http://www.zxdiv.com/alipay.png",
-          key: "22",
+          key: "2",
           value: "支付宝支付"
         },
         {
           icon: "http://www.zxdiv.com/wxpay.png",
-          key: "21",
+          key: "1",
           value: "微信支付"
         }
       ]
@@ -80,15 +79,15 @@ export default {
   },
   methods: {
     payRequest(type) {
-      Pay({
+      recharge({
         paytype: type,
-        order_sn: this.$route.query.orderid,
+        order_sn: this.demo1,
         isJf: "0"
       })
         .then(res => {
           console.log(res);
           if (res.result === 1) {
-            if (type === "21") {
+            if (type === "1") {
               this.WeixinPay(res.data.url);
             } else {
               this.AliPay(res.data.url);
