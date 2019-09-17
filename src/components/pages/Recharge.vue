@@ -37,7 +37,7 @@
       </div>
     </div>
     <div class="end-button">
-      <x-button link="/RechargeResult" @click.native="submit">确认充值</x-button>
+      <x-button @click.native="submit">确认充值</x-button>
     </div>
   </div>
 </template>
@@ -80,8 +80,8 @@ export default {
   methods: {
     payRequest(type) {
       recharge({
-        paytype: type,
-        order_sn: this.demo1,
+        type: type,
+        money: this.demo1,
         isJf: "0"
       })
         .then(res => {
@@ -135,6 +135,8 @@ export default {
     AliPay(aliInfo) {
       let that = this;
       document.addEventListener("deviceready", onDeviceReady, false);
+      console.log('支付宝');
+
       function onDeviceReady() {
         cordova.plugins.alipay.payment(
           aliInfo,
