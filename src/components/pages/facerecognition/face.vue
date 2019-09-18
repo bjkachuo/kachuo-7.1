@@ -38,7 +38,7 @@ import axios from "axios";
 const FACEUPLOADCONFIG = {
   timeout: 10000,
   headers: {
-    "Content-Type": "application/x-www-form-urlencoded",
+    "Content-Type": "multipart/form-data",
     Authorization: localStorage.getItem("token")
   }
 };
