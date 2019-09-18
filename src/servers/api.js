@@ -188,6 +188,9 @@ export const postMingjia = (data) => http.post('enter.celebrity', data);
 //提交景区入驻
 export const postJingqu = (data) => http.post('enter.scenic', data);
 
+//商家入驻
+export const postShangjia = (data) => http.post('enter.business', data);
+
 // 图片上传
 export const imageUpload = (data) => http.post("util.uploader.uploadm", data);
 

@@ -7,7 +7,7 @@
 
           <UploadImgOne  v-on:getHeaderImgUrl="getImgVal" :plus="true">
             <div slot="bg">
-              <div class="up-avata-bg">
+              <div class="up-avata-bg" v-if="!form.user_path">
                 <div class="camera"></div>
               </div>
             </div>
@@ -15,36 +15,36 @@
         </div>
         <div class="information">
           <h2>基本信息</h2>
-          <x-input title="姓名:" name="username" placeholder="请输入姓名" is-type="china-name" label-width="5em"></x-input>
-          <x-input title="手机号码:" name="mobile" placeholder="请输入手机号码" keyboard="number" is-type="china-mobile"  mask="999 9999 9999" label-width="5em"></x-input>
+          <x-input title="姓名:" name="username" placeholder="请输入姓名" v-model="form.realname" label-width="5em"></x-input>
+          <x-input title="手机号码:" name="mobile" placeholder="请输入手机号码" keyboard="number" is-type="china-mobile"  v-model="form.mobile" label-width="5em"></x-input>
           <Address v-on:selectAddress="getSelAddress"></Address>
-          <x-input title="详细地址:" name="username" placeholder="街道、门牌号等" label-width="5em"></x-input>
-          <x-input title="身份证号:" name="mobile" keyboard="number" is-type="china-mobile"  label-width="5em"></x-input>
+          <x-input title="详细地址:" name="username" v-model="form.address" placeholder="街道、门牌号等" label-width="5em"></x-input>
+          <x-input title="身份证号:" name="mobile" keyboard="number" v-model="form.idcard"   label-width="5em"></x-input>
         </div>
         <div class="information">
           <h2>商铺信息</h2>
-          <x-input title="商铺名称:" name="username" placeholder="请填写商铺名称"  label-width="5em"></x-input>
-          <x-input title="经营项目:" name="mobile" placeholder="请填写经营项目" keyboard="number" label-width="5em"></x-input>
-          <Address v-on:selectAddress="getSelAddress"></Address>
-          <x-input title="详细地址:" name="username" placeholder="街道、门牌号等" label-width="5em"></x-input>
+          <x-input title="商铺名称:" name="username" v-model="form.shop_name" placeholder="请填写商铺名称"  label-width="5em"></x-input>
+          <x-input title="经营项目:" name="mobile" v-model="form.shop_project" placeholder="请填写经营项目" keyboard="number" label-width="5em"></x-input>
+          <Address v-on:selectAddress="getSelAddress2"></Address>
+          <x-input title="详细地址:" name="username" v-model="form.shop_address" placeholder="街道、门牌号等" label-width="5em"></x-input>
         </div>
         <div class="information">
           <h2>账户信息</h2>
-          <x-input title="开户行:" name="username" placeholder="请填写商铺名称"  label-width="5em"></x-input>
-          <x-input title="银行卡:" name="mobile" placeholder="请填写经营项目" keyboard="number" label-width="5em"></x-input>
+          <x-input title="开户行:" name="username" v-model="form.shop_bank" placeholder="请填写商铺名称"  label-width="5em"></x-input>
+          <x-input title="银行卡:" name="mobile" v-model="form.shop_bank_cardnumber" placeholder="请填写经营项目" keyboard="number" label-width="5em"></x-input>
         </div>
         <div class="up-avata">
           <p><span class="blod">上传营业资质</span></p>
 
-          <UploadImgOne  v-on:getHeaderImgUrl="getImgVal" :plus="true">
+          <UploadImgOne  v-on:getHeaderImgUrl="gerImgVal2" :plus="true">
             <div slot="bg">
-              <div class="up-avata-bg">
+              <div class="up-avata-bg" v-if="!form.shop_business_pic">
                 <div class="camera"></div>
               </div>
             </div>
           </UploadImgOne>
         </div>
-        <div class="btn">提交申请</div>
+        <div class="btn" @click="submit">提交申请</div>
       </div>
 
     </div>
@@ -55,6 +55,7 @@
   import Header from "@/components/common/Header";
   import UploadImgOne from "@/components/common/UploadImgOne/UploadImgOne";
   import { XInput } from 'vux'
+  import {postShangjia} from "@/servers/api";
     export default {
         name: "shangjia",
 
@@ -67,17 +68,55 @@
               showLeftBack: true,
               showRightMore: false
             },
-            maskValueAddress:[]
+            maskValueAddress:[],
+
+            form:{
+              user_path:'',
+              realname:'',
+              mobile:'',
+              region:'',
+              address:'',
+              idcard:'',
+              shop_name:'',
+              shop_project:'',
+              shop_region:'',
+              shop_address:'',
+              shop_bank:'',
+              shop_bank_cardnumber:'',
+              shop_business_pic:''
+            },
           }
         },
 
         methods:{
           getImgVal(val) {
-            console.log(val);
-            this.imgUrl = val;
+            this.form.user_path = val;
+          },
+          gerImgVal2(val){
+            this.form.shop_business_pic = val
           },
           getSelAddress(val) {
-            this.maskValueAddress = val;
+            this.form.region = val;
+          },
+          getSelAddress2(val) {
+            this.form.shop_region = val;
+          },
+          showTip(conttentTip) {
+            this.$vux.toast.text(conttentTip, "middle")
+            setTimeout(() => {
+              this.$vux.toast.hide();
+            }, 1000)
+          },
+          submit(){
+            postShangjia({ ...this.form })
+              .then( res  => {
+                if (res.result == 1){
+                  this.showTip('入驻成功')
+                  this.$router.go(-1)
+                }else{
+                  this.showTip(res.msg)
+                }
+              })
           },
         }
     }

@@ -38,7 +38,7 @@ import axios from "axios";
 const FACEUPLOADCONFIG = {
   timeout: 10000,
   headers: {
-    "Content-Type": "multipart/form-data",
+    "Content-Type": "application/x-www-form-urlencoded",
     Authorization: localStorage.getItem("token")
   }
 };
@@ -157,7 +157,7 @@ export default {
     faceLogin() {
       cordova.plugins.FaceScan.faceLivingScan(
         res => {
-          alert(res);
+          if(res == null) return
           this.$vux.loading.show({
             text: "正在上传"
           });
