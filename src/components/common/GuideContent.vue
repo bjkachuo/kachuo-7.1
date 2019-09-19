@@ -117,7 +117,7 @@ export default {
     this.$http
           .post(
             "https://core.kachuo.com/app/ewei_shopv2_app.php?i=8&c=site&a=entry&m=ewei_shopv2&do=mobile&r=tourguide.index.like&id=" +
-             this.$route.query.idNum+"&status=" +this.zanNum
+             this.$route.query.idNum+"&status=" + (this.zanNum == 0 ? '1':'0')
           )
          .then(({ data }) => {
             console.log(data);
