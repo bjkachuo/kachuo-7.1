@@ -191,6 +191,14 @@ export const postJingqu = (data) => http.post('enter.scenic', data);
 //商家入驻
 export const postShangjia = (data) => http.post('enter.business', data);
 
+//拍客入驻
+export const postPaike = (data) => http.post('enter.photogApply', data )
+//匠人入驻
+export const postJiangren = (data) => http.post('enter.artisanApply', data )
+//墨客入驻
+export const postMoke = (data) => http.post('enter.schloarApply', data )
+
+
 // 图片上传
 export const imageUpload = (data) => http.post("util.uploader.uploadm", data);
 

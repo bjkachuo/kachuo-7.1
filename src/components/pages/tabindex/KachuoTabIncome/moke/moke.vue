@@ -7,7 +7,7 @@
 
         <UploadImgOne  v-on:getHeaderImgUrl="getImgVal" :plus="true">
           <div slot="bg">
-            <div class="up-avata-bg">
+            <div class="up-avata-bg" v-if="!form.user_path">
               <div class="camera"></div>
             </div>
           </div>
@@ -15,17 +15,17 @@
       </div>
       <div class="information">
         <h2>基本信息</h2>
-        <x-input title="姓名:" name="username" placeholder="请输入姓名" is-type="china-name" label-width="5em"></x-input>
-        <x-input title="手机号码:" name="mobile" placeholder="请输入手机号码" keyboard="number" is-type="china-mobile"  mask="999 9999 9999" label-width="5em"></x-input>
+        <x-input title="姓名:" name="username" placeholder="请输入姓名" is-type="china-name" label-width="5em" v-model="form.realname"></x-input>
+        <x-input title="手机号码:" name="mobile" placeholder="请输入手机号码" keyboard="number" is-type="china-mobile"  v-model="form.mobile" label-width="5em"></x-input>
         <Address v-on:selectAddress="getSelAddress"></Address>
-        <x-input title="详细地址:" name="username" placeholder="街道、门牌号等" label-width="5em"></x-input>
-        <x-input title="身份证号:" name="mobile" keyboard="number" is-type="china-mobile"  label-width="5em"></x-input>
+        <x-input title="详细地址:" name="username" placeholder="街道、门牌号等" label-width="5em" v-model="form.address"></x-input>
+        <x-input title="身份证号:" name="mobile" keyboard="number" is-type="china-mobile"  label-width="5em" v-model="form.idcard"></x-input>
       </div>
       <div class="master">
         <h2>师承信息</h2>
         <PopupPicker :dataOpion="dataOpE" @givePickerVal="getPickValE"></PopupPicker>
       </div>
-      <div class="btn">立即入驻</div>
+      <div class="btn" @click="submit">立即入驻</div>
     </div>
   </div>
 </template>
@@ -35,7 +35,7 @@
   import UploadImgOne from "@/components/common/UploadImgOne/UploadImgOne";
   import { XInput } from 'vux'
   import Address from "@/components/common/Address";
-  import { getUserRule } from "@/servers/api";
+  import { getUserRule,postPaike,postJiangren,postMoke } from "@/servers/api";
   import { formData } from "@/assets/js/tools";
   import PopupPicker from "@/components/common/PopupPicker";
     export default {
@@ -51,28 +51,26 @@
               showRightMore: false
             },
             maskValueAddress:[],
+            form:{
+              user_path:'',
+              realname:'',
+              mobile:'',
+              region:'',
+              address:'',
+              idcard:'',
+              teacher:''
+            },
             dataOpE: {
               title: "师承",
               columns: 4,
               data: []
             },
             type:'',
-            pickValE:[1]
           }
         },
 
         methods:{
-          getImgVal(val) {
-            console.log(val);
-            this.imgUrl = val;
-          },
-          getSelAddress(val) {
-            this.maskValueAddress = val;
-          },
-          getPickValE(val) {
-            console.log(val);
-            this.pickValE = val;
-          },
+
           getDataList() {
             getUserRule({})
               .then(res => {
@@ -84,12 +82,6 @@
                       case "师承":
                         this.dataOpE.data = item.data;
                         break;
-                      case "职称":
-                        this.dataOpF.data = item.data;
-                        break;
-                      case "行业":
-                        this.dataOpG.data = item.data;
-                        break;
                       default:
                         return;
                     }
@@ -100,10 +92,63 @@
                 console.log(err);
               });
           },
+
+          getImgVal(val) {
+            this.form.user_path = val;
+          },
+          getSelAddress(val) {
+            this.form.region = val;
+          },
+          getPickValE(val) {
+            this.form.teacher = val.toString();
+          },
+
+          submit(){
+            if(this.type == 'moke'){
+              postMoke({...this.form})
+                .then( res  => {
+                  if (res.result == 1){
+                    this.showTip('入驻成功')
+                    this.$router.go(-1)
+                  }else{
+                    this.showTip(res.msg)
+                  }
+                })
+            }else if(this.type == 'jiangren'){
+              postJiangren({...this.form})
+                .then( res  => {
+                  if (res.result == 1){
+                    this.showTip('入驻成功')
+                    this.$router.go(-1)
+                  }else{
+                    this.showTip(res.msg)
+                  }
+                })
+            }else{
+
+              postPaike({...this.form})
+                .then( res  => {
+                  if (res.result == 1){
+                    this.showTip('入驻成功')
+                    this.$router.go(-1)
+                  }else{
+                    this.showTip(res.msg)
+                  }
+                })
+            }
+          },
+
+          showTip(conttentTip) {
+            this.$vux.toast.text(conttentTip, "middle")
+            setTimeout(() => {
+              this.$vux.toast.hide();
+            }, 1000)
+          },
         },
 
         created() {
           this.type = this.$route.query.type
+          this.getDataList()
           this.type == 'moke' ? this.TitleObjData.titleContent = '墨客入驻' : null
           this.type == 'jiangren' ? this.TitleObjData.titleContent = '匠人入驻' : null
           this.type == 'paike' ? this.TitleObjData.titleContent = '拍客入驻' : null
