@@ -15,14 +15,14 @@
             <checker-item value="50"><span>{{ ('50积分') }}</span></checker-item>
             <checker-item value="100"><span>{{ ('100积分') }}</span></checker-item>
             <checker-item value="500"><span>{{ ('500积分') }}</span></checker-item>
-            <checker-item v-model="maskValue"><span>{{ ('其他金额') }}</span></checker-item>
+            <checker-item v-model="demo1"><span>{{ ('其他金额') }}</span></checker-item>
           </checker>
         </div>
       </div>
       <div class="tab-card input-card">
         <x-input
           title="其它金额:"
-          v-model="maskValue"
+          v-model="demo1"
           placeholder="请输入充值金额(充值比例1:1积分)"
           @on-change="onChange()"
           type="number"

@@ -9,10 +9,13 @@
       <div class="inner-wrap">
         <div class="guide-grid">
           <img :src="this.DList.tour_path" alt />
-          <div class="btn-click">
-            <span :class="zan?'icon-thumb-two':'icon-thumb'" @click="zan=!zan"></span>
+          <div class="btn-click" @click="zanChange">
+            <!-- <span :class="zan?'icon-thumb-two':'icon-thumb'" @click="zan=!zan;"></span> -->
+            <span  v-if="zanNum ==0" class="icon-thumb"></span>
+            <span  v-if="zanNum ==1" class="icon-thumb-two"></span>
             <!-- <span :class="icon-thumb" @click="zan=!zan" v-if="this.state=='1'"></span> -->
             <span>{{this.DList.zan}}</span>
+            <!-- <span>{{this.zanNum}}</span> -->
           </div>
         </div>
         <div class="bs-panel">
@@ -92,7 +95,9 @@ export default {
         showLeftBack: true,
         showRightMore: false
       },
+      like:'',
       zan: false,
+      zanNum:0,
       data1: "4",
       toggle: false,
       //星星分
@@ -107,29 +112,46 @@ export default {
     // zan(){
     //   console.log(this.zan)
     // },
-    // zan() {
-    //   this.$http
-    //     .post(
-    //       "https://core.kachuo.com/app/ewei_shopv2_app.php?i=8&c=site&a=entry&m=ewei_shopv2&do=mobile&r=tourguide.index.like&id=" +
-    //         this.$route.query.idNum
-    //     )
-    //     .then(({ data }) => {
-    //       console.log(data);
-    //     });
-    // },
+    zanChange() {
+    this.$http
+          .post(
+            "https://core.kachuo.com/app/ewei_shopv2_app.php?i=8&c=site&a=entry&m=ewei_shopv2&do=mobile&r=tourguide.index.like&id=" +
+             this.$route.query.idNum+"&status=" +this.zanNum
+          )
+         .then(({ data }) => {
+            console.log(data);
+            
+      			if(this.zanNum==0){
+                this.$vux.toast.show({
+                type: "success",
+                text: "感谢评价",
+                time: 1000
+              });
+                this.zanNum=1
+                console.log(data);
+								// this.clickNum=this.clickNum+1
+								console.log(this.zanNum)
+							}else{
+								this.zanNum=0
+                // this.clickNum=this.clickNum-1
+                console.log(this.zanNum)
+                console.log(data);
+							}
+
+         });
+        // this.$http
+        //   .post(
+        //     "https://core.kachuo.com/app/ewei_shopv2_app.php?i=8&c=site&a=entry&m=ewei_shopv2&do=mobile&r=tourguide.index.like&id=" +
+        //      this.$route.query.idNum+"&status=" +this.zanNum
+        //   )
+        //  .then(({ data }) => {
+        //     console.log(data);
+        //  });
+    },
 
     url(link) {
       this.$router.push(link);
     },
-    // goForm(id) {
-    //   console.log(11111)
-    //   this.$router.push({
-    //     path: "/GuideForm",
-    //     query: {
-    //      id : id
-    //     }
-    //   });
-    // },
     ckToggle() {
       this.toggle = !this.toggle;
     }
