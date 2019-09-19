@@ -121,8 +121,6 @@ export default {
           )
          .then(({ data }) => {
             console.log(data);
-
-         });
         if(this.zanNum==0){
             this.zanNum=1;
             this.DList.zan ++
@@ -132,6 +130,8 @@ export default {
             this.DList.zan --
             console.log(this.zanNum,"取消赞")
         }   
+
+         });
 
              
     },
