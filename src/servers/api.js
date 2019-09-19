@@ -390,3 +390,8 @@ export const yuyueGuide = (data) => http.post("tourguide.show.addorder", data);
 export const orderReside = (data) => http.post("scenic.index.addOrder", data);
 //充值积分
 export const recharge = (data) => http.post("integral.recharge_int", data);
+//导游点赞
+export const LikeGuide = (data) => http.post("tourguide.index.like", data);
+//获取导游列表
+export const GuideList = (data) => http.post("tourguide.index.detail", data);
+

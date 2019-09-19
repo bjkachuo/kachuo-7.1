@@ -168,7 +168,7 @@ export default {
       //价格
       price: "",
       //日期
-      dataTime: []
+      dataTime: 'TODAY'
 
       // menus: {
       //   menu1: "开发票",
@@ -203,7 +203,6 @@ export default {
       }).then(({ data }) => {
         console.log(data);
       });
-      
     },
     //选择器显示时触发
     onShow() {
@@ -514,6 +513,12 @@ export default {
 .item-more /deep/ .vux-label {
   font-size: 12px;
 }
+.selected-days {
+  color: #999;
+  width: 90px;
+}
+</style>
+<style lang="less" scoped>
 .selected-days {
   color: #999;
   width: 90px;

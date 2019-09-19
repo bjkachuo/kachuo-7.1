@@ -21,7 +21,7 @@
           </swiper-item>
         </swiper>
       </div>
-      <Divider :content="TitleObjData.titleContent"></Divider>
+      <!-- <Divider :content="TitleObjData.titleContent"></Divider> -->
       <div class="scroll-wrap-con" :style="scrollWrapHeight">
         <GoodsListWrapBack v-if="this.TitleObjData.titleContent === '艺品回购'"></GoodsListWrapBack>
         <GoodsListWrapLease v-if="this.TitleObjData.titleContent === '艺品租赁'"></GoodsListWrapLease>
@@ -138,4 +138,11 @@ export default {
     height: 3px !important;
   }
 }
+/deep/.pulldown-wrapper{
+  display: none;
+}
+/deep/canvas{
+  display: none;
+}
+
 </style>

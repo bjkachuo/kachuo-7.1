@@ -22,7 +22,7 @@
         </swiper>
       </div>
 
-      <Divider :content="title"></Divider>
+      <!-- <Divider :content="title"></Divider> -->
       <main class="position-box">
         <vue-better-scroll
           class="wrapper"
@@ -197,7 +197,7 @@ h2 {
 }
 .position-box {
   position: absolute;
-  top: 310px;
+  top: 180px;
   left: 0;
   right: 0;
   bottom: 0;
@@ -219,5 +219,11 @@ h2 {
     width: 15px !important;
     height: 3px !important;
   }
+}
+/deep/.pulldown-wrapper{
+  display: none;
+}
+/deep/canvas{
+  display: none;
 }
 </style>

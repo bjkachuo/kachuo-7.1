@@ -86,6 +86,8 @@
 import Header from "@/components/common/Header";
 import { Cell, XButton, Rater } from "vux";
 import { Group } from "vux";
+// import { GuideList } from "@/servers/api.js";
+
 export default {
   props: [""],
   data() {
@@ -96,8 +98,7 @@ export default {
         showRightMore: false
       },
       like:'',
-      zan: false,
-      zanNum:0,
+      zanNum:"",
       data1: "4",
       toggle: false,
       //星星分
@@ -120,33 +121,19 @@ export default {
           )
          .then(({ data }) => {
             console.log(data);
-            
-      			if(this.zanNum==0){
-                this.$vux.toast.show({
-                type: "success",
-                text: "感谢评价",
-                time: 1000
-              });
-                this.zanNum=1
-                console.log(data);
-								// this.clickNum=this.clickNum+1
-								console.log(this.zanNum)
-							}else{
-								this.zanNum=0
-                // this.clickNum=this.clickNum-1
-                console.log(this.zanNum)
-                console.log(data);
-							}
 
          });
-        // this.$http
-        //   .post(
-        //     "https://core.kachuo.com/app/ewei_shopv2_app.php?i=8&c=site&a=entry&m=ewei_shopv2&do=mobile&r=tourguide.index.like&id=" +
-        //      this.$route.query.idNum+"&status=" +this.zanNum
-        //   )
-        //  .then(({ data }) => {
-        //     console.log(data);
-        //  });
+        if(this.zanNum==0){
+            this.zanNum=1;
+            this.DList.zan ++
+            console.log(this.zanNum,"点赞")
+				}else if(this.zanNum==1){
+            this.zanNum=0;
+            this.DList.zan --
+            console.log(this.zanNum,"取消赞")
+        }   
+
+             
     },
 
     url(link) {
@@ -168,8 +155,9 @@ export default {
         console.log(data);
         this.DList = data.data;
         console.log(this.DList);
-        this.starNum = data.data.score - 0
+        this.starNum = parseInt(data.data.score)
         console.log(this.starNum);
+        this.zanNum = data.data.is_zan;
       });
 
     // this.$http

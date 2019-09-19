@@ -147,7 +147,7 @@ export default {
         content:this.msgList.content,
         message:{people:this.msgList.chooseList.numValue.toString(),time:this.msgList.chooseList.timeValue.toString()},
         type:5,
-        price:this.$route.query.price
+        price:this.$route.query.price * this.msgList.chooseList.timeValue.toString()
       })
       .then(({ data }) => {
         console.log(data);
