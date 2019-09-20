@@ -12,7 +12,9 @@
             <div class="grid-title">{{this.$route.query.goodname}}</div>
             <div class="grid-more">房型详情</div>
           </div>
-          <div class="grid-days">入住(8月20日)/离店(8月20日) 共1晚</div>
+          <div
+            class="grid-days"
+          >入住({{this.dataTime[0]}})/离店({{this.dataTime[this.dataTime.length-1]}})共1晚</div>
           <div class="grid-attr">不含早 大床 有窗</div>
           <div class="grid-footer">该订单支付成功后不可取消或者变更</div>
         </div>
@@ -151,18 +153,23 @@ export default {
       //商家id
       businessId: "",
       //价格
-      price: ""
+      price: "",
+      //获取到的日期
+      dataTime: []
     };
   },
   mounted() {
-    // console.log(this.$route.query);
+    console.log(this.$route.query);
     // console.log(this.$route.query.id);
     this.storeId = this.$route.query.id;
     this.businessId = this.$route.query.businessId;
     this.price = this.$route.query.price;
     console.log(this.storeId);
-
     console.log(this.businessId);
+    this.dataTime = JSON.parse(sessionStorage.getItem("dataTime"));
+    console.log(sessionStorage.getItem("dataTime"));
+    console.log(this.dataTime[0], this.dataTime[this.dataTime.length - 1]);
+    
   },
   methods: {
     //积分抵扣

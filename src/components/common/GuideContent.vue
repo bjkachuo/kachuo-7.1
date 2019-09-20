@@ -97,7 +97,6 @@ export default {
         showLeftBack: true,
         showRightMore: false
       },
-      like:'',
       zanNum:"",
       data1: "4",
       toggle: false,

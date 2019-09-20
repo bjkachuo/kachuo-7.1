@@ -1,7 +1,8 @@
 <template>
   <div class="wrap">
-    <HeaderTR></HeaderTR>
+    
     <div class="normal-content" :style="conHei">
+      <HeaderTR></HeaderTR>
       <div class="swiper-main">
         <video
           :src="this.storeDetails.video"
@@ -33,9 +34,11 @@
                   </div>
                 </flexbox-item>
                 <flexbox-item>
-                  <div class="flex-link">
-                    <img src="../../assets/images/xin.png" alt="">
-                    <div class="link-text">{{this.storeDetails.comment_count}}赞</div>
+                  <div class="flex-link" @click="zanChange">
+                    <img v-if="zanNum ==0" src="../../assets/images/addzan.png" alt="">
+                    <img v-if="zanNum ==1"  src="../../assets/images/cancelzan.png" alt="">
+
+                    <div class="link-text">{{this.storeDetails.zan}}赞</div>
                   </div>
                 </flexbox-item>
                 <flexbox-item>
@@ -68,14 +71,26 @@
         </cell>
       </div>
       <div class="kc-panel">
-        <cell title="" link="###" >
+        <calendar
+          v-model="dataTime"
+          title="入住时间-退房时间"
+          disable-past
+          placeholder="请选择"
+          @on-show="log('show')"
+          @on-hide="log('hide')"
+          :highlight-weekend=true
+          :start-date="startDate"
+          :end-date="endDate"
+        ></calendar>
+
+        <!-- <cell title="" link="" >
           <template slot="inline-desc">
             <div class="zhu-icon">入住时间-退房时间</div>
           </template>
           <template slot="default">
             <div class="nav-days">共1晚</div>
           </template>
-        </cell>
+        </cell> -->
       </div>
       <div class="kc-list-panel">
         <div class="kc-list-header">
@@ -108,23 +123,9 @@
 
 <script>
   import HeaderTR from "@/components/common/HeaderTR";
-  import {Cell,XButton,Flexbox, FlexboxItem,Rater,Actionsheet,Swiper,SwiperItem} from 'vux'
+  import {Cell,XButton,Flexbox, FlexboxItem,Rater,Actionsheet,Swiper,SwiperItem,Calendar} from 'vux'
   export default {
     props: [""],
-    methods: {
-      url(link) {
-        this.$router.push(link);
-      },
-
-      cateClick () {
-        this.show1 = !this.show1
-      },click (key) {
-        console.log(key)
-      },
-      clickMore () { //查看剩余服务
-        this.listnumber += this.listnumber
-      },
-    },
     data() {
       return {
         menus: {
@@ -132,6 +133,14 @@
           menu2:'双床房',
           menu3:'其它特色床'
         },
+        // //开始 日期
+        // startDate:[],
+        // //结束日期
+        // endDate:[],
+        //日期
+        dataTime: [],
+        //赞的状态
+        zanNum:"",
         //获取到的商家id
         idNum: "",
         //商家详情
@@ -191,6 +200,59 @@
         ],
       };
     },
+        methods: {
+    //日期选择
+    onShow() {
+      console.log("on show");
+    },
+    //选择器关闭时触发
+    onHide(type) {
+      console.log("on hide", type);
+
+      
+    },
+    log(str) {
+      console.log(str,this.dataTime);
+       sessionStorage.setItem("dataTime", JSON.stringify(this.dataTime))
+       console.log(this.sessionStorage)
+      //  console.log(this.startDate,this.endDate)
+    },
+      url(link) {
+        this.$router.push(link);
+      },
+
+      cateClick () {
+        this.show1 = !this.show1
+      },click (key) {
+        console.log(key)
+      },
+      clickMore () { //查看剩余服务
+        this.listnumber += this.listnumber
+      },
+      //点赞取消赞
+      zanChange(){
+         this.$http
+          .post(
+            "https://core.kachuo.com/app/ewei_shopv2_app.php?i=8&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.index.businessLike&id=" +
+             this.$route.query.idNum+"&status=" + (this.zanNum == 0 ? '1':'0')
+          )
+         .then(({ data }) => {
+            console.log(data);
+        if(this.zanNum==0){
+            this.zanNum=1;
+            this.storeDetails.zan ++
+            console.log(this.zanNum,"点赞")
+				}else if(this.zanNum==1){
+            this.zanNum=0;
+            this.storeDetails.zan --
+            console.log(this.zanNum,"取消赞")
+        }   
+
+      });
+
+      }
+    },
+
     mounted(){
     //查看传来的id
     console.log(this.$route.query);
@@ -208,6 +270,8 @@
         console.log(this.goodsList);
         console.log(this.storeDetails);
         this.data1 = parseFloat(this.storeDetails.score)
+         this.zanNum = data.data.is_zan;
+
       });
     },
 
@@ -221,6 +285,7 @@
       Rater,
       Swiper,
       SwiperItem,
+      Calendar
     },
     computed: {
       conHei() {
@@ -250,6 +315,7 @@ video{
     overflow: hidden;
     overflow-y: scroll;
     box-sizing: border-box;
+    position: relative;
   }
 
   img{

@@ -677,6 +677,12 @@ export default [{
     component: resolve => require(['@/components/common/TourList'], resolve),
   },
   {
+    //游吧导游注册页
+    path: '/TourRegister',
+    name: 'TourRegister',
+    component: resolve => require(['@/components/common/TourRegister'], resolve),
+  },
+  {
     //游吧导游详情页
     path: '/GuideContent',
     name: 'GuideContent',

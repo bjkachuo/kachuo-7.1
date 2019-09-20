@@ -1,5 +1,12 @@
 <template>
   <div class="store-details-wrap">
+    <!-- <x-header class="in-header" :class="{isFixed:isFixeds==true}" id="headerBar">
+      详情
+      <div slot="right">
+        <div class="help-icon">帮助</div>
+      </div>
+    </x-header> -->
+
     <Header
       :titleContent="TitleObjData.titleContent"
       :showLeftBack="TitleObjData.showLeftBack"
@@ -74,7 +81,7 @@
             @ended="test()"
         ></video>-->
       </div>
-      <div class="tab-wrap">
+      <div class="tab-wrap" id="vxMain" :class="{mainFixeds:mainFixeds==true}">
         <ul class="tab-tilte">
           <li @click="cur=0" :class="{active:cur==0}">点餐</li>
           <li @click="cur=1" :class="{active:cur==1}">商家</li>
@@ -246,7 +253,7 @@
 <script>
 import Header from "@/components/common/Header";
 import {
-  Scroller,
+  // Scroller,
   LoadMore,
   Rater,
   Cell,
@@ -254,7 +261,8 @@ import {
   XButton,
   XInput,
   Group,
-  Actionsheet
+  Actionsheet,
+  XHeader
 } from "vux";
 import list1 from "@/components/common/goods/list1.vue";
 import list2 from "@/components/common/goods/list2.vue";
@@ -263,8 +271,14 @@ import list4 from "@/components/common/goods/list4.vue";
 import list5 from "@/components/common/goods/list5.vue";
 
 export default {
+  // beforeCreate: function() {
+  //   document.querySelector("body").setAttribute("style", "height:auto");
+  // },
+
   data() {
     return {
+      // isFixeds: false,
+      // mainFixeds: false,
       showDialogStyle: false,
       tabView: "list1",
       tabs: [
@@ -305,7 +319,7 @@ export default {
   },
   components: {
     Header,
-    Scroller,
+    // Scroller,
     LoadMore,
     Rater,
     Cell,
@@ -319,7 +333,8 @@ export default {
     list3,
     list4,
     list5,
-    XDialog
+    XDialog,
+    XHeader
   },
   created() {},
   methods: {
@@ -333,9 +348,23 @@ export default {
     //跳转资质页面
     fications() {
       this.$router.push("/Qualifications");
-    }
+    },
+    	// //滚动  判断固定
+	    // handleScroll () {
+			//   let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+			//   let offsetTop = document.querySelector('#vxMain').offsetTop
+  		// 	this.mainFixeds = scrollTop > (offsetTop - 20) // 44px是导航标题头的高度
+			//   if (scrollTop > 45) {//提前判断要上升多少像素就固定
+      //     this.isFixeds=true;
+			//   } else {
+			//     this.isFixeds = false;
+			//   }
+			// },
+			//
   },
   mounted() {
+    // window.addEventListener("scroll", this.handleScroll);
+
     //获取列表页传来的id
     console.log(this.$route.query.idNum);
     this.idNum = this.$route.query.idNum;
@@ -903,6 +932,69 @@ video {
   height: 50px;
   margin-right: 10px;
 }
+/* header */
+/* .in-header {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 888;
+  color: #ffffff;
+  transition: 0.4s all;
+  background: none !important;
+}
+.in-header /deep/ .vux-header-title {
+  color: #ffffff !important;
+}
+.in-header /deep/ .vux-header-left a,
+.in-header /deep/.vux-header-left button,
+.in-header /deep/ .vux-header-right a,
+.in-header /deep/ .vux-header-right button {
+  color: #ffffff !important;
+}
+.in-header /deep/ .vux-header-left .left-arrow:before {
+  border-color: #fff !important;
+}
+.help-icon {
+  line-height: 1;
+  background: url(../../../assets/images/book.png) center top no-repeat;
+  background-size: 18px 18px;
+  padding-top: 20px;
+  font-size: 12px;
+}
+.in-header.isFixed {
+  position: fixed;
+  z-index: 111;
+  background-color: #ffffff !important;
+  color: #222222;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.08);
+}
+.in-header.isFixed /deep/ .vux-header-title {
+  color: #222222 !important;
+}
+.vux-header /deep/ .vux-header-right {
+  top: 10px;
+}
+.in-header.isFixed /deep/ .vux-header-left a,
+.in-header.isFixed /deep/ .vux-header-left button,
+.in-header.isFixed /deep/ .vux-header-right a,
+.in-header.isFixed /deep/ .vux-header-right button {
+  color: #222 !important;
+}
+.in-header.isFixed /deep/ .vux-header-left .left-arrow:before {
+  border-color: #222 !important;
+}
+
+.in-header.isFixed /deep/ .help-icon {
+  background: url(../../../assets/images/book2.png) center top no-repeat;
+
+  background-size: 18px 18px;
+}
+.vx-main.mainFixeds /deep/ .dc-navbar {
+  position: fixed;
+  top: 54px;
+} */
+
 </style>
 <style lang="less" scoped>
 .el-rate__icon {
@@ -919,7 +1011,7 @@ video {
 
 } */
 /deep/ .vux-header {
-  background: rgba(90, 90, 54, 0);
+  background: rgba(90, 90, 54, 0.5);
 }
 /deep/ .vux-header .vux-header-left .vux-header-back {
   color: #ffffff;
@@ -965,4 +1057,5 @@ video {
 /deep/ .weui-dialog {
   overflow: auto;
 }
+
 </style>

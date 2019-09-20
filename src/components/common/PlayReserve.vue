@@ -10,9 +10,19 @@
         <div class="form-cells">
           <div class="form-header">{{this.$route.query.goodname}}</div>
           <div class="select-body">
-            <div class="select-txt">使用日期</div>
+            <!-- <div class="select-txt">使用日期</div> -->
             <div class="select-cell">
-              <ul class="select-days">
+              <calendar
+                v-model="dataTime"
+                title="使用日期"
+                disable-past
+                placeholder="请选择"
+                @on-show="log('show')"
+                @on-hide="log('hide')"
+                :highlight-weekend=true
+              ></calendar>
+
+              <!-- <ul class="select-days">
                 <li v-for="(item, index) in items" :key="index" :class="{active:current==index}">
                   <div class="day-item" @click="addClass(index)">
                     <div class="day">{{ item.day }}</div>
@@ -22,18 +32,10 @@
                 <li>
                   <div class="day-item">
                     <div class="item-more">
-                      <calendar
-                        v-model="dataTime"
-                        title="更多时间"
-                        disable-past
-                        placeholder="placeholder"
-                        @on-show="log('show')"
-                        @on-hide="log('hide')"
-                      ></calendar>
                     </div>
                   </div>
                 </li>
-              </ul>
+              </ul>-->
             </div>
           </div>
         </div>
@@ -98,7 +100,7 @@
         实付
         <span class="price">
           ￥
-          <i>{{this.$route.query.price}}</i>
+          <i>{{this.price}}</i>
         </span>
       </div>
       <x-button link="/ReserveResult" @click.native="submit">提交订单</x-button>
@@ -168,7 +170,7 @@ export default {
       //价格
       price: "",
       //日期
-      dataTime: 'TODAY'
+      dataTime: []
 
       // menus: {
       //   menu1: "开发票",
@@ -196,7 +198,7 @@ export default {
         id: this.businessId,
         type: 3,
         mobile: this.phone,
-        price: this.price,
+        price: this.price * this.roomNum.toString(),
         realname: this.name,
         date: this.dataTime.toString(),
         goods: [this.storeId, this.roomNum.toString()]
@@ -261,6 +263,7 @@ export default {
 </script>
 <style lang='css' scoped>
 .normal-content {
+  height: 88%;
   width: 100%;
   background: #f5f5f5;
   margin-top: 45px;
@@ -272,7 +275,7 @@ export default {
 }
 .select-body {
   position: relative;
-  padding: 15px;
+  padding: 0px;
 }
 .select-body:before {
   content: " ";
@@ -519,8 +522,10 @@ export default {
 }
 </style>
 <style lang="less" scoped>
-.selected-days {
-  color: #999;
-  width: 90px;
+/deep/ .select-body[data-v-7dd8e0b4]:before {
+  border-top: none;
 }
+// /deep/ span.vux-calendar-each-date {
+//   background-color: #3987ff;
+// }
 </style>
