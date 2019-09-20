@@ -14,12 +14,8 @@
         </cell>
         <cell>
           <div slot="title"><span class="addr-content">{{item.inlineDesc}}</span></div>
-          <div slot="default"><div class="addr-edit"></div></div>
+          <div slot="default" @click="goEdit(item.key)"><div class="addr-edit"></div></div>
         </cell>
-
-
-
-
       </div>
 
     </div>
@@ -77,6 +73,9 @@ export default {
 
     setDefAdd(val) {
       this.setDefaultAddress(val);
+    },
+    goEdit(id){
+      this.$router.push('/addnewaddress?id='+id)
     },
     setDefaultAddress(val) {
       setDefaultAddr({

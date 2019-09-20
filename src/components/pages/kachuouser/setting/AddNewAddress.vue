@@ -30,7 +30,7 @@
 import Header from "@/components/common/Header";
 import Address from "@/components/common/Address";
 import CheckList from "@/components/common/CheckList";
-import { updateAddress } from "@/servers/api";
+import { updateAddress ,getAddressDetail} from "@/servers/api";
 import { XButton, XInput, Group,XSwitch } from "vux";
 
 export default {
@@ -68,7 +68,19 @@ export default {
   },
 
   mounted() {
+    if(this.$route.query.id){
+      this.TitleObjData.titleContent = "修改地址"
 
+      getAddressDetail({id:this.$route.query.id}).then(res=>{
+        console.log(res);
+        this.maskValueAddress = res.data.province+','+res.data.city+','+res.data.area
+        this.maskValueName =res.data.realname
+        this.maskValuePhone =res.data.mobile
+        this.maskValueDetails =res.data.address
+        this.isdefault =res.data.isdefault
+      })
+
+    }
   },
 
   methods: {
@@ -92,12 +104,13 @@ export default {
     },
     updateAddressData() {
       updateAddress({
+        id:this.$route.query.id,
         tel: this.maskValuePhone,
         realname: this.maskValueName,
         mobile: this.maskValuePhone,
-        province: this.maskValueAddress[0],
-        city: this.maskValueAddress[1],
-        area: this.maskValueAddress[2],
+        province: this.maskValueAddress.split(',')[0],
+        city: this.maskValueAddress.split(',')[1],
+        area: this.maskValueAddress.split(',')[2],
         address: this.maskValueDetails,
         isdefault:this.isdefault
       })
@@ -131,9 +144,11 @@ export default {
   },
 
   watch: {
-      "$route": function(){
+      "$route": function(to){
         this.maskValueAddress = []
         this.getSelAddress()
+
+
       }
   }
 };
