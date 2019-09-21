@@ -18,7 +18,6 @@
           v-model="msgList.chooseList.numValue"
           @on-show="onShow"
           @on-hide="onHide"
-          @on-change="onChange"
           placeholder="请选择"
         ></popup-picker>
 
@@ -42,7 +41,7 @@
         合计:
         <span class="price">
           ￥
-          <i>200.</i>00
+          <i>{{this.msgList.endPrice}}</i>
         </span>
       </div>
       <x-button @click.native="submit">立即预约</x-button>
@@ -53,7 +52,7 @@
 <script>
 import Header from "@/components/common/Header";
 import { Cell, XButton, XInput, XTextarea, PopupPicker } from "vux";
-import {yuyueGuide} from '@/servers/api.js'
+import { yuyueGuide } from "@/servers/api.js";
 export default {
   props: [""],
   data() {
@@ -83,10 +82,7 @@ export default {
         phone: "",
         //填写内容
         content: "",
-        // //选择人数
-        // numValue: [],
-        // //选择时间
-        // timeValue: [],
+        endPrice: "",
         chooseList: {
           //选择人数
           numValue: [],
@@ -99,7 +95,7 @@ export default {
   mounted() {
     console.log(this.$route.query);
     this.gId = this.$route.query.id;
-
+    this.msgList.endPrice = this.$route.query.price;
     // const obj = {};
     // obj.people = this.msgList.chooseList.numValue[0];
     // // this.msgList.chooseList.numValue[0] = obj.people;
@@ -112,20 +108,8 @@ export default {
   methods: {
     //选择器该改变时触发
     onChange(val) {
-      //人数
-      // const obj = {};
-      // obj.people = this.msgList.chooseList.numValue[0];
-      // // obj = this.objOne;
-      // this.objOne = obj;
-      // console.log(this.objOne);
-      // //时间
-      // const obj2 = {};
-      // obj2.time = this.msgList.chooseList.timeValue[0];
-      // // obj = this.objTwo;
-      // this.objTwo = obj2;
-      // console.log(this.objTwo);
-
-      // console.log("val change", val);
+      this.msgList.endPrice =
+        this.msgList.chooseList.timeValue[0] * this.$route.query.price;
     },
     //选择器显示时触发
     onShow() {
@@ -139,19 +123,27 @@ export default {
       this.$router.push(link);
     },
     submit() {
-
       yuyueGuide({
-        id:this.$route.query.id,
-        realname:this.msgList.name,
-        mobile:this.msgList.phone,
-        content:this.msgList.content,
-        message:{people:this.msgList.chooseList.numValue.toString(),time:this.msgList.chooseList.timeValue.toString()},
-        type:5,
-        price:this.$route.query.price * this.msgList.chooseList.timeValue.toString()
-      })
-      .then(({ data }) => {
+        id: this.$route.query.id,
+        realname: this.msgList.name,
+        mobile: this.msgList.phone,
+        content: this.msgList.content,
+        message: {
+          people: this.msgList.chooseList.numValue.toString(),
+          time: this.msgList.chooseList.timeValue.toString()
+        },
+        type: 5,
+        price:
+          this.$route.query.price * this.msgList.chooseList.timeValue.toString()
+      }).then(({ data }) => {
         console.log(data);
       });
+      // if (this.msgList.name="") {
+      // this.$vux.toast.text(请填写, "middle");
+      //   this.$router.push("/");
+      // } else {
+      //   this.$router.back(-1);
+      // }
     }
   },
 

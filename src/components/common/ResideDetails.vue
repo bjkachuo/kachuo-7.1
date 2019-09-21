@@ -1,7 +1,8 @@
 <template>
   <div class="wrap">
-    <HeaderTR></HeaderTR>
+    
     <div class="normal-content" :style="conHei">
+      <HeaderTR></HeaderTR>
       <div class="swiper-main">
         <video
           :src="this.storeDetails.video"
@@ -33,9 +34,11 @@
                   </div>
                 </flexbox-item>
                 <flexbox-item>
-                  <div class="flex-link">
-                    <img src="../../assets/images/xin.png" alt="">
-                    <div class="link-text">{{this.storeDetails.comment_count}}赞</div>
+                  <div class="flex-link" @click="zanChange">
+                    <img v-if="zanNum ==0" src="../../assets/images/addzan.png" alt="">
+                    <img v-if="zanNum ==1"  src="../../assets/images/cancelzan.png" alt="">
+
+                    <div class="link-text">{{this.storeDetails.zan}}赞</div>
                   </div>
                 </flexbox-item>
                 <flexbox-item>
@@ -68,14 +71,24 @@
         </cell>
       </div>
       <div class="kc-panel">
-        <cell title="" link="###" >
-          <template slot="inline-desc">
-            <div class="zhu-icon">入住时间-退房时间</div>
-          </template>
-          <template slot="default">
-            <div class="nav-days">共1晚</div>
-          </template>
-        </cell>
+        <calendar
+          v-model="liveData"
+          title="入住时间"
+          disable-past
+          placeholder="请选择"
+          @on-change="log('改变')"
+          :highlight-weekend=true
+        ></calendar>
+      </div>
+      <div class="kc-panel">
+        <calendar
+          v-model="leaveData"
+          title="退房时间"
+          disable-past
+          placeholder="请选择"
+          @on-change="log('改变')"
+          :highlight-weekend=true
+        ></calendar>
       </div>
       <div class="kc-list-panel">
         <div class="kc-list-header">
@@ -83,7 +96,7 @@
           <div class="kc-toggle" @click="cateClick">筛选</div>
         </div>
         <div class="list-body">
-          <cell class="list-cell" align-items="start" :link="{path:'/ResideReserve',query:{id:item.id,type:item.type,price:item.price,goodname:item.name,total:item.total,businessId:item.business_id}}" v-for="(item,index) in goodsList" :key="index" v-if="index < listnumber">
+          <cell class="list-cell" align-items="start" :link="{path:'/ResideReserve',query:{id:item.id,type:item.type,price:item.price,goodname:item.name,total:item.total,businessId:item.business_id,isMorning:item.is_morning,isWindow:item.is_window}}" v-for="(item,index) in goodsList" :key="index" v-if="index < listnumber">
             <template slot="icon">
               <img :src="item.image" alt="">
             </template>
@@ -108,10 +121,60 @@
 
 <script>
   import HeaderTR from "@/components/common/HeaderTR";
-  import {Cell,XButton,Flexbox, FlexboxItem,Rater,Actionsheet,Swiper,SwiperItem} from 'vux'
+  import {Cell,XButton,Flexbox, FlexboxItem,Rater,Actionsheet,Swiper,SwiperItem,Calendar} from 'vux'
   export default {
     props: [""],
+    data() {
+      return {
+        menus: {
+          menu1: '大床房',
+          menu2:'双床房',
+          menu3:'其它特色床'
+        },
+        liveData: "",
+        //离店日期
+        leaveData: "",
+        //赞的状态
+        zanNum:"",
+        //获取到的商家id
+        idNum: "",
+        //商家详情
+        storeDetails: [],
+        //商品详情
+        goodsList:[],
+        show1:false,
+        data1:0,
+        toggle:false,
+        listnumber:3,
+        // baseList : [{
+        //   url: 'javascript:',
+        //   img: require('../../assets/images/zhuslide.jpg'),
+        // },{
+        //   url: 'javascript:',
+        //   img: require('../../assets/images/zhuslide.jpg'),
+        // },{
+        //   url: 'javascript:',
+        //   img: require('../../assets/images/zhuslide.jpg'),
+        // }
+        // ],
+      };
+    },
     methods: {
+    //日期选择
+    log(str) {
+      console.log(str);
+      //存入住日期
+      sessionStorage.setItem("liveData", JSON.stringify(this.liveData))
+       console.log(sessionStorage.setItem("liveData", JSON.stringify(this.liveData)))
+        sessionStorage.setItem("leaveData", JSON.stringify(this.leaveData))
+       console.log(sessionStorage.setItem("leaveData", JSON.stringify(this.leaveData)))
+
+    },
+    // logTwo(str){
+    //   console.log(str);
+    //    //存离店日期
+
+    // },
       url(link) {
         this.$router.push(link);
       },
@@ -124,73 +187,30 @@
       clickMore () { //查看剩余服务
         this.listnumber += this.listnumber
       },
+      //点赞取消赞
+      zanChange(){
+         this.$http
+          .post(
+            "https://core.kachuo.com/app/ewei_shopv2_app.php?i=8&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.index.businessLike&id=" +
+             this.$route.query.idNum+"&status=" + (this.zanNum == 0 ? '1':'0')
+          )
+         .then(({ data }) => {
+            console.log(data);
+        if(this.zanNum==0){
+            this.zanNum=1;
+            this.storeDetails.zan ++
+            console.log(this.zanNum,"点赞")
+				}else if(this.zanNum==1){
+            this.zanNum=0;
+            this.storeDetails.zan --
+            console.log(this.zanNum,"取消赞")
+        }   
+
+      });
+
+      }
     },
-    data() {
-      return {
-        menus: {
-          menu1: '大床房',
-          menu2:'双床房',
-          menu3:'其它特色床'
-        },
-        //获取到的商家id
-        idNum: "",
-        //商家详情
-        storeDetails: [],
-        //商品详情
-        goodsList:[],
-        show1:false,
-        data1:0,
-        toggle:false,
-        listnumber:3,
-        list: [{
-          src: require('../../assets/images/zhu.jpg'),
-          title: '自主大床房',
-          desc: '不含早  大床  有窗 不可取消',
-          url: '/ResideReserve'
-        },{
-          src: require('../../assets/images/zhu.jpg'),
-          title: '经济大床房',
-          desc: '不含早  大床  有窗 不可取消',
-          url: '/ResideReserve'
-        },{
-          src: require('../../assets/images/zhu.jpg'),
-          title: '自主大床房',
-          desc: '不含早  大床  有窗 不可取消',
-          url: '/ResideReserve'
-        },{
-          src: require('../../assets/images/zhu.jpg'),
-          title: '经济大床房',
-          desc: '不含早  大床  有窗 不可取消',
-          url: '/ResideReserve'
-        },{
-          src: require('../../assets/images/zhu.jpg'),
-          title: '自主大床房',
-          desc: '不含早  大床  有窗 不可取消',
-          url: '/ResideReserve'
-        },{
-          src: require('../../assets/images/zhu.jpg'),
-          title: '自主大床房',
-          desc: '不含早  大床  有窗 不可取消',
-          url: '/ResideReserve'
-        },{
-          src: require('../../assets/images/zhu.jpg'),
-          title: '经济大床房',
-          desc: '不含早  大床  有窗 不可取消',
-          url: '/ResideReserve'
-        },],
-        baseList : [{
-          url: 'javascript:',
-          img: require('../../assets/images/zhuslide.jpg'),
-        },{
-          url: 'javascript:',
-          img: require('../../assets/images/zhuslide.jpg'),
-        },{
-          url: 'javascript:',
-          img: require('../../assets/images/zhuslide.jpg'),
-        }
-        ],
-      };
-    },
+
     mounted(){
     //查看传来的id
     console.log(this.$route.query);
@@ -208,6 +228,7 @@
         console.log(this.goodsList);
         console.log(this.storeDetails);
         this.data1 = parseFloat(this.storeDetails.score)
+         this.zanNum = data.data.is_zan;
       });
     },
 
@@ -221,6 +242,7 @@
       Rater,
       Swiper,
       SwiperItem,
+      Calendar
     },
     computed: {
       conHei() {
@@ -250,6 +272,7 @@ video{
     overflow: hidden;
     overflow-y: scroll;
     box-sizing: border-box;
+    position: relative;
   }
 
   img{

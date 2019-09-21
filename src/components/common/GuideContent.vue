@@ -97,7 +97,6 @@ export default {
         showLeftBack: true,
         showRightMore: false
       },
-      like:'',
       zanNum:"",
       data1: "4",
       toggle: false,
@@ -121,8 +120,6 @@ export default {
           )
          .then(({ data }) => {
             console.log(data);
-
-         });
         if(this.zanNum==0){
             this.zanNum=1;
             this.DList.zan ++
@@ -132,6 +129,8 @@ export default {
             this.DList.zan --
             console.log(this.zanNum,"取消赞")
         }   
+
+         });
 
              
     },

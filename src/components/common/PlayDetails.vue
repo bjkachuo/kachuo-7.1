@@ -27,9 +27,10 @@
                   </div>
                 </flexbox-item>
                 <flexbox-item>
-                  <div class="flex-link">
-                    <img src="../../assets/images/xin.png" alt="">
-                    <div class="link-text">{{this.storeDetails.comment_count}}赞</div>
+                  <div class="flex-link" @click="zanChange">
+                    <img v-if="zanNum ==0" src="../../assets/images/addzan.png" alt="">
+                    <img v-if="zanNum ==1"  src="../../assets/images/cancelzan.png" alt="">
+                    <div class="link-text">{{this.storeDetails.zan}}赞</div>
                   </div>
                 </flexbox-item>
                 <flexbox-item>
@@ -117,6 +118,28 @@
       clickMore () { //查看剩余服务
         this.listnumber += this.listnumber
       },
+      //点赞取消赞
+    zanChange(){
+        this.$http
+          .post(
+            "https://core.kachuo.com/app/ewei_shopv2_app.php?i=8&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.index.businessLike&id=" +
+             this.$route.query.idNum+"&status=" + (this.zanNum == 0 ? '1':'0')
+          )
+         .then(({ data }) => {
+            console.log(data);
+        if(this.zanNum==0){
+            this.zanNum=1;
+            this.storeDetails.zan ++
+            console.log(this.zanNum,"点赞")
+				}else if(this.zanNum==1){
+            this.zanNum=0;
+            this.storeDetails.zan --
+            console.log(this.zanNum,"取消赞")
+        }   
+
+      });
+
+      }
     },
     data() {
       return {
@@ -125,6 +148,8 @@
           menu2:'夜场票',
           menu3:'双人套票'
         },
+        //赞的状态
+        zanNum:"",
         //获取到的商家id
         idNum: "",
         //商家详情
@@ -201,6 +226,7 @@
         this.goodsList = data.data.goods_msg;
         this.dataOne = data.data.score - 0
         console.log(this.storeDetails);
+        this.zanNum = data.data.is_zan;
       });
     },
 
@@ -346,7 +372,7 @@ video::-webkit-media-controls-panel {
     padding-left: 20px;
   }
   .nav-address{
-    font-size: 16px;
+    font-size: 14px;
   }
   .kc-list-header{
     position: relative;
