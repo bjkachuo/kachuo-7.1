@@ -72,25 +72,23 @@
       </div>
       <div class="kc-panel">
         <calendar
-          v-model="dataTime"
-          title="入住时间-退房时间"
+          v-model="liveData"
+          title="入住时间"
           disable-past
           placeholder="请选择"
-          @on-show="log('show')"
-          @on-hide="log('hide')"
+          @on-change="log('改变')"
           :highlight-weekend=true
-          :start-date="startDate"
-          :end-date="endDate"
         ></calendar>
-
-        <!-- <cell title="" link="" >
-          <template slot="inline-desc">
-            <div class="zhu-icon">入住时间-退房时间</div>
-          </template>
-          <template slot="default">
-            <div class="nav-days">共1晚</div>
-          </template>
-        </cell> -->
+      </div>
+      <div class="kc-panel">
+        <calendar
+          v-model="leaveData"
+          title="退房时间"
+          disable-past
+          placeholder="请选择"
+          @on-change="log('改变')"
+          :highlight-weekend=true
+        ></calendar>
       </div>
       <div class="kc-list-panel">
         <div class="kc-list-header">
@@ -98,7 +96,7 @@
           <div class="kc-toggle" @click="cateClick">筛选</div>
         </div>
         <div class="list-body">
-          <cell class="list-cell" align-items="start" :link="{path:'/ResideReserve',query:{id:item.id,type:item.type,price:item.price,goodname:item.name,total:item.total,businessId:item.business_id}}" v-for="(item,index) in goodsList" :key="index" v-if="index < listnumber">
+          <cell class="list-cell" align-items="start" :link="{path:'/ResideReserve',query:{id:item.id,type:item.type,price:item.price,goodname:item.name,total:item.total,businessId:item.business_id,isMorning:item.is_morning,isWindow:item.is_window}}" v-for="(item,index) in goodsList" :key="index" v-if="index < listnumber">
             <template slot="icon">
               <img :src="item.image" alt="">
             </template>
@@ -133,12 +131,9 @@
           menu2:'双床房',
           menu3:'其它特色床'
         },
-        // //开始 日期
-        // startDate:[],
-        // //结束日期
-        // endDate:[],
-        //日期
-        dataTime: [],
+        liveData: "",
+        //离店日期
+        leaveData: "",
         //赞的状态
         zanNum:"",
         //获取到的商家id
@@ -151,72 +146,35 @@
         data1:0,
         toggle:false,
         listnumber:3,
-        list: [{
-          src: require('../../assets/images/zhu.jpg'),
-          title: '自主大床房',
-          desc: '不含早  大床  有窗 不可取消',
-          url: '/ResideReserve'
-        },{
-          src: require('../../assets/images/zhu.jpg'),
-          title: '经济大床房',
-          desc: '不含早  大床  有窗 不可取消',
-          url: '/ResideReserve'
-        },{
-          src: require('../../assets/images/zhu.jpg'),
-          title: '自主大床房',
-          desc: '不含早  大床  有窗 不可取消',
-          url: '/ResideReserve'
-        },{
-          src: require('../../assets/images/zhu.jpg'),
-          title: '经济大床房',
-          desc: '不含早  大床  有窗 不可取消',
-          url: '/ResideReserve'
-        },{
-          src: require('../../assets/images/zhu.jpg'),
-          title: '自主大床房',
-          desc: '不含早  大床  有窗 不可取消',
-          url: '/ResideReserve'
-        },{
-          src: require('../../assets/images/zhu.jpg'),
-          title: '自主大床房',
-          desc: '不含早  大床  有窗 不可取消',
-          url: '/ResideReserve'
-        },{
-          src: require('../../assets/images/zhu.jpg'),
-          title: '经济大床房',
-          desc: '不含早  大床  有窗 不可取消',
-          url: '/ResideReserve'
-        },],
-        baseList : [{
-          url: 'javascript:',
-          img: require('../../assets/images/zhuslide.jpg'),
-        },{
-          url: 'javascript:',
-          img: require('../../assets/images/zhuslide.jpg'),
-        },{
-          url: 'javascript:',
-          img: require('../../assets/images/zhuslide.jpg'),
-        }
-        ],
+        // baseList : [{
+        //   url: 'javascript:',
+        //   img: require('../../assets/images/zhuslide.jpg'),
+        // },{
+        //   url: 'javascript:',
+        //   img: require('../../assets/images/zhuslide.jpg'),
+        // },{
+        //   url: 'javascript:',
+        //   img: require('../../assets/images/zhuslide.jpg'),
+        // }
+        // ],
       };
     },
-        methods: {
+    methods: {
     //日期选择
-    onShow() {
-      console.log("on show");
-    },
-    //选择器关闭时触发
-    onHide(type) {
-      console.log("on hide", type);
-
-      
-    },
     log(str) {
-      console.log(str,this.dataTime);
-       sessionStorage.setItem("dataTime", JSON.stringify(this.dataTime))
-       console.log(this.sessionStorage)
-      //  console.log(this.startDate,this.endDate)
+      console.log(str);
+      //存入住日期
+      sessionStorage.setItem("liveData", JSON.stringify(this.liveData))
+       console.log(sessionStorage.setItem("liveData", JSON.stringify(this.liveData)))
+        sessionStorage.setItem("leaveData", JSON.stringify(this.leaveData))
+       console.log(sessionStorage.setItem("leaveData", JSON.stringify(this.leaveData)))
+
     },
+    // logTwo(str){
+    //   console.log(str);
+    //    //存离店日期
+
+    // },
       url(link) {
         this.$router.push(link);
       },
@@ -271,7 +229,6 @@
         console.log(this.storeDetails);
         this.data1 = parseFloat(this.storeDetails.score)
          this.zanNum = data.data.is_zan;
-
       });
     },
 

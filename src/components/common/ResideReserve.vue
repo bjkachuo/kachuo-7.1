@@ -12,10 +12,8 @@
             <div class="grid-title">{{this.$route.query.goodname}}</div>
             <div class="grid-more">房型详情</div>
           </div>
-          <div
-            class="grid-days"
-          >入住({{this.dataTime[0]}})/离店({{this.dataTime[this.dataTime.length-1]}})共1晚</div>
-          <div class="grid-attr">不含早 大床 有窗</div>
+          <div class="grid-days">入住({{this.liveData}})/离店({{this.leaveData}})共{{this.dayNum}}晚</div>
+          <div class="grid-attr">{{this.$route.query.isMorning}} 大床 {{this.$route.query.isWindow}}</div>
           <div class="grid-footer">该订单支付成功后不可取消或者变更</div>
         </div>
       </div>
@@ -83,7 +81,7 @@
         实付
         <span class="price">
           ￥
-          <i>{{this.$route.query.price}}</i>
+          <i>{{this.endPrice}}</i>
         </span>
       </div>
       <x-button link="/ReserveResult" @click.native="submit">立即支付</x-button>
@@ -126,18 +124,6 @@ export default {
       menus2: [["1", "2", "3", "4", "5", "6"]],
       //选择发票
       menus: [["开发票", "不需要发票"]],
-      // menus: {
-      //   menu1: "开发票",
-      //   menu2: "不需要发票"
-      // },
-      // menus2: {
-      //   menu1: "1间",
-      //   menu2: "2间",
-      //   menu3: "3间",
-      //   menu4: "4间",
-      //   menu5: "5间",
-      //   menu6: "6间"
-      // },
       //实付价格
       scorePrice: [],
       //房间数
@@ -154,22 +140,52 @@ export default {
       businessId: "",
       //价格
       price: "",
-      //获取到的日期
-      dataTime: []
+      //入住日期
+      liveData: "",
+      //离店日期
+      leaveData: "",
+      dayNum:"",
+      endPrice:"",
     };
+  },
+  beforeMount() {
   },
   mounted() {
     console.log(this.$route.query);
-    // console.log(this.$route.query.id);
     this.storeId = this.$route.query.id;
     this.businessId = this.$route.query.businessId;
     this.price = this.$route.query.price;
     console.log(this.storeId);
     console.log(this.businessId);
-    this.dataTime = JSON.parse(sessionStorage.getItem("dataTime"));
-    console.log(sessionStorage.getItem("dataTime"));
-    console.log(this.dataTime[0], this.dataTime[this.dataTime.length - 1]);
-    
+    //取出入住时间
+    // this.liveData = JSON.parse(sessionStorage.getItem("liveData"));
+    // //取出离店时间
+    // this.leaveData = JSON.parse(sessionStorage.getItem("leaveData"));
+    // console.log(this.liveData);
+    // console.log(this.leaveData);
+    //////
+    //取出入住时间
+    this.liveData = JSON.parse(sessionStorage.getItem("liveData"));
+    //取出离店时间
+    this.leaveData = JSON.parse(sessionStorage.getItem("leaveData"));
+    console.log(this.liveData);
+    console.log(this.leaveData);
+    //计算入住天数
+    function DateMinus(date1, date2) {
+      //date1:小日期   date2:大日期
+      var sdate = new Date(date1);
+      var now = new Date(date2);
+      var days = now.getTime() - sdate.getTime();
+      var day = parseInt(days / (1000 * 60 * 60 * 24));
+      return day;
+    }
+    let arg = DateMinus(this.liveData,this.leaveData);
+    console.log(arg);
+    this.dayNum = arg;
+    console.log(this.dayNum);
+    //最终价格
+    this.endPrice = this.price * this.dayNum;
+    console.log(this.roomNum)
   },
   methods: {
     //积分抵扣
@@ -208,22 +224,29 @@ export default {
         id: this.businessId,
         type: 4,
         mobile: this.phone,
-        price: this.price,
+        price: this.endPrice,
         realname: this.name,
         goods: [this.storeId, this.roomNum.toString()]
       }).then(({ data }) => {
         console.log(data);
+        
       });
     },
     //选择器显示时触发
     onShow() {
       console.log("on show");
+      
     },
     //选择器关闭时触发
     onHide(type) {
       console.log("on hide", type);
     },
-    onChange(val) {}
+    onChange(val) {
+      console.log(this.roomNum)
+      this.endPrice = this.roomNum[0] * this.price * this.dayNum;
+      
+      
+    }
   },
 
   components: {
