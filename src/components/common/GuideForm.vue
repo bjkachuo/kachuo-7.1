@@ -90,7 +90,11 @@ export default {
       //是否使用积分
       demo1: false,
       //全局用户信息
-      userInfo: null
+      userInfo: null,
+      //下订单中抵扣的积分
+      Deduction:0,
+      //下单中订单中抵扣的金额
+      Demoney:0
     };
   },
   created() {
@@ -147,11 +151,17 @@ export default {
           .then(({ data }) => {
             console.log(data);
             this.msgList.endPrice = data.data.real_price;
+            //抵扣的积分
+            this.Deduction = data.data.decr_integral;
+            //抵扣的金额
+            this.Demoney = data.data.decr_money
           });
       } else {
         console.log("不使用积分");
         this.msgList.endPrice =
           this.msgList.chooseList.timeValue[0] * this.$route.query.price;
+          this.Deduction = 0 ;
+          this.Demoney = 0;
       }
     },
 
@@ -161,8 +171,8 @@ export default {
         realname: this.msgList.name,
         mobile: this.msgList.phone,
         content: this.msgList.content,
-        integral: this.userInfo.credit1,
-        integral_money: this.userInfo.credit1,
+        integral: this.Deduction,
+        integral_money: this.Demoney,
 
         message: {
           people: this.msgList.chooseList.numValue.toString(),
