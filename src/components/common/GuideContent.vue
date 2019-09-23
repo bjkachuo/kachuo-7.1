@@ -55,21 +55,15 @@
           <div class="mess-group" v-for="(item,index) in DList.comm" :key="index">
             <cell @cell-label-color :title="item.nickname" :inline-desc="item.created_at">
               <img slot="icon" class="mess-avatar"  :src="item.avatar"/>
-              <template slot="default">
-                <div class="cared-number">12</div>
-              </template>
+              <div slot="default" style="touch-action:default;">
+                <div @click="commentZan(item,index)">
+                  <div class="cared-number" v-if="item.is_zan == 0">{{item.zancount}}</div>
+                  <div class="cared-number-two" v-if="item.is_zan ==1">{{item.zancount}}</div>
+                </div>
+              </div>
             </cell>
             <cell :value="item.content" value-align="left"></cell>
           </div>
-          <!-- <div class="mess-group">
-            <cell title="木子菲菲" inline-desc="2019-05-24">
-              <img slot="icon" class="mess-avatar" src="../../assets/images/touxiang.jpg">
-              <template slot="default">
-                <div class="cared-number">12</div>
-              </template>
-            </cell>
-            <cell title="点赞仙文化"></cell>
-          </div>-->
         </div>
       </div>
       <div class="btn-space">
@@ -97,7 +91,10 @@ export default {
         showLeftBack: true,
         showRightMore: false
       },
+      //导游点赞
       zanNum:"",
+      //导游评论点赞
+      zanCommNum:"",
       data1: "4",
       toggle: false,
       //星星分
@@ -109,9 +106,7 @@ export default {
   },
 
   methods: {
-    // zan(){
-    //   console.log(this.zan)
-    // },
+    //导游点赞
     zanChange() {
     this.$http
           .post(
@@ -129,12 +124,21 @@ export default {
             this.DList.zan --
             console.log(this.zanNum,"取消赞")
         }   
-
-         });
-
-             
+        });    
     },
+    //评论点赞
+    commentZan(item,index){
+      this.$http.post("http://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=scenic.index.businessLike&type="+14+"&id="+
+      item.id+"&status=" +(item.is_zan == 0 ? '1':'0')
+      )
+      .then(({data})=>{
+        console.log(data)
+        item.is_zan = item.is_zan == 1 ? 0 : 1 
+        item.zancount = item.is_zan == 1 ? item.zancount - 0 + 1 : --item.zancount
 
+      })
+      console.log(item,index)
+    },
     url(link) {
       this.$router.push(link);
     },
@@ -157,22 +161,9 @@ export default {
         this.starNum = parseInt(data.data.score)
         console.log(this.starNum);
         this.zanNum = data.data.is_zan;
+        //this.zanCommNum = data.data.comm[index].is_zan
+        console.log(this.DList.comm)
       });
-
-    // this.$http
-    //   .post(
-    //     "https://core.kachuo.com/app/ewei_shopv2_app.php?i=8&c=site&a=entry&m=ewei_shopv2&do=mobile&r=tourguide.index.like&id=" +
-    //       this.$route.query.idNum
-    //   )
-    //   .then(({ data }) => {
-    //     console.log(data);
-    //     this.state = data.result;
-    //     if (this.zan == false) {
-    //       data.result == 1;
-    //     } else{
-    //       this.zan == true
-    //     }
-    //   });
   },
   components: {
     Header,
@@ -274,7 +265,15 @@ export default {
   line-height: 1;
   color: #222222;
   padding-left: 20px;
-  background: url(../../assets/images/xin.png) left center no-repeat;
+  background: url(../../assets/images/addzan.png) left center no-repeat;
+  background-size: contain;
+}
+.cared-number-two {
+  font-size: 16px;
+  line-height: 1;
+  color: #222222;
+  padding-left: 20px;
+  background: url(../../assets/images/cancelzan.png) left center no-repeat;
   background-size: contain;
 }
 .btn-space {

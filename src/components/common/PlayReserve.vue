@@ -10,32 +10,17 @@
         <div class="form-cells">
           <div class="form-header">{{this.$route.query.goodname}}</div>
           <div class="select-body">
-            <!-- <div class="select-txt">使用日期</div> -->
             <div class="select-cell">
               <calendar
                 v-model="dataTime"
                 title="使用日期"
                 disable-past
                 placeholder="请选择"
+                @on-change="onChange"
                 @on-show="log('show')"
                 @on-hide="log('hide')"
-                :highlight-weekend=true
+                :highlight-weekend="true"
               ></calendar>
-
-              <!-- <ul class="select-days">
-                <li v-for="(item, index) in items" :key="index" :class="{active:current==index}">
-                  <div class="day-item" @click="addClass(index)">
-                    <div class="day">{{ item.day }}</div>
-                    <div class="price">￥{{ item.price }}</div>
-                  </div>
-                </li>
-                <li>
-                  <div class="day-item">
-                    <div class="item-more">
-                    </div>
-                  </div>
-                </li>
-              </ul>-->
             </div>
           </div>
         </div>
@@ -53,14 +38,6 @@
             @on-change="onChange"
             placeholder="请选择"
           ></popup-picker>
-          <!-- <cell @click.native="tkClick" is-link>
-            <template slot="icon">
-              <div class="room-text" style="margin-right: 15px;">门票数</div>
-            </template>
-            <template slot="after-title">
-              <div class="tk-value">{{ppValue}}</div>
-            </template>
-          </cell>-->
           <x-input
             title="联系人"
             placeholder="填写真实入住人姓名"
@@ -78,7 +55,12 @@
         </div>
       </div>
       <div class="form-panel">
-        <checklist label-position="left" :options="checklist"></checklist>
+        <span @click="useIntegral">
+          <check-icon
+            :value.sync="demo1"
+            label-position="right"
+          >可用{{userInfo.credit1}}积分抵用{{userInfo.credit1}}元</check-icon>
+        </span>
       </div>
       <div class="form-panel">
         <popup-picker
@@ -91,8 +73,6 @@
           @on-change="onChange"
           placeholder="请选择"
         ></popup-picker>
-
-        <!-- <cell is-link title="发票信息" :value="fapvalue" @click.native="infoClick"></cell> -->
       </div>
     </div>
     <div class="btm-bar">
@@ -100,13 +80,11 @@
         实付
         <span class="price">
           ￥
-          <i>{{this.price}}</i>
+          <i>{{this.endPrice}}</i>
         </span>
       </div>
-      <x-button link="/ReserveResult" @click.native="submit">提交订单</x-button>
+      <x-button @click.native="submit">提交订单</x-button>
     </div>
-    <!-- <actionsheet v-model="show1" :menus="menus" @on-click-menu="Click" show-cancel></actionsheet>
-    <actionsheet v-model="show2" :menus="menus2" @on-click-menu="tkSelect" show-cancel></actionsheet>-->
   </div>
 </template>
 
@@ -122,18 +100,14 @@ import {
   Checklist,
   Actionsheet,
   Calendar,
-  PopupPicker
+  PopupPicker,
+  CheckIcon
 } from "vux";
 export default {
   props: [""],
   data() {
     return {
       current: 0,
-      items: [
-        { price: "88", day: "今天08-11" },
-        { price: "89", day: "明天08-12" },
-        { price: "90", day: "周六08-13" }
-      ],
       ppValue: "1张",
       fapvalue: "不需要发票",
       checklist: ["可用100积分抵用100元"],
@@ -142,7 +116,6 @@ export default {
         showLeftBack: true,
         showRightMore: false
       },
-      demo1: "",
       numvalue: "",
       tvalue: "",
       numvalue: "",
@@ -153,10 +126,8 @@ export default {
       menus: [["开发票", "不需要发票"]],
       //选择票数
       menus2: [["1", "2", "3", "4", "5", "6"]],
-      //实付价格
-      scorePrice: [],
       //票数数
-      roomNum: [],
+      roomNum: ["1"],
       //发票信息
       invoice: [],
       //姓名
@@ -170,40 +141,89 @@ export default {
       //价格
       price: "",
       //日期
-      dataTime: []
-
-      // menus: {
-      //   menu1: "开发票",
-      //   menu2: "不需要发票"
-      // },
-      // menus2: {
-      //   menu1: "1张",
-      //   menu2: "2张"
-      // }
+      dataTime: [],
+      //最终价格
+      endPrice: "",
+      //是否使用积分
+      demo1: false,
+      //全局用户信息
+      userInfo: null
     };
   },
+  created() {
+    //获取全局用户信息
+    this.getUserInfo();
+  },
+
   mounted() {
     console.log(this.$route.query);
+    //商品id
     this.storeId = this.$route.query.id;
+    //商家id
     this.businessId = this.$route.query.storeId;
+    //初始价格
     this.price = this.$route.query.price;
+    //最终价格
+    this.endPrice = this.price;
   },
   methods: {
+    //获取全局用户信息
+    getUserInfo() {
+      this.userInfo = this.GLOBAL.getSession("userLoginInfo");
+    },
+
+    //显示提示信息
+    showTip(conttentTip) {
+      this.$vux.toast.text(conttentTip, "middle");
+      setTimeout(() => {
+        this.$vux.toast.hide();
+      }, 1000);
+    },
     url(link) {
       this.$router.push(link);
     },
+    //积分抵扣
+    useIntegral() {
+      if (this.demo1 === true) {
+        console.log("使用积分");
+        this.$http
+          .post(
+            "https://core.kachuo.com/app/ewei_shopv2_app.php?i=8&c=site&a=entry&m=ewei_shopv2&do=mobile&r=integral.shop_integral_itf&type=" +
+              1 +
+              "&money=" +
+              this.endPrice
+          )
+          .then(({ data }) => {
+            console.log(data);
+            this.endPrice = data.data.real_price;
+          });
+      } else {
+        console.log("不使用积分");
+        this.endPrice = this.roomNum[0] * this.price * this.dataTime.length;
+      }
+    },
+
     //支付提交订单
     submit() {
       orderReside({
         id: this.businessId,
         type: 3,
         mobile: this.phone,
-        price: this.price * this.roomNum.toString(),
+        price: this.endPrice,
         realname: this.name,
-        date: this.dataTime.toString(),
+        data: this.dataTime.toString(),
+        integral: this.userInfo.credit1,
+        integral_money: this.userInfo.credit1,
+
         goods: [this.storeId, this.roomNum.toString()]
-      }).then(({ data }) => {
-        console.log(data);
+      }).then(data => {
+        console.log(data.result);
+        if (data.result == 1) {
+          this.showTip("预约成功");
+          this.$router.push("/ReserveResult");
+        } else {
+          this.showTip("请填写完整信息");
+        }
       });
     },
     //选择器显示时触发
@@ -214,31 +234,18 @@ export default {
     onHide(type) {
       console.log("on hide", type);
     },
-    onChange(val) {},
+    // onChangedata(val){
+    //   this.endPrice = this.roomNum[0] * this.price * this.dataTime.length
+    // },
+    //当日期或者票数发生改变时重新计算价格
+    onChange(val) {
+      //价格乘票张数
+      this.endPrice = this.roomNum[0] * this.price * this.dataTime.length;
+      this.demo1 = false;
+    },
     log(str) {
       console.log(str);
     }
-
-    // Click(key, item) {
-    //   console.log(key, item);
-    //   this.fapvalue = item;
-    // },
-    // infoClick() {
-    //   this.show1 = !this.show1;
-    // },
-    // tkClick() {
-    //   this.show2 = !this.show2;
-    // },
-    // tkSelect(key, item) {
-    //   console.log(key, item);
-    //   this.ppValue = item;
-    // },
-    // addClass(index) {
-    //   this.current = index;
-    // },
-    // onChange(val) {
-    //   console.log("on change", val);
-    // }
   },
 
   components: {
@@ -250,7 +257,8 @@ export default {
     Checklist,
     Actionsheet,
     Calendar,
-    PopupPicker
+    PopupPicker,
+    CheckIcon
   },
   computed: {
     conHei() {
@@ -525,7 +533,12 @@ export default {
 /deep/ .select-body[data-v-7dd8e0b4]:before {
   border-top: none;
 }
-// /deep/ span.vux-calendar-each-date {
-//   background-color: #3987ff;
-// }
+/deep/ .vux-check-icon {
+  display: inline-block;
+  padding: 15px 6px;
+}
+/deep/ .vux-check-icon > .weui-icon-success:before,
+.vux-check-icon > .weui-icon-success-circle:before {
+  color: #3987ff;
+}
 </style>

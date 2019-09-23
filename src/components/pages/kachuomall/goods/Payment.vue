@@ -109,11 +109,12 @@ export default {
       function onDeviceReady() {
         Wechat.sendPaymentRequest(
           WXparams,
-          function () {
+          function() {
             that.successToast();
-          }, function (reason) {
-            that.errorToast(reason);
           },
+          function(reason) {
+            that.errorToast(reason);
+          }
         );
       }
     },
@@ -124,16 +125,16 @@ export default {
       function onDeviceReady() {
         cordova.plugins.alipay.payment(
           aliInfo,
-          function () {
+          function() {
             that.successToast();
-          }, function (reason) {
-            if(reason.resultStatus == "6001"){
+          },
+          function(reason) {
+            if (reason.resultStatus == "6001") {
               that.errorToast("您点击取消并返回");
-            }
-            else{
+            } else {
               that.errorToast(reason.memo);
             }
-          },
+          }
           /*function success(e) {
             if (e.resultStatus === 9000) {
               that.successToast();
@@ -167,5 +168,10 @@ export default {
   overflow-y: scroll;
   box-sizing: border-box;
   padding: 50px 15px 0;
+}
+</style>
+<style lang="less" scoped>
+/deep/ .weui-btn_primary {
+  background-color: #3976ff;
 }
 </style>

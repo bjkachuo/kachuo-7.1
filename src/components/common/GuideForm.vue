@@ -10,7 +10,6 @@
         <x-input title="姓名：" is-type="china-name" placeholder v-model="msgList.name"></x-input>
         <x-input title="联系电话：" placeholder v-model="msgList.phone"></x-input>
         <x-textarea name="description" placeholder="请输入留言..." v-model="msgList.content"></x-textarea>
-
         <popup-picker
           class="pickOne"
           title="选择人数/人"
@@ -20,7 +19,6 @@
           @on-hide="onHide"
           placeholder="请选择"
         ></popup-picker>
-
         <popup-picker
           class="pickTwo"
           title="选择时长/小时"
@@ -31,9 +29,13 @@
           @on-change="onChange"
           placeholder="请选择"
         ></popup-picker>
-
-        <!-- <cell title="选择人数" :value="numvalue" is-link></cell>
-        <cell title="选择时长" :value="tvalue" is-link></cell>-->
+        <span @click="useIntegral">
+          <check-icon
+            :value.sync="demo1"
+            label-position="right"
+            style=" background: #fff;display: block; height: 45px;border-radius: 8px;"
+          >可用{{userInfo.credit1}}积分抵用{{userInfo.credit1}}元</check-icon>
+        </span>
       </div>
     </div>
     <div class="btm-bar">
@@ -51,7 +53,7 @@
 
 <script>
 import Header from "@/components/common/Header";
-import { Cell, XButton, XInput, XTextarea, PopupPicker } from "vux";
+import { Cell, XButton, XInput, XTextarea, PopupPicker, CheckIcon } from "vux";
 import { yuyueGuide } from "@/servers/api.js";
 export default {
   props: [""],
@@ -70,11 +72,6 @@ export default {
       numList: [["1-5", "5-10", "10以上"]],
       //时间列表
       timeList: [["1", "2", "3", "4", "5", "6", "7", "8"]],
-      // tvalue: "",
-      //人数列表
-      objOne: {},
-      //时间列表
-      objTwo: {},
       msgList: {
         //填写姓名
         name: "",
@@ -87,29 +84,43 @@ export default {
           //选择人数
           numValue: [],
           //选择时间
-          timeValue: []
+          timeValue: ["1"]
         }
-      }
+      },
+      //是否使用积分
+      demo1: false,
+      //全局用户信息
+      userInfo: null
     };
   },
+  created() {
+    //获取全局用户信息
+    this.getUserInfo();
+  },
+
   mounted() {
     console.log(this.$route.query);
     this.gId = this.$route.query.id;
     this.msgList.endPrice = this.$route.query.price;
-    // const obj = {};
-    // obj.people = this.msgList.chooseList.numValue[0];
-    // // this.msgList.chooseList.numValue[0] = obj.people;
-    // console.log(obj);
-    // const obj2 = {};
-    // obj2.time = this.msgList.chooseList.timeValue[0];
-    // // this.msgList.chooseList.timeValue[0] = obj2.time;
-    // console.log(obj2);
   },
   methods: {
+    //获取全局用户信息
+    getUserInfo() {
+      this.userInfo = this.GLOBAL.getSession("userLoginInfo");
+    },
+
+    //显示提示信息
+    showTip(conttentTip) {
+      this.$vux.toast.text(conttentTip, "middle");
+      setTimeout(() => {
+        this.$vux.toast.hide();
+      }, 1000);
+    },
     //选择器该改变时触发
     onChange(val) {
       this.msgList.endPrice =
         this.msgList.chooseList.timeValue[0] * this.$route.query.price;
+      this.demo1 = false;
     },
     //选择器显示时触发
     onShow() {
@@ -122,28 +133,55 @@ export default {
     url(link) {
       this.$router.push(link);
     },
+    //积分抵扣
+    useIntegral() {
+      if (this.demo1 === true) {
+        console.log("使用积分");
+        this.$http
+          .post(
+            "https://core.kachuo.com/app/ewei_shopv2_app.php?i=8&c=site&a=entry&m=ewei_shopv2&do=mobile&r=integral.shop_integral_itf&type=" +
+              1 +
+              "&money=" +
+              this.msgList.endPrice
+          )
+          .then(({ data }) => {
+            console.log(data);
+            this.msgList.endPrice = data.data.real_price;
+          });
+      } else {
+        console.log("不使用积分");
+        this.msgList.endPrice =
+          this.msgList.chooseList.timeValue[0] * this.$route.query.price;
+      }
+    },
+
     submit() {
       yuyueGuide({
         id: this.$route.query.id,
         realname: this.msgList.name,
         mobile: this.msgList.phone,
         content: this.msgList.content,
+        integral: this.userInfo.credit1,
+        integral_money: this.userInfo.credit1,
+
         message: {
           people: this.msgList.chooseList.numValue.toString(),
           time: this.msgList.chooseList.timeValue.toString()
         },
         type: 5,
-        price:
-          this.$route.query.price * this.msgList.chooseList.timeValue.toString()
-      }).then(({ data }) => {
-        console.log(data);
-      });
-      // if (this.msgList.name="") {
-      // this.$vux.toast.text(请填写, "middle");
-      //   this.$router.push("/");
-      // } else {
-      //   this.$router.back(-1);
-      // }
+        price: this.msgList.endPrice
+      })
+        .then(data => {
+          console.log(data.result);
+          if (data.result == 1) {
+            this.showTip("预约成功");
+          } else {
+            this.showTip("请填写完整信息");
+          }
+        })
+        .catch(error => {
+          console.log(error);
+        });
     }
   },
 
@@ -153,7 +191,8 @@ export default {
     XInput,
     XButton,
     XTextarea,
-    PopupPicker
+    PopupPicker,
+    CheckIcon
   },
   computed: {
     conHei() {
@@ -244,5 +283,14 @@ export default {
 /deep/ .pickTwo {
   background: #fff;
   border-radius: 8px;
+  margin-bottom: 10px;
+}
+/deep/ .vux-check-icon {
+  display: inline-block;
+  padding: 11px 6px;
+}
+/deep/ .vux-check-icon > .weui-icon-success:before,
+.vux-check-icon > .weui-icon-success-circle:before {
+  color: #3987ff;
 }
 </style>

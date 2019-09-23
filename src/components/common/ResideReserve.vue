@@ -30,19 +30,6 @@
             @on-change="onChange"
             placeholder="请选择"
           ></popup-picker>
-
-          <!-- <cell>
-            <template slot="icon">
-              <div class="room-text" style="margin-right: 15px;">房间数</div>
-            </template>
-            <template slot="after-title">
-              <div class="room-value">{{roomValue}}</div>
-            </template>
-            <template slot="default">
-              <div class="less-more">仅剩{{this.$route.query.total}}间了</div>
-            </template>
-          </cell>-->
-
           <x-input
             title="入住人"
             placeholder="填写真实入住人姓名"
@@ -60,10 +47,11 @@
         </div>
       </div>
       <div class="form-panel">
-        <checklist label-position="left" :options="checklist"></checklist>
+        <span @click="useIntegral">
+          <check-icon :value.sync="demo1" label-position="right">可用{{userInfo.credit1}}积分抵用{{userInfo.credit1}}元</check-icon>
+        </span>
       </div>
       <div class="form-panel">
-        <!-- <cell is-link title="发票信息" :value="fapvalue" @click.native="infoClick"></cell> -->
         <popup-picker
           class="pickTwo"
           title="发票信息"
@@ -84,10 +72,8 @@
           <i>{{this.endPrice}}</i>
         </span>
       </div>
-      <x-button link="/ReserveResult" @click.native="submit">立即支付</x-button>
+      <x-button @click.native="submit">立即支付</x-button>
     </div>
-    <!-- <actionsheet v-model="show1" :menus="menus"  @on-click-menu="Click" show-cancel></actionsheet>
-    <actionsheet v-model="show2" :menus="menus2" @on-click-menu="roomSelect" show-cancel></actionsheet>-->
   </div>
 </template>
 
@@ -99,6 +85,7 @@ import {
   XInput,
   XTextarea,
   Checklist,
+  CheckIcon,
   Actionsheet,
   PopupPicker
 } from "vux";
@@ -108,18 +95,11 @@ export default {
   props: [""],
   data() {
     return {
-      // roomValue: "1间房",
-      // fapvalue: "不需要发票",
-      checklist: ["可用100积分抵用100元"],
       TitleObjData: {
         titleContent: "提交订单",
         showLeftBack: true,
         showRightMore: false
       },
-      // numvalue: "",
-      // tvalue: "",
-      // show1: false,
-      // show2: false,
       //选择房间数
       menus2: [["1", "2", "3", "4", "5", "6"]],
       //选择发票
@@ -127,7 +107,7 @@ export default {
       //实付价格
       scorePrice: [],
       //房间数
-      roomNum: [],
+      roomNum: ["1"],
       //发票信息
       invoice: [],
       //姓名
@@ -144,12 +124,22 @@ export default {
       liveData: "",
       //离店日期
       leaveData: "",
-      dayNum:"",
-      endPrice:"",
+      //入住天数
+      dayNum: "",
+      //最终价格
+      endPrice: "",
+      //是否使用积分
+      demo1: false,
+      //全局用户信息
+      userInfo: null
     };
   },
-  beforeMount() {
+  created() {
+    //获取全局用户信息
+    this.getUserInfo();
   },
+
+  beforeMount() {},
   mounted() {
     console.log(this.$route.query);
     this.storeId = this.$route.query.id;
@@ -157,13 +147,6 @@ export default {
     this.price = this.$route.query.price;
     console.log(this.storeId);
     console.log(this.businessId);
-    //取出入住时间
-    // this.liveData = JSON.parse(sessionStorage.getItem("liveData"));
-    // //取出离店时间
-    // this.leaveData = JSON.parse(sessionStorage.getItem("leaveData"));
-    // console.log(this.liveData);
-    // console.log(this.leaveData);
-    //////
     //取出入住时间
     this.liveData = JSON.parse(sessionStorage.getItem("liveData"));
     //取出离店时间
@@ -179,45 +162,50 @@ export default {
       var day = parseInt(days / (1000 * 60 * 60 * 24));
       return day;
     }
-    let arg = DateMinus(this.liveData,this.leaveData);
+    let arg = DateMinus(this.liveData, this.leaveData);
     console.log(arg);
     this.dayNum = arg;
     console.log(this.dayNum);
     //最终价格
     this.endPrice = this.price * this.dayNum;
-    console.log(this.roomNum)
+    console.log(this.roomNum);
   },
   methods: {
+    //获取全局用户信息
+    getUserInfo() {
+      this.userInfo = this.GLOBAL.getSession("userLoginInfo");
+    },
     //积分抵扣
-    // integral(value, label) {
-    //   // this.$http
-    //   //   .post(
-    //   //     "https://core.kachuo.com/app/ewei_shopv2_app.php?i=8&c=site&a=entry&m=ewei_shopv2&do=mobile&r=integral.shop_integral_itf&type="+this.$route.query.type+"&money="+this.$route.query.price
-    //   //   )
-    //   //   .then(({ data }) => {
-    //   //     console.log(data);
-    //   //     this.scorePrice = data.data;
-    //   //     console.log(this.scorePrice)
-    //   //   });
-    //   console.log(value, label);
-    // },
+    useIntegral() {
+      if (this.demo1 === true) {
+        console.log("使用积分");
+        this.$http
+          .post(
+            "https://core.kachuo.com/app/ewei_shopv2_app.php?i=8&c=site&a=entry&m=ewei_shopv2&do=mobile&r=integral.shop_integral_itf&type=" +
+              1 +
+              "&money=" +
+              this.endPrice
+          )
+          .then(({ data }) => {
+            console.log(data);
+            this.endPrice = data.data.real_price;
+          });
+      } else {
+        console.log("不使用积分");
+        this.endPrice = this.roomNum[0] * this.price * this.dayNum;
+      }
+    },
+    //显示提示信息
+    showTip(conttentTip) {
+      this.$vux.toast.text(conttentTip, "middle");
+      setTimeout(() => {
+        this.$vux.toast.hide();
+      }, 1000);
+    },
+
     url(link) {
       this.$router.push(link);
     },
-    // Click(key, item) {
-    //   console.log(key, item);
-    //   this.fapvalue = item;
-    // },
-    // infoClick() {
-    //   this.show1 = !this.show1;
-    // },
-    // roomClick() {
-    //   this.show2 = !this.show2;
-    // },
-    // roomSelect(key, item) {
-    //   console.log(key, item);
-    //   this.roomValue = item;
-    // },
     //支付提交订单
     submit() {
       orderReside({
@@ -226,26 +214,31 @@ export default {
         mobile: this.phone,
         price: this.endPrice,
         realname: this.name,
+        integral:this.userInfo.credit1,
+        integral_money:this.userInfo.credit1,
         goods: [this.storeId, this.roomNum.toString()]
-      }).then(({ data }) => {
-        console.log(data);
-        
+      }).then(data => {
+        console.log(data.result);
+        if (data.result == 1) {
+          this.showTip("预约成功");
+          this.$router.push("/ReserveResult");
+        } else {
+          this.showTip("请填写完整信息");
+        }
       });
     },
     //选择器显示时触发
     onShow() {
       console.log("on show");
-      
     },
     //选择器关闭时触发
     onHide(type) {
       console.log("on hide", type);
     },
     onChange(val) {
-      console.log(this.roomNum)
+      console.log(this.roomNum);
       this.endPrice = this.roomNum[0] * this.price * this.dayNum;
-      
-      
+      this.demo1 = false;
     }
   },
 
@@ -257,7 +250,8 @@ export default {
     XTextarea,
     Checklist,
     Actionsheet,
-    PopupPicker
+    PopupPicker,
+    CheckIcon
   },
   computed: {
     conHei() {
@@ -425,6 +419,16 @@ export default {
   .weui-cells_checkbox
   .weui-check:checked
   + .vux-checklist-icon-checked:before {
+  color: #3987ff;
+}
+</style>
+<style lang="less" scoped>
+/deep/ .vux-check-icon {
+  display: inline-block;
+  padding: 15px 6px;
+}
+/deep/ .vux-check-icon > .weui-icon-success:before,
+.vux-check-icon > .weui-icon-success-circle:before {
   color: #3987ff;
 }
 </style>
