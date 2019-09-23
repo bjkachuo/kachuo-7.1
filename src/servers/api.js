@@ -394,4 +394,6 @@ export const recharge = (data) => http.post("integral.recharge_int", data);
 export const LikeGuide = (data) => http.post("tourguide.index.like", data);
 //获取导游列表
 export const GuideList = (data) => http.post("tourguide.index.detail", data);
+//导游订单支付
+export const guidePay = (data) => http.post("tourguide.show.pay", data);
 

@@ -803,6 +803,12 @@ export default [{
     name: '/Recharge',
     component: resolve => require(['@/components/pages/Recharge'], resolve),
   },
+  //导演支付页面
+  {
+    path: '/GuidePayment',
+    name: '/GuidePayment',
+    component: resolve => require(['@/components/common/GuidePayment'], resolve),
+  },
   
 
 

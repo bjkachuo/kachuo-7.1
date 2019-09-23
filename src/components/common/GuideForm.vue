@@ -172,9 +172,11 @@ export default {
         price: this.msgList.endPrice
       })
         .then(data => {
-          console.log(data.result);
           if (data.result == 1) {
             this.showTip("预约成功");
+            this.$router.push("/GuidePayment?orderid=" + data.data);
+
+            console.log(data);
           } else {
             this.showTip("请填写完整信息");
           }
