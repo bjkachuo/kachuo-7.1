@@ -6,7 +6,7 @@
       <div class="content-card-top">
         <div class="content-card-top-left">
           <p>
-            <img class="content-card-top-left-img" :src="userInfo.avatar ? userInfo.avatar : ''"  @click="goCenter"/>
+            <img class="content-card-top-left-img" :src="avatar"  @click="goCenter"/>
           </p>
           <div class="content-card-top-left-txt">
             <p class="p-one">{{userInfo.nickname}}</p>
@@ -91,7 +91,7 @@ export default {
   data() {
     return {
       showDialogFlag: false,
-      userInfo: null,
+
       showJiFfen:false,
 
       dataListOne: [
@@ -230,29 +230,19 @@ export default {
       return {
         height: document.documentElement.clientHeight - 45 + "px"
       };
+    },
+    userInfo() {
+      return this.$store.state.userLoginInfo;
     }
   },
 
-
-  created() {
-    this.getUserInfo();
-  },
-
-  mounted() {
-    console.log(this.GLOBAL.getSession("userLoginInfo"));
-  },
-
   methods: {
-    getUserInfo() {
-      this.userInfo = this.GLOBAL.getSession("userLoginInfo");
-    },
-
     showjifen(){
       this.$refs.alert.show = true
     },
 
     goCenter(){
-      this.$router.push('')
+      this.$router.push('/Ucenter')
     },
 
     watchAllCode() {
@@ -270,7 +260,6 @@ export default {
     }
   },
 
-  watch: {}
 };
 </script>
 <style lang='less' scoped>

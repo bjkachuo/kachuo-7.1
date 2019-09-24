@@ -17,7 +17,9 @@
 import { Cell, Group, Badge } from "vux";
 import { setNickName } from "@/servers/api";
 export default {
+
   props: ["cellList"],
+
   mounted() {
     setTimeout(() => {
       this.money = -1024;

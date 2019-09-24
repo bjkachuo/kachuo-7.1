@@ -326,6 +326,18 @@ export default [{
     name: 'IntegralDesc',
     component: resolve => require(['@/components/pages/kachuouser/IntegralDesc'], resolve),
   },
+  //个人中心
+  {
+    path: '/Ucenter',
+    name: 'Ucenter',
+    component: resolve => require(['@/components/pages/kachuouser/Ucenter/Ucenter'], resolve),
+  },
+  //个人中心
+  {
+    path: '/Ucenter/ModifyNicknames',
+    name: 'SetingNickName',
+    component: resolve => require(['@/components/pages/kachuouser/Ucenter/ModifyNicknames'], resolve),
+  },
   // {
   //   path: '/setting',
   //   name: 'Setting',

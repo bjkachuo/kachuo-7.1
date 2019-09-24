@@ -3,11 +3,7 @@
     <div class="user-info-header-img-wrap">
       <div class="user-info-header-img">
         <img :src="userInfo.avatar" alt="头像">
-        <ImageUpload
-          class="img-upload-wrap"
-          ref="ImageUploadCom"
-          v-on:getHeaderImgUrl="getHeaderImgUrlData"
-        ></ImageUpload>
+        <ImageUpload class="img-upload-wrap" ref="ImageUploadCom" v-on:getHeaderImgUrl="getHeaderImgUrlData"></ImageUpload>
       </div>
       <div class="user-info-header-desc">
         <p>{{userInfo.nickname}}</p>
@@ -25,7 +21,7 @@ import ImageUpload from "@/components/common/UploadImgOne/UploadImgOne";
 
 export default {
   name: "",
-  props: [""],
+
   data() {
     return {
       imgUrl: ""
