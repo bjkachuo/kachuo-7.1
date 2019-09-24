@@ -256,6 +256,10 @@ export default {
         Wechat.auth(scope, state, function (response) {
           // you may use response.code to get the access token.
           alert(JSON.stringify(response));
+          login({
+            code: response.code,
+            type: 2
+          })
         }, function (reason) {
           alert("Failed: " + reason);
         });
@@ -264,7 +268,7 @@ export default {
       });
     }
   },
-  
+
   beforeDestroy() {
     clearInterval(this.timer);
   }
