@@ -6,8 +6,8 @@
       :showRightMore="TitleObjData.showRightMore"
     ></Header>
     <div class="scence-gifts-content" :style="scenceGiftsContent">
-      <x-button type="primary" @click.native="aliPay">支付宝支付</x-button>
-      <x-button type="primary" @click.native="weixinPay">微信支付</x-button>
+      <x-button type="default" @click.native="aliPay" class="ali">支付宝支付</x-button>
+      <x-button type="default" @click.native="weixinPay" class="wechat">微信支付</x-button>
     </div>
   </div>
 </template>
@@ -163,7 +163,7 @@ export default {
 .scence-gifts-content {
   width: 100%;
   margin-top: 50px;
-  background: #fff;
+  background: #F5F5F5;
   overflow: hidden;
   overflow-y: scroll;
   box-sizing: border-box;
@@ -174,4 +174,21 @@ export default {
 /deep/ .weui-btn_primary {
   background-color: #3976ff;
 }
+/deep/ .ali {
+  background: url(./ali.png) no-repeat;
+  background-color: #fff;
+  background-position: 20% 6px;
+  background-size: 30px 30px;
+  color: #000;
+  box-shadow: 0px 10px 20px 0px rgba(0, 101, 255, 0.06);
+}
+/deep/ .wechat {
+  background: url(./wechat.png) no-repeat;
+  background-color: #fff;
+  background-position: 20% 6px;
+  background-size: 30px 30px;
+  color: #000;
+  box-shadow: 0px 10px 20px 0px rgba(0, 101, 255, 0.06);
+}
+
 </style>

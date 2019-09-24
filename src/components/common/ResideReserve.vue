@@ -48,7 +48,10 @@
       </div>
       <div class="form-panel">
         <span @click="useIntegral">
-          <check-icon :value.sync="demo1" label-position="right">可用{{userInfo.credit1}}积分抵用{{userInfo.credit1}}元</check-icon>
+          <check-icon
+            :value.sync="demo1"
+            label-position="right"
+          >可用{{this.Deduction}}积分抵用{{this.Demoney}}元(选中查看可抵积分)</check-icon>
         </span>
       </div>
       <div class="form-panel">
@@ -131,7 +134,11 @@ export default {
       //是否使用积分
       demo1: false,
       //全局用户信息
-      userInfo: null
+      userInfo: null,
+      //下订单中抵扣的积分
+      Deduction: 0,
+      //下单中订单中抵扣的金额
+      Demoney: 0
     };
   },
   created() {
@@ -189,10 +196,16 @@ export default {
           .then(({ data }) => {
             console.log(data);
             this.endPrice = data.data.real_price;
+            //抵扣的积分
+            this.Deduction = data.data.decr_integral;
+            //抵扣的金额
+            this.Demoney = data.data.decr_money;
           });
       } else {
         console.log("不使用积分");
         this.endPrice = this.roomNum[0] * this.price * this.dayNum;
+        this.Deduction = 0;
+        this.Demoney = 0;
       }
     },
     //显示提示信息
@@ -214,18 +227,28 @@ export default {
         mobile: this.phone,
         price: this.endPrice,
         realname: this.name,
-        integral:this.userInfo.credit1,
-        integral_money:this.userInfo.credit1,
+        integral: this.Deduction,
+        integral_money: this.Demoney,
         goods: [this.storeId, this.roomNum.toString()]
-      }).then(data => {
-        console.log(data.result);
-        if (data.result == 1) {
-          this.showTip("预约成功");
-          this.$router.push("/ReserveResult");
-        } else {
-          this.showTip("请填写完整信息");
-        }
-      });
+      })
+        .then(data => {
+          console.log(data.result);
+          if (data.result == 1) {
+            this.showTip("预约成功");
+            //填写完整跳转支付页面进行支付
+            this.$router.push("/GuidePayment?orderid=" + data.data.result);
+            console.log(data);
+          } else if (data.result == 2) {
+            //如果积分大于金额,不需支付直接扣积分跳转订单页>>>>
+            this.$router.push("/orderlist");
+            console.log(data);
+          } else {
+            this.showTip("请填写完整信息");
+          }
+        })
+        .catch(error => {
+          console.log(error);
+        });
     },
     //选择器显示时触发
     onShow() {
@@ -409,6 +432,7 @@ export default {
 }
 .btm-price .price {
   font-weight: bold;
+  color: #ff3939;
 }
 .btm-price .price i {
   font-style: normal;
