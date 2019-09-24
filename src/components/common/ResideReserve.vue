@@ -51,7 +51,7 @@
           <check-icon
             :value.sync="demo1"
             label-position="right"
-          >可用{{this.Deduction}}积分抵用{{this.Demoney}}元(选中查看可抵积分)</check-icon>
+          >可用{{this.startScore}}积分抵用{{this.startScore}}元</check-icon>
         </span>
       </div>
       <div class="form-panel">
@@ -138,14 +138,15 @@ export default {
       //下订单中抵扣的积分
       Deduction: 0,
       //下单中订单中抵扣的金额
-      Demoney: 0
+      Demoney: 0,
+      //初始值积分
+      startScore: ""
     };
   },
   created() {
     //获取全局用户信息
     this.getUserInfo();
   },
-
   beforeMount() {},
   mounted() {
     console.log(this.$route.query);
@@ -176,6 +177,18 @@ export default {
     //最终价格
     this.endPrice = this.price * this.dayNum;
     console.log(this.roomNum);
+    //初始值积分显示
+    this.$http
+      .post(
+        "https://core.kachuo.com/app/ewei_shopv2_app.php?i=8&c=site&a=entry&m=ewei_shopv2&do=mobile&r=integral.shop_integral_itf&type=" +
+          1 +
+          "&money=" +
+          this.endPrice
+      )
+      .then(({ data }) => {
+        console.log(data);
+        this.startScore = data.data.decr_integral;
+      });
   },
   methods: {
     //获取全局用户信息
