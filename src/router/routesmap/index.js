@@ -332,11 +332,17 @@ export default [{
     name: 'Ucenter',
     component: resolve => require(['@/components/pages/kachuouser/Ucenter/Ucenter'], resolve),
   },
-  //个人中心
+  //昵称修改
   {
     path: '/Ucenter/ModifyNicknames',
     name: 'SetingNickName',
     component: resolve => require(['@/components/pages/kachuouser/Ucenter/ModifyNicknames'], resolve),
+  },
+  //实名认证未认证
+  {
+    path: '/Ucenter/Certification',
+    name: 'Certification',
+    component: resolve => require(['@/components/pages/kachuouser/Ucenter/Certification'], resolve),
   },
   // {
   //   path: '/setting',

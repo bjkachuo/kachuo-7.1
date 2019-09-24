@@ -24,7 +24,7 @@
       <div class="set-cells">
         <cell title="实名认证" is-link>
           <template slot="default">
-            <div>未认证</div>
+            <div @click="goRenzheng">未认证</div>
           </template>
         </cell>
         <cell title="人脸识别" is-link>
@@ -72,6 +72,9 @@ export default {
     click (key) {
       console.log(key)
     },
+    goRenzheng(){
+      this.$router.push('/Ucenter/Certification')
+    }
   },
 
   components: {

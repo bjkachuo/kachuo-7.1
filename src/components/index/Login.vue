@@ -261,6 +261,19 @@ export default {
             type: 2
           }).then(res => {
             alert(JSON.stringify(res));
+            localStorage.setItem("token", res.data.accessToken);
+            this.$vux.toast.show({
+              type: "success",
+              text: "登录成功",
+              time: 1000,
+              onHide: () => {
+                this.getUserLoginInfo();
+                this.getLocationData();
+              }
+            });
+            this.$router.push("/indextab");
+
+
           })
         }, function (reason) {
           alert("Failed: " + reason);
