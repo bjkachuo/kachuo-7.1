@@ -29,12 +29,12 @@
           @on-change="onChange"
           placeholder="请选择"
         ></popup-picker>
-        <span @click="useIntegral">
+        <span @click="useIntegral" style="font-size: 3.8vw;">
           <check-icon
             :value.sync="demo1"
             label-position="right"
             style=" background: #fff;display: block; height: 45px;border-radius: 8px;"
-          >可用{{userInfo.credit1}}积分抵用{{userInfo.credit1}}元</check-icon>
+          >可用{{this.Deduction}}积分抵用{{this.Demoney}}元(选中查看可抵积分)</check-icon>
         </span>
       </div>
     </div>
@@ -92,9 +92,9 @@ export default {
       //全局用户信息
       userInfo: null,
       //下订单中抵扣的积分
-      Deduction:0,
+      Deduction: 0,
       //下单中订单中抵扣的金额
-      Demoney:0
+      Demoney: 0
     };
   },
   created() {
@@ -150,18 +150,19 @@ export default {
           )
           .then(({ data }) => {
             console.log(data);
+            //后台返回传来计算后的价格
             this.msgList.endPrice = data.data.real_price;
             //抵扣的积分
             this.Deduction = data.data.decr_integral;
             //抵扣的金额
-            this.Demoney = data.data.decr_money
+            this.Demoney = data.data.decr_money;
           });
       } else {
         console.log("不使用积分");
         this.msgList.endPrice =
           this.msgList.chooseList.timeValue[0] * this.$route.query.price;
-          this.Deduction = 0 ;
-          this.Demoney = 0;
+        this.Deduction = 0;
+        this.Demoney = 0;
       }
     },
 
@@ -173,7 +174,6 @@ export default {
         content: this.msgList.content,
         integral: this.Deduction,
         integral_money: this.Demoney,
-
         message: {
           people: this.msgList.chooseList.numValue.toString(),
           time: this.msgList.chooseList.timeValue.toString()
@@ -184,8 +184,12 @@ export default {
         .then(data => {
           if (data.result == 1) {
             this.showTip("预约成功");
+            //填写完整跳转支付页面进行支付
             this.$router.push("/GuidePayment?orderid=" + data.data);
-
+            console.log(data);
+            //如果积分大于金额
+          } else if (data.result == 2) {
+            this.$router.push("/orderlist");
             console.log(data);
           } else {
             this.showTip("请填写完整信息");

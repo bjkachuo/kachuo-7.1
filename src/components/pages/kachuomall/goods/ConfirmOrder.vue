@@ -368,7 +368,7 @@ export default {
 .confirm-order-btn {
   flex: 1;
   height: 50px;
-  background: #222;
+  background: #3976ff;
   line-height: 50px;
   text-align: center;
   color: #fff;
