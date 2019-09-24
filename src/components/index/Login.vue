@@ -249,13 +249,14 @@ export default {
     },
 
     handleWechat(){
-      Wechat.isInstalled(function (installed) {
+
+      Wechat.isInstalled(installed=> {
         alert("Wechat installed: " + (installed ? "Yes" : "No"));
         let scope = "snsapi_userinfo",
           state = "_" + (+new Date());
-          Wechat.auth(scope, state, function (response) {
+          Wechat.auth(scope, state, response=> {
           // you may use response.code to get the access token.
-          alert(JSON.stringify(response));
+            alert(JSON.stringify(response));
           login({
             code: response.code,
             type: 2
@@ -272,8 +273,6 @@ export default {
               }
             });
             this.$router.push("/indextab");
-
-
           })
         }, function (reason) {
           alert("Failed: " + reason);
