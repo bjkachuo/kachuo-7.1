@@ -253,12 +253,14 @@ export default {
         alert("Wechat installed: " + (installed ? "Yes" : "No"));
         let scope = "snsapi_userinfo",
           state = "_" + (+new Date());
-        Wechat.auth(scope, state, function (response) {
+          Wechat.auth(scope, state, function (response) {
           // you may use response.code to get the access token.
           alert(JSON.stringify(response));
           login({
             code: response.code,
             type: 2
+          }).then(res => {
+            alert(JSON.stringify(res));
           })
         }, function (reason) {
           alert("Failed: " + reason);
