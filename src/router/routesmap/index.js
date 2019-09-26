@@ -829,7 +829,4 @@ export default [{
     name: '/GuidePayment',
     component: resolve => require(['@/components/common/GuidePayment'], resolve),
   },
-  
-
-
 ]

@@ -12,7 +12,7 @@
           <div class="select-body">
             <div class="select-cell">
               <calendar
-                v-model="dataTime"
+                v-model="dateTime"
                 title="使用日期"
                 disable-past
                 placeholder="请选择"
@@ -67,7 +67,7 @@
           class="pickTwo"
           title="发票信息"
           :data="menus"
-          v-model="invoice"
+          
           @on-show="onShow"
           @on-hide="onHide"
           @on-change="onChange"
@@ -102,6 +102,7 @@ import {
   PopupPicker,
   CheckIcon
 } from "vux";
+import { type } from 'os';
 export default {
   props: [""],
   data() {
@@ -128,7 +129,7 @@ export default {
       //票数数
       roomNum: ["1"],
       //发票信息
-      invoice: [],
+      // invoice: [],
       //姓名
       name: "",
       //手机号
@@ -140,7 +141,7 @@ export default {
       //价格
       price: "",
       //日期
-      dataTime: [],
+      dateTime: [],
       //最终价格
       endPrice: "",
       //是否使用积分
@@ -221,7 +222,7 @@ export default {
           });
       } else {
         console.log("不使用积分");
-        this.endPrice = this.roomNum[0] * this.price * this.dataTime.length;
+        this.endPrice = this.roomNum[0] * this.price * this.dateTime.length;
         this.Deduction = 0;
         this.Demoney = 0;
       }
@@ -235,13 +236,12 @@ export default {
         mobile: this.phone,
         price: this.endPrice,
         realname: this.name,
-        data: this.dataTime.toString(),
+        date: this.dateTime,
         integral: this.Deduction,
         integral_money: this.Demoney,
-        goods: [this.storeId, this.roomNum.toString()]
+        goods: [this.storeId.toString(), this.roomNum.toString()]
       })
         .then(data => {
-          console.log(data.result);
           if (data.result == 1) {
             this.showTip("预约成功");
             //填写完整跳转支付页面进行支付
@@ -253,11 +253,13 @@ export default {
             console.log(data);
           } else {
             this.showTip("请填写完整信息");
+            console.log(data)
           }
         })
         .catch(error => {
           console.log(error);
         });
+        // console.log( this.dateTime,this.endPrice)
     },
     //选择器显示时触发
     onShow() {
@@ -273,8 +275,9 @@ export default {
     //当日期或者票数发生改变时重新计算价格
     onChange(val) {
       //价格乘票张数
-      this.endPrice = this.roomNum[0] * this.price * this.dataTime.length;
+      this.endPrice = this.roomNum[0] * this.price * this.dateTime.length;
       this.demo1 = false;
+      console.log(this.endPrice)
     },
     log(str) {
       console.log(str);
