@@ -161,39 +161,6 @@ export default {
           this.$vux.loading.show({
             text: "正在上传"
           });
-          
-          //将base64转换为文件
-          //let bstr = atob(res), n = bstr.length, u8arr = new Uint8Array(n);
-          /*this.$vux.toast.show({
-            type: "cancel",
-            text: "base64解码后大小 " + n,
-            time: 3000
-          });*/ 
-
-          // while(n--){
-          //   u8arr[n] = bstr.charCodeAt(n);
-          // }
-          // let blob = new Blob([u8arr], {type: "JPEG" });
-          //
-          // let file = new File(blob, "faceScan.JPEG");
-
-          /*this.$vux.toast.show({
-            type: "cancel",
-            text: "图片大小 " + file.size,
-            time: 3000
-          });*/
-
-        //   if (file.size > 10 * 1024 * 1024) {
-        //   this.$vux.loading.hide();
-        //   this.$vux.toast.show({
-        //     type: "cancel",
-        //     text: "图片过大",
-        //     time: 1000
-        //   });
-        //   return;
-        // }
-        // let formData = new FormData();
-        // formData.append("file", file);
         axios
           .post(this.videoUploadUrl, res, FACEUPLOADCONFIG)
           .then(res2 => {

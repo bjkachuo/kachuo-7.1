@@ -6,10 +6,12 @@ const _import = require('../_import_' + process.env.NODE_ENV);
 export default [{
     path: '/',
     name: 'login',
-    meta: {
-      auth: true // 如果此路由需要微信授权请设置为true,默认为false
-    },
     component: resolve => require(['@/components/index/Login'], resolve)
+  },
+  {
+    path: '/login2',
+    name: 'login2',
+    component: resolve => require(['@/components/index/Login2'], resolve)
   },
   {
     path: '/indextab',
