@@ -24,11 +24,7 @@
       <div class="set-cells">
         <cell title="实名认证" is-link>
           <template slot="default">
-<<<<<<< Updated upstream
             <div @click="goRenzheng">未认证</div>
-=======
-            <div>未认证</div>
->>>>>>> Stashed changes
           </template>
         </cell>
         <cell title="人脸识别" is-link>
@@ -76,12 +72,9 @@ export default {
     click (key) {
       console.log(key)
     },
-<<<<<<< Updated upstream
     goRenzheng(){
       this.$router.push('/Ucenter/Certification')
     }
-=======
->>>>>>> Stashed changes
   },
 
   components: {
