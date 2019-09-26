@@ -1,7 +1,8 @@
 <template>
   <div class="wrap">
-    <HeaderTR></HeaderTR>
+  
     <div class="normal-content" :style="conHei">
+      <HeaderTR></HeaderTR>
       <div class="swiper-main">
           <video
           :src="this.storeDetails.video"
@@ -277,6 +278,8 @@ video::-webkit-media-controls-panel {
     overflow: hidden;
     overflow-y: scroll;
     box-sizing: border-box;
+    position: relative;
+
   }
 
   img{
