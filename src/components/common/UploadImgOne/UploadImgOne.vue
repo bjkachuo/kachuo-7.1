@@ -141,6 +141,7 @@ export default {
 .upload-imgs li {
   position: relative;
   font-size: 14px;
+  width: 100%;
   display: inline-block;
   margin-left: 16px;
   text-align: center;
@@ -169,6 +170,12 @@ export default {
   width: 94px;
   height: 94px;
   line-height: 94px;
+}
+.cert-flex .upload-imgs img {
+  position: relative;
+  width: 100%;
+  height: 88px;
+  line-height: 88px;
 }
 .upload-imgs .img img {
   vertical-align: middle;

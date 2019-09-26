@@ -7,15 +7,24 @@
         <div class="cert-body">
           <flexbox :gutter="15" class="cert-flex">
             <flexbox-item>
-              <div class="cert-photo">
-                <img src="./card1.png" alt="">
-              </div>
+
+              <UploadImgOne  v-on:getHeaderImgUrl="getz" :plus="true">
+                <div slot="bg" style="width: 100%;height: 100%">
+                  <div class="up-avata-bg" v-if="!z">
+                    <div class="camera"></div>
+                  </div>
+                </div>
+              </UploadImgOne>
               <div class="text">身份证正面</div>
             </flexbox-item>
             <flexbox-item>
-              <div class="cert-photo">
-                <img src="./card2.png" alt="">
-              </div>
+              <UploadImgOne  v-on:getHeaderImgUrl="getz" :plus="true">
+                <div slot="bg" style="width: 100%;height: 100%">
+                  <div class="up-avata-bg" v-if="!f">
+                    <div class="camera"></div>
+                  </div>
+                </div>
+              </UploadImgOne>
               <div class="text">身份证背面</div>
             </flexbox-item>
           </flexbox>
@@ -37,7 +46,7 @@ import { Flexbox, FlexboxItem,XButton } from 'vux'
 import UploadImgOne from "@/components/common/UploadImgOne/UploadImgOne";
 export default {
   name: "",
-  props: [""],
+
   data() {
     return {
       TitleObjData: {
@@ -45,13 +54,23 @@ export default {
         showLeftBack: true,
         showRightMore: false
       },
+      z:'',
+      f:''
     };
   },
+
+  methods:{
+    getz(val){
+      this.z = val;
+    },
+  },
+
   components: {
     Header,
     Flexbox,
     XButton,
-    FlexboxItem
+    FlexboxItem,
+    UploadImgOne
   },
   computed: {
     conHei() {
@@ -61,6 +80,29 @@ export default {
 };
 </script>
 <style lang='css' scoped>
+
+  .camera{
+    width: 100%;
+    height: 88px;
+    margin: 0 auto;
+    position: relative;
+
+    background-size: 100% 100%;
+  }
+  .camera1{
+    background-image: url("./card1.png");
+  }
+  .camera2{
+    background-image: url("./card2.png");
+  }
+  .cert-flex/deep/ li{
+    width: 100%;
+  }
+
+
+
+
+
 .normal-content{
   width: 100%;
   background: #F5F5F5;
