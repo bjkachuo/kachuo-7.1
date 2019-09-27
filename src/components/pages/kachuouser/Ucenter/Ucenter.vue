@@ -34,7 +34,7 @@
         </cell>
       </div>
       <div class="set-cells">
-        <cell title="收货地址" is-link></cell>
+        <cell title="收货地址" is-link link="/address"></cell>
       </div>
     </div>
     <actionsheet v-model="show2" :menus="menus2" @on-click-menu="click" show-cancel></actionsheet>

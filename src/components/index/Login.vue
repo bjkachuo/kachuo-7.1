@@ -99,6 +99,8 @@ export default {
               });
               this.$router.push("/indextab")
             }else{
+              this.getUserLoginInfo()
+              this.getLocationData()
               this.$router.push("/Login2?id="+ res.data.id)
             }
           })

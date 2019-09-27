@@ -74,7 +74,7 @@ export default {
           time: 1000
         });
         if(res.result == 1){
-
+          this.$router.push('/Ucenter')
         }
       })
     }
