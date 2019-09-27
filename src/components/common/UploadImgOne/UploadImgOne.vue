@@ -178,6 +178,10 @@ export default {
   height: 88px;
   line-height: 88px;
 }
+.cert-flex  .upload-imgs li {
+  margin-left: 0;
+}
+/*身份证正反面用的*/
 .upload-imgs .img img {
   vertical-align: middle;
   object-fit: cover;
