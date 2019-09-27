@@ -197,6 +197,7 @@ export default {
         price: this.msgList.endPrice
       })
         .then(data => {
+            console.log(data)
           if (data.result == 1) {
             this.showTip("预约成功");
             //填写完整跳转支付页面进行支付

@@ -242,6 +242,7 @@ export default {
         realname: this.name,
         integral: this.Deduction,
         integral_money: this.Demoney,
+        date:[this.liveData.toString(),this.leaveData.toString()],
         goods: [this.storeId, this.roomNum.toString()]
       })
         .then(data => {
