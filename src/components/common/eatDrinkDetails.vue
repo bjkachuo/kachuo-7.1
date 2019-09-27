@@ -12,6 +12,35 @@
           <div class="shop-title">{{this.storeDetails.name}}</div>
           <cell class="shop-cell">
             <img slot="icon" class="order-pic" :src="this.storeDetails.video_image" />
+            <div class="play-img" @click="showDialogStyle = !showDialogStyle">
+              <img src="../../assets/images/playv.png" alt />
+            </div>
+            <!-- <x-dialog
+              v-model="showDialogStyle"
+              hide-on-blur
+              :dialog-style="{'max-width': '100%', width: '100%', height: '50%', 'background-color': 'transparent'}"
+            >
+              <p style="color:#fff;text-align:center;" @click="showDialogStyle = false">
+                <span style="font-size:30px;">HELLO WORLD</span>
+                <br />
+                <br />
+                <x-icon type="ios-close-outline" style="fill:#fff;"></x-icon>
+              </p>
+            </x-dialog>-->
+            <x-dialog v-model="showDialogStyle" hide-on-blur>
+              <p style="color:#fff;text-align:center;width:80%" @click="showDialogStyle = false">
+                <video
+                  :src="this.storeDetails.video"
+                  :poster="this.storeDetails.video_image"
+                  controlslist="nodownload"
+                  preload="none"
+                  controls="controls"
+                  x5-video-orientation="landscape"
+                ></video>
+                <span class="vux-close" @click="showToast=false"></span>
+              </p>
+            </x-dialog>
+
             <template slot="after-title">
               <div class="raty-body">
                 <div class="raty-num">{{this.data1}}分</div>
@@ -397,7 +426,7 @@
       <div class="btm-bar">
         <div class="btm-price">
           实付
-          <span class="price"  style="color:#ff3939;">
+          <span class="price" style="color:#ff3939;">
             ￥
             <i>{{this.endPrice}}</i>
           </span>
@@ -432,6 +461,8 @@ export default {
   },
   data() {
     return {
+      //视频遮照
+      showDialogStyle: false,
       isFixeds: false,
       mainFixeds: false,
       //选了商品的数量
@@ -451,9 +482,9 @@ export default {
       //评论列表数组
       commentList: [],
       //商家名称
-      storeName:"",
+      storeName: "",
       //商家id
-      businessId:"",
+      businessId: "",
       //下方是否弹出电话
       show1: false,
       BarFixed: false,
@@ -469,12 +500,19 @@ export default {
     };
   },
   methods: {
+    //点击播放视频
+    // playVideo() {
+    //   alert("hhhh");
+    // },
     //点餐数量
     change(price, index) {
-      console.log(this.storeDetails)
+      console.log(this.storeDetails);
       //将选中的商品放入seesion
-      sessionStorage.setItem("storeDetails",JSON.stringify(this.storeDetails.goods_msg))
-      
+      sessionStorage.setItem(
+        "storeDetails",
+        JSON.stringify(this.storeDetails.goods_msg)
+      );
+
       // this.endPrice = this.changeValue[index] * price;
     },
     //滚动  判断固定
@@ -509,7 +547,16 @@ export default {
     },
     //去吃喝下订单页
     goEatOrder() {
-      this.$router.push("/eatDrinkOrders?storeName="+this.storeName+"&endPrice="+this.endPrice+"&businessId="+this.businessId+"&type="+this.storeDetails.type);
+      this.$router.push(
+        "/eatDrinkOrders?storeName=" +
+          this.storeName +
+          "&endPrice=" +
+          this.endPrice +
+          "&businessId=" +
+          this.businessId +
+          "&type=" +
+          this.storeDetails.type
+      );
     },
     //跳转资质页面
     fications() {
@@ -529,15 +576,15 @@ export default {
       )
       .then(({ data }) => {
         var obj = data.data;
-        obj.goods_msg.forEach(item=>{
-          item.num = 0
-          console.log(item)
-        })
-        console.log(obj)
-        this.storeDetails = obj
+        obj.goods_msg.forEach(item => {
+          item.num = 0;
+          console.log(item);
+        });
+        console.log(obj);
+        this.storeDetails = obj;
         this.data1 = data.data.score - 0;
         this.storeName = data.data.name;
-        this.businessId = data.data.id
+        this.businessId = data.data.id;
       });
   },
   components: {
@@ -553,20 +600,24 @@ export default {
   },
   watch: {
     storeDetails: {
-            deep: true,
-            handler: function (newVal,oldVal){
-              let price = 0
-                newVal.goods_msg.forEach(item=>{
-                  price+=item.price*item.num
-                  this.endPrice = price
-                })
-            }
+      deep: true,
+      handler: function(newVal, oldVal) {
+        let price = 0;
+        newVal.goods_msg.forEach(item => {
+          price += item.price * item.num;
+          this.endPrice = price;
+        });
+      }
     }
-
   }
 };
 </script>
 <style lang='css' scoped>
+video {
+  object-fit: fill;
+  width: 125%;
+}
+
 .normal-content {
   /* padding-bottom: 90%; */
   background: #f5f5f5;
@@ -704,6 +755,19 @@ export default {
 .shop-cell {
   line-height: 14px;
   padding: 0 15px;
+  position: relative;
+}
+.shop-cell .play-img {
+  position: absolute;
+  left: 14px;
+  top: 0;
+}
+.shop-cell .play-img img {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #fff;
+  background: rgba(52, 52, 52, 0.5);
+  background-size: 10px;
 }
 .shop-cell:before {
   display: none;
@@ -937,5 +1001,10 @@ export default {
 .lists /deep/ .vux-number-round .vux-number-selector-sub *,
 .lists /deep/ .vux-number-round .vux-number-selector-plus * {
   display: none;
+}
+</style>
+<style lang="less" scoped>
+/deep/ .vux-x-dialog-absolute .weui-dialogP {
+  position: fixed;
 }
 </style>
