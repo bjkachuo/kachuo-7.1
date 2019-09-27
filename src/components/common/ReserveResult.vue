@@ -54,8 +54,12 @@
         }, {
           label: '下单手机：',
           value: '178 1611 5091'
-        }]
+        }],
+        test:'xixixi'
       };
+    },
+    mounted(){
+      // this.list[2].label = this.test
     },
     components: {
       Header,

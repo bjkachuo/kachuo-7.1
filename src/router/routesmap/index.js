@@ -677,7 +677,7 @@ export default [{
 
   },
   {
-    //住吧订单成功页
+    //支付订单成功页外包 兼容好
     path: '/ReserveResult',
     name: 'ReserveResult',
     component: resolve => require(['@/components/common/ReserveResult'], resolve),

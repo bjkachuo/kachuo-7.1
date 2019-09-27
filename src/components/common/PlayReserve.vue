@@ -67,7 +67,6 @@
           class="pickTwo"
           title="发票信息"
           :data="menus"
-          
           @on-show="onShow"
           @on-hide="onHide"
           @on-change="onChange"
@@ -102,7 +101,7 @@ import {
   PopupPicker,
   CheckIcon
 } from "vux";
-import { type } from 'os';
+import { type } from "os";
 export default {
   props: [""],
   data() {
@@ -153,7 +152,7 @@ export default {
       //下单中订单中抵扣的金额
       Demoney: 0,
       //初始值积分
-      startScore:""
+      startScore: ""
     };
   },
   created() {
@@ -181,7 +180,7 @@ export default {
       )
       .then(({ data }) => {
         console.log(data);
-        this.startScore = data.data.decr_integral
+        this.startScore = data.data.decr_integral;
       });
   },
   methods: {
@@ -253,13 +252,13 @@ export default {
             console.log(data);
           } else {
             this.showTip("请填写完整信息");
-            console.log(data)
+            console.log(data);
           }
         })
         .catch(error => {
           console.log(error);
         });
-        // console.log( this.dateTime,this.endPrice)
+      // console.log( this.dateTime,this.endPrice)
     },
     //选择器显示时触发
     onShow() {
@@ -277,7 +276,7 @@ export default {
       //价格乘票张数
       this.endPrice = this.roomNum[0] * this.price * this.dateTime.length;
       this.demo1 = false;
-      console.log(this.endPrice)
+      console.log(this.endPrice);
     },
     log(str) {
       console.log(str);
