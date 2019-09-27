@@ -6,7 +6,7 @@
       <div class="content-card-top">
         <div class="content-card-top-left">
           <p>
-            <img class="content-card-top-left-img" :src="avatar"  @click="goCenter"/>
+            <img class="content-card-top-left-img" :src="userInfo.avatar"  @click="goCenter"/>
           </p>
           <div class="content-card-top-left-txt">
             <p class="p-one">{{userInfo.nickname}}</p>

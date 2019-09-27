@@ -33,7 +33,7 @@
       <div class="cert-foot">
         <span class="text">信息已加密，仅用于身份认证</span>
       </div>
-      <div class="end-button">
+      <div class="end-button"  @click="submitS">
         <x-button>提交</x-button>
       </div>
     </div>
@@ -64,8 +64,19 @@ export default {
     getz(val){
       this.z = val;
     },
-    submit(){
-      // card_img
+    submitS(){
+
+      AuthSubmit({card_img:this.z}).then(res=>{
+        console.log(res);
+        this.$vux.toast.show({
+          type: res.result ?'success':"warn",
+          text: res.msg,
+          time: 1000
+        });
+        if(res.result == 1){
+
+        }
+      })
     }
   },
 
