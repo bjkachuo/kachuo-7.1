@@ -102,7 +102,8 @@
               login({
                 tel: this.phoneValue.replace(/\s*/g, ""),
                 code: this.veriValue,
-                type: 1
+                type: 1,
+                ins_id:this.$route.query.id
               })
                 .then(res => {
                   if (res.result === 1) {

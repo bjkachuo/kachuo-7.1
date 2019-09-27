@@ -11,7 +11,7 @@
               <UploadImgOne  v-on:getHeaderImgUrl="getz" :plus="true">
                 <div slot="bg" style="width: 100%;height: 100%">
                   <div class="up-avata-bg" v-if="!z">
-                    <div class="camera"></div>
+                    <div class="camera camera1"></div>
                   </div>
                 </div>
               </UploadImgOne>
@@ -21,7 +21,7 @@
               <UploadImgOne  v-on:getHeaderImgUrl="getz" :plus="true">
                 <div slot="bg" style="width: 100%;height: 100%">
                   <div class="up-avata-bg" v-if="!f">
-                    <div class="camera"></div>
+                    <div class="camera camera2"></div>
                   </div>
                 </div>
               </UploadImgOne>

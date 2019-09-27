@@ -75,17 +75,17 @@ export default {
     handleWechat(){
 
       Wechat.isInstalled(installed=> {
-        alert("Wechat installed: " + (installed ? "Yes" : "No"));
+
         let scope = "snsapi_userinfo",
           state = "_" + (+new Date());
           Wechat.auth(scope, state, response=> {
           // you may use response.code to get the access token.
-            alert(JSON.stringify(response));
+
           login({
             code: response.code,
             type: 2
           }).then(res => {
-            alert(JSON.stringify(res));
+
             localStorage.setItem("token", res.data.accessToken);
             if(res.data.mobile){
               this.$vux.toast.show({
@@ -93,20 +93,20 @@ export default {
                 text: "登录成功",
                 time: 1000,
                 onHide: () => {
-                  this.getUserLoginInfo();
-                  this.getLocationData();
+                  this.getUserLoginInfo()
+                  this.getLocationData()
                 }
               });
-              this.$router.push("/indextab");
+              this.$router.push("/indextab")
             }else{
-              this.$router.push("/Login2");
+              this.$router.push("/Login2?id="+ res.data.id)
             }
           })
         }, function (reason) {
-          alert("Failed: " + reason);
+
         });
       }, function (reason) {
-        alert("Failed: " + reason);
+
       });
     }
   },
