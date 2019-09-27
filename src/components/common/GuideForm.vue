@@ -113,7 +113,7 @@ export default {
     this.$http
       .post(
         "https://core.kachuo.com/app/ewei_shopv2_app.php?i=8&c=site&a=entry&m=ewei_shopv2&do=mobile&r=integral.shop_integral_itf&type=" +
-          1 +
+          4 +
           "&money=" +
           this.msgList.endPrice
       )
@@ -159,7 +159,7 @@ export default {
         this.$http
           .post(
             "https://core.kachuo.com/app/ewei_shopv2_app.php?i=8&c=site&a=entry&m=ewei_shopv2&do=mobile&r=integral.shop_integral_itf&type=" +
-              1 +
+              4 +
               "&money=" +
               this.msgList.endPrice
           )

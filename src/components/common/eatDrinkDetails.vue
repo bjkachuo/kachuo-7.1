@@ -2,7 +2,7 @@
   <div class="wrap" style="overflow-y:scroll;height: 92%;">
     <x-header class="in-header" :class="{isFixed:isFixeds==true}" id="headerBar">
       详情
-      <div slot="right">
+      <div slot="right" style="display:none">
         <div class="help-icon">帮助</div>
       </div>
     </x-header>
@@ -397,7 +397,7 @@
       <div class="btm-bar">
         <div class="btm-price">
           实付
-          <span class="price">
+          <span class="price"  style="color:#ff3939;">
             ￥
             <i>{{this.endPrice}}</i>
           </span>
@@ -450,7 +450,10 @@ export default {
       storeDetails: {},
       //评论列表数组
       commentList: [],
-
+      //商家名称
+      storeName:"",
+      //商家id
+      businessId:"",
       //下方是否弹出电话
       show1: false,
       BarFixed: false,
@@ -469,6 +472,9 @@ export default {
     //点餐数量
     change(price, index) {
       console.log(this.storeDetails)
+      //将选中的商品放入seesion
+      sessionStorage.setItem("storeDetails",JSON.stringify(this.storeDetails.goods_msg))
+      
       // this.endPrice = this.changeValue[index] * price;
     },
     //滚动  判断固定
@@ -503,7 +509,7 @@ export default {
     },
     //去吃喝下订单页
     goEatOrder() {
-      this.$router.push("/eatDrinkOrders");
+      this.$router.push("/eatDrinkOrders?storeName="+this.storeName+"&endPrice="+this.endPrice+"&businessId="+this.businessId+"&type="+this.storeDetails.type);
     },
     //跳转资质页面
     fications() {
@@ -515,7 +521,6 @@ export default {
     //获取列表页传来的id
     console.log(this.$route.query);
     this.idNum = this.$route.query.idNum;
-
     //获取商家详情！
     this.$http
       .post(
@@ -525,16 +530,14 @@ export default {
       .then(({ data }) => {
         var obj = data.data;
         obj.goods_msg.forEach(item=>{
-          
           item.num = 0
           console.log(item)
         })
         console.log(obj)
         this.storeDetails = obj
-        
-        
         this.data1 = data.data.score - 0;
-        
+        this.storeName = data.data.name;
+        this.businessId = data.data.id
       });
   },
   components: {
@@ -559,6 +562,7 @@ export default {
                 })
             }
     }
+
   }
 };
 </script>
@@ -762,6 +766,7 @@ export default {
   margin-top: 5px;
 }
 .link-heart {
+  display: none;
   background: url(../../assets/images/cancelzan.png) no-repeat;
   width: 30px;
   height: 30px;
