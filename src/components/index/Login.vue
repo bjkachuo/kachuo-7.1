@@ -51,6 +51,18 @@ export default {
         this.$router.push("/indextab");
       }
     },
+    getUserLoginInfo() {
+      getUserInfo({})
+        .then(res => {
+          if (res.result === 1) {
+            this.$store.commit("setUserLoginInfo", res.data);
+            this.GLOBAL.setSession("userLoginInfo", res.data);
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
     // 获取经纬度信息
     getLocationData() {
       let dataObj = sessionStorage.getItem("positionInfo") ? sessionStorage.getItem("positionInfo") : "";

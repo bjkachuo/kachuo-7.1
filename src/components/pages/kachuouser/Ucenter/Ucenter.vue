@@ -45,6 +45,7 @@
 import Header from "@/components/common/Header";
 import { Cell,XInput,Actionsheet } from 'vux'
 import ImageUpload from "@/components/common/UploadImgOne/UploadImgOne";
+import { GetAuthState } from "@/servers/api";
 export default {
   name: "",
   props: [""],
