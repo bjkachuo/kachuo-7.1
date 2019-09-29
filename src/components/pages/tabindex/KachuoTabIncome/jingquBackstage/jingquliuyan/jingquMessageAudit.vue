@@ -56,6 +56,7 @@ export default {
   border-radius: 8px;
   margin: 56px auto 10px;
   overflow: hidden;
+  border-radius: 85px;
 }
 .line-two {
   width: 100%;
