@@ -117,7 +117,7 @@ export default {
       //商家id
       businessId: "",
       //商家tyoe1吃 2喝
-      type:""
+      type: ""
     };
   },
   computed: {},
@@ -140,13 +140,13 @@ export default {
     }
     console.log(newarr);
     this.storeNumTwo = newarr;
-    console.log(this.storeNumTwo,11111111)
+    console.log(this.storeNumTwo, 11111111);
     //最终价格等于传来的价格
     this.endPrice = this.$route.query.endPrice;
     //商家id
     this.businessId = this.$route.query.businessId;
     //商家tyoe 1吃 2喝
-    this.type = this.$route.query.type
+    this.type = this.$route.query.type;
     //初始值积分显示
     this.$http
       .post(
@@ -217,16 +217,17 @@ export default {
       })
         .then(data => {
           if (data.result == 1) {
-            this.showTip("预约成功");
+            this.showTip("预约成功去支付");
             //填写完整跳转支付页面进行支付
             this.$router.push("/GuidePayment?orderid=" + data.data.result);
             console.log(data);
           } else if (data.result == 2) {
+            this.showTip("使用积分抵扣成功");
             //如果积分大于金额,不需支付直接扣几分跳转订单页>>>>
             this.$router.push("/orderlist");
             console.log(data);
           } else {
-            this.showTip("请填写完整信息");
+            this.showTip("请填写完整或检查网络");
             console.log(data);
           }
         })

@@ -101,7 +101,7 @@
                 <!-- <div class="list-tt">1</div> -->
                 <div class="lists">
                   <cell>
-                    <img slot="icon" class="order-pic" src="../../assets/images/dingdan.png" />
+                    <img slot="icon" class="order-pic" :src="item.image" />
                     <template slot="after-title">
                       <div class="cell-title">{{item.name}}</div>
                       <div class="list-foot">

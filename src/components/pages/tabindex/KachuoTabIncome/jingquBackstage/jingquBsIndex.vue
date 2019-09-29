@@ -62,7 +62,7 @@ export default {
         },
         {
           name: "游客留言",
-          link: "",
+          link: "/jingquMessageAudit",
           imgSrc: require("@/components/pages/tabindex/KachuoTabIncome/jingquBackstage/jq6.png")
         }
       ]

@@ -197,18 +197,19 @@ export default {
         price: this.msgList.endPrice
       })
         .then(data => {
-            console.log(data)
+          console.log(data);
           if (data.result == 1) {
-            this.showTip("预约成功");
+            this.showTip("预约成功去支付");
             //填写完整跳转支付页面进行支付
             this.$router.push("/GuidePayment?orderid=" + data.data);
             console.log(data);
             //如果积分大于金额
           } else if (data.result == 2) {
+            this.showTip("使用积分抵扣成功");
             this.$router.push("/orderlist");
             console.log(data);
           } else {
-            this.showTip("请填写完整信息");
+            this.showTip("请填写完整或检查网络");
           }
         })
         .catch(error => {

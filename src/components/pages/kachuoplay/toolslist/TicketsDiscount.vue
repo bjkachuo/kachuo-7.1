@@ -5,7 +5,10 @@
       :showLeftBack="TitleObjData.showLeftBack"
       :showRightMore="TitleObjData.showRightMore"
     ></Header>
-    <div class="tickets-discount-list" :style="contentNoHeaderHeight">
+    <div class="line-one">
+
+    </div>
+    <!-- <div class="tickets-discount-list" :style="contentNoHeaderHeight">
       <div style="width:92%;margin: 10px auto 10px;">
         <swiper auto height="100px" class="custom">
           <swiper-item class="black">
@@ -38,9 +41,7 @@
           </flexbox-item>
         </flexbox>
       </div>
-
-      <!-- <TicketsDiscount></TicketsDiscount> -->
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -117,14 +118,19 @@ export default {
 };
 </script>
 <style lang='css' scoped>
-.tickets-discount-wrap {
+.line-one {
+  width: 100%;
+  height: 145px;
+  border-radius: 8px;
+  margin-top: 56px;
+} 
+/* .tickets-discount-wrap {
   width: 100%;
 }
 .tickets-discount-list {
   width: 100%;
   height: auto;
   overflow-y: scroll;
-  /* padding: 15px; */
   box-sizing: border-box;
   margin-top: 50px;
   background: #f9f9f9;
@@ -133,7 +139,6 @@ export default {
   width: 92%;
   height: auto;
   margin: 0 auto;
-  /* background: darkblue; */
 }
 .t-left {
   height: 100%;
@@ -157,36 +162,36 @@ export default {
 .t-right img {
   width: 100%;
   background: none;
-}
+} */
 </style>
 <style lang="less" scoped>
-/deep/ .vux-swiper {
-  border-radius: 8px;
-}
-.custom {
-  overflow: inherit;
-  /deep/ .vux-indicator {
-    right: 50%;
-    margin-right: -32px;
-    bottom: -27px;
-  }
-  /deep/ .vux-icon-dot {
-    width: 15px !important;
-    height: 3px !important;
-  }
-}
-.flex-demo {
-  text-align: center;
-  width: 97%;
-  height: 79px;
-  background-color: #ffffff;
-  border-radius: 4px;
-  background-clip: padding-box;
-  margin: 5px auto;
-}
-/deep/ .custom .vux-indicator {
-  right: 50%;
-  margin-right: -32px;
-  bottom: 0px;
-}
+// /deep/ .vux-swiper {
+//   border-radius: 8px;
+// }
+// .custom {
+//   overflow: inherit;
+//   /deep/ .vux-indicator {
+//     right: 50%;
+//     margin-right: -32px;
+//     bottom: -27px;
+//   }
+//   /deep/ .vux-icon-dot {
+//     width: 15px !important;
+//     height: 3px !important;
+//   }
+// }
+// .flex-demo {
+//   text-align: center;
+//   width: 97%;
+//   height: 79px;
+//   background-color: #ffffff;
+//   border-radius: 4px;
+//   background-clip: padding-box;
+//   margin: 5px auto;
+// }
+// /deep/ .custom .vux-indicator {
+//   right: 50%;
+//   margin-right: -32px;
+//   bottom: 0px;
+// }
 </style>

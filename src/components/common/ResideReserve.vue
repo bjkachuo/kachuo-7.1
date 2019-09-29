@@ -242,22 +242,23 @@ export default {
         realname: this.name,
         integral: this.Deduction,
         integral_money: this.Demoney,
-        date:[this.liveData.toString(),this.leaveData.toString()],
+        date: [this.liveData.toString(), this.leaveData.toString()],
         goods: [this.storeId, this.roomNum.toString()]
       })
         .then(data => {
           console.log(data.result);
           if (data.result == 1) {
-            this.showTip("预约成功");
+            this.showTip("预约成功去支付");
             //填写完整跳转支付页面进行支付
             this.$router.push("/GuidePayment?orderid=" + data.data.result);
             console.log(data);
           } else if (data.result == 2) {
+            this.showTip("使用积分抵扣成功");
             //如果积分大于金额,不需支付直接扣积分跳转订单页>>>>
             this.$router.push("/orderlist");
             console.log(data);
           } else {
-            this.showTip("请填写完整信息");
+            this.showTip("请填写完整或检查网络");
           }
         })
         .catch(error => {

@@ -631,6 +631,12 @@ export default [{
     name: 'jingquBsGuideOrder',
     component: resolve => require(['@/components/pages/tabindex/KachuoTabIncome/jingquBackstage/jingqudingdan/jingquBsGuideOrder'], resolve),
   },
+  //景区后台游客留言
+  {
+    path: '/jingquMessageAudit',
+    name: 'jingquMessageAudit',
+    component: resolve => require(['@/components/pages/tabindex/KachuoTabIncome/jingquBackstage/jingquliuyan/jingquMessageAudit'], resolve),
+  },
   {
     path: '/understand',
     name: 'understand',
