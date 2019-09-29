@@ -14,13 +14,23 @@
           </div>
           <div class="piao-head-right">
             <div style="width:15px;height:15px;float:left;margin-top: 21px;">
-              <img src="wenhaohh.png" alt />
+              <img src="./wenhaohh.png" alt />
             </div>
             <p>验票说明</p>
           </div>
         </div>
-        <div class="piao-one">
-          <div class="p-left"></div>
+        <div class="piao-one" v-for="(item,index) in dataList" :key="index" @click="getItem(item.link)"> 
+          <div class="p-left">
+            <img :src="item.imgSrc" alt />
+          </div>
+          <div class="p-right">
+            <div class="txt-one">
+              <p>{{item.name}}</p>
+            </div>
+            <div class="txt-two">
+              <p>{{item.text}}</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -81,12 +91,14 @@ export default {
         {
           name: "电子票",
           link: "/electronicsTicket",
-          imgSrc: require("@/components/pages/kachuoplay/toolslist/piaoone.png")
+          imgSrc: require("@/components/pages/kachuoplay/toolslist/piaoone.png"),
+          text: "其它平台或渠道购票用户验票入口"
         },
         {
           name: "纸质票",
           link: "/paperTicket",
-          imgSrc: require("@/components/pages/kachuoplay/toolslist/piaotwo.png")
+          imgSrc: require("@/components/pages/kachuoplay/toolslist/piaotwo.png"),
+          text: "持有纸质门票用户验票入口"
         },
         // {
         //   name: "现场票",
@@ -96,7 +108,8 @@ export default {
         {
           name: "免费票",
           link: "/freeTickets",
-          imgSrc: require("@/components/pages/kachuoplay/toolslist/piaofour.png")
+          imgSrc: require("@/components/pages/kachuoplay/toolslist/piaofour.png"),
+          text: "达到国家免票标准的用户游园入口"
         }
       ]
     };
@@ -152,7 +165,7 @@ export default {
 .piao-head {
   width: 100%;
   height: 60px;
-  background: #FFFFFF;
+  background: #ffffff;
   border-radius: 20px 20px 0 0;
   border-bottom: 1px solid #ebf1ff;
   margin-bottom: 21px;
@@ -185,7 +198,37 @@ export default {
   height: 90px;
   margin: 0 auto 15px;
   border-radius: 8px;
-  background: aquamarine;
+  background: #ebf1ff;
+}
+.p-left {
+  width: 75px;
+  height: 90px;
+  float: left;
+}
+.p-left img {
+  width: 100%;
+  border-radius: 12px;
+}
+.p-right {
+  width: 70%;
+  height: 90px;
+  float: right;
+}
+.txt-one {
+  height: 28px;
+  margin: 18px 0 5px 0;
+}
+.txt-one p {
+  font-size: 18px;
+  color: #222222;
+  font-weight: bold;
+}
+.txt-two {
+  height: 20px;
+}
+.txt-two p {
+  font-size: 12px;
+  color: #666666;
 }
 /* .tickets-discount-wrap {
   width: 100%;
