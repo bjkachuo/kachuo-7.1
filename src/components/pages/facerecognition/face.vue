@@ -156,10 +156,10 @@ export default {
     //人脸识别
     faceLogin() {
       
-       var ua = navigator.userAgent.toLowerCase();
+       //var ua = navigator.userAgent.toLowerCase();
         //判断是否是苹果手机，是则是true
-       var isIos = (ua.indexOf('iphone') != -1) || (ua.indexOf('ipad') != -1);
-       if (isIos) {//苹果
+       //var isIos = (ua.indexOf('iphone') != -1) || (ua.indexOf('ipad') != -1);
+       //if (isIos) {//苹果
          navigator.camera.getPicture((res)=>{if(res == null) returnthis.$vux.loading.show({  text: "正在上传"});
           axios
             .post(this.videoUploadUrl, res, FACEUPLOADCONFIG)
@@ -179,33 +179,33 @@ export default {
             .catch(err => {
               console.log(err);
             });}, (err)=>{console.log(err)}, { quality: 60,destinationType: Camera.DestinationType.DATA_URL ,cameraDirection:Camera.Direction.FRONT});
-       }else{
+       //}else{
         //安卓
-        cordova.plugins.FaceScan.faceLivingScan(
-          res => {if(res == null) returnthis.$vux.loading.show({  text: "正在上传"});
-          axios
-            .post(this.videoUploadUrl, res, FACEUPLOADCONFIG)
-            .then(res2 => {
+        //cordova.plugins.FaceScan.faceLivingScan(
+          //res => {if(res == null) returnthis.$vux.loading.show({  text: "正在上传"});
+          //axios
+            //.post(this.videoUploadUrl, res, FACEUPLOADCONFIG)
+            //.then(res2 => {
               // alert(JSON.stringify(res2))
-              if (res2.data.result === 1) {
-                this.checkFaceRequest(res2);
-              } else {
-                this.$vux.loading.hide();
-                this.$vux.toast.show({
-                  type: "warn",
-                  text: "人脸验证失败请重试",
-                  time: 1000
-                });
-              }
-            })
-            .catch(err => {
-              console.log(err);
-            });
-          }, err => {
-            console.log(err);
-          }
-        );
-      };
+             // if (res2.data.result === 1) {
+             //   this.checkFaceRequest(res2);
+              //} else {
+               // this.$vux.loading.hide();
+               // this.$vux.toast.show({
+               //   type: "warn",
+               //   text: "人脸验证失败请重试",
+                //  time: 1000
+                //});
+              //}
+            //})
+           // .catch(err => {
+             // console.log(err);
+            //});
+          //}, err => {
+          //  console.log(err);
+         // }
+        //);
+      //};
     }
   },
 

@@ -6,7 +6,23 @@
       :showRightMore="TitleObjData.showRightMore"
     ></Header>
     <div class="line-one">
-
+      <img src="./piaobig.png" alt />
+      <div class="piao-wrap">
+        <div class="piao-head">
+          <div class="piao-head-left">
+            <p>智能验票</p>
+          </div>
+          <div class="piao-head-right">
+            <div style="width:15px;height:15px;float:left;margin-top: 21px;">
+              <img src="wenhaohh.png" alt />
+            </div>
+            <p>验票说明</p>
+          </div>
+        </div>
+        <div class="piao-one">
+          <div class="p-left"></div>
+        </div>
+      </div>
     </div>
     <!-- <div class="tickets-discount-list" :style="contentNoHeaderHeight">
       <div style="width:92%;margin: 10px auto 10px;">
@@ -41,7 +57,7 @@
           </flexbox-item>
         </flexbox>
       </div>
-    </div> -->
+    </div>-->
   </div>
 </template>
 
@@ -72,11 +88,11 @@ export default {
           link: "/paperTicket",
           imgSrc: require("@/components/pages/kachuoplay/toolslist/piaotwo.png")
         },
-        {
-          name: "现场票",
-          link: "/onsiteTickets",
-          imgSrc: require("@/components/pages/kachuoplay/toolslist/piaothree.png")
-        },
+        // {
+        //   name: "现场票",
+        //   link: "/onsiteTickets",
+        //   imgSrc: require("@/components/pages/kachuoplay/toolslist/piaothree.png")
+        // },
         {
           name: "免费票",
           link: "/freeTickets",
@@ -121,9 +137,56 @@ export default {
 .line-one {
   width: 100%;
   height: 145px;
+  border-radius: 16px 16px 0 0;
+  margin: 61px auto 0;
+  box-shadow: 0px -5px 15px 0px rgba(57, 118, 255, 0.32);
+  position: relative;
+}
+.piao-wrap {
+  width: 100%;
+  height: 468px;
+  position: absolute;
+  top: 120px;
+  border-radius: 30px 30px 0 0;
+}
+.piao-head {
+  width: 100%;
+  height: 60px;
+  background: #FFFFFF;
+  border-radius: 20px 20px 0 0;
+  border-bottom: 1px solid #ebf1ff;
+  margin-bottom: 21px;
+}
+.piao-head .piao-head-left {
+  float: left;
+  height: 100%;
+  margin-left: 5%;
+}
+.piao-head .piao-head-left p {
+  line-height: 60px;
+  font-size: 18px;
+  color: #222222;
+  font-weight: 800;
+}
+.piao-head .piao-head-right {
+  float: right;
+  height: 100%;
+  margin-right: 5%;
+  width: 76px;
+}
+.piao-head-right p {
+  color: #999999;
+  font-size: 14px;
+  float: right;
+  line-height: 60px;
+}
+.piao-one {
+  width: 92%;
+  height: 90px;
+  margin: 0 auto 15px;
   border-radius: 8px;
-  margin-top: 56px;
-} 
+  background: aquamarine;
+}
 /* .tickets-discount-wrap {
   width: 100%;
 }
