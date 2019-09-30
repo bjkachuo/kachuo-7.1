@@ -172,6 +172,7 @@ export default {
                   text: "识别成功",
                   time: 1000
                 });
+                this.$router.go(-1);
               } else {
                 this.$vux.loading.hide();
                 this.$vux.toast.show({
@@ -183,7 +184,7 @@ export default {
             })
             .catch(err => {
               console.log(err);
-            });}, (err)=>{console.log(err)}, { quality: 50,destinationType: Camera.DestinationType.DATA_URL ,cameraDirection:Camera.Direction.FRONT});
+            });}, (err)=>{console.log(err)}, { quality: 50,destinationType: Camera.DestinationType.DATA_URL ,cameraDirection:Camera.Direction.FRONT,targetWidth:720,targetHeight:1280});
 
     }
   },
