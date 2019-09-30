@@ -840,4 +840,25 @@ export default [{
     name: '/GuidePayment',
     component: resolve => require(['@/components/common/GuidePayment'], resolve),
   },
+  {
+    //导游后台首页
+    path: '/TourBsIndex',
+    name: '/TourBsIndex',
+    component: resolve => require(['@/components/common/TourBackstage/TourBsIndex'], resolve),
+
+  },
+  {
+    //导游后台个人资料页
+    path: '/personMsgBs',
+    name: '/personMsgBs',
+    component: resolve => require(['@/components/common/TourBackstage/personMsgBs'], resolve),
+
+  },
+  {
+    //导游后台订单管理页
+    path: '/GuideOrderBs',
+    name: '/GuideOrderBs',
+    component: resolve => require(['@/components/common/TourBackstage/GuideOrderBs'], resolve),
+
+  }
 ]

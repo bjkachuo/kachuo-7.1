@@ -1,5 +1,5 @@
 <template>
-  <div class="addGuide-wrap">
+  <div class="personMsg-wrap">
     <Header
       style="margin-bottom: 46px"
       :titleContent="TitleObjData.titleContent"
@@ -7,28 +7,23 @@
       :showRightMore="TitleObjData.showRightMore"
     ></Header>
     <p class="Preservation">提交</p>
-    <div class="name">
-      <x-input title name="username" placeholder="请输入导游姓名" is-type="china-name" class="name-inpt"></x-input>
+    <div class="jq-photo-wrap">
+      <p>上传个人照片</p>
+      <ImageUploaderBs></ImageUploaderBs>
     </div>
     <div class="introduce">
       <x-textarea
         :max="200"
         name="detail"
-        placeholder="请输入个人介绍..."
+        placeholder="请输入导游介绍"
         :show-counter="false"
         :height="130"
         :rows="8"
         :cols="30"
       ></x-textarea>
     </div>
-    <div class="jq-photo-wrap">
-      <p>导游头像</p>
-      <ImageUploaderBs></ImageUploaderBs>
-    </div>
     <div class="price">
-      <x-input title placeholder="请输入每小时定价" type="number" class="price-inpt" :show-clear="false">
-        <p slot="right" style="color=#222222FF">元</p>
-      </x-input>
+      <x-input title="每小时价格(元)" placeholder="请输入每小时价格" required="true" type="number"></x-input>
     </div>
     <div class="time">
       <popup-picker
@@ -39,6 +34,9 @@
         @on-hide="onHide"
         @on-change="onChange"
       ></popup-picker>
+    </div>
+    <div class="price">
+      <x-input title="联系方式" placeholder="请输入联系方式" required="true" is-type="china-mobile"></x-input>
     </div>
   </div>
 </template>
@@ -53,7 +51,7 @@ export default {
   data() {
     return {
       TitleObjData: {
-        titleContent: "添加导游",
+        titleContent: "个人资料",
         showLeftBack: true,
         showRightMore: false
       },
@@ -65,18 +63,7 @@ export default {
   created() {},
   mounted() {},
   watch: {},
-  methods: {
-    //选择种类事件
-    onChange(val) {
-      console.log("val change", val);
-    },
-    onShow() {
-      console.log("on show");
-    },
-    onHide(type) {
-      console.log("on hide", type);
-    }
-  },
+  methods: {},
   components: {
     Header,
     XInput,
@@ -88,12 +75,10 @@ export default {
 </script>
 
 <style scoped lang="css">
-.addGuide-wrap {
-  height: 100%;
-  width: 100%;
-  background: #f5f5f5ff;
-  overflow: hidden scroll;
+.personMsg-wrap {
+  background: #f0f1f5;
   position: relative;
+  overflow: hidden scroll;
 }
 .Preservation {
   display: block;
@@ -104,25 +89,11 @@ export default {
   z-index: 9999;
   color: #333333ff;
 }
-.name {
-  width: 92%;
-  height: 55px;
-  background: #ffffffff;
-  margin: 56px auto 10px;
-  border-radius: 8px;
-}
-.introduce {
-  width: 92%;
-  height: 150px;
-  background: #ffffffff;
-  border-radius: 8px;
-  margin: 0 auto 10px;
-}
 .jq-photo-wrap {
   width: 92%;
   min-height: 170px;
   background: #ffffffff;
-  margin: 0 auto 10px;
+  margin: 56px auto 10px;
   border-radius: 8px;
   overflow: hidden;
 }
@@ -133,12 +104,20 @@ export default {
   display: block;
   margin: 10px 0 0 4%;
 }
+.introduce {
+  width: 92%;
+  height: 150px;
+  background: #ffffffff;
+  border-radius: 8px;
+  margin: 0 auto 10px;
+}
 .price {
   width: 92%;
   height: 55px;
   background: #ffffffff;
-  margin: 0 auto 10px;
   border-radius: 8px;
+  margin: 0 auto 10px;
+  padding: 8px 2px;
 }
 .time {
   width: 92%;
@@ -154,17 +133,5 @@ export default {
   display: block;
   float: left;
   margin: 16px 0 0 4%;
-}
-</style>
-<style lang="less" scoped>
-/deep/ .name-inpt input {
-  height: 2.411765em;
-}
-/deep/ .price-inpt input {
-  height: 2.411765em;
-}
-/deep/ .right-icon {
-  margin: 13px 4% 0 0;
-  float: right;
 }
 </style>

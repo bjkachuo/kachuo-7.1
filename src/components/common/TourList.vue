@@ -14,6 +14,7 @@
         <x-icon type="ios-arrow-back" size="28"></x-icon>
       </div>
       <div class="head-right" style="float:right;font-size:16px;margin-top:10px;" @click="goRegister">导游注册</div>
+      <div class="head-right" style="float:right;font-size:16px;margin-top:10px;margin-right:8px" @click="goTourBs">导游后台</div>
     </div>
     <div class="normal-content" :style="conHei">
       <div class="guide-list">
@@ -66,6 +67,10 @@ import { Rater } from "vux";
 export default {
   props: [""],
   methods: {
+    //去导演后台管理页面
+    goTourBs(){
+      this.$router.push("/TourBsIndex")
+    },
     //导演注册页面
     goRegister(){
       this.$router.push("/TourRegister")
