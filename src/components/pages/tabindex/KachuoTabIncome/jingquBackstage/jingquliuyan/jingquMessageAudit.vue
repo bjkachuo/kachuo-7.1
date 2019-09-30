@@ -14,6 +14,15 @@
         <div class="txt-wrap">
           <p>木子菲菲</p>
         </div>
+        <!-- <div class="tong-wrap">
+          <img src="./lajitong.png" alt />
+        </div> -->
+      </div>
+      <div class="liuyan-wrap">
+        <p>
+          蓬莱阁旅游景区，是国家级5A级风景区，位于山
+          东省蓬莱市，小城在海边。
+        </p>
       </div>
     </div>
     <div class="line-two"></div>
@@ -56,7 +65,7 @@ export default {
   border-radius: 8px;
   margin: 56px auto 10px;
   overflow: hidden;
-  border-radius: 85px;
+  border-radius: 12px;
 }
 .line-two {
   width: 100%;
@@ -88,5 +97,24 @@ export default {
 }
 .txt-wrap p {
   line-height: 35px;
+}
+/* .tong-wrap {
+  width: 24px;
+  height: 24px;
+  float: right;
+  margin-top: 3px;
+}
+.tong-wrap img {
+  width: 100%;
+} */
+.liuyan-wrap {
+  width: 92%;
+  height: 40px;
+  margin: 0 auto;
+  height: 48px;
+}
+.liuyan-wrap p {
+  font-size: 16px;
+  color: #333333;
 }
 </style>

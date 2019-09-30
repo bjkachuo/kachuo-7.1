@@ -1,25 +1,30 @@
 <template>
-  <div class="tickets-discount-wrap">
+  <div class="tickets-discount-wrap" style="overflow: hidden scroll;">
     <Header
       :titleContent="TitleObjData.titleContent"
       :showLeftBack="TitleObjData.showLeftBack"
       :showRightMore="TitleObjData.showRightMore"
     ></Header>
     <div class="line-one">
-      <img src="./piaobig.png" alt />
+      <img src="./piaobig.png" alt @click="olBuy" class="big-img" />
       <div class="piao-wrap">
         <div class="piao-head">
           <div class="piao-head-left">
             <p>智能验票</p>
           </div>
           <div class="piao-head-right">
-            <div style="width:15px;height:15px;float:left;margin-top: 21px;">
+            <div style="width:15px;height:15px;float:left;margin-top: 18px;">
               <img src="./wenhaohh.png" alt />
             </div>
             <p>验票说明</p>
           </div>
         </div>
-        <div class="piao-one" v-for="(item,index) in dataList" :key="index" @click="getItem(item.link)"> 
+        <div
+          class="piao-one"
+          v-for="(item,index) in dataList"
+          :key="index"
+          @click="getItem(item.link)"
+        >
           <div class="p-left">
             <img :src="item.imgSrc" alt />
           </div>
@@ -32,8 +37,16 @@
             </div>
           </div>
         </div>
+        <div class="piao-bottom">
+          <div class="btm-left"></div>
+
+          <p class="btm-mid">认证服务由北京卡戳科技有限公司提供技术支持</p>
+
+          <div class="btm-right"></div>
+        </div>
       </div>
     </div>
+
     <!-- <div class="tickets-discount-list" :style="contentNoHeaderHeight">
       <div style="width:92%;margin: 10px auto 10px;">
         <swiper auto height="100px" class="custom">
@@ -140,6 +153,10 @@ export default {
     getItem(link) {
       console.log(111111);
       this.$router.push(link);
+    },
+    //跳转在线购票
+    olBuy() {
+      this.$router.push("/onlineTicketing");
     }
   },
 
@@ -154,6 +171,9 @@ export default {
   margin: 61px auto 0;
   box-shadow: 0px -5px 15px 0px rgba(57, 118, 255, 0.32);
   position: relative;
+}
+.big-img {
+  background: none;
 }
 .piao-wrap {
   width: 100%;
@@ -230,6 +250,34 @@ export default {
   font-size: 12px;
   color: #666666;
 }
+.piao-bottom {
+  width: 315px;
+  height: 14px;
+  margin: 36px auto 0;
+}
+.btm-left {
+  height: 1px;
+  width: 25px;
+  background: #e1e7f5;
+  margin-top: 8px;
+  float: left;
+}
+.btm-mid {
+  height: 14px;
+  float: left;
+  font-size: 12px;
+  color: #cccccc;
+  text-align: center;
+  margin: 0 2%;
+}
+.btm-right {
+  height: 1px;
+  width: 25px;
+  background: #e1e7f5;
+  margin-top: 8px;
+  float: left;
+}
+
 /* .tickets-discount-wrap {
   width: 100%;
 }

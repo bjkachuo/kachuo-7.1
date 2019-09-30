@@ -6,8 +6,9 @@
       :showRightMore="TitleObjData.showRightMore"
     ></Header>
     <div class="scence-gifts-content" :style="scenceGiftsContent">
-      <x-button type="default" @click.native="aliPay" class="ali">支付宝支付</x-button>
       <x-button type="default" @click.native="weixinPay" class="wechat">微信支付</x-button>
+
+      <x-button type="default" @click.native="aliPay" class="ali">支付宝支付</x-button>
     </div>
   </div>
 </template>
@@ -189,5 +190,8 @@ export default {
   background-size: 30px 30px;
   color: #000;
   box-shadow: 0px 10px 20px 0px rgba(0, 101, 255, 0.06);
+}
+/deep/ .weui-btn:after{
+  border: none;
 }
 </style>

@@ -1,4 +1,3 @@
-
 const _import = require('../_import_' + process.env.NODE_ENV);
 
 // export default [{
@@ -292,15 +291,15 @@ export default [{
   },
   //我的创作
   {
-      path: '/CreateIncome/MyCreation',
-      name: 'MyCreation',
-      component: resolve => require(['@/components/pages/kachuouser/CreateIncome/MyCreation'], resolve),
+    path: '/CreateIncome/MyCreation',
+    name: 'MyCreation',
+    component: resolve => require(['@/components/pages/kachuouser/CreateIncome/MyCreation'], resolve),
   },
   //创作收集
   {
-      path: '/CreateIncome/CreationCollection',
-      name: 'CreationCollection',
-      component: resolve => require(['@/components/pages/kachuouser/CreateIncome/CreationCollection'], resolve),
+    path: '/CreateIncome/CreationCollection',
+    name: 'CreationCollection',
+    component: resolve => require(['@/components/pages/kachuouser/CreateIncome/CreationCollection'], resolve),
   },
   //游园日记
   {
@@ -795,6 +794,12 @@ export default [{
     path: '/scenicSpot/information',
     name: 'information',
     component: resolve => require(['@/admin/scenicSpot/page/information/information'], resolve),
+  },
+  {
+    //票务系统在线购票
+    path: '/onlineTicketing',
+    name: '/onlineTicketing',
+    component: resolve => require(['@/components/pages/kachuoplay/toolslist/onlineTicketing'], resolve),
   },
   {
     //票务系统电子票

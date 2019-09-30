@@ -37,7 +37,7 @@
             v-if="item.num > 0"
           >
             <div class="img-wrap">
-              <img src alt />
+              <img :src="item.image" alt />
             </div>
             <div class="content-right">
               <div class="top">

@@ -1,12 +1,23 @@
 <template>
   <div class="electronicsTicket-wrap">
-    <Header :titleContent="TitleObjData.titleContent" :showLeftBack="TitleObjData.showLeftBack" :showRightMore="TitleObjData.showRightMore" style="top:-43px"></Header>
-    <tab :line-width="1" custom-bar-width="100%" default-color="#666666FF" active-color="#222222FF" bar-active-color="#3976FFFF">
+    <Header
+      :titleContent="TitleObjData.titleContent"
+      :showLeftBack="TitleObjData.showLeftBack"
+      :showRightMore="TitleObjData.showRightMore"
+      style="top:-43px"
+    ></Header>
+    <!-- <tab
+      :line-width="1"
+      custom-bar-width="100%"
+      default-color="#666666FF"
+      active-color="#222222FF"
+      bar-active-color="#3976FFFF"
+    >
       <tab-item @click.native="cur=0" :class="{active:cur==1}" selected>智能验票</tab-item>
       <tab-item @click.native="cur=1" :class="{active:cur==0}">在线购票</tab-item>
-    </tab>
+    </tab>-->
     <div class="tab-content">
-      <b v-show="cur==1">
+      <!-- <b v-show="cur==1">
         <div class="t-content" v-for="(item,index) in dataListOne" :key="index">
           <div class="t-left">
             <div class="img-wrap">
@@ -25,20 +36,11 @@
             </div>
           </div>
           <div class="t-right">
-            <!-- @click="buyTickets(index)" -->
             <p>购票</p>
           </div>
         </div>
-        <!-- <div class="order-content">
-          <div class="content-top">
-            <div class="img-wrap">
-              <img src alt />
-            </div>
-          </div>
-          <div class="content-bottom"></div>
-        </div>-->
-      </b>
-      <b v-show="cur==0">
+      </b>-->
+      <b>
         <div class="explain-wrap">
           <div class="explain-one">
             <img src="./yanpiao.png" alt />
@@ -51,53 +53,6 @@
               <p>&nbsp;&nbsp;2.门票和人脸信息绑定，可通过景区闸机快速入园</p>
             </div>
           </div>
-          <!-- <div class="p-wrap">
-            <flexbox>
-              <flexbox-item>
-                <div class="flex-demo">
-                  <div class="p-img-wrap">
-                    <img src="./p1.png" alt />
-                  </div>
-                  <div>
-                    <p>扫描人脸</p>
-                  </div>
-                </div>
-              </flexbox-item>
-              <div class="add-wrap">
-                <img src="./p2.png" alt />
-              </div>
-              <flexbox-item>
-                <div class="flex-demo">
-                  <div class="p-img-wrap">
-                    <img src="./p3.png" alt />
-                  </div>
-                  <div>
-                    <p>二维码</p>
-                  </div>
-                </div>
-              </flexbox-item>
-              <flexbox-item>
-                <div class="flex-demo">
-                  <div class="p-img-wrap">
-                    <img src="./p4.png" alt />
-                  </div>
-                  <div>
-                    <p>条形码</p>
-                  </div>
-                </div>
-              </flexbox-item>
-              <flexbox-item>
-                <div class="flex-demo">
-                  <div class="p-img-wrap">
-                    <img src="./p5.png" alt />
-                  </div>
-                  <div>
-                    <p>数字码</p>
-                  </div>
-                </div>
-              </flexbox-item>
-            </flexbox>
-          </div>-->
         </div>
         <div class="face-wrap">
           <div class="f-left">
@@ -144,92 +99,89 @@ export default {
         titleContent: "电子票",
         showLeftBack: true,
         showRightMore: false
-      },
-      cur: 0, //默认选中第一个tab
-      dataListOne: [],
-      dataList: [
-        {
-          imgSrc: require("@/assets/images/蓬莱阁.jpg"),
-          distance: "500km",
-          name: "蓬莱阁",
-          price: "¥110",
-          priceDiscount: "¥120",
-          type: "蓬莱阁门票"
-        },
-        {
-          imgSrc: require("@/assets/images/三孔.jpg"),
-          distance: "500km",
-          name: "三孔",
-          price: "¥110",
-          priceDiscount: "¥130",
-          type: "三孔门票"
-        },
-        {
-          imgSrc: require("@/assets/images/云冈石窟.jpg"),
-          distance: "500km",
-          name: "云冈石窟",
-          price: "¥110",
-          priceDiscount: "¥120",
-          type: "云冈石窟门票"
-        },
-        {
-          imgSrc: require("@/assets/images/云雾山.jpg"),
-          distance: "500km",
-          name: "云雾山",
-          price: "¥110",
-          priceDiscount: "¥120",
-          type: "云雾山门票"
-        },
-        {
-          imgSrc: require("@/assets/images/少林寺.jpg"),
-          distance: "500km",
-          name: "少林寺",
-          price: "¥110",
-          priceDiscount: "¥120",
-          type: "少林寺门票"
-        },
-        {
-          imgSrc: require("@/assets/images/徽州古城.jpg"),
-          distance: "500km",
-          name: "徽州古城",
-          price: "¥110",
-          priceDiscount: "¥120",
-          type: "徽州古城门票"
-        },
-        {
-          imgSrc: require("@/assets/images/苍岩山.jpg"),
-          distance: "500km",
-          name: "苍岩山",
-          price: "¥110",
-          priceDiscount: "¥120",
-          type: "苍岩山门票"
-        }
-      ]
+      }
+      // cur: 0, //默认选中第一个tab
+      // dataListOne: [],
+      // dataList: [
+      //   {
+      //     imgSrc: require("@/assets/images/蓬莱阁.jpg"),
+      //     distance: "500km",
+      //     name: "蓬莱阁",
+      //     price: "¥110",
+      //     priceDiscount: "¥120",
+      //     type: "蓬莱阁门票"
+      //   },
+      //   {
+      //     imgSrc: require("@/assets/images/三孔.jpg"),
+      //     distance: "500km",
+      //     name: "三孔",
+      //     price: "¥110",
+      //     priceDiscount: "¥130",
+      //     type: "三孔门票"
+      //   },
+      //   {
+      //     imgSrc: require("@/assets/images/云冈石窟.jpg"),
+      //     distance: "500km",
+      //     name: "云冈石窟",
+      //     price: "¥110",
+      //     priceDiscount: "¥120",
+      //     type: "云冈石窟门票"
+      //   },
+      //   {
+      //     imgSrc: require("@/assets/images/云雾山.jpg"),
+      //     distance: "500km",
+      //     name: "云雾山",
+      //     price: "¥110",
+      //     priceDiscount: "¥120",
+      //     type: "云雾山门票"
+      //   },
+      //   {
+      //     imgSrc: require("@/assets/images/少林寺.jpg"),
+      //     distance: "500km",
+      //     name: "少林寺",
+      //     price: "¥110",
+      //     priceDiscount: "¥120",
+      //     type: "少林寺门票"
+      //   },
+      //   {
+      //     imgSrc: require("@/assets/images/徽州古城.jpg"),
+      //     distance: "500km",
+      //     name: "徽州古城",
+      //     price: "¥110",
+      //     priceDiscount: "¥120",
+      //     type: "徽州古城门票"
+      //   },
+      //   {
+      //     imgSrc: require("@/assets/images/苍岩山.jpg"),
+      //     distance: "500km",
+      //     name: "苍岩山",
+      //     price: "¥110",
+      //     priceDiscount: "¥120",
+      //     type: "苍岩山门票"
+      //   }
+      // ]
     };
   },
 
-
   mounted() {
-    //票列表
-    //
-    if(JSON.parse(sessionStorage.getItem("userLoginInfo")).discern == 0){
+    if (JSON.parse(sessionStorage.getItem("userLoginInfo")).discern == 0) {
       this.$router.push("/facecheck");
-    }else{
-
+    } else {
     }
 
-    this.$http.post("http://core.kachuo.com/app/ewei_shopv2_app.php?i=8&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.ticket.getlist")
-      .then(({ data }) => {
-        console.log(data);
-        this.dataListOne = data.data;
-        console.log(this.dataListOne);
-      });
+    // this.$http
+    //   .post(
+    //     "http://core.kachuo.com/app/ewei_shopv2_app.php?i=8&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.ticket.getlist"
+    //   )
+    //   .then(({ data }) => {
+    //     console.log(data);
+    //     this.dataListOne = data.data;
+    //     console.log(this.dataListOne);
+    //   });
   },
 
   methods: {
-    scan() {
-
-    }
+    scan() {}
     //跳转购票页面
     // buyTickets(index) {
     //   // var i = 0 ; i < this.dataList.length; i ++ ;
@@ -274,6 +226,7 @@ export default {
   font-weight: normal;
   display: block;
   width: 100%;
+  margin-top: 56px;
 }
 .t-content {
   width: 92%;
