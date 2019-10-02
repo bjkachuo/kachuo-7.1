@@ -11,9 +11,9 @@
     <tab
       :line-width="1"
       custom-bar-width="32px"
-      default-color="#222222FF"
-      active-color="#3976FFFF"
-      bar-active-color="#3976FFFF"
+      default-color="#222222"
+      active-color="#3976FF"
+      bar-active-color="#3976FF"
     >
       <tab-item @click.native="cur=0" :class="{active:cur==0}" selected>出售中</tab-item>
       <tab-item @click.native="cur=1" :class="{active:cur==1}">已下架</tab-item>
@@ -115,7 +115,7 @@ i {
 .Mall-wrap {
   height: 100%;
   width: 100%;
-  background: #f5f5f5ff;
+  background: #f5f5f5;
   overflow: hidden;
   position: relative;
 }
@@ -126,7 +126,7 @@ i {
   right: 4%;
   font-size: 16px;
   z-index: 9999;
-  color: #333333ff;
+  color: #333333;
 }
 .tab-content {
   width: 100%;
@@ -141,7 +141,7 @@ i {
 .list-one {
   width: 100%;
   height: 120px;
-  background: #ffffffff;
+  background: #ffffff;
   margin-bottom: 10px;
   border-radius: 8px;
 }
@@ -168,7 +168,7 @@ i {
 }
 .title-wrap p {
   font-size: 16px;
-  color: #222222ff;
+  color: #222222;
 }
 .more-wrap {
   width: 30px;
@@ -189,14 +189,14 @@ i {
 .bottom-line span {
   float: left;
   font-size: 18px;
-  color: #ff3939ff;
+  color: #ff3939;
   font-weight: 600;
   line-height: 28px;
 }
 .bottom-line p {
   float: right;
   font-weight: 14px;
-  color: #999999ff;
+  color: #999999;
   font-size: 14px;
   font-weight: 300;
   line-height: 28px;

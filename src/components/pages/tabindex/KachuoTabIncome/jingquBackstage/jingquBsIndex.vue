@@ -89,12 +89,12 @@ export default {
 .jingqu-wrap {
   width: 100%;
   height: 100%;
-  background: #f0f1f5ff;
+  background: #f0f1f5;
 }
 .Choice {
   width: 100%;
   height: 233px;
-  background: #ffffffff;
+  background: #ffffff;
   border-radius: 8px;
   margin-top: 56px;
 }
@@ -121,7 +121,7 @@ export default {
 }
 .flex-demo p {
   font-size: 18px;
-  color: #333333ff;
+  color: #333333;
   //   font-family: PingFangSC-Medium;
 }
 </style>

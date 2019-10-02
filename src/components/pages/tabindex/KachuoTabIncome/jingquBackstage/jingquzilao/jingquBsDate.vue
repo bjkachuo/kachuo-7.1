@@ -134,13 +134,13 @@ export default {
 .data-wrap {
   width: 100%;
   height: 100%;
-  background: #f0f1f5ff;
+  background: #f0f1f5;
   overflow: hidden scroll;
 }
 .photo {
   width: 92%;
   height: 100px;
-  background: #ffffffff;
+  background: #ffffff;
   border-radius: 8px;
   margin: 0 auto 15px;
 }
@@ -151,7 +151,7 @@ export default {
   display: block;
   font-size: 16px;
   float: left;
-  color: #222222ff;
+  color: #222222;
   font-weight: 800;
   margin: 12px 0 0 4%;
 }
@@ -159,13 +159,13 @@ export default {
   display: block;
   float: right;
   font-size: 14px;
-  color: #3976ffff;
+  color: #3976ff;
   margin: 14px 4% 0 0;
 }
 .line-mid {
   height: 1px;
   width: 92%;
-  background: #f0f1f5ff;
+  background: #f0f1f5;
   margin: 0 auto;
 }
 .line-bottom {
@@ -174,7 +174,7 @@ export default {
 .line-bottom p {
   line-height: 42px;
   font-size: 14px;
-  color: #ccccccff;
+  color: #cccccc;
   margin-left: 4%;
 }
 .addNum {
@@ -193,7 +193,7 @@ export default {
 }
 .addNum p {
   font-size: 14px;
-  color: #9ebcffff;
+  color: #9ebcff;
   line-height: 0;
   float: left;
   display: block;
@@ -206,7 +206,7 @@ export default {
 /deep/ .weui-btn_default {
   margin-top: 8px;
   width: 54%;
-  color: #9ebcffff;
+  color: #9ebcff;
   font-size: 14px;
   background: rgba(255, 255, 255, 0.5);
 }

@@ -95,7 +95,7 @@ export default {
 .search-wrap {
   height: 100%;
   width: 100;
-  background: #ffffffff;
+  background: #ffffff;
 }
 .head-wrap {
   width: 100%;

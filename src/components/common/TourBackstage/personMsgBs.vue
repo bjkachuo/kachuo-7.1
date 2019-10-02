@@ -87,19 +87,19 @@ export default {
   right: 4%;
   font-size: 16px;
   z-index: 9999;
-  color: #333333ff;
+  color: #333333;
 }
 .jq-photo-wrap {
   width: 92%;
   min-height: 170px;
-  background: #ffffffff;
+  background: #ffffff;
   margin: 56px auto 10px;
   border-radius: 8px;
   overflow: hidden;
 }
 .jq-photo-wrap p {
   font-size: 16px;
-  color: #222222ff;
+  color: #222222;
   font-weight: bold;
   display: block;
   margin: 10px 0 0 4%;
@@ -107,14 +107,14 @@ export default {
 .introduce {
   width: 92%;
   height: 150px;
-  background: #ffffffff;
+  background: #ffffff;
   border-radius: 8px;
   margin: 0 auto 10px;
 }
 .price {
   width: 92%;
   height: 55px;
-  background: #ffffffff;
+  background: #ffffff;
   border-radius: 8px;
   margin: 0 auto 10px;
   padding: 8px 2px;
@@ -122,13 +122,13 @@ export default {
 .time {
   width: 92%;
   height: 55px;
-  background: #ffffffff;
+  background: #ffffff;
   margin: 0 auto 10px;
   border-radius: 8px;
   padding: 8px 2px;
 }
 .time p {
-  color: #222222ff;
+  color: #222222;
   font-size: 16px;
   display: block;
   float: left;

@@ -79,7 +79,7 @@ export default {
   right: 4%;
   font-size: 16px;
   z-index: 9999;
-  color: #333333ff;
+  color: #333333;
 }
 </style>
 <style lang="less" scoped>

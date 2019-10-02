@@ -42,10 +42,10 @@
       </div>
       <div class="price">
         <x-input title="单价" placeholder="请填写商品单价" type="number" :show-clear="false">
-          <p slot="right" style="color=#222222FF">元</p>
+          <p slot="right" style="color=#222222">元</p>
         </x-input>
         <x-input title="库存" placeholder="请填写库存数量" type="number" :show-clear="false">
-          <p slot="right" style="color=#222222FF">件</p>
+          <p slot="right" style="color=#222222">件</p>
         </x-input>
       </div>
       <div class="freight">
@@ -139,27 +139,27 @@ export default {
 .addCommodity-wrap {
   height: 100%;
   width: 100%;
-  background: #f5f5f5ff;
+  background: #f5f5f5;
   overflow: hidden;
 }
 .addCommodity-content {
   height: 90%;
   width: 100%;
-  background: #f5f5f5ff;
+  background: #f5f5f5;
   overflow: hidden scroll;
   margin-top: 46px;
 }
 .jq-photo-wrap {
   width: 92%;
   min-height: 170px;
-  background: #ffffffff;
+  background: #ffffff;
   margin: 10px auto 10px;
   border-radius: 8px;
   overflow: hidden;
 }
 .jq-photo-wrap p {
   font-size: 16px;
-  color: #222222ff;
+  color: #222222;
   font-weight: bold;
   display: block;
   margin: 10px 0 0 4%;
@@ -168,14 +168,14 @@ export default {
 .jq-photo-wrap-two {
   width: 92%;
   min-height: 170px;
-  background: #ffffffff;
+  background: #ffffff;
   margin: 0 auto 10px;
   border-radius: 8px;
   overflow: hidden;
 }
 .jq-photo-wrap-two p {
   font-size: 16px;
-  color: #222222ff;
+  color: #222222;
   font-weight: bold;
   display: block;
   margin: 10px 0 0 4%;
@@ -184,21 +184,21 @@ export default {
 .name-wrap {
   width: 92%;
   height: 110px;
-  background: #ffffffff;
+  background: #ffffff;
   border-radius: 8px;
   margin: 0 auto 10px;
 }
 .Up-wrap {
   width: 92%;
   height: 165px;
-  background: #ffffffff;
+  background: #ffffff;
   margin: 0 auto 10px;
   border-radius: 8px;
   overflow: hidden;
 }
 .Up-wrap h3 {
   font-size: 16px;
-  color: #222222ff;
+  color: #222222;
   font-weight: bold;
   display: block;
   margin: 10px 0 10px 4%;
@@ -206,27 +206,27 @@ export default {
 .line {
   width: 92%;
   height: 1px;
-  background: #e5e5e5ff;
+  background: #e5e5e5;
   margin: 0 auto;
 }
 .price {
   width: 92%;
   height: 110px;
-  background: #ffffffff;
+  background: #ffffff;
   margin: 0 auto 10px;
   border-radius: 8px;
 }
 .freight {
   width: 92%;
   height: 55px;
-  background: #ffffffff;
+  background: #ffffff;
   margin: 0 auto 10px;
   border-radius: 8px;
 }
 .existing {
   width: 92%;
   height: 55px;
-  background: #ffffffff;
+  background: #ffffff;
   margin: 0 auto 30px;
   border-radius: 8px;
 }
@@ -249,7 +249,7 @@ export default {
 }
 /deep/ button.weui-btn,
 input.weui-btn {
-  background: #3976ffff;
-  color: #ffffffff;
+  background: #3976ff;
+  color: #ffffff;
 }
 </style>

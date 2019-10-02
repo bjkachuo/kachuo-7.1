@@ -27,7 +27,7 @@
     </div>
     <div class="price">
       <x-input title placeholder="请输入每小时定价" type="number" class="price-inpt" :show-clear="false">
-        <p slot="right" style="color=#222222FF">元</p>
+        <p slot="right" style="color=#222222">元</p>
       </x-input>
     </div>
     <div class="time">
@@ -91,7 +91,7 @@ export default {
 .addGuide-wrap {
   height: 100%;
   width: 100%;
-  background: #f5f5f5ff;
+  background: #f5f5f5;
   overflow: hidden scroll;
   position: relative;
 }
@@ -102,33 +102,33 @@ export default {
   right: 4%;
   font-size: 16px;
   z-index: 9999;
-  color: #333333ff;
+  color: #333333;
 }
 .name {
   width: 92%;
   height: 55px;
-  background: #ffffffff;
+  background: #ffffff;
   margin: 56px auto 10px;
   border-radius: 8px;
 }
 .introduce {
   width: 92%;
   height: 150px;
-  background: #ffffffff;
+  background: #ffffff;
   border-radius: 8px;
   margin: 0 auto 10px;
 }
 .jq-photo-wrap {
   width: 92%;
   min-height: 170px;
-  background: #ffffffff;
+  background: #ffffff;
   margin: 0 auto 10px;
   border-radius: 8px;
   overflow: hidden;
 }
 .jq-photo-wrap p {
   font-size: 16px;
-  color: #222222ff;
+  color: #222222;
   font-weight: bold;
   display: block;
   margin: 10px 0 0 4%;
@@ -136,20 +136,20 @@ export default {
 .price {
   width: 92%;
   height: 55px;
-  background: #ffffffff;
+  background: #ffffff;
   margin: 0 auto 10px;
   border-radius: 8px;
 }
 .time {
   width: 92%;
   height: 55px;
-  background: #ffffffff;
+  background: #ffffff;
   margin: 0 auto 10px;
   border-radius: 8px;
   padding: 8px 2px;
 }
 .time p {
-  color: #222222ff;
+  color: #222222;
   font-size: 16px;
   display: block;
   float: left;

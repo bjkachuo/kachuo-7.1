@@ -10,9 +10,9 @@
     <tab
       :line-width="1"
       custom-bar-width="32px"
-      default-color="#222222FF"
-      active-color="#3976FFFF"
-      bar-active-color="#3976FFFF"
+      default-color="#222222"
+      active-color="#3976FF"
+      bar-active-color="#3976FF"
     >
       <tab-item @click.native="cur=0" :class="{active:cur==0}" selected>全部</tab-item>
       <tab-item @click.native="cur=1" :class="{active:cur==1}">空闲</tab-item>
@@ -152,7 +152,7 @@ export default {
 .guide-wrap {
   height: 100%;
   width: 100%;
-  background: #f5f5f5ff;
+  background: #f5f5f5;
   overflow: hidden;
   position: relative;
 }
@@ -163,7 +163,7 @@ export default {
   right: 4%;
   font-size: 16px;
   z-index: 9999;
-  color: #333333ff;
+  color: #333333;
 }
 .tab-content {
   width: 100%;
@@ -178,7 +178,7 @@ export default {
 .list-one {
   width: 100%;
   height: 120px;
-  background: #ffffffff;
+  background: #ffffff;
   margin-bottom: 10px;
   border-radius: 8px;
 }
@@ -196,8 +196,8 @@ export default {
 .img-wrap .state {
   width: 45px;
   height: 25px;
-  background: #6b97ffff;
-  color: #ffffffff;
+  background: #6b97ff;
+  color: #ffffff;
   font-size: 12px;
   line-height: 25px;
   border-radius: 8px 0 20px 0;
@@ -214,11 +214,11 @@ export default {
 }
 .name-star-wrap p {
   font-size: 18px;
-  color: #222222ff;
+  color: #222222;
 }
 .star-wrap span {
   font-size: 12px;
-  color: #999999ff;
+  color: #999999;
   margin-left: 4px;
 }
 .more-wrap {

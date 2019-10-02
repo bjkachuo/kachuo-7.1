@@ -9,9 +9,9 @@
     <tab
       :line-width="1"
       custom-bar-width="32px"
-      default-color="#222222FF"
-      active-color="#3976FFFF"
-      bar-active-color="#3976FFFF"
+      default-color="#222222"
+      active-color="#3976FF"
+      bar-active-color="#3976FF"
     >
       <tab-item @click.native="cur=0" :class="{active:cur==0}" selected>待接单</tab-item>
       <tab-item @click.native="cur=1" :class="{active:cur==1}">服务中</tab-item>
@@ -210,7 +210,7 @@ export default {
 .goodsOrder-wrap {
   height: 100%;
   width: 100%;
-  background: #f5f5f5ff;
+  background: #f5f5f5;
   overflow: hidden;
 }
 .tab-content {
@@ -226,7 +226,7 @@ export default {
 .order-content {
   width: 100%;
   height: 180px;
-  background: #ffffffff;
+  background: #ffffff;
   margin-bottom: 10px;
   border-radius: 8px;
 }
@@ -254,7 +254,7 @@ export default {
 .num {
   width: 90px;
   height: 30px;
-  background: #000000ff;
+  background: #000000;
   position: absolute;
   left: 0;
   bottom: 0;
@@ -264,7 +264,7 @@ export default {
   text-align: center;
   line-height: 30px;
   font-size: 16px;
-  color: #ffffffff;
+  color: #ffffff;
 }
 .mid-text {
   width: 66%;
@@ -279,12 +279,12 @@ export default {
   float: left;
   font-size: 16px;
   font-weight: bold;
-  color: #222222ff;
+  color: #222222;
   font-family: PingFangSC-Bold;
 }
 .state {
   font-size: 14px;
-  color: #85a9ffff;
+  color: #85a9ff;
   float: right;
   font-family: PingFangSC-Regular;
   margin-right: 4%;
@@ -295,7 +295,7 @@ export default {
 }
 .text-two p {
   font-size: 12px;
-  color: #999999ff;
+  color: #999999;
 }
 .text-three {
   height: 22px;
@@ -303,20 +303,20 @@ export default {
 }
 .text-three p {
   font-size: 14px;
-  color: #666666ff;
+  color: #666666;
 }
 .bottom-one {
   float: right;
   border-radius: 18px;
   width: 100px;
   height: 35px;
-  border: 1px solid #3976ffff;
-  background: #ffffffff;
+  border: 1px solid #3976ff;
+  background: #ffffff;
   margin-top: 2px;
 }
 .bottom-one p {
   font-size: 14px;
-  color: #3976ffff;
+  color: #3976ff;
   line-height: 35px;
   text-align: center;
 }
@@ -325,12 +325,12 @@ export default {
   border-radius: 18px;
   width: 100px;
   height: 35px;
-  background: #3976ffff;
+  background: #3976ff;
   margin: 2px 4% 0 4%;
 }
 .bottom-two p {
   font-size: 14px;
-  color: #ffffffff;
+  color: #ffffff;
   line-height: 35px;
   text-align: center;
 }

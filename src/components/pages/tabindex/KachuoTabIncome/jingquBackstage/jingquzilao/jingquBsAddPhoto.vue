@@ -45,7 +45,7 @@ export default {
 .AddPhoto-wrap {
   height: 100%;
   width: 100%;
-  background: #f5f5f5ff;
+  background: #f5f5f5;
   overflow: hidden scroll;
   position: relative;
 }
@@ -56,19 +56,19 @@ export default {
   right: 4%;
   font-size: 16px;
   z-index: 9999;
-  color: #333333ff;
+  color: #333333;
 }
 .jq-photo-wrap {
   width: 92%;
   min-height: 170px;
-  background: #ffffffff;
+  background: #ffffff;
   margin: 61px auto 0;
   border-radius: 8px;
   overflow: hidden;
 }
 .jq-photo-wrap p {
   font-size: 16px;
-  color: #222222ff;
+  color: #222222;
   font-weight: bold;
   display: block;
   margin: 5px 0 0 4%;

@@ -156,20 +156,20 @@ export default {
 .order-wrap {
   height: 100%;
   width: 100%;
-  background: #f5f5f5ff;
+  background: #f5f5f5;
   overflow: hidden;
 }
 .box-one {
   width: 92%;
   height: 150px;
-  background: #ffffffff;
+  background: #ffffff;
   border-radius: 8px;
   margin: 61px auto 15px;
 }
 .box-two {
   width: 92%;
   height: 150px;
-  background: #ffffffff;
+  background: #ffffff;
   border-radius: 8px;
   margin: 0px auto;
 }
@@ -179,14 +179,14 @@ export default {
 }
 .title p {
   font-size: 16px;
-  color: #222222ff;
+  color: #222222;
   font-weight: bold;
   float: left;
   margin: 10px 0 0 4%;
 }
 .title span {
   font-weight: normal;
-  color: #999999ff;
+  color: #999999;
   font-size: 14px;
   float: right;
   margin: 12px 4% 0 0;
@@ -198,7 +198,7 @@ export default {
 .line {
   width: 92%;
   height: 1px;
-  background: #e5e5e5ff;
+  background: #e5e5e5;
   margin: 0 auto;
 }
 .content {
@@ -208,7 +208,7 @@ export default {
 </style>
 <style lang="less" scoped>
 /deep/ .icon-one {
-  fill: #999999ff;
+  fill: #999999;
 }
 .flex-demo {
   text-align: center;
@@ -222,11 +222,11 @@ export default {
 .flex-demo p {
   font-size: 24px;
   font-weight: bold;
-  color: #222222ff;
+  color: #222222;
 }
 .flex-demo span {
   font-size: 15px;
-  color: #666666ff;
+  color: #666666;
 }
 </style>
 

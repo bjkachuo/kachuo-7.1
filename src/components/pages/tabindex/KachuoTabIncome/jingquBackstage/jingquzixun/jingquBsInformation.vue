@@ -78,7 +78,7 @@ export default {
 .information-wrap {
   height: 100%;
   width: 100%;
-  background: #f5f5f5ff;
+  background: #f5f5f5;
   overflow: hidden scroll;
   position: relative;
 }
@@ -89,12 +89,12 @@ export default {
   right: 4%;
   font-size: 16px;
   z-index: 9999;
-  color: #333333ff;
+  color: #333333;
 }
 .line-one {
   width: 100%;
   height: 170px;
-  background: #ffffffff;
+  background: #ffffff;
   margin-top: 56px;
   border-radius: 8px;
   position: relative;
@@ -104,8 +104,8 @@ export default {
   display: block;
   width: 30px;
   height: 15px;
-  background: #f5f5f5ff;
-  color: #222222ff;
+  background: #f5f5f5;
+  color: #222222;
   font-size: 24px;
   text-align: center;
   line-height: 1px;
@@ -123,7 +123,7 @@ export default {
   overflow: hidden;
   margin: 12px 0 12px 5%;
   font-size: 18px;
-  color: #333333ff;
+  color: #333333;
   height: 54px;
 }
 .img-list {
