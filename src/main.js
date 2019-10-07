@@ -15,6 +15,8 @@ import './assets/css/reset.css';
 import './assets/css/resetweui.less';
 import './assets/css/iconfont.css';
 
+import myTouch from './assets/js/touch'
+myTouch(Vue)
 // import 'lib-flexible/flexible'
 /**
  * 全局函数，获取广告图

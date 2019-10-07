@@ -75,6 +75,11 @@ export default {
     },
     goRenzheng(){
       this.$router.push('/Ucenter/Certification')
+    },
+    getStatus(){
+      GetAuthState().then(res=>{
+        console.log(res);
+      })
     }
   },
 
@@ -93,6 +98,10 @@ export default {
       return this.$store.state.userLoginInfo
     }
   },
+
+  created() {
+    this.getStatus()
+  }
 };
 </script>
 <style lang='css' scoped>

@@ -22,12 +22,10 @@
         </div>
       </div>
       <div class="content-card-mid">
+
         <span class="token-num">ID:{{userInfo.block_key.slice(0,19)}}...</span>
-        <span
-          class="iconfont iconliulan"
-          @click="watchAllCode"
-          style="font-size:12px;margin-left:10px"
-        ></span>
+        <span class="iconfont iconliulan" @click="watchAllCode" style="font-size:12px;margin-left:10px"></span>
+
       </div>
       <div class="content-card-bot">
         <span>积分：{{userInfo.credit1}}</span>
