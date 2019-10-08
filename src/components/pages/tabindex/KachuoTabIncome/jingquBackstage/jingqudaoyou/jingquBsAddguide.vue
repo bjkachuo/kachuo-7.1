@@ -6,7 +6,7 @@
       :showLeftBack="TitleObjData.showLeftBack"
       :showRightMore="TitleObjData.showRightMore"
     ></Header>
-    <p class="Preservation">提交</p>
+    <p class="Preservation" @click.native="test">提交</p>
     <div class="name">
       <x-input title name="username" placeholder="请输入导游姓名" is-type="china-name" class="name-inpt"></x-input>
     </div>
@@ -75,6 +75,9 @@ export default {
     },
     onHide(type) {
       console.log("on hide", type);
+    },
+    test(){
+      console.log('1111')
     }
   },
   components: {

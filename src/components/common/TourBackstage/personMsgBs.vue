@@ -92,7 +92,7 @@ export default {
 .jq-photo-wrap {
   width: 92%;
   min-height: 170px;
-  background: #ffffff;
+  background: #FFFFFF;
   margin: 56px auto 10px;
   border-radius: 8px;
   overflow: hidden;
@@ -107,14 +107,14 @@ export default {
 .introduce {
   width: 92%;
   height: 150px;
-  background: #ffffff;
+  background: #FFFFFF;
   border-radius: 8px;
   margin: 0 auto 10px;
 }
 .price {
   width: 92%;
   height: 55px;
-  background: #ffffff;
+  background: #FFFFFF;
   border-radius: 8px;
   margin: 0 auto 10px;
   padding: 8px 2px;
@@ -122,7 +122,7 @@ export default {
 .time {
   width: 92%;
   height: 55px;
-  background: #ffffff;
+  background: #FFFFFF;
   margin: 0 auto 10px;
   border-radius: 8px;
   padding: 8px 2px;
