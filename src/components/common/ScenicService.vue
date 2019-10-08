@@ -50,7 +50,7 @@
       <div class="content-two">
         <div class="nearby">
           <p>附近商家</p>
-          <span>排序</span>
+          <!-- <span>排序</span> -->
         </div>
         <!-- <div class="content-two-head">
           <div class="head-left">
@@ -92,7 +92,7 @@
               </span>
             </div>
             <div class="inRight">
-              <p>190m</p>
+              <p>{{item.distance}}km</p>
             </div>
           </div>
 
@@ -303,21 +303,21 @@ export default {
         "https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.index.scenic_service"
       )
       .then(({ data }) => {
-        // console.log(data.data.recommend_business);
+        console.log(data);
         this.recommend = data.data.recommend_business;
-        // console.log(this.recommend)
+        console.log(this.recommend)
       });
     //获取商家列表！
-    this.$http
-      .post(
-        "https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.index.scenic_service_list&type=" +
-          this.typeNum
-      )
-      .then(({ data }) => {
-        // console.log(data.data.list);
-        this.BusinessList = data.data.list;
-        // console.log(this.BusinessList);
-      });
+    // this.$http
+    //   .post(
+    //     "https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.index.scenic_service_list&type=" +
+    //       this.typeNum
+    //   )
+    //   .then(({ data }) => {
+    //     console.log(data);
+    //     this.BusinessList = data.data.list;
+    //     console.log(this.BusinessList);
+    //   });
   },
 
   methods: {
