@@ -49,11 +49,17 @@
       <div class="f-left">
         <img src="./renlian.png" alt />
       </div>
-      <div class="f-right">
+      <div class="f-right" v-if="this.face==1">
+        <div class="i-warp">
+          <x-icon type="ios-checkmark" size="15" class="yes"></x-icon>
+        </div>
+        <span>已通过</span>
+      </div>
+      <div class="f-right" v-if="this.face==0">
         <div class="i-warp">
           <x-icon type="ios-checkmark" size="15"></x-icon>
         </div>
-        <span>已通过</span>
+        <span>未通过</span>
       </div>
     </div>
     <div class="face-wrap">
@@ -85,12 +91,21 @@ export default {
         titleContent: "免票用户",
         showLeftBack: true,
         showRightMore: false
-      }
+      },
+      face: 0
     };
   },
   computed: {},
   created() {},
-  mounted() {},
+  mounted() {
+    this.face = JSON.parse(sessionStorage.getItem("userLoginInfo")).is_face;
+    console.log(this.face);
+
+    if (JSON.parse(sessionStorage.getItem("userLoginInfo")).is_face == 0) {
+      this.$router.push("/facecheck");
+    } else {
+    }
+  },
   watch: {},
   methods: {},
   components: {
@@ -291,7 +306,7 @@ export default {
   font-size: 14px;
   color: #999faa;
 }
-.vux-x-icon {
+/deep/ .yes {
   fill: #2ecc33;
 }
 .cell-x-icon {
