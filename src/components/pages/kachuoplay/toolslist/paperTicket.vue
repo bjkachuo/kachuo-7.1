@@ -118,6 +118,15 @@
 <script>
 import Header from "@/components/common/Header";
 import { Tab, TabItem, Flexbox, FlexboxItem, Confirm } from "vux";
+import axios from "axios";
+const FACEUPLOADCONFIG = {
+  timeout: 10000,
+  headers: {
+    "Content-Type": "application/x-www-form-urlencoded",
+    Authorization: localStorage.getItem("token")
+  }
+};
+
 import { faceCheck } from "@/servers/api";
 
 export default {
