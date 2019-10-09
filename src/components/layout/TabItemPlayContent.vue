@@ -472,7 +472,7 @@ export default {
   text-overflow: ellipsis;
   white-space: nowrap;
   /* border-radius: 8px; */
-  margin-top: 14px;
+  margin-top: 4px;
 }
 .inMid span .house {
   width: 13px;
