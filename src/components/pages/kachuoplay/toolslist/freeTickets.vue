@@ -73,8 +73,11 @@
         </div>
       </div>
     </div>
-    <div class="CheckTickets">
-      <p>立即购票</p>
+    <div class="CheckTickets" v-if="this.face==0">
+      <p>立即验票</p>
+    </div>
+    <div class="CheckTicketsTwo" v-if="this.face==1" @click="tip">
+      <p>立即验票</p>
     </div>
   </div>
 </template>
@@ -107,7 +110,17 @@ export default {
     }
   },
   watch: {},
-  methods: {},
+  methods: {
+    tip() {
+      this.$vux.loading.hide();
+      this.$vux.toast.show({
+        type: "success",
+        text: "验票成功",
+        time: 1000
+      });
+      this.$router.go("/indextab");
+    }
+  },
   components: {
     Header,
     Tab,
@@ -274,6 +287,19 @@ export default {
   bottom: 0px;
 }
 .CheckTickets p {
+  font-size: 16px;
+  color: #ffffff;
+  text-align: center;
+  line-height: 60px;
+}
+.CheckTicketsTwo {
+  height: 60px;
+  width: 100%;
+  position: absolute;
+  background: rgba(57, 118, 255, 1);
+  bottom: 0px;
+}
+.CheckTicketsTwo p {
   font-size: 16px;
   color: #ffffff;
   text-align: center;

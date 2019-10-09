@@ -71,13 +71,13 @@
       </div>
       <div class="f-right" v-if="this.face==1">
         <div class="i-warp">
-          <x-icon type="ios-checkmark" size="15"></x-icon>
+          <x-icon type="ios-checkmark" size="15" class="yes"></x-icon>
         </div>
         <span>已通过</span>
       </div>
       <div class="f-right" v-else-if="this.face==0">
         <div class="i-warp">
-          <x-icon type="ios-checkmark" size="15" class="yes"></x-icon>
+          <x-icon type="ios-checkmark" size="15"></x-icon>
         </div>
         <span>未通过</span>
       </div>
@@ -96,8 +96,11 @@
         <p>数字串码</p>
       </div>
     </div>
-    <div class="CheckTickets">
-      <p>立即购票</p>
+    <div class="CheckTickets" v-if="this.text == ''|| this.photo == 0">
+      <p>立即验票</p>
+    </div>
+    <div class="CheckTicketsTwo" v-if="this.text !=''|| this.photo == 1" @click="tip">
+      <p>立即验票</p>
     </div>
     <confirm
       v-model="show5"
@@ -126,7 +129,11 @@ export default {
         showRightMore: false
       },
       show5: false,
-      face: 0
+      face: 0,
+      //输入的信息状态
+      text: "",
+      //传入的图片状态
+      photo: ""
     };
   },
   computed: {},
@@ -149,8 +156,8 @@ export default {
     onHide() {
       console.log("on hide");
     },
-    onShow() {
-      console.log("on show");
+    onCancel() {
+      console.log("on cancel");
     },
     onShow5() {
       this.$refs.confirm5.setInputValue("");
@@ -158,6 +165,7 @@ export default {
     onConfirm5(value) {
       this.$refs.confirm5.setInputValue("");
       this.$vux.toast.text("input value: " + value);
+      this.text = value;
     },
     scanning() {
       navigator.camera.getPicture(
@@ -175,7 +183,8 @@ export default {
                   text: "扫描成功",
                   time: 1000
                 });
-                this.$router.go("/indextab");
+                this.photo = res2.data.result;
+                // this.$router.go("/indextab");
               } else {
                 this.$vux.loading.hide();
                 this.$vux.toast.show({
@@ -200,6 +209,15 @@ export default {
           targetHeight: 1280
         }
       );
+    },
+    tip() {
+      this.$vux.loading.hide();
+      this.$vux.toast.show({
+        type: "success",
+        text: "验票成功",
+        time: 1000
+      });
+      this.$router.go("/indextab");
     }
   },
   components: {
@@ -355,6 +373,19 @@ export default {
   bottom: 0px;
 }
 .CheckTickets p {
+  font-size: 16px;
+  color: #ffffff;
+  text-align: center;
+  line-height: 60px;
+}
+.CheckTicketsTwo {
+  height: 60px;
+  width: 100%;
+  position: absolute;
+  background: rgba(57, 118, 255, 1);
+  bottom: 0px;
+}
+.CheckTicketsTwo p {
   font-size: 16px;
   color: #ffffff;
   text-align: center;
