@@ -143,7 +143,9 @@ export default {
       //输入的信息状态
       text: "",
       //传入的图片状态
-      photo: ""
+      photo: "",
+      videoUploadUrl:
+        "https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=member.realname.faceRecognition"
     };
   },
   computed: {},
