@@ -118,6 +118,7 @@
 <script>
 import Header from "@/components/common/Header";
 import { Tab, TabItem, Flexbox, FlexboxItem, Confirm } from "vux";
+import { faceCheck } from "@/servers/api";
 
 export default {
   props: {},
