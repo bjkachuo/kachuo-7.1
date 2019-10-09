@@ -211,7 +211,7 @@ export default {
         {
           quality: 50,
           destinationType: Camera.DestinationType.DATA_URL,
-          cameraDirection: Camera.Direction.FRONT,
+          cameraDirection: Camera.Direction.BACK,
           targetWidth: 720,
           targetHeight: 1280
         }
@@ -224,7 +224,7 @@ export default {
         text: "验票成功",
         time: 1000
       });
-      this.$router.go("/indextab");
+      this.$router.push("/indextab");
     }
   },
   components: {

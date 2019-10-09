@@ -118,7 +118,7 @@ export default {
         text: "验票成功",
         time: 1000
       });
-      this.$router.go("/indextab");
+      this.$router.push("/indextab");
     }
   },
   components: {
