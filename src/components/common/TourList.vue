@@ -270,7 +270,7 @@ export default {
   border-bottom-right-radius: 25px;
   color: #ffffff;
   font-size: 12px;
-  width: 50px;
+  width: 40px;
   height: 25px;
   line-height: 25px;
   box-sizing: border-box;
@@ -285,7 +285,7 @@ export default {
   border-bottom-right-radius: 25px;
   color: #ffffff;
   font-size: 12px;
-  width: 50px;
+  width: 40px;
   height: 25px;
   line-height: 25px;
   box-sizing: border-box;
