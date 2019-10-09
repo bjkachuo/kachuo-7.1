@@ -35,7 +35,7 @@
           </span>
         </div>
         <div class="inRight">
-          <p>190m</p>
+          <p>{{item.distance}}km</p>
         </div>
       </div>
     </div>

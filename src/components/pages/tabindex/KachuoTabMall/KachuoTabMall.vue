@@ -60,19 +60,16 @@ export default {
           name: "绘画"
         },
         {
-          name: "陶瓷"
+          name: "紫砂"
         },
         {
           name: "雕刻"
         },
         {
-          name: "陶器"
+          name: "瓷器"
         },
         {
-          name: "刺绣"
-        },
-        {
-          name: "非遗"
+          name: "其他"
         }
       ],
       cellListTools: [

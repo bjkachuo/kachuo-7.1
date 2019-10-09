@@ -58,11 +58,17 @@
           <div class="f-left">
             <img src="./renlian.png" alt />
           </div>
-          <div class="f-right">
+          <div class="f-right" v-if="this.face==1">
             <div class="i-warp">
-              <x-icon type="ios-checkmark" size="15"></x-icon>
+              <x-icon type="ios-checkmark" size="15" class="yes"></x-icon>
             </div>
             <span>已通过</span>
+          </div>
+          <div class="f-right" v-else-if="this.face==0">
+            <div class="i-warp">
+              <x-icon type="ios-close" size="15"></x-icon>
+            </div>
+            <span>未通过</span>
           </div>
         </div>
         <div class="binding-wrap">
@@ -72,24 +78,48 @@
           <div class="text-bind">
             <p>扫描或输入其它平台购买的景区门票二维码、条形码或数字串码信息进行门票信息绑定</p>
           </div>
-          <div class="scann" @click="scan">
+          <div class="scann" @click="scanning">
             <p>扫码识别</p>
+            <!-- <input type="file" accept="image/*" value="扫描识别"/> -->
           </div>
-          <div class="num">
+          <div class="num" @click="write">
             <p>数字串码</p>
           </div>
         </div>
       </b>
     </div>
-    <div class="CheckTickets">
-      <p>立即购票</p>
+    <div class="CheckTickets" v-if="this.text == ''|| this.photo == 0">
+      <p>立即验票</p>
     </div>
+    <div class="CheckTicketsTwo" v-if="this.text !=''|| this.photo == 1" @click="tip">
+      <p>立即验票</p>
+    </div>
+    <confirm
+      v-model="show5"
+      show-input
+      ref="confirm5"
+      title="请输入数字串码"
+      @on-cancel="onCancel"
+      @on-confirm="onConfirm5"
+      @on-show="onShow5"
+      @on-hide="onHide"
+    ></confirm>
   </div>
 </template>
 
 <script>
 import Header from "@/components/common/Header";
-import { Tab, TabItem, Flexbox, FlexboxItem } from "vux";
+import { Tab, TabItem, Flexbox, FlexboxItem, Confirm } from "vux";
+import axios from "axios";
+const FACEUPLOADCONFIG = {
+  timeout: 10000,
+  headers: {
+    "Content-Type": "application/x-www-form-urlencoded",
+    Authorization: localStorage.getItem("token")
+  }
+};
+
+import { faceCheck } from "@/servers/api";
 
 export default {
   props: {},
@@ -99,113 +129,111 @@ export default {
         titleContent: "电子票",
         showLeftBack: true,
         showRightMore: false
-      }
-      // cur: 0, //默认选中第一个tab
-      // dataListOne: [],
-      // dataList: [
-      //   {
-      //     imgSrc: require("@/assets/images/蓬莱阁.jpg"),
-      //     distance: "500km",
-      //     name: "蓬莱阁",
-      //     price: "¥110",
-      //     priceDiscount: "¥120",
-      //     type: "蓬莱阁门票"
-      //   },
-      //   {
-      //     imgSrc: require("@/assets/images/三孔.jpg"),
-      //     distance: "500km",
-      //     name: "三孔",
-      //     price: "¥110",
-      //     priceDiscount: "¥130",
-      //     type: "三孔门票"
-      //   },
-      //   {
-      //     imgSrc: require("@/assets/images/云冈石窟.jpg"),
-      //     distance: "500km",
-      //     name: "云冈石窟",
-      //     price: "¥110",
-      //     priceDiscount: "¥120",
-      //     type: "云冈石窟门票"
-      //   },
-      //   {
-      //     imgSrc: require("@/assets/images/云雾山.jpg"),
-      //     distance: "500km",
-      //     name: "云雾山",
-      //     price: "¥110",
-      //     priceDiscount: "¥120",
-      //     type: "云雾山门票"
-      //   },
-      //   {
-      //     imgSrc: require("@/assets/images/少林寺.jpg"),
-      //     distance: "500km",
-      //     name: "少林寺",
-      //     price: "¥110",
-      //     priceDiscount: "¥120",
-      //     type: "少林寺门票"
-      //   },
-      //   {
-      //     imgSrc: require("@/assets/images/徽州古城.jpg"),
-      //     distance: "500km",
-      //     name: "徽州古城",
-      //     price: "¥110",
-      //     priceDiscount: "¥120",
-      //     type: "徽州古城门票"
-      //   },
-      //   {
-      //     imgSrc: require("@/assets/images/苍岩山.jpg"),
-      //     distance: "500km",
-      //     name: "苍岩山",
-      //     price: "¥110",
-      //     priceDiscount: "¥120",
-      //     type: "苍岩山门票"
-      //   }
-      // ]
+      },
+      show5: false,
+      //扫脸状态
+      face: 0,
+      //输入的信息状态
+      text: "",
+      //传入的图片状态
+      photo: "",
+      videoUploadUrl:
+        "https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=member.realname.faceRecognition"
     };
   },
 
   mounted() {
-    if (JSON.parse(sessionStorage.getItem("userLoginInfo")).discern == 0) {
+    this.face = JSON.parse(sessionStorage.getItem("userLoginInfo")).is_face;
+    console.log(this.face);
+
+    if (JSON.parse(sessionStorage.getItem("userLoginInfo")).is_face == 0) {
       this.$router.push("/facecheck");
     } else {
     }
-
-    // this.$http
-    //   .post(
-    //     "http://core.kachuo.com/app/ewei_shopv2_app.php?i=8&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.ticket.getlist"
-    //   )
-    //   .then(({ data }) => {
-    //     console.log(data);
-    //     this.dataListOne = data.data;
-    //     console.log(this.dataListOne);
-    //   });
   },
 
   methods: {
-    scan() {}
-    //跳转购票页面
-    // buyTickets(index) {
-    //   // var i = 0 ; i < this.dataList.length; i ++ ;
-    //   let a = 0;
-    //   for (let i = 0; i < this.dataList; i++) {
-    //     a + -i;
-    //     return a;
-    //   }
-    //   // console.log(11)
-    //   // console.log(a)
-    //   this.$router.push({
-    //     path: "/ticketsdetails",
-    //     query: {
-    //       type: this.dataList[index + a].type
-    //     }
-    //   });
-    // }
+    write() {
+      this.show5 = !this.show5;
+      console.log("11111");
+    },
+    onHide() {
+      console.log("on hide");
+    },
+    onCancel() {
+      console.log("on cancel");
+    },
+    onShow5() {
+      this.$refs.confirm5.setInputValue("");
+    },
+    onConfirm5(value) {
+      this.$refs.confirm5.setInputValue("");
+      this.$vux.toast.text("input value: " + value);
+      this.text = value;
+      console.log(this.text);
+    },
+    scanning() {
+      navigator.camera.getPicture(
+        res => {
+          if (res == null) return;
+          this.$vux.loading.show({ text: "正在上传" });
+          axios
+            .post(this.videoUploadUrl, res, FACEUPLOADCONFIG)
+            .then(res2 => {
+              // alert(JSON.stringify(res2))
+              if (res2.data.result === 1) {
+                this.$vux.loading.hide();
+                this.$vux.toast.show({
+                  type: "success",
+                  text: "扫描成功",
+                  time: 1000
+                });
+                this.photo = res2.data.result;
+                // this.$router.go("/indextab");
+              } else {
+                this.$vux.loading.hide();
+                this.$vux.toast.show({
+                  type: "warn",
+                  text: "验证失败请重试",
+                  time: 1000
+                });
+                this.photo = res2.data.result;
+                // this.$router.go("/electronicsTicket");
+              }
+            })
+            .catch(err => {
+              console.log(err);
+            });
+        },
+        err => {
+          console.log(err);
+        },
+        {
+          quality: 50,
+          destinationType: Camera.DestinationType.DATA_URL,
+          cameraDirection: Camera.Direction.BACK,
+          targetWidth: 720,
+          targetHeight: 1280
+        }
+      );
+    },
+    tip() {
+      this.$vux.loading.hide();
+      this.$vux.toast.show({
+        type: "success",
+        text: "验票成功",
+        time: 1000
+      });
+      this.$router.push("/indextab");
+    }
   },
   components: {
     Header,
     Tab,
     TabItem,
     Flexbox,
-    FlexboxItem
+    FlexboxItem,
+    Confirm
   }
 };
 </script>
@@ -434,6 +462,19 @@ export default {
   text-align: center;
   line-height: 60px;
 }
+.CheckTicketsTwo {
+  height: 60px;
+  width: 100%;
+  position: absolute;
+  background: rgba(57, 118, 255, 1);
+  bottom: 0px;
+}
+.CheckTicketsTwo p {
+  font-size: 16px;
+  color: #ffffff;
+  text-align: center;
+  line-height: 60px;
+}
 </style>
 <style scoped lang="less">
 /deep/ .vux-tab-wrap {
@@ -460,7 +501,7 @@ export default {
   font-size: 14px;
   color: #999faa;
 }
-.vux-x-icon {
+/deep/ .yes {
   fill: #2ecc33;
 }
 // /deep/ Header {

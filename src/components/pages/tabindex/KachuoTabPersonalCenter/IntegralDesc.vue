@@ -19,13 +19,13 @@
           <div @click="cur=0" :class="{active:cur==0}" class="int-item">
             <div class="int-box">
               <div class="txt">积分获取</div>
-              <div class="desc">您已获得1911.00积分</div>
+              <div class="desc">您已获得{{this.soreState.in_num}}积分</div>
             </div>
           </div>
           <div @click="cur=1" :class="{active:cur==1}" class="int-item">
             <div class="int-box">
               <div class="txt">积分消耗</div>
-              <div class="desc">已消耗1611.00积分</div>
+              <div class="desc">已消耗{{this.soreState.out_num}}积分</div>
             </div>
           </div>
         </div>
@@ -143,7 +143,9 @@ export default {
       showHideOnBlur: false,
       show: false,
       addList:[],
-      increatList:[]
+      increatList:[],
+      //已经获得已经消耗的积分
+      soreState:[]
     };
   },
   mounted() {
@@ -157,6 +159,8 @@ export default {
         this.increatList = data.data.out;
         console.log(this.addList)
         console.log(this.increatList)
+        this.soreState = data.data;
+        console.log(this.soreState,1111)
       });
   },
 
