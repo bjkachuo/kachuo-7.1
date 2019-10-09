@@ -144,7 +144,7 @@ export default {
 .tab-item-play-header-title {
   width: 100%;
   height: 45px;
-  /* position: absolute; */
+   position: fixed;
   /* z-index: 9999;
   top: 0;
   left: 0; */
@@ -211,6 +211,7 @@ iframe {
   width: 100%;
   background: #ffffff;
   height: 50px;
+  top: 50px;
   border-radius: 0px 0px 10px 10px;
   position: relative;
 }

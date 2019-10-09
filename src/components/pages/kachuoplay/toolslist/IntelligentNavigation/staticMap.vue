@@ -51,6 +51,7 @@
           // param > 0 ? a = 1 : a=-1
           // if(nodeStyle){
             // 如果存在的话，就说明已经设置了，scale已经改变了
+        let old = this.scalc
             this.scalc = this.scalc + param
         // alert(this.scalc)
           this.scalc > 3 ? this.scalc = 3 : null
@@ -61,34 +62,35 @@
             this.ele.style.height = 1000*this.scalc+'px'
             this.ele2.style.height = 1000*this.scalc+'px'
 
-
+            this.setMaxdisp(this.scalc - old,param.x, param.y, 'move')
             // this.ele.style.transform = 'translate(-50%, -50%) scale('+currScaleSize+','+currScaleSize+')';
       },
       setMaxdisp:function(changeSize, changeX, changeY, type){
         // 计算最大位移
         // naturalWidth ： 是图片原始的宽度，通过比例可以计算出当前图片在页面的高度
+        let box = document.getElementsByClassName('normal-content')[0]
+
+        let currentLeft = box.scrollLeft
+        let currentTop = box.scrollLeft
+
         let picHeight =  this.bodyWidth  / (this.ele.naturalWidth / this.ele.naturalHeight);
         let maxTop = ( picHeight * changeSize - window.innerHeight) /2
         let maxLeft = this.bodyWidth / 2 * (changeSize - 1)
-        if(changeX >= maxLeft){
-          this.ele.style.marginLeft = maxLeft + 'px'
-        }else if(changeX < -maxLeft){
-          this.ele.style.marginLeft = -maxLeft + 'px'
-        }else if(type==='move'){
-          this.ele.style.marginLeft =changeX +'px';
-        }
+
+        box.scrollTo(currentLeft + changeSize*833/2,currentTop+changeSize*1000/2)
+
         // 如果图片当前尺寸大于屏幕尺寸，可以移动
-        if(maxTop > 0){
-          if(changeY >= maxTop){
-            this.ele.style.marginTop = maxTop + 'px';
-          }else if(changeY < -maxTop){
-            this.ele.style.marginTop = -maxTop + 'px'
-          }else if(type==='move'){
-            this.ele.style.marginTop = changeY+'px';
-          }
-        }else if(type==='move'){
-          this.ele.style.marginTop = 0 +'px';
-        }
+        // if(maxTop > 0){
+        //   if(changeY >= maxTop){
+        //     this.ele.style.marginTop = maxTop + 'px';
+        //   }else if(changeY < -maxTop){
+        //     this.ele.style.marginTop = -maxTop + 'px'
+        //   }else if(type==='move'){
+        //     this.ele.style.marginTop = changeY+'px';
+        //   }
+        // }else if(type==='move'){
+        //   this.ele.style.marginTop = 0 +'px';
+        // }
       }
     },
 

@@ -4,7 +4,6 @@
     <div class="custom-ctrl" >
       <div style="margin-bottom: 10px;" @click="status == 0 ? status = 1 : status = 0">{{status== 0 ? '静态':'动态'}}<br>地图</div>
       <div style="padding-top: 10px;border-top: 1px solid #fff;" @click="goScenic">景点<br>列表</div>
-
     </div>
     <static-map :markers="markers" v-show="status == 1" :mapimg="mapimg"></static-map>
     <el-amap vid="amapDemo"  :center="center"  :zoom="zoom" class="amap-demo" ref="amap" :style="setMapHeight" :plugin="plugin"  :events="events" :aMapManager="AMapManager" v-show="status == 0">
