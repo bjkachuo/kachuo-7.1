@@ -45,26 +45,20 @@
       <!-- <div class="line-one-box">
       </div>-->
     </div>
-    <!-- <div class="line-two"> -->
-    <!-- <flexbox :gutter="15">
-        <flexbox-item v-for="(item,index) in dataListTwo" :key="index">
-          <div class="flex-demo-two" @click="getItem(item.link)">
-            <div class="flex-demo-two-content-wrap">
-              <div class="flex-demo-two-content-left">
-                <p>{{item.name}}</p>
-                <span>{{item.text}}</span>
-              </div>
-              <div class="flex-demo-two-content-right">
-                <img :src="item.imgSrc" alt />
-              </div>
-            </div>
-    </div>-->
-    <!-- </flexbox-item> -->
-    <!-- <flexbox-item>
-          <div class="flex-demo-two">2</div>
-    </flexbox-item>-->
-    <!-- </flexbox> -->
-    <!-- </div> -->
+    <div style="width:92%;margin: 15px auto 10px;">
+      <swiper auto height="70px" class="custom">
+        <swiper-item class="black">
+          <img src="./indexone.png" alt />
+        </swiper-item>
+        <swiper-item class="black">
+          <img src="../../assets/images/6-min.png" alt />
+        </swiper-item>
+        <swiper-item class="black">
+          <img src="../../assets/images/1-min.png" alt />
+        </swiper-item>
+      </swiper>
+    </div>
+
     <div class="Selected">
       <p>精选推荐</p>
     </div>
@@ -81,51 +75,27 @@
             <div class="house">
               <img src="../../assets/images/fangzi.png" alt />
             </div>
-            <div class="characteristic">特色：地方菜、面馆</div>
+            <div class="characteristic">特色:{{item.product}}</div>
           </span>
         </div>
         <div class="inRight" @click="details(item.id,item.type)">
           <p>进店</p>
         </div>
       </div>
-
-      <!-- <div class="tab-wrap">
-        <tab>
-          <tab-item
-            v-for="(item,index) in tiltleList"
-            :key="index"
-            :selected="index===0"
-            @on-item-click="onItemClick(index)"
-            line-width="4"
-          >{{item}}</tab-item>
-        </tab>
-      </div>-->
-      <!-- <div class="store-wrap"></div> -->
     </div>
-    <!-- <FunctionAreas class="tab-item-play-content-tools-wrap"></FunctionAreas> -->
-    <!-- <div class="tab-item-play-content-tip-wrap">
-      <AdvertiseSwiper style="padding-left:15px"></AdvertiseSwiper>
-    </div>-->
-    <!-- <div class="tab-item-play-content-scence">
-      <div class="tab-item-play-content-tools">
-        <span class="tab-item-play-content-tools-line"></span>
-        <span class="tab-item-play-content-title">景区服务</span>
-      </div>
-
-      <Cell class="tab-item-play-content-cell" :cellList="cellListScence"></Cell>
-    </div>-->
-    <!-- <div class="tab-item-play-content-scence tab-item-play-content-scence-wrap">
-      <div class="tab-item-play-content-tools">
-        <span class="tab-item-play-content-tools-line"></span>
-        <span class="tab-item-play-content-title">周边服务</span>
-      </div>
-    <div>
-      <Cell
-        class="tab-item-play-content-cell tab-item-play-content-cell-spec"
-        :cellList="cellListAround">
-      </Cell>
+    <div style="width:92%;margin: 0px auto 0px;">
+      <swiper auto height="70px" class="custom">
+        <swiper-item class="black">
+          <img src="./indextwo.png" alt />
+        </swiper-item>
+        <swiper-item class="black">
+          <img src="../../assets/images/10-min.png" alt />
+        </swiper-item>
+        <swiper-item class="black">
+          <img src="../../assets/images/2-min.png" alt />
+        </swiper-item>
+      </swiper>
     </div>
-    </div>-->
   </div>
 </template>
 
@@ -134,7 +104,15 @@ import FunctionAreas from "@/components/layout/FunctionAreas";
 import AdvertiseSwiper from "@/components/layout/AdvertiseSwiper";
 import Cell from "@/components/common/CellNoBorder";
 import SwiperAdvEat from "@/components/common/SwiperAdvEat";
-import { Flexbox, FlexboxItem, Tab, TabItem, Scroller } from "vux";
+import {
+  Flexbox,
+  FlexboxItem,
+  Tab,
+  TabItem,
+  Scroller,
+  Swiper,
+  SwiperItem
+} from "vux";
 
 export default {
   name: "",
@@ -144,45 +122,6 @@ export default {
       //推荐商家列表：
       recommend: [],
 
-      // cellListScence: [
-      //   {
-      //     title: "吃吧",
-      //     icon: "iconfont iconchiba",
-      //     link: "/scenicService?type=1"
-      //   },
-      //   {
-      //     title: "喝吧",
-      //     icon: "iconfont iconheba",
-      //     link: "/scenicService?type=2"
-      //   },
-      //   {
-      //     title: "玩吧",
-      //     icon: "iconfont iconwanba",
-      //     link: "/scenicService?type=3"
-      //   }
-      // ],
-      // cellListAround: [
-      //   {
-      //     title: "美食",
-      //     icon: "iconfont iconmeishi",
-      //     link: "/suerroundBusiness?type=4"
-      //   },
-      //   {
-      //     title: "休闲",
-      //     icon: "iconfont iconxiuxian",
-      //     link: "/suerroundBusiness?type=5"
-      //   },
-      //   {
-      //     title: "酒店",
-      //     icon: "iconfont iconjiudian",
-      //     link: "/suerroundBusiness?type=6"
-      //   },
-      //   {
-      //     title: "娱乐",
-      //     icon: "iconfont iconyule",
-      //     link: "/suerroundBusiness?type=7"
-      //   }
-      // ],
       dataList: [
         {
           imgUrl:
@@ -243,7 +182,9 @@ export default {
     FlexboxItem,
     Tab,
     TabItem,
-    Scroller
+    Scroller,
+    Swiper,
+    SwiperItem
   },
 
   computed: {},
@@ -466,7 +407,7 @@ export default {
   color: #666666ff;
   font-weight: normal;
   font-family: PingFangSC-Medium;
-  text-align: center;
+  /* text-align: center; */
   /* line-height: 25px; */
   overflow: hidden;
   text-overflow: ellipsis;
@@ -487,6 +428,9 @@ export default {
   float: left;
   line-height: 22px;
   text-indent: 4%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 80%;
 }
 .inRight {
   width: 18%;
@@ -716,5 +660,35 @@ export default {
   background: darkgreen;
   overflow: hidden;
   line-height: 40px;
+}
+.custom {
+  overflow: inherit;
+  // border-radius: 8px;
+  /deep/ .vux-indicator {
+    right: 50%;
+    margin-right: -32px;
+    bottom: -27px;
+  }
+  /deep/ .vux-icon-dot {
+    width: 15px !important;
+    height: 3px !important;
+  }
+  /deep/ .vux-tab-ink-bar {
+    display: none;
+  }
+  /deep/ .vux-tab {
+    background: transparent;
+    .vux-tab-item {
+      background: transparent;
+    }
+  }
+}
+/deep/ .custom .vux-indicator {
+  right: 50%;
+  margin-right: -32px;
+  bottom: 0px;
+}
+/deep/ .vux-swiper {
+  border-radius: 8px;
 }
 </style>

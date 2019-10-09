@@ -5,18 +5,10 @@
       :showLeftBack="TitleObjData.showLeftBack"
       :showRightMore="TitleObjData.showRightMore"
     ></Header>
-    <!-- <scroller lock-x height="-4"> -->
     <div class="scence-service-content">
       <div class="content-one">
         <div class="swp-wrap">
           <swiper :list="baseList" height="110px" loop auto dots-position="center"></swiper>
-
-          <!-- <swiper :options="swiperOption">
-            <swiper-slide>
-              <img src="../../assets/images/banner图@2x.png" alt />
-            </swiper-slide>
-            <div class="swiper-pagination swiper-pagination-bullets" slot="pagination"></div>
-          </swiper>-->
         </div>
         <div class="Selected-warp">
           <flexbox>
@@ -29,47 +21,25 @@
               </div>
             </flexbox-item>
           </flexbox>
-
-          <!-- <div class="Selected-title">商户精选</div>
-          <scroller lock-y :scrollbar-x="false">
-            <div class="Selected-business-list">
-              <div
-                class="business"
-                v-for="(item,index) in recommend"
-                :key="index"
-                @click="details(item.id)"
-              >
-                <img :src="item.video_image" alt />
-                <span class="price">{{item.price}}￥/人</span>
-                <span class="name">{{item.name}}</span>
-              </div>
-            </div>
-          </scroller>-->
         </div>
+      </div>
+      <div style="width:92%;margin: 15px auto 10px;">
+        <swiper auto height="70px" class="custom">
+          <swiper-item class="black">
+            <img src="../../assets/images/8-min.png" alt />
+          </swiper-item>
+          <swiper-item class="black">
+            <img src="../../assets/images/5-min.png" alt />
+          </swiper-item>
+          <swiper-item class="black">
+            <img src="../../assets/images/4-min.png" alt />
+          </swiper-item>
+        </swiper>
       </div>
       <div class="content-two">
         <div class="nearby">
           <p>附近商家</p>
-          <!-- <span>排序</span> -->
         </div>
-        <!-- <div class="content-two-head">
-          <div class="head-left">
-            <popup-radio
-              :options="this.checkList"
-              v-model="option2"
-              placeholder="分类"
-              @on-hide="change"
-            ></popup-radio>
-          </div>
-          <div class="head-right">
-            <popup-radio
-              :options="this.sortList"
-              v-model="option3"
-              placeholder="排序"
-              @on-hide="sort"
-            ></popup-radio>
-          </div>
-        </div>-->
         <div class="store-list-warp">
           <div
             class="recommend"
@@ -83,58 +53,27 @@
             </div>
             <div class="inMid">
               <p>{{item.name}}</p>
-              <i>人均18元</i>
+              <i style="color:red;">人均{{item.price}}元</i>
               <span>
                 <div class="house">
                   <img src="../../assets/images/fangzi.png" alt />
                 </div>
-                <div class="characteristic">特色：地方菜、面馆</div>
+                <div class="characteristic">特色:{{item.product}}</div>
               </span>
             </div>
             <div class="inRight">
               <p>{{item.distance}}km</p>
             </div>
           </div>
-
-          <!-- <div
-            class="store"
-            v-for="(item,index) in BusinessList"
-            :key="index"
-            @click="details(item.id)"
-          >
-            <div class="store-img-warp">
-              <img :src="item.video_image" alt />
-            </div>
-            <div class="store-msg-warp">
-              <div class="store-title">
-                <h3>{{item.name}}</h3>
-              </div>
-              <div class="star-price-warp">
-                <div class="star">
-                  <rater v-model="item.score" :font-size="11" disabled></rater>
-                </div>
-                <div class="store-price">
-                  <p>{{item.price}}￥/人</p>
-                </div>
-              </div>
-              <div class="store-time">
-                <span>联系电话：{{item.phone}}</span>
-              </div>
-              <div class="tip">
-                <span>商家地址：{{item.address}}</span>
-              </div>
-            </div>
-          </div>-->
         </div>
       </div>
     </div>
-    <!-- </scroller> -->
   </div>
 </template>
 <script>
 import Header from "@/components/common/Header";
 // import { swiper, swiperSlide } from "vue-awesome-swiper";
-import { Swiper, GroupTitle, SwiperItem, XButton, Cell } from "vux";
+import { GroupTitle, XButton, Cell, Swiper, SwiperItem } from "vux";
 
 import {
   Scroller,
@@ -218,28 +157,10 @@ export default {
         showLeftBack: true,
         showRightMore: false
       }
-      // swiperOption: {
-      //   pagination: {
-      //     el: ".swiper-pagination",
-      //     clickable: true,
-      //     dynamicBullets: true
-      //   },
-      //   autoplay: {
-      //     disableOnInteraction: true //触碰后继续轮播
-      //   },
-      //   speed: 600,
-      //   loop: true, //循环模式
-      //   observer: true, //修改swiper自己或子元素时，自动初始化swiper
-      //   observeParents: true, //修改swiper的父元素时，自动初始化swiper
-      //   centeredSlides: true, //元素居中
-      //   slidesPerView: "1"
-      // }
     };
   },
   components: {
     Header,
-    // swiper,
-    // swiperSlide,
     Scroller,
     PopupRadio,
     PopupPicker,
@@ -250,7 +171,9 @@ export default {
     GroupTitle,
     SwiperItem,
     XButton,
-    Cell
+    Cell,
+    Swiper,
+    SwiperItem
   },
 
   computed: {},
@@ -260,43 +183,6 @@ export default {
   mounted() {
     //商家type值
     this.typeNum = this.$route.query.type;
-    //获取景区服务轮播图；
-    // this.$http
-    //   .post(
-    //     "https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=carousel&type=41"
-    //   )
-    //   .then(({ data }) => {
-    //     // console.log(data.data.data.carousel);
-    //     this.advSwiper = data.data.data.carousel;
-    //     // console.log(this.advSwiper)
-    //   });
-    // //获取选择分类！
-    // this.$http
-    //   .post(
-    //     "https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.index.scenic_service"
-    //   )
-    //   .then(({ data }) => {
-    //     // console.log(data.data.category);
-
-    //     this.checkList = data.data.category.map(item => {
-    //       return { key: item.id, value: item.name };
-    //     });
-    //     // this.checkList = data.data.category;
-    //     console.log(this.checkList);
-    //     // console.log(this.checkList);
-    //   });
-    // //获取排序分类
-    // this.$http
-    //   .post(
-    //     "https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.index.scenic_service"
-    //   )
-    //   .then(({ data }) => {
-    //     console.log(data);
-    //     this.sortList = data.data.orderby.map(item => {
-    //       return { key: item.type_score, value: item.name };
-    //     });
-    //     console.log(this.sortList);
-    //   });
     //获取推荐商家：
     this.$http
       .post(
@@ -305,19 +191,8 @@ export default {
       .then(({ data }) => {
         console.log(data);
         this.recommend = data.data.recommend_business;
-        console.log(this.recommend)
+        console.log(this.recommend);
       });
-    //获取商家列表！
-    // this.$http
-    //   .post(
-    //     "https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.index.scenic_service_list&type=" +
-    //       this.typeNum
-    //   )
-    //   .then(({ data }) => {
-    //     console.log(data);
-    //     this.BusinessList = data.data.list;
-    //     console.log(this.BusinessList);
-    //   });
   },
 
   methods: {
@@ -634,7 +509,7 @@ img {
   color: #666666ff;
   font-weight: normal;
   font-family: PingFangSC-Medium;
-  text-align: center;
+  /* text-align: center; */
   /* line-height: 25px; */
   overflow: hidden;
   text-overflow: ellipsis;
@@ -654,6 +529,9 @@ img {
   float: left;
   line-height: 22px;
   text-indent: 4%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 80%;
 }
 .inRight {
   width: 15.945%;
@@ -875,13 +753,6 @@ img {
   bottom: 5px;
 }
 </style>
-<style>
-/* .el-rate__icon {
-  font-size: 15px;
-  margin-right: 0px;
-  line-height: 4px;
-} */
-</style>
 <style lang="less" scoped>
 /deep/ .vux-slider > .vux-indicator > a > .vux-icon-dot,
 .swiper-main /deep/ .vux-slider .vux-indicator-right > a > .vux-icon-dot {
@@ -952,5 +823,35 @@ img {
   font-size: 14px;
   color: #222222ff;
   line-height: 2;
+}
+.custom {
+  overflow: inherit;
+  // border-radius: 8px;
+  /deep/ .vux-indicator {
+    right: 50%;
+    margin-right: -32px;
+    bottom: -27px;
+  }
+  /deep/ .vux-icon-dot {
+    width: 15px !important;
+    height: 3px !important;
+  }
+  /deep/ .vux-tab-ink-bar {
+    display: none;
+  }
+  /deep/ .vux-tab {
+    background: transparent;
+    .vux-tab-item {
+      background: transparent;
+    }
+  }
+}
+/deep/ .custom .vux-indicator {
+  right: 50%;
+  margin-right: -32px;
+  bottom: 0px;
+}
+/deep/ .vux-swiper {
+  border-radius: 8px;
 }
 </style>

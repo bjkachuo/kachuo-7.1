@@ -13,7 +13,7 @@
         <div class="right">
           <popup-radio :options="options3" v-model="option3" placeholder="智能排序"></popup-radio>
         </div>
-      </div> -->
+      </div>-->
       <div
         class="recommend"
         v-for="(item,index) in recommend"
@@ -26,12 +26,12 @@
         </div>
         <div class="inMid">
           <p>{{item.name}}</p>
-          <i>人均18元</i>
+          <i style="color:red;">人均{{item.price}}元</i>
           <span>
             <div class="house">
               <img src="../../assets/images/fangzi.png" alt />
             </div>
-            <div class="characteristic">特色：地方菜、面馆</div>
+            <div class="characteristic">特色:{{item.product}}</div>
           </span>
         </div>
         <div class="inRight">
@@ -263,7 +263,7 @@ export default {
   color: #666666ff;
   font-weight: normal;
   font-family: PingFangSC-Medium;
-  text-align: center;
+  /* text-align: center; */
   /* line-height: 25px; */
   overflow: hidden;
   text-overflow: ellipsis;
@@ -283,6 +283,10 @@ export default {
   float: left;
   line-height: 22px;
   text-indent: 4%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 80%;
 }
 .inRight {
   width: 15.945%;

@@ -57,7 +57,7 @@
       </div>
       <div class="f-right" v-if="this.face==0">
         <div class="i-warp">
-          <x-icon type="ios-checkmark" size="15"></x-icon>
+          <x-icon type="ios-checkmark" size="15" class="no"></x-icon>
         </div>
         <span>未通过</span>
       </div>
@@ -66,17 +66,17 @@
       <div class="f-left" style="width:93px">
         <img src="./shenfenzheng.png" alt />
       </div>
-      <div class="f-right-two">
+      <div class="f-right-two" @click="IdCard">
         <span>立即绑定</span>
         <div class="i-warp-two">
           <x-icon type="ios-arrow-right" size="15" class="cell-x-icon"></x-icon>
         </div>
       </div>
     </div>
-    <div class="CheckTickets" v-if="this.face==0">
+    <div class="CheckTickets" v-if="this.face==0 || this.idState == null">
       <p>立即验票</p>
     </div>
-    <div class="CheckTicketsTwo" v-if="this.face==1" @click="tip">
+    <div class="CheckTicketsTwo" v-if="this.face==1 && this.idState !==null" @click="tip">
       <p>立即验票</p>
     </div>
   </div>
@@ -95,7 +95,8 @@ export default {
         showLeftBack: true,
         showRightMore: false
       },
-      face: 0
+      face: 0,
+      idState:null
     };
   },
   computed: {},
@@ -104,6 +105,8 @@ export default {
     this.face = JSON.parse(sessionStorage.getItem("userLoginInfo")).is_face;
     console.log(this.face);
 
+    this.idState = JSON.parse(sessionStorage.getItem("userLoginInfo")).sm_createtime;
+    console.log(this.idState,111)
     if (JSON.parse(sessionStorage.getItem("userLoginInfo")).is_face == 0) {
       this.$router.push("/facecheck");
     } else {
@@ -112,13 +115,18 @@ export default {
   watch: {},
   methods: {
     tip() {
-      this.$vux.loading.hide();
       this.$vux.toast.show({
         type: "success",
         text: "验票成功",
         time: 1000
       });
-      this.$router.push("/indextab");
+      setTimeout(() => {
+        this.$router.push("/indextab");
+      }, 2000);
+    },
+    IdCard(){
+      this.$router.push("/Ucenter/Certification")
+      console.log('1111')
     }
   },
   components: {
@@ -335,6 +343,10 @@ export default {
 /deep/ .yes {
   fill: #2ecc33;
 }
+/deep/ .no {
+  fill: #ccc;
+}
+
 .cell-x-icon {
   fill: #437dff;
 }

@@ -16,6 +16,20 @@
         @pullingDown="onPullingDown"
         @pullingUp="onPullingUp"
       >
+        <div style="width:92%;margin: 0px auto 0px;padding:10px 0;">
+          <swiper auto height="110px" class="custom">
+            <swiper-item class="black">
+              <img src="./13-min.png" alt />
+            </swiper-item>
+            <swiper-item class="black">
+              <img src="./14-min.png" alt />
+            </swiper-item>
+            <swiper-item class="black">
+              <img src="./11-min.png" alt />
+            </swiper-item>
+          </swiper>
+        </div>
+
         <VideoList :dataList="items"></VideoList>
       </vue-better-scroll>
     </main>
@@ -29,6 +43,8 @@ import VideoList from "@/components/layout/VideoList";
 import Scroll from "@/components/common/Scroller";
 import DividedArea from "@/components/common/DividedArea";
 import { ScenceRememberAndLearn } from "@/servers/api";
+import { Swiper, SwiperItem } from "vux";
+
 export default {
   name: "",
   props: [""],
@@ -53,7 +69,7 @@ export default {
           noMore: "没有更多数据了"
         }
       },
-      startY: '0',
+      startY: "0",
       scrollToX: 0,
       scrollToY: 0,
       scrollToTime: 700,
@@ -66,7 +82,9 @@ export default {
     Header,
     VideoList,
     Scroll,
-    DividedArea
+    DividedArea,
+    Swiper,
+    SwiperItem
   },
 
   computed: {
@@ -97,7 +115,7 @@ export default {
         ScenceRememberAndLearn({
           type: this.$route.query.branch,
           page: this.page,
-          scenicid:sessionStorage.getItem("currentScenic")
+          scenicid: sessionStorage.getItem("currentScenic")
         })
           .then(res => {
             if (res.result === 1) {
@@ -160,5 +178,37 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
+}
+</style>
+<style lang="less" scoped>
+.custom {
+  overflow: inherit;
+  // border-radius: 8px;
+  /deep/ .vux-indicator {
+    right: 50%;
+    margin-right: -32px;
+    bottom: -27px;
+  }
+  /deep/ .vux-icon-dot {
+    width: 15px !important;
+    height: 3px !important;
+  }
+  /deep/ .vux-tab-ink-bar {
+    display: none;
+  }
+  /deep/ .vux-tab {
+    background: transparent;
+    .vux-tab-item {
+      background: transparent;
+    }
+  }
+}
+/deep/ .custom .vux-indicator {
+  right: 50%;
+  margin-right: -32px;
+  bottom: 0px;
+}
+/deep/ .vux-swiper {
+  border-radius: 8px;
 }
 </style>

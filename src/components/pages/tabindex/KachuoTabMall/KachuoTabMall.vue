@@ -5,7 +5,11 @@
     <div style="background: #fff;position:relative;">
       <div style="width: 76%;margin: 0 0 0 4%;">
         <tab :scroll-threshold="5" class="custom" custom-bar-width="50%">
-          <tab-item v-for="(item,index) in CommodityCategory" :key="index" :selected="index===1">{{item.name}}</tab-item>
+          <tab-item
+            v-for="(item,index) in CommodityCategory"
+            :key="index"
+            :selected="index===1"
+          >{{item.name}}</tab-item>
         </tab>
       </div>
       <div class="classification" @click="classification">
@@ -14,9 +18,15 @@
     </div>
     <div style="width:92%;margin: 15px auto 10px;">
       <swiper auto height="110px" class="custom">
-        <swiper-item class="black"><img src="./mallone.png" alt=""></swiper-item>
-        <swiper-item class="black"><img src="./malltwo.jpg" alt=""></swiper-item>
-        <swiper-item class="black"><img src="./mallthree.jpg" alt=""></swiper-item>
+        <swiper-item class="black">
+          <img src="./mallone.png" alt />
+        </swiper-item>
+        <swiper-item class="black">
+          <img src="./malltwo.jpg" alt />
+        </swiper-item>
+        <swiper-item class="black">
+          <img src="./mallthree.jpg" alt />
+        </swiper-item>
       </swiper>
     </div>
     <ul class="goods-type">
@@ -27,6 +37,20 @@
     </ul>
     <!--    <CellDivider :cellList="cellListTools" class="tab-item-mall-tools-wrap"></CellDivider>-->
     <DividedArea></DividedArea>
+    <div style="width:92%;margin: 0px auto 10px;">
+      <swiper auto height="70px" class="custom">
+        <swiper-item class="black">
+          <img src="./7-min.png" alt />
+        </swiper-item>
+        <swiper-item class="black">
+          <img src="./3-min.png" alt />
+        </swiper-item>
+        <swiper-item class="black">
+          <img src="./7-min.png" alt />
+        </swiper-item>
+      </swiper>
+    </div>
+
     <!--    <Divider :content="dividerContent"></Divider>-->
     <GoodsList :goodList="goodsListData"></GoodsList>
     <!--    <span class="btn-wrap" @click="classification">-->
@@ -123,8 +147,8 @@ export default {
 
   methods: {
     //跳转分类页面
-    classification(){
-      this.$router.push('/goodsSlassification')
+    classification() {
+      this.$router.push("/goodsSlassification");
     },
     // 商品推荐
     getGoodsComm() {
@@ -154,12 +178,12 @@ export default {
 };
 </script>
 <style lang='less' scoped>
-.classification{
-    position: absolute;
-    right: 3%;
-    top: 9px;
-    font-size: 16px;
-    font-weight: 800;
+.classification {
+  position: absolute;
+  right: 3%;
+  top: 9px;
+  font-size: 16px;
+  font-weight: 800;
 }
 .box1 {
   width: 1000px;
@@ -253,6 +277,5 @@ export default {
   margin-right: -32px;
   bottom: 0px;
 }
-
 </style>
 

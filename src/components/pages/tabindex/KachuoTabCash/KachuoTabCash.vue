@@ -22,11 +22,25 @@
         <div style="text-align: center">{{item.title}}</div>
       </li>
     </ul>
+    <div style="width:92%;margin: 0px auto 10px;">
+      <swiper auto height="70px" class="custom">
+        <swiper-item class="black">
+          <img src="./9-min.png" alt />
+        </swiper-item>
+        <swiper-item class="black">
+          <img src="./9-min.png" alt />
+        </swiper-item>
+        <swiper-item class="black">
+          <img src="./9-min.png" alt />
+        </swiper-item>
+      </swiper>
+    </div>
 
     <div class="guess-you">
       <div class="guess-you-bgc"></div>
       <span>猜你喜欢</span>
     </div>
+
     <GoodsList :goodList="goodsListData"></GoodsList>
 
     <!--    <CellDivider :cellList="cellListTools" class="tab-item-mall-tools-wrap"></CellDivider>-->

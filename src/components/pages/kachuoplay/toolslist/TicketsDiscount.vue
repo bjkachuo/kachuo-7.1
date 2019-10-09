@@ -206,6 +206,7 @@ export default {
   height: 100%;
   margin-right: 5%;
   width: 76px;
+  display: none;
 }
 .piao-head-right p {
   color: #999999;
@@ -253,7 +254,7 @@ export default {
 .piao-bottom {
   width: 315px;
   height: 14px;
-  margin: 36px auto 0;
+  margin: 23% auto 0;
 }
 .btm-left {
   height: 1px;

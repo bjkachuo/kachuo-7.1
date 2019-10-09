@@ -22,7 +22,7 @@
           <div class="bs-panel-body">
             <div class="guid-header">
               <div class="g-name">{{this.DList.name}}</div>
-              <div class="g-raty">4.0分 17人评价</div>
+              <div class="g-raty">{{this.DList.score}}分 {{this.DList.commtotal}}人评价</div>
             </div>
             <div class="bs-raty">
               <!-- <rater v-model="data1" active-color="red" :margin="0" disabled></rater> -->
@@ -49,7 +49,7 @@
       </div>
       <div class="message-panel">
         <div class="mess-header">
-          <div class="mess-title">评论(2条)</div>
+          <div class="mess-title">评论({{this.DList.commtotal}}条)</div>
         </div>
         <div class="mess-body">
           <div class="mess-group" v-for="(item,index) in DList.comm" :key="index">

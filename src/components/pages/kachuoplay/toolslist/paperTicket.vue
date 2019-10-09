@@ -75,9 +75,9 @@
         </div>
         <span>已通过</span>
       </div>
-      <div class="f-right" v-else-if="this.face==0">
+      <div class="f-right" v-else-if="this.face==0" >
         <div class="i-warp">
-          <x-icon type="ios-checkmark" size="15"></x-icon>
+          <x-icon type="ios-checkmark" size="15" class="no"></x-icon>
         </div>
         <span>未通过</span>
       </div>
@@ -223,13 +223,14 @@ export default {
       );
     },
     tip() {
-      this.$vux.loading.hide();
       this.$vux.toast.show({
         type: "success",
         text: "验票成功",
         time: 1000
       });
-      this.$router.push("/indextab");
+      setTimeout(() => {
+        this.$router.push("/indextab");
+      }, 2000);
     }
   },
   components: {
@@ -431,5 +432,8 @@ export default {
 }
 /deep/ .yes {
   fill: #2ecc33;
+}
+/deep/ .no {
+  fill: #ccc;
 }
 </style>
