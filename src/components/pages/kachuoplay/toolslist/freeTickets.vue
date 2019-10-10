@@ -95,15 +95,15 @@ export default {
         showLeftBack: true,
         showRightMore: false
       },
-      face: 0,
+      // face: 0,
       idState: null
     };
   },
   computed: {},
   created() {},
   mounted() {
-    // this.face = JSON.parse(sessionStorage.getItem("userLoginInfo")).is_face;
-    this.face = this.$route.query.face;
+    this.face = JSON.parse(sessionStorage.getItem("userLoginInfo")).is_face;
+    // this.face = this.$route.query.face;
     console.log(this.face);
 
     this.idState = JSON.parse(

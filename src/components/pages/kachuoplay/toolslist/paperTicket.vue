@@ -139,7 +139,7 @@ export default {
         showRightMore: false
       },
       show5: false,
-      face: 0,
+      // face: 0,
       //输入的信息状态
       text: "",
       //传入的图片状态
@@ -151,8 +151,8 @@ export default {
   computed: {},
   created() {},
   mounted() {
-    // this.face = JSON.parse(sessionStorage.getItem("userLoginInfo")).is_face;
-    this.face = this.$route.query.face;
+    this.face = JSON.parse(sessionStorage.getItem("userLoginInfo")).is_face;
+    // this.face = this.$route.query.face;
     console.log(this.face);
 
     if (JSON.parse(sessionStorage.getItem("userLoginInfo")).is_face == 0) {
