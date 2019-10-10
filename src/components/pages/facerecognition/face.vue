@@ -172,7 +172,7 @@ export default {
                   text: "识别成功",
                   time: 1000
                 });
-                this.$router.go("/indextab");
+                this.$router.go(-1);
               } else {
                 this.$vux.loading.hide();
                 this.$vux.toast.show({
