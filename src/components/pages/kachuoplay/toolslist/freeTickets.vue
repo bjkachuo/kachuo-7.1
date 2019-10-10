@@ -95,7 +95,7 @@ export default {
         showLeftBack: true,
         showRightMore: false
       },
-      // face: 0,
+      face: 0,
       idState: null
     };
   },

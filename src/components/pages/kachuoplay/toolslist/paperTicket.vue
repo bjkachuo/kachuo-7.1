@@ -139,7 +139,7 @@ export default {
         showRightMore: false
       },
       show5: false,
-      // face: 0,
+      face: 0,
       //输入的信息状态
       text: "",
       //传入的图片状态

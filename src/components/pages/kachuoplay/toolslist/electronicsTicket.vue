@@ -132,7 +132,7 @@ export default {
       },
       show5: false,
       //扫脸状态
-      // face: 0,
+      face: 0,
       //输入的信息状态
       text: "",
       //传入的图片状态

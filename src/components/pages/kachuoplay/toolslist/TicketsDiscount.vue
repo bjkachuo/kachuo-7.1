@@ -89,12 +89,15 @@ import Header from "@/components/common/Header";
 import TicketsDiscount from "@/components/layout/TicketsDiscount";
 import ScrollContainer from "@/components/common/ScrollContainer";
 import { Swiper, SwiperItem, Flexbox, FlexboxItem } from "vux";
+import { getUserInfo } from "@/servers/api.js";
 
 export default {
   name: "",
   props: [""],
   data() {
     return {
+      //全局用户信息
+      // userInfo: null,
       TitleObjData: {
         titleContent: "门票认证",
         showLeftBack: true,
@@ -113,11 +116,6 @@ export default {
           imgSrc: require("@/components/pages/kachuoplay/toolslist/piaotwo.png"),
           text: "持有纸质门票用户验票入口"
         },
-        // {
-        //   name: "现场票",
-        //   link: "/onsiteTickets",
-        //   imgSrc: require("@/components/pages/kachuoplay/toolslist/piaothree.png")
-        // },
         {
           name: "免费票",
           link: "/freeTickets",
@@ -127,7 +125,6 @@ export default {
       ]
     };
   },
-
   components: {
     Header,
     TicketsDiscount,
@@ -143,10 +140,15 @@ export default {
       return { height: document.documentElement.clientHeight - 50 + "px" };
     }
   },
+  created() {},
 
   beforeMount() {},
 
   mounted() {
+    //获取全局用户信息
+    this.getUserInfo()
+    // console.log(this.getUserInfo());
+
     // this.face = this.$route.query.face;
     // console.log(this.$route.query.face)
   },
@@ -159,7 +161,9 @@ export default {
     //跳转在线购票
     olBuy() {
       this.$router.push("/onlineTicketing");
-    }
+    },
+    //获取全局用户信息
+    getUserInfo() {}
   },
 
   watch: {}
