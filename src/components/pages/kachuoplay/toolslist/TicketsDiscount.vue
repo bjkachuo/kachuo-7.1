@@ -146,7 +146,12 @@ export default {
 
   mounted() {
     //获取全局用户信息
-    this.getUserInfo()
+    getUserInfo({}).then(res => {
+      this.$store.commit("setUserLoginInfo", res.data);
+      this.GLOBAL.setSession("userLoginInfo", res.data);
+      console.log(res)
+    });
+
     // console.log(this.getUserInfo());
 
     // this.face = this.$route.query.face;
