@@ -50,6 +50,7 @@ export default {
   props: [""],
   data() {
     return {
+      face:0,
       TitleObjData: {
         titleContent: "人脸识别",
         showLeftBack: true,
@@ -172,7 +173,9 @@ export default {
                   text: "识别成功",
                   time: 1000
                 });
-                this.$router.push("/ticketsdiscount");
+                this.face = 1
+                this.$router.push("/ticketsdiscount&face="+this.face);
+                
               } else {
                 this.$vux.loading.hide();
                 this.$vux.toast.show({
@@ -180,6 +183,7 @@ export default {
                   text: "人脸验证失败请重试",
                   time: 1000
                 });
+                this.face = 0
               }
             })
             .catch(err => {

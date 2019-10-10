@@ -75,7 +75,7 @@
         </div>
         <span>已通过</span>
       </div>
-      <div class="f-right" v-else-if="this.face==0" >
+      <div class="f-right" v-else-if="this.face==0">
         <div class="i-warp">
           <x-icon type="ios-checkmark" size="15" class="no"></x-icon>
         </div>
@@ -151,7 +151,8 @@ export default {
   computed: {},
   created() {},
   mounted() {
-    this.face = JSON.parse(sessionStorage.getItem("userLoginInfo")).is_face;
+    // this.face = JSON.parse(sessionStorage.getItem("userLoginInfo")).is_face;
+    this.face = this.$route.query.face;
     console.log(this.face);
 
     if (JSON.parse(sessionStorage.getItem("userLoginInfo")).is_face == 0) {

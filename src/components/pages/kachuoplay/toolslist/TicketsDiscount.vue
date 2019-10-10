@@ -95,6 +95,7 @@ export default {
   props: [""],
   data() {
     return {
+      face:'',
       TitleObjData: {
         titleContent: "门票认证",
         showLeftBack: true,
@@ -103,13 +104,13 @@ export default {
       dataList: [
         {
           name: "电子票",
-          link: "/electronicsTicket",
+          link: "/electronicsTicket&face="+this.face,
           imgSrc: require("@/components/pages/kachuoplay/toolslist/piaoone.png"),
           text: "其它平台或渠道购票用户验票入口"
         },
         {
           name: "纸质票",
-          link: "/paperTicket",
+          link: "/paperTicket&face="+this.face,
           imgSrc: require("@/components/pages/kachuoplay/toolslist/piaotwo.png"),
           text: "持有纸质门票用户验票入口"
         },
@@ -120,7 +121,7 @@ export default {
         // },
         {
           name: "免费票",
-          link: "/freeTickets",
+          link: "/freeTickets&face="+this.face,
           imgSrc: require("@/components/pages/kachuoplay/toolslist/piaofour.png"),
           text: "达到国家免票标准的用户游园入口"
         }
@@ -146,7 +147,10 @@ export default {
 
   beforeMount() {},
 
-  mounted() {},
+  mounted() {
+    this.face = this.$route.query.face;
+    console.log(this.$route.query.face)
+  },
 
   methods: {
     //跳转各种类型票

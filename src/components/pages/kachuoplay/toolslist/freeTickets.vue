@@ -96,17 +96,20 @@ export default {
         showRightMore: false
       },
       face: 0,
-      idState:null
+      idState: null
     };
   },
   computed: {},
   created() {},
   mounted() {
-    this.face = JSON.parse(sessionStorage.getItem("userLoginInfo")).is_face;
+    // this.face = JSON.parse(sessionStorage.getItem("userLoginInfo")).is_face;
+    this.face = this.$route.query.face;
     console.log(this.face);
 
-    this.idState = JSON.parse(sessionStorage.getItem("userLoginInfo")).sm_createtime;
-    console.log(this.idState,111)
+    this.idState = JSON.parse(
+      sessionStorage.getItem("userLoginInfo")
+    ).sm_createtime;
+    console.log(this.idState, 111);
     if (JSON.parse(sessionStorage.getItem("userLoginInfo")).is_face == 0) {
       this.$router.push("/facecheck");
     } else {
@@ -124,9 +127,9 @@ export default {
         this.$router.push("/indextab");
       }, 2000);
     },
-    IdCard(){
-      this.$router.push("/Ucenter/Certification")
-      console.log('1111')
+    IdCard() {
+      this.$router.push("/Ucenter/Certification");
+      console.log("1111");
     }
   },
   components: {
