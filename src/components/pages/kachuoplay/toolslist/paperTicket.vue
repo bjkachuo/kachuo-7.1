@@ -145,7 +145,7 @@ export default {
       //传入的图片状态
       photo: "",
       videoUploadUrl:
-        "https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=member.realname.faceRecognition"
+        "https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=member.realname.ticket_qrcode"
     };
   },
   computed: {},
