@@ -132,7 +132,6 @@ export default {
       },
       show5: false,
       //扫脸状态
-      face: 0,
       //输入的信息状态
       text: "",
       //传入的图片状态
@@ -144,11 +143,11 @@ export default {
 
   mounted() {
     //获取全局用户信息
-    getUserInfo({}).then(res => {
-      this.$store.commit("setUserLoginInfo", res.data);
-      this.GLOBAL.setSession("userLoginInfo", res.data);
-      console.log(res);
-    });
+    // getUserInfo({}).then(res => {
+    //   this.$store.commit("setUserLoginInfo", res.data);
+    //   this.GLOBAL.setSession("userLoginInfo", res.data);
+    //   console.log(res);
+    // });
 
     this.face = JSON.parse(sessionStorage.getItem("userLoginInfo")).is_face;
     // this.face = this.$route.query.face;

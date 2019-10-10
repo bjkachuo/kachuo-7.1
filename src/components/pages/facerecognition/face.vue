@@ -173,7 +173,7 @@ export default {
                   time: 1000
                 });
                 
-                this.$router.go(-1);
+                this.$router.push("/ticketsdiscount");
                 
               } else {
                 this.$vux.loading.hide();
