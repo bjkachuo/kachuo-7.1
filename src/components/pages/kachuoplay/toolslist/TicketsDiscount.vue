@@ -145,12 +145,12 @@ export default {
   beforeMount() {},
 
   mounted() {
-    //获取全局用户信息
-    getUserInfo({}).then(res => {
-      this.$store.commit("setUserLoginInfo", res.data);
-      this.GLOBAL.setSession("userLoginInfo", res.data);
-      console.log(res)
-    });
+    // //获取全局用户信息
+    // getUserInfo({}).then(res => {
+    //   this.$store.commit("setUserLoginInfo", res.data);
+    //   this.GLOBAL.setSession("userLoginInfo", res.data);
+    //   console.log(res)
+    // });
 
     // console.log(this.getUserInfo());
 
@@ -168,7 +168,7 @@ export default {
       this.$router.push("/onlineTicketing");
     },
     //获取全局用户信息
-    getUserInfo() {}
+    // getUserInfo() {}
   },
 
   watch: {}

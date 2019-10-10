@@ -85,6 +85,7 @@
 <script>
 import Header from "@/components/common/Header";
 import { Tab, TabItem, Flexbox, FlexboxItem } from "vux";
+import { getUserInfo } from "@/servers/api";
 
 export default {
   props: {},
@@ -102,6 +103,13 @@ export default {
   computed: {},
   created() {},
   mounted() {
+    //获取全局用户信息
+    getUserInfo({}).then(res => {
+      this.$store.commit("setUserLoginInfo", res.data);
+      this.GLOBAL.setSession("userLoginInfo", res.data);
+      console.log(res);
+    });
+
     this.face = JSON.parse(sessionStorage.getItem("userLoginInfo")).is_face;
     // this.face = this.$route.query.face;
     console.log(this.face);
