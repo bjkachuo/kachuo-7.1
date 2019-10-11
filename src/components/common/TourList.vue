@@ -13,8 +13,8 @@
       <div class="head-left" style="float:left;margin-top:8px;" @click="goback">
         <x-icon type="ios-arrow-back" size="28"></x-icon>
       </div>
-      <div class="head-right" style="float:right;font-size:16px;margin-top:10px;display:none" @click="goRegister">导游注册</div>
-      <div class="head-right" style="float:right;font-size:16px;margin-top:10px;margin-right:8px;display:none" @click="goTourBs">导游后台</div>
+      <div class="head-right" style="float:right;font-size:16px;margin-top:10px;" @click="goRegister">导游注册</div>
+      <div class="head-right" style="float:right;font-size:16px;margin-top:10px;margin-right:8px;" @click="goTourBs">导游后台</div>
     </div>
     <div class="normal-content" :style="conHei">
       <div class="guide-list">
