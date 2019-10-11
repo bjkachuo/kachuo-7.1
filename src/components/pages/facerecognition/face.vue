@@ -172,7 +172,9 @@ export default {
                   text: "识别成功",
                   time: 1000
                 });
-                this.$router.go(-1);
+                
+                this.$router.push("/ticketsdiscount");
+                
               } else {
                 this.$vux.loading.hide();
                 this.$vux.toast.show({
@@ -180,6 +182,7 @@ export default {
                   text: "人脸验证失败请重试",
                   time: 1000
                 });
+               
               }
             })
             .catch(err => {

@@ -75,7 +75,7 @@
         </div>
         <span>已通过</span>
       </div>
-      <div class="f-right" v-else-if="this.face==0" >
+      <div class="f-right" v-else-if="this.face==0">
         <div class="i-warp">
           <x-icon type="ios-checkmark" size="15" class="no"></x-icon>
         </div>
@@ -127,7 +127,7 @@ const FACEUPLOADCONFIG = {
   }
 };
 
-import { faceCheck } from "@/servers/api";
+import { faceCheck, getUserInfo } from "@/servers/api";
 
 export default {
   props: {},
@@ -145,13 +145,21 @@ export default {
       //传入的图片状态
       photo: "",
       videoUploadUrl:
-        "https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=member.realname.faceRecognition"
+        "https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=member.realname.ticket_qrcode"
     };
   },
   computed: {},
   created() {},
   mounted() {
+    //获取全局用户信息
+    // getUserInfo({}).then(res => {
+    //   this.$store.commit("setUserLoginInfo", res.data);
+    //   this.GLOBAL.setSession("userLoginInfo", res.data);
+    //   console.log(res);
+    // });
+
     this.face = JSON.parse(sessionStorage.getItem("userLoginInfo")).is_face;
+    // this.face = this.$route.query.face;
     console.log(this.face);
 
     if (JSON.parse(sessionStorage.getItem("userLoginInfo")).is_face == 0) {

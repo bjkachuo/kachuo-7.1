@@ -63,7 +63,7 @@
       <p>精选推荐</p>
     </div>
     <div class="line-three">
-      <swiper auto height="440px" direction="vertical">
+      <swiper auto height="440px" direction="vertical" interval="5000">
         <swiper-item v-for="(reco,index) in recommend" :key="index">
           <div class="recommend"  v-for="(item,index) in reco" :key="index">
             <div class="inLeft">
