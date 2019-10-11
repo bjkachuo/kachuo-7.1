@@ -2,9 +2,9 @@
   <div class="tab-item-mall-wrap">
     <TabItemMallHeader></TabItemMallHeader>
 
-    <div style="background: #fff;position:relative;">
+    <div style="background: #fff;position:relative;position: fixed;top: 45px;z-index: 99999;">
       <div style="width: 76%;margin: 0 0 0 4%;">
-        <tab :scroll-threshold="5" class="custom" custom-bar-width="50%">
+        <tab :scroll-threshold="5" class="custom" custom-bar-width="50%" >
           <tab-item
             v-for="(item,index) in CommodityCategory"
             :key="index"
