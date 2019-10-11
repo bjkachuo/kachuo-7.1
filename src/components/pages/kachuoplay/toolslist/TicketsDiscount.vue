@@ -263,7 +263,7 @@ export default {
   color: #666666;
 }
 .piao-bottom {
-  width: 315px;
+  width: 345px;
   height: 14px;
   margin: 23% auto 0;
 }
