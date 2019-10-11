@@ -93,7 +93,7 @@
         <p>扫码识别</p>
       </div>
       <div class="num" @click="write">
-        <p>数字串码</p>
+        <p>门票编号</p>
       </div>
     </div>
     <div class="CheckTickets" v-if="this.text == ''|| this.photo == 0">
@@ -106,7 +106,7 @@
       v-model="show5"
       show-input
       ref="confirm5"
-      title="请输入数字串码"
+      title="请输入门票编号"
       @on-cancel="onCancel"
       @on-confirm="onConfirm5"
       @on-show="onShow5"
