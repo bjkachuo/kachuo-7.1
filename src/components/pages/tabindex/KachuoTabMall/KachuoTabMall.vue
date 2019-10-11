@@ -2,21 +2,21 @@
   <div class="tab-item-mall-wrap">
     <TabItemMallHeader></TabItemMallHeader>
 
-    <div style="background: #fff;position:relative;position: fixed;top: 45px;z-index: 99999;">
-      <div style="width: 76%;margin: 0 0 0 4%;">
-        <tab :scroll-threshold="5" class="custom" custom-bar-width="50%" >
-          <tab-item
-            v-for="(item,index) in CommodityCategory"
-            :key="index"
-            :selected="index===1"
-          >{{item.name}}</tab-item>
-        </tab>
-      </div>
-      <div class="classification" @click="classification">
-        <p>分类</p>
-      </div>
-    </div>
-    <div style="width:92%;margin: 15px auto 10px;">
+<!--    <div style="background: #fff;position:relative;position: fixed;top: 45px;z-index: 99999;width: 100%">-->
+<!--      <div style="width: 76%;margin: 0 0 0 4%;">-->
+<!--        <tab :scroll-threshold="5" class="custom" custom-bar-width="50%" >-->
+<!--          <tab-item-->
+<!--            v-for="(item,index) in CommodityCategory"-->
+<!--            :key="index"-->
+<!--            :selected="index===1"-->
+<!--          >{{item.name}}</tab-item>-->
+<!--        </tab>-->
+<!--      </div>-->
+<!--      <div class="classification" @click="classification">-->
+<!--        <p>分类</p>-->
+<!--      </div>-->
+<!--    </div>-->
+    <div style="width:92%;margin: 15px auto 10px; position: relative;top: 45px;">
       <swiper auto height="110px" class="custom">
         <swiper-item class="black">
           <img src="./mallone.png" alt />
