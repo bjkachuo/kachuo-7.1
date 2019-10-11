@@ -132,6 +132,7 @@ export default {
       },
       show5: false,
       //扫脸状态
+      face: 0,
       //输入的信息状态
       text: "",
       //传入的图片状态
@@ -180,47 +181,22 @@ export default {
       console.log(this.text);
     },
     scanning() {
-      navigator.camera.getPicture(
-        res => {
-          if (res == null) return;
-          this.$vux.loading.show({ text: "正在上传" });
-          axios
-            .post(this.videoUploadUrl, res, FACEUPLOADCONFIG)
-            .then(res2 => {
-              // alert(JSON.stringify(res2))
-              if (res2.data.result === 1) {
-                this.$vux.loading.hide();
-                this.$vux.toast.show({
-                  type: "success",
-                  text: "扫描成功",
-                  time: 1000
-                });
-                this.photo = res2.data.result;
-                // this.$router.go("/indextab");
-              } else {
-                this.$vux.loading.hide();
-                this.$vux.toast.show({
-                  type: "warn",
-                  text: "验证失败请重试",
-                  time: 1000
-                });
-                this.photo = res2.data.result;
-                // this.$router.go("/electronicsTicket");
-              }
-            })
-            .catch(err => {
-              console.log(err);
-            });
+      cordova.plugins.barcodeScanner.scan(
+        function(result) {
+          alert(result.text);
         },
-        err => {
-          console.log(err);
+        function(error) {
+          alert("Scanning failed: " + error);
         },
         {
-          quality: 50,
-          destinationType: Camera.DestinationType.DATA_URL,
-          cameraDirection: Camera.Direction.BACK,
-          targetWidth: 720,
-          targetHeight: 1280
+          showFlipCameraButton: true,
+          showTorchButton: true,
+          prompt: "请用方框区域对准二维码",
+          resultDisplayDuration: 100,
+          formats: "QR_CODE,PDF_417,UPC_A,UPC_E,EAN_8,EAN_13,CODE_39",
+          orientation: "portrait",
+          disableAnimations: true,
+          disableSuccessBeep: false
         }
       );
     },

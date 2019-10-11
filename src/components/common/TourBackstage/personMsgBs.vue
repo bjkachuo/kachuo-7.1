@@ -23,7 +23,7 @@
       ></x-textarea>
     </div>
     <div class="price">
-      <x-input title="每小时价格(元)" placeholder="请输入每小时价格" required="true" type="number"></x-input>
+      <x-input title="每小时价格(元)" placeholder="请输入每小时价格" required type='number'></x-input>
     </div>
     <div class="time">
       <popup-picker
@@ -36,7 +36,7 @@
       ></popup-picker>
     </div>
     <div class="price">
-      <x-input title="联系方式" placeholder="请输入联系方式" required="true" is-type="china-mobile"></x-input>
+      <x-input title="联系方式" placeholder="请输入联系方式" required is-type="china-mobile"></x-input>
     </div>
   </div>
 </template>
@@ -63,7 +63,17 @@ export default {
   created() {},
   mounted() {},
   watch: {},
-  methods: {},
+  methods: {
+    onShow() {
+      console.log("on show");
+    },
+    onHide(type) {
+      console.log("on hide", type);
+    },
+    onChange(val) {
+      console.log("val change", val);
+    }
+  },
   components: {
     Header,
     XInput,
@@ -92,7 +102,7 @@ export default {
 .jq-photo-wrap {
   width: 92%;
   min-height: 170px;
-  background: #FFFFFF;
+  background: #ffffff;
   margin: 56px auto 10px;
   border-radius: 8px;
   overflow: hidden;
@@ -107,14 +117,14 @@ export default {
 .introduce {
   width: 92%;
   height: 150px;
-  background: #FFFFFF;
+  background: #ffffff;
   border-radius: 8px;
   margin: 0 auto 10px;
 }
 .price {
   width: 92%;
   height: 55px;
-  background: #FFFFFF;
+  background: #ffffff;
   border-radius: 8px;
   margin: 0 auto 10px;
   padding: 8px 2px;
@@ -122,7 +132,7 @@ export default {
 .time {
   width: 92%;
   height: 55px;
-  background: #FFFFFF;
+  background: #ffffff;
   margin: 0 auto 10px;
   border-radius: 8px;
   padding: 8px 2px;
