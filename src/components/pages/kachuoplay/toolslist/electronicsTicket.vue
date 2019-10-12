@@ -188,7 +188,7 @@ export default {
           if (result.text != "") {
             that.photo = 1;
             // alert("扫码成果" + result.text);
-            this.$vux.toast.show({
+            that.$vux.toast.show({
               type: "success",
               text: "扫码成功:" + result.text,
               time: 1000
@@ -197,7 +197,7 @@ export default {
             that.photo = 0;
             //如果未进行扫码识别返回
             // alert("取消扫码");
-            this.$vux.toast.show({
+            that.$vux.toast.show({
               type: "cancel",
               text: "取消扫码",
               time: 1000
@@ -209,7 +209,7 @@ export default {
           that.photo = 0;
           //扫码失败
           // alert("扫码失败" + error);
-          this.$vux.toast.show({
+          that.$vux.toast.show({
             type: "warn",
             text: "扫码失败:" + error,
             time: 1000
