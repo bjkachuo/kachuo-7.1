@@ -297,7 +297,7 @@ img {
 }
 .scence-service-content {
   /* width: 375px; */
-  height: 100%;
+  height: 94%;
   margin-top: 46px;
   border-top: 1px solid #eeeeee;
   background: #f5f5f5;
@@ -438,7 +438,7 @@ img {
   width: 100%;
   height: 100px;
   background: rgba(255, 255, 255, 1);
-  box-shadow: 0px 10px 20px 0px rgba(0, 101, 255, 0.08);
+  box-shadow: 0px 5px 10px 0px rgba(0, 101, 255, 0.08);
   border-radius: 8px;
   margin-bottom: 10px;
   overflow: hidden;
