@@ -43,11 +43,11 @@
         <span>预约导游</span>
       </div>
     </div>
-    <div class="map">
-      <span>“资质齐全，价格公开透明”</span>
+    <div class="guide">
+      <span>景区卫生间、救助站、周边交通</span>
       <div>
         <i class="map-icon"></i>
-        <span>景区卫生间、救助站、周边交通</span>
+        <span>地图导航</span>
       </div>
     </div>
   </div>
@@ -320,7 +320,7 @@ export default {
   }
   .map-icon{
     width: 12px;
-    background-image: url("guide.png");
+    background-image: url("position.png");
   }
 }
 .scence-release-wrap {

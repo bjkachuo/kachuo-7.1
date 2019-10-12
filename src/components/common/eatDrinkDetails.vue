@@ -455,6 +455,9 @@ import {
   XNumber,
   XDialog
 } from "vux";
+
+
+
 export default {
   beforeCreate: function() {
     document.querySelector("body").setAttribute("style", "height:auto");
