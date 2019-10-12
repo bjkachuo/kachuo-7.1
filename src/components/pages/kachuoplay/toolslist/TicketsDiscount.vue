@@ -40,7 +40,7 @@
         <div class="piao-bottom">
           <div class="btm-left"></div>
 
-          <p class="btm-mid">认证服务由北京卡戳科技有限公司提供技术支持</p>
+          <p class="btm-mid">认证服务由北京卡戳数字科技有限公司提供技术支持</p>
 
           <div class="btm-right"></div>
         </div>
@@ -263,7 +263,7 @@ export default {
   color: #666666;
 }
 .piao-bottom {
-  width: 315px;
+  width: 345px;
   height: 14px;
   margin: 23% auto 0;
 }
