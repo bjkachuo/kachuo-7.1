@@ -136,7 +136,7 @@ export default {
       //输入的信息状态
       text: "",
       //传入的图片状态
-      photo: "",
+      photo: 0,
       videoUploadUrl:
         "https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=member.realname.ticket_qrcode"
     };
@@ -183,36 +183,37 @@ export default {
     scanning() {
       cordova.plugins.barcodeScanner.scan(
         function(result) {
+          var that = this;
           //如果识别不为空有数据
           if (result.text != "") {
-            this.photo = 1;
-            alert("扫码成果" + result.text);
-            // this.$vux.toast.show({
-            //   type: "success",
-            //   text: "扫码成功:"+result.text,
-            //   time: 1000
-            // });
+            that.photo = 1;
+            // alert("扫码成果" + result.text);
+            this.$vux.toast.show({
+              type: "success",
+              text: "扫码成功:" + result.text,
+              time: 1000
+            });
           } else {
-            this.photo = 0;
+            that.photo = 0;
             //如果未进行扫码识别返回
-            alert("取消扫码");
-
-            // this.$vux.toast.show({
-            //   type: "cancel",
-            //   text: "取消扫码",
-            //   time: 1000
-            // });
+            // alert("取消扫码");
+            this.$vux.toast.show({
+              type: "cancel",
+              text: "取消扫码",
+              time: 1000
+            });
           }
         },
         function(error) {
-          this.photo = 0;
+          var that = this;
+          that.photo = 0;
           //扫码失败
-          alert("扫码失败" + error);
-          // this.$vux.toast.show({
-          //   type: "warn",
-          //   text: "扫码失败:"+error,
-          //   time: 1000
-          // });
+          // alert("扫码失败" + error);
+          this.$vux.toast.show({
+            type: "warn",
+            text: "扫码失败:" + error,
+            time: 1000
+          });
         },
         {
           showFlipCameraButton: true,
