@@ -189,39 +189,70 @@ export default {
     },
     scanning() {
       cordova.plugins.barcodeScanner.scan(
-        function(result) {
-          var that = this;
+        result => {
           //如果识别不为空有数据
           if (result.text != "") {
-            that.photo = 1;
+            this.photo = 1;
             // alert("扫码成果" + result.text);
-            that.$vux.toast.show({
+            this.$vux.toast.show({
               type: "success",
               text: "扫码成功:" + result.text,
               time: 1000
             });
           } else {
-            that.photo = 0;
             //如果未进行扫码识别返回
+            this.photo = 0;
             // alert("取消扫码");
-            that.$vux.toast.show({
+            this.$vux.toast.show({
               type: "cancel",
               text: "取消扫码",
               time: 1000
             });
           }
         },
-        function(error) {
-          var that = this;
-          that.photo = 0;
+        error => {
           //扫码失败
+          this.photo = 0;
           // alert("扫码失败" + error);
-          that.$vux.toast.show({
+          this.$vux.toast.show({
             type: "warn",
             text: "扫码失败:" + error,
             time: 1000
           });
         },
+        // function(result) {
+        //   var that = this;
+        //   //如果识别不为空有数据
+        //   if (result.text != "") {
+        //     that.photo = 1;
+        //     // alert("扫码成果" + result.text);
+        //     that.$vux.toast.show({
+        //       type: "success",
+        //       text: "扫码成功:" + result.text,
+        //       time: 1000
+        //     });
+        //   } else {
+        //     that.photo = 0;
+        //     //如果未进行扫码识别返回
+        //     // alert("取消扫码");
+        //     that.$vux.toast.show({
+        //       type: "cancel",
+        //       text: "取消扫码",
+        //       time: 1000
+        //     });
+        //   }
+        // },
+        // function(error) {
+        //   var that = this;
+        //   that.photo = 0;
+        //   //扫码失败
+        //   // alert("扫码失败" + error);
+        //   that.$vux.toast.show({
+        //     type: "warn",
+        //     text: "扫码失败:" + error,
+        //     time: 1000
+        //   });
+        // },
         {
           showFlipCameraButton: true,
           showTorchButton: true,
