@@ -185,32 +185,34 @@ export default {
         function(result) {
           //如果识别不为空有数据
           if (result.text != "") {
-            // alert(result.text);
-            this.$vux.toast.show({
-              type: "success",
-              text: "扫码成功:"+result.text,
-              time: 1000
-            });
             this.photo = 1;
+            alert("扫码成果" + result.text);
+            // this.$vux.toast.show({
+            //   type: "success",
+            //   text: "扫码成功:"+result.text,
+            //   time: 1000
+            // });
           } else {
-            //如果未进行扫码识别返回
-            this.$vux.toast.show({
-              type: "cancel",
-              text: "取消扫码",
-              time: 1000
-            });
             this.photo = 0;
+            //如果未进行扫码识别返回
+            alert("取消扫码");
+
+            // this.$vux.toast.show({
+            //   type: "cancel",
+            //   text: "取消扫码",
+            //   time: 1000
+            // });
           }
         },
         function(error) {
-          //扫码失败
-          // alert("Scanning failed: " + error);
-          this.$vux.toast.show({
-            type: "warn",
-            text: "扫码失败:"+error,
-            time: 1000
-          });
           this.photo = 0;
+          //扫码失败
+          alert("扫码失败" + error);
+          // this.$vux.toast.show({
+          //   type: "warn",
+          //   text: "扫码失败:"+error,
+          //   time: 1000
+          // });
         },
         {
           showFlipCameraButton: true,
