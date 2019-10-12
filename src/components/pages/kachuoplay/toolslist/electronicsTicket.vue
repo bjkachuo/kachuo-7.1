@@ -183,22 +183,34 @@ export default {
     scanning() {
       cordova.plugins.barcodeScanner.scan(
         function(result) {
-          // alert(result.text);
-          this.$vux.toast.show({
-            type: "success",
-            text: result.text,
-            time: 1000
-          });
-          this.photo == 1;
+          //如果识别不为空有数据
+          if (result.text != "") {
+            // alert(result.text);
+            this.$vux.toast.show({
+              type: "success",
+              text: "扫码成功:"+result.text,
+              time: 1000
+            });
+            this.photo = 1;
+          } else {
+            //如果未进行扫码识别返回
+            this.$vux.toast.show({
+              type: "cancel",
+              text: "取消扫码",
+              time: 1000
+            });
+            this.photo = 0;
+          }
         },
         function(error) {
+          //扫码失败
           // alert("Scanning failed: " + error);
           this.$vux.toast.show({
-            type: "success",
-            text: "Scanning failed: " + error,
+            type: "warn",
+            text: "扫码失败:"+error,
             time: 1000
           });
-          this.photo == 0;
+          this.photo = 0;
         },
         {
           showFlipCameraButton: true,
