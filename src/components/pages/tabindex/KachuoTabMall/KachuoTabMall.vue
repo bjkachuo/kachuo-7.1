@@ -220,7 +220,7 @@ export default {
 }
 .goods-type {
   width: 92%;
-  margin: 0 auto;
+  margin: 55px auto 0;
   border-radius: 8px;
   background-color: #fff;
   height: 90px;
