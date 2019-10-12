@@ -183,10 +183,22 @@ export default {
     scanning() {
       cordova.plugins.barcodeScanner.scan(
         function(result) {
-          alert(result.text);
+          // alert(result.text);
+          this.$vux.toast.show({
+            type: "success",
+            text: result.text,
+            time: 1000
+          });
+          this.photo == 1;
         },
         function(error) {
-          alert("Scanning failed: " + error);
+          // alert("Scanning failed: " + error);
+          this.$vux.toast.show({
+            type: "success",
+            text: "Scanning failed: " + error,
+            time: 1000
+          });
+          this.photo == 0;
         },
         {
           showFlipCameraButton: true,
