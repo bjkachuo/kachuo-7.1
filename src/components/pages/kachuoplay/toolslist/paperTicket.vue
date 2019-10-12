@@ -193,10 +193,11 @@ export default {
           //如果识别不为空有数据
           if (result.text != "") {
             this.photo = 1;
+            console.log(result.text)
             // alert("扫码成果" + result.text);
             this.$vux.toast.show({
               type: "success",
-              text: "扫码成功:" + result.text,
+              text: "扫码成功",
               time: 1000
             });
           } else {
@@ -214,9 +215,10 @@ export default {
           //扫码失败
           this.photo = 0;
           // alert("扫码失败" + error);
+          console.log(error)
           this.$vux.toast.show({
             type: "warn",
-            text: "扫码失败:" + error,
+            text: "扫码失败",
             time: 1000
           });
         },
