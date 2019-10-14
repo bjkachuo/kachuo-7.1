@@ -196,6 +196,7 @@
           "https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.index.scenic_service"
         )
         .then(({ data }) => {
+
           let index = 0
           data.data.recommend_business.forEach((item,i)=>{
 
@@ -214,6 +215,7 @@
 
 
           // this.recommend = data.data.recommend_business;
+
           console.log(this.recommend);
           console.log(data);
         });
@@ -329,7 +331,6 @@
     font-size: 14px;
     font-weight: 800;
   }
-
   .recommend {
     width: 92%;
     height: 100px;
@@ -475,6 +476,7 @@
       rgba(255, 113, 99, 1) 100%
     );
   }
+
 
   .line-three {
     width: 99%;

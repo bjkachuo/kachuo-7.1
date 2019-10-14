@@ -41,8 +41,8 @@
       ></x-input>
       <cell title="人脸识别" value="未识别" is-link v-if="face == 0" @click.native="goFaceTwo"></cell>
       <cell title="人脸识别" value="已识别" v-if="face == 1"></cell>
-      <cell title="实名认证" value="未认证" is-link v-if="idState == ''" @click.native="goId"></cell>
-      <cell title="实名认证" value="已认证" v-if="idState != '' "></cell>
+      <cell title="实名认证" value="未认证" is-link v-if="idState == '0'" @click.native="goId"></cell>
+      <cell title="实名认证" value="已认证" v-if="idState != '0' "></cell>
     </div>
     <div class="up-avata">
       <p>
@@ -108,7 +108,7 @@ export default {
       //人脸识别状态
       face: 0,
       //实名认证状态
-      idState: null,
+      idState: "0",
       //表单
       form: {
         id: [],
@@ -149,7 +149,7 @@ export default {
       this.face = res.data.is_face;
       console.log("人脸识别状态   " + this.face);
       this.idState = res.data.sm_createtime;
-      console.log("实名认真状态   " + this.idState);
+      console.log("实名认证状态   " + this.idState);
     });
     // //人脸识别状态
     // this.face = JSON.parse(sessionStorage.getItem("userLoginInfo")).is_face;
@@ -215,10 +215,11 @@ export default {
         idcard: this.form.idcard
       }).then(res => {
         console.log(res);
-        if (res.result == 1 && this.face == 1 && this.idState != '') {
+        if (res.result == 1 && this.face == 1 && this.idState != "") {
           this.showTip("注册成功");
+          this.$router.push("/waitingAudit")
         } else {
-            this.showTip("请填写完整并进行人脸识别和实名认真");
+          this.showTip("请填写完整并检查人脸识别和实名认真状态");
         }
       });
     },
