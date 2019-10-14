@@ -56,10 +56,10 @@ export default {
 
     let id
     id = sessionStorage.currentScenic ?  sessionStorage.currentScenic : 24
+    // alert(id)
     this.$http.get("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.index.change_scenic&scenic_id="+id)
-      .then(({data})=>{
-
-        this.changeAreadata = data;
+      .then(data=>{
+        // alert(data)
       })
   },
 
