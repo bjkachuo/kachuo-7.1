@@ -55,7 +55,7 @@ export default {
         showLeftBack: true,
         showRightMore: false
       },
-      faceImg: require("@/assets/images/face-img/face-icon.png"),
+      faceImg: require("@/assets/images/face-img/rlsbaaa.png"),
       videoUploadUrl:
         "https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=member.realname.faceRecognition",
       formData: new FormData()

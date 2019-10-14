@@ -866,5 +866,12 @@ export default [{
     name: '/GuideOrderBs',
     component: resolve => require(['@/components/common/TourBackstage/GuideOrderBs'], resolve),
 
-  }
+  },
+  {
+    //等待审核页面
+    path: '/waitingAudit',
+    name: 'waitingAudit',
+    component: resolve => require(['@/components/common/waitingAudit'], resolve),
+  },
+
 ]

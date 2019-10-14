@@ -6,7 +6,7 @@
       <div class="content-card-top">
         <div class="content-card-top-left">
           <p>
-            <img class="content-card-top-left-img" :src="userInfo.avatar"  @click="goCenter"/>
+            <img class="content-card-top-left-img" :src="userInfo.avatar" @click="goCenter" />
           </p>
           <div class="content-card-top-left-txt">
             <p class="p-one">{{userInfo.nickname}}</p>
@@ -22,10 +22,12 @@
         </div>
       </div>
       <div class="content-card-mid">
-
         <span class="token-num">ID:{{userInfo.usercode.slice(0,19)}}...</span>
-        <span class="iconfont iconliulan" @click="watchAllCode" style="font-size:12px;margin-left:10px"></span>
-
+        <span
+          class="iconfont iconliulan"
+          @click="watchAllCode"
+          style="font-size:12px;margin-left:10px"
+        ></span>
       </div>
       <div class="content-card-bot">
         <span>积分：{{userInfo.credit1}}</span>
@@ -67,30 +69,45 @@
             <p>{{item.name}}</p>
           </div>
         </flexbox-item>
+        <flexbox-item :span="1/4" style="display:none" v-if="this.tourState == 0">
+          <div class="flex-demo">
+            <div class="img-wrap">
+              <img src="../../../../assets/images/daoyouht.png" alt />
+            </div>
+            <p>导游后台</p>
+          </div>
+        </flexbox-item>
+        <flexbox-item :span="1/4" v-if="this.tourState != 0">
+          <div class="flex-demo" @click="getItem('/TourBsIndex')">
+            <div class="img-wrap">
+              <img src="../../../../assets/images/daoyouht.png" alt />
+            </div>
+            <p>导游后台</p>
+          </div>
+        </flexbox-item>
       </flexbox>
     </div>
     <IntegralDesc ref="alert"></IntegralDesc>
-    <!-- <Cell class="margin-top-10px" :cellList="cellListToolsA"></Cell>
-    <Cell class="margin-top-10px" :cellList="cellListToolsB"></Cell>
-    <Cell class="margin-top-10px" :cellList="cellListToolsC"></Cell>-->
   </div>
 </template>
 
 <script>
 import TabPersonCenterHeader from "@/components/layout/TabItemPersonHeader.vue";
 import AppUserInfo from "@/components/layout/AppUserInfo.vue";
-import IntegralDesc from './IntegralDesc'
+import IntegralDesc from "./IntegralDesc";
 import DividedArea from "@/components/common/DividedArea.vue";
 import Cell from "@/components/common/Cell.vue";
 import XDialog from "@/components/common/XDialog";
 import { Flexbox, FlexboxItem } from "vux";
+import { getUserInfo } from "@/servers/api";
+
 export default {
   name: "",
   data() {
     return {
       showDialogFlag: false,
 
-      showJiFfen:false,
+      showJiFfen: false,
 
       dataListOne: [
         {
@@ -146,16 +163,25 @@ export default {
           name: "云相册",
           link: "/photoalbum",
           imgSrc: require("@/assets/images/图片@2x.png")
-        },
-        {
-          name:"导游后台",
-          link:"/TourBsIndex",
-          imgSrc:require("@/assets/images/daoyouht.png")
         }
-      ]
+        // {
+        //   name: "导游后台",
+        //   link: "/TourBsIndex",
+        //   imgSrc: require("@/assets/images/daoyouht.png")
+        // }
+      ],
+      tourState: 0
     };
   },
-
+  mounted() {
+    getUserInfo({}).then(res => {
+      this.$store.commit("setUserLoginInfo", res.data);
+      this.GLOBAL.setSession("userLoginInfo", res.data);
+      console.log(res.data);
+      this.tourState = res.data.tourguide_id;
+      console.log(this.tourState);
+    });
+  },
   components: {
     TabPersonCenterHeader,
     AppUserInfo,
@@ -179,12 +205,12 @@ export default {
   },
 
   methods: {
-    showjifen(){
-      this.$refs.alert.show = true
+    showjifen() {
+      this.$refs.alert.show = true;
     },
 
-    goCenter(){
-      this.$router.push('/Ucenter')
+    goCenter() {
+      this.$router.push("/Ucenter");
     },
 
     watchAllCode() {
@@ -193,16 +219,14 @@ export default {
     getQRcode() {
       this.$router.push("/tokenqrcode");
     },
-    getItem(link,index) {
-      if(link == 'kefu'){
-        this.$refs.header.$refs.service.iframeShow = true
-      }else{
+    getItem(link, index) {
+      if (link == "kefu") {
+        this.$refs.header.$refs.service.iframeShow = true;
+      } else {
         this.$router.push(link);
-        
       }
     }
-  },
-
+  }
 };
 </script>
 <style lang='less' scoped>
@@ -258,7 +282,7 @@ export default {
 .content-card-bot {
   flex: 1;
   position: relative;
-  i{
+  i {
     position: absolute;
     bottom: 0;
     width: 28px;
@@ -267,7 +291,7 @@ export default {
     background-size: 100% 100%;
     right: 0;
   }
-  span{
+  span {
     position: absolute;
     bottom: 0;
     height: 25px;

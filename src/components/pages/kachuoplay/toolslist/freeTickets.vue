@@ -46,10 +46,10 @@
         </div>
       </div>
     </div>
-    <div class="CheckTickets" v-if="this.face==0 || this.idState == null">
+    <div class="CheckTickets" v-if="this.face==0 || this.idState == '0'">
       <p>立即验票</p>
     </div>
-    <div class="CheckTicketsTwo" v-if="this.face==1 && this.idState !==null" @click="tip">
+    <div class="CheckTicketsTwo" v-if="this.face==1 && this.idState !='0'" @click="tip">
       <p>立即验票</p>
     </div>
   </div>
@@ -70,7 +70,7 @@ export default {
         showRightMore: false
       },
       face: 0,
-      idState: null
+      idState: '0'
     };
   },
   computed: {},
