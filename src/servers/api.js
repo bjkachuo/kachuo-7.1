@@ -192,11 +192,11 @@ export const postJingqu = (data) => http.post('enter.scenic', data);
 export const postShangjia = (data) => http.post('enter.business', data);
 
 //拍客入驻
-export const postPaike = (data) => http.post('enter.photogApply', data )
+export const postPaike = (data) => http.post('enter.photogApply', data)
 //匠人入驻
-export const postJiangren = (data) => http.post('enter.artisanApply', data )
+export const postJiangren = (data) => http.post('enter.artisanApply', data)
 //墨客入驻
-export const postMoke = (data) => http.post('enter.schloarApply', data )
+export const postMoke = (data) => http.post('enter.schloarApply', data)
 
 
 // 图片上传
@@ -396,4 +396,5 @@ export const LikeGuide = (data) => http.post("tourguide.index.like", data);
 export const GuideList = (data) => http.post("tourguide.index.detail", data);
 //导游订单支付
 export const guidePay = (data) => http.post("tourguide.show.pay", data);
-
+//个人导游注册
+export const guideRegister = (data) => http.post("enter.tourguideRegister", data);

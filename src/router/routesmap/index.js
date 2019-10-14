@@ -451,6 +451,12 @@ export default [{
     component: resolve => require(['@/components/pages/facerecognition/face'], resolve),
   },
   {
+    //用于导演注册的人脸
+    path: '/faceTwo',
+    name: 'faceTwo',
+    component: resolve => require(['@/components/pages/facerecognition/faceTwo'], resolve),
+  },
+  {
     path: '/face',
     name: 'face',
     component: resolve => require(['@/components/pages/facerecognition/face'], resolve),

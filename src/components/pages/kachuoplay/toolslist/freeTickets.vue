@@ -17,33 +17,6 @@
           <p>2.门票和人脸信息绑定，可通过景区闸机快速入园</p>
         </div>
       </div>
-      <!-- <div class="p-wrap">
-        <flexbox>
-          <flexbox-item>
-            <div class="flex-demo">
-              <div class="p-img-wrap">
-                <img src="./p1.png" alt />
-              </div>
-              <div>
-                <p>扫描人脸</p>
-              </div>
-            </div>
-          </flexbox-item>
-          <div class="add-wrap">
-            <img src="./p2.png" alt />
-          </div>
-          <flexbox-item>
-            <div class="flex-demo">
-              <div class="p-img-wrap">
-                <img src="./p3.png" alt />
-              </div>
-              <div>
-                <p>二维码</p>
-              </div>
-            </div>
-          </flexbox-item>
-        </flexbox>
-      </div>-->
     </div>
     <div class="face-wrap">
       <div class="f-left">
@@ -103,12 +76,6 @@ export default {
   computed: {},
   created() {},
   mounted() {
-    //获取全局用户信息
-    // getUserInfo({}).then(res => {
-    //   this.$store.commit("setUserLoginInfo", res.data);
-    //   this.GLOBAL.setSession("userLoginInfo", res.data);
-    //   console.log(res);
-    // });
 
     this.face = JSON.parse(sessionStorage.getItem("userLoginInfo")).is_face;
     // this.face = this.$route.query.face;

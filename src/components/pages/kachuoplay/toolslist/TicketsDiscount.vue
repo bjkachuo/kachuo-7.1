@@ -151,11 +151,6 @@ export default {
       this.GLOBAL.setSession("userLoginInfo", res.data);
       console.log(res)
     });
-
-    // console.log(this.getUserInfo());
-
-    // this.face = this.$route.query.face;
-    // console.log(this.$route.query.face)
   },
 
   methods: {

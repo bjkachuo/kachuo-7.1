@@ -60,7 +60,7 @@
     <div class="line-three">
       <flexbox :gutter="0">
         <flexbox-item v-for="(item,index) in dataListThree" :key="index" :span="1/4">
-          <div class="flex-demo" @click="getItem(item.link)">
+          <div class="flex-demo" @click="getItem(item.link,index)">
             <div class="img-wrap">
               <img :src="item.imgSrc" alt />
             </div>
@@ -146,69 +146,13 @@ export default {
           name: "云相册",
           link: "/photoalbum",
           imgSrc: require("@/assets/images/图片@2x.png")
+        },
+        {
+          name:"导游后台",
+          link:"/TourBsIndex",
+          imgSrc:require("@/assets/images/daoyouht.png")
         }
       ]
-      // cellListToolsA: [
-      //   {
-      //     title: "通证",
-      //     icon: "iconfont icontongzheng",
-      //     link: "/usertoken"
-      //   },
-      //   {
-      //     title: "积分",
-      //     icon: "iconfont iconjifen",
-      //     link: "/userintegral"
-      //   }
-      // ],
-      // cellListToolsB: [
-      //   {
-      //     title: "购物车",
-      //     icon: "iconfont icongouwuche",
-      //     link: "/ShoppingCart"
-      //   },
-      //   {
-      //     title: "我的足迹",
-      //     icon: "iconfont icongouwuche",
-      //     link: "/FootPrint"
-      //   },
-      //   {
-      //     title: "商品订单",
-      //     icon: "iconfont icondingdan",
-      //     link: "/orderlist"
-      //   },
-      //   {
-      //     title: "文创订单",
-      //     icon: "iconfont iconwenhuashuli",
-      //     link: "/orderlistcaiyuan?type=1"
-      //   },
-      //   {
-      //     title: "艺创订单",
-      //     icon: "iconfont iconyishuchuangzuo",
-      //     link: "/orderlistcaiyuan?type=2"
-      //   },
-      //   {
-      //     title: "溯源订单",
-      //     icon: "iconfont iconchanpinsuyuan",
-      //     link: "/orderlistcaiyuan?type=3"
-      //   },
-      //   {
-      //     title: "我的门票",
-      //     icon: "iconfont iconmenpiaodingdan",
-      //     link: "/ticketsorder"
-      //   }
-      // ],
-      // cellListToolsC: [
-      //   {
-      //     title: "收藏",
-      //     icon: "iconfont iconshoucang",
-      //     link: "/collection"
-      //   },
-      //   {
-      //     title: "云相册",
-      //     icon: "iconfont iconyunxiangce",
-      //     link: "/photoalbum"
-      //   }
-      // ]
     };
   },
 
@@ -249,11 +193,12 @@ export default {
     getQRcode() {
       this.$router.push("/tokenqrcode");
     },
-    getItem(link) {
+    getItem(link,index) {
       if(link == 'kefu'){
         this.$refs.header.$refs.service.iframeShow = true
       }else{
         this.$router.push(link);
+        
       }
     }
   },
