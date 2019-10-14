@@ -21,7 +21,7 @@
         </div>
         <div class="synopsis">
           <div style="color:#222;display: inline-block;width: calc(100% - 5em);overflow: hidden; white-space: nowrap; text-overflow: ellipsis;line-height: 30px">1231231231231123123123123112312312312311231231231231</div>
-          <div style="display: inline-block;width: 5em;float: right;text-align: right">服务项<x-icon type="ios-arrow-right" size="20"></x-icon></div>
+          <div style="display: inline-block;width: 5em;float: right;text-align: right" @click="goPage('/scencerelease/dynamic/ScenicContent')">服务项<x-icon type="ios-arrow-right" size="20"></x-icon></div>
         </div>
       </div>
       <div class="tel-box">

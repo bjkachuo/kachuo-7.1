@@ -63,31 +63,22 @@ export default {
       source: 'click',
       taOffset : [-15,-35],
       plugin: [{
-        pName: 'ToolBar',
+        pName: 'Geolocation',
         events: {
-          init(instance) {
-
+          init(o) {
+            // o 是高德地图定位插件实例
+            o.getCurrentPosition((status, result) => {
+              if (result && result.position) {
+                self.lng = result.position.lng;
+                self.lat = result.position.lat;
+                self.center = [self.lng, self.lat];
+                self.loaded = true;
+                self.$nextTick();
+              }
+            });
           }
         }
-      },
-      {
-          pName: 'Geolocation',
-          events: {
-            init(o) {
-              document.getElementsByClassName('amap-geolocation-con')[0].onclick = () =>{
-
-                o.getCurrentPosition((status, result) => {
-                  if (result && result.position) {
-
-                    self.center = [result.position.lng, result.position.lat];
-                    self.loaded = true;
-                    self.$nextTick();
-                  }
-                });
-              }
-            }
-          }
-        }],
+      }],
       TitleObjData: {
         titleContent: "智慧导航",
         showLeftBack: true,
