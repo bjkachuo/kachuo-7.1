@@ -6,11 +6,24 @@
       :showLeftBack="TitleObjData.showLeftBack"
       :showRightMore="TitleObjData.showRightMore"
     ></Header>
-    <p class="Preservation">提交</p>
-    <div class="jq-photo-wrap">
+    <p class="Preservation" @click="submit">提交</p>
+    <div class="up-avata">
+      <p>
+        <span class="blod">上传个人照片</span>
+      </p>
+      <UploadImgOne v-on:getHeaderImgUrl="getImgVal" :plus="true" ref="upimg">
+        <div slot="bg">
+          <div class="up-avata-bg" v-if="!form.tour_path">
+            <div class="camera"></div>
+          </div>
+        </div>
+      </UploadImgOne>
+    </div>
+
+    <!-- <div class="jq-photo-wrap">
       <p>上传个人照片</p>
       <ImageUploaderBs></ImageUploaderBs>
-    </div>
+    </div>-->
     <div class="introduce">
       <x-textarea
         :max="200"
@@ -20,23 +33,30 @@
         :height="130"
         :rows="8"
         :cols="30"
+        v-model="form.introduce"
       ></x-textarea>
     </div>
     <div class="price">
-      <x-input title="每小时价格(元)" placeholder="请输入每小时价格" required type='number'></x-input>
+      <x-input title="每小时价格(元)" placeholder="请输入每小时价格" required type="number" v-model="form.price"></x-input>
     </div>
     <div class="time">
       <popup-picker
-        title="最低预约时长"
+        title="最低预约时长/小时"
         :data="list1"
-        v-model="value1"
+        v-model="form.lowest_time"
         @on-show="onShow"
         @on-hide="onHide"
         @on-change="onChange"
       ></popup-picker>
     </div>
     <div class="price">
-      <x-input title="联系方式" placeholder="请输入联系方式" required is-type="china-mobile"></x-input>
+      <x-input
+        title="联系方式"
+        placeholder="请输入联系方式"
+        required
+        is-type="china-mobile"
+        v-model="form.phone"
+      ></x-input>
     </div>
   </div>
 </template>
@@ -45,6 +65,8 @@
 import Header from "@/components/common/Header";
 import { XInput, XTextarea, PopupPicker } from "vux";
 import ImageUploaderBs from "@/components/common/ImageUploaderBs";
+import UploadImgOne from "@/components/common/UploadImgOne/UploadImgOne";
+import { guideInfor } from "@/servers/api";
 
 export default {
   props: {},
@@ -55,15 +77,51 @@ export default {
         showLeftBack: true,
         showRightMore: false
       },
-      list1: [["1小时", "2小时", "3小时", "4小时", "5小时", "6小时", "7小时"]],
-      value1: ["1小时"]
+      list1: [["1", "2", "3", "4", "5", "6", "7"]],
+      form: {
+        tour_path: "",
+        introduce: "",
+        price: "",
+        lowest_time: [],
+        phone: ""
+      }
     };
   },
   computed: {},
   created() {},
-  mounted() {},
+  mounted() {
+    //打印导演注册的全局id
+    console.log(
+      JSON.parse(sessionStorage.getItem("userLoginInfo")).tourguide_id
+    );
+    //获取导游原有信息
+    this.$http
+      .post(
+        "http://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=tourguide.index.detail&id=" +
+          JSON.parse(sessionStorage.getItem("userLoginInfo")).tourguide_id
+      )
+      .then(({ data }) => {
+        console.log(data);
+        this.$refs.upimg.imgUrl = data.data.tour_path;
+        this.form.tour_path = data.data.tour_path;
+        this.form.introduce = data.data.introduce;
+        this.form.price = data.data.price;
+        this.form.phone = data.data.phone;
+        this.form.lowest_time = data.data.lowest_time.split();
+        console.log(this.form.tour_path);
+        //  this.form.phone = data.data.phone;
+      });
+  },
   watch: {},
   methods: {
+    //提示框
+    showTip(conttentTip) {
+      this.$vux.toast.text(conttentTip, "middle");
+      setTimeout(() => {
+        this.$vux.toast.hide();
+      }, 1000);
+    },
+
     onShow() {
       console.log("on show");
     },
@@ -72,6 +130,30 @@ export default {
     },
     onChange(val) {
       console.log("val change", val);
+      // this.lowest_time = val.toString();
+      console.log(this.form);
+    },
+    //上传头像
+    getImgVal(val) {
+      this.form.tour_path = val;
+    },
+    //提交表单
+    submit() {
+      guideInfor({
+        id: JSON.parse(sessionStorage.getItem("userLoginInfo")).tourguide_id,
+        tour_path: this.form.tour_path,
+        introduce: this.form.introduce,
+        price: this.form.price,
+        lowest_time: this.form.lowest_time.toString(),
+        phone: this.form.phone
+      }).then(res => {
+        console.log(res);
+        if (res.result == 1) {
+          this.showTip("提交成功");
+        } else {
+          this.showTip("请填写完整或检查网络");
+        }
+      });
     }
   },
   components: {
@@ -79,7 +161,8 @@ export default {
     XInput,
     XTextarea,
     ImageUploaderBs,
-    PopupPicker
+    PopupPicker,
+    UploadImgOne
   }
 };
 </script>
@@ -143,5 +226,54 @@ export default {
   display: block;
   float: left;
   margin: 16px 0 0 4%;
+}
+</style>
+<style lang="less" scoped>
+// /deep/ .weui-cell {
+//   padding: 17px 15px;
+// }
+
+.up-avata {
+  padding-bottom: 16px;
+  background-color: #fff;
+  width: 92%;
+  box-shadow: 0px 5px 10px 0px rgba(0, 101, 255, 0.06);
+  border-radius: 8px;
+  margin: 56px auto 10px;
+  p {
+    line-height: 45px;
+    padding: 0 16px;
+    .blod {
+      font-weight: 800;
+      font-size: 16px;
+      color: #222;
+    }
+    span {
+      font-size: 14px;
+      color: #999;
+    }
+  }
+  .upload-img {
+    width: 94px;
+    height: 94px;
+    display: inline-block;
+    object-fit: cover;
+    margin: 0 0 0 20px;
+  }
+  .up-avata-bg {
+    width: 90px;
+    height: 90px;
+    border-radius: 4px;
+    background-color: #ebeef5;
+    .camera {
+      width: 46px;
+      height: 46px;
+      margin: 0 auto;
+      position: relative;
+      top: 22px;
+      background-image: url("./camera.png");
+      background-size: 100% 100%;
+    }
+  }
 }
 </style>

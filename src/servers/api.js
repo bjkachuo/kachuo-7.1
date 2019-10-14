@@ -398,3 +398,5 @@ export const GuideList = (data) => http.post("tourguide.index.detail", data);
 export const guidePay = (data) => http.post("tourguide.show.pay", data);
 //个人导游注册
 export const guideRegister = (data) => http.post("enter.tourguideRegister", data);
+//个人导游资料提交
+export const guideInfor = (data) => http.post("tourguide.index.save", data);
