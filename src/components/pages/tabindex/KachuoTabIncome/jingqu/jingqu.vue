@@ -1,5 +1,6 @@
 <template>
     <div>
+      <div v-if="mask" class="mask" @click="mask = false"></div>
       <Header style="margin-bottom: 46px" :titleContent="TitleObjData.titleContent" :showLeftBack="TitleObjData.showLeftBack" :showRightMore="TitleObjData.showRightMore"></Header>
       <div class="content">
         <div class="up-avata">
@@ -65,6 +66,7 @@
               showLeftBack: true,
               showRightMore: false
             },
+            mask:true,
             form:{
               scenic_title:'',
               region:'1',
@@ -189,6 +191,16 @@
   }
 </style>
 <style scoped lang="less">
+  .mask{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-image: url("./景区.jpg");
+    background-size: 100% 100%;
+    z-index: 999;
+  }
   .content{
     background-color: #f5f5f5;
     overflow-y: scroll;
