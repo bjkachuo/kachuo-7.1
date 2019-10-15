@@ -1,5 +1,6 @@
 <template>
   <div>
+    <div v-if="mask" class="mask" @click="mask = false" :class="type"></div>
     <Header style="margin-bottom: 46px" :titleContent="TitleObjData.titleContent" :showLeftBack="TitleObjData.showLeftBack" :showRightMore="TitleObjData.showRightMore"></Header>
     <div class="content">
       <div class="up-avata">
@@ -51,6 +52,7 @@
               showRightMore: false
             },
             maskValueAddress:[],
+            mask:true,
             form:{
               user_path:'',
               realname:'',
@@ -162,6 +164,24 @@
   }
 </style>
 <style scoped lang="less">
+  .mask{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-size: 100% 100%;
+    z-index: 999;
+  }
+  .moke{
+    background-image: url("./墨客.jpg");
+  }
+  .jiangren{
+    background-image: url("./匠人.jpg");
+  }
+  .paike{
+    background-image: url("./拍客.jpg");
+  }
   .content{
     background-color: #f5f5f5;
     overflow-y: scroll;
