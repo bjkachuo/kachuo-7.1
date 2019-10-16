@@ -10,7 +10,7 @@
     </div>
     <div class="line-one">
       <div class="status">
-        <p>已取消</p>
+        <p>{{this.$route.query.status}}</p>
       </div>
       <div class="form-wrap">
         <div class="f-one">
@@ -60,9 +60,9 @@ export default {
       //留言
       message: "无",
       //预约时长
-      time: "4小时",
+      time: "无",
       //预约人数
-      personNum: "3人",
+      personNum: "无",
       //价格
       price: "1200",
       //订单编号
@@ -70,12 +70,43 @@ export default {
       //支付时间
       payTime: "2019-08-09 12:42",
       //取消时间
-      cancelTime: "2019-08-11 12:52"
+      cancelTime: "无",
+      //详情列表
+      list: []
     };
   },
   computed: {},
   created() {},
-  mounted() {},
+  mounted() {
+    console.log(this.$route.query);
+    // this.person = this.$route.query.listOne.realname;
+    // this.phone = this.$route.query.listOne.mobile;
+    // // this.message = this.$route.query.listOne.mobile;
+    // // this.time = this.$route.query.listOne.mobile;
+    // // this.personNum = this.$route.query.listOne.mobile;
+    // this.price = this.$route.query.listOne.amount;
+    // this.orderNum = this.$route.query.listOne.order_sn;
+    // this.payTime = this.$route.query.listOne.add_time;
+    this.$http
+      .post(
+        "http://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=tourguide.show.orderMsg&id=" +
+          this.$route.query.listOne.id
+      )
+      .then(({ data }) => {
+        console.log(data);
+        this.list = data.data.data;
+        console.log(this.list);
+        //
+        this.person = this.list.realname;
+        this.phone = this.list.mobile;
+        // this.message = this.list.mobile;
+        // this.time = this.list.mobile;
+        // this.personNum = this.list.mobile;
+        this.price = this.list.amount;
+        this.orderNum = this.list.order_sn;
+        this.payTime = this.list.add_time;
+      });
+  },
   watch: {},
   methods: {
     goback() {

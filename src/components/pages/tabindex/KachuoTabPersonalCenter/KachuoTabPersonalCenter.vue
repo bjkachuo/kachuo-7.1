@@ -163,12 +163,12 @@ export default {
           name: "云相册",
           link: "/photoalbum",
           imgSrc: require("@/assets/images/图片@2x.png")
+        },
+        {
+          name: "游园订单",
+          link: "/",
+          imgSrc: require("@/assets/images/daoyouht.png")
         }
-        // {
-        //   name: "导游后台",
-        //   link: "/TourBsIndex",
-        //   imgSrc: require("@/assets/images/daoyouht.png")
-        // }
       ],
       tourState: 0
     };

@@ -34,7 +34,7 @@
             :value.sync="demo1"
             label-position="right"
             style=" background: #fff;display: block; height: 45px;border-radius: 8px;"
-          >可用{{this.startScore}}积分抵用{{this.startScore}}元</check-icon>
+          >可用{{this.Deduction}}积分抵用{{this.Demoney}}元</check-icon>
         </span>
       </div>
     </div>
@@ -119,7 +119,9 @@ export default {
       )
       .then(({ data }) => {
         console.log(data);
-        this.startScore = data.data.decr_integral;
+        // this.startScore = data.data.decr_integral;
+        // this.Deduction = data.data.decr_integral;
+        // this.Demoney = data.data.decr_money;
       });
   },
   methods: {
