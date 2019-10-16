@@ -23,7 +23,7 @@
         <flexbox orient="vertical">
           <flexbox-item>
             <div class="order-content">
-              <div class="content-top">
+              <div class="content-top" @click="goOrder">
                 <div class="img-wrap">
                   <img src alt />
                   <div class="num">
@@ -32,7 +32,7 @@
                 </div>
                 <div class="mid-text">
                   <div class="text-one">
-                    <p class="name">预约人:李先生</p>
+                    <p class="name">预约人:1先生</p>
                     <p class="state">待接单</p>
                   </div>
                   <div class="text-two">
@@ -68,8 +68,8 @@
                 </div>
                 <div class="mid-text">
                   <div class="text-one">
-                    <p class="name">预约人:李先生</p>
-                    <p class="state">待接单</p>
+                    <p class="name">预约人:2先生</p>
+                    <p class="state" style="color:#FF8585;">服务中</p>
                   </div>
                   <div class="text-two">
                     <p>支付时间：2019-08-21 08:12:01</p>
@@ -81,10 +81,10 @@
               </div>
               <div class="content-bottom">
                 <div class="bottom-two">
-                  <p>接单</p>
+                  <p>订单完成</p>
                 </div>
                 <div class="bottom-one">
-                  <p>取消订单</p>
+                  <p>联系用户</p>
                 </div>
               </div>
             </div>
@@ -104,8 +104,8 @@
                 </div>
                 <div class="mid-text">
                   <div class="text-one">
-                    <p class="name">预约人:李先生</p>
-                    <p class="state">待接单</p>
+                    <p class="name">预约人:3先生</p>
+                    <p class="state" style="color:#999999;">已取消</p>
                   </div>
                   <div class="text-two">
                     <p>支付时间：2019-08-21 08:12:01</p>
@@ -115,14 +115,14 @@
                   </div>
                 </div>
               </div>
-              <div class="content-bottom">
+              <!-- <div class="content-bottom">
                 <div class="bottom-two">
                   <p>接单</p>
                 </div>
                 <div class="bottom-one">
                   <p>取消订单</p>
                 </div>
-              </div>
+              </div>-->
             </div>
           </flexbox-item>
         </flexbox>
@@ -140,8 +140,8 @@
                 </div>
                 <div class="mid-text">
                   <div class="text-one">
-                    <p class="name">预约人:李先生</p>
-                    <p class="state">待接单</p>
+                    <p class="name">预约人:4先生</p>
+                    <p class="state" style="color:#999999;">已完成</p>
                   </div>
                   <div class="text-two">
                     <p>支付时间：2019-08-21 08:12:01</p>
@@ -151,14 +151,14 @@
                   </div>
                 </div>
               </div>
-              <div class="content-bottom">
+              <!-- <div class="content-bottom">
                 <div class="bottom-two">
                   <p>接单</p>
                 </div>
                 <div class="bottom-one">
                   <p>取消订单</p>
                 </div>
-              </div>
+              </div>-->
             </div>
           </flexbox-item>
         </flexbox>
@@ -187,7 +187,11 @@ export default {
   created() {},
   mounted() {},
   watch: {},
-  methods: {},
+  methods: {
+    goOrder() {
+      this.$router.push("/orderDetails");
+    }
+  },
   components: {
     Header,
     Tab,
@@ -203,7 +207,7 @@ export default {
   height: 100%;
   width: 100%;
   background: #f5f5f5;
-  overflow: hidden;
+  overflow: hidden scroll;
 }
 .tab-content {
   width: 100%;
@@ -217,10 +221,11 @@ export default {
 }
 .order-content {
   width: 100%;
-  height: 180px;
+  /* height: 180px; */
   background: #ffffff;
   margin-bottom: 10px;
   border-radius: 8px;
+  min-height: 120px;
 }
 .content-top {
   height: 105px;

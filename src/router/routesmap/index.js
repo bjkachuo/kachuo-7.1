@@ -873,5 +873,11 @@ export default [{
     name: 'waitingAudit',
     component: resolve => require(['@/components/common/waitingAudit'], resolve),
   },
+  {
+    //订单详情页面
+    path: '/orderDetails',
+    name: 'orderDetails',
+    component: resolve => require(['@/components/common/orderDetails'], resolve),
+  },
 
 ]

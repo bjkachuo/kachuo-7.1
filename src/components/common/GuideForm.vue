@@ -171,6 +171,7 @@ export default {
             this.Deduction = data.data.decr_integral;
             //抵扣的金额
             this.Demoney = data.data.decr_money;
+            // this.startScore = data.data.decr_integral;
           });
       } else {
         console.log("不使用积分");
