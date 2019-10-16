@@ -1,5 +1,5 @@
 <template>
-  <div class="wrap" v-if="show">
+  <div class="wrap" v-if="show" style="position: fixed;left: 0;top:0;">
     <div class="normal-content" :style="conHei">
       <div class="int-dailog">
         <div class="int-header">

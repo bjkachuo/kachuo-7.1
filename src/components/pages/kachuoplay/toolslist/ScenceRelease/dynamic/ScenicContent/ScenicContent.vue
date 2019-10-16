@@ -81,6 +81,10 @@
         };
       }
     },
+    mounted() {
+
+    }
+
   };
 </script>
 <style lang='css' scoped>
