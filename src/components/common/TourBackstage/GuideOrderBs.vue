@@ -143,7 +143,7 @@
               class="order-content"
               v-for="(item,index) in this.listOne"
               :key="index"
-              v-if="item.status == 3"
+              v-if="item.status == 6"
             >
               <div class="content-top" @click="goOrderFour(index)">
                 <div class="img-wrap">
