@@ -17,7 +17,7 @@
       <div style="border-bottom: 1px solid #ddd">
         <div class="synopsis">
           <div style="color:#222;display: inline-block;width: calc(100% - 4em);overflow: hidden; white-space: nowrap; text-overflow: ellipsis;line-height: 30px">1231231231231123123123123112312312312311231231231231</div>
-          <div style="display: inline-block;width: 4em;float: right;text-align: right" @click="goPage('/scencerelease/dynamic/ScenicContent')">简介<x-icon type="ios-arrow-right" size="20"></x-icon></div>
+          <div style="display: inline-block;width: 4em;float: right;text-align: right" @click="goPage('/scencerelease/dynamic/ScenicContent?index=0')">简介<x-icon type="ios-arrow-right" size="20"></x-icon></div>
         </div>
         <div class="synopsis">
           <div style="color:#222;display: inline-block;width: calc(100% - 5em);overflow: hidden; white-space: nowrap; text-overflow: ellipsis;line-height: 30px">1231231231231123123123123112312312312311231231231231</div>
@@ -68,7 +68,6 @@ export default {
       swiperIndex:0,
       name:'蓬莱阁',
       leave:'5A',
-
       page: 0,
       list: [],
       refreshText: "下拉刷新",
@@ -114,7 +113,6 @@ export default {
     }
   },
 
-  beforeMount() {},
 
   mounted() {
     this.onPullingDown();

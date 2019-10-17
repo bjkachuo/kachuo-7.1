@@ -82,7 +82,7 @@
       }
     },
     mounted() {
-
+       this.index = this.$route.query.index
     }
 
   };

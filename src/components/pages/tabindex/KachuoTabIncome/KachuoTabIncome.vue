@@ -1,12 +1,13 @@
 <template>
   <div class="tab-item-mall-wrap">
+    <div v-if="mask" class="mask2" @click="maskClick" :class="detileClass"></div>
     <TabItemIncomeHeader></TabItemIncomeHeader>
     <div class="offer" @click="goLink('/yaoyuechuangzuo')"></div>
     <ul class="tsb-list">
        <li v-for="item in cellListTools" :class="item.icon" @click="goLink(item.link )"></li>
     </ul>
     <div class="mg">
-      <div class="content" @click="Backstage" style="overflow: hidden;"><img :src="btnIndex != -1 ? btnList[btnIndex].src : btnList[0].src" alt="" ></div>
+      <div class="content" @click="mask = true" style="overflow: hidden;"><img :src="btnIndex != -1 ? btnList[btnIndex].src : btnList[0].src" alt="" ></div>
       <div class="btn-menu" @click="checkIn"></div>
     </div>
     <div class="settled-in">
@@ -55,6 +56,8 @@ export default {
           link: "/hundredshall?branch=8"
         }
       ],
+      mask:false,
+      detileClass:'名家入驻',
       btnList:[
         {title:'名家入驻',link:'/checkIn/minjia',src:require('@/components/pages/tabindex/KachuoTabIncome/mingjia.jpg')},
         {title:'景区入驻',link:'/checkIn/jingqu',src:require('@/components/pages/tabindex/KachuoTabIncome/jingqu.jpg')},
@@ -63,7 +66,7 @@ export default {
         {title:'匠人入驻',link:'/checkIn/moke?type=jiangren',src:require('@/components/pages/tabindex/KachuoTabIncome/jiangren.jpg')},
         {title:'拍客入驻',link:'/checkIn/moke?type=paike',src:require('@/components/pages/tabindex/KachuoTabIncome/paike.jpg')},
       ],
-      btnIndex:-1,
+      btnIndex:0,
       alertFlag : false
     };
   },
@@ -75,6 +78,13 @@ export default {
 
   mounted() {
     this.getBannerImgFn("12");
+  },
+
+  watch:{
+    btnIndex(to){
+      console.log(to);
+      this.detileClass = this.btnList[to].title
+    }
   },
 
   methods: {
@@ -90,8 +100,9 @@ export default {
       this.$router.push(this.btnList[this.btnIndex].link)
     },
 
-    Backstage(){
-      this.$router.push("/jingquBsIndex")
+    maskClick(){
+      this.mask = false
+      this.$router.push(this.btnList[this.btnIndex].link)
     },
     xieyi(){
       this.$router.push('/checkIn/agreement')
@@ -101,7 +112,24 @@ export default {
 };
 </script>
 <style lang='less' scoped>
-
+  .名家入驻{
+    background-image: url("./mingjia/名家.jpg");
+  }
+  .景区入驻{
+    background-image: url("./jingqu/景区.jpg");
+  }
+  .商家入驻{
+    background-image: url("./shangjia/商家.jpg");
+  }
+  .mask2{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-size: 100% 100%;
+    z-index: 99999;
+  }
 .offer{
   width: 92%;
   margin: 15px auto 10px;
