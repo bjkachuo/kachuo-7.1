@@ -37,50 +37,12 @@
             </div>
           </div>
         </div>
-        <div class="piao-bottom">
-          <div class="btm-left"></div>
-
-          <p class="btm-mid">认证服务由北京卡戳数字科技有限公司提供技术支持</p>
-
-          <div class="btm-right"></div>
-        </div>
+        <divider>认证服务由北京卡戳数字科技有限公司提供技术支持</divider>
+        <!-- <div class="piao-bottom">
+          <divider>认证服务由北京卡戳数字科技有限公司提供技术支持</divider>
+        </div>-->
       </div>
     </div>
-
-    <!-- <div class="tickets-discount-list" :style="contentNoHeaderHeight">
-      <div style="width:92%;margin: 10px auto 10px;">
-        <swiper auto height="100px" class="custom">
-          <swiper-item class="black">
-            <img src="./menren.jpeg" alt />
-          </swiper-item>
-          <swiper-item class="black">
-            <img src="./renzhengone.jpg" alt />
-          </swiper-item>
-          <swiper-item class="black">
-            <img src="./renzhengtwo.jpg" alt />
-          </swiper-item>
-        </swiper>
-      </div>
-      <div class="ticketType-wrap">
-        <flexbox :gutter="0" wrap="wrap">
-          <flexbox-item
-            :span="1/2"
-            v-for="(item,index) in dataList"
-            :key="index"
-            @click.native="getItem(item.link)"
-          >
-            <div class="flex-demo">
-              <div class="t-left">
-                <p>{{item.name}}</p>
-              </div>
-              <div class="t-right">
-                <img :src="item.imgSrc" alt />
-              </div>
-            </div>
-          </flexbox-item>
-        </flexbox>
-      </div>
-    </div>-->
   </div>
 </template>
 
@@ -88,7 +50,7 @@
 import Header from "@/components/common/Header";
 import TicketsDiscount from "@/components/layout/TicketsDiscount";
 import ScrollContainer from "@/components/common/ScrollContainer";
-import { Swiper, SwiperItem, Flexbox, FlexboxItem } from "vux";
+import { Swiper, SwiperItem, Flexbox, FlexboxItem, Divider } from "vux";
 import { getUserInfo } from "@/servers/api.js";
 
 export default {
@@ -132,7 +94,8 @@ export default {
     Swiper,
     SwiperItem,
     Flexbox,
-    FlexboxItem
+    FlexboxItem,
+    Divider
   },
 
   computed: {
@@ -149,7 +112,7 @@ export default {
     getUserInfo({}).then(res => {
       this.$store.commit("setUserLoginInfo", res.data);
       this.GLOBAL.setSession("userLoginInfo", res.data);
-      console.log(res)
+      console.log(res);
     });
   },
 
@@ -326,6 +289,19 @@ export default {
 } */
 </style>
 <style lang="less" scoped>
+.vux-divider {
+  display: table;
+  white-space: nowrap;
+  height: auto;
+  overflow: hidden;
+  line-height: 1;
+  text-align: center;
+  padding: 10px 0;
+  color: #666;
+  position: absolute;
+  bottom: 0px;
+  font-size: 8px;
+}
 // /deep/ .vux-swiper {
 //   border-radius: 8px;
 // }

@@ -879,5 +879,11 @@ export default [{
     name: 'orderDetails',
     component: resolve => require(['@/components/common/orderDetails'], resolve),
   },
+  {
+    //游园订单
+    path: '/GardenOrder',
+    name: 'GardenOrder',
+    component: resolve => require(['@/components/common/GardenService/GardenOrder'], resolve),
+  },
 
 ]

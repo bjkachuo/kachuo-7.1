@@ -87,7 +87,7 @@
         </swiper-item>
       </swiper>
     </div>
-    <div style="width:92%;margin: 0px auto 0px;">
+    <!-- <div style="width:92%;margin: 0px auto 0px;">
       <swiper auto height="70px" class="custom">
         <swiper-item class="black">
           <img src="./indextwo.png" alt />
@@ -99,7 +99,7 @@
           <img src="../../assets/images/2-min.png" alt />
         </swiper-item>
       </swiper>
-    </div>
+    </div> -->
   </div>
 </template>
 

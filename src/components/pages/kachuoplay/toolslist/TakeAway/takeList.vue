@@ -3,7 +3,8 @@
     <Header :titleContent="TitleObjData.titleContent" :showLeftBack="TitleObjData.showLeftBack" :showRightMore="TitleObjData.showRightMore"></Header>
     <div class="normal-content" :style="conHei">
       <div class="take-list">
-        <div class="li" v-for="(item,index) in lists" :key="index">
+        <p style="text-align: center;font-size: 18px;color: #999;">-----敬请期待-----</p>
+        <!-- <div class="li" v-for="(item,index) in lists" :key="index">
           <router-link class="take-card" :to="item.url">
             <div class="take-photo">
               <img :src="item.src" alt="">
@@ -13,7 +14,7 @@
               <div class="t-price">￥<span>{{item.price}}</span></div>
             </div>
           </router-link>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
