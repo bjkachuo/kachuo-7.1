@@ -209,7 +209,7 @@ export default {
             //如果积分大于金额
           } else if (data.result == 2) {
             this.showTip("使用积分抵扣成功");
-            this.$router.push("/orderlist");
+            this.$router.push("/GardenOrder");
             console.log(data);
           } else {
             this.showTip("请填写完整或检查网络");

@@ -92,7 +92,7 @@ export default {
         position: "middle",
         time: 3000,
         onHide: () => {
-          this.$router.push("/orderlist");
+          this.$router.push("/GardenOrder");
         }
       });
     },
