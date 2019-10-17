@@ -181,12 +181,6 @@ export default {
 <style lang='less' scoped>
 .normal-content {
   width: 100%;
-  background: #f5f5f5;
-  margin-top: 45px;
-  overflow: hidden;
-  overflow-y: scroll;
-  padding: 15px;
-  box-sizing: border-box;
 }
 .int-dailog {
   background-color: #ffffff;
