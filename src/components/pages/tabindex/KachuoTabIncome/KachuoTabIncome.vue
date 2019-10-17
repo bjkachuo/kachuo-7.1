@@ -121,6 +121,15 @@ export default {
   .商家入驻{
     background-image: url("./shangjia/商家.jpg");
   }
+  .墨客入驻{
+    background-image: url("./moke/墨客.jpg");
+  }
+  .匠人入驻{
+    background-image: url("./moke/匠人.jpg");
+  }
+  .拍客入驻{
+    background-image: url("./moke/拍客.jpg");
+  }
   .mask2{
     position: absolute;
     top: 0;

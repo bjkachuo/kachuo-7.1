@@ -12,7 +12,7 @@
     </p> -->
     <div class="goods-list" v-for="(item,index) in goodList" :key="index" @click="watchGoodsDetails(item.goods_id,item.id,item.rent,item)">
       <div class="img-posution">
-        <i class="suyuan"></i>
+        <i class="suyuan" v-if="item.is_forty"></i>
         <img class="goods-img" v-lazy="item.thumb">
       </div>
       <div class="good-desc-wrap">
