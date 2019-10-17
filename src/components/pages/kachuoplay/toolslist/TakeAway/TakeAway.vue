@@ -134,12 +134,12 @@ export default {
 }
 .cc-flex .cc-item {
   display: block;
-  padding: 25px 0;
+  padding: 10px 0;
   text-align: center;
   border-radius: 8px;
   background: #ffffff;
   overflow: hidden;
-  box-shadow: 0px 6px 10px 0px rgba(0, 101, 255, 0.05);
+  /* box-shadow: 0px 6px 10px 0px rgba(0, 101, 255, 0.05); */
 }
 .take-card {
   background: #fff;

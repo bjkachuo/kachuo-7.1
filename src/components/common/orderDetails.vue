@@ -1,5 +1,6 @@
 <template>
   <div class="od-wrap">
+    <customerService style="float: right;margin: -30px;" ref="header"></customerService>
     <div class="head">
       <div class="h-left" @click="goback">
         <x-icon type="ios-arrow-left" size="30" class="back"></x-icon>
@@ -34,6 +35,12 @@
           <x-input title="支付时间:" disabled v-model="payTime"></x-input>
           <x-input title="取消时间:" disabled v-model="cancelTime" class="bottom"></x-input>
         </div>
+        <div class="scever">
+          <p>
+            如需取消订单或申请退款请点此联系
+            <span @click="goser">人工客服</span>
+          </p>
+        </div>
       </div>
     </div>
 
@@ -48,6 +55,7 @@
 
 <script>
 import { Cell, XInput } from "vux";
+import customerService from "@/components/common/customerService/customerService";
 
 export default {
   props: {},
@@ -111,11 +119,16 @@ export default {
   methods: {
     goback() {
       this.$router.go(-1);
+    },
+    //人工客服
+    goser() {
+      this.$refs.header.iframeShow = true;
     }
   },
   components: {
     Cell,
-    XInput
+    XInput,
+    customerService
   }
 };
 </script>
@@ -192,5 +205,15 @@ export default {
 }
 .bottom {
   border-radius: 0 0 8px 8px;
+}
+.scever p {
+  font-size: 12px;
+  color: #999999;
+  text-align: center;
+  margin-top: 30px;
+}
+.scever span {
+  color: #3976ff;
+  text-decoration: underline;
 }
 </style>

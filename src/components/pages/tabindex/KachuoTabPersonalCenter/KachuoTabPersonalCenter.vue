@@ -13,13 +13,13 @@
             <p class="p-two">{{userInfo.levelname}}</p>
           </div>
         </div>
-        <div class="content-card-top-right">
+        <!-- <div class="content-card-top-right">
           <span
             class="iconfont iconerweima"
             @click="getQRcode"
             style="font-size:45px;margin-left:10px;color:#80BFFF"
           ></span>
-        </div>
+        </div> -->
       </div>
       <div class="content-card-mid">
         <span class="token-num">ID:{{userInfo.usercode.slice(0,19)}}...</span>
@@ -166,7 +166,7 @@ export default {
         },
         {
           name: "游园订单",
-          link: "/",
+          link: "/GardenOrder",
           imgSrc: require("@/assets/images/daoyouht.png")
         }
       ],
