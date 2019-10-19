@@ -456,8 +456,6 @@ import {
   XDialog
 } from "vux";
 
-
-
 export default {
   beforeCreate: function() {
     document.querySelector("body").setAttribute("style", "height:auto");
@@ -1008,6 +1006,11 @@ video {
 </style>
 <style lang="less" scoped>
 /deep/ .vux-x-dialog-absolute .weui-dialogP {
+  position: fixed;
+}
+/deep/ .vux-x-dialog-absolute .weui-dialog {
+}
+/deep/ .weui-dialog {
   position: fixed;
 }
 </style>
