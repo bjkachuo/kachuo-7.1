@@ -59,29 +59,34 @@
       </swiper>
     </div>
 
-    <div class="Selected">
-      <p>精选推荐</p>
-    </div>
+<!--    <div class="Selected">-->
+<!--      <p>精选推荐</p>-->
+<!--    </div>-->
     <div class="line-three">
-      <swiper auto height="440px" direction="vertical" interval="5000">
+      <swiper auto height="568px" interval="5000">
         <swiper-item v-for="(reco,index) in recommend" :key="index">
-          <div class="recommend"  v-for="(item,index) in reco" :key="index">
-            <div class="inLeft">
-              <img :src="item.video_image" alt />
+          <div v-for="(item,index) in reco" :key="index">
+            <div class="Selected">
               <p>{{item.typename}}</p>
             </div>
-            <div class="inMid">
-              <p>{{item.name}}</p>
-              <!-- <i>人均18元</i> -->
-              <span>
+            <div class="recommend" >
+              <div class="inLeft">
+                <img :src="item.video_image" alt />
+                <p>{{item.typename}}</p>
+              </div>
+              <div class="inMid">
+                <p>{{item.name}}</p>
+                <!-- <i>人均18元</i> -->
+                <span>
             <div class="house">
               <img src="../../assets/images/fangzi.png" alt />
             </div>
             <div class="characteristic">特色:{{item.product}}</div>
           </span>
-            </div>
-            <div class="inRight" @click="details(item.id,item.type)">
-              <p>进店</p>
+              </div>
+              <div class="inRight" @click="details(item.id,item.type)">
+                <p>进店</p>
+              </div>
             </div>
           </div>
         </swiper-item>
@@ -324,10 +329,11 @@
   }
   .Selected {
     width: 100%;
+    margin-bottom: 10px;
   }
   .Selected p {
     text-align: center;
-    color: #222222ff;
+    color: #222222;
     font-size: 14px;
     font-weight: 800;
   }
