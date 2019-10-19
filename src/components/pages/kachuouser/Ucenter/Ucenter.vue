@@ -28,7 +28,7 @@
       <div class="set-cells">
         <cell title="实名认证" value="未认证" is-link v-if="idState == '0'" @click.native="goRenzheng"></cell>
         <cell title="实名认证" value="已认证" v-if="idState != '0' "></cell>
-        <cell title="人脸识别" value="未识别" v-if="face == 0" is-link></cell>
+        <cell title="人脸识别" value="未识别" v-if="face == 0" is-link @click.native="goFaceThr"></cell>
         <cell title="人脸识别" value="已识别" v-if="face == 1"></cell>
         <!-- <cell title="实名认证" is-link>
           <template slot="default">
@@ -72,7 +72,7 @@ export default {
       //人脸识别状态
       face: 0,
       //实名认证状态
-      idState: '0'
+      idState: "0"
     };
   },
   mounted() {
@@ -97,6 +97,9 @@ export default {
     },
     goRenzheng() {
       this.$router.push("/Ucenter/Certification");
+    },
+    goFaceThr() {
+      this.$router.push("/faceThr");
     },
     getStatus() {
       GetAuthState().then(res => {

@@ -446,15 +446,22 @@ export default [{
     component: resolve => require(['@/components/pages/kachuomall/goods/ConfirmOrderShoppingCart'], resolve),
   },
   {
+    //门票认真人脸识别
     path: '/facecheck',
     name: 'facecheck',
     component: resolve => require(['@/components/pages/facerecognition/face'], resolve),
   },
   {
-    //用于导演注册的人脸
+    //用于导演注册的人脸识别
     path: '/faceTwo',
     name: 'faceTwo',
     component: resolve => require(['@/components/pages/facerecognition/faceTwo'], resolve),
+  },
+  {
+    //用于个人中心的人脸识别
+    path: '/faceThr',
+    name: 'faceThr',
+    component: resolve => require(['@/components/pages/facerecognition/faceThr'], resolve),
   },
   {
     path: '/face',
