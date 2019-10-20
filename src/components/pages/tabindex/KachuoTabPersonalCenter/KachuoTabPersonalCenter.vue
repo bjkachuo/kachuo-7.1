@@ -19,7 +19,7 @@
             @click="getQRcode"
             style="font-size:45px;margin-left:10px;color:#80BFFF"
           ></span>
-        </div> -->
+        </div>-->
       </div>
       <div class="content-card-mid">
         <span class="token-num">ID:{{userInfo.usercode.slice(0,19)}}...</span>
@@ -38,18 +38,6 @@
     <div class="line-one">
       <flexbox>
         <flexbox-item v-for="(item,index) in dataListOne" :key="index">
-          <div class="flex-demo" @click="getItem(item.link)">
-            <div class="img-wrap">
-              <img :src="item.imgSrc" alt />
-            </div>
-            <p>{{item.name}}</p>
-          </div>
-        </flexbox-item>
-      </flexbox>
-    </div>
-    <div class="line-two">
-      <flexbox>
-        <flexbox-item v-for="(item,index) in dataListTwo" :key="index">
           <div class="flex-demo" @click="getItem(item.link)">
             <div class="img-wrap">
               <img :src="item.imgSrc" alt />
@@ -87,6 +75,19 @@
         </flexbox-item>
       </flexbox>
     </div>
+    <div class="line-two">
+      <flexbox>
+        <flexbox-item v-for="(item,index) in dataListTwo" :key="index">
+          <div class="flex-demo" @click="getItem(item.link)">
+            <div class="img-wrap">
+              <img :src="item.imgSrc" alt />
+            </div>
+            <p>{{item.name}}</p>
+          </div>
+        </flexbox-item>
+      </flexbox>
+    </div>
+
     <IntegralDesc ref="alert"></IntegralDesc>
   </div>
 </template>

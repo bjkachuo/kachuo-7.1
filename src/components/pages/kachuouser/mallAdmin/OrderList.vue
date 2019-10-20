@@ -25,13 +25,16 @@
       </tab-item>
     </tab>
     <div class="tab-panel" v-if="this.index == 0">
-      <div class="tab-card">
+      <div class="tab-card" v-for="(item,index) in this.bigList" :key="index">
         <cell>
           <template slot="after-title">
-            <div class="shop-title">艺品寄卖</div>
+            <div class="shop-title">{{item.goods[0].suoshujingqu}}</div>
           </template>
           <template slot="default">
-            <div class="div-status">待收货</div>
+            <div class="div-status" v-if="item.status==0">待付款</div>
+            <div class="div-status" v-if="item.status==1">待发货</div>
+            <div class="div-status" v-if="item.status==2">待收货</div>
+            <div class="div-status" v-if="item.status==3">已完成</div>
           </template>
         </cell>
         <cell>
@@ -41,12 +44,12 @@
             </div>
           </template>
           <template slot="after-title">
-            <div class="order-title">李几已书法作品蓬莱仙阁 赋李几已书法作品蓬莱...</div>
+            <div class="order-title">{{item.goods[0].shangpinxinxi.title}}</div>
           </template>
           <template slot="default">
             <div class="order-price">
               ￥
-              <i>60.00</i>
+              <i>{{item.goodsprice}}</i>
             </div>
             <div class="order-number">×1</div>
           </template>
@@ -58,7 +61,7 @@
                 共1件商品
                 <span class="order-price">
                   ￥
-                  <i>600</i>
+                  <i>{{item.goodsprice}}</i>
                 </span> 合计
               </div>
               <div class="card-button">
@@ -71,10 +74,10 @@
       </div>
     </div>
     <div class="tab-panel" v-if="this.index == 1">
-      <div class="tab-card">
+      <div class="tab-card" v-for="(item,index) in this.bigList" :key="index" v-if="item.status==0">
         <cell>
           <template slot="after-title">
-            <div class="shop-title">艺品寄卖</div>
+            <div class="shop-title">{{item.goods[0].suoshujingqu}}</div>
           </template>
           <template slot="default">
             <div class="div-status">待付款</div>
@@ -87,12 +90,12 @@
             </div>
           </template>
           <template slot="after-title">
-            <div class="order-title">李几已书法作品蓬莱仙阁 赋李几已书法作品蓬莱...</div>
+            <div class="order-title">{{item.goods[0].shangpinxinxi.title}}</div>
           </template>
           <template slot="default">
             <div class="order-price">
               ￥
-              <i>60.00</i>
+              <i>{{item.goodsprice}}</i>
             </div>
             <div class="order-number">×1</div>
           </template>
@@ -104,7 +107,7 @@
                 共1件商品
                 <span class="order-price">
                   ￥
-                  <i>600</i>
+                  <i>{{item.goodsprice}}</i>
                 </span> 合计
               </div>
               <div class="card-button">
@@ -117,10 +120,10 @@
       </div>
     </div>
     <div class="tab-panel" v-if="this.index == 2">
-      <div class="tab-card">
+      <div class="tab-card" v-for="(item,index) in this.bigList" :key="index" v-if="item.status==1">
         <cell>
           <template slot="after-title">
-            <div class="shop-title">蓬莱阁艺术馆</div>
+            <div class="shop-title">{{item.goods[0].suoshujingqu}}</div>
           </template>
           <template slot="default">
             <div class="div-status">待发货</div>
@@ -133,12 +136,12 @@
             </div>
           </template>
           <template slot="after-title">
-            <div class="order-title">李几已书法作品蓬莱仙阁 赋李几已书法作品蓬莱...</div>
+            <div class="order-title">{{item.goods[0].shangpinxinxi.title}}</div>
           </template>
           <template slot="default">
             <div class="order-price">
               ￥
-              <i>60.00</i>
+              <i>{{item.goodsprice}}</i>
             </div>
             <div class="order-number">×1</div>
           </template>
@@ -150,7 +153,7 @@
                 共1件商品
                 <span class="order-price">
                   ￥
-                  <i>600</i>
+                  <i>{{item.goodsprice}}</i>
                 </span> 合计
               </div>
               <div class="card-button">
@@ -162,16 +165,59 @@
       </div>
     </div>
     <div class="tab-panel" v-if="this.index == 3">
-      <div class="empty-box">
-        <!--          <img src="../../../assets/images/empty.png" alt="">-->
+      <!-- <div class="empty-box" style="z-index:-1;">
+                 <img src="../../../assets/images/empty.png" alt="">
         <p>你还没有订单，快去逛逛吧~</p>
+      </div> -->
+      <div class="tab-card" v-for="(item,index) in this.bigList" :key="index" v-if="item.status==2">
+        <cell>
+          <template slot="after-title">
+            <div class="shop-title">{{item.goods[0].suoshujingqu}}</div>
+          </template>
+          <template slot="default">
+            <div class="div-status">待收货</div>
+          </template>
+        </cell>
+        <cell>
+          <template slot="icon">
+            <div class="order-photo">
+              <!--                <img src="../../../assets/images/ddpic.png" alt="">-->
+            </div>
+          </template>
+          <template slot="after-title">
+            <div class="order-title">{{item.goods[0].shangpinxinxi.title}}</div>
+          </template>
+          <template slot="default">
+            <div class="order-price">
+              ￥
+              <i>{{item.goodsprice}}</i>
+            </div>
+            <div class="order-number">×1</div>
+          </template>
+        </cell>
+        <cell>
+          <template slot="after-title">
+            <div class="card-foot">
+              <div class="total-text">
+                共1件商品
+                <span class="order-price">
+                  ￥
+                  <i>{{item.goodsprice}}</i>
+                </span> 合计
+              </div>
+              <div class="card-button">
+                <x-button class="btn-blue" disabled>确认收货</x-button>
+              </div>
+            </div>
+          </template>
+        </cell>
       </div>
     </div>
     <div class="tab-panel" v-if="this.index == 4">
-      <div class="tab-card">
+      <div class="tab-card" v-for="(item,index) in this.bigList" :key="index" v-if="item.status==3">
         <cell>
           <template slot="after-title">
-            <div class="shop-title">蓬莱阁艺术馆</div>
+            <div class="shop-title">{{item.goods[0].suoshujingqu}}</div>
           </template>
           <template slot="default">
             <div class="div-status">已完成</div>
@@ -184,12 +230,12 @@
             </div>
           </template>
           <template slot="after-title">
-            <div class="order-title">李几已书法作品蓬莱仙阁 赋李几已书法作品蓬莱...</div>
+            <div class="order-title">{{item.goods[0].shangpinxinxi.title}}</div>
           </template>
           <template slot="default">
             <div class="order-price">
               ￥
-              <i>60.00</i>
+              <i>{{item.goodsprice}}</i>
             </div>
             <div class="order-number">×1</div>
           </template>
@@ -201,7 +247,7 @@
                 共1件商品
                 <span class="order-price">
                   ￥
-                  <i>600</i>
+                  <i>{{item.goodsprice}}</i>
                 </span> 合计
               </div>
               <div class="card-button">
@@ -236,7 +282,8 @@ export default {
       index: 0,
       iscur: 0,
       dataList: [],
-      getData: []
+      getData: [],
+      bigList: []
     };
   },
 
@@ -277,28 +324,31 @@ export default {
         status: status
       })
         .then(res => {
-          if (res.result === 1) {
-            if (res.data.result) {
-              for (let i = 0; i < res.data.result.length; i++) {
-                this.dataList.push({
-                  id: res.data.result[i].id,
-                  goodsId: res.data.result[i].goods[0].id,
-                  ordersn: res.data.result[i].ordersn,
-                  orderType: res.data.result[i].iswxappcreate,
-                  classify: res.data.result[i].goods[0].suoshujingqu,
-                  status: res.data.result[i].status,
-                  orderState: res.data.result[i].status,
-                  goodImg: res.data.result[i].goods[0].shangpinxinxi.thumb,
-                  name: res.data.result[i].goods[0].shangpinxinxi.title,
-                  spec: "无",
-                  price: res.data.result[i].goods[0].goodsprice,
-                  count: res.data.result[i].goods[0].total,
-                  date: timeTodate(res.data.result[i].goods[0].createtime),
-                  priceCount: res.data.result[i].goods[0].price
-                });
-              }
-            }
-          }
+          console.log(res);
+          this.bigList = res.data.result;
+          console.log("列表：", this.bigList);
+          // if (res.result === 1) {
+          //   if (res.data.result) {
+          //     for (let i = 0; i < res.data.result.length; i++) {
+          //       this.dataList.push({
+          //         id: res.data.result[i].id,
+          //         goodsId: res.data.result[i].goods[0].id,
+          //         ordersn: res.data.result[i].ordersn,
+          //         orderType: res.data.result[i].iswxappcreate,
+          //         classify: res.data.result[i].goods[0].suoshujingqu,
+          //         status: res.data.result[i].status,
+          //         orderState: res.data.result[i].status,
+          //         goodImg: res.data.result[i].goods[0].shangpinxinxi.thumb,
+          //         name: res.data.result[i].goods[0].shangpinxinxi.title,
+          //         spec: "无",
+          //         price: res.data.result[i].goods[0].goodsprice,
+          //         count: res.data.result[i].goods[0].total,
+          //         date: timeTodate(res.data.result[i].goods[0].createtime),
+          //         priceCount: res.data.result[i].goods[0].price
+          //       });
+          //     }
+          //   }
+          // }
         })
         .catch(err => {
           console.log(err);
@@ -429,5 +479,8 @@ export default {
 }
 .tab-panel {
   padding: 15px 0;
+  padding: 15px 0;
+  overflow: hidden scroll;
+  height: 88%;
 }
 </style>

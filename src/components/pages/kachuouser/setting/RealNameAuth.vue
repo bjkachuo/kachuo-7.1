@@ -63,7 +63,7 @@ export default {
       },
       dataOpD: {
         title: "信仰",
-        columns: 2,
+        columns: 3,
         data: []
       },
       dataOpE: {

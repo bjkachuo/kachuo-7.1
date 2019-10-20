@@ -7,14 +7,14 @@
     </div>
     </x-header>
     <div class="normal-content" :style="conHei">
-      <div class="cart-panel">
+      <div class="cart-panel" v-for="(item,index) in this.ListOne" :key="index">
         <div class="cart-header">
-          <check-icon :value.sync="check1"></check-icon>
+          <check-icon :value.sync="check2"></check-icon>
           <span class="shop-name">蓬莱阁艺术馆</span>
         </div>
         <cell>
           <template slot="icon">
-            <check-icon :value.sync="check1"></check-icon>
+            <check-icon :value.sync="check2"></check-icon>
             <div class="gar-photo">
               <img src="./ddpic.png" alt="">
             </div>
@@ -22,11 +22,11 @@
           <template slot="after-title">
             <div class="gar-body">
               <div class="gar-header">
-                <div class="gar-title">李几已书法作品蓬莱仙阁赋李 几已书法作品蓬莱...</div>
+                <div class="gar-title">{{item.goods_sx.title}}</div>
               </div>
               <div class="gar-foot">
-                <div class="gar-price">￥<span>600.00</span></div>
-                <inline-x-number :min="0" width="30px"></inline-x-number>
+                <div class="gar-price">￥<span>{{item.marketprice}}</span></div>
+                <inline-x-number :min="0" width="30px" :value="item.total" ></inline-x-number>
               </div>
             </div>
           </template>
@@ -58,7 +58,9 @@ export default {
       showLeftBack: true,
       rText: "编辑",
       check1:true,
-      check2:true
+      check2:true,
+      ListOne:[],
+      num:""
     };
   },
   methods:{
@@ -77,16 +79,18 @@ export default {
       ShopList({page: 1})
         .then(res => {
           console.log(res);
-          if (res.result === 1) {
-            let obj = res.data.result;
-            for (let i in obj) {
-              for (let j in obj[i][0]) {
-                this.dataList.push(obj[i][0][j]);
-                this.numArr.push(parseInt(obj[i][0][j].total, 10));
-                this.checkFlagArr.push(true);
-              }
-            }
-          }
+          this.ListOne = res.data.result
+          console.log("购物车列表",this.ListOne)
+          // if (res.result === 1) {
+          //   let obj = res.data.result;
+          //   for (let i in obj) {
+          //     for (let j in obj[i][0]) {
+          //       this.dataList.push(obj[i][0][j]);
+          //       this.numArr.push(parseInt(obj[i][0][j].total, 10));
+          //       this.checkFlagArr.push(true);
+          //     }
+          //   }
+          // }
         })
         .catch(err => {
           console.log(err);
