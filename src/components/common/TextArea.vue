@@ -6,7 +6,6 @@
       placeholder="请输入标题"
       v-model="inputValue"
       @on-change="getInputVal"
-      :show-clear="false"
     ></x-input>
     <p class="input-textarea-title">内容</p>
     <Group>

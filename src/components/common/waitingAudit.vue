@@ -47,7 +47,7 @@ export default {
   watch: {},
   methods: {
       done(){
-          this.$router.push("/TourList")
+          this.$router.go(-2)
       }
   },
   components: {

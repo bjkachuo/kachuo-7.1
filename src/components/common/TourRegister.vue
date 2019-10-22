@@ -219,7 +219,7 @@ export default {
           this.showTip("注册成功");
           this.$router.push("/waitingAudit")
         } else {
-          this.showTip("请填写完整并检查人脸识别和实名认真状态");
+          this.showTip("请填写完整并检查人脸识别和实名认证状态");
         }
       });
     },
