@@ -190,8 +190,13 @@
       setInterval(function () {
         console.log(1);
         geolocation.getCurrentPosition(function (r) {
-          console.log(r);
-      })
+          if(this.getStatus() == BMAP_STATUS_SUCCESS){
+                var mk = new BMap.Marker(r.point);
+                self.addOverlay(mk);
+                self.panTo(r.point);
+                alert('您的位置：'+r.point.lng+','+r.point.lat);
+          }
+      },5000)
 
         // geolocation.getCurrentPosition(function(r){
         //   if(this.getStatus() == BMAP_STATUS_SUCCESS){
