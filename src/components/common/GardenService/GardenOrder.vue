@@ -48,7 +48,7 @@
               </div>
               <div class="content-bottom" v-if="item.status == 1">
                 <div class="bottom-two" @click="done(item.id)">
-                  <p>订单完成1</p>
+                  <p>订单完成</p>
                 </div>
                 <div class="bottom-one">
                   <p>
@@ -58,7 +58,7 @@
               </div>
               <div class="content-bottom" style="display:none;" v-if="item.status == 2 || 6">
                 <div class="bottom-two">
-                  <p>订单完成2</p>
+                  <p>订单完成</p>
                 </div>
                 <div class="bottom-one">
                   <p>
