@@ -21,7 +21,7 @@
         <div style="overflow: hidden">
           <div class="dataList" ref="col1">
             <div v-for="item in dataList1" class="card">
-              <div class="img">
+              <div class="img" @click="getDetailsContent(item.id)">
                 <img :src="item.video_img[0]" width="100%" />
                 <div class="address">
                   <i></i>
@@ -29,23 +29,36 @@
                 </div>
               </div>
               <div class="summary">{{item.summary}}</div>
-            </div>
-          </div>
-          <div class="dataList" ref="col2" style=" margin-left: 0;">
-            <div v-for="item in dataList2" class="card">
-              <div class="img">
-                <img :src="item.video_img[0]" width="100%" />
-                <div class="address">
-                  <i></i>
-                  {{item.title}}
-                </div>
-              </div>
-              <div class="summary">{{item.title}}</div>
               <div class="bottom">
                 <div class="avata">
                   <img :src="item.release_img" alt />
                 </div>
-                <div class="name">{{item.release_name}}</div>
+                <div
+                  class="name"
+                  style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;width: 120px;"
+                >{{item.release_name}}</div>
+                <div></div>
+              </div>
+            </div>
+          </div>
+          <div class="dataList" ref="col2" style=" margin-left: 0;">
+            <div v-for="item in dataList2" class="card">
+              <div class="img" @click="getDetailsContent(item.id)">
+                <img :src="item.video_img[0]" width="100%" />
+                <div class="address">
+                  <i></i>
+                  {{item.address}}
+                </div>
+              </div>
+              <div class="summary">{{item.summary}}</div>
+              <div class="bottom">
+                <div class="avata">
+                  <img :src="item.release_img" alt />
+                </div>
+                <div
+                  class="name"
+                  style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;width: 120px;"
+                >{{item.release_name}}</div>
                 <div></div>
               </div>
             </div>
@@ -199,6 +212,7 @@ export default {
       });
     },
     onPullingDown() {
+      // this.$router.push('/')
       totalCount = 0;
       this.page = 1;
       this.getData().then(res => {

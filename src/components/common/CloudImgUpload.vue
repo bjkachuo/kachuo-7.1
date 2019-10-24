@@ -1,9 +1,17 @@
+
 <template>
   <div class="control-form">
     <ul class="upload-imgs">
       <li>
-
-        <input type="file" class="upload" @change="addImg" ref="inputer" accept="image/*" capture="camera">
+        <input
+          type="file"
+          class="upload"
+          @change="addImg"
+          ref="inputer"
+          accept="image/*"
+          capture="camera"
+          multiple
+        />
         <a class="add">
           <p class="add-icon">+</p>
         </a>
@@ -105,7 +113,8 @@ export default {
     submit() {
       for (let key in this.imgs) {
         let name = key.split("?")[0];
-        this.formData.append("file", this.imgs[key]);
+        this.formData.append("file[]", this.imgs[key]);
+        console.log(this.imgs[key]);
       }
       let config = {
         timeout: 10000,
@@ -158,10 +167,10 @@ export default {
   mounted() {
     var ua = navigator.userAgent.toLowerCase();
     //判断是否是苹果手机，是则是true
-    var isIos = (ua.indexOf('iphone') != -1) || (ua.indexOf('ipad') != -1);
+    var isIos = ua.indexOf("iphone") != -1 || ua.indexOf("ipad") != -1;
     if (isIos) {
       // this.$refs.inputer.setAttribute("capture",'');
-    };
+    }
   }
 };
 </script>

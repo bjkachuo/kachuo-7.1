@@ -47,8 +47,8 @@
                 </div>
               </div>
               <div class="content-bottom" v-if="item.status == 1">
-                <div class="bottom-two">
-                  <p>订单完成</p>
+                <div class="bottom-two" @click="done(item.id)">
+                  <p>订单完成1</p>
                 </div>
                 <div class="bottom-one">
                   <p>
@@ -58,7 +58,7 @@
               </div>
               <div class="content-bottom" style="display:none;" v-if="item.status == 2 || 6">
                 <div class="bottom-two">
-                  <p>订单完成</p>
+                  <p>订单完成2</p>
                 </div>
                 <div class="bottom-one">
                   <p>
@@ -100,7 +100,7 @@
                 </div>
               </div>
               <div class="content-bottom">
-                <div class="bottom-two">
+                <div class="bottom-two" @click="done(item.id)">
                   <p>订单完成</p>
                 </div>
                 <div class="bottom-one">
@@ -219,6 +219,33 @@ export default {
   },
   watch: {},
   methods: {
+    //订单完成
+    done(id) {
+      this.$http
+        .post(
+          "https://core.kachuo.com/app/ewei_shopv2_app.php?i=8&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.index.operateOrderStatus&id=" +
+            id +
+            "&status=" +
+            6
+        )
+        .then(({ data }) => {
+          console.log(data);
+          this.start();
+        });
+    },
+    //刷新订单列表
+    start() {
+      this.$http
+        .post(
+          "http://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.index.orderlist&id=" +
+            JSON.parse(sessionStorage.getItem("userLoginInfo")).id
+        )
+        .then(({ data }) => {
+          console.log(data);
+          this.allList = data.data.list;
+          console.log("刷新后全部订单", this.allList);
+        });
+    },
     //进行中
     goOrderTwo(index) {
       this.$router.push({

@@ -142,7 +142,7 @@ export default {
   text-align: center;
 }
 .img-wrap {
-  width: 100%;
+  width: 105%;
   min-height: 100px;
   height: auto;
   display: flex;

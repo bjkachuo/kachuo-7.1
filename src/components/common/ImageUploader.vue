@@ -3,12 +3,19 @@
     <ul class="upload-imgs">
       <li v-for="(value, key) in imgs" :key="key">
         <p class="img">
-          <img :src="getObjectURL(value)">
+          <img :src="getObjectURL(value)" />
           <a class="close" @click="delImg(key)">×</a>
         </p>
       </li>
       <li v-if="imgLen>=3 ? false : true">
-        <input type="file" class="upload" @change="addImg" ref="inputer" multiple='false' accept="image/*">
+        <input
+          type="file"
+          class="upload"
+          @change="addImg"
+          ref="inputer"
+          multiple="false"
+          accept="image/*"
+        />
         <a class="add">
           <p class="add-icon">+</p>
         </a>
@@ -44,11 +51,14 @@ export default {
       }
       for (let i = 0; i < this.fil.length; i++) {
         let size = Math.floor(this.fil[i].size / 1024);
-        if (size > 10 * 1024 * 1024) {
-          this.showToast("请选择10M以内的图片！");
+        if (size > 4 * 1024 * 1024) {
+          this.showToast("请选择4M以内的图片");
+
+          console.log( this.oldLen)
           return false;
         }
         this.imgLen++;
+        console.log( this.imgLen)
         this.$set(
           this.imgs,
           this.fil[i].name + "?" + new Date().getTime() + i,

@@ -118,7 +118,8 @@ export default {
               text: "发布成功",
               time: 1000,
               onHide: () => {
-                this.$router.goBack();
+                // this.$router.goBack();
+                this.$router.go(-1)
               }
             });
           } else {
@@ -143,7 +144,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="css" scoped>
 .input-textarea-input {
   width: 100%;
   height: 40px;
@@ -178,5 +179,10 @@ export default {
 .image-upload-weak-tip {
   font-size: 12px;
   color: #999;
+}
+</style>
+<style lang="less" scoped>
+.weui-btn_primary {
+  background-color: #3976ff;
 }
 </style>

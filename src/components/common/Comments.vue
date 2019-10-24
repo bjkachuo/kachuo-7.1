@@ -10,7 +10,7 @@
       :max="100"
       ref="inputVal"
       @input="onChange"
-    >
+    />
     <x-button
       slot="right"
       type="primary"
@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { XInput, Group, XButton, Cell} from "vux";
+import { XInput, Group, XButton, Cell } from "vux";
 import { NewsKachuoTopic } from "@/servers/api";
 import { setTimeout } from "timers";
 export default {
@@ -108,5 +108,10 @@ export default {
 .comments-wrap-btn {
   flex: 1;
   margin-left: 24px;
+}
+</style>
+<style lang="less" scoped>
+.weui-btn_primary {
+  background-color: #3976ff;
 }
 </style>
