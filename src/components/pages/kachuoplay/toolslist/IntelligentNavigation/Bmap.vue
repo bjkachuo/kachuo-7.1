@@ -192,9 +192,11 @@
         geolocation.getCurrentPosition(function (r) {
           if(this.getStatus() == BMAP_STATUS_SUCCESS){
                 var mk = new BMap.Marker(r.point);
-                self.addOverlay(mk);
-                self.panTo(r.point);
+                self.Bmap.addOverlay(mk);
+                self.Bmap.panTo(r.point);
                 alert('您的位置：'+r.point.lng+','+r.point.lat);
+          }else{
+            alert('failed'+this.getStatus())
           }
       },5000)
 
