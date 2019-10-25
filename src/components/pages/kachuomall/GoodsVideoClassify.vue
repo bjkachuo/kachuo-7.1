@@ -1,13 +1,26 @@
 <template>
   <div class="scence-release-wrap">
-    <Header
-      :titleContent="TitleObjData.titleContent"
-      :showLeftBack="TitleObjData.showLeftBack"
-      :showRightMore="TitleObjData.showRightMore"
-    ></Header>
+    <div>
+      <Header
+        :titleContent="TitleObjData.titleContent"
+        :showLeftBack="TitleObjData.showLeftBack"
+        :showRightMore="TitleObjData.showRightMore"
+      ></Header>
+      <div style="position:absolute;right:45px;top:7px;z-index:999;" @click="search">
+        <x-icon type="ios-search-strong" size="32"></x-icon>
+      </div>
+      <div class="help-wrap" style="position:absolute;right:15px;top:10px;z-index: 999;">
+        <customerService></customerService>
+      </div>
+    </div>
     <div class="position-box" :style="contentNoHeaderHeight">
-      <div class="video-list-for" v-for="(item,index) in items" :key="index" @click="getDetailFn(item.id)">
-        <img v-lazy="item.show_img" :alt="item.title" srcset>
+      <div
+        class="video-list-for"
+        v-for="(item,index) in items"
+        :key="index"
+        @click="getDetailFn(item.id)"
+      >
+        <img v-lazy="item.show_img" :alt="item.title" srcset />
       </div>
     </div>
   </div>
@@ -16,6 +29,8 @@
 <script>
 import Header from "@/components/common/ReleaseHeader";
 import { VideoListIndex } from "@/servers/api";
+import customerService from "@/components/common/customerService/customerService";
+
 export default {
   name: "",
   props: [""],
@@ -31,7 +46,8 @@ export default {
   },
 
   components: {
-    Header
+    Header,
+    customerService
   },
 
   computed: {
@@ -47,9 +63,13 @@ export default {
   },
 
   methods: {
+    search() {
+      this.$router.push("/usersearch");
+    },
+
     // 获取详情
-    getDetailFn(id){
-      this.$router.push("/goodsVideoclassifydetails?id="+id+"&type=1");
+    getDetailFn(id) {
+      this.$router.push("/goodsVideoclassifydetails?id=" + id + "&type=1");
     },
     // 数据请求
     getData() {
@@ -84,7 +104,7 @@ export default {
   padding: 0 15px;
   box-sizing: border-box;
 }
-.video-list-for{
+.video-list-for {
   width: 100%;
   height: 120px;
   object-fit: contain;
