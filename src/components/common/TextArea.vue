@@ -57,6 +57,7 @@ export default {
     getImgAddress(val) {
       // console.log(val);
       this.arressVal = val;
+      console.log(val)
     },
     getImgUrl(val) {
       // console.log(val);

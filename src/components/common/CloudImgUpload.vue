@@ -113,9 +113,11 @@ export default {
     submit() {
       for (let key in this.imgs) {
         let name = key.split("?")[0];
-        this.formData.append("file[]", this.imgs[key]);
+        this.formData.append("file[]", this.imgs[key],this.imgs[key].name);
         console.log(this.imgs[key]);
       }
+      console.log(this.imgs[key]);
+
       let config = {
         timeout: 10000,
         headers: {

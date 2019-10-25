@@ -1,10 +1,18 @@
 <template>
   <div class="back-lease-sale-wrap">
-    <Header
-      :titleContent="TitleObjData.titleContent"
-      :showLeftBack="TitleObjData.showLeftBack"
-      :showRightMore="TitleObjData.showRightMore"
-    ></Header>
+    <div style="height:46px;">
+      <Header
+        :titleContent="TitleObjData.titleContent"
+        :showLeftBack="TitleObjData.showLeftBack"
+        :showRightMore="TitleObjData.showRightMore"
+      ></Header>
+      <div style="position:absolute;right:45px;top:7px;z-index:999;" @click="search">
+        <x-icon type="ios-search-strong" size="32"></x-icon>
+      </div>
+      <div class="help-wrap" style="position:absolute;right:15px;top:10px;z-index: 999;">
+        <customerService></customerService>
+      </div>
+    </div>
     <div class="back-lease-sale-content-wrap" :style="scrollContentHeight">
       <!-- <TabItemMallAdvertise></TabItemMallAdvertise>
       <DividedArea></DividedArea>-->
@@ -40,6 +48,7 @@ import GoodsListWrapSent from "@/components/layout/GoodsListWrapSent";
 import DividedArea from "@/components/common/DividedArea";
 import Divider from "@/components/common/Divider";
 import { Swiper, SwiperItem } from "vux";
+import customerService from "@/components/common/customerService/customerService";
 
 export default {
   name: "",
@@ -63,7 +72,8 @@ export default {
     GoodsListWrapSent,
     Divider,
     Swiper,
-    SwiperItem
+    SwiperItem,
+    customerService
   },
 
   computed: {
@@ -82,6 +92,9 @@ export default {
   },
 
   methods: {
+    search(){
+      this.$router.push("/usersearch")
+    },
     setTitle() {
       let title = this.$route.query.title;
       this.TitleObjData.titleContent = title;
@@ -138,11 +151,10 @@ export default {
     height: 3px !important;
   }
 }
-/deep/.pulldown-wrapper{
+/deep/.pulldown-wrapper {
   display: none;
 }
-/deep/canvas{
+/deep/canvas {
   display: none;
 }
-
 </style>
