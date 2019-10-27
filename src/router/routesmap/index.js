@@ -893,5 +893,11 @@ export default [{
     name: 'GardenOrder',
     component: resolve => require(['@/components/common/GardenService/GardenOrder'], resolve),
   },
+  {
+    //积分提现
+    path: '/drawIntegral',
+    name: 'drawIntegral',
+    component: resolve => require(['@/components/pages/kachuouser/drawIntegral'], resolve),
+  },
 
 ]

@@ -22,7 +22,7 @@
         </div>
         <div class="lineOne"></div>
         <div class="bottom">
-          <div class="b-one">
+          <div class="b-one" @click="draw">
             <p>积分提现</p>
           </div>
           <div class="line-two"></div>
@@ -97,8 +97,13 @@ export default {
   },
 
   methods: {
+    //充值页面
     goChong() {
       this.$router.push("/Recharge");
+    },
+    //去积分提现页
+    draw() {
+      this.$router.push("/drawIntegral");
     }
   },
 
