@@ -1,10 +1,15 @@
 <template>
   <div class="done-wrap">
-    <Header
-      :titleContent="TitleObjData.titleContent"
-      :showLeftBack="TitleObjData.showLeftBack"
-      :showRightMore="TitleObjData.showRightMore"
-    ></Header>
+    <div>
+      <Header
+        :titleContent="TitleObjData.titleContent"
+        :showLeftBack="TitleObjData.showLeftBack"
+        :showRightMore="TitleObjData.showRightMore"
+      ></Header>
+      <div class="iconWarp" @click="go">
+        <x-icon type="ios-arrow-left" size="30"></x-icon>
+      </div>
+    </div>
     <div class="img-wrap">
       <img src="./txcg.png" alt />
     </div>
@@ -26,7 +31,7 @@ export default {
     return {
       TitleObjData: {
         titleContent: "提现完成",
-        showLeftBack: true,
+        showLeftBack: false,
         showRightMore: false
       }
     };
@@ -35,7 +40,11 @@ export default {
   created() {},
   mounted() {},
   watch: {},
-  methods: {},
+  methods: {
+    go() {
+      this.$router.go(-2);
+    }
+  },
   components: {
     Header
   }
@@ -70,5 +79,13 @@ export default {
   font-size: 14px;
   color: #999999;
   text-align: center;
+}
+.iconWarp {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  left: 3%;
+  top: 8px;
+  z-index: 1111111;
 }
 </style>

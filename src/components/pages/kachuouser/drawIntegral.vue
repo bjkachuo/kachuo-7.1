@@ -15,7 +15,7 @@
       <div class="line"></div>
       <div class="bottom">
         <div class="left">
-          <p>可提现积分；{{this.iNum}}</p>
+          <p>可提现积分: {{this.iNum}}</p>
         </div>
         <div class="right">
           <p>提现记录</p>
