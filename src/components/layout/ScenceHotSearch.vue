@@ -26,7 +26,8 @@ export default {
         {id: "26", name: "神垕", position: [113.228142, 34.118356],imgSrc: require("@/assets/images/神垕.jpg")},
         {id: "27", name: "云雾山", position: [114.214391, 31.12476],imgSrc: require("@/assets/images/云雾山.jpg")},
         {id: "35", name: "三孔", position: [116.989873, 35.590745],imgSrc: require("@/assets/images/三孔.jpg")},
-        {id: "66", name: "云冈石窟", position: [113.144103, 40.109236],imgSrc: require("@/assets/images/云冈石窟.jpg")}
+        {id: "66", name: "云冈石窟", position: [113.144103, 40.109236],imgSrc: require("@/assets/images/云冈石窟.jpg")},
+        {id: "87", name: "卡戳网", position: [113.144103, 40.109236],imgSrc: require("@/assets/images/云冈石窟.jpg")}
       ]
     };
   },

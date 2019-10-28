@@ -55,7 +55,7 @@ export default [{
     path: '/intelligentnavigation',
     name: 'intelligentnavigation',
     // component: resolve => require(['@/components/pages/kachuoplay/toolslist/IntelligentNavigation/IntelligentNavigation'], resolve),
-    component: resolve => require(['@/components/pages/kachuoplay/toolslist/IntelligentNavigation/Bmap'], resolve),
+    component: resolve => require(['@/components/pages/kachuoplay/toolslist/IntelligentNavigation/Bmap/Bmap'], resolve),
   },
   //景点列表
   {

@@ -48,49 +48,34 @@
     <div style="width:92%;margin: 15px auto 10px;">
       <swiper auto height="70px" class="custom">
         <swiper-item class="black">
-          <img src="./indexone.png" alt />
+          <img src="../indexone.png" alt />
         </swiper-item>
         <swiper-item class="black">
-          <img src="../../assets/images/6-min.png" alt />
+          <img src="../../../assets/images/6-min.png" alt />
         </swiper-item>
         <swiper-item class="black">
-          <img src="../../assets/images/1-min.png" alt />
+          <img src="../../../assets/images/1-min.png" alt />
         </swiper-item>
       </swiper>
     </div>
 
-<!--    <div class="Selected">-->
-<!--      <p>精选推荐</p>-->
-<!--    </div>-->
+
     <div class="line-three">
-      <swiper auto height="568px" interval="5000">
-        <swiper-item v-for="(reco,index) in recommend" :key="index">
-          <div v-for="(item,index) in reco" :key="index">
-            <div class="Selected">
-              <p>{{item.typename}}</p>
-            </div>
-            <div class="recommend" >
-              <div class="inLeft">
-                <img :src="item.video_image" alt />
-                <p>{{item.typename}}</p>
-              </div>
-              <div class="inMid">
-                <p>{{item.name}}</p>
-                <!-- <i>人均18元</i> -->
-                <span>
-            <div class="house">
-              <img src="../../assets/images/fangzi.png" alt />
-            </div>
-            <div class="characteristic">特色:{{item.product}}</div>
-          </span>
-              </div>
-              <div class="inRight" @click="details(item.id,item.type)">
-                <p>进店</p>
+
+      <div v-for="(reco,index) in recommend" class="recommend">
+        <p><i :class="reco[0][0].typename"></i><span>{{reco[0][0].typename}}</span></p>
+        <swiper auto height="345px" interval="3000">
+          <swiper-item  v-for="(swiperItem,ii) in reco">
+            <div class="goods-box">
+              <div v-for="(item,i) in swiperItem" class="goods">
+                <img :src="item.video_image" alt="" >
+                <div style="font-size: 14px;color: #000;">{{item.name}}</div>
+                <div style="font-size: 10px;color: #666;">{{item.product}}</div>
               </div>
             </div>
-          </div>
-        </swiper-item>
-      </swiper>
+          </swiper-item>
+        </swiper>
+      </div>
     </div>
     <!-- <div style="width:92%;margin: 0px auto 0px;">
       <swiper auto height="70px" class="custom">
@@ -202,22 +187,17 @@
         )
         .then(({ data }) => {
 
-          let index = 0
           data.data.recommend_business.forEach((item,i)=>{
-
-            if (i == 0){
-              this.recommend.push(new Array())
-              this.recommend[index].push(item)
-            } else if(i%4 == 0){
-              index++
-              this.recommend.push(new Array())
-              this.recommend[index].push(item)
-            }else{
-              this.recommend[index].push(item)
-            }
-
+            this.recommend.push(new Array)
+            let arr_index = -1
+            item.forEach((goods,index)=>{
+              if(index%3 == 0){
+                arr_index++
+                this.recommend[i][arr_index] = []
+              }
+              this.recommend[i][arr_index].push(goods)
+            })
           })
-
 
           // this.recommend = data.data.recommend_business;
 
@@ -228,7 +208,7 @@
     methods: {
       //跳转门票认证
       Ticket() {
-        this.$router.push("/ticketsdiscount");
+        this.$router.push("/ticketsdiscount")
       },
       //跳转智慧导航
       Navigation() {
@@ -299,7 +279,7 @@
     watch: {}
   };
 </script>
-<style lang="css" scoped>
+<style lang="less" scoped>
   .tab-item-paly-content {
     margin-top: 5px;
   }
@@ -307,10 +287,9 @@
     width: 92%;
     height: 142px;
     background: #ffffff;
-    margin: 0 auto;
+    margin: 0 auto 10px;
     border-radius: 8px;
     overflow: hidden;
-    margin-bottom: 10px;
   }
   .line-one-a {
     width: 100%;
@@ -327,140 +306,43 @@
     margin: 0 auto;
     border-radius: 8px;
   }
-  .Selected {
-    width: 100%;
-    margin-bottom: 10px;
-  }
-  .Selected p {
-    text-align: center;
-    color: #222222;
-    font-size: 14px;
-    font-weight: 800;
-  }
+
   .recommend {
     width: 92%;
-    height: 100px;
+    height: 210px;
     background: rgba(255, 255, 255, 1);
     box-shadow: 0px 10px 20px 0px rgba(0, 101, 255, 0.08);
     border-radius: 8px;
     /* margin-bottom: 10px; */
     overflow: hidden;
-    margin: 0 auto 10px;
+    margin: 0 auto 15px;
+    p{
+      line-height: 45px;
+      padding-left: 15px;
+      font-size: 16px;
+      color: #000;
+    }
+    .goods-box{
+      .goods{
+        border-radius: 4px;
+        overflow: hidden;
+        background:rgba(245,245,245,1);
+        width: 30%;
+        float: left;
+        margin-left: 3.3333%;
+        img{
+          width: 100%;
+          height: 95px;
+        }
+      }
+    }
   }
-  .inLeft {
-    width: 23.19%;
-    height: 50px;
-    margin: 22px 3.19% 0 4.35%;
-    float: left;
-    border-radius: 4px;
-    position: relative;
-  }
-  .inLeft img {
-    width: 100%;
-    background: none;
-    border-radius: 4px;
-  }
-  .inLeft p {
-    width: 38px;
-    height: 20px;
-    background: linear-gradient(
-      90deg,
-      rgba(0, 0, 0, 1) 0%,
-      rgba(51, 51, 51, 1) 100%
-    );
-    border-radius: 4px 0px 16px 0px;
-    color: rgba(255, 255, 255, 1);
-    font-size: 12px;
-    font-family: PingFangSC-Medium;
-    line-height: 20px;
-    text-align: center;
-    position: absolute;
-    top: -7%;
-    left: -4%;
-  }
-  .inMid {
-    width: 41.58%;
-    height: 66px;
-    float: left;
-    margin-top: 14px;
-    margin-right: 5.25%;
-    overflow: hidden;
-  }
-  .inMid p {
-    font-size: 14px;
-    color: #222222ff;
-    font-weight: bold;
-    font-family: PingFangSC-Heavy;
-    /* margin-bottom: 4px; */
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    margin-top: 6px;
-  }
-  .inMid i {
-    font-style: normal;
-    font-size: 12px;
-    color: #222222ff;
-    font-weight: normal;
-    font-family: PingFangSC-Medium;
-  }
-  .inMid span {
-    width: 100%;
-    height: 25px;
-    display: block;
-    /* width: 140px; */
-    /* height: 25px; */
-    /* background: rgba(245, 245, 245, 1); */
-    font-size: 12px;
-    color: #666666ff;
-    font-weight: normal;
-    font-family: PingFangSC-Medium;
-    /* text-align: center; */
-    /* line-height: 25px; */
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    /* border-radius: 8px; */
-    margin-top: 4px;
-  }
-  .inMid span .house {
-    width: 13px;
-    height: 13px;
-    float: left;
-  }
-  .inMid span .house img {
-    background: none;
-    width: 100%;
-  }
-  .inMid span .characteristic {
-    float: left;
-    line-height: 22px;
-    text-indent: 4%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    width: 80%;
-  }
-  .inRight {
-    width: 18%;
-    margin-top: 35px;
-    height: 30px;
-    float: left;
-    background: #3976ff;
-    border-radius: 4px;
-  }
-  .inRight p {
-    color: #ffffff;
-    font-size: 12px;
-    text-align: center;
-    font-family: PingFangSC-Medium;
-    font-weight: 400;
-    line-height: 30px;
-  }
+
 </style>
 
 <style lang='less' scoped>
-  @import "~vux/src/styles/1px.less";
-  @import "~vux/src/styles/center.less";
+  @import "../../../../node_modules/vux/src/styles/1px.less";
+  @import "../../../../node_modules/vux/src/styles/center.less";
   .flex-demo {
     // text-align: center;
     color: rgba(255, 255, 255, 1);
@@ -555,9 +437,7 @@
   .flex-demo-two-content-wrap {
     width: 134px;
     height: 40px;
-    // background: darkcyan;
-    margin: 0 auto;
-    margin-top: 14px;
+    margin: 14px auto 0;
   }
   .flex-demo-two-content-left {
     width: 80px;

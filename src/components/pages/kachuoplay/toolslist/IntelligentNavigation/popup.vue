@@ -3,7 +3,10 @@
     <popup v-model="isShow" :hide-on-blur="true" @on-hide="hide" v-if="descDetails.siteMsg && descDetails.siteMsg.title">
       <div class="popup2">
         <div class="navigaion-video-detail-wrap">
-          <p class="navigaion-video-detail-p">{{descDetails.title}}</p>
+          <p class="navigaion-video-detail-p">
+            <span>{{descDetails.siteMsg.title}}</span>
+            <span style="float: right;" @click="goPath">路径规划</span>
+          </p>
           <ul>
             <li>
               <img :src="descDetails.siteMsg.scenic_image" alt="" @click="goPlay(descDetails.siteMsg)">
@@ -27,6 +30,9 @@
   import { getScenicPointDetails } from "@/servers/api";
 
   export default {
+
+    props:['start','Bmap'],
+
     directives: {
       TransferDom
     },
@@ -41,10 +47,13 @@
         isControls: true,
         descDetails: {},
         label:'',
+        path1:{},
+        position:''
       };
     },
     methods: {
       getScenicDetails(obj) {
+        this.position = obj
         getScenicPointDetails({
           longitude: obj.lng,
           latitude: obj.lat
@@ -85,6 +94,22 @@
       hide() {
         this.$store.commit("changeNavigationDetailsState", false);
       },
+      goPath(){
+
+        this.path1.search(this.start , new BMap.Point(this.position.lng, this.position.lat))
+        this.hide()
+      }
+    },
+
+    mounted(){
+      setTimeout(()=>{
+        this.path1 = new BMap.WalkingRoute(this.Bmap, {
+          renderOptions: {
+            map: this.Bmap ,
+            autoViewport: false
+          }
+        });
+      },2000)
     },
     computed: {
       isShow: {

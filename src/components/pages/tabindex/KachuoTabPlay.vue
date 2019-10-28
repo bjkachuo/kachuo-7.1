@@ -10,7 +10,7 @@
 
 <script>
 import TabItemPlayHeader from "@/components/layout/TabItemPlayHeader";
-import TabItemPlayContent from "@/components/layout/TabItemPlayContent";
+import TabItemPlayContent from "@/components/layout/TabItemPlayContent/TabItemPlayContent";
 import FaceToast from "@/components/layout/FaceToast";
 import { location } from "@/servers/LocationUtil";
 export default {

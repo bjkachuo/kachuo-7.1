@@ -151,6 +151,9 @@ export const getScenicNameByScenicId = (id) => {
     case "66":
       return "云冈";
       break;
+    case "87":
+      return "卡戳网";
+      break;
     default:
       return "蓬莱阁";
       break;
