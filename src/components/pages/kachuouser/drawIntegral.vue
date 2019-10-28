@@ -10,19 +10,19 @@
         <p>账户余额将提现到微信</p>
       </div>
       <div class="input-wrap">
-        <x-input title="¥" type="number" show-clear></x-input>
+        <x-input title="¥" type="number" show-clear v-model="integral"></x-input>
       </div>
       <div class="line"></div>
       <div class="bottom">
         <div class="left">
-          <p>账户余额：¥{{this.iNum}}</p>
+          <p>可提现积分；{{this.iNum}}</p>
         </div>
         <div class="right">
           <p>提现记录</p>
         </div>
       </div>
     </div>
-    <div class="btn">
+    <div class="btn" @click="draw">
       <p>立即提现</p>
     </div>
   </div>
@@ -31,7 +31,7 @@
 <script>
 import Header from "@/components/common/Header";
 import { XInput } from "vux";
-import { getUserInfo } from "@/servers/api";
+import { getUserInfo, drawIntegral } from "@/servers/api";
 
 export default {
   props: {},
@@ -42,7 +42,12 @@ export default {
         showLeftBack: true,
         showRightMore: false
       },
-      iNum: ""
+      //可提现积分
+      iNum: "",
+      //所填数额
+      integral: "",
+      //订单号
+      orderNum: ""
     };
   },
   computed: {},
@@ -53,11 +58,44 @@ export default {
       this.$store.commit("setUserLoginInfo", res.data);
       this.GLOBAL.setSession("userLoginInfo", res.data);
       console.log(res.data);
-      this.iNum = res.data.credit1;
+      //如果积分减去30大于0 显示iNum
+      if (res.data.credit1 - 30 > 0) {
+        this.iNum = res.data.credit1 - 30;
+      } else {
+        //积分减去30小于0 显示0
+        this.iNum = 0;
+      }
     });
   },
   watch: {},
-  methods: {},
+  methods: {
+    //显示提示信息
+    showTip(conttentTip) {
+      this.$vux.toast.text(conttentTip, "middle");
+      setTimeout(() => {
+        this.$vux.toast.hide();
+      }, 1000);
+    },
+    draw() {
+      drawIntegral({}).then(data => {
+        console.log(data);
+        this.orderNum = data.data.order_sn;
+        drawIntegral({
+          order_sn: this.orderNum,
+          int: this.integral
+        }).then(res => {
+          console.log(res);
+          if (res.result == 1) {
+            //提交成功跳转到提现完成页面
+            this.showTip(res.msg);
+            this.$router.push("/drawDone");
+          } else {
+            this.showTip(res.msg);
+          }
+        });
+      });
+    }
+  },
   components: {
     Header,
     XInput

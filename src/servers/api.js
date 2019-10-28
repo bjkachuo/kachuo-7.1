@@ -400,3 +400,5 @@ export const guidePay = (data) => http.post("tourguide.show.pay", data);
 export const guideRegister = (data) => http.post("enter.tourguideRegister", data);
 //个人导游资料提交
 export const guideInfor = (data) => http.post("tourguide.index.save", data);
+//积分提现
+export const drawIntegral = (data) => http.post("integral.withdraw_int", data);

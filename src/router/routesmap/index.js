@@ -899,5 +899,11 @@ export default [{
     name: 'drawIntegral',
     component: resolve => require(['@/components/pages/kachuouser/drawIntegral'], resolve),
   },
+  {
+    //积分提现完成页
+    path: '/drawDone',
+    name: 'drawDone',
+    component: resolve => require(['@/components/pages/kachuouser/drawDone'], resolve),
+  },
 
 ]
