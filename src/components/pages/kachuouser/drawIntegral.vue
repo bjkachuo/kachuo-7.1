@@ -10,7 +10,7 @@
         <p>账户余额将提现到微信</p>
       </div>
       <div class="input-wrap">
-        <x-input title="¥" type="number" show-clear v-model="integral"></x-input>
+        <x-input title="¥" type="number" placeholder="请输入提现数额" :min="0" :show-clear="false" v-model="integral" ></x-input>
       </div>
       <div class="line"></div>
       <div class="bottom">

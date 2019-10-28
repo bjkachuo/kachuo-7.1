@@ -32,12 +32,14 @@
         </div>
       </div>
       <div class="bot">
-        <div class="bot-one">
-          <p>积分规则</p>
-        </div>
-        <div class="bot-two"></div>
-        <div class="bot-thr">
-          <p>联系客服</p>
+        <div style="margin:0 auto;width: 124px;">
+          <div class="bot-one">
+            <p>积分规则</p>
+          </div>
+          <div class="bot-two"></div>
+          <div class="bot-thr">
+            <p>联系客服</p>
+          </div>
         </div>
       </div>
     </div>
@@ -71,7 +73,7 @@ export default {
           link: "/integraldesc"
         }
       ],
-      iNum:""
+      iNum: ""
     };
   },
 
@@ -226,11 +228,11 @@ export default {
   color: #ffffff;
 }
 .bot {
-  width: 131px;
+  width: 100%;
   margin: 0 auto;
   position: absolute;
   bottom: 4px;
-  left: 32%;
+  /* left: 32%; */
 }
 .bot-one {
   float: left;
