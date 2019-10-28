@@ -182,7 +182,7 @@
 
       addMarker(data,index){
         console.log(data);
-        let myIcon = new BMap.Icon(require("@/assets/images/amap-icon/scenic.png"), new BMap.Size(23, 25), {
+        let myIcon = new BMap.Icon(require("@/assets/images/amap-icon/taoge.png"), new BMap.Size(23, 25), {
           anchor: new BMap.Size(10, 25),
           imageOffset: new BMap.Size(0, 0)   // 设置图片偏移
         });
@@ -190,14 +190,17 @@
         // 创建标注对象并添加到地图
         let marker = new BMap.Marker(point, {icon: myIcon});
         this.Bmap.addOverlay(marker);
-        let label = new BMap.Label(data.label, {position:point,offset:new BMap.Size(0, -44)});  // 创建文本标注对象
+        let label = new BMap.Label(data.label, {position:point,offset:new BMap.Size(0, -64)});  // 创建文本标注对象
         label.setStyle({
-          color : "red",
-          fontSize : "12px",
-          height : "20px",
-          lineHeight : "20px",
-          fontFamily:"微软雅黑",
-          transform: 'translateX(-50%)'
+          height:'30px',
+          background:'#fff',
+          padding:'0 10px',
+          opacity:0.8,
+          fontSize:'14px',
+          lineHeight:'30px',
+          borderRadius:'4px',
+          transform: 'translateX(-50%)',
+          border:'none'
         });
         this.Bmap.addOverlay(label);
         marker.addEventListener("click", ()=>{
