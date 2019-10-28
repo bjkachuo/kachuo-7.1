@@ -204,9 +204,6 @@
           this.showModel(data.label,data.position)
         })
 
-
-
-
       }
 
     },
