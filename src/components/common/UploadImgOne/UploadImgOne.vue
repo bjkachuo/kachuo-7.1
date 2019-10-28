@@ -114,13 +114,13 @@ export default {
             });
             this.getImg = res.data.data.files[0];
             this.imgUrl = res.data.data.files[0].url
-
-
             if(this.$route.path == 'Ucenter'){
-              this.$store.commit("changeUserAvatar", res.data.data.files[0].url);
-              this.$emit("getHeaderImgUrl", res.data.data.files[0].url);
               this.updataUserImg(res.data.data.files[0].url);
+              this.$store.commit("changeUserAvatar", res.data.data.files[0].url);
             }
+
+            this.$emit("getHeaderImgUrl", res.data.data.files[0].url);
+
           } else {
             this.$vux.toast.show({
               type: "warn",
