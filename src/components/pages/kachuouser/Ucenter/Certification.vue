@@ -115,9 +115,6 @@ export default {
   }
 
 
-
-
-
 .normal-content{
   width: 100%;
   background: #F5F5F5;

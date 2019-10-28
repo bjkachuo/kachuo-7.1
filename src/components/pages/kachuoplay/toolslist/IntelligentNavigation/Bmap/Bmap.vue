@@ -203,6 +203,9 @@
         marker.addEventListener("click", ()=>{
           this.showModel(data.label,data.position)
         })
+        label.addEventListener("click", ()=>{
+          this.showModel(data.label,data.position)
+        })
 
       }
 
