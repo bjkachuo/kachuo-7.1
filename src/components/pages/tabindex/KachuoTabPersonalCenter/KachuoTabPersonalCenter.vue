@@ -127,7 +127,7 @@ export default {
           imgSrc: require("@/assets/images/留言@2x.png")
         },
         {
-          name: "我的收藏",
+          name: "商品收藏",
           link: "/collection",
           imgSrc: require("@/assets/images/标星@2x.png")
         }

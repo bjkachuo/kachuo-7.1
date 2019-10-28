@@ -31,24 +31,24 @@ export default {
   beforeMount() {},
 
   mounted() {
-    this.getBannerImgFn("2");
-    this.getLocation(); // 调用获取地理位置
+    // this.getBannerImgFn("2");
+    // this.getLocation(); // 调用获取地理位置
   },
 
   methods: {
     /**获取地图定位*/
-    getLocation() {
-      let _that = this;
-      let geolocation = location.initMap("map-container"); //定位
-      AMap.event.addListener(geolocation, "complete", result => {
-        _that.lat = result.position.lat;
-        _that.lng = result.position.lng;
-        _that.province = result.addressComponent.province;
-        _that.city = result.addressComponent.city;
-        _that.district = result.addressComponent.district;
-      });
-      console.log(geolocation,_that)
-    }
+    // getLocation() {
+    //   let _that = this;
+    //   let geolocation = location.initMap("map-container"); //定位
+    //   AMap.event.addListener(geolocation, "complete", result => {
+    //     _that.lat = result.position.lat;
+    //     _that.lng = result.position.lng;
+    //     _that.province = result.addressComponent.province;
+    //     _that.city = result.addressComponent.city;
+    //     _that.district = result.addressComponent.district;
+    //   });
+    //   console.log(geolocation,_that)
+    // }
   },
 
   watch: {}

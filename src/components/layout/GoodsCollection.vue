@@ -8,11 +8,17 @@
     >
       <div class="order-state-list-mid">
         <div class="order-state-list-mid-left">
-          <img class="goods-img" v-lazy="item.comment.thumb" alt srcset>
+          <img class="goods-img" v-lazy="item.comment.thumb" alt srcset />
           <p class="goods-img-desc">
             <span class="text-overflow-hidden">{{item.comment.title}}</span>
             <!-- <span class="font-12-px">{{item.spec}}</span> -->
-            <span>价格：{{item.comment.marketprice}}</span>
+            <span style="margin-bottom: 5px;">价格：{{item.comment.marketprice}}元</span>
+            <span>
+              <div class="left">0人收藏</div>
+              <div class="right" @click.stop="addShoppingCart(item.comment.id)">
+                <p>加入购物车</p>
+              </div>
+            </span>
             <!-- <span>收藏时间：{{item.createtime | formDate}}</span> -->
           </p>
         </div>
@@ -24,6 +30,8 @@
 <script>
 import { XButton } from "vux";
 import { getLocalTime } from "@/assets/js/tools";
+import { SaveShopping } from "@/servers/api";
+
 export default {
   name: "",
   props: ["orderData"],
@@ -52,6 +60,28 @@ export default {
   methods: {
     getGoodsDetails(id) {
       this.$router.push("/goodsdetails?id=" + id);
+    },
+    // 添加购物车
+    addShoppingCart(id) {
+      SaveShopping({ gid:id })
+        .then(res => {
+          if (res.result === 1) {
+            this.$vux.toast.show({
+              type: "success",
+              text: "添加成功",
+              time: 1000
+            });
+          } else {
+            this.$vux.toast.show({
+              type: "warn",
+              text: res.msg,
+              time: 1000
+            });
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   },
 
@@ -59,10 +89,11 @@ export default {
 };
 </script>
 <style lang='css' scoped>
-.goods-wrap{
+.goods-wrap {
   width: 100%;
   overflow: hidden;
   overflow-y: scroll;
+  margin-top: 56px;
 }
 .font-12-px {
   font-size: 12px;
@@ -116,7 +147,8 @@ export default {
   display: inline-block;
 }
 .goods-img-desc {
-  width: 200px;
+  width: 100%;
+  height: 90px;
   display: flex;
   flex-direction: column;
   margin-left: 10px;
@@ -134,5 +166,27 @@ export default {
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
+}
+.text-overflow-hidden {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+.left {
+  float: left;
+}
+.right {
+  float: right;
+  width: 92px;
+  height: 30px;
+  border-radius: 15px;
+  background: #ffffff;
+  border: 1px solid #3976ff;
+}
+.right p {
+  font-size: 12px;
+  text-align: center;
+  line-height: 30px;
+  color: #3976ff;
 }
 </style>

@@ -5,17 +5,19 @@
       :showLeftBack="TitleObjData.showLeftBack"
       :showRightMore="TitleObjData.showRightMore"
     ></Header>
-    <Tab
+    <!-- <Tab
       style="margin-top:50px"
       :tabList="tabListCon"
       ref="tabItem"
       v-on:currentIndex="getCurrentINdex"
-    ></Tab>
+    ></Tab>-->
     <div class="con-hei-wrap" :style="conSty">
-      <GoodsCollection v-if="showIndex === 0" :orderData="dataList"></GoodsCollection>
+      <GoodsCollection :orderData="dataList"></GoodsCollection>
+
+      <!-- <GoodsCollection v-if="showIndex === 0" :orderData="dataList"></GoodsCollection>
       <JonuaryCollection v-if="showIndex === 1" :dataList="dataList"></JonuaryCollection>
       <NotesCollection v-if="showIndex === 2" :dataList="dataList"></NotesCollection>
-      <LectureCollection v-if="showIndex === 3" :dataList="dataList"></LectureCollection>
+      <LectureCollection v-if="showIndex === 3" :dataList="dataList"></LectureCollection>-->
     </div>
   </div>
 </template>
@@ -35,11 +37,11 @@ export default {
   data() {
     return {
       TitleObjData: {
-        titleContent: "收藏",
+        titleContent: "商品收藏",
         showLeftBack: true,
         showRightMore: false
       },
-      tabListCon: ["作品", "旅拍", "游记", "讲堂"],
+      // tabListCon: ["作品", "旅拍", "游记", "讲堂"],
       dataList: [],
       showIndex: 0
     };
@@ -72,30 +74,30 @@ export default {
     getCurrentINdex(val) {
       this.showIndex = val;
       let type = 1;
-      if(val === 0){
+      if (val === 0) {
         type = 1;
-      }else if(val === 1){
+      } else if (val === 1) {
         type = 9;
-      }else if(val === 2){
+      } else if (val === 2) {
         type = 10;
-      }else{
+      } else {
         type = 8;
       }
       this.getInitData(type);
     },
-    getInitData(type){
+    getInitData(type) {
       this.dataList = [];
       CollectionList({
-        type:type
+        type: type
       })
-      .then(res =>{
-        if(res.result === 1){
-          this.dataList = res.data.result;
-        }
-      })
-      .catch(err =>{
-        console.log(err);
-      })
+        .then(res => {
+          if (res.result === 1) {
+            this.dataList = res.data.result;
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   },
 
