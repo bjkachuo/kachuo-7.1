@@ -2,8 +2,7 @@
   <div class="amap-page-container">
     <Header :titleContent="TitleObjData.titleContent" :showLeftBack="TitleObjData.showLeftBack" :showRightMore="TitleObjData.showRightMore"></Header>
     <div class="custom-ctrl" >
-      <div style="margin-bottom: 10px;" @click="status == 0 ? status = 1 : status = 0">{{status== 0 ? '静态':'动态'}}<br>地图</div>
-      <div style="padding-top: 10px;border-top: 1px solid #fff;" @click="goScenic">景点<br>列表</div>
+      <div @click="goScenic">景点<br>列表</div>
     </div>
     <div id="container">
 
@@ -32,7 +31,7 @@
     data() {
       let self = this;
       return {
-        status:0,
+
         AMapManager,
         mapimg:'',
         zoom: 16,
@@ -139,7 +138,6 @@
           lat:position[1],
           lng:position[0]
         }
-
         this.$refs.videoWrap.getScenicDetails(clickPosition);
       },
 
@@ -153,7 +151,7 @@
       getMarkerList(type){
         this.$http.get("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.site.site_list&type="+type)
           .then( datas  => {
-            console.log(datas);
+
             // this.mapimg = datas.data.mapimg
             let data = datas.data.data
             let arr = []
@@ -184,17 +182,31 @@
 
       addMarker(data,index){
         console.log(data);
-        var myIcon = new BMap.Icon(require("@/assets/images/amap-icon/scenic.png"), new BMap.Size(23, 25), {
+        let myIcon = new BMap.Icon(require("@/assets/images/amap-icon/scenic.png"), new BMap.Size(23, 25), {
           anchor: new BMap.Size(10, 25),
           imageOffset: new BMap.Size(0, 0)   // 设置图片偏移
         });
-        var point = new BMap.Point(data.position[0],data.position[1])
+        let point = new BMap.Point(data.position[0],data.position[1])
         // 创建标注对象并添加到地图
-        var marker = new BMap.Marker(point, {icon: myIcon});
+        let marker = new BMap.Marker(point, {icon: myIcon});
         this.Bmap.addOverlay(marker);
+        let label = new BMap.Label(data.label, {position:point,offset:new BMap.Size(0, -44)});  // 创建文本标注对象
+        label.setStyle({
+          color : "red",
+          fontSize : "12px",
+          height : "20px",
+          lineHeight : "20px",
+          fontFamily:"微软雅黑",
+          transform: 'translateX(-50%)'
+        });
+        this.Bmap.addOverlay(label);
         marker.addEventListener("click", ()=>{
           this.showModel(data.label,data.position)
         })
+
+
+
+
       }
 
     },
@@ -216,15 +228,10 @@
     mounted() {
 // 创建地图实例
       this.Bmap = new BMap.Map("container")
-      var point = new BMap.Point(116.404, 39.915);
-// 创建点坐标
-      this.Bmap.centerAndZoom(point, 15);
-
-
       let self = this
-      this.myPoint = new BMap.Point(120.7756450, 37.8259570);
+
       let geolocation = new BMap.Geolocation({maximumAge:10});
-      setInterval(function () {
+      // setInterval(function () {
             geolocation.getCurrentPosition(function (r) {
               if (this.getStatus() == BMAP_STATUS_SUCCESS) {
 
@@ -235,10 +242,10 @@
                 })
 
                 // alert(JSON.stringify(r.point))
-                this.myPoint = r.point
+                self.myPoint = r.point
 
                 let myIcon = new BMap.Icon(self.userInfo.avatar, new BMap.Size(30,30))
-                let mk = new BMap.Marker(this.myPoint,{icon:myIcon,title:'xiang'});
+                let mk = new BMap.Marker(self.myPoint,{icon:myIcon,title:'xiang'});
                 self.Bmap.addOverlay(mk);
                 mk.Ac.style.borderRadius = '50%'
                 mk.Ac.style.width = '30px'
@@ -251,7 +258,7 @@
                 // alert('failed'+this.getStatus())
               }
             })
-      },5000)
+      // },5000)
       this.getMarkerList('')
     }
   };
@@ -270,21 +277,6 @@
     border-radius: 4px;
   }
 
-  .marker-icon-ta{
-    width: 24px;
-    height: 24px;
-    background-image: url("../../../../../../assets/images/amap-icon/scenic.png");
-    background-size: 100% 100%;
-  }
-  .marker-icon-sort{
-    background-color: #e4794b;
-    width: 23px;
-    height: 23px;
-    text-align: center;
-    border: 1px solid #fff;
-    color: #fff;
-    border-radius: 50%;
-  }
 
   #container {
     width: 100%;
@@ -301,6 +293,4 @@
     position: relative;
     z-index: 9999
   }
-
-
 </style>

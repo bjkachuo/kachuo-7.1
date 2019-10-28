@@ -95,7 +95,7 @@
         this.$store.commit("changeNavigationDetailsState", false);
       },
       goPath(){
-
+        console.log(this.start, new BMap.Point(this.position.lng, this.position.lat));
         this.path1.search(this.start , new BMap.Point(this.position.lng, this.position.lat))
         this.hide()
       }
@@ -106,7 +106,7 @@
         this.path1 = new BMap.WalkingRoute(this.Bmap, {
           renderOptions: {
             map: this.Bmap ,
-            autoViewport: false
+            autoViewport: true
           }
         });
       },2000)
