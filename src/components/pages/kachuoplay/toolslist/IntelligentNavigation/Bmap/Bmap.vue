@@ -237,9 +237,13 @@
             geolocation.getCurrentPosition(function (r) {
               if (this.getStatus() == BMAP_STATUS_SUCCESS) {
                 self.Bmap.getOverlays().forEach(item=>{
-                  if(item.getTitle() == 'xiang'){
-                    self.Bmap.removeOverlay(item)
+
+                  if(item.getTitle){
+                    if(item.getTitle() == 'xiang'){
+                      self.Bmap.removeOverlay(item)
+                    }
                   }
+
                 })
                 // alert(JSON.stringify(r.point))
                 self.myPoint = r.point
