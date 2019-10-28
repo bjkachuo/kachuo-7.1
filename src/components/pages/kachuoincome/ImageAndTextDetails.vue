@@ -255,7 +255,7 @@ export default {
 }
 .img-swiper-wrap {
   width: 100%;
-  height: 170px;
+  /* height: 211px; */
 }
 .img-swiper-wrap-img-lis {
   width: 100%;

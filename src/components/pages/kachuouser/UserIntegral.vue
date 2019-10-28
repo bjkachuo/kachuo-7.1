@@ -18,11 +18,11 @@
           <p>当前积分</p>
         </div>
         <div class="num">
-          <p>{{userInfo.credit1}}</p>
+          <p>{{this.iNum}}</p>
         </div>
         <div class="lineOne"></div>
         <div class="bottom">
-          <div class="b-one">
+          <div class="b-one" @click="draw">
             <p>积分提现</p>
           </div>
           <div class="line-two"></div>
@@ -47,6 +47,7 @@
 <script>
 import Header from "@/components/common/Header";
 import CellDivider from "@/components/common/CellDivider";
+import { getUserInfo } from "@/servers/api";
 
 export default {
   name: "",
@@ -69,7 +70,8 @@ export default {
           icon: "iconfont iconjifenshuoming",
           link: "/integraldesc"
         }
-      ]
+      ],
+      iNum:""
     };
   },
 
@@ -93,12 +95,25 @@ export default {
   beforeMount() {},
 
   mounted() {
+    //从用户信息中提取积分余额
+    getUserInfo({}).then(res => {
+      this.$store.commit("setUserLoginInfo", res.data);
+      this.GLOBAL.setSession("userLoginInfo", res.data);
+      console.log(res.data);
+      this.iNum = res.data.credit1;
+    });
+
     console.log(this.$store.state.userLoginInfo);
   },
 
   methods: {
+    //充值页面
     goChong() {
       this.$router.push("/Recharge");
+    },
+    //去积分提现页
+    draw() {
+      this.$router.push("/drawIntegral");
     }
   },
 

@@ -2,7 +2,7 @@
     <div>
       <div class="customer-service-icon" @click="iframeShow = true"></div>
       <iframe v-if='iframeShow' :src="usermobile" style="position: fixed;z-index: 99998;top: 0;left: 0;width: 100%;height: 100%;"></iframe>
-      <div style="position: fixed;line-height: 50px;right: 20px;z-index: 999999;top: 0;color: #fff" v-if="iframeShow" @click="iframeShow = false">关闭</div>
+      <div style="position: fixed;line-height: 46px;right: 54px;z-index: 999999;top: 0;color: #fff" v-if="iframeShow" @click="iframeShow = false">关闭</div>
     </div>
 </template>
 

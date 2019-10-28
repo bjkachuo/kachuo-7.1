@@ -2,10 +2,11 @@
   <div class="img-and-text-details-user-info-wrap">
     <div class="details-left">
       <div>
-        <img class="header-img" :src="detailsObj.avatar">
+        <img class="header-img" :src="detailsObj.avatar" />
       </div>
       <div class="header-desc">
-        <p>{{detailsObj.nickname}}</p>
+        <p style=" overflow:hidden;text-overflow:ellipsis;white-space:nowrap;width:120px;"
+        >{{detailsObj.nickname}}</p>
         <p style="font-size:12px">{{detailsObj.createtime}}</p>
       </div>
     </div>
