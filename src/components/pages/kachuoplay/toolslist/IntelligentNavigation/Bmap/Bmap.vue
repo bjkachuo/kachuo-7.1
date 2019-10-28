@@ -225,19 +225,22 @@
     mounted() {
 // 创建地图实例
       this.Bmap = new BMap.Map("container")
+      var point = new BMap.Point(116.404, 39.915);
+// 创建点坐标
+      this.Bmap.centerAndZoom(point, 15);
+
+
       let self = this
 
       let geolocation = new BMap.Geolocation({maximumAge:10});
-      // setInterval(function () {
+      setInterval(function () {
             geolocation.getCurrentPosition(function (r) {
               if (this.getStatus() == BMAP_STATUS_SUCCESS) {
-
                 self.Bmap.getOverlays().forEach(item=>{
                   if(item.getTitle() == 'xiang'){
                     self.Bmap.removeOverlay(item)
                   }
                 })
-
                 // alert(JSON.stringify(r.point))
                 self.myPoint = r.point
 
@@ -248,14 +251,11 @@
                 mk.Ac.style.width = '30px'
                 mk.Ac.style.height = '30px'
                 mk.Ac.style.overflow = 'hidden'
-
-                // self.Bmap.panTo(r.point);
-                // alert('您的位置：'+r.point.lng+','+r.point.lat);
               } else {
-                // alert('failed'+this.getStatus())
+
               }
             })
-      // },5000)
+      },5000)
       this.getMarkerList('')
     }
   };

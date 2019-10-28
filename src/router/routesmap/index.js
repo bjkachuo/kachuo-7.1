@@ -250,6 +250,7 @@ export default [{
     path: '/userintegral',
     name: 'UserIntegral',
     component: resolve => require(['@/components/pages/kachuouser/UserIntegral'], resolve),
+    
   },
   {
     path: '/shoppingcart',
