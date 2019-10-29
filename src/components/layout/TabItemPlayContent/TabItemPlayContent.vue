@@ -69,8 +69,8 @@
             <div class="goods-box">
               <div v-for="(item,i) in swiperItem" class="goods">
                 <img :src="item.video_image" alt="" >
-                <div style="font-size: 14px;color: #000;">{{item.name}}</div>
-                <div style="font-size: 10px;color: #666;">{{item.product}}</div>
+                <div style="font-size: 14px;color: #000; overflow: hidden;text-overflow:ellipsis; white-space: nowrap;padding-top: 10px">{{item.name}}</div>
+                <div style="font-size: 10px;color: #666;overflow: hidden;text-overflow:ellipsis; white-space: nowrap;line-height: 35px">{{item.product}}</div>
               </div>
             </div>
           </swiper-item>
