@@ -73,7 +73,7 @@
     data() {
       return {
         TitleObjData: {
-          titleContent: "我的留言",
+          titleContent: "我的评论",
           showLeftBack: true,
           showRightMore: false
         },

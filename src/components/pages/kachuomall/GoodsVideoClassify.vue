@@ -37,7 +37,7 @@ export default {
   data() {
     return {
       TitleObjData: {
-        titleContent: "品类",
+        titleContent: "品类视频",
         showLeftBack: true,
         showRightMore: false
       },

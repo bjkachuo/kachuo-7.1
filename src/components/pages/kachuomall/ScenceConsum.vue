@@ -105,16 +105,16 @@ export default {
   beforeMount() {},
 
   mounted() {
-    this.setTitle();
+    // this.setTitle();
     this.getClassList();
     this.getData();
     this.getBannerImgFn("4");
   },
 
   methods: {
-    setTitle() {
-      this.TitleObjData.titleContent = this.$route.query.title;
-    },
+    // setTitle() {
+    //   this.TitleObjData.titleContent = this.$route.query.title;
+    // },
     // 获取分类列表
     getClassList() {
       ScenceGoodsClass({})

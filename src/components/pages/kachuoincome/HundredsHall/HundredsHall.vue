@@ -1,7 +1,7 @@
 <template>
   <div class="video-create-wrap">
     <x-header :left-options="{showBack: true,preventGoBack:true}" :right-options="{showMore: false}" @on-click-back="back" @on-click-more="showMenus = true" slot="header" style="width:100%;position:absolute;left:0;top:0;z-index:100;">
-      百家讲堂
+      百家讲坛
       <a slot="right" @click="releaseContent">发布</a>
     </x-header>
     <div class="video-create-content" :style="contentSty">

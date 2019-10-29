@@ -54,7 +54,8 @@ export default {
     return {
       title: "",
       TitleObjData: {
-        titleContent: this.$route.query.title,
+        // titleContent: this.$route.query.title,
+        titleContent:"",
         showLeftBack: true,
         showRightMore: false
       },

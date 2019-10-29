@@ -57,7 +57,7 @@ export default {
   data() {
     return {
       TitleObjData: {
-        titleContent: "积分",
+        titleContent: "我的资产",
         showLeftBack: true,
         showRightMore: false
       },
@@ -67,11 +67,11 @@ export default {
         //   icon: "iconfont iconqiandaolingjifen",
         //   link: "/signin"
         // },
-        {
-          title: "积分说明",
-          icon: "iconfont iconjifenshuoming",
-          link: "/integraldesc"
-        }
+        // {
+        //   title: "我的资产",
+        //   icon: "iconfont iconjifenshuoming",
+        //   link: "/integraldesc"
+        // }
       ],
       iNum: ""
     };
