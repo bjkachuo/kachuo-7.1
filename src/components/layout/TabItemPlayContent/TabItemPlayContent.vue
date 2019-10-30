@@ -69,27 +69,14 @@
             <div class="goods-box">
               <div v-for="(item,i) in swiperItem" class="goods">
                 <img :src="item.video_image" alt="" >
-                <div style="font-size: 14px;color: #000; overflow: hidden;text-overflow:ellipsis; white-space: nowrap;padding-top: 10px">{{item.name}}</div>
-                <div style="font-size: 10px;color: #666;overflow: hidden;text-overflow:ellipsis; white-space: nowrap;line-height: 35px">{{item.product}}</div>
+                <div style="font-size: 14px;color: #000;overflow: hidden;text-overflow:ellipsis; white-space: nowrap;padding-top: 10px;margin: 0 5px">{{item.name}}</div>
+                <div style="font-size: 10px;color: #666;overflow: hidden;text-overflow:ellipsis; white-space: nowrap;line-height: 35px;margin: 0 5px">{{item.product}}</div>
               </div>
             </div>
           </swiper-item>
         </swiper>
       </div>
     </div>
-    <!-- <div style="width:92%;margin: 0px auto 0px;">
-      <swiper auto height="70px" class="custom">
-        <swiper-item class="black">
-          <img src="./indextwo.png" alt />
-        </swiper-item>
-        <swiper-item class="black">
-          <img src="../../assets/images/10-min.png" alt />
-        </swiper-item>
-        <swiper-item class="black">
-          <img src="../../assets/images/2-min.png" alt />
-        </swiper-item>
-      </swiper>
-    </div> -->
   </div>
 </template>
 
@@ -329,7 +316,7 @@
         background:rgba(245,245,245,1);
         width: 30%;
         float: left;
-        margin-left: 3.3333%;
+        margin-left: 2.5%;
         img{
           width: 100%;
           height: 95px;

@@ -9,6 +9,7 @@
       @on-change="onChange"
       @on-shadow-change="onShadowChange"
       @on-hide="onHide"
+      :inline-desc="`当前值[${formatDemoValue}]`"
     ></popup-picker>
   </group>
 </template>
