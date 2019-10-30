@@ -40,7 +40,31 @@
         <div class="nearby">
           <p>附近商家</p>
         </div>
-        <div class="store-list-warp">
+        <div class="line-three">
+          <div v-for="(reco,index) in recommend" class="recommend">
+            <p>
+              <i :class="reco[0][0].typename"></i>
+              <span>{{reco[0][0].typename}}</span>
+            </p>
+            <swiper auto height="345px" interval="3000">
+              <swiper-item v-for="(swiperItem,ii) in reco">
+                <div class="goods-box">
+                  <div v-for="(item,i) in swiperItem" class="goods">
+                    <img :src="item.video_image" alt />
+                    <div
+                      style="font-size: 14px;color: #000; overflow: hidden;text-overflow:ellipsis; white-space: nowrap;padding-top: 10px"
+                    >{{item.name}}</div>
+                    <div
+                      style="font-size: 10px;color: #666;overflow: hidden;text-overflow:ellipsis; white-space: nowrap;line-height: 35px"
+                    >{{item.product}}</div>
+                  </div>
+                </div>
+              </swiper-item>
+            </swiper>
+          </div>
+        </div>
+
+        <!-- <div class="store-list-warp">
           <div
             class="recommend"
             v-for="(item,index) in recommend"
@@ -65,7 +89,7 @@
               <p>{{item.distance}}km</p>
             </div>
           </div>
-        </div>
+        </div>-->
       </div>
     </div>
   </div>
@@ -189,10 +213,34 @@ export default {
         "https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.index.scenic_service"
       )
       .then(({ data }) => {
-        console.log(data);
-        this.recommend = data.data.recommend_business;
+        data.data.recommend_business.forEach((item, i) => {
+          this.recommend.push(new Array());
+          let arr_index = -1;
+          item.forEach((goods, index) => {
+            if (index % 3 == 0) {
+              arr_index++;
+              this.recommend[i][arr_index] = [];
+            }
+            this.recommend[i][arr_index].push(goods);
+          });
+        });
+
+        // this.recommend = data.data.recommend_business;
+
         console.log(this.recommend);
+        console.log(data);
       });
+
+    //获取推荐商家：
+    // this.$http
+    //   .post(
+    //     "https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.index.scenic_service"
+    //   )
+    //   .then(({ data }) => {
+    //     console.log(data);
+    //     this.recommend = data.data.recommend_business;
+    //     console.log(this.recommend);
+    //   });
   },
 
   methods: {
@@ -853,5 +901,48 @@ img {
 }
 /deep/ .vux-swiper {
   border-radius: 8px;
+}
+.line-three {
+  width: 99%;
+  /* height: 208px; */
+  border-radius: 5px;
+  /* background: darkgreen; */
+  overflow: hidden;
+  margin-left: 4px;
+  margin-top: 10px;
+  /deep/.vux-indicator {
+    display: none;
+  }
+  /* margin-bottom: 35px; */
+}
+.recommend {
+  width: 92%;
+  height: 210px;
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0px 10px 20px 0px rgba(0, 101, 255, 0.08);
+  border-radius: 8px;
+  /* margin-bottom: 10px; */
+  overflow: hidden;
+  margin: 0 auto 15px;
+  p {
+    line-height: 45px;
+    padding-left: 15px;
+    font-size: 16px;
+    color: #000;
+  }
+  .goods-box {
+    .goods {
+      border-radius: 4px;
+      overflow: hidden;
+      background: rgba(245, 245, 245, 1);
+      width: 30%;
+      float: left;
+      margin-left: 3.3333%;
+      img {
+        width: 100%;
+        height: 95px;
+      }
+    }
+  }
 }
 </style>
