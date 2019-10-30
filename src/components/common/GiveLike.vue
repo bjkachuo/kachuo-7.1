@@ -10,7 +10,7 @@
       <span class="collection" @click="collectionFn">
         <span v-if="isCollection ===0" class="iconfont iconshoucang-xuanzhong"></span>
         <span v-if="isCollection !=0" class="iconfont iconshoucang1"></span>
-        <span >收藏</span>
+        <span>收藏</span>
       </span>
     </span>
   </div>
@@ -19,17 +19,22 @@
 <script>
 import { NewsKachuoInpraise } from "@/servers/api";
 import { GetCollectionInit, CollectionGoods } from "@/servers/api";
+import { Confirm } from "vux";
+
 export default {
   name: "",
   props: ["praiseNum", "clickState", "praiseNum"],
   data() {
     return {
       isCkick: false,
-      isCollection: 1
+      isCollection: 1,
+      show2: false
     };
   },
 
-  components: {},
+  components: {
+    Confirm
+  },
 
   computed: {},
 
@@ -48,13 +53,16 @@ export default {
       })
         .then(res => {
           if (res.result) {
-            this.isCollection = parseInt(res.data.result.deleted,10);
+            this.isCollection = parseInt(res.data.result.deleted, 10);
           }
         })
         .catch(err => {
           console.log(err);
         });
     },
+    // collectionFn() {
+    //   this.show2 = !this.show2;
+    // },
     // 点击收藏
     collectionFn() {
       CollectionGoods({
@@ -67,7 +75,7 @@ export default {
             if (res.data.result === 0) {
               this.$vux.toast.show({
                 type: "success",
-                text: "收藏成功",
+                text: "收藏成功扣除0.3积分",
                 time: 1000
               });
             } else {

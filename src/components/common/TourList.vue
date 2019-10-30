@@ -13,7 +13,12 @@
       <div class="head-left" style="float:left;margin-top:8px;" @click="goback">
         <x-icon type="ios-arrow-back" size="28"></x-icon>
       </div>
-      <div class="head-right" style="float:right;font-size:16px;margin-top:10px;" @click="goRegister">导游注册</div>
+      <div class="help-wrap" style="position:absolute;right:15px;top:10px;z-index: 999;">
+        <customerService></customerService>
+      </div>
+
+      <div class="head-right" style="float:right;font-size:16px;margin-top:10px;margin-right: 40px;" @click="goRegister">导游注册</div>
+      
       <!-- <div class="head-right" style="float:right;font-size:16px;margin-top:10px;margin-right:8px;" @click="goTourBs">导游后台</div> -->
     </div>
     <div class="normal-content" :style="conHei">
@@ -64,6 +69,8 @@ import Header from "@/components/common/Header";
 import { Actionsheet, GroupTitle, SwiperItem, XButton, Cell } from "vux";
 import { Panel } from "vux";
 import { Rater } from "vux";
+import customerService from "@/components/common/customerService/customerService";
+
 export default {
   props: [""],
   methods: {
@@ -175,7 +182,8 @@ export default {
     Header,
     Actionsheet,
     Rater,
-    Cell
+    Cell,
+    customerService
   },
   computed: {
     // conHei() {

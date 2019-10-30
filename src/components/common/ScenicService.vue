@@ -1,10 +1,15 @@
 <template>
   <div class="scence-service-wrap">
-    <Header
-      :titleContent="TitleObjData.titleContent"
-      :showLeftBack="TitleObjData.showLeftBack"
-      :showRightMore="TitleObjData.showRightMore"
-    ></Header>
+    <div>
+      <Header
+        :titleContent="TitleObjData.titleContent"
+        :showLeftBack="TitleObjData.showLeftBack"
+        :showRightMore="TitleObjData.showRightMore"
+      ></Header>
+      <div class="help-wrap" style="position:absolute;right:15px;top:10px;z-index: 999;">
+        <customerService></customerService>
+      </div>
+    </div>
     <div class="scence-service-content">
       <div class="content-one">
         <div class="swp-wrap">
@@ -98,6 +103,7 @@
 import Header from "@/components/common/Header";
 // import { swiper, swiperSlide } from "vue-awesome-swiper";
 import { GroupTitle, XButton, Cell, Swiper, SwiperItem } from "vux";
+import customerService from "@/components/common/customerService/customerService";
 
 import {
   Scroller,
@@ -105,7 +111,8 @@ import {
   PopupPicker,
   Rater,
   Flexbox,
-  FlexboxItem
+  FlexboxItem,
+  
 } from "vux";
 // import "element-ui/lib/theme-chalk/index.css";
 export default {
@@ -197,7 +204,8 @@ export default {
     XButton,
     Cell,
     Swiper,
-    SwiperItem
+    SwiperItem,
+    customerService
   },
 
   computed: {},

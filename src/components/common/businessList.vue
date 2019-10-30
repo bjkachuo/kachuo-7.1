@@ -1,10 +1,15 @@
 <template>
   <div class="businessList-wrap">
-    <Header
-      :titleContent="TitleObjData.titleContent"
-      :showLeftBack="TitleObjData.showLeftBack"
-      :showRightMore="TitleObjData.showRightMore"
-    ></Header>
+    <div>
+      <Header
+        :titleContent="TitleObjData.titleContent"
+        :showLeftBack="TitleObjData.showLeftBack"
+        :showRightMore="TitleObjData.showRightMore"
+      ></Header>
+      <div class="help-wrap" style="position:absolute;right:15px;top:10px;z-index: 999;">
+        <customerService></customerService>
+      </div>
+    </div>
     <div class="businessList-content">
       <!-- <div class="classificationSorting-wrap">
         <div class="left">
@@ -45,6 +50,7 @@
 <script>
 import Header from "@/components/common/Header";
 import { PopupRadio } from "vux";
+import customerService from "@/components/common/customerService/customerService";
 
 export default {
   props: {},
@@ -148,7 +154,8 @@ export default {
   },
   components: {
     Header,
-    PopupRadio
+    PopupRadio,
+    customerService
   }
 };
 </script>
