@@ -258,8 +258,8 @@
                 let mk = new BMap.Marker(self.myPoint,{icon:myIcon,title:'xiang'});
                 self.Bmap.addOverlay(mk);
                 mk.Ac.style.borderRadius = '50%'
-                mk.Ac.style.width = '30px'
-                mk.Ac.style.height = '30px'
+                mk.Ac.style.width = '20px'
+                mk.Ac.style.height = '23px'
                 mk.Ac.style.overflow = 'hidden'
               } else {
 

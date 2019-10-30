@@ -67,7 +67,7 @@
         <swiper auto height="345px" interval="3000">
           <swiper-item  v-for="(swiperItem,ii) in reco">
             <div class="goods-box">
-              <div v-for="(item,i) in swiperItem" class="goods">
+              <div v-for="(item,i) in swiperItem" class="goods" @click="details(item.id,item.type)">
                 <img :src="item.video_image" alt="" >
                 <div style="font-size: 14px;color: #000;overflow: hidden;text-overflow:ellipsis; white-space: nowrap;padding-top: 10px;margin: 0 5px">{{item.name}}</div>
                 <div style="font-size: 10px;color: #666;overflow: hidden;text-overflow:ellipsis; white-space: nowrap;line-height: 35px;margin: 0 5px">{{item.product}}</div>
