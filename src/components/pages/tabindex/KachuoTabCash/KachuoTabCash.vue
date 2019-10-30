@@ -174,17 +174,17 @@ export default {
 
 .goods-type {
   width: 92%;
-  margin: 0 auto;
+  margin: 0 auto 10px;
   border-radius: 8px;
   background-color: #fff;
-  height: 90px;
+  height: 100px;
   display: flex;
   li {
     flex: 1;
     .goods-type-icon {
-      width: 26px;
-      height: 26px;
-      margin: 21px auto 8px;
+      width: 44px;
+      height: 44px;
+      margin: 12px auto 8px;
     }
     .huigou {
       background-image: url("./huigou.png");

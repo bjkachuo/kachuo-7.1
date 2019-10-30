@@ -37,7 +37,7 @@
     </ul>
     <!--    <CellDivider :cellList="cellListTools" class="tab-item-mall-tools-wrap"></CellDivider>-->
     <DividedArea></DividedArea>
-    <div style="width:92%;margin: 0px auto 10px;">
+    <!-- <div style="width:92%;margin: 0px auto 10px;">
       <swiper auto height="70px" class="custom">
         <swiper-item class="black">
           <img src="./7-min.png" alt />
@@ -49,7 +49,7 @@
           <img src="./7-min.png" alt />
         </swiper-item>
       </swiper>
-    </div>
+    </div> -->
 
     <!--    <Divider :content="dividerContent"></Divider>-->
     <GoodsList :goodList="goodsListData"></GoodsList>
@@ -223,14 +223,14 @@ export default {
   margin: 55px auto 0;
   border-radius: 8px;
   background-color: #fff;
-  height: 90px;
+  height: 100px;
   display: flex;
   li {
     flex: 1;
     .goods-type-icon {
-      width: 27px;
-      height: 27px;
-      margin: 21px auto 8px;
+      width: 44px;
+      height: 44px;
+      margin: 12px auto 8px;
       background-size: 100% 100%;
     }
     .shipin {
