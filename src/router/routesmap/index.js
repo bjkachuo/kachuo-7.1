@@ -552,104 +552,104 @@ export default [{
   {
     path: '/jingquBsIndex',
     name: 'JingquBsIndex',
-    component: resolve => require(['@/components/pages/tabindex/KachuoTabIncome/jingquBackstage/jingquBsIndex'], resolve),
+    component: resolve => require(['@/components/pages/backStage/jingquBackstage/jingquBsIndex'], resolve),
   },
   //景区后台资料页
   {
     path: '/jingquBsDate',
     name: 'JingquBsDate',
-    component: resolve => require(['@/components/pages/tabindex/KachuoTabIncome/jingquBackstage/jingquzilao/jingquBsDate'], resolve),
+    component: resolve => require(['@/components/pages/backStage/jingquBackstage/jingquzilao/jingquBsDate'], resolve),
   },
   //景区照片添加页
   {
     path: '/jingquBsAddPhoto',
     name: 'JingquBsAddPhoto',
-    component: resolve => require(['@/components/pages/tabindex/KachuoTabIncome/jingquBackstage/jingquzilao/jingquBsAddPhoto'], resolve),
+    component: resolve => require(['@/components/pages/backStage/jingquBackstage/jingquzilao/jingquBsAddPhoto'], resolve),
   },
   //景区介绍添加页
   {
     path: '/jingquBsAddIntroduce',
     name: 'JingquBsAddIntroduce',
-    component: resolve => require(['@/components/pages/tabindex/KachuoTabIncome/jingquBackstage/jingquzilao/jingquBsAddIntroduce'], resolve),
+    component: resolve => require(['@/components/pages/backStage/jingquBackstage/jingquzilao/jingquBsAddIntroduce'], resolve),
 
   },
   //景区服务项添加页
   {
     path: '/jingquBsAddService',
     name: 'JingquBsAddService',
-    component: resolve => require(['@/components/pages/tabindex/KachuoTabIncome/jingquBackstage/jingquzilao/jingquBsAddService'], resolve),
+    component: resolve => require(['@/components/pages/backStage/jingquBackstage/jingquzilao/jingquBsAddService'], resolve),
   },
   //景区安全提示添加页
   {
     path: '/jingquBsAddSecurity',
     name: 'JingquBsAddSecurity',
-    component: resolve => require(['@/components/pages/tabindex/KachuoTabIncome/jingquBackstage/jingquzilao/jingquBsAddSecurity'], resolve),
+    component: resolve => require(['@/components/pages/backStage/jingquBackstage/jingquzilao/jingquBsAddSecurity'], resolve),
 
   },
   //景区后台景区讯息页
   {
     path: '/jingquBsInformation',
     name: 'JingquBsInformation',
-    component: resolve => require(['@/components/pages/tabindex/KachuoTabIncome/jingquBackstage/jingquzixun/jingquBsInformation'], resolve),
+    component: resolve => require(['@/components/pages/backStage/jingquBackstage/jingquzixun/jingquBsInformation'], resolve),
   },
   //景区资讯搜索页面
   {
     path: '/jingquBsSearch',
     name: 'JingquBsSearch',
-    component: resolve => require(['@/components/pages/tabindex/KachuoTabIncome/jingquBackstage/jingquzixun/jingquBsSearch'], resolve),
+    component: resolve => require(['@/components/pages/backStage/jingquBackstage/jingquzixun/jingquBsSearch'], resolve),
 
   },
   // 景区后台导游
   {
     path: '/jingquBsGuide',
     name: 'JingquBsGuide',
-    component: resolve => require(['@/components/pages/tabindex/KachuoTabIncome/jingquBackstage/jingqudaoyou/jingquBsGuide'], resolve),
+    component: resolve => require(['@/components/pages/backStage/jingquBackstage/jingqudaoyou/jingquBsGuide'], resolve),
   },
   //景区后台添加导游
   {
     path: '/jingquBsAddguide',
     name: 'JingquBsAddguide',
-    component: resolve => require(['@/components/pages/tabindex/KachuoTabIncome/jingquBackstage/jingqudaoyou/jingquBsAddguide'], resolve),
+    component: resolve => require(['@/components/pages/backStage/jingquBackstage/jingqudaoyou/jingquBsAddguide'], resolve),
 
   },
   //景区后台商城
   {
     path: '/jingquBsMall',
     name: 'JingquBsMall',
-    component: resolve => require(['@/components/pages/tabindex/KachuoTabIncome/jingquBackstage/jingqushangcheng/jingquBsMall'], resolve),
+    component: resolve => require(['@/components/pages/backStage/jingquBackstage/jingqushangcheng/jingquBsMall'], resolve),
 
   },
   //景区后台商城添加商品
   {
     path: '/jingquBsAddCommodity',
     name: 'JingquBsAddCommodity',
-    component: resolve => require(['@/components/pages/tabindex/KachuoTabIncome/jingquBackstage/jingqushangcheng/jingquBsAddCommodity'], resolve),
+    component: resolve => require(['@/components/pages/backStage/jingquBackstage/jingqushangcheng/jingquBsAddCommodity'], resolve),
   },
   //景区后台订单管理
   {
     path: '/jingquBsOrder',
     name: 'JingquBsOrder',
-    component: resolve => require(['@/components/pages/tabindex/KachuoTabIncome/jingquBackstage/jingqudingdan/jingquBsOrder'], resolve),
+    component: resolve => require(['@/components/pages/backStage/jingquBackstage/jingqudingdan/jingquBsOrder'], resolve),
 
   },
   //景区后台商品订单
   {
     path: '/jinquBsGoodsOrder',
     name: 'JinquBsGoodsOrder',
-    component: resolve => require(['@/components/pages/tabindex/KachuoTabIncome/jingquBackstage/jingqudingdan/jinquBsGoodsOrder'], resolve),
+    component: resolve => require(['@/components/pages/backStage/jingquBackstage/jingqudingdan/jinquBsGoodsOrder'], resolve),
 
   },
   //景区后台导游订单
   {
     path: '/jingquBsGuideOrder',
     name: 'jingquBsGuideOrder',
-    component: resolve => require(['@/components/pages/tabindex/KachuoTabIncome/jingquBackstage/jingqudingdan/jingquBsGuideOrder'], resolve),
+    component: resolve => require(['@/components/pages/backStage/jingquBackstage/jingqudingdan/jingquBsGuideOrder'], resolve),
   },
   //景区后台游客留言
   {
     path: '/jingquMessageAudit',
     name: 'jingquMessageAudit',
-    component: resolve => require(['@/components/pages/tabindex/KachuoTabIncome/jingquBackstage/jingquliuyan/jingquMessageAudit'], resolve),
+    component: resolve => require(['@/components/pages/backStage/jingquBackstage/jingquliuyan/jingquMessageAudit'], resolve),
   },
   {
     path: '/understand',

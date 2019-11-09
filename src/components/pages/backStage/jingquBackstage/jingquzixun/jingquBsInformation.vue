@@ -26,7 +26,7 @@
     <actionsheet
       v-model="show4"
       :menus="menus1"
-      :close-on-clicking-mask="false"
+      :close-on-clicking-mask="true"
       show-cancel
       @onClickMask="console('on click mask')"
     ></actionsheet>

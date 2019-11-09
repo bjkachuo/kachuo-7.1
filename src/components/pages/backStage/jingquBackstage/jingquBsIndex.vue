@@ -38,32 +38,32 @@ export default {
         {
           name: "景区资料",
           link: "/jingquBsDate",
-          imgSrc: require("@/components/pages/tabindex/KachuoTabIncome/jingquBackstage/jq1.png")
+          imgSrc: require("@/components/pages/backStage/jingquBackstage/jq1.png")
         },
         {
           name: "景区资讯",
           link: "/jingquBsInformation",
-          imgSrc: require("@/components/pages/tabindex/KachuoTabIncome/jingquBackstage/jq2.png")
+          imgSrc: require("@/components/pages/backStage/jingquBackstage/jq2.png")
         },
         {
           name: "景区导游",
           link: "/jingquBsGuide",
-          imgSrc: require("@/components/pages/tabindex/KachuoTabIncome/jingquBackstage/jq3.png")
+          imgSrc: require("@/components/pages/backStage/jingquBackstage/jq3.png")
         },
         {
           name: "景区商城",
           link: "/jingquBsMall",
-          imgSrc: require("@/components/pages/tabindex/KachuoTabIncome/jingquBackstage/jq4.png")
+          imgSrc: require("@/components/pages/backStage/jingquBackstage/jq4.png")
         },
         {
           name: "订单管理",
           link: "/jingquBsOrder",
-          imgSrc: require("@/components/pages/tabindex/KachuoTabIncome/jingquBackstage/jq5.png")
+          imgSrc: require("@/components/pages/backStage/jingquBackstage/jq5.png")
         },
         {
           name: "游客留言",
           link: "/jingquMessageAudit",
-          imgSrc: require("@/components/pages/tabindex/KachuoTabIncome/jingquBackstage/jq6.png")
+          imgSrc: require("@/components/pages/backStage/jingquBackstage/jq6.png")
         }
       ]
     };
