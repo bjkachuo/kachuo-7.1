@@ -17,7 +17,7 @@
           accept="image/*"
         />
         <a class="add">
-          <img src="../pages/tabindex/KachuoTabIncome/jingquBackstage/camera.png" alt />
+          <img src="../pages/backStage/jingquBackstage/camera.png" alt />
           <!-- <p class="add-icon">+</p> -->
         </a>
       </li>
