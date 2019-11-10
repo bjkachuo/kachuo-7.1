@@ -116,7 +116,7 @@ export default {
 }
 .Choice {
   width: 92%;
-  height: 152px;
+  height: 164px;
   background: #ffffff;
   border-radius: 8px;
   overflow: hidden;

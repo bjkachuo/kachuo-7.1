@@ -17,14 +17,14 @@
       <tab-item @click.native="cur=1" :class="{active:cur==1}">已发货</tab-item>
       <tab-item @click.native="cur=2" :class="{active:cur==2}">退款中</tab-item>
       <tab-item @click.native="cur=3" :class="{active:cur==3}">已退款</tab-item>
-      <tab-item @click.native="cur=3" :class="{active:cur==4}">已完成</tab-item>
+      <tab-item @click.native="cur=4" :class="{active:cur==4}">已完成</tab-item>
     </tab>
     <div class="tab-content">
       <b v-show="cur==0">
         <flexbox orient="vertical">
           <flexbox-item>
             <div class="order-content">
-              <div class="content-top">
+              <div class="content-top" @click="goWaitDetail">
                 <div class="img-wrap">
                   <img src alt />
                   <div class="num">
@@ -33,7 +33,7 @@
                 </div>
                 <div class="mid-text">
                   <div class="text-one">
-                    <p class="name">收货人：安其拉</p>
+                    <p class="name">收货人：安其拉1</p>
                     <p class="state">待发货</p>
                   </div>
                   <div class="text-two">
@@ -68,7 +68,7 @@
         <flexbox orient="vertical">
           <flexbox-item>
             <div class="order-content">
-              <div class="content-top">
+              <div class="content-top" @click="goAready">
                 <div class="img-wrap">
                   <img src alt />
                   <div class="num">
@@ -77,8 +77,8 @@
                 </div>
                 <div class="mid-text">
                   <div class="text-one">
-                    <p class="name">收货人：安其拉</p>
-                    <p class="state">待发货</p>
+                    <p class="name">收货人：安其拉2</p>
+                    <p class="state">已发货</p>
                   </div>
                   <div class="text-two">
                     <p>支付时间:2019-08-01 19:35</p>
@@ -89,11 +89,11 @@
                 </div>
               </div>
               <div class="content-bottom">
-                <div class="bottom-two">
+                <!-- <div class="bottom-two">
                   <p>发货</p>
-                </div>
+                </div>-->
                 <div class="bottom-one">
-                  <p>联系买家</p>
+                  <p>查看物流</p>
                 </div>
               </div>
             </div>
@@ -104,7 +104,7 @@
         <flexbox orient="vertical">
           <flexbox-item>
             <div class="order-content">
-              <div class="content-top">
+              <div class="content-top" @click="goReturn">
                 <div class="img-wrap">
                   <img src alt />
                   <div class="num">
@@ -113,8 +113,8 @@
                 </div>
                 <div class="mid-text">
                   <div class="text-one">
-                    <p class="name">收货人：安其拉</p>
-                    <p class="state">待发货</p>
+                    <p class="name">收货人：安其拉3</p>
+                    <p class="state">退款中</p>
                   </div>
                   <div class="text-two">
                     <p>支付时间:2019-08-01 19:35</p>
@@ -125,11 +125,11 @@
                 </div>
               </div>
               <div class="content-bottom">
-                <div class="bottom-two">
+                <!-- <div class="bottom-two">
                   <p>发货</p>
-                </div>
+                </div>-->
                 <div class="bottom-one">
-                  <p>联系买家</p>
+                  <p>同意退款</p>
                 </div>
               </div>
             </div>
@@ -140,7 +140,7 @@
         <flexbox orient="vertical">
           <flexbox-item>
             <div class="order-content">
-              <div class="content-top">
+              <div class="content-top" @click="goReturned">
                 <div class="img-wrap">
                   <img src alt />
                   <div class="num">
@@ -149,8 +149,8 @@
                 </div>
                 <div class="mid-text">
                   <div class="text-one">
-                    <p class="name">收货人：安其拉</p>
-                    <p class="state">待发货</p>
+                    <p class="name">收货人：安其拉4</p>
+                    <p class="state">已退款</p>
                   </div>
                   <div class="text-two">
                     <p>支付时间:2019-08-01 19:35</p>
@@ -160,14 +160,14 @@
                   </div>
                 </div>
               </div>
-              <div class="content-bottom">
+              <!-- <div class="content-bottom">
                 <div class="bottom-two">
                   <p>发货</p>
                 </div>
                 <div class="bottom-one">
                   <p>联系买家</p>
                 </div>
-              </div>
+              </div>-->
             </div>
           </flexbox-item>
         </flexbox>
@@ -176,7 +176,7 @@
         <flexbox orient="vertical">
           <flexbox-item>
             <div class="order-content">
-              <div class="content-top">
+              <div class="content-top" @click="goFinish">
                 <div class="img-wrap">
                   <img src alt />
                   <div class="num">
@@ -185,8 +185,8 @@
                 </div>
                 <div class="mid-text">
                   <div class="text-one">
-                    <p class="name">收货人：安其拉</p>
-                    <p class="state">待发货</p>
+                    <p class="name">收货人：安其拉5</p>
+                    <p class="state">已完成</p>
                   </div>
                   <div class="text-two">
                     <p>支付时间:2019-08-01 19:35</p>
@@ -196,14 +196,14 @@
                   </div>
                 </div>
               </div>
-              <div class="content-bottom">
+              <!-- <div class="content-bottom">
                 <div class="bottom-two">
                   <p>发货</p>
                 </div>
                 <div class="bottom-one">
                   <p>联系买家</p>
                 </div>
-              </div>
+              </div>-->
             </div>
           </flexbox-item>
         </flexbox>
@@ -232,7 +232,33 @@ export default {
   created() {},
   mounted() {},
   watch: {},
-  methods: {},
+  methods: {
+    //跳转待发货订单详情页面
+    goWaitDetail() {
+      this.$router.push("/orderWaitPro");
+      console.log("去待发货");
+    },
+    //跳转已发货详情页面
+    goAready() {
+      this.$router.push("/orderAlreadyPro");
+      console.log("去已发货");
+    },
+    //跳转退款中详情页面
+    goReturn() {
+      this.$router.push("/orderReturnPro");
+      console.log("去退款中");
+    },
+    //跳转已退款详情页面
+    goReturned() {
+      this.$router.push("/orderReturnedPro");
+      console.log("去已退款");
+    },
+    //跳转已完成详情页面
+    goFinish() {
+      this.$router.push("/orderFinishPro");
+      console.log("去已完成");
+    }
+  },
   components: {
     Header,
     Tab,
@@ -262,7 +288,7 @@ export default {
 }
 .order-content {
   width: 100%;
-  height: 180px;
+  min-height: 120px;
   background: #ffffff;
   margin-bottom: 10px;
   border-radius: 8px;
@@ -349,7 +375,7 @@ export default {
   height: 35px;
   border: 1px solid #3976ff;
   background: #ffffff;
-  margin-top: 2px;
+  margin: 2px 2% 0 0;
 }
 .bottom-one p {
   font-size: 14px;

@@ -33,7 +33,7 @@
         <div class="f-one">
           <x-input title="订单编号:" disabled v-model="orderNum" class="top"></x-input>
           <x-input title="支付时间:" disabled v-model="payTime"></x-input>
-          <x-input title="取消时间:" disabled v-model="cancelTime" class="bottom"></x-input>
+          <!-- <x-input title="取消时间:" disabled v-model="cancelTime" class="bottom"></x-input> -->
         </div>
         <div class="scever">
           <p>

@@ -639,6 +639,41 @@ export default [{
     component: resolve => require(['@/components/pages/backStage/jingquBackstage/jingqudingdan/jinquBsGoodsOrder'], resolve),
 
   },
+  //景区后台商品订单详情：待发货
+  {
+    path: '/orderWaitPro',
+    name: 'orderWaitPro',
+    component: resolve => require(['@/components/pages/backStage/jingquBackstage/jingqudingdan/productOrderDetails/orderWaitPro'], resolve),
+
+  },
+  //景区后台商品订单详情：已发货
+  {
+    path: '/orderAlreadyPro',
+    name: 'orderAlreadyPro',
+    component: resolve => require(['@/components/pages/backStage/jingquBackstage/jingqudingdan/productOrderDetails/orderAlreadyPro'], resolve),
+
+  },
+  //景区后台商品订单详情：退款中
+  {
+    path: '/orderReturnPro',
+    name: 'orderReturnPro',
+    component: resolve => require(['@/components/pages/backStage/jingquBackstage/jingqudingdan/productOrderDetails/orderReturnPro'], resolve),
+
+  },
+  //景区后台商品订单详情：已退款
+  {
+    path: '/orderReturnedPro',
+    name: 'orderReturnedPro',
+    component: resolve => require(['@/components/pages/backStage/jingquBackstage/jingqudingdan/productOrderDetails/orderReturnedPro'], resolve),
+
+  },
+  //景区后台商品订单详情：已完成
+  {
+    path: '/orderFinishPro',
+    name: 'orderFinishPro',
+    component: resolve => require(['@/components/pages/backStage/jingquBackstage/jingqudingdan/productOrderDetails/orderFinishPro'], resolve),
+
+  },
   //景区后台导游订单
   {
     path: '/jingquBsGuideOrder',
