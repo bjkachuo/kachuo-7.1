@@ -14,15 +14,15 @@
 <script>
 import "swiper/dist/css/swiper.css";
 import { swiper, swiperSlide } from "vue-awesome-swiper";
-import { AdvertiseLoop, getUpdateInfo } from "@/servers/api";
+import { AdvertiseLoop } from "@/servers/api";
 
 export default {
-  props: [""],
+
   components: {
     swiper,
     swiperSlide
   },
-  ready() {},
+
   methods: {
     getBannerImg(type, height) {
       let imgArr = [];
@@ -102,9 +102,7 @@ export default {
       swiperSlides: []
     };
   },
-  computed: {},
-  created() {
-  },
+
   mounted() {
     this.getBannerImg();
   },

@@ -75,7 +75,6 @@ export default {
 
         this.$refs.address.showAxiosData(res.data)
 
-
         this.maskValueAddress = res.data.province+','+res.data.city+','+res.data.area
         this.maskValueName = res.data.realname
         this.maskValuePhone = res.data.mobile
@@ -150,8 +149,6 @@ export default {
       "$route": function(to){
         this.maskValueAddress = []
         this.getSelAddress()
-
-
       }
   }
 };

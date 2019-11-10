@@ -6,6 +6,8 @@
         :showLeftBack="TitleObjData.showLeftBack"
         :showRightMore="TitleObjData.showRightMore"
       ></Header>
+
+
       <div style="position:absolute;right:45px;top:7px;z-index:999;" @click="search">
         <x-icon type="ios-search-strong" size="32"></x-icon>
       </div>
@@ -13,7 +15,23 @@
         <customerService></customerService>
       </div>
     </div>
+
     <div class="position-box" :style="contentNoHeaderHeight">
+
+      <div style="width:92%;margin: 15px auto 10px; position: relative;">
+        <swiper auto height="110px" class="custom">
+          <swiper-item class="black">
+            <img src="./mallone.png" alt />
+          </swiper-item>
+          <swiper-item class="black">
+            <img src="./malltwo.jpg" alt />
+          </swiper-item>
+          <swiper-item class="black">
+            <img src="./mallthree.jpg" alt />
+          </swiper-item>
+        </swiper>
+      </div>
+
       <div
         class="video-list-for"
         v-for="(item,index) in items"
@@ -28,12 +46,14 @@
 
 <script>
 import Header from "@/components/common/ReleaseHeader";
-import { VideoListIndex } from "@/servers/api";
+import { VideoListIndex,AdvertiseLoop } from "@/servers/api";
 import customerService from "@/components/common/customerService/customerService";
+import "swiper/dist/css/swiper.css";
+import { Swiper, SwiperItem, } from "vux";
 
 export default {
   name: "",
-  props: [""],
+
   data() {
     return {
       TitleObjData: {
@@ -47,7 +67,9 @@ export default {
 
   components: {
     Header,
-    customerService
+    customerService,
+    Swiper,
+    SwiperItem
   },
 
   computed: {

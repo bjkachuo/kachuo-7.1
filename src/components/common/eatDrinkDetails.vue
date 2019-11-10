@@ -27,19 +27,7 @@
                 <x-icon type="ios-close-outline" style="fill:#fff;"></x-icon>
               </p>
             </x-dialog>-->
-            <x-dialog v-model="showDialogStyle" hide-on-blur>
-              <p style="color:#fff;text-align:center;width:80%" @click="showDialogStyle = false">
-                <video
-                  :src="this.storeDetails.video"
-                  :poster="this.storeDetails.video_image"
-                  controlslist="nodownload"
-                  preload="none"
-                  controls="controls"
-                  x5-video-orientation="landscape"
-                ></video>
-                <span class="vux-close" @click="showToast=false"></span>
-              </p>
-            </x-dialog>
+
 
             <template slot="after-title">
               <div class="raty-body">
@@ -434,12 +422,29 @@
         <x-button @click.native="goEatOrder">去下单</x-button>
       </div>
     </div>
+
+    <x-dialog v-model="showDialogStyle" hide-on-blur>
+            <p style="color:#fff;text-align:center;width:80%" @click="showDialogStyle = false">
+              <video
+                :src="this.storeDetails.video"
+                :poster="this.storeDetails.video_image"
+                controlslist="nodownload"
+                preload="none"
+                controls="controls"
+                x5-video-orientation="landscape"
+              ></video>
+              <span class="vux-close" @click="showToast=false"></span>
+            </p>
+    </x-dialog>
+
+
     <actionsheet
       v-model="show1"
       :menus="menus1"
       show-cancel
       @on-click-mask="console('on click mask')"
     ></actionsheet>
+
   </div>
 </template>
 

@@ -483,7 +483,7 @@ export default [{
   {
     path: '/goodsVideoclassify',
     name: 'GoodsVideoClassify',
-    component: resolve => require(['@/components/pages/kachuomall/GoodsVideoClassify'], resolve),
+    component: resolve => require(['@/components/pages/kachuomall/GoodsVideoClassify/GoodsVideoClassify'], resolve),
   },
   {
     path: '/goodsVideoclassifydetails',

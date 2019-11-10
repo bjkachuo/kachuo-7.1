@@ -36,8 +36,25 @@ export default {
     logShow(str) {
       this.isShow = true;
     },
-    showAxiosData(){
-
+    showAxiosData(data){
+      let arr = []
+      console.log(data);
+      for(var i=0;i<ChinaAddressV4Data.length;i++){
+        if(data.province == ChinaAddressV4Data[i].name){
+          console.log(0);
+          arr[0] = ChinaAddressV4Data[i].value
+        }
+        if(data.city == ChinaAddressV4Data[i].name){
+          console.log(1);
+          arr[1] = ChinaAddressV4Data[i].value
+        }
+        if(data.area == ChinaAddressV4Data[i].name){
+          console.log(2);
+          arr[2] = ChinaAddressV4Data[i].value
+        }
+      }
+      console.log(arr);
+      this.value = arr
     }
   },
   updated() {}

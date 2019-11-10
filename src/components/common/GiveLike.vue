@@ -8,8 +8,8 @@
       </span>
       <span class="line-grad"></span>
       <span class="collection" @click="collectionFn">
-        <span v-if="isCollection ===0" class="iconfont iconshoucang-xuanzhong"></span>
-        <span v-if="isCollection !=0" class="iconfont iconshoucang1"></span>
+        <span v-if="isCollection ===1" class="iconfont iconshoucang-xuanzhong"></span>
+        <span v-if="isCollection !=1" class="iconfont iconshoucang1"></span>
         <span>收藏</span>
       </span>
     </span>
@@ -53,7 +53,7 @@ export default {
       })
         .then(res => {
           if (res.result) {
-            this.isCollection = parseInt(res.data.result.deleted, 10);
+            this.isCollection = parseInt(res.data.result, 10);
           }
         })
         .catch(err => {
@@ -65,6 +65,9 @@ export default {
     // },
     // 点击收藏
     collectionFn() {
+      if(this.isCollection){
+        return
+      }
       CollectionGoods({
         goodsid: this.$route.query.id,
         type: this.$route.query.type
