@@ -92,7 +92,6 @@ export default {
           state = "_" + (+new Date());
           Wechat.auth(scope, state, response=> {
           // you may use response.code to get the access token.
-
           login({
             code: response.code,
             type: 2

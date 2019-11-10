@@ -63,7 +63,7 @@
     <div class="line-three">
 
       <div v-for="(reco,index) in recommend" class="recommend">
-        <p><i :class="reco[0][0].typename"></i><span>{{reco[0][0].typename}}</span></p>
+        <p><i :class="reco[0][0].typename"></i><span>{{reco[0][0].typename}}</span><span style="float: right;margin-right: 10px;">更多</span></p>
         <swiper auto height="345px" interval="3000">
           <swiper-item  v-for="(swiperItem,ii) in reco">
             <div class="goods-box">

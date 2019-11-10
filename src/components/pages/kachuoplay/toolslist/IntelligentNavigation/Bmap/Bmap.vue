@@ -235,38 +235,37 @@
 // 创建点坐标
       this.Bmap.centerAndZoom(point, 15);
 
-
       let self = this
 
-      let geolocation = new BMap.Geolocation({maximumAge:10});
-      setInterval(function () {
-            geolocation.getCurrentPosition(function (r) {
-              if (this.getStatus() == BMAP_STATUS_SUCCESS) {
-                self.Bmap.getOverlays().forEach(item=>{
-
-                  if(item.getTitle){
-                    if(item.getTitle() == 'xiang'){
-                      self.Bmap.removeOverlay(item)
-                    }
-                  }
-
-                })
-                // alert(JSON.stringify(r.point))
-                self.myPoint = r.point
-
-                let myIcon = new BMap.Icon(self.userInfo.avatar, new BMap.Size(30,30))
-                let mk = new BMap.Marker(self.myPoint,{icon:myIcon,title:'xiang'});
-                self.Bmap.addOverlay(mk);
-                mk.Ac.style.borderRadius = '50%'
-                mk.Ac.style.width = '20px'
-                mk.Ac.style.height = '23px'
-                mk.Ac.style.overflow = 'hidden'
-              } else {
-
-              }
-            })
-      },5000)
-      this.getMarkerList('')
+      // let geolocation = new BMap.Geolocation({maximumAge:10});
+      // setInterval(function () {
+      //       geolocation.getCurrentPosition(function (r) {
+      //         if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+      //           self.Bmap.getOverlays().forEach(item=>{
+      //
+      //             if(item.getTitle){
+      //               if(item.getTitle() == 'xiang'){
+      //                 self.Bmap.removeOverlay(item)
+      //               }
+      //             }
+      //
+      //           })
+      //           // alert(JSON.stringify(r.point))
+      //           self.myPoint = r.point
+      //
+      //           let myIcon = new BMap.Icon(self.userInfo.avatar, new BMap.Size(30,30))
+      //           let mk = new BMap.Marker(self.myPoint,{icon:myIcon,title:'xiang'});
+      //           self.Bmap.addOverlay(mk);
+      //           mk.Ac.style.borderRadius = '50%'
+      //           mk.Ac.style.width = '20px'
+      //           mk.Ac.style.height = '23px'
+      //           mk.Ac.style.overflow = 'hidden'
+      //         } else {
+      //
+      //         }
+      //       })
+      // },5000)
+      // this.getMarkerList('')
     }
   };
 </script>

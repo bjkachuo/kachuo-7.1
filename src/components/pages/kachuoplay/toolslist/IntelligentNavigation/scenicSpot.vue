@@ -3,12 +3,12 @@
       <Header :titleContent="TitleObjData.titleContent" :showLeftBack="TitleObjData.showLeftBack" :showRightMore="TitleObjData.showRightMore"></Header>
       <div class="normal-content" :style="conHei">
         <ul>
-          <li v-for="item in list" @click="goPlayList(item)">
-            <img :src="item.scenic_image">
+          <li v-for="item in list">
+            <img :src="item.scenic_image"  @click="goPlayList(item)">
             <div class="content">
               <div class="title">{{item.scenic_name}}</div>
               <div class="bottom">景点视频1个</div>
-              <div class="btn">我要创作</div>
+              <div class="btn" @click="goChuangZuo">我要创作</div>
             </div>
           </li>
         </ul>
@@ -54,6 +54,9 @@
               })
           },
 
+          goChuangZuo(){
+            this.$router.push('/releasevideo?branch=9')
+          },
           goPlayList(item){
             this.$router.push('/intelligentnavigation/veidoList?longitude='+item.longitude+'&latitude='+item.latitude)
           }

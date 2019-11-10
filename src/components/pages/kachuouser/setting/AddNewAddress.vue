@@ -11,7 +11,7 @@
         <div class="addr-card">
           <x-input title="收货人：" v-model="maskValueName" :max="10" placeholder="请填写收货人姓名"></x-input>
           <x-input title="手机号码：" v-model="maskValuePhone" :max="11" placeholder="请填写收货人手机号码"></x-input>
-          <Address style="height:52px;line-height:24px;font-size:14px" v-on:selectAddress="getSelAddress" class="custom"></Address>
+          <Address style="height:52px;line-height:24px;font-size:14px" v-on:selectAddress="getSelAddress" class="custom" ref="address"></Address>
           <x-input title="详细地址：" v-model="maskValueDetails" placeholder="街道、楼牌号等"></x-input>
         </div>
         <div class="addr-card">
@@ -72,12 +72,15 @@ export default {
       this.TitleObjData.titleContent = "修改地址"
 
       getAddressDetail({id:this.$route.query.id}).then(res=>{
-        console.log(res);
+
+        this.$refs.address.showAxiosData(res.data)
+
+
         this.maskValueAddress = res.data.province+','+res.data.city+','+res.data.area
-        this.maskValueName =res.data.realname
-        this.maskValuePhone =res.data.mobile
-        this.maskValueDetails =res.data.address
-        this.isdefault =res.data.isdefault
+        this.maskValueName = res.data.realname
+        this.maskValuePhone = res.data.mobile
+        this.maskValueDetails = res.data.address
+        this.isdefault = res.data.isdefault
       })
 
     }

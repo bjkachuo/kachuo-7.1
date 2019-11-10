@@ -5,11 +5,10 @@
       :data="dataOpion.data"
       :columns="dataOpion.columns"
       v-model="value"
-      show-name
+      :display-format="format"
       @on-change="onChange"
       @on-shadow-change="onShadowChange"
       @on-hide="onHide"
-      :inline-desc="`当前值[${formatDemoValue}]`"
     ></popup-picker>
   </group>
 </template>
@@ -37,7 +36,10 @@ export default {
   },
   data() {
     return {
-      value: []
+      value: [],
+      format: function (value, name) {
+        return `${name.split(' ')[1]}`
+      }
     };
   }
 };

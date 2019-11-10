@@ -43,7 +43,7 @@
 <script>
 import Header from "@/components/common/Header";
 import { Flexbox, FlexboxItem,XButton } from 'vux'
-import {AuthSubmit} from "@/servers/api";
+import { AuthSubmit } from "@/servers/api";
 import UploadImgOne from "@/components/common/UploadImgOne/UploadImgOne";
 export default {
   name: "",

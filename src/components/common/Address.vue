@@ -1,5 +1,5 @@
 <template>
-  <x-address @on-hide="logHide" @on-show="logShow" :title="title" v-model="value" raw-value="true" :list="addressData" @on-shadow-change="onShadowChange" placeholder="请选择地址" inline-desc :show.sync="showAddress"></x-address>
+  <x-address @on-hide="logHide" @on-show="logShow" :title="title" v-model="value" :raw-value="1 == 1" :list="addressData" @on-shadow-change="onShadowChange" placeholder="请选择地址" inline-desc :show.sync="showAddress"></x-address>
 </template>
 
 <script>
@@ -35,6 +35,9 @@ export default {
     },
     logShow(str) {
       this.isShow = true;
+    },
+    showAxiosData(){
+
     }
   },
   updated() {}

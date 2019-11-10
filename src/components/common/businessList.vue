@@ -1,19 +1,7 @@
 <template>
   <div class="businessList-wrap">
-    <Header
-      :titleContent="TitleObjData.titleContent"
-      :showLeftBack="TitleObjData.showLeftBack"
-      :showRightMore="TitleObjData.showRightMore"
-    ></Header>
+    <Header :titleContent="TitleObjData.titleContent" :showLeftBack="TitleObjData.showLeftBack" :showRightMore="TitleObjData.showRightMore"></Header>
     <div class="businessList-content">
-      <!-- <div class="classificationSorting-wrap">
-        <div class="left">
-          <popup-radio :options="options2" v-model="option2" placeholder="全部分类"></popup-radio>
-        </div>
-        <div class="right">
-          <popup-radio :options="options3" v-model="option3" placeholder="智能排序"></popup-radio>
-        </div>
-      </div>-->
       <div
         class="recommend"
         v-for="(item,index) in recommend"
@@ -144,6 +132,9 @@ export default {
 
         // alert("跳转游");
       }
+    },
+    gengduo(){
+      // businessList?type=1&name=吃吧
     }
   },
   components: {
