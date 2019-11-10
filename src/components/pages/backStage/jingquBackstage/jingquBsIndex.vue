@@ -7,8 +7,28 @@
       :showRightMore="TitleObjData.showRightMore"
     ></Header>
     <div class="Choice">
+      <div class="tlt-wrap">
+        <p>信息管理</p>
+      </div>
+      <div style="width:92%;margin:10px auto 18px;background:#E5E5E5;height:1px"></div>
       <flexbox :gutter="0" wrap="wrap">
-        <flexbox-item :span="1/3" v-for="(item,index) in choiceList" :key="index">
+        <flexbox-item :span="1/3" v-for="(item,index) in choiceListOne" :key="index">
+          <div class="flex-demo" @click="getItem(item.link)">
+            <div class="img-wrap">
+              <img :src="item.imgSrc" alt />
+            </div>
+            <p>{{item.name}}</p>
+          </div>
+        </flexbox-item>
+      </flexbox>
+    </div>
+    <div class="Choice" style="margin:10px auto 0">
+      <div class="tlt-wrap">
+        <p>服务管理</p>
+      </div>
+      <div style="width:92%;margin:10px auto 18px;background:#E5E5E5;height:1px"></div>
+      <flexbox :gutter="0" wrap="wrap">
+        <flexbox-item :span="1/3" v-for="(item,index) in choiceListTwo" :key="index">
           <div class="flex-demo" @click="getItem(item.link)">
             <div class="img-wrap">
               <img :src="item.imgSrc" alt />
@@ -34,7 +54,7 @@ export default {
         showLeftBack: true,
         showRightMore: false
       },
-      choiceList: [
+      choiceListOne: [
         {
           name: "景区资料",
           link: "/jingquBsDate",
@@ -46,23 +66,26 @@ export default {
           imgSrc: require("@/components/pages/backStage/jingquBackstage/jq2.png")
         },
         {
-          name: "景区导游",
-          link: "/jingquBsGuide",
+          name: "留言审核",
+          link: "/jingquMessageAudit",
           imgSrc: require("@/components/pages/backStage/jingquBackstage/jq3.png")
-        },
+        }
+      ],
+      choiceListTwo: [
         {
-          name: "景区商城",
+          name: "景区商品",
           link: "/jingquBsMall",
           imgSrc: require("@/components/pages/backStage/jingquBackstage/jq4.png")
         },
+
         {
-          name: "订单管理",
-          link: "/jingquBsOrder",
+          name: "景区导游",
+          link: "/jingquBsGuide",
           imgSrc: require("@/components/pages/backStage/jingquBackstage/jq5.png")
         },
         {
-          name: "游客留言",
-          link: "/jingquMessageAudit",
+          name: "全部订单",
+          link: "/jingquBsOrder",
           imgSrc: require("@/components/pages/backStage/jingquBackstage/jq6.png")
         }
       ]
@@ -92,11 +115,20 @@ export default {
   background: #f0f1f5;
 }
 .Choice {
-  width: 100%;
-  height: 233px;
+  width: 92%;
+  height: 152px;
   background: #ffffff;
   border-radius: 8px;
-  margin-top: 56px;
+  overflow: hidden;
+  margin: 56px auto 0;
+}
+.tlt-wrap {
+  margin: 12px 0 0 4.35%;
+}
+.tlt-wrap p {
+  font-size: 16px;
+  color: #222222;
+  font-weight: bold;
 }
 </style>
 <style lang="less" scoped>
@@ -106,14 +138,14 @@ export default {
   //   background-color: #20b907;
   border-radius: 4px;
   background-clip: padding-box;
-  height: 72px;
+  height: 80px;
   width: 72px;
-  margin: 23px auto;
+  margin: 0px auto;
 }
 .img-wrap {
   width: 47px;
   height: 47px;
-  margin: 0 auto;
+  margin: 0 auto 5px;
 }
 .img-wrap img {
   background: none;
