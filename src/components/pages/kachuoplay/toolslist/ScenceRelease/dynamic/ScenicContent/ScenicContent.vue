@@ -7,7 +7,7 @@
           <div class="tab-item-text">{{item}}</div>
         </tab-item>
       </tab>
-      <div class="tab-panel" v-if="this.index == 0">
+      <div class="tab-panel" v-if="index == 0">
         <div class="article-main">
           <div class="tab-header"><span>介绍</span></div>
           <div class="article-content">
@@ -18,7 +18,7 @@
           </div>
         </div>
       </div>
-      <div class="tab-panel" v-if="this.index == 1">
+      <div class="tab-panel" v-if="index == 1">
         <div class="article-main">
           <div class="tab-header"><span>服务项</span></div>
           <div class="article-content">
@@ -29,7 +29,7 @@
           </div>
         </div>
       </div>
-      <div class="tab-panel" v-if="this.index == 2">
+      <div class="tab-panel" v-if="index == 2">
         <div class="article-main">
           <div class="tab-header"><span>安全提示</span></div>
           <div class="article-content">
@@ -48,7 +48,7 @@
   import Header from "@/components/common/Header";
   import { Tab, TabItem,Group,Cell } from 'vux'
   export default {
-    props: [""],
+
     data() {
       return {
         TitleObjData: {
@@ -56,9 +56,9 @@
           showLeftBack: true,
           showRightMore: false
         },
-        index:0,
         tabList: ['景区介绍', '服务项','安全提示'],
         iscur:0,
+        index:0,
       };
     },
     methods: {
@@ -81,9 +81,11 @@
         };
       }
     },
-    mounted() {
-      this.index = this.$route.query.index
-      console.log(this.$route.query.index);
+    created() {
+      this.$nextTick(()=>{
+        this.index = this.$route.query.index - 0
+        console.log(this.$route.query.index);
+      })
     }
 
   };
