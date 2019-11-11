@@ -21,7 +21,7 @@
         </div>
         <div class="synopsis">
           <div style="color:#222;display: inline-block;width: calc(100% - 5em);overflow: hidden; white-space: nowrap; text-overflow: ellipsis;line-height: 30px">1231231231231123123123123112312312312311231231231231</div>
-          <div style="display: inline-block;width: 5em;float: right;text-align: right" @click="goPage('/scencerelease/dynamic/ScenicContent')">服务项<x-icon type="ios-arrow-right" size="20"></x-icon></div>
+          <div style="display: inline-block;width: 5em;float: right;text-align: right" @click="goPage('/scencerelease/dynamic/ScenicContent?index=1')">服务项<x-icon type="ios-arrow-right" size="20"></x-icon></div>
         </div>
       </div>
       <div class="tel-box">
@@ -49,6 +49,10 @@
         <i class="map-icon"></i>
         <span>地图导航</span>
       </div>
+    </div>
+    <div class="guide" @click="goPage('/scencerelease/dynamic/ScenicContent?index=2')">
+      <span>安全提示</span>
+      <div style="display: inline-block;width: 4em;float: right;text-align: right;font-size: 16px;"><x-icon type="ios-arrow-right" size="20" style="position: relative;top: 5px;"></x-icon></div>
     </div>
   </div>
 </template>
@@ -297,6 +301,7 @@ export default {
   background-color: #fff;
   margin-top: 10px;
   border-radius: 8px;
+  box-shadow:0px 5px 10px 0px rgba(0,101,255,0.06);
   font-size: 16px;
   padding: 0 15px;
   div{

@@ -82,7 +82,8 @@
       }
     },
     mounted() {
-       this.index = this.$route.query.index
+      this.index = this.$route.query.index
+      console.log(this.$route.query.index);
     }
 
   };
