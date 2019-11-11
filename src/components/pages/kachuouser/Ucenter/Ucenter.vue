@@ -99,7 +99,7 @@ export default {
       this.$router.push("/Ucenter/Certification");
     },
     goFaceThr() {
-      this.$router.push("/faceThr");
+      this.$router.push("/face?form=Ucenter");
     },
     getStatus() {
       GetAuthState().then(res => {

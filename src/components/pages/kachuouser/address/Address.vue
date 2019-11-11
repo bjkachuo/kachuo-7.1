@@ -9,11 +9,11 @@
     <div class="normal-content" :style="conHei">
       <div class="addr-card" v-for="item in commonList">
         <cell>
-          <div slot="icon"><div class="name">{{item.realname}}</div></div>
-          <div slot="title"><span class="tel">{{item.mobile}}</span><span class="tag-default" v-if="item.isdefault == 1">默认</span></div>
+          <div slot="icon" @click="selectAddress(item)"><div class="name">{{item.realname}}</div></div>
+          <div slot="title" @click="selectAddress(item)"><span class="tel">{{item.mobile}}</span><span class="tag-default" v-if="item.isdefault == 1">默认</span></div>
         </cell>
         <cell>
-          <div slot="title"><span class="addr-content">{{item.inlineDesc}}</span></div>
+          <div slot="title" @click="selectAddress(item)"><span class="addr-content">{{item.inlineDesc}}</span></div>
           <div slot="default" @click="goEdit(item.key)"><div class="addr-edit"></div></div>
         </cell>
       </div>
@@ -70,34 +70,17 @@ export default {
   },
 
   methods: {
-
-    setDefAdd(val) {
-      this.setDefaultAddress(val);
+    selectAddress(address){
+      if(this.$route.query.type == 'goods'){
+        sessionStorage.addressDetails = JSON.stringify(address)
+        this.$router.goBack();
+      }
     },
+
     goEdit(id){
       this.$router.push('/addnewaddress?id='+id)
     },
-    setDefaultAddress(val) {
-      setDefaultAddr({
-        id: val[0]
-      })
-        .then(res => {
-          if (res.result === 1) {
-            this.$vux.toast.show({
-              type: "success",
-              text: "设置成功",
-              time: 1000,
-              isShowMask: true
-            });
-            this.$store.state.address ++
-            this.$router.goBack()
 
-          }
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    },
     getAddressList() {
       getAddressList({})
         .then(res => {

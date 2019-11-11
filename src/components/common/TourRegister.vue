@@ -232,7 +232,7 @@ export default {
     },
     //跳转人脸识别
     goFaceTwo() {
-      this.$router.push("/faceTwo");
+      this.$router.push("/face?form=TourRegister");
     },
     //跳转实名认真
     goId() {

@@ -2,7 +2,8 @@ const _import = require('../_import_' + process.env.NODE_ENV);
 
 // export default [{
 
-export default [{
+export default [
+  {
     path: '/',
     name: 'login',
     component: resolve => require(['@/components/index/Login'], resolve)
@@ -458,12 +459,6 @@ export default [{
     path: '/faceTwo',
     name: 'faceTwo',
     component: resolve => require(['@/components/pages/facerecognition/faceTwo'], resolve),
-  },
-  {
-    //用于个人中心的人脸识别
-    path: '/faceThr',
-    name: 'faceThr',
-    component: resolve => require(['@/components/pages/facerecognition/faceThr'], resolve),
   },
   {
     path: '/face',

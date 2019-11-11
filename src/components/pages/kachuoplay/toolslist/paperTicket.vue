@@ -162,10 +162,10 @@ export default {
     // this.face = this.$route.query.face;
     console.log(this.face);
 
-    if (JSON.parse(sessionStorage.getItem("userLoginInfo")).is_face == 0) {
-      this.$router.push("/facecheck");
-    } else {
-    }
+    // if (JSON.parse(sessionStorage.getItem("userLoginInfo")).is_face == 0) {
+    //   this.$router.push("/facecheck");
+    // } else {
+    // }
   },
   watch: {},
   methods: {

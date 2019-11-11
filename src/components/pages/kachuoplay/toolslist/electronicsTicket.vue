@@ -6,40 +6,8 @@
       :showRightMore="TitleObjData.showRightMore"
       style="top:-43px"
     ></Header>
-    <!-- <tab
-      :line-width="1"
-      custom-bar-width="100%"
-      default-color="#666666FF"
-      active-color="#222222FF"
-      bar-active-color="#3976FFFF"
-    >
-      <tab-item @click.native="cur=0" :class="{active:cur==1}" selected>智能验票</tab-item>
-      <tab-item @click.native="cur=1" :class="{active:cur==0}">在线购票</tab-item>
-    </tab>-->
+
     <div class="tab-content">
-      <!-- <b v-show="cur==1">
-        <div class="t-content" v-for="(item,index) in dataListOne" :key="index">
-          <div class="t-left">
-            <div class="img-wrap">
-              <img :src="item.ImgUrl" alt />
-            </div>
-            <div class="txt-wrap">
-              <div class="t-one">
-                <p>{{item.Name}}</p>
-              </div>
-              <div class="t-two">
-                <p>当前景区</p>
-              </div>
-              <div class="t-three">
-                <p>¥{{item.MarketPrice}}</p>
-              </div>
-            </div>
-          </div>
-          <div class="t-right">
-            <p>购票</p>
-          </div>
-        </div>
-      </b>-->
       <b>
         <div class="explain-wrap">
           <div class="explain-one">
@@ -154,10 +122,10 @@ export default {
     // this.face = this.$route.query.face;
     console.log(this.face);
 
-    if (JSON.parse(sessionStorage.getItem("userLoginInfo")).is_face == 0) {
-      this.$router.push("/facecheck");
-    } else {
-    }
+    // if (JSON.parse(sessionStorage.getItem("userLoginInfo")).is_face == 0) {
+    //   this.$router.push("/facecheck");
+    // } else {
+    // }
   },
 
   methods: {

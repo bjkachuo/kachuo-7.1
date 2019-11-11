@@ -15,16 +15,6 @@
       </div>
       <p class="face-desc">由本人亲自操作，请正对手机，确保光线充足</p>
       <x-button type="primary" class="face-btn" @click.native="faceLogin">开始拍摄</x-button>
-      <!--<x-button type="primary" class="face-btn">
-        开始拍摄
-        <input
-          type="file"
-          class="camera-input"
-          ref="cameraInput"
-          accept="image/*"
-          @change="getFaceImg($event)"
-        >
-      </x-button>-->
       <p class="face-tip">
         <span class="iconfont iconanquan"></span>
         信息已加密，仅用于身份验证
@@ -117,46 +107,7 @@ export default {
           console.log(err);
         });
     },
-    getFaceImg(event) {
-      // const files = event.target.files;
-      // this.$vux.loading.show({
-      //   text: "正在上传"
-      // });
-      // if (files && files.length > 0) {
-      //   let file = files[0];
-      //   if (file.size > 10 * 1024 * 1024) {
-      //     this.$vux.loading.hide();
-      //     this.$vux.toast.show({
-      //       type: "cancel",
-      //       text: "图片过大",
-      //       time: 1000
-      //     });
-      //     return;
-      //   }
-        // this.formData.append("file", file);
-        axios
-          .post(this.videoUploadUrl, res, FACEUPLOADCONFIG)
-          .then(res => {
-            if (res.data.result === 1) {
-              this.$vux.loading.hide();
-            this.$vux.toast.show({
-              type: "success",
-              text: "识别成功",
-              time: 1000
-            });
-            } else {
-              this.$vux.loading.hide();
-              this.$vux.toast.show({
-                type: "warn",
-                text: "失败请重试",
-                time: 1000
-              });
-            }
-          })
-          .catch(err => {
-            console.log(err);
-          });
-      },
+
     // },
     //人脸识别
     faceLogin() {
@@ -172,8 +123,14 @@ export default {
                   text: "识别成功",
                   time: 1000
                 });
-                
-                this.$router.push("/ticketsdiscount");
+                if(this.$route.query.form == 'Ucenter'){
+                  this.$router.push("/Ucenter");
+                }else if(this.$route.query.form == 'TourRegister'){
+                  this.$router.push("/TourRegister");
+                }else{
+                  this.$router.push("/ticketsdiscount");
+                }
+
                 
               } else {
                 this.$vux.loading.hide();

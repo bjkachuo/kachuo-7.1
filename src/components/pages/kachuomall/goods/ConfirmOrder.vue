@@ -215,7 +215,7 @@ export default {
       }
     },
     selAddress() {
-      this.$router.push("/address");
+      this.$router.push("/address?type=goods");
     },
     // 获取商品详情
     getGoodsDetailsInfo() {
@@ -259,6 +259,12 @@ export default {
   watch: {
     "$store.state.address": function() {
       this.getAddressDefaultFn();
+    },
+    '$route':function (to) {
+        if(sessionStorage.addressDetails){
+          this.addressDetails = JSON.parse(sessionStorage.addressDetails)
+          sessionStorage.addressDetails = ''
+        }
     }
   }
 };

@@ -119,7 +119,11 @@ export default {
   methods: {
     //跳转各种类型票
     getItem(link) {
-      this.$router.push(link);
+      if (JSON.parse(sessionStorage.getItem("userLoginInfo")).is_face == 0) {
+        this.$router.push("/facecheck");
+      } else {
+        this.$router.push(link);
+      }
     },
     //跳转在线购票
     olBuy() {

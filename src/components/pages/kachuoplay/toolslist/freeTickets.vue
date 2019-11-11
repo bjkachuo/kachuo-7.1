@@ -85,10 +85,10 @@ export default {
       sessionStorage.getItem("userLoginInfo")
     ).sm_createtime;
     console.log(this.idState, 111);
-    if (JSON.parse(sessionStorage.getItem("userLoginInfo")).is_face == 0) {
-      this.$router.push("/facecheck");
-    } else {
-    }
+    // if (JSON.parse(sessionStorage.getItem("userLoginInfo")).is_face == 0) {
+    //   this.$router.push("/facecheck");
+    // } else {
+    // }
   },
   watch: {},
   methods: {
