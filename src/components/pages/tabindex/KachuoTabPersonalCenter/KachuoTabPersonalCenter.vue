@@ -191,7 +191,8 @@ export default {
         },
         {
           name: "商家后台",
-          link: "/businessBsIndex",
+          // link: "/businessBsIndex",
+          link:"/SjLinShiNavigation",
           imgSrc: require("@/assets/images/daoyouht.png")
         },
         {

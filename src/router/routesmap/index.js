@@ -2,8 +2,7 @@ const _import = require('../_import_' + process.env.NODE_ENV);
 
 // export default [{
 
-export default [
-  {
+export default [{
     path: '/',
     name: 'login',
     component: resolve => require(['@/components/index/Login'], resolve)
@@ -543,6 +542,7 @@ export default [
     name: 'minjia',
     component: resolve => require(['@/components/pages/tabindex/KachuoTabIncome/mingjia/mingjia'], resolve),
   },
+  /***************************************景区后台*******************************************************/
   //景区后台首页
   {
     path: '/jingquBsIndex',
@@ -681,6 +681,60 @@ export default [
     name: 'jingquMessageAudit',
     component: resolve => require(['@/components/pages/backStage/jingquBackstage/jingquliuyan/jingquMessageAudit'], resolve),
   },
+  /**********************************************商家后台*********************************************************************/
+  //商家后台种类（要根据状态判断 如入驻时为1 则为吃吧或喝吧 2 为住吧）(此页面为没有状态时临时分类页便于调试)
+  {
+    path: '/SjLinShiNavigation',
+    name: 'SjLinShiNavigation',
+    component: resolve => require(['@/components/pages/backStage/businessBackstage/SjLinShiNavigation'], resolve),
+  },
+  //吃吧或喝吧商家后台首页
+  {
+    path: '/EatOrDrinkbusinessBsIndex',
+    name: 'EatOrDrinkbusinessBsIndex',
+    component: resolve => require(['@/components/pages/backStage/businessBackstage/eatDrinkBS/EatOrDrinkBusinessBsIndex'], resolve),
+
+  },
+  //吃吧或喝吧商家后台店铺信息页面
+  {
+    path: '/EatOrDrinkStoreInformation',
+    name: 'EatOrDrinkStoreInformation',
+    component: resolve => require(['@/components/pages/backStage/businessBackstage/eatDrinkBS/EatOrDrinkStoreInformation'], resolve),
+  },
+  //吃吧或喝吧商家后台商品管理页面
+  {
+    path: '/EatOrDrinkCommodityManagement',
+    name: 'EatOrDrinkCommodityManagement',
+    component: resolve => require(['@/components/pages/backStage/businessBackstage/eatDrinkBS/EatOrDrinkCommodityManagement'], resolve),
+  },
+  //吃吧或喝吧商家后台商品管理添加商品页面#########
+  // {
+
+  // },
+  //吃吧或喝吧商家后台订单管理页面
+  {
+    path: '/EatOrDrinkOrderManagement',
+    name: 'EatOrDrinkOrderManagement',
+    component: resolve => require(['@/components/pages/backStage/businessBackstage/eatDrinkBS/EatOrDrinkOrderManagement'], resolve),
+  },
+  //吃吧或喝吧商家后台订单详情页面##########
+  // {
+
+  // },
+  //住吧商家后台首页
+  {
+    path: '/LiveBusinessBsIndex',
+    name: 'LiveBusinessBsIndex',
+    component: resolve => require(['@/components/pages/backStage/businessBackstage/liveBS/LiveBusinessBsIndex'], resolve),
+
+  },
+  //住吧商家后台店铺信息页面
+  {
+    path: '/LiveStoreInformation',
+    name: 'LiveStoreInformation',
+    component: resolve => require(['@/components/pages/backStage/businessBackstage/liveBS/LiveStoreInformation'], resolve),
+  },
+  /*********************************************************************************************************************/
   //商家后台首页
   {
     path: '/businessBsIndex',
@@ -713,6 +767,7 @@ export default [
     component: resolve => require(['@/components/pages/backStage/businessBackstage/SjBsOrder'], resolve),
 
   },
+  /**********************************************************************************************/
 
   {
     path: '/understand',
