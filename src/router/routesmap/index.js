@@ -251,7 +251,7 @@ export default [
     path: '/userintegral',
     name: 'UserIntegral',
     component: resolve => require(['@/components/pages/kachuouser/UserIntegral'], resolve),
-    
+
   },
   {
     path: '/shoppingcart',
@@ -681,6 +681,39 @@ export default [
     name: 'jingquMessageAudit',
     component: resolve => require(['@/components/pages/backStage/jingquBackstage/jingquliuyan/jingquMessageAudit'], resolve),
   },
+  //商家后台首页
+  {
+    path: '/businessBsIndex',
+    name: 'businessBsIndex',
+    component: resolve => require(['@/components/pages/backStage/businessBackstage/businessBsIndex'], resolve),
+
+  },
+  //商家后台店铺信息页面
+  {
+    path: '/StoreInformation',
+    name: 'StoreInformation',
+    component: resolve => require(['@/components/pages/backStage/businessBackstage/StoreInformation'], resolve),
+  },
+  //商家后台商品管理页面
+  {
+    path: '/CommodityManagement',
+    name: 'CommodityManagement',
+    component: resolve => require(['@/components/pages/backStage/businessBackstage/CommodityManagement'], resolve),
+  },
+  //商家后台商品添加页面
+  {
+    path: '/SjAddCommodity',
+    name: 'SjAddCommodity',
+    component: resolve => require(['@/components/pages/backStage/businessBackstage/SjAddCommodity'], resolve),
+  },
+  //商家后台订单管理页面
+  {
+    path: '/SjBsOrder',
+    name: 'SjBsOrder',
+    component: resolve => require(['@/components/pages/backStage/businessBackstage/SjBsOrder'], resolve),
+
+  },
+
   {
     path: '/understand',
     name: 'understand',

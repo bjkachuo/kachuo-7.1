@@ -28,7 +28,10 @@
       <div class="tab-card" v-for="(item,index) in this.bigList" :key="index">
         <cell>
           <template slot="after-title">
-            <div class="shop-title">{{item.goods[0].suoshujingqu}}</div>
+            <div class="shop-title">
+              {{item.goods[0].suoshujingqu}}
+              <x-icon type="ios-arrow-right" size="12"></x-icon>
+            </div>
           </template>
           <template slot="default">
             <div class="div-status" v-if="item.status==0">待付款</div>
@@ -40,7 +43,7 @@
         <cell>
           <template slot="icon">
             <div class="order-photo">
-              <!--                <img src="../../../assets/images/ddpic.png" alt="">-->
+              <img :src="item.goods[0].shangpinxinxi.thumb" alt />
             </div>
           </template>
           <template slot="after-title">
@@ -77,7 +80,10 @@
       <div class="tab-card" v-for="(item,index) in this.bigList" :key="index" v-if="item.status==0">
         <cell>
           <template slot="after-title">
-            <div class="shop-title">{{item.goods[0].suoshujingqu}}</div>
+            <div class="shop-title">
+              {{item.goods[0].suoshujingqu}}
+              <x-icon type="ios-arrow-right" size="12"></x-icon>
+            </div>
           </template>
           <template slot="default">
             <div class="div-status">待付款</div>
@@ -86,7 +92,7 @@
         <cell>
           <template slot="icon">
             <div class="order-photo">
-              <!--                <img src="../../../assets/images/ddpic.png" alt="">-->
+              <img :src="item.goods[0].shangpinxinxi.thumb" alt />
             </div>
           </template>
           <template slot="after-title">
@@ -123,7 +129,10 @@
       <div class="tab-card" v-for="(item,index) in this.bigList" :key="index" v-if="item.status==1">
         <cell>
           <template slot="after-title">
-            <div class="shop-title">{{item.goods[0].suoshujingqu}}</div>
+            <div class="shop-title">
+              {{item.goods[0].suoshujingqu}}
+              <x-icon type="ios-arrow-right" size="12"></x-icon>
+            </div>
           </template>
           <template slot="default">
             <div class="div-status">待发货</div>
@@ -132,7 +141,7 @@
         <cell>
           <template slot="icon">
             <div class="order-photo">
-              <!--                <img src="../../../assets/images/ddpic.png" alt="">-->
+              <img :src="item.goods[0].shangpinxinxi.thumb" alt />
             </div>
           </template>
           <template slot="after-title">
@@ -168,11 +177,14 @@
       <!-- <div class="empty-box" style="z-index:-1;">
                  <img src="../../../assets/images/empty.png" alt="">
         <p>你还没有订单，快去逛逛吧~</p>
-      </div> -->
+      </div>-->
       <div class="tab-card" v-for="(item,index) in this.bigList" :key="index" v-if="item.status==2">
         <cell>
           <template slot="after-title">
-            <div class="shop-title">{{item.goods[0].suoshujingqu}}</div>
+            <div class="shop-title">
+              {{item.goods[0].suoshujingqu}}
+              <x-icon type="ios-arrow-right" size="12"></x-icon>
+            </div>
           </template>
           <template slot="default">
             <div class="div-status">待收货</div>
@@ -181,7 +193,7 @@
         <cell>
           <template slot="icon">
             <div class="order-photo">
-              <!--                <img src="../../../assets/images/ddpic.png" alt="">-->
+              <img :src="item.goods[0].shangpinxinxi.thumb" alt />
             </div>
           </template>
           <template slot="after-title">
@@ -217,7 +229,10 @@
       <div class="tab-card" v-for="(item,index) in this.bigList" :key="index" v-if="item.status==3">
         <cell>
           <template slot="after-title">
-            <div class="shop-title">{{item.goods[0].suoshujingqu}}</div>
+            <div class="shop-title">
+              {{item.goods[0].suoshujingqu}}
+              <x-icon type="ios-arrow-right" size="12"></x-icon>
+            </div>
           </template>
           <template slot="default">
             <div class="div-status">已完成</div>
@@ -226,7 +241,7 @@
         <cell>
           <template slot="icon">
             <div class="order-photo">
-              <!--                <img src="../../../assets/images/ddpic.png" alt="">-->
+              <img :src="item.goods[0].shangpinxinxi.thumb" alt />
             </div>
           </template>
           <template slot="after-title">

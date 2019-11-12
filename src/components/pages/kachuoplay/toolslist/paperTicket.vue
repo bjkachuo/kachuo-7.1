@@ -89,11 +89,18 @@
       <div class="text-bind">
         <p>扫描或输入景区门票二维码、条形码或数字串码 等识别码进行门票信息绑定</p>
       </div>
-      <div class="scann" @click="scanning">
-        <p>扫码识别</p>
+      <div v-if="this.text == ''&& this.photo == 0">
+        <div class="scann" @click="scanning">
+          <p>扫码识别</p>
+        </div>
+        <div class="num" @click="write">
+          <p>门票编号</p>
+        </div>
       </div>
-      <div class="num" @click="write">
-        <p>门票编号</p>
+      <div v-if="this.text !=''|| this.photo == 1">
+        <div class="numTwo">
+          <p>已绑定</p>
+        </div>
       </div>
     </div>
     <div class="CheckTickets" v-if="this.text == ''|| this.photo == 0">
@@ -111,6 +118,7 @@
       @on-confirm="onConfirm5"
       @on-show="onShow5"
       @on-hide="onHide"
+      :input-attrs="{type: 'number'}"
     ></confirm>
   </div>
 </template>
@@ -193,7 +201,7 @@ export default {
           //如果识别不为空有数据
           if (result.text != "") {
             this.photo = 1;
-            console.log(result.text)
+            console.log(result.text);
             // alert("扫码成果" + result.text);
             this.$vux.toast.show({
               type: "success",
@@ -215,7 +223,7 @@ export default {
           //扫码失败
           this.photo = 0;
           // alert("扫码失败" + error);
-          console.log(error)
+          console.log(error);
           this.$vux.toast.show({
             type: "warn",
             text: "扫码失败",
@@ -423,6 +431,21 @@ export default {
   color: #3976ff;
   font-size: 16px;
 }
+.numTwo {
+  width: 85%;
+  height: 44px;
+  background: #ffffff;
+  border: 1px solid #999999;
+  border-radius: 8px;
+  margin: 0 auto;
+}
+.numTwo p {
+  text-align: center;
+  line-height: 44px;
+  color: #999999;
+  font-size: 16px;
+}
+
 .CheckTickets {
   height: 60px;
   width: 100%;

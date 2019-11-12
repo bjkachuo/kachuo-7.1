@@ -87,6 +87,18 @@
         </flexbox-item>
       </flexbox>
     </div>
+    <div class="line-two">
+      <flexbox>
+        <flexbox-item v-for="(item,index) in dataListFour" :key="index">
+          <div class="flex-demo" @click="getItem(item.link)">
+            <div class="img-wrap">
+              <img :src="item.imgSrc" alt />
+            </div>
+            <p>{{item.name}}</p>
+          </div>
+        </flexbox-item>
+      </flexbox>
+    </div>
 
     <IntegralDesc ref="alert"></IntegralDesc>
   </div>
@@ -168,6 +180,23 @@ export default {
         {
           name: "游园订单",
           link: "/GardenOrder",
+          imgSrc: require("@/assets/images/daoyouht.png")
+        }
+      ],
+      dataListFour: [
+        {
+          name: "景区后台",
+          link: "/jingquBsIndex",
+          imgSrc: require("@/assets/images/图片@2x.png")
+        },
+        {
+          name: "商家后台",
+          link: "/businessBsIndex",
+          imgSrc: require("@/assets/images/daoyouht.png")
+        },
+        {
+          name: "名家后台",
+          link: "/",
           imgSrc: require("@/assets/images/daoyouht.png")
         }
       ],

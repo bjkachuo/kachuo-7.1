@@ -53,13 +53,6 @@
       <div class="line-mid"></div>
       <div class="line-bottom">
         <x-button @click.native="showPlugin3">+ 添加服务电话</x-button>
-
-        <!-- <div class="addNum">
-          <div class="addNum-img">
-            <img src="../add.png" alt />
-          </div>
-          <p>添加服务电话</p>
-        </div>-->
       </div>
     </div>
   </div>
@@ -176,30 +169,6 @@ export default {
   font-size: 14px;
   color: #cccccc;
   margin-left: 4%;
-}
-.addNum {
-  width: 120px;
-  height: 20px;
-  margin: 18px auto;
-}
-.addNum-img {
-  height: 13px;
-  width: 13px;
-  float: left;
-}
-.addNum-img img {
-  width: 100%;
-  background: none;
-}
-.addNum p {
-  font-size: 14px;
-  color: #9ebcff;
-  line-height: 0;
-  float: left;
-  display: block;
-  margin-top: 6px;
-  margin-top: 13px;
-  margin-left: 5px;
 }
 </style>
 <style lang="less" scoped>
