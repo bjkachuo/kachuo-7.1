@@ -126,10 +126,6 @@ export default {
     //   console.log(res);
     // });
 
-    this.face = JSON.parse(sessionStorage.getItem("userLoginInfo")).is_face;
-    // this.face = this.$route.query.face;
-    console.log(this.face);
-
     // if (JSON.parse(sessionStorage.getItem("userLoginInfo")).is_face == 0) {
     //   this.$router.push("/facecheck");
     // } else {
@@ -160,7 +156,7 @@ export default {
       cordova.plugins.barcodeScanner.scan(
         result => {
           //如果识别不为空有数据
-          if (result.text != "") {
+          if (result.text != ""){
             this.photo = 1;
             console.log(result.text);
             // alert("扫码成果" + result.text);

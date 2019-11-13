@@ -13,8 +13,8 @@
           <div slot="title" @click="selectAddress(item)"><span class="tel">{{item.mobile}}</span><span class="tag-default" v-if="item.isdefault == 1">默认</span></div>
         </cell>
         <cell>
-          <div slot="title" @click="selectAddress(item)"><span class="addr-content">{{item.inlineDesc}}</span></div>
-          <div slot="default" @click="goEdit(item.key)"><div class="addr-edit"></div></div>
+          <div slot="title" @click="selectAddress(item)"><span class="addr-content">{{item.province}},{{item.city}},{{item.area}},{{item.address}}</span></div>
+          <div slot="default" @click="goEdit(item.id)"><div class="addr-edit"></div></div>
         </cell>
       </div>
 
@@ -89,15 +89,14 @@ export default {
             res.data.list.forEach(item=>{
               this.commonList.push({
                 realname:item.realname,
-                key: item.id,
+                id: item.id,
                 value: item.realname,
                 mobile:item.tel.slice(0,3)+'****'+item.tel.slice(7),
                 isdefault:item.isdefault,
-                inlineDesc:
-                  item.province +
-                  item.city +
-                  item.area +
-                  item.address
+                province:item.province,
+                city:item.city,
+                area:item.area,
+                address:item.address,
               })
             })
           }

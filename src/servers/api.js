@@ -6,8 +6,7 @@ export const getVeriCode = (data) => http.post('sms.changemobile', data);
 
 // 登录
 export const login = (data) => http.post('login.logintel', data);
-
-// 获取用户信息
+   // 获取用户信息
 export const getUserInfo = (data) => http.post('member.realname.login', data);
 
 //panhuisen 2019.07.17
