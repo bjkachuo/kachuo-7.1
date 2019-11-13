@@ -708,9 +708,12 @@ export default [{
     component: resolve => require(['@/components/pages/backStage/businessBackstage/eatDrinkBS/EatOrDrinkCommodityManagement'], resolve),
   },
   //吃吧或喝吧商家后台商品管理添加商品页面#########
-  // {
+  {
+    path: '/EatOrDrinkAddCommodity',
+    name: 'EatOrDrinkAddCommodity',
+    component: resolve => require(['@/components/pages/backStage/businessBackstage/eatDrinkBS/EatOrDrinkAddCommodity'], resolve),
 
-  // },
+  },
   //吃吧或喝吧商家后台订单管理页面
   {
     path: '/EatOrDrinkOrderManagement',
@@ -718,9 +721,12 @@ export default [{
     component: resolve => require(['@/components/pages/backStage/businessBackstage/eatDrinkBS/EatOrDrinkOrderManagement'], resolve),
   },
   //吃吧或喝吧商家后台订单详情页面##########
-  // {
+  {
+    path: '/EatOrDrinkOrderDetails',
+    name: 'EatOrDrinkOrderDetails',
+    component: resolve => require(['@/components/pages/backStage/businessBackstage/eatDrinkBS/EatOrDrinkOrderDetails'], resolve),
 
-  // },
+  },
   //住吧商家后台首页
   {
     path: '/LiveBusinessBsIndex',
@@ -733,6 +739,20 @@ export default [{
     path: '/LiveStoreInformation',
     name: 'LiveStoreInformation',
     component: resolve => require(['@/components/pages/backStage/businessBackstage/liveBS/LiveStoreInformation'], resolve),
+  },
+  //住吧商家后台商品管理页
+  {
+    path: '/LiveCommodityManagement',
+    name: 'LiveCommodityManagement',
+    component: resolve => require(['@/components/pages/backStage/businessBackstage/liveBS/LiveCommodityManagement'], resolve),
+
+  },
+  //住吧商家后台订单管理页
+  {
+    path: '/LiveOrderManagement',
+    name: 'LiveOrderManagement',
+    component: resolve => require(['@/components/pages/backStage/businessBackstage/liveBS/LiveOrderManagement'], resolve),
+
   },
   /*********************************************************************************************************************/
   //商家后台首页

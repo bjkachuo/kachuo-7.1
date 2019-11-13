@@ -79,7 +79,7 @@ export default {
         lowest_time: [],
         phone: "18790123121",
         name: "如家酒店",
-        address: "山东省济南市蓬莱阁街道",
+        address: "山东省济南市历下街道",
         account: "中国建设银行",
         cardNumber: "621226100108077XXXX"
       }
