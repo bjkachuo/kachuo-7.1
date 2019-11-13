@@ -60,18 +60,18 @@
             </div>
           </div>
         </div>
+        <confirm
+          class="confirm-dialog"
+          v-model="show2"
+          title="确定要删除这条留言吗？"
+          theme="android"
+          @on-cancel="onCancel(item.id)"
+          @on-confirm="onConfirm(item.id)"
+          @on-show="onShow"
+          @on-hide="onHide"
+        ></confirm>
       </div>
     </div>
-    <confirm
-      class="confirm-dialog"
-      v-model="show2"
-      title="确定要删除这条留言吗？"
-      theme="android"
-      @on-cancel="onCancel"
-      @on-confirm="onConfirm"
-      @on-show="onShow"
-      @on-hide="onHide"
-    ></confirm>
   </div>
 </template>
 
@@ -88,13 +88,13 @@ export default {
         showRightMore: false
       },
       show2: false,
-      List:[]
+      List: []
     };
   },
   mounted() {
     // this.User = JSON.parse(sessionStorage.getItem("userLoginInfo"));
     // console.log(this.User.avatar,this.User.realname);
-    
+
     this.$http
       .post(
         "https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=member.realname.memberComment"
@@ -106,17 +106,47 @@ export default {
       });
   },
   methods: {
+    //删除后重新刷新列表
+    newList() {
+      this.$http
+        .post(
+          "https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=member.realname.memberComment"
+        )
+        .then(({ data }) => {
+          console.log(data);
+          this.List = data.data;
+          console.log("删除后", this.List);
+        });
+    },
     onDel() {
       this.show2 = !this.show2;
     },
-    onCancel() {
-      console.log("on cancel");
+    onCancel(id) {
+      console.log("我点了取消", id);
     },
-    onConfirm(msg) {
-      console.log("on confirm");
-      if (msg) {
-        alert(msg);
-      }
+    //点击确定删除评论
+    onConfirm(id) {
+      this.$http
+        .post(
+          "https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=member.realname.delMemberComment&id=" +
+            id
+        )
+        .then(({ data }) => {
+          console.log(data);
+          this.newList();
+          this.$vux.toast.show({
+            type: "success",
+            text: "删除成功",
+            time: 1000,
+            position: "middle",
+            isShowMask: true
+          });
+        });
+      console.log("我点了确定");
+
+      // if (msg) {
+      //   alert(msg);
+      // }
     },
     onHide() {
       console.log("on hide");

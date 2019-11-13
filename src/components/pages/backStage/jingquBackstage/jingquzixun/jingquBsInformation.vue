@@ -57,7 +57,16 @@ export default {
   },
   computed: {},
   created() {},
-  mounted() {},
+  mounted() {
+    // this.$http
+    //   .post(
+    //     "https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.msg.scenicInformationList"
+    //     // http://www.kachuoceshi.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=scenic.msg.getScenic
+    //   )
+    //   .then(({ data }) => {
+    //     console.log(data);
+    //   });
+  },
   watch: {},
   methods: {
     jumpSearch() {
