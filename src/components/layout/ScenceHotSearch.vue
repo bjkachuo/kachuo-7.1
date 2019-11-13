@@ -34,12 +34,7 @@ export default {
 
 
   mounted() {
-   this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.index.get_recommend_business&scenic_id=24&scenic.index.change_scenic")
-    .then(({data})=>{
 
-      this.changeAreadata = data.data;
-
-    })
   },
 
   methods: {
