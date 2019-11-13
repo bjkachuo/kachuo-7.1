@@ -246,7 +246,7 @@ export default {
     //进行中
     goOrderTwo(index) {
       this.$router.push({
-        path: "/EatOrDrinkOrderDetails",
+        path: "/orderDetails",
         query: {
           status: "进行中",
           listOne: this.allList[index]
@@ -256,7 +256,7 @@ export default {
     //已取消
     goOrderThr(index) {
       this.$router.push({
-        path: "/EatOrDrinkOrderDetails",
+        path: "/orderDetails",
         query: {
           status: "已取消",
           listOne: this.allList[index]
@@ -266,7 +266,7 @@ export default {
     //已完成
     goOrderFour(index) {
       this.$router.push({
-        path: "/EatOrDrinkOrderDetails",
+        path: "/orderDetails",
         query: {
           status: "已完成",
           listOne: this.allList[index]

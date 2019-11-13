@@ -44,7 +44,7 @@ export default {
   data() {
     return {
       TitleObjData: {
-        titleContent: "商家管理后台",
+        titleContent: "商家管理后台(吃吧&喝吧)",
         showLeftBack: true,
         showRightMore: false
       },

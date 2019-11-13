@@ -44,7 +44,7 @@ export default {
   data() {
     return {
       TitleObjData: {
-        titleContent: "商家管理后台",
+        titleContent: "商家管理后台(住吧)",
         showLeftBack: true,
         showRightMore: false
       },
@@ -58,12 +58,12 @@ export default {
         },
         {
           name: "商品管理",
-          link: "/EatOrDrinkCommodityManagement",
+          link: "/LiveCommodityManagement",
           imgSrc: require("@/components/pages/backStage/businessBackstage/sj2.png")
         },
         {
           name: "订单管理",
-          link: "/EatOrDrinkOrderManagement",
+          link: "/LiveOrderManagement",
           imgSrc: require("@/components/pages/backStage/businessBackstage/sj3.png")
         }
       ]

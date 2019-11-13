@@ -25,13 +25,13 @@
             <img src alt />
           </div>
           <div class="title-wrap">
-            <p>吃的</p>
+            <p>大床房</p>
           </div>
           <div class="more-wrap" @click="show">
             <img src="../moremore.png" alt />
           </div>
           <div class="bottom-line">
-            <span>￥30.00</span>
+            <span>￥300.00</span>
             <p>库存 99</p>
           </div>
         </div>
@@ -42,13 +42,13 @@
             <img src alt />
           </div>
           <div class="title-wrap">
-            <p>喝的</p>
+            <p>标间</p>
           </div>
           <div class="more-wrap" @click="show">
             <img src="../moremore.png" alt />
           </div>
           <div class="bottom-line">
-            <span>￥30.00</span>
+            <span>￥260.00</span>
             <p>库存 99</p>
           </div>
         </div>
@@ -96,7 +96,7 @@ export default {
     },
     //跳转添加商品页
     addCommodity() {
-      this.$router.push("/EatOrDrinkAddCommodity");
+      this.$router.push("/SjAddCommodity");
     }
   },
   components: {
