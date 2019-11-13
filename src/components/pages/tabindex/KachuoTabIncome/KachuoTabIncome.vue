@@ -97,13 +97,27 @@ export default {
     },
     agree(){
       this.alertFlag = false
-      this.$router.push(this.btnList[this.btnIndex].link)
+      this.shiMing()
     },
-
     maskClick(){
       this.mask = false
-      this.$router.push(this.btnList[this.btnIndex].link)
+      this.shiMing()
     },
+    shiMing(){
+      if(JSON.parse(sessionStorage.userLoginInfo).sm_createtime != '0'){
+        this.$router.push(this.btnList[this.btnIndex].link)
+      }else{
+        this.$vux.toast.show({
+          type: "text",
+          text: '请先实名认证',
+          position: "middle",
+          time: 1000
+        });
+        this.$router.push("/Ucenter/Certification");
+      }
+    },
+
+
     xieyi(){
       this.$router.push('/checkIn/agreement')
     }

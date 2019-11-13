@@ -62,6 +62,7 @@ export default {
           time: 1000
         });
         if(res.result == 1){
+          // if()
           this.$router.push('/Ucenter')
         }
       })

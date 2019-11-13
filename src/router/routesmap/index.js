@@ -15,9 +15,6 @@ export default [{
   {
     path: '/indextab',
     name: 'indextab',
-    meta: {
-      auth: true // 如果此路由需要微信授权请设置为true,默认为false
-    },
     component: resolve => require(['@/components/index/index'], resolve)
   },
   {
