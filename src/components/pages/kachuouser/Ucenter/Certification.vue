@@ -7,25 +7,13 @@
         <div class="cert-body">
           <flexbox :gutter="15" class="cert-flex">
             <flexbox-item>
-
               <UploadImgOne  v-on:getHeaderImgUrl="getz" :plus="true">
                 <div slot="bg" style="width: 100%;height: 100%">
                   <div class="up-avata-bg" v-if="!z">
-                    <div class="camera camera1"></div>
+                    <div class="camera"></div>
                   </div>
                 </div>
               </UploadImgOne>
-              <div class="text">身份证正面</div>
-            </flexbox-item>
-            <flexbox-item>
-              <UploadImgOne  v-on:getHeaderImgUrl="getz" :plus="true">
-                <div slot="bg" style="width: 100%;height: 100%">
-                  <div class="up-avata-bg" v-if="!f">
-                    <div class="camera camera2"></div>
-                  </div>
-                </div>
-              </UploadImgOne>
-              <div class="text">身份证背面</div>
             </flexbox-item>
           </flexbox>
         </div>
@@ -98,17 +86,11 @@ export default {
 
   .camera{
     width: 100%;
-    height: 88px;
+    height: 176px;
     margin: 0 auto;
     position: relative;
-
-    background-size: 100% 100%;
-  }
-  .camera1{
-    background-image: url("./card1.png");
-  }
-  .camera2{
     background-image: url("./card2.png");
+    background-size: 100% 100%;
   }
   .cert-flex/deep/ li{
     width: 100%;
@@ -152,10 +134,6 @@ export default {
 }
 .cert-flex{
   text-align: center;
-}
-.cert-flex .text{
-  font-size: 14px;
-  margin-top: 10px;
 }
 .cert-photo{
   overflow: hidden;

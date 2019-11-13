@@ -99,6 +99,7 @@
           requestLogin() {
             if (this.phoneValue && this.veriValue) {
               // 请求登录
+
               login({
                 tel: this.phoneValue.replace(/\s*/g, ""),
                 code: this.veriValue,
