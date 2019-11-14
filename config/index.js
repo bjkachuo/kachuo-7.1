@@ -23,7 +23,11 @@ module.exports = {
     https:true,
     // Various Dev Server settings
 
+<<<<<<< Updated upstream
     host: '192.168.101.5', // can be overwritten by process.env.HOST
+=======
+    host: '192.168.8.69', // can be overwritten by process.env.HOST
+>>>>>>> Stashed changes
 
     port: 9999, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: true,
@@ -36,7 +40,7 @@ module.exports = {
     // linting errors and warnings will be shown in the console.
     useEslint: false,
     // If true, eslint errors and warnings will also be shown in the error overlay
-    // in the browser.
+    // in the browser. -    8-++
     showEslintErrorsInOverlay: false,
 
     /**
