@@ -1,11 +1,6 @@
 <template>
   <div class="ol-wrap">
-    <Header
-      :titleContent="TitleObjData.titleContent"
-      :showLeftBack="TitleObjData.showLeftBack"
-      :showRightMore="TitleObjData.showRightMore"
-      style="top:-43px"
-    ></Header>
+    <Header :titleContent="TitleObjData.titleContent" :showLeftBack="TitleObjData.showLeftBack" :showRightMore="TitleObjData.showRightMore" style="top:-43px"></Header>
     <b>
       <div class="t-content" v-for="(item,index) in dataListOne" :key="index">
         <div class="t-left">
@@ -24,7 +19,7 @@
             </div>
           </div>
         </div>
-        <div class="t-right">
+        <div class="t-right" @click="order(item.Id)">
           <p>购票</p>
         </div>
       </div>
@@ -61,8 +56,12 @@ export default {
         console.log(this.dataListOne);
       });
   },
-  methods: {},
-  watch: {},
+  methods: {
+    order(Id){
+      this.$router.push('/onlineTicketing/orderCompletion?id='+Id)
+    }
+  },
+
   components: {
     Header
   }

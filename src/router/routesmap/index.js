@@ -948,8 +948,13 @@ export default [{
   {
     //票务系统在线购票
     path: '/onlineTicketing',
-    name: '/onlineTicketing',
-    component: resolve => require(['@/components/pages/kachuoplay/toolslist/onlineTicketing'], resolve),
+    name: 'onlineTicketing',
+    component: resolve => require(['@/components/pages/kachuoplay/toolslist/onlineTicketing/onlineTicketing'], resolve),
+  },
+  {
+    path:'/onlineTicketing/orderCompletion',
+    name:'orderCompletion',
+    component: resolve => require(['@/components/pages/kachuoplay/toolslist/onlineTicketing/orderCompletion'], resolve),
   },
   {
     //票务系统电子票

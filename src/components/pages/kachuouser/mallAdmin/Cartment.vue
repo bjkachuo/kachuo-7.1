@@ -1,11 +1,6 @@
 <template>
   <div class="wrap">
-    <x-header
-      :left-options="{showBack: showLeftBack,preventGoBack:true}"
-      @on-click-back="back"
-      slot="header"
-      style="width: 100%;position: absolute;left: 0;top: 0;z-index: 100;font-size: 20px;"
-    >
+    <x-header :left-options="{showBack: showLeftBack,preventGoBack:true}" @on-click-back="back" slot="header" style="width: 100%;position: absolute;left: 0;top: 0;z-index: 100;font-size: 20px;">
       {{titleContent}}
       <div slot="right">
         <div class="x-txt" v-if="toggle" @click="onEdit()">{{rText}}</div>
@@ -22,7 +17,7 @@
           <template slot="icon">
             <check-icon :value.sync="check2"></check-icon>
             <div class="gar-photo">
-              <img src="./ddpic.png" alt />
+              <img :src="item.goods_sx.thumb" alt />
             </div>
           </template>
           <template slot="after-title">
@@ -31,11 +26,8 @@
                 <div class="gar-title">{{item.goods_sx.title}}</div>
               </div>
               <div class="gar-foot">
-                <div class="gar-price">
-                  ￥
-                  <span>{{item.marketprice}}</span>
-                </div>
-                <inline-x-number :min="0" width="30px" :value="item.total"></inline-x-number>
+                <div class="gar-price">￥<span>{{item.marketprice}}</span></div>
+                <inline-x-number :min="0" width="30px" v-model="item.total"></inline-x-number>
               </div>
             </div>
           </template>
@@ -83,19 +75,13 @@ export default {
       check2: true,
       ListOne: [],
       num: "",
-      price: 0
     };
   },
   methods: {
     test() {
       this.check1 != this.check1
       console.log(this.check1)
-      // if(this.check1 = true){
-      //   console.log("11111")
-      // }else{
-      //   console.log("22222")
-      // }
-},
+    },
     onEdit() {
       this.rText = "完成";
       this.toggle = !this.toggle;
@@ -112,17 +98,11 @@ export default {
         .then(res => {
           console.log(res);
           this.ListOne = res.data.result;
+          this.ListOne.forEach(item=>{
+            item.total = 1
+          })
           console.log("购物车列表", this.ListOne);
-          // if (res.result === 1) {
-          //   let obj = res.data.result;
-          //   for (let i in obj) {
-          //     for (let j in obj[i][0]) {
-          //       this.dataList.push(obj[i][0][j]);
-          //       this.numArr.push(parseInt(obj[i][0][j].total, 10));
-          //       this.checkFlagArr.push(true);
-          //     }
-          //   }
-          // }
+
         })
         .catch(err => {
           console.log(err);
@@ -147,6 +127,15 @@ export default {
   computed: {
     conHei() {
       return { height: document.documentElement.clientHeight - 90 + "px" };
+    },
+    price(){
+
+        let price = 0
+
+        this.ListOne.forEach(item=>{
+          price += item.marketprice * item.total
+        })
+        return price
     }
   }
 };
