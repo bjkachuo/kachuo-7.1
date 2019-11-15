@@ -39,8 +39,12 @@
             //安卓访问时不显示头部
             bridge.register("yyTab", r => {
                 this.isApp = true;
-                return "游园"
             });
+
+          bridge.register("getUserInfo", r => {
+            alert(r)
+            localStorage.setItem("token",r)
+          });
 
             // this.getBannerImgFn("2");
             // this.getLocation(); // 调用获取地理位置
