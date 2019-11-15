@@ -62,25 +62,25 @@
                     },
                     {
                         name: "名家动态",
-                        link: "/jingquBsInformation",
+                        link: "/famousPersonDynamic",
                         imgSrc: require("@/components/pages/backStage/jingquBackstage/jq2.png")
                     },
                     {
                         name: "留言审核",
-                        link: "/jingquMessageAudit",
+                        link: "/famousPersonMessageAudit",
                         imgSrc: require("@/components/pages/backStage/jingquBackstage/jq3.png")
                     }
                 ],
                 choiceListTwo: [
                     {
                         name: "名家商品",
-                        link: "/jingquBsMall",
+                        link: "/famousPersonManagement",
                         imgSrc: require("@/components/pages/backStage/jingquBackstage/jq4.png")
                     },
 
                     {
                         name: "全部订单",
-                        link: "/jingquBsGuide",
+                        link: "/famousPersonOrder",
                         imgSrc: require("@/components/pages/backStage/jingquBackstage/jq5.png")
                     }
                 ]

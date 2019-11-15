@@ -7,6 +7,9 @@
       :showRightMore="TitleObjData.showRightMore"
     ></Header>
     <p class="Preservation">保存</p>
+    <x-input  placeholder="请输入标题..."  placeholder-align="left"></x-input>
+    <div style="width: 92%;height: 1px;background: #E5E5E5;margin: 10px auto 10px;"></div>
+
     <!-- <x-textarea placeholder="请输入内容..." :show-counter="false" :rows="1" autosize></x-textarea> -->
     <quill-editor
       v-model="content"
@@ -21,20 +24,21 @@
 
 <script>
     import Header from "@/components/common/Header";
-    // import { XTextarea } from "vux";
-    import {quillEditor} from "vue-quill-editor";
+    import {XInput} from 'vux'
 
+    // import { XTextarea } from "vux";
+    import { quillEditor } from "vue-quill-editor";
 
     export default {
         props: {},
         data() {
             return {
                 TitleObjData: {
-                    titleContent: "景区介绍",
+                    titleContent: "发布动态",
                     showLeftBack: true,
                     showRightMore: false
                 },
-                content: "",
+                content:"",
                 messages: [],
                 editorOption: {
                     modules: {
@@ -46,10 +50,8 @@
             };
         },
         computed: {},
-        created() {
-        },
-        mounted() {
-        },
+        created() {},
+        mounted() {},
         watch: {},
         methods: {
             onEditorBlur() {
@@ -66,7 +68,7 @@
         },
         components: {
             Header,
-
+            XInput
             // XTextarea
         }
     };
@@ -79,7 +81,6 @@
     overflow: hidden scroll;
     position: relative;
   }
-
   .Preservation {
     display: block;
     position: absolute;
@@ -94,18 +95,15 @@
   /deep/ .vux-header {
     box-shadow: 0px 10px 20px 0px rgba(0, 101, 255, 0.08);
   }
-
   // /deep/ .weui-textarea {
   //   min-height: 600px;
   // }
   /deep/ .ql-editor {
     min-height: 300px;
   }
-
   /deep/ .ql-container.ql-snow {
     border: none;
   }
-
   /deep/ .ql-toolbar {
     position: fixed;
     top: 8%;
@@ -113,12 +111,10 @@
     z-index: 100000;
     border: none;
   }
-
   /deep/ .ql-snow.ql-toolbar button,
   .ql-snow .ql-toolbar button {
     height: 50px;
   }
-
   /deep/ .ql-snow.ql-toolbar button svg,
   .ql-snow .ql-toolbar button svg {
     background: white;
