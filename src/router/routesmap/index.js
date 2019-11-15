@@ -784,8 +784,23 @@ export default [{
     component: resolve => require(['@/components/pages/backStage/businessBackstage/SjBsOrder'], resolve),
 
   },
-  /**********************************************************************************************/
+  /*******************************************名家后台***************************************************/
+  //名家后台首页
+  {
+    path: '/famousPersonBsIndex',
+    name: 'famousPersonBsIndex',
+    component: resolve => require(['@/components/pages/backStage/FamousPersonBackstage/famousPersonBsIndex'], resolve),
 
+  },
+  //名家后台个人信息页
+  {
+    path: '/famousPersonInformation',
+    name: 'famousPersonInformation',
+    component: resolve => require(['@/components/pages/backStage/FamousPersonBackstage/famousPersonInformation/famousPersonInformation'], resolve),
+
+  },
+
+  /*******************************************************************************************/
   {
     path: '/understand',
     name: 'understand',
