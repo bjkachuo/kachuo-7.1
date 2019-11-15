@@ -30,12 +30,13 @@
         <cell title="实名认证" value="已认证" v-if="idState != '0' "></cell>
         <cell title="人脸识别" value="未识别" v-if="face == 0" is-link @click.native="goFaceThr"></cell>
         <cell title="人脸识别" value="已识别" v-if="face == 1"></cell>
-        <!-- <cell title="实名认证" is-link>
+        <cell title="个人信息" is-link>
           <template slot="default">
-            <div @click="goRenzheng">未认证</div>
+            <div @click="goWanshan">未认证</div>
           </template>
         </cell>
-        <cell title="人脸识别" is-link>
+
+        <!-- <cell title="人脸识别" is-link>
           <template slot="default">
             <div>未识别</div>
           </template>
@@ -90,6 +91,9 @@ export default {
   methods: {
     onClick(key) {
       this.show2 = !this.show2;
+    },
+    goWanshan(){
+      this.$router.push('/realnameauth')
     },
     getHeaderImgUrlData() {},
     click(key) {

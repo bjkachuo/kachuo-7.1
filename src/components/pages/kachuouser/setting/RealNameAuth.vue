@@ -11,9 +11,6 @@
       <PopupPicker :dataOpion="dataOpC" @givePickerVal="getPickValC"></PopupPicker>
       <PopupPicker :dataOpion="dataOpD" @givePickerVal="getPickValD"></PopupPicker>
       <PopupPicker :dataOpion="dataOpE" @givePickerVal="getPickValE"></PopupPicker>
-      <p class="id-card-img">身份证正面照片</p>
-      <img class="upload-img" v-if="imgUrl" :src="imgUrl" alt srcset>
-      <UploadImgOne v-else-if="!imgUrl" v-on:getHeaderImgUrl="getImgVal"></UploadImgOne>
       <div class="btn-wrap">
         <x-button class="sub-btn" type="primary" @click.native="veriFormData">提交</x-button>
       </div>
@@ -24,7 +21,7 @@
 <script>
 import Header from "@/components/common/Header";
 import PopupPicker from "@/components/common/PopupPicker";
-import UploadImgOne from "@/components/common/UploadImgOne/UploadImgOne";
+
 import { XButton } from "vux";
 
 import { getUserRule, AuthSubmit } from "@/servers/api";
@@ -175,9 +172,6 @@ export default {
       } else if (!this.pickValE.length) {
         this.showToast("请选择师承");
         return;
-      } else if (!this.imgUrl) {
-        this.showToast("请上传身份证照片");
-        return;
       } else {
         this.submitVal();
       }
@@ -237,19 +231,6 @@ export default {
 .sub-btn {
   width: 80%;
 }
-.upload-img {
-  width: 94px;
-  height: 94px;
-  display: inline-block;
-  object-fit: cover;
-  margin: 0 0 0 20px;
-}
-.id-card-img {
-  width: 100%;
-  height: 30px;
-  padding: 0 10px;
-  box-sizing: border-box;
-  line-height: 30px;
-  margin-top: 10px;
-}
+
+
 </style>

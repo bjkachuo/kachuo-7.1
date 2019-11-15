@@ -121,11 +121,6 @@ export default {
       return { height: document.documentElement.clientHeight - 45 + "px" };
     }
   },
-  created(){
-
-  },
-
-  beforeMount() {},
 
   mounted() {
     this.getGoodsDetailsInfo();

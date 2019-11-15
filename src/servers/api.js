@@ -401,3 +401,9 @@ export const guideRegister = (data) => http.post("enter.tourguideRegister", data
 export const guideInfor = (data) => http.post("tourguide.index.save", data);
 //积分提现
 export const drawIntegral = (data) => http.post("integral.withdraw_int", data);
+//单票
+export const getTicketDetail = (data) => http.post("scenic.ticket.get_ticket_detail", data);
+//购票
+export const buyTicket = (data) => http.post("scenic.ticket.buy_ticket", data);
+//购票支付
+export const buyTicketHd = (data) => http.post("scenic.ticket.hd", data);

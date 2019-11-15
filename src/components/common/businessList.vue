@@ -1,19 +1,6 @@
 <template>
   <div class="businessList-wrap">
-<<<<<<< HEAD
     <Header :titleContent="TitleObjData.titleContent" :showLeftBack="TitleObjData.showLeftBack" :showRightMore="TitleObjData.showRightMore"></Header>
-=======
-    <div>
-      <Header
-        :titleContent="TitleObjData.titleContent"
-        :showLeftBack="TitleObjData.showLeftBack"
-        :showRightMore="TitleObjData.showRightMore"
-      ></Header>
-      <div class="help-wrap" style="position:absolute;right:15px;top:10px;z-index: 999;">
-        <customerService></customerService>
-      </div>
-    </div>
->>>>>>> 7096f3490e59046d1f42c5eb68f85081898c9747
     <div class="businessList-content">
       <div
         class="recommend"
