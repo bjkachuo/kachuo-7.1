@@ -77,14 +77,15 @@ export default {
         showLeftBack: true,
         showRightMore: false
       },
-      list1: [["1", "2", "3", "4", "5", "6", "7"]],
-      form: {
-        tour_path: "",
-        introduce: "",
-        price: "",
-        lowest_time: [],
-        phone: ""
-      }
+        form: {
+            tour_path: "",
+            introduce: "",
+            price: "",
+            lowest_time: [],
+            phone: ""
+        },
+
+        list1: [["1", "2", "3", "4", "5", "6", "7"]],
     };
   },
   computed: {},

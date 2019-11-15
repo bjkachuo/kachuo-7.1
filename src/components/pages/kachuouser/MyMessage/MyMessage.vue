@@ -45,7 +45,7 @@
       <div class="message-panel" v-for="(item,index) in List" :key="index">
         <div class="mess-body">
           <div class="mess-group">
-            <cell :title="item.realname">
+            <cell :title="item.nickname">
               <img slot="icon" class="mess-avatar" :src="item.avatar" />
               <template slot="default">
                 <div class="btn-del" @click="onDel()"></div>
@@ -79,7 +79,6 @@
 import Header from "@/components/common/Header";
 import { Cell, XButton, Flexbox, FlexboxItem, Confirm } from "vux";
 export default {
-  methods: {},
   data() {
     return {
       TitleObjData: {

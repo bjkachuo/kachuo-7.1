@@ -3,10 +3,10 @@ const _import = require('../_import_' + process.env.NODE_ENV);
 // export default [{
 
 export default [{
-    path: '/',
-    name: 'login',
-    component: resolve => require(['@/components/index/Login'], resolve)
-  },
+  path: '/',
+  name: 'login',
+  component: resolve => require(['@/components/index/Login'], resolve)
+},
   {
     path: '/login2',
     name: 'login2',
@@ -784,8 +784,23 @@ export default [{
     component: resolve => require(['@/components/pages/backStage/businessBackstage/SjBsOrder'], resolve),
 
   },
-  /**********************************************************************************************/
+  /*******************************************名家后台***************************************************/
+  //名家后台首页
+  {
+    path: '/famousPersonBsIndex',
+    name: 'famousPersonBsIndex',
+    component: resolve => require(['@/components/pages/backStage/FamousPersonBackstage/famousPersonBsIndex'], resolve),
 
+  },
+  //名家后台个人信息页
+  {
+    path: '/famousPersonInformation',
+    name: 'famousPersonInformation',
+    component: resolve => require(['@/components/pages/backStage/FamousPersonBackstage/famousPersonInformation/famousPersonInformation'], resolve),
+
+  },
+
+  /*******************************************************************************************/
   {
     path: '/understand',
     name: 'understand',
@@ -952,8 +967,8 @@ export default [{
     component: resolve => require(['@/components/pages/kachuoplay/toolslist/onlineTicketing/onlineTicketing'], resolve),
   },
   {
-    path:'/onlineTicketing/orderCompletion',
-    name:'orderCompletion',
+    path: '/onlineTicketing/orderCompletion',
+    name: 'orderCompletion',
     component: resolve => require(['@/components/pages/kachuoplay/toolslist/onlineTicketing/orderCompletion'], resolve),
   },
   {
@@ -1046,5 +1061,33 @@ export default [{
     name: 'drawDone',
     component: resolve => require(['@/components/pages/kachuouser/drawDone'], resolve),
   },
+  /************************************安卓跳转****************************************************/
+  {
+    //安卓游园首页
+    path: '/KachuoTabPlay',
+    name: 'KachuoTabPlay',
+    component: resolve => require(['@/components/pages/tabindex/KachuoTabPlay'], resolve),
+
+  },
+  {
+    //安卓游园商城
+    path: '/KachuoTabMall',
+    name: 'KachuoTabMall',
+    component: resolve => require(['@/components/pages/tabindex/KachuoTabMall/KachuoTabMall'], resolve),
+  },
+  {
+    //安卓游园变现
+    path: '/KachuoTabCash',
+    name: 'KachuoTabCash',
+    component: resolve => require(['@/components/pages/tabindex/KachuoTabCash/KachuoTabCash'], resolve),
+  },
+  {
+    //安卓游园创收
+    path: '/KachuoTabIncome',
+    name: 'KachuoTabIncome',
+    component: resolve => require(['@/components/pages/tabindex/KachuoTabIncome/KachuoTabIncome'], resolve),
+  },
+  /****************************************************************************************/
+
 
 ]

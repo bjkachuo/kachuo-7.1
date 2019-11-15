@@ -197,7 +197,7 @@ export default {
         },
         {
           name: "名家后台",
-          link: "/",
+          link: "/famousPersonBsIndex",
           imgSrc: require("@/assets/images/daoyouht.png")
         }
       ],
