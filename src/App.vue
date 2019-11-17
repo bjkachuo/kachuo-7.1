@@ -45,7 +45,6 @@ export default {
   },
 
   created(){
-    alert(1)
     let id
     id = sessionStorage.currentScenic ?  sessionStorage.currentScenic : 24
     // alert(id)
