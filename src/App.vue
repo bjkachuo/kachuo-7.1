@@ -1,11 +1,3 @@
-<!--
- * @Description: 
- * @Author: lpb
- * @Github: https://github.com/lpb273
- * @LastEditors: lpb
- * @Date: 2019-02-27 08:56:16
- * @LastEditTime: 2019-05-06 08:52:55
- -->
 <template>
   <div id="#app-box" class="app-box">
     <transition :name="transitionName">
@@ -53,7 +45,7 @@ export default {
   },
 
   created(){
-
+    alert(1)
     let id
     id = sessionStorage.currentScenic ?  sessionStorage.currentScenic : 24
     // alert(id)
@@ -61,6 +53,21 @@ export default {
       .then(data=>{
         // alert(data)
       })
+
+    let ret = dsBridge.call("getUserInfo.syn", {},cb=>{
+      alert(cb)
+    });
+
+
+    // bridge.register("getUserInfo",  (r)=> {
+    //   alert(r)
+    //
+    //   JSON.parse(r).accessToken
+    //
+    //   localStorage.setItem("token",r)
+    // })
+
+
   },
 
   mounted() {
