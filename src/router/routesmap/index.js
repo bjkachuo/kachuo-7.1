@@ -799,6 +799,48 @@ export default [{
     component: resolve => require(['@/components/pages/backStage/FamousPersonBackstage/famousPersonInformation/famousPersonInformation'], resolve),
 
   },
+  //名家后台名家动态页
+  {
+    path: '/famousPersonDynamic',
+    name: 'famousPersonDynamic',
+    component: resolve => require(['@/components/pages/backStage/FamousPersonBackstage/famousPersonDynamic/famousPersonDynamic'], resolve),
+
+  },
+  //名家后台发布动态页
+  {
+    path: '/famousPersonRelease',
+    name: 'famousPersonRelease',
+    component: resolve => require(['@/components/pages/backStage/FamousPersonBackstage/famousPersonDynamic/famousPersonRelease'], resolve),
+
+  },
+  //名家后台留言审核页
+  {
+    path: '/famousPersonMessageAudit',
+    name: 'famousPersonMessageAudit',
+    component: resolve => require(['@/components/pages/backStage/FamousPersonBackstage/famousPersonMessageAudit/famousPersonMessageAudit'], resolve),
+
+  },
+  //名家后台商品管理页
+  {
+    path: '/famousPersonManagement',
+    name: 'famousPersonManagement',
+    component: resolve => require(['@/components/pages/backStage/FamousPersonBackstage/famousPersonManagement/famousPersonManagement'], resolve),
+
+  },
+  //名家后台商品添加页
+  {
+    path: '/famousPersonManagementAdd',
+    name: 'famousPersonManagementAdd',
+    component: resolve => require(['@/components/pages/backStage/FamousPersonBackstage/famousPersonManagement/famousPersonManagementAdd'], resolve),
+
+  },
+  //名家后台商品订单管理页
+  {
+    path: '/famousPersonOrder',
+    name: 'famousPersonOrder',
+    component: resolve => require(['@/components/pages/backStage/FamousPersonBackstage/famousPersonOrder/famousPersonOrder'], resolve),
+
+  },
 
   /*******************************************************************************************/
   {

@@ -91,7 +91,7 @@ axios.interceptors.response.use(function (response) {
     if (response.data.code !== 200) {
       if (response.data. code === 10001) {
         localStorage.removeItem("token");
-        showTip("请登录", () => {
+        showTip("", () => {
           // window.location.href = ("/");
         })
       } else if (response.data.code === -3) {
