@@ -2,11 +2,17 @@ const _import = require('../_import_' + process.env.NODE_ENV);
 
 // export default [{
 
-export default [{
-  path: '/',
-  name: 'login',
-  component: resolve => require(['@/components/index/Login'], resolve)
-},
+export default [
+  {
+    path: '/',
+    name: 'login',
+    component: resolve => require(['@/components/index/Login'], resolve)
+  },
+  {
+    path: '/registrationAgreement',
+    name: 'registrationAgreement',
+    component: resolve => require(['@/components/index/registrationAgreement'], resolve)
+  },
   {
     path: '/login2',
     name: 'login2',
