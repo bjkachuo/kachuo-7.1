@@ -23,29 +23,8 @@ module.exports = {
     https:true,
     // Various Dev Server settings
 
-<<<<<<< HEAD
-    host: '192.168.81.175', // can be overwritten by process.env.HOST
+    host: '192.168.2.4', // can be overwritten by process.env.HOST
 
-=======
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-    host: '192.168.101.5', // can be overwritten by process.env.HOST
-
-=======
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-    host: '192.168.101.5', // can be overwritten by process.env.HOST
-=======
-    host: '192.168.8.69', // can be overwritten by process.env.HOST
->>>>>>> Stashed changes
-=======
-    host: '192.168.82.107', // can be overwritten by process.env.HOST
->>>>>>> Stashed changes
->>>>>>> 36d85b0dcdbb84300cac6022e6b88fd54aae89bd
-=======
-    host: '192.168.82.107', // can be overwritten by process.env.HOST
->>>>>>> Stashed changes
->>>>>>> 47d0735c7cd6e2b030c606211f8a7290db3b0fc2
 
     port: 9999, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: true,

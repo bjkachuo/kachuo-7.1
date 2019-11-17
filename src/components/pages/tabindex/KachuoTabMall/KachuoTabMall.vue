@@ -162,9 +162,7 @@
             },
             // 商品推荐
             getGoodsComm() {
-                goodsBucketRecomm({
-                    type: 2
-                })
+                goodsBucketRecomm({type: 2})
                     .then(res => {
                         if (res.result === 1) {
                             this.goodsListData = res.data.result;

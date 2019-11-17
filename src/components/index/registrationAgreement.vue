@@ -1,7 +1,6 @@
 <template>
   <div>
-    <Header style="margin-bottom: 46px" :titleContent="TitleObjData.titleContent" :showLeftBack="TitleObjData.showLeftBack" :showRightMore="TitleObjData.showRightMore"></Header>
-    <div style="width: 92%;margin: 0 auto; overflow-y: auto;height: calc(100% - 46px)">
+    <div style="width: 92%;margin: 0 auto;">
       <h1 style="text-align: center;font-weight: 800;">卡戳APP平台服务协议</h1>
       <p>
         尊敬的用户：
@@ -193,19 +192,13 @@
 </template>
 
 <script>
-  import Header from "@/components/common/Header";
+
   export default {
     name: "registrationAgreement",
 
-    components:{Header},
-
     data(){
       return{
-        TitleObjData: {
-          titleContent: "注册协议",
-          showLeftBack: true,
-          showRightMore: false
-        },
+
       }
     }
   }
