@@ -56,15 +56,6 @@ export default {
     // });
     dsBridge.registerAsyn("loginInfo", function(arg1, responseCallback) {
       localStorage.setItem("token", JSON.parse(arg1).accessToken);
-      //     this.$store.commit("setUserLoginInfo", JSON.parse(arg1));
-      //    this.GLOBAL.setSession("userLoginInfo", JSON.parse(arg1));
-
-    //   alert();
-      alert(JSON.stringify(JSON.parse(arg1)));
-      //   alert(String.parseJSON(arg1));
-      alert(JSON.parse(arg1).accessToken);
-
-      alert("登录信息成功");
       responseCallback("登录信息成功");
     });
     //安卓访问时不显示头部

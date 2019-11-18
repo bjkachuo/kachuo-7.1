@@ -1,9 +1,9 @@
 <template>
   <div :style="conHeight">
-    <KachuoTabPlay v-show="getCurrentTabItem === 0"></KachuoTabPlay>
-    <KachuoTabMall v-show="getCurrentTabItem === 1"></KachuoTabMall>
-    <KachuoTabCash v-show="getCurrentTabItem === 2"></KachuoTabCash>
-    <KachuoTabIncome v-show="getCurrentTabItem === 3"></KachuoTabIncome>
+    <KachuoTabPlay v-if="getCurrentTabItem === 0"></KachuoTabPlay>
+    <KachuoTabMall v-if="getCurrentTabItem === 1"></KachuoTabMall>
+    <KachuoTabCash v-if="getCurrentTabItem === 2"></KachuoTabCash>
+    <KachuoTabIncome v-if="getCurrentTabItem === 3"></KachuoTabIncome>
     <KachuoTabPersonalCenter v-show="getCurrentTabItem === 4"></KachuoTabPersonalCenter>
   </div>
 </template>

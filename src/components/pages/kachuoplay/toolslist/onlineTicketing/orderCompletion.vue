@@ -62,10 +62,38 @@
           confirmOrder(){
             buyTicket({ticket:this.$route.query.id,idCard:this.ruleCode,date:this.selected.Date,type:1}).then(res=>{
               console.log(res);
-              guidePay({
-                type:1,
-                order_sn: res.data.order_sn
-              })
+              let WXparams = {
+                partnerid: res.data.pay.partnerid, // merchant id
+                prepayid: res.data.pay.prepayid, // prepay id
+                noncestr: res.data.pay.noncestr, // nonce
+                timestamp: res.data.pay.timestamp.toString(), // timestamp
+                sign: res.data.pay.paySign, // signed string
+                package: res.data.pay.package // signed string
+              };
+              alert(JSON.stringify(WXparams))
+              dsBridge.call("WXpay", JSON.stringify(WXparams));
+
+
+              bridge.register("payStatus", r => {
+                if(r){
+                  this.$vux.toast.show({
+                    text: '支付成功',
+                    type: 'success',
+                    time: 2000
+                  })
+                }else{
+                  this.$vux.toast.show({
+                    text: '支付失败,请重试!',
+                    type: 'warn',
+                    time: 2000
+                  })
+                }
+              });
+
+              // guidePay({
+              //   type:1,
+              //   order_sn: res.data.order_sn
+              // })
                 // .then(res => {
                 //   console.log(res);
                 //   if (res.result === 1) {
@@ -78,26 +106,7 @@
             })
           },
           WeixinPay(res) {
-            let WXparams = {
-              partnerid: res.partnerid, // merchant id
-              prepayid: res.prepayid, // prepay id
-              noncestr: res.noncestr, // nonce
-              timestamp: res.timestamp.toString(), // timestamp
-              sign: res.paySign // signed string
-            };
-            let that = this;
-            document.addEventListener("deviceready", onDeviceReady, false);
-            function onDeviceReady() {
-              Wechat.sendPaymentRequest(
-                WXparams,
-                function() {
-                  that.successToast();
-                },
-                function(reason) {
-                  that.errorToast(reason);
-                }
-              );
-            }
+
           },
         },
 

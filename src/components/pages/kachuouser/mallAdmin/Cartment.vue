@@ -10,24 +10,24 @@
     <div class="normal-content" :style="conHei">
       <div class="cart-panel" v-for="(item,index) in this.ListOne" :key="index">
         <div class="cart-header">
-          <check-icon :value.sync="check2"></check-icon>
-          <span class="shop-name">蓬莱阁艺术馆</span>
+          <check-icon :value.sync="item.checked" @on-change="itemChange"></check-icon>
+          <span class="shop-name">{{ item.name }}</span>
         </div>
-        <cell>
+        <cell v-for="good in item.arr">
           <template slot="icon">
-            <check-icon :value.sync="check2"></check-icon>
+            <check-icon :value.sync="good.checked"></check-icon>
             <div class="gar-photo">
-              <img :src="item.goods_sx.thumb" alt />
+              <img :src="good.goods_sx.thumb" alt />
             </div>
           </template>
           <template slot="after-title">
             <div class="gar-body">
               <div class="gar-header">
-                <div class="gar-title">{{item.goods_sx.title}}</div>
+                <div class="gar-title">{{good.goods_sx.title}}</div>
               </div>
               <div class="gar-foot">
-                <div class="gar-price">￥<span>{{item.marketprice}}</span></div>
-                <inline-x-number :min="0" width="30px" v-model="item.total"></inline-x-number>
+                <div class="gar-price">￥<span>{{good.marketprice}}</span></div>
+                <inline-x-number :min="0" width="30px" v-model="good.total"></inline-x-number>
               </div>
             </div>
           </template>
@@ -36,8 +36,8 @@
     </div>
     <div class="cart-tabbar">
       <label class="check-box">
-        <div @click="test">
-          <check-icon :value.sync="check1"></check-icon>
+        <div @click="checkAll = !checkAll">
+          <check-icon :value.sync="checkAll"></check-icon>
         </div>
         <span>全选</span>
       </label>
@@ -71,16 +71,14 @@ export default {
       titleContent: "购物车",
       showLeftBack: true,
       rText: "编辑",
-      check1: true,
-      check2: true,
+      checkAll: true,
       ListOne: [],
       num: "",
     };
   },
   methods: {
-    test() {
-      this.check1 != this.check1
-      console.log(this.check1)
+    itemChange(a){
+      console.log(a);
     },
     onEdit() {
       this.rText = "完成";
@@ -100,10 +98,12 @@ export default {
           let obj = {}
 
           res.data.result.forEach(item=>{
-            obj[item.goods_sx.goods_owner] ? obj[item.goods_sx.goods_owner].arr.push(item) : obj[item.goods_sx.goods_owner] = { name:item.goods_sx.goods_owner,arr:[] }
+            item.checked = true
+            obj[item.goods_sx.goods_owner] ? obj[item.goods_sx.goods_owner].arr.push(item) : obj[item.goods_sx.goods_owner] = { name:item.goods_sx.goods_owner,arr:[],checked:true }
           })
 
           let arr = Object.values(obj)
+          //模拟数据
               arr.push({
                 arr:[{
                       createtime: "1563240493",
@@ -118,20 +118,27 @@ export default {
                         title: "青花手绘盖碗-仙",
                         type: "1"
                       },
-                      integral:'',
+                      integral:{
+                        decr_integral: 0,
+                        decr_money: 0,
+                        incr_integral: 13,
+                        real_price: 268
+                      },
                       goodsid: "2754",
                       id: "803",
                       marketprice: "268.00",
                       merch_pcate: "38",
                       total: "1"
-                },
-              ],
-                name:'前端模拟数据'})
+                }],
+                name:'前端模拟数据'
+              })
           console.log('数组',arr);
 
-          // this.ListOne =
+          this.ListOne = arr
           this.ListOne.forEach(item=>{
-            item.total = 1
+            item.arr.forEach(good=>{
+              good.total = 1
+            })
           })
 
 
@@ -168,9 +175,27 @@ export default {
         let price = 0
 
         this.ListOne.forEach(item=>{
-          price += item.marketprice * item.total
+          item.arr.forEach(good=>{
+            price += good.marketprice * good.total
+          })
         })
         return price
+    }
+  },
+  watch:{
+    ListOne: {
+      handler(curVal, oldVal) {
+        let all = true
+
+
+
+        curVal.forEach(item=>{
+         item.arr.forEach(good=>{
+
+         })
+        })
+      },
+      deep: true
     }
   }
 };
