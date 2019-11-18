@@ -46,15 +46,30 @@
         <p>无</p>
       </div>
     </div>
-    <div class="photo">
+    <div class="photo" style="height:126px">
       <div class="line-top">
         <p>服务电话</p>
+      </div>
+      <div class="line-mid"></div>
+      <div style="margin: 5px 5% 5px;">
+        <p>{{this.phone}}</p>
       </div>
       <div class="line-mid"></div>
       <div class="line-bottom">
         <x-button @click.native="showPlugin3">+ 添加服务电话</x-button>
       </div>
     </div>
+    <confirm
+      v-model="show3"
+      show-input
+      ref="confirm5"
+      title="请输入门票编号"
+      @on-cancel="onCancel"
+      @on-confirm="onConfirm5"
+      @on-show="onShow5"
+      @on-hide="onHide"
+      :input-attrs="{type: 'number'}"
+    ></confirm>
   </div>
 </template>
 
@@ -70,7 +85,9 @@ export default {
         titleContent: "景区资料",
         showLeftBack: true,
         showRightMore: false
-      }
+      },
+      show3:false,
+      phone:"13856412313",
     };
   },
   computed: {},
@@ -96,24 +113,25 @@ export default {
     },
     //添加电话号
     showPlugin3() {
-      const _this = this;
-      this.$vux.confirm.prompt("请输入", {
-        title: "添加服务电话",
-        onShow() {
-          console.log("promt show");
-          _this.$vux.confirm.setInputValue("");
-        },
-        onHide() {
-          console.log("prompt hide");
-        },
-        onCancel() {
-          console.log("prompt cancel");
-        },
-        onConfirm(msg) {
-          alert(msg);
-        }
-      });
-    }
+      this.show3 = !this.show3;
+      console.log("修改手机号");
+    },
+    onHide() {
+      console.log("on hide");
+    },
+    onCancel() {
+      console.log("on cancel");
+    },
+    onShow5() {
+      this.$refs.confirm5.setInputValue("");
+    },
+    onConfirm5(value) {
+      this.$refs.confirm5.setInputValue("");
+      this.$vux.toast.text("input value: " + value);
+      this.phone = value;
+      console.log(this.phone);
+    },
+
   },
   components: {
     Header,

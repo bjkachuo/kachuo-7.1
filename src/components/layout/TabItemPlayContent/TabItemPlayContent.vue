@@ -205,7 +205,13 @@
         },
         methods: {
             //安卓请求跳转选择景区页
-
+            // function: bridge.register("selectAddress", function (r) {
+            //     if (r != "" && r == "android") {
+            //         return "userlocation";
+            //     } else {
+            //         return "失败";
+            //     }
+            // }),
 
             //跳转门票认证
             Ticket() {
