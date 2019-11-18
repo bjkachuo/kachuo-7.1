@@ -175,10 +175,14 @@
 
         mounted() {
             //获取推荐商家：
-            this.$http
-                .post(
-                    "https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.index.scenic_service"
-                )
+          bridge.register("selectAddress", function (r) {
+            if (r != "" && r == "android") {
+              return "userlocation";
+            } else {
+              return "失败";
+            }
+          }),
+            this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.index.scenic_service")
                 .then(({data}) => {
 
                     data.data.recommend_business.forEach((item, i) => {
@@ -201,13 +205,7 @@
         },
         methods: {
             //安卓请求跳转选择景区页
-             function: bridge.register("selectAddress", function (r) {
-                if (r != "" && r == "android") {
-                    return "userlocation";
-                } else {
-                    return "失败";
-                }
-            }),
+
 
             //跳转门票认证
             Ticket() {

@@ -97,10 +97,45 @@ export default {
       ShopList({ page: 1 })
         .then(res => {
           console.log(res);
-          this.ListOne = res.data.result;
+          let obj = {}
+
+          res.data.result.forEach(item=>{
+            obj[item.goods_sx.goods_owner] ? obj[item.goods_sx.goods_owner].arr.push(item) : obj[item.goods_sx.goods_owner] = { name:item.goods_sx.goods_owner,arr:[] }
+          })
+
+          let arr = Object.values(obj)
+              arr.push({
+                arr:[{
+                      createtime: "1563240493",
+                      goods_sx:{
+                        decr_integral_pre: "20",
+                        decr_max_rate: "5",
+                        goods_owner: "微商城",
+                        incr_integral_pre: "20",
+                        marketprice: "570.00",
+                        scenic_id: "0",
+                        thumb: "https://core.kachuo.com/attachment/images/5/2019/10/yL1X6MR1mrRFvQxrzpR13uMmK7W103.jpg",
+                        title: "青花手绘盖碗-仙",
+                        type: "1"
+                      },
+                      integral:'',
+                      goodsid: "2754",
+                      id: "803",
+                      marketprice: "268.00",
+                      merch_pcate: "38",
+                      total: "1"
+                },
+              ],
+                name:'前端模拟数据'})
+          console.log('数组',arr);
+
+          // this.ListOne =
           this.ListOne.forEach(item=>{
             item.total = 1
           })
+
+
+
           console.log("购物车列表", this.ListOne);
 
         })

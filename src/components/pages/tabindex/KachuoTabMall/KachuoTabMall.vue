@@ -140,11 +140,6 @@
             SwiperItem
         },
 
-        computed: {},
-
-        beforeMount() {
-        },
-
         mounted() {
             //安卓访问时不显示头部
             bridge.register("yyTab", r => {

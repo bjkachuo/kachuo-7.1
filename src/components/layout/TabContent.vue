@@ -1,10 +1,10 @@
 <template>
   <div :style="conHeight">
-    <KachuoTabPlay v-if="getCurrentTabItem === 0"></KachuoTabPlay>
-    <KachuoTabMall v-if="getCurrentTabItem === 1"></KachuoTabMall>
-    <KachuoTabCash v-if="getCurrentTabItem === 2"></KachuoTabCash>
-    <KachuoTabIncome v-if="getCurrentTabItem === 3"></KachuoTabIncome>
-    <KachuoTabPersonalCenter v-if="getCurrentTabItem === 4"></KachuoTabPersonalCenter>
+    <KachuoTabPlay v-show="getCurrentTabItem === 0"></KachuoTabPlay>
+    <KachuoTabMall v-show="getCurrentTabItem === 1"></KachuoTabMall>
+    <KachuoTabCash v-show="getCurrentTabItem === 2"></KachuoTabCash>
+    <KachuoTabIncome v-show="getCurrentTabItem === 3"></KachuoTabIncome>
+    <KachuoTabPersonalCenter v-show="getCurrentTabItem === 4"></KachuoTabPersonalCenter>
   </div>
 </template>
 
@@ -36,25 +36,35 @@ export default {
         height:'200px',
         overflow:'hidden',
         overflowY:'scroll'
-      }
+      },
+      getCurrentTabItem:0
     };
   },
   created() {
+    bridge.register("setCurrentTabItem", r => {
+      this.getCurrentTabItem = r
+    });
+
     this.getContentHeight();
+
   },
-  mounted() {},
+
   methods: {
     getContentHeight(){
       this.conHeight.height = document.documentElement.clientHeight - 46 + 'px';
     }
   },
   computed: {
-    getCurrentTabItem() {
+    haha() {
+      this.getCurrentTabItem = this.$store.state.tabIndex
       return this.$store.state.tabIndex;
     }
   },
   watch: {
-    $route: (to, from) => {}
+    haha: (to, from) => {
+      console.log(to);
+      this.getCurrentTabItem = to
+    }
   }
 };
 </script>
