@@ -111,9 +111,11 @@
         },
         mounted() {
             //安卓判断是否显示底部
-            bridge.register("youyuan", r => {
-                this.isApp = true
+            bridge.register("hideTabTitle", r => {
+                this.isApp = true;
+                // sessionStorage.setItem("isApp",JSON.stringify(this.isApp))
             });
+
 
             this.changeVuexCurrentRoute();
 

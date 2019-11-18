@@ -174,14 +174,15 @@
         },
 
         mounted() {
+
             //获取推荐商家：
-          bridge.register("selectAddress", function (r) {
-            if (r != "" && r == "android") {
-              return "userlocation";
-            } else {
-              return "失败";
-            }
-          }),
+            bridge.register("selectAddress", function (r) {
+                if (r != "" && r == "android") {
+                    return "userlocation";
+                } else {
+                    return "失败";
+                }
+            });
             this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.index.scenic_service")
                 .then(({data}) => {
 
@@ -204,22 +205,27 @@
                 });
         },
         methods: {
-            //安卓请求跳转选择景区页
-            // function: bridge.register("selectAddress", function (r) {
-            //     if (r != "" && r == "android") {
-            //         return "userlocation";
-            //     } else {
-            //         return "失败";
-            //     }
-            // }),
-
             //跳转门票认证
             Ticket() {
                 this.$router.push("/ticketsdiscount")
             },
             //跳转智慧导航
             Navigation() {
-                this.$router.push("/intelligentnavigation");
+                //呼叫原生去智慧导航
+                dsBridge.call("goMapSyn", "web");
+                //接收原生传来参数 原生进行跳转
+                dsBridge.register("goMap", r => {
+
+                    if (r = "android" || "ios") {
+
+                        return "原生可以跳转了"
+
+                    } else {
+                        this.$router.push("/intelligentnavigation");
+
+                    }
+                });
+
             },
             //跳转游园服务
             service() {
@@ -228,6 +234,7 @@
             //跳转记住的
             Remember() {
                 this.$router.push("/remember?type=5&branch=1");
+
             },
             //跳转了解的
             Understand() {

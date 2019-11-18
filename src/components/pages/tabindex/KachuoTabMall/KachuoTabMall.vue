@@ -141,6 +141,9 @@
         },
 
         mounted() {
+            // console.log("我在这！！！"+sessionStorage.getItem("isApp"));
+            // this.isApp = sessionStorage.getItem("isApp");
+
             //安卓访问时不显示头部
             bridge.register("yyTab", r => {
                 this.isApp = true;

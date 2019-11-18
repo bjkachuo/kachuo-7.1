@@ -94,43 +94,28 @@ export default {
   },
 
   mounted() {
-    // dsBridge.call ("testSyn", function(r, l) {
-    //   console.log("hhhhhhhh")
-    //   alert('xixixiixix')
-    //   return r + l;
-    // });
   },
 
   methods: {
     callSyn() {},
+      changeArea(id) {
+          this.$http
+              .get(
+                  "https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.index.change_scenic&scenic_id=" +
+                  id
+              )
+              .then(({ data }) => {
+                  this.changeAreadata = data;
+              });
+      },
 
     selectScenic(item) {
       //安卓选择地址方法 返回一个对象
-      dsBridge.call("addRessSyn", JSON.stringify(item))
-      // dsBridge.call("addRessSyn", item);
-        // bridge.register("selectAddress", function(r) {
-        //   if (r != "" && r == "android") {
-        //     return "userlocation";
-        //   } else {
-        //     return "失败";
-        //   }
-        // }),
+      dsBridge.call("addRessSyn", JSON.stringify(item));
         sessionStorage.setItem("currentScenic", item.id);
-      setTimeout(() => {
-        this.$router.push("/indextab");
-      }, 300);
-      this.changeArea(item.id);
+        this.changeArea(item.id);
+        this.$router.goBack();
     },
-    changeArea(id) {
-      this.$http
-        .get(
-          "https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.index.change_scenic&scenic_id=" +
-            id
-        )
-        .then(({ data }) => {
-          this.changeAreadata = data;
-        });
-    }
   }
 };
 </script>
