@@ -33,6 +33,8 @@ const getRandomData = (arr, count) => {
 
 export default new Vuex.Store({
   state: {
+    //判断是否显示头部
+    hide:"",
     titleObj: {
       title: '',
       showLeftBack: false,
@@ -44,6 +46,7 @@ export default new Vuex.Store({
       text: '',
       show: false
     },
+
     address:1,
     currentRouteVal: '',
     isShowBottomTabbar: true,

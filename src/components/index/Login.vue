@@ -55,7 +55,7 @@ export default {
       getUserInfo({})
         .then(res => {
           if (res.result === 1) {
-            this.$store.commit("setUserLoginInfo", res.data);s
+            this.$store.commit("setUserLoginInfo", res.data);
             this.GLOBAL.setSession("userLoginInfo", res.data);
           }
         })
