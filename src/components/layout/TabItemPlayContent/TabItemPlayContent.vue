@@ -220,10 +220,16 @@
             //跳转智慧导航
             Navigation() {
                 // this.$router.push("/intelligentnavigation");
-<<<<<<< HEAD
-              dsBridge.call("navigation", "navigation")
-=======
->>>>>>> b45687d0fdfa0e5b13a4b91533ea9f843a068b4a
+
+              // dsBridge.call("navigation", "navigation")
+
+                //原生安卓 ios 跳转智慧导航
+                dsBridge.call("webMap", "web");
+                bridge.register("goMap", r => {
+                    if (r != "") {
+                        return r
+                    }
+                });
             },
             //跳转游园服务
             service() {
