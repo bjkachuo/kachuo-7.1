@@ -109,14 +109,8 @@
         },
         mounted() {
             //安卓判断是否显示底部
-<<<<<<< HEAD
             bridge.register("youyuan", r => {
                 this.$store.state.isApp = true
-=======
-            bridge.register("hideTabTitle", r => {
-                this.isApp = true;
-                // sessionStorage.setItem("isApp",JSON.stringify(this.isApp))
->>>>>>> 37a580455aa601cfa652c604edadf8d39f6e5330
             });
 
 

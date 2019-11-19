@@ -211,25 +211,7 @@
             },
             //跳转智慧导航
             Navigation() {
-<<<<<<< HEAD
                 // this.$router.push("/intelligentnavigation");
-=======
-                //呼叫原生去智慧导航
-                dsBridge.call("goMapSyn", "web");
-                //接收原生传来参数 原生进行跳转
-                dsBridge.register("goMap", r => {
-
-                    if (r = "android" || "ios") {
-
-                        return "原生可以跳转了"
-
-                    } else {
-                        this.$router.push("/intelligentnavigation");
-
-                    }
-                });
-
->>>>>>> 37a580455aa601cfa652c604edadf8d39f6e5330
             },
             //跳转游园服务
             service() {
