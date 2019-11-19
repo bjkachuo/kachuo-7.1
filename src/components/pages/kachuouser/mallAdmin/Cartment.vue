@@ -10,12 +10,12 @@
     <div class="normal-content" :style="conHei">
       <div class="cart-panel" v-for="(item,index) in this.ListOne" :key="index">
         <div class="cart-header">
-          <span @click="itemChange(item.checked,item)"><check-icon :value.sync="item.checked" ></check-icon></span>
+          <span @click="itemChange(item)"><check-icon :value.sync="item.checked" ></check-icon></span>
           <span class="shop-name">{{ item.name }}</span>
         </div>
         <cell v-for="good in item.arr">
           <template slot="icon">
-            <check-icon :value.sync="good.checked"></check-icon>
+            <span @click="goodsChange(item)"><check-icon :value.sync="good.checked"></check-icon></span>
             <div class="gar-photo">
               <img :src="good.goods_sx.thumb" alt />
             </div>
@@ -79,9 +79,13 @@ export default {
   methods: {
     itemChange(item){
       console.log(item);
-
-      this.goodsIsAllChecked(item)
-
+      let itemFlag = item.checked
+      this.goodsAllChecked(item,itemFlag)
+      this.itemIsAllChecked()
+    },
+    goodsChange(item){
+      item.checked = this.goodsIsAllChecked(item)
+      this.itemIsAllChecked()
     },
     goodsIsAllChecked(item){
       let flag = true
@@ -90,6 +94,19 @@ export default {
       })
       return flag
     },
+    itemIsAllChecked(){
+      let flag = true
+      this.ListOne.forEach(item=>{
+        item.checked == false ? flag = false : null
+      })
+      this.checkAll = flag
+    },
+    goodsAllChecked(item,flag){
+      item.arr.forEach(good=>{
+        good.checked = flag
+      })
+    },
+
 
     onEdit() {
       this.rText = "完成";
@@ -139,8 +156,10 @@ export default {
                       id: "803",
                       marketprice: "268.00",
                       merch_pcate: "38",
-                      total: "1"
+                      total: "1",
+                      checked:true,
                 }],
+                checked:true,
                 name:'前端模拟数据'
               })
           console.log('数组',arr);
@@ -182,12 +201,12 @@ export default {
       return { height: document.documentElement.clientHeight - 90 + "px" };
     },
     price(){
-
         let price = 0
-
         this.ListOne.forEach(item=>{
           item.arr.forEach(good=>{
-            price += good.marketprice * good.total
+            if(good.checked == true){
+              price += good.marketprice * good.total
+            }
           })
         })
         return price

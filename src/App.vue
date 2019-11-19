@@ -1,10 +1,10 @@
 <template>
   <div id="#app-box" class="app-box">
-    <transition :name="transitionName">
+
       <navigation>
         <router-view class="router-animate"/>
       </navigation>
-    </transition>
+
     <loading v-model="isLoading"></loading>
     <confirm
       v-model="showModel"
@@ -52,11 +52,6 @@ export default {
       .then(data=>{
         // alert(data)
       })
-
-    let ret = dsBridge.call("getUserInfo.syn", {},cb=>{
-      alert(cb)
-    });
-
 
     // bridge.register("getUserInfo",  (r)=> {
     //   alert(r)
@@ -172,17 +167,17 @@ export default {
   transition: all 0.4s ease;
 }
 
-.slide-left-enter,
-.slide-right-leave-active {
-  opacity: 0;
-  -webkit-transform: translate(100%, 0);
-  transform: translate(100%, 0);
-}
+/*.slide-left-enter,*/
+/*.slide-right-leave-active {*/
+/*  opacity: 0;*/
+/*  -webkit-transform: translate(100%, 0);*/
+/*  transform: translate(100%, 0);*/
+/*}*/
 
-.slide-left-leave-active,
-.slide-right-enter {
-  opacity: 0.5;
-  -webkit-transform: translate(-100%, 0);
-  transform: translate(-100% 0);
-}
+/*.slide-left-leave-active,*/
+/*.slide-right-enter {*/
+/*  opacity: 0.5;*/
+/*  -webkit-transform: translate(-100%, 0);*/
+/*  transform: translate(-100% 0);*/
+/*}*/
 </style>
