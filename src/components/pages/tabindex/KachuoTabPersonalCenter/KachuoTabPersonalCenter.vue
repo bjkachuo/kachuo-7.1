@@ -213,8 +213,9 @@
                     //     alert(typeof str)
                     // alert(JSON.stringify(r));
                     alert(r)
-                    alert(JSON.stringify(r))
-                    this.$router.push(JSON.stringify(r))
+                    alert("hahaha")
+                    // alert(JSON.stringify(r))
+                    this.$router.push(r)
                     // this.$router.push("/GardenJournal")
                     return "跳转成功！"
                     // }
