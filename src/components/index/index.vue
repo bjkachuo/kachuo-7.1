@@ -108,6 +108,7 @@
         created() {
         },
         mounted() {
+
             //安卓判断是否显示底部
             bridge.register("youyuan", r => {
                 this.$store.state.isApp = true
