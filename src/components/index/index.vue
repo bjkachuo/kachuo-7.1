@@ -114,7 +114,6 @@
                 this.$store.state.isApp = true
             });
 
-
             this.changeVuexCurrentRoute();
 
             this.getRegistrationID();
