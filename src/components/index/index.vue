@@ -1,7 +1,7 @@
 <template>
   <div class="view-box-wrap">
     <TabContent></TabContent>
-    <Kachuo-Bottom-Tab v-if="!isApp"></Kachuo-Bottom-Tab>
+    <Kachuo-Bottom-Tab v-if="!$store.state.isApp"></Kachuo-Bottom-Tab>
   </div>
 </template>
 
@@ -27,8 +27,6 @@
                 cordova: Vue.cordova,
                 badgeNum: 0,
                 timer: '',
-                //安卓传参数判断隐藏导航栏
-                isApp: false
 
             };
         },
@@ -112,7 +110,7 @@
         mounted() {
             //安卓判断是否显示底部
             bridge.register("youyuan", r => {
-                this.isApp = true
+                this.$store.state.isApp = true
             });
 
             this.changeVuexCurrentRoute();

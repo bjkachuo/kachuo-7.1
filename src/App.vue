@@ -138,9 +138,12 @@ export default {
   },
   watch: {
     $route(to, from) {
+      if(to.name == 'indextab'){
+        dsBridge.call("isIndexTab",true );
+      }else{
+        dsBridge.call("isIndexTab",false );
+      }
 
-        dsBridge.call("isIndexTab",to.name == 'indextab' );
-      
       let isBack = this.$router.isBack;
       if (isBack) {
         this.transitionName = "slide-right";

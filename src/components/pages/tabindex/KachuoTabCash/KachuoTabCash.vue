@@ -1,6 +1,6 @@
 <template>
   <div class="tab-item-mall-wrap">
-    <TabItemCashHeader v-if="!isApp"></TabItemCashHeader>
+    <TabItemCashHeader v-if="!$store.state.isApp"></TabItemCashHeader>
     <!--    <TabItemMallAdvertise></TabItemMallAdvertise>-->
     <div style="width:92%;margin: 15px auto 10px;">
       <swiper auto height="110px" class="custom">
@@ -62,7 +62,6 @@
         data() {
             return {
                 //判断是否显示头部
-                isApp: false,
                 cellListTools: [
                     {
                         title: "艺品回购",
@@ -106,10 +105,6 @@
 
         mounted() {
             //安卓判断是否显示头部
-            bridge.register("bxTab", r => {
-                this.isApp = true;
-                return "变现";
-            });
 
             this.getBannerImgFn("7");
             this.getGoodsComm();

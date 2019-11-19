@@ -1,7 +1,7 @@
 <template>
   <div class="tab-item-mall-wrap">
     <div v-if="mask" class="mask2" @click="maskClick" :class="detileClass"></div>
-    <TabItemIncomeHeader v-if="!isApp"></TabItemIncomeHeader>
+    <TabItemIncomeHeader v-if="!$store.state.isApp"></TabItemIncomeHeader>
     <div class="offer" @click="goLink('/yaoyuechuangzuo')"></div>
     <ul class="tsb-list">
        <li v-for="item in cellListTools" :class="item.icon" @click="goLink(item.link )"></li>
@@ -43,7 +43,7 @@ export default {
   data() {
     return {
         //安卓判断是否显示头部
-        isApp: false,
+
         cellListTools: [
         {
           icon: "png1",
@@ -81,7 +81,7 @@ export default {
   mounted() {
       //安卓判断是否显示头部
       bridge.register("csTab", r => {
-          this.isApp = true;
+          this.$store.state.isApp = true;
           return "创收";
       });
       this.getBannerImgFn("12");

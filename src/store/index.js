@@ -65,6 +65,7 @@ export default new Vuex.Store({
       isForce: false,
       content: '',
     },
+    isApp:false,
     showActionDialog: false
   },
   plugins: [createPersistedState({

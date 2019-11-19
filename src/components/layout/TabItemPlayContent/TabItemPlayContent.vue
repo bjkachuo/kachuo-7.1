@@ -219,7 +219,7 @@
             },
             //跳转智慧导航
             Navigation() {
-                this.$router.push("/intelligentnavigation");
+                // this.$router.push("/intelligentnavigation");
             },
             //跳转游园服务
             service() {

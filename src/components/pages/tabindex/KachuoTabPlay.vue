@@ -2,7 +2,7 @@
   <div>
     <FaceToast></FaceToast>
     <div class="tab-item-paly-wrap">
-      <TabItemPlayHeader v-if="!isApp"></TabItemPlayHeader>
+      <TabItemPlayHeader v-if="!$store.state.isApp"></TabItemPlayHeader>
       <TabItemPlayContent></TabItemPlayContent>
     </div>
   </div>
@@ -19,8 +19,7 @@ export default {
   props: [""],
   data() {
     return {
-      //安卓判断是否显示头部
-      isApp: false
+
     };
   },
 
@@ -60,7 +59,7 @@ export default {
     });
     //安卓访问时不显示头部
     bridge.register("yyTab", r => {
-      this.isApp = true;
+      this.$store.state.isApp = true;
     });
 
     bridge.register("getUserInfo", r => {

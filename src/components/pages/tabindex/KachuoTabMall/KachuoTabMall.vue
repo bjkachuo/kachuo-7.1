@@ -1,6 +1,6 @@
 <template>
   <div class="tab-item-mall-wrap">
-    <TabItemMallHeader v-if="!isApp"></TabItemMallHeader>
+    <TabItemMallHeader v-if="!$store.state.isApp"></TabItemMallHeader>
 
     <!--    <div style="background: #fff;position:relative;position: fixed;top: 45px;z-index: 99999;width: 100%">-->
     <!--      <div style="width: 76%;margin: 0 0 0 4%;">-->
@@ -75,8 +75,6 @@
         props: [""],
         data() {
             return {
-                //安卓判断是否隐藏头部
-                isApp: false,
 
                 //商品类别
                 CommodityCategory: [
@@ -142,11 +140,6 @@
 
         mounted() {
             //安卓访问时不显示头部
-            bridge.register("yyTab", r => {
-                this.isApp = true;
-                return "游园"
-            });
-
             this.getGoodsComm();
         },
 

@@ -10,7 +10,7 @@
     <div class="normal-content" :style="conHei">
       <div class="cart-panel" v-for="(item,index) in this.ListOne" :key="index">
         <div class="cart-header">
-          <check-icon :value.sync="item.checked" @on-change="itemChange"></check-icon>
+          <span @click="itemChange(item.checked,item)"><check-icon :value.sync="item.checked" ></check-icon></span>
           <span class="shop-name">{{ item.name }}</span>
         </div>
         <cell v-for="good in item.arr">
@@ -36,7 +36,7 @@
     </div>
     <div class="cart-tabbar">
       <label class="check-box">
-        <div @click="checkAll = !checkAll">
+        <div>
           <check-icon :value.sync="checkAll"></check-icon>
         </div>
         <span>全选</span>
@@ -77,8 +77,8 @@ export default {
     };
   },
   methods: {
-    itemChange(a){
-      console.log(a);
+    itemChange(item){
+      console.log(item);
     },
     onEdit() {
       this.rText = "完成";
@@ -104,7 +104,7 @@ export default {
 
           let arr = Object.values(obj)
           //模拟数据
-              arr.push({
+          arr.push({
                 arr:[{
                       createtime: "1563240493",
                       goods_sx:{
@@ -182,22 +182,7 @@ export default {
         return price
     }
   },
-  watch:{
-    ListOne: {
-      handler(curVal, oldVal) {
-        let all = true
 
-
-
-        curVal.forEach(item=>{
-         item.arr.forEach(good=>{
-
-         })
-        })
-      },
-      deep: true
-    }
-  }
 };
 </script>
 <style lang='css' scoped>
