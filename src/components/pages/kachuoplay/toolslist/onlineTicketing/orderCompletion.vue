@@ -32,7 +32,7 @@
 <script>
   import Header from "@/components/common/Header";
   import { Scroller,XInput } from 'vux'
-  import {buyTicket,getTicketDetail,guidePay} from '@/servers/api'
+  import {buyTicket,getTicketDetail,buyTicketHd} from '@/servers/api'
     export default {
         name: "orderCompletion",
 
@@ -81,6 +81,17 @@
                     type: 'success',
                     time: 2000
                   })
+
+
+                  buyTicketHd({order_sn: res.data.order_sn})
+                    .then(res => {
+                      res.result == 1 ? '成功':'失败'
+                      alert(JSON.stringify(res))
+                    })
+                    .catch(err => {
+                      alert(JSON.stringify(err))
+                    });
+
                 }else{
                   this.$vux.toast.show({
                     text: '支付失败,请重试!',
@@ -89,21 +100,10 @@
                   })
                 }
               });
-
-              // guidePay({
-              //   type:1,
-              //   order_sn: res.data.order_sn
-              // })
-                // .then(res => {
-                //   console.log(res);
-                //   if (res.result === 1) {
-                //       this.WeixinPay(res.data.url);
-                //   }
-                // })
-                // .catch(err => {
-                //   console.log(err);
-                // });
             })
+              .catch(err => {
+                alert(JSON.parse(err))
+              });
           },
           WeixinPay(res) {
 

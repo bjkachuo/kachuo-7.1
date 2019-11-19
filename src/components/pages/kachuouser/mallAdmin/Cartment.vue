@@ -79,7 +79,18 @@ export default {
   methods: {
     itemChange(item){
       console.log(item);
+
+      this.goodsIsAllChecked(item)
+
     },
+    goodsIsAllChecked(item){
+      let flag = true
+      item.arr.forEach(good=>{
+        good.checked == false ? flag = false : null
+      })
+      return flag
+    },
+
     onEdit() {
       this.rText = "完成";
       this.toggle = !this.toggle;
