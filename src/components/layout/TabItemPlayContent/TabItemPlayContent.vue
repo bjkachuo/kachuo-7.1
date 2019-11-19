@@ -220,7 +220,10 @@
             //跳转智慧导航
             Navigation() {
                 // this.$router.push("/intelligentnavigation");
+<<<<<<< HEAD
               dsBridge.call("navigation", "navigation")
+=======
+>>>>>>> b45687d0fdfa0e5b13a4b91533ea9f843a068b4a
             },
             //跳转游园服务
             service() {

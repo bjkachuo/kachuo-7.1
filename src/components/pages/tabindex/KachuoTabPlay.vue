@@ -19,18 +19,14 @@ export default {
   props: [""],
   data() {
     return {
-
     };
   },
-
   components: {
     TabItemPlayHeader,
     TabItemPlayContent,
     FaceToast
   },
-
   computed: {},
-
   beforeMount() {},
   created() {
     // var str = dsBridge.call("testSyn", "testSyn");
@@ -47,9 +43,7 @@ export default {
     // var dsBridge=require("dsbridge");
     // var str = dsBridge.call("testSyn", "testSyn");
     // alert(dsBridge.call("getUserInfo","我要用户数据"));
-
     dsBridge.call("getUserInfo", "web");
-
     // dsBridge.register("addValue", function(r) {
     //   console.log("安卓传来的r", r);
     // });
@@ -61,16 +55,13 @@ export default {
     bridge.register("yyTab", r => {
       this.$store.state.isApp = true;
     });
-
     bridge.register("getUserInfo", r => {
       alert(r);
       localStorage.setItem("token", r);
     });
-
     // this.getBannerImgFn("2");
     // this.getLocation(); // 调用获取地理位置
   },
-
   methods: {
     /**获取地图定位*/
     // getLocation() {
@@ -86,10 +77,8 @@ export default {
     //   console.log(geolocation,_that)
     // }
   },
-
   watch: {}
-};
-</script>
+};</script>
 <style lang='css' scoped>
 .tab-item-paly-wrap {
   background: #f5f5f5;
