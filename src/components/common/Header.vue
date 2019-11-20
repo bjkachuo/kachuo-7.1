@@ -55,7 +55,10 @@ export default  {
   methods: {
     back() {
       if(this.hideApp){
-        if(this.$store.state.isApp) this.$store.state.loadingWhite = true
+        if(this.$store.state.isApp) {
+          this.$store.state.loadingWhite = true
+          alert(this.$store.state.isApp)
+        }
       }
       this.$router.goBack();
     },
