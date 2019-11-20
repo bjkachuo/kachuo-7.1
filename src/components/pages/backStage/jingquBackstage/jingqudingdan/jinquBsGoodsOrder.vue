@@ -89,10 +89,7 @@
                 </div>
               </div>
               <div class="content-bottom">
-                <!-- <div class="bottom-two">
-                  <p>发货</p>
-                </div>-->
-                <div class="bottom-one">
+                <div class="bottom-one" @click="goGoodsLog">
                   <p>查看物流</p>
                 </div>
               </div>
@@ -125,9 +122,6 @@
                 </div>
               </div>
               <div class="content-bottom">
-                <!-- <div class="bottom-two">
-                  <p>发货</p>
-                </div>-->
                 <div class="bottom-one">
                   <p>同意退款</p>
                 </div>
@@ -160,14 +154,6 @@
                   </div>
                 </div>
               </div>
-              <!-- <div class="content-bottom">
-                <div class="bottom-two">
-                  <p>发货</p>
-                </div>
-                <div class="bottom-one">
-                  <p>联系买家</p>
-                </div>
-              </div>-->
             </div>
           </flexbox-item>
         </flexbox>
@@ -196,14 +182,6 @@
                   </div>
                 </div>
               </div>
-              <!-- <div class="content-bottom">
-                <div class="bottom-two">
-                  <p>发货</p>
-                </div>
-                <div class="bottom-one">
-                  <p>联系买家</p>
-                </div>
-              </div>-->
             </div>
           </flexbox-item>
         </flexbox>
@@ -263,6 +241,10 @@
             //跳转发货页面
             goSend() {
                 this.$router.push("/jinquBsSendGoods")
+            },
+            //跳转查看物流页面
+            goGoodsLog(){
+                this.$router.push("/jinquBsGoodsLogistics")
             }
         },
         components: {
