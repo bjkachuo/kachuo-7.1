@@ -212,8 +212,8 @@
                     // if (str instanceof String){
                     //     alert(typeof str)
                     // alert(JSON.stringify(r));
-                    alert(r)
-                    alert("hahaha")
+                    // alert(r)
+                    // alert("hahaha")
                     // alert(JSON.stringify(r))
                     this.$router.push(r)
                     // this.$router.push("/GardenJournal")
