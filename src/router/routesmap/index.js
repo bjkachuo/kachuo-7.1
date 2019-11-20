@@ -637,6 +637,18 @@ export default [
     component: resolve => require(['@/components/pages/backStage/jingquBackstage/jingqudingdan/jinquBsGoodsOrder'], resolve),
 
   },
+  //景区后台商品订单发货页
+  {
+    path: '/jinquBsSendGoods',
+    name: 'jinquBsSendGoods',
+    component: resolve => require(['@/components/pages/backStage/jingquBackstage/jingqudingdan/jinquBsSendGoods'], resolve),
+  },
+  //景区后台商品订单查看物流页
+  {
+    path: '/jinquBsGoodsLogistics',
+    name: 'jinquBsGoodsLogistics',
+    component: resolve => require(['@/components/pages/backStage/jingquBackstage/jingqudingdan/jinquBsGoodsLogistics'], resolve),
+  },
   //景区后台商品订单详情：待发货
   {
     path: '/orderWaitPro',

@@ -108,7 +108,6 @@
         created() {
         },
         mounted() {
-
             //安卓判断是否显示底部
             bridge.register("youyuan", r => {
                 this.$store.state.isApp = true
@@ -119,11 +118,6 @@
             this.getRegistrationID();
             this.getAPNSBadge();
         },
-        /*this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=member.realname.get_reg_id")
-        .then(({data})=>{
-          // console.log(data);
-        });
-        },*/
         beforeDestroy() {
             clearTimeout(this.timer);
         },

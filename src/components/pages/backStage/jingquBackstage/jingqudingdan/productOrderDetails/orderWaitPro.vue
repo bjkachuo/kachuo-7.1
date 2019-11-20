@@ -63,8 +63,6 @@
               </div>
             </cell>
           </div>
-          <!-- <x-input title="预约时长:" disabled v-model="time" class="top"></x-input>
-          <x-input title="游客人数:" disabled v-model="personNum" class="bottom"></x-input>-->
         </div>
         <!-- <div class="f-one">
           <cell title="本单金额:" class="mid">
