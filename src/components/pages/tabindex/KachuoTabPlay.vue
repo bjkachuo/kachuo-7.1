@@ -52,7 +52,8 @@
         },
         methods: {},
         watch: {}
-    };</script>
+    };
+</script>
 <style lang='css' scoped>
   .tab-item-paly-wrap {
     background: #f5f5f5;

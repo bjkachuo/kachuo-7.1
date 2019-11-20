@@ -197,36 +197,18 @@
                         })
                     })
 
-                    // this.recommend = data.data.recommend_business;
 
                     console.log(this.recommend);
                     console.log(data);
                 });
         },
         methods: {
-            //安卓请求跳转选择景区页
-            // function: bridge.register("selectAddress", function (r) {
-            //     if (r != "" && r == "android") {
-            //         return "userlocation";
-            //     } else {
-            //         return "失败";
-            //     }
-            // }),
-
             //跳转门票认证
             Ticket() {
                 this.$router.push("/ticketsdiscount")
             },
             //跳转智慧导航
             Navigation() {
-                // this.$router.push("/intelligentnavigation");
-
-              dsBridge.call("navigation", "navigation")
-
-
-
-              // dsBridge.call("navigation", "navigation")
-
                 //原生安卓 ios 跳转智慧导航
                 dsBridge.call("webMap", "web");
                 bridge.register("goMap", r => {
