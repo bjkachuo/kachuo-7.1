@@ -33,7 +33,7 @@
           :max="1"
           v-model="checklist001"
           @on-change="change"
-          style="margin-top=26px"
+          style="margin-top:26px"
         ></checklist>
       </div>
       <div class="jq-photo-wrap-two">
@@ -42,10 +42,10 @@
       </div>
       <div class="price">
         <x-input title="单价" placeholder="请填写商品单价" type="number" :show-clear="false">
-          <p slot="right" style="color=#222222">元</p>
+          <p slot="right" style="color:#222222">元</p>
         </x-input>
         <x-input title="库存" placeholder="请填写库存数量" type="number" :show-clear="false">
-          <p slot="right" style="color=#222222">件</p>
+          <p slot="right" style="color:#222222">件</p>
         </x-input>
       </div>
       <div class="freight">
