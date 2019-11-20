@@ -46,7 +46,7 @@ export default new Vuex.Store({
       text: '',
       show: false
     },
-
+    loadingWhite:false,
     address:1,
     currentRouteVal: '',
     isShowBottomTabbar: true,

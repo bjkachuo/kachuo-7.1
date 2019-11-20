@@ -103,8 +103,7 @@
     } from "vux";
 
     export default {
-        name: "",
-        props: [""],
+
         data() {
             return {
                 //推荐商家列表：

@@ -206,25 +206,7 @@
         },
         mounted() {
             //安卓 ios我的页面二级页面跳转
-            bridge.register("myMethod", r => {
-                if(r != ""){
-                    // var str = JSON.stringify(r);
-                    // if (str instanceof String){
-                    //     alert(typeof str)
-                    // alert(JSON.stringify(r));
-                    // alert(r)
-<<<<<<< Updated upstream
-                    // alert("hahaha")
-                    // alert(JSON.stringify(r))
-=======
-                     // alert(JSON.stringify(r))
->>>>>>> Stashed changes
-                    this.$router.push(r)
-                    // this.$router.push("/GardenJournal")
-                    return "跳转成功！"
-                    // }
-                }
-            });
+
             // bridge.register("myMethod", function (r){
             //     if(r != ""){
             //         var str = JSON.stringify(r);

@@ -42,6 +42,9 @@ export default {
   },
   created() {
     bridge.register("setCurrentTabItem", r => {
+      setTimeout(()=>{
+        this.$store.state.loadingWhite = false
+      },300)
       this.getCurrentTabItem = r
     });
 

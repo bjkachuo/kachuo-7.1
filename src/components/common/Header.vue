@@ -31,7 +31,7 @@ import { XHeader, TransferDom, Actionsheet } from "vux";
 import Popup from "@/components/common/PupupRescue";
 import { vueCordovaFunction } from "@/assets/js/vuecordova";
 export default  {
-  props: ["titleContent", "showLeftBack", "showRightMore"],
+  props: ["titleContent", "showLeftBack", "showRightMore",'hideApp'],
   directives: {
     TransferDom
   },
@@ -54,6 +54,9 @@ export default  {
   },
   methods: {
     back() {
+      if(this.hideApp){
+        if(this.$store.state.isApp) this.$store.state.loadingWhite = true
+      }
       this.$router.goBack();
     },
     showBottom() {

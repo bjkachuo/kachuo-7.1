@@ -1,5 +1,5 @@
 <template>
-  <div id="#app-box" class="app-box">
+  <div id="#app-box" class="app-box" v-show="!$store.state.loadingWhite">
 
       <navigation>
         <router-view class="router-animate"/>
@@ -35,7 +35,7 @@ export default {
   name: "App",
   data() {
     return {
-      transitionName: "slide-right"
+      transitionName: "slide-right",
     };
   },
   components: {
@@ -52,29 +52,55 @@ export default {
       .then(data=>{
         // alert(data)
       })
-
-    // bridge.register("getUserInfo",  (r)=> {
-    //   alert(r)
-    //
-    //   JSON.parse(r).accessToken
-    //
-    //   localStorage.setItem("token",r)
-    // })
-
-
   },
 
   mounted() {
+    //安卓 ios登录储存token
+    dsBridge.call("getUserInfo", "web");
+    dsBridge.registerAsyn("loginInfo", function (arg1, responseCallback) {
+      localStorage.setItem("token", JSON.parse(arg1).accessToken);
+      alert(localStorage.getItem("token"))
+      responseCallback("登录信息成功");
+    });
+    bridge.register("yyTab", r => {
+      this.$store.state.isApp = true;
+    });
+    dsBridge.registerAsyn("myTab", (arg1, responseCallback)=> {
+      this.$store.state.loadingWhite = true
+      responseCallback("隐藏成功");
+    });
+    bridge.register("myMethod", r => {
+      if(r != ""){
+
+        this.$router.push(r)
+
+        setTimeout(()=>{
+          this.$store.state.loadingWhite = false
+
+        },300)
+        // this.$router.push("/GardenJournal")
+        return "跳转成功！"
+        // }
+      }
+    });
+
     vueCordovaFunction.getLocation();
     this.checkUserLocationInfo();
     appVersion();
     sessionStorage.setItem("closeFace", 0);
+
+
+
+
   },
+
   beforeRouteUpdate(to, from, next) {
+    console.log(to);
     next(vm => {
       console.log(vm);
     });
   },
+
   computed: {
     showToastFn() {
       return this.$store.state.toastInfo;
