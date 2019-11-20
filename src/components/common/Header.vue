@@ -51,6 +51,12 @@ export default  {
     };
   },
   mounted() {
+    window.addEventListener('popstate', ()=>{
+      if(this.$store.state.isApp) {
+        this.$store.state.loadingWhite = true
+        alert(this.$store.state.isApp)
+      }
+    })
   },
   methods: {
     back() {
