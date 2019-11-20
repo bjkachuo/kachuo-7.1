@@ -20,8 +20,7 @@
         <p style="color: #222222;font-size:16px;">快递单号</p>
       </div>
       <div>
-        <x-input placeholder="I'm placeholder"
-        ></x-input>
+        <x-input placeholder="请输入快递单号" :show-clear="false"  type="number"></x-input>
       </div>
     </div>
     <div class="f-one">
@@ -185,5 +184,16 @@
     color: #FFFFFF;
     line-height: 50px;
     text-align: center;
+  }
+</style>
+<style lang="css" scoped>
+  /deep/ .weui-input {
+    border-radius: 4px;
+    height: 2.411765em;
+    line-height: 2.411765;
+    background-color: #F5F5F5;
+    color: #999999;
+    width: 92%;
+    text-indent: 6%;
   }
 </style>
