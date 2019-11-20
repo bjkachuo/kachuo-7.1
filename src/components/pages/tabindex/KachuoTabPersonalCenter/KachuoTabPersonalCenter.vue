@@ -213,8 +213,12 @@
                     //     alert(typeof str)
                     // alert(JSON.stringify(r));
                     // alert(r)
+<<<<<<< Updated upstream
                     // alert("hahaha")
                     // alert(JSON.stringify(r))
+=======
+                     // alert(JSON.stringify(r))
+>>>>>>> Stashed changes
                     this.$router.push(r)
                     // this.$router.push("/GardenJournal")
                     return "跳转成功！"
