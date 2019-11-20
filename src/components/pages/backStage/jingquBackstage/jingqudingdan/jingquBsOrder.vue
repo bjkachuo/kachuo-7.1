@@ -19,43 +19,13 @@
       <div class="line"></div>
       <div class="content">
         <flexbox>
-          <flexbox-item>
+          <flexbox-item v-for="(item,index) in this.SList" :key="index">
             <div class="flex-demo">
               <div>
-                <p>3</p>
+                <p>{{item.count}}</p>
               </div>
               <div>
-                <span>待发货</span>
-              </div>
-            </div>
-          </flexbox-item>
-          <flexbox-item>
-            <div class="flex-demo">
-              <div>
-                <p>3</p>
-              </div>
-              <div>
-                <span>待发货</span>
-              </div>
-            </div>
-          </flexbox-item>
-          <flexbox-item>
-            <div class="flex-demo">
-              <div>
-                <p>3</p>
-              </div>
-              <div>
-                <span>待发货</span>
-              </div>
-            </div>
-          </flexbox-item>
-          <flexbox-item>
-            <div class="flex-demo">
-              <div>
-                <p>3</p>
-              </div>
-              <div>
-                <span>待发货</span>
+                <span>{{item.name}}</span>
               </div>
             </div>
           </flexbox-item>
@@ -75,43 +45,13 @@
       <div class="line"></div>
       <div class="content">
         <flexbox>
-          <flexbox-item>
+          <flexbox-item v-for="(item,index) in this.GList" :key="index">
             <div class="flex-demo">
               <div>
-                <p>3</p>
+                <p>{{item.count}}</p>
               </div>
               <div>
-                <span>待发货</span>
-              </div>
-            </div>
-          </flexbox-item>
-          <flexbox-item>
-            <div class="flex-demo">
-              <div>
-                <p>3</p>
-              </div>
-              <div>
-                <span>待发货</span>
-              </div>
-            </div>
-          </flexbox-item>
-          <flexbox-item>
-            <div class="flex-demo">
-              <div>
-                <p>3</p>
-              </div>
-              <div>
-                <span>待发货</span>
-              </div>
-            </div>
-          </flexbox-item>
-          <flexbox-item>
-            <div class="flex-demo">
-              <div>
-                <p>3</p>
-              </div>
-              <div>
-                <span>待发货</span>
+                <span>{{item.name}}</span>
               </div>
             </div>
           </flexbox-item>
@@ -133,12 +73,22 @@ export default {
         titleContent: "订单管理",
         showLeftBack: true,
         showRightMore: false
-      }
+      },
+        SList:[],
+        GList:[],
     };
   },
   computed: {},
   created() {},
-  mounted() {},
+  mounted() {
+      //获取订单状态列表
+      this.$http.post("http://core.kachuo.com//app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=scenic.shop.totalOrder").then(({data})=>{
+          console.log(data)
+          this.SList = data.data.goods;
+          this.GList = data.data.goods;
+          console.log(this.SList,this.GList)
+      })
+  },
   watch: {},
   methods: {
     goodsOrder() {

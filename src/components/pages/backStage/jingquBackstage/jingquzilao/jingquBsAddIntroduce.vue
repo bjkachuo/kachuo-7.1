@@ -6,7 +6,7 @@
       :showLeftBack="TitleObjData.showLeftBack"
       :showRightMore="TitleObjData.showRightMore"
     ></Header>
-    <p class="Preservation">保存</p>
+    <p class="Preservation" @click="passMsg">保存</p>
     <!-- <x-textarea placeholder="请输入内容..." :show-counter="false" :rows="1" autosize></x-textarea> -->
     <quill-editor
       v-model="content"
@@ -15,7 +15,10 @@
       @blur="onEditorBlur($event)"
       @focus="onEditorFocus($event)"
       @ready="onEditorReady($event)"
+      @change="onEditorChange($event)"
     ></quill-editor>
+    <div v-html="this.text"></div>
+    {{this.content}}
   </div>
 </template>
 
@@ -23,6 +26,7 @@
     import Header from "@/components/common/Header";
     // import { XTextarea } from "vux";
     import {quillEditor} from "vue-quill-editor";
+    import {saveJqData} from "@/servers/api";
 
 
     export default {
@@ -34,6 +38,8 @@
                     showLeftBack: true,
                     showRightMore: false
                 },
+                //测试获取景区资料
+                text: "",
                 content: "",
                 messages: [],
                 editorOption: {
@@ -49,8 +55,16 @@
         created() {
         },
         mounted() {
+            // //测试获取景区资料
+            // this.$http.post("http://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=scenic.manage.scenicGetDate&introduce").then(({data})=>{
+            //     console.log(data)
+            //     this.text=data.data.introduce;
+            //
+            // })
         },
-        watch: {},
+        watch: {
+
+        },
         methods: {
             onEditorBlur() {
                 console.log("blur", this.messages);
@@ -62,6 +76,23 @@
 
             onEditorReady() {
                 console.log("ready", this.messages);
+            },
+            onEditorChange(){
+                console.log(this.content)
+            }, // 内容改变事件
+            passMsg() {
+                saveJqData({
+                    introduce: JSON.stringify(this.content)
+                }).then(res => {
+                    console.log(res)
+                    //测试获取景区资料
+                    this.$http.post("http://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=scenic.manage.scenicGetDate&introduce").then(({data})=>{
+                        console.log(data)
+                        this.text=data.data.introduce;
+
+                    })
+
+                })
             }
         },
         components: {

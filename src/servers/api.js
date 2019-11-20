@@ -264,7 +264,7 @@ export const UserVideoList = (data) => http.post("video.show.videoi", data);
 // 用户提交视频
 export const UserVideoSubmit = (data) => http.post("video.show.videoadd", data);
 
-// 景区四季视频详情 
+// 景区四季视频详情
 export const ScenceVideoDetails = (data) => http.post("video.show.videodet", data);
 
 // 文化动态评论
@@ -407,3 +407,5 @@ export const getTicketDetail = (data) => http.post("scenic.ticket.get_ticket_det
 export const buyTicket = (data) => http.post("scenic.ticket.buy_ticket", data);
 //购票支付
 export const buyTicketHd = (data) => http.post("scenic.ticket.hd", data);
+//景区后台景区资料保存接口
+export const saveJqData = (data) => http.post("scenic.manage.scenicSet", data);
