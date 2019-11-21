@@ -1,6 +1,6 @@
 <template>
   <div class="scence-release-wrap">
-<!--    <Header :titleContent="TitleObjData.titleContent" :showLeftBack="TitleObjData.showLeftBack" :showRightMore="TitleObjData.showRightMore"></Header>-->
+
     <div class="banner">
       <swiper auto height="234px" v-model="swiperIndex" class="custom">
         <swiper-item class="black"><img src="../../../../../assets/images/蓬莱阁.jpg" alt=""></swiper-item>
@@ -9,7 +9,7 @@
       </swiper>
       <div class="swiper-index">{{swiperIndex + 1}}/3</div>
       <div class="back" @click="goBack">
-        <x-icon type="ios-arrow-left" size="28"></x-icon>
+        <x-icon type="ios-arrow-left" size="29"></x-icon>
       </div>
     </div>
     <div class="detile">
@@ -205,7 +205,7 @@ export default {
     position: absolute;
     background-color: rgba(0,0,0,.5);
     left: 15px;
-    top: 31px;
+    top: 15px;
     /deep/.vux-x-icon-ios-arrow-left {
       fill: #fff;
       margin-left: 2px;

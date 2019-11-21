@@ -8,12 +8,7 @@
       <inline-loading></inline-loading>
       <span style="vertical-align:middle;display:inline-block;font-size:14px;">暂无数据～</span>
     </p> -->
-    <div
-      class="scence-releace-wrap"
-      v-for="(item,index) in dataList"
-      :key="index"
-      @click="getReleaseDetails(item.id)"
-    >
+    <div class="scence-releace-wrap" v-for="(item,index) in dataList" :key="index" @click="getReleaseDetails(item.id)">
       <div class="scence-releace-top">
         <div class="scence-releace-top-left">
           <p class="scence-releace-top-left-title text-show-line2">{{item.title}}</p>

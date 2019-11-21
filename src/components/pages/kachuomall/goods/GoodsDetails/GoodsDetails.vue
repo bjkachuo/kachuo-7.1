@@ -1,24 +1,24 @@
 <template>
   <div class="goods-details-wrap">
-    <Header
-      :titleContent="TitleObjData.titleContent"
-      :showLeftBack="TitleObjData.showLeftBack"
-      :showRightMore="TitleObjData.showRightMore"
-    ></Header>
+<!--    <Header-->
+<!--      :titleContent="TitleObjData.titleContent"-->
+<!--      :showLeftBack="TitleObjData.showLeftBack"-->
+<!--      :showRightMore="TitleObjData.showRightMore"-->
+<!--    ></Header>-->
     <div class="goods-details-content" :style="conHei">
-      <!-- <VideoPlayer :isControls="true" v-if="goodsData.ar_image" class="video-player-wrap"></VideoPlayer> -->
-      <!-- <SwiperImg 
-      :SwiperImgDataList="SwiperImgData"
-       v-if="SwiperImgData.ImgList.length">
-
-      </SwiperImg>     -->
-    <div>
+    <div class="banner">
       <swiper :options="swiperOption" class="swp-wall" v-if="list.length > 0" >
-      <swiper-slide class="swp-warp" v-for="(item,index) in list" :key="index">
-          <img :src="item.img" alt="" width="100%" height="100%" class="previewer-delete-icon" @click.prevent.stop="previewImg(index)">
-      </swiper-slide>
-      <div class="swiper-pagination swiper-pagination-bullets" slot="pagination"></div> 
+        <swiper-slide class="swp-warp" v-for="(item,index) in list" :key="index">
+            <img :src="item.img" alt="" width="100%" height="100%" class="previewer-delete-icon" @click.prevent.stop="previewImg(index)">
+        </swiper-slide>
+        <div class="swiper-pagination swiper-pagination-bullets" slot="pagination"></div>
     </swiper>
+      <div class="back" @click="goBack">
+        <x-icon type="ios-arrow-left" size="29"></x-icon>
+      </div>
+      <div class="more" @click="more">
+        <div class="icon"></div>
+      </div>
     </div>
       <previewer ref="previewer" :list="list2" :options="options"></previewer>
       <div class="goods-details-desc">
@@ -37,7 +37,6 @@
           <span>库存：{{goodsData.total}}</span>
         </p>
       </div>
-      <p class="good-acvitivy">活动</p>
       <div class="divider-area-wrap"></div>
       <div class="goods-details-cells">
         <group>
@@ -146,8 +145,7 @@ export default {
   directives: {
     TransferDom
   },
-  name: "",
-  props: [""],
+
   data() {
     return {
       swiperOption: {
@@ -191,20 +189,12 @@ export default {
       selOption: "",
       selService: "",
       collectState: true,
-      SwiperImgData: {
-        ImgList: [],
-        // index: 0,
-        // dotsPosition: "center",
-        // loop: true,
-        // auto: true,
-        // height: "160px",
-      }
+
     }
   },
   components: {
     Header,
     VideoPlayer,
-    // SwiperImg,
     Previewer,
     Divider,
     Group,
@@ -242,6 +232,12 @@ export default {
   },
 
   methods: {
+    goBack(){
+      this.$router.go(-1)
+    },
+    more(){
+
+    },
     previewImg(index){
       this.$refs.previewer.show(index)
     },
@@ -341,13 +337,11 @@ export default {
                   img: res.data.thumb_url[i]
                 });
               }
-              this.SwiperImgData.ImgList = JSON.parse(JSON.stringify(arr));
-              // console.log(this.SwiperImgData.ImgList);
-              this.list = this.SwiperImgData.ImgList;
-              this.SwiperImgData.ImgList.forEach(item=>{
+
+              this.list = JSON.parse(JSON.stringify(arr));
+              this.list.forEach(item=>{
                 this.list2.push({src:item.img})
               })
-              // console.log(this.list)
             }
             this.$nextTick(() => {
               this.goodsData = res.data;
@@ -364,6 +358,44 @@ export default {
 </script>
 <style lang='less' scoped>
 @import "~vux/src/styles/close";
+.banner{
+  position: relative;
+  .back{
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    position: absolute;
+    background-color: rgba(255,255,255,.9);
+    left: 15px;
+    top: 15px;
+    z-index: 10;
+    /deep/.vux-x-icon-ios-arrow-left {
+      fill: #000;
+      margin-left: 2px;
+      margin-top: 2px;
+    }
+  }
+  .more{
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    position: absolute;
+    background-color: rgba(255,255,255,.9);
+    right: 15px;
+    top: 15px;
+    z-index: 10;
+    .icon{
+      width: 70%;
+      margin-left: 15%;
+      margin-top: 15%;
+      height: 70%;
+      background-image: url("../more.png");
+      background-size: 100% 100%;
+    }
+  }
+}
+
+
 .divider-area-wrap {
   width: 100%;
   height: 10px;
@@ -376,58 +408,46 @@ export default {
 }
 .goods-details-content {
   width: 100%;
-  background: #fff;
-  margin-top: 50px;
+  background: rgb(245,245,245);
   overflow: hidden;
   overflow-y: scroll;
   box-sizing: border-box;
-  padding-bottom: 55px;
 }
-.video-player-wrap {
-  width: 100%;
-  height: 200px;
-  overflow: hidden;
-}
+
 .goods-details-desc {
+  background: #fff;
   width: 100%;
-  height: 110px;
+  box-shadow:0px 5px 10px 0px rgba(0,101,255,0.08);
+  border-radius:8px;
+  .goods-name {
+    line-height: 48px;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 0 15px;
+  }
+  .goods-price {
+    font-size: 30px;
+    color: rgb(255,57,57);
+    margin: 0 15px;
+    line-height: .8;
+    padding-bottom: 20px;
+    font-weight: bold;
+    border-bottom: 1px solid rgb(229,229,229);
+  }
+  .goods-propity {
+    width: 100%;
+    line-height: 38px;
+    color:rgb(153,153,153);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    padding: 0 15px;
+    box-sizing: border-box;
+  }
 }
-.goods-propity {
-  width: 100%;
-  height: 30px;
-  color: #999;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid #eee;
-  padding: 0 15px;
-  box-sizing: border-box;
-}
-.goods-name {
-  width: 100%;
-  height: 30px;
-  line-height: 30px;
-  font-size: 16px;
-  font-weight: bold;
-  padding: 0 15px;
-  box-sizing: border-box;
-}
-.goods-price {
-  width: 100%;
-  height: 50px;
-  font-size: 30px;
-  color: #b7090a;
-  padding: 0 15px;
-  box-sizing: border-box;
-}
-.good-acvitivy {
-  width: 100%;
-  height: 50px;
-  line-height: 50px;
-  padding: 0 15px;
-  box-sizing: border-box;
-}
+
 .goods-about-list {
   width: 100%;
   height: 44px;
