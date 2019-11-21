@@ -31,7 +31,7 @@
             //安卓ios跳转选择景区
             dsBridge.register("userlocation", r => {
                 this.$router.push("/userlocation");
-                alert("xuanze");
+                // alert("xuanze");
             });
 
             //安卓访问时不显示头部

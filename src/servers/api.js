@@ -383,29 +383,45 @@ export const CloudUploadImg = (data) => http.post("album.index", data);
 
 // 获取相册列表
 export const GetCloudUploadImg = (data) => http.post("album.album_list", data);
+
 //预约导游
 export const yuyueGuide = (data) => http.post("tourguide.show.addorder", data);
+
 //住吧房间预约订单下单
 export const orderReside = (data) => http.post("scenic.index.addOrder", data);
+
 //充值积分
 export const recharge = (data) => http.post("integral.recharge_int", data);
+
 //导游点赞
 export const LikeGuide = (data) => http.post("tourguide.index.like", data);
+
 //获取导游列表
 export const GuideList = (data) => http.post("tourguide.index.detail", data);
+
 //导游订单支付
 export const guidePay = (data) => http.post("tourguide.show.pay", data);
+
 //个人导游注册
 export const guideRegister = (data) => http.post("enter.tourguideRegister", data);
+
 //个人导游资料提交
 export const guideInfor = (data) => http.post("tourguide.index.save", data);
+
 //积分提现
 export const drawIntegral = (data) => http.post("integral.withdraw_int", data);
+
 //单票
 export const getTicketDetail = (data) => http.post("scenic.ticket.get_ticket_detail", data);
+
 //购票
 export const buyTicket = (data) => http.post("scenic.ticket.buy_ticket", data);
+
 //购票支付
 export const buyTicketHd = (data) => http.post("scenic.ticket.hd", data);
+
 //景区后台景区资料保存接口
 export const saveJqData = (data) => http.post("scenic.manage.scenicSet", data);
+
+//景区后台商家商品管理添加商品
+export const JqBsAddGoods = (data) => http.post("scenic.shop.addGoods", data);

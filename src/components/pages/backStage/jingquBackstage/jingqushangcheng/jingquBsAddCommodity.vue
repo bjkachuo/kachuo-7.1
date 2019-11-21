@@ -9,79 +9,78 @@
     <div class="addCommodity-content">
       <div class="up-avata">
         <p>
-          <span class="blod">上传个人照片</span>
+          <span class="blod">添加商品图片</span>
         </p>
         <UploadImgOne v-on:getHeaderImgUrl="getImgVal" :plus="true" ref="upimg">
           <div slot="bg">
-            <div class="up-avata-bg" v-if="!form.tour_path">
+            <div class="up-avata-bg" v-if="!form.goodsPhoto">
               <div class="camera"></div>
             </div>
           </div>
         </UploadImgOne>
       </div>
-
-      <!--      <div class="jq-photo-wrap">-->
-      <!--        <p>添加商品图片</p>-->
-      <!--        <ImageUploaderBs></ImageUploaderBs>-->
-      <!--      </div>-->
       <div class="name-wrap">
-        <x-input title="商品名称" placeholder="请填写商品名称" type="text" class="name-ipt"></x-input>
+        <x-input title="商品名称" placeholder="请填写商品名称" type="text" class="name-ipt" v-model="form.goodsName"></x-input>
         <popup-picker
           title="选择类目"
-          :data="list1"
-          v-model="value1"
+          :data="ChoiceGoodsClass"
+          v-model="form.goodsClass"
           @on-show="onShow"
           @on-hide="onHide"
           @on-change="onChange"
+          :columns="2"
+          show-name
         ></popup-picker>
       </div>
       <div class="Up-wrap">
-        <!-- <h3>上架板块</h3>
-        <div class="line"></div>-->
         <checklist
           title="上架板块"
           label-position="left"
           required
-          :options="commonList"
+          :options="UpperPlate"
           :max="1"
-          v-model="checklist001"
+          v-model="form.UpperPlate"
           @on-change="change"
           style="margin-top:26px"
         ></checklist>
       </div>
-      <div class="jq-photo-wrap-two">
-        <p>添加商品详情页</p>
-        <ImageUploaderBs></ImageUploaderBs>
+      <div class="up-avata">
+        <p>
+          <span class="blod">添加商品详情页</span>
+        </p>
+        <UploadImgOne v-on:getHeaderImgUrl="getImgValTwo" :plus="true" ref="upimg">
+          <div slot="bg">
+            <div class="up-avata-bg" v-if="!form.goodsPhotoDetails">
+              <div class="camera"></div>
+            </div>
+          </div>
+        </UploadImgOne>
       </div>
       <div class="price">
-        <x-input title="单价" placeholder="请填写商品单价" type="number" :show-clear="false">
+        <x-input title="单价" placeholder="请填写商品单价" type="number" :show-clear="false" v-model="form.goodsPrice">
           <p slot="right" style="color:#222222">元</p>
         </x-input>
-        <x-input title="库存" placeholder="请填写库存数量" type="number" :show-clear="false">
+        <x-input title="库存" placeholder="请填写库存数量" type="number" :show-clear="false" v-model="form.goodsNum">
           <p slot="right" style="color:#222222">件</p>
         </x-input>
-      </div>
-      <div class="freight">
-        <popup-picker
-          title="运费"
-          :data="list2"
-          v-model="value2"
-          @on-show="onShow"
-          @on-hide="onHide"
-          @on-change="onChange"
-        ></popup-picker>
+        <x-input title="运费" placeholder="请填写运费价格" type="number" :show-clear="false" v-model="form.freight">
+          <p slot="right" style="color:#222222">元</p>
+        </x-input>
+
       </div>
       <div class="existing">
         <popup-picker
           title="上链存证"
-          :data="list3"
-          v-model="value3"
+          :data="ChoiceChain"
+          v-model="form.chain"
           @on-show="onShow"
           @on-hide="onHide"
           @on-change="onChange"
+          :columns="1"
+          show-name
         ></popup-picker>
       </div>
-      <div class="button">
+      <div class="button" @click="submit">
         <x-button>立即上架</x-button>
       </div>
     </div>
@@ -90,9 +89,9 @@
 
 <script>
     import Header from "@/components/common/Header";
-    import ImageUploaderBs from "@/components/common/ImageUploaderBs";
     import {XInput, XTextarea, PopupPicker, Checklist, XButton} from "vux";
     import UploadImgOne from "@/components/common/UploadImgOne/UploadImgOne";
+    import {JqBsAddGoods} from "@/servers/api";
 
     export default {
         props: {},
@@ -103,32 +102,103 @@
                     showLeftBack: true,
                     showRightMore: false
                 },
+                //添加商品表单
                 form: {
-                    tour_path: "",
-                    introduce: "",
-                    price: "",
-                    lowest_time: [],
-                    phone: ""
-                },
+                    //商品图片
+                    goodsPhoto: "",
+                    //商品名称
+                    goodsName: "",
+                    //商品类目
+                    goodsClass: [],
+                    //上架板块
+                    UpperPlate: [],
+                    //商品详情图片
+                    goodsPhotoDetails: "",
+                    //商品价格
+                    goodsPrice: "",
+                    //商品库存
+                    goodsNum: "",
+                    //运费
+                    freight: "",
+                    //上链
+                    chain: ["1"]
 
-                //选择种类
-                list1: [["1", "2", "3"]],
-                value1: ["1"],
-                //选择包邮
-                list2: [["包邮", "不包邮"]],
-                value2: ["包邮"],
+                },
+                //选择商品类目
+                ChoiceGoodsClass: [
+                    {
+                        name: 'one',
+                        value: '1',
+                        parent: 0,
+                        id:1
+                    },
+                    {
+                        name: 'two',
+                        value: '2',
+                        parent: 0,
+                        id:2
+
+                    },
+                    {
+                        name: 'one-one',
+                        value: '3',
+                        parent: '1',
+                        id:3
+                    }, {
+                        name: 'one-two',
+                        value: '4',
+                        parent: '1',
+                        id:4
+                    },
+                    {
+                        name: 'two-one',
+                        value: '5',
+                        parent: '2',
+                        id:5
+                    }, {
+                        name: 'two-two',
+                        value: '6',
+                        parent: '2',
+                        id:6
+                    },
+                ],
+                //选择上架板块
+                UpperPlate: [
+                    {
+                        key: '1',
+                        value: '地方特色商品',
+                    },
+                    {
+                        key: '2',
+                        value: '自营文创产品',
+                    },
+                ],
                 //选择上链存证
-                list3: [["需要", "不需要"]],
-                value3: ["需要"],
-                //上架选择
-                commonList: ["地方特色商品", "自营文创产品"],
-                checklist001: []
+                ChoiceChain:
+                    [
+                        {
+                            name: '需要',
+                            value: '1',
+                            parent: 0
+                        },
+                        {
+                            name: '不需要',
+                            value: '0',
+                            parent: 0
+                        },
+
+                    ]
             };
         },
         computed: {},
         created() {
         },
         mounted() {
+            //获取景区商品类目
+            this.$http.post("http://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=scenic.shop.getGoodsCates").then(({data})=>{
+                console.log(data);
+                this.ChoiceGoodsClass = data.data
+            })
         },
         watch: {},
         methods: {
@@ -139,22 +209,51 @@
             onShow() {
                 console.log("on show");
             },
-            onHide(type) {
+            onHide(type,) {
                 console.log("on hide", type);
             },
             //切换上架选择
             change(val, label) {
                 console.log("change", val, label);
             },
-            //上传头像
+            //上传商品图片
             getImgVal(val) {
-                this.form.tour_path = val;
+                this.form.goodsPhoto = val;
             },
+            //上传商品详情图片图片
+            getImgValTwo(val) {
+                this.form.goodsPhotoDetails = val;
+            },
+            //提交添加商品表单
+              submit() {
+                JqBsAddGoods({
+                    //商品名称
+                    title: this.form.goodsName,
+                    //商品类目
+                    cates: this.form.goodsClass[1].toString(),
+                    //商品图片
+                    image: this.form.goodsPhoto.toArray(),
+                    //上架板块
+                    on_plate: this.form.UpperPlate.toString(),
+                    //商品详情图片
+                    content: this.form.goodsPhotoDetails.toArray(),
+                    //商品价格
+                    marketprice: this.form.goodsPrice,
+                    //运费价格
+                    dispatchprice: this.form.freight,
+                    //商品库存数量
+                    total: this.form.goodsNum,
+                    //商品上链
+                    is_yc:this.form.chain.toLocaleString()
+
+                }).then(res => {
+                    console.log(res)
+                })
+            }
 
         },
         components: {
             Header,
-            ImageUploaderBs,
             XInput,
             XTextarea,
             PopupPicker,
@@ -250,7 +349,7 @@
 
   .price {
     width: 92%;
-    height: 110px;
+    height: 160px;
     background: #ffffff;
     margin: 0 auto 10px;
     border-radius: 8px;
@@ -303,7 +402,7 @@
     width: 92%;
     box-shadow: 0px 5px 10px 0px rgba(0, 101, 255, 0.06);
     border-radius: 8px;
-    margin: 56px auto 10px;
+    margin: 10px auto 10px;
 
     p {
       line-height: 45px;

@@ -59,7 +59,7 @@ export default {
     dsBridge.call("getUserInfo", "web");
     dsBridge.registerAsyn("loginInfo", function (arg1, responseCallback) {
       localStorage.setItem("token", JSON.parse(arg1).accessToken);
-      alert(localStorage.getItem("token"))
+      // alert(localStorage.getItem("token"))
       responseCallback("登录信息成功");
     });
     bridge.register("yyTab", r => {

@@ -7,42 +7,6 @@
       :hideApp="1"
     ></Header>
     <div class="normal-content" style="height:636px;">
-      <!-- <div class="message-panel">
-        <div class="mess-body">
-          <div class="mess-group">
-            <cell @cell-label-color title="木子菲菲">
-              <img slot="icon" class="mess-avatar" src="../../../../assets/images/touxiang.jpg" />
-              <template slot="default">
-                <div class="btn-del" @click="onDel()"></div>
-              </template>
-            </cell>
-            <div class="commont-body">
-              <div class="cont">蓬莱阁旅游景区，是国家级5A级风景区，位于山 东省蓬莱市，小城在海边。</div>
-              <flexbox :gutter="5">
-                <flexbox-item>
-                  <div class="commont-pic">
-                    <img src="../../../../assets/images/蓬莱阁.jpg" alt />
-                  </div>
-                </flexbox-item>
-                <flexbox-item>
-                  <div class="commont-pic">
-                    <img src="../../../../assets/images/蓬莱阁.jpg" alt />
-                  </div>
-                </flexbox-item>
-                <flexbox-item>
-                  <div class="commont-pic">
-                    <img src="../../../../assets/images/蓬莱阁.jpg" alt />
-                  </div>
-                </flexbox-item>
-              </flexbox>
-            </div>
-            <div class="commont-footer">
-              <div class="time">2019-08-01</div>
-              <div>12点赞</div>
-            </div>
-          </div>
-        </div>
-      </div>-->
       <div class="message-panel" v-for="(item,index) in List" :key="index">
         <div class="mess-body">
           <div class="mess-group">
