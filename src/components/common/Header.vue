@@ -58,6 +58,9 @@ export default  {
       }
     })
   },
+  beforeDestroy(){
+    window.removeEventListener('popstate',()=>{})
+  },
   methods: {
     back() {
       if(this.hideApp){

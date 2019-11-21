@@ -4,6 +4,7 @@
       :titleContent="TitleObjData.titleContent"
       :showLeftBack="TitleObjData.showLeftBack"
       :showRightMore="TitleObjData.showRightMore"
+      :hideApp="1"
     ></Header>
     <!-- <Tab
       style="margin-top:50px"

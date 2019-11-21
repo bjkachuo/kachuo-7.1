@@ -4,6 +4,7 @@
       :titleContent="TitleObjData.titleContent"
       :showLeftBack="TitleObjData.showLeftBack"
       :showRightMore="TitleObjData.showRightMore"
+      :hideApp="1"
     ></Header>
     <div class="user-interal-content-wrap" :style="consty">
       <!-- <div class="user-interal-desc">

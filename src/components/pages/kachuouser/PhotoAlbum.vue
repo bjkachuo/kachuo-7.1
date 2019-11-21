@@ -4,6 +4,7 @@
       :titleContent="TitleObjData.titleContent"
       :showLeftBack="TitleObjData.showLeftBack"
       :showRightMore="TitleObjData.showRightMore"
+      :hideApp="1"
     ></Header>
     <div class="photo-album-content" :style="conHei">
       <div v-for="(item,index) in dataList" :key="index">

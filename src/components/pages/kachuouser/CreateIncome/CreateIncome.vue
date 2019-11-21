@@ -1,7 +1,6 @@
 <template>
   <div class="photo-album-wrap">
-    <Header :titleContent="TitleObjData.titleContent" :showLeftBack="TitleObjData.showLeftBack"
-            :showRightMore="TitleObjData.showRightMore"></Header>
+    <Header :titleContent="TitleObjData.titleContent" :showLeftBack="TitleObjData.showLeftBack" :showRightMore="TitleObjData.showRightMore" :hideApp="1"></Header>
     <div class="normal-content" :style="conHei">
 
       <div class="content-card">
