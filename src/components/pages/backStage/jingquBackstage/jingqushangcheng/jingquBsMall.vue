@@ -27,7 +27,7 @@
           <div class="title-wrap">
             <p>{{item.title}}</p>
           </div>
-          <div class="more-wrap" @click="show">
+          <div class="more-wrap" @click="show(item)">
             <img src="../moremore.png" alt/>
           </div>
           <div class="bottom-line">
@@ -39,10 +39,9 @@
             v-model="show2"
             title="确定要删除这件商品？"
             theme="android"
-            @on-cancel="onCancel(index)"
-            @on-confirm="onConfirm(index)"
+            @on-cancel="onCancel(index,item)"
+            @on-confirm="onConfirm(index,item)"
           ></confirm>
-
         </div>
       </b>
       <b v-show="cur==1">
@@ -70,7 +69,6 @@
       show-cancel
       @on-click-menu="click"
     ></actionsheet>
-
 
 
   </div>
@@ -115,8 +113,10 @@
         },
         watch: {},
         methods: {
-            show() {
+            show(item) {
                 this.show4 = !this.show4;
+                var a = item;
+                console.log(a);
             },
             //跳转添加商品页
             addCommodity() {
@@ -125,8 +125,8 @@
             //点击Actionsheet事件
             click(key, item) {
                 console.log(key, item)
-                if (item == "删除") {
-                    console.log("我点了删除")
+                if (key == "menu3") {
+                    console.log("我点了删除");
                     this.onDel()
                 }
             },
@@ -135,15 +135,14 @@
                 this.show2 = !this.show2;
             },
             //点击取消事件
-            onCancel(index) {
-                console.log("我点了取消", index);
+            onCancel(index,item) {
+                console.log("我点了取消",index, item);
             },
+
             //点击确认事件
-            onConfirm(index) {
-                console.log("我点了确认", index);
+            onConfirm(index, item) {
+                console.log("我点了确认", index, item);
             },
-
-
         },
         components: {
             Header,
