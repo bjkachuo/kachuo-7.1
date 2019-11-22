@@ -16,7 +16,7 @@
       <div class="back" @click="goBack">
         <x-icon type="ios-arrow-left" size="29"></x-icon>
       </div>
-      <div class="more" @click="more">
+      <div class="more" @click="share = true">
         <div class="icon"></div>
       </div>
     </div>
@@ -38,6 +38,7 @@
         </p>
       </div>
       <div class="divider-area-wrap"></div>
+
       <div class="goods-details-cells">
         <group>
           <cell title="已选" v-if="goodsData.options" is-link @click.native="selOptionFn">{{selName}}</cell>
@@ -46,23 +47,26 @@
         <div class="divider-area-wrap"></div>
         <group>
           <cell title="作品参数" is-link @click.native="selOptionFn2">{{selOption}}</cell>
-          <cell title="服务" is-link @click.native="selServiceFn">{{selService}}</cell>
+        </group>
+<!--        <group>-->
+<!--          <cell title="服务" is-link @click.native="selServiceFn">{{selService}}</cell>-->
+<!--        </group>-->
+        <div class="divider-area-wrap"></div>
+        <group>
+          <cell title="溯源视频" is-link @click.native="showSourceVideo">{{selService}}</cell>
+        </group>
+        <div class="divider-area-wrap"></div>
+        <group>
+          <cell title="文链查证" is-link @click.native="blockChainInfoFn">{{selService}}</cell>
         </group>
         <div class="divider-area-wrap"></div>
       </div>
-      <div class="goods-about-list">
-        <p class="goods-about-list-p">
-          <span @click="blockChainInfoFn">文链查证</span>
-          <span @click="showSourceVideo">溯源视频</span>
-          <!-- <span class="goods-about-list-p-span-noborder">文化构思</span> -->
-        </p>
-      </div>
-      <div class="divider-area-wrap"></div>
+
       <div class="goods-about-copywriter">
         <span>产品文案</span>
       </div>
       <p style="margin-top:10px" v-html="goodsData.content">{{goodsData.content}}</p>
-      
+
     </div>
 
     <bottom-menu :collectState="collectState"></bottom-menu>
@@ -111,6 +115,9 @@
         </div>
       </x-dialog>
     </div>
+
+    <!--分享-->
+    <actionsheet v-model="share" :menus="menus1"  @on-click-menu="shareClick"></actionsheet>
   </div>
 </template>
 
@@ -136,7 +143,8 @@ import {
   Checker,
   CheckerItem,
   XButton,
-  XDialog, 
+  XDialog,
+  Actionsheet
 } from "vux";
 
 
@@ -181,6 +189,11 @@ export default {
         showRightMore: true
       },
       selModel: "",
+      share:false,
+      menus1: {
+        0: '分享给好友',
+        1: '分享到朋友圈'
+      },
       showPopup: false,
       showPopupOption: false,
       showSourceModel: false,
@@ -189,7 +202,6 @@ export default {
       selOption: "",
       selService: "",
       collectState: true,
-
     }
   },
   components: {
@@ -210,7 +222,8 @@ export default {
     XDialog,
     swiper,
     swiperSlide,
-    bottomMenu
+    bottomMenu,
+    Actionsheet
   },
 
   computed: {
@@ -235,8 +248,15 @@ export default {
     goBack(){
       this.$router.go(-1)
     },
-    more(){
+    shareClick(key){
+      console.log(this.$route);
 
+      dsBridge.call("share",JSON.stringify({
+        type:key,
+        url:this.$route.fullPath,
+        imgUrl:this.goodsData.thumb_url[0],
+        title:this.goodsData.title
+      }))
     },
     previewImg(index){
       this.$refs.previewer.show(index)
@@ -395,7 +415,6 @@ export default {
   }
 }
 
-
 .divider-area-wrap {
   width: 100%;
   height: 10px;
@@ -448,29 +467,14 @@ export default {
   }
 }
 
-.goods-about-list {
-  width: 100%;
-  height: 44px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+.goods-details-cells{
+  /deep/.weui-cell{
+    padding: 15px 15px;
+    border-radius: 8px;
+    box-shadow:0px 5px 10px 0px rgba(0,101,255,0.08);
+  }
 }
-.goods-about-list-p {
-  width: 100%;
-  height: 20px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-}
-.goods-about-list-p span {
-  flex: 1;
-  text-align: center;
-}
-.goods-about-list-p span:nth-child(1),
-.goods-about-list-p span:nth-child(2) {
-  border-right: 1px solid #eee;
-}
+
 .goods-about-copywriter {
   width: 100%;
   height: 44px;

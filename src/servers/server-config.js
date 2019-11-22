@@ -1,6 +1,11 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-
+dsBridge.call("getUserInfo", "web");
+dsBridge.registerAsyn("loginInfo", function (arg1, responseCallback) {
+  localStorage.setItem("token", JSON.parse(arg1).accessToken);
+  // alert(localStorage.getItem("token"))
+  responseCallback("登录信息成功");
+});
 import axios from 'axios';
 import qs from 'qs';
 

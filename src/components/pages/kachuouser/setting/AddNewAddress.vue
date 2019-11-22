@@ -71,16 +71,16 @@ export default {
     if(this.$route.query.id){
       this.TitleObjData.titleContent = "修改地址"
 
-      // getAddressDetail({id:this.$route.query.id}).then(res=>{
-      //   console.log(this.$refs.address);
-      //   // this.$refs.address.showAxiosData(res.data)
-      //
-      //   this.maskValueAddress = res.data.province+','+res.data.city+','+res.data.area
-      //   this.maskValueName = res.data.realname
-      //   this.maskValuePhone = res.data.mobile
-      //   this.maskValueDetails = res.data.address
-      //   this.isdefault = res.data.isdefault
-      // })
+      getAddressDetail({id:this.$route.query.id}).then(res=>{
+        console.log(this.$refs.address);
+        this.$refs.address.showAxiosData(res.data)
+
+        this.maskValueAddress = res.data.province+','+res.data.city+','+res.data.area
+        this.maskValueName = res.data.realname
+        this.maskValuePhone = res.data.mobile
+        this.maskValueDetails = res.data.address
+        this.isdefault = res.data.isdefault
+      })
 
     }
   },

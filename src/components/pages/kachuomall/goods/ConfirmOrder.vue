@@ -1,10 +1,6 @@
 <template>
   <div class="confirm-order-wrap">
-    <Header
-      :titleContent="TitleObjData.titleContent"
-      :showLeftBack="TitleObjData.showLeftBack"
-      :showRightMore="TitleObjData.showRightMore"
-    ></Header>
+    <Header :titleContent="TitleObjData.titleContent" :showLeftBack="TitleObjData.showLeftBack" :showRightMore="TitleObjData.showRightMore"></Header>
     <div class="confirm-order-content" :style="scenceGiftsContent">
       <div class="address-wrap" @click="selAddress">
         <div class="address-left">

@@ -52,15 +52,13 @@ export default  {
   },
   mounted() {
     window.addEventListener('popstate', ()=>{
-      if(this.$store.state.isApp) {
+      if(this.$store.state.isApp && this.hideApp) {
         this.$store.state.loadingWhite = true
-        alert(this.$store.state.isApp)
+        window.removeEventListener('popstate',()=>{})
       }
     })
   },
-  beforeDestroy(){
-    window.removeEventListener('popstate',()=>{})
-  },
+
   methods: {
     back() {
       if(this.hideApp){

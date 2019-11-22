@@ -27,6 +27,7 @@
 </template>
 
 <script>
+  import axios from 'axios';
 import { vueCordovaFunction } from "@/assets/js/vuecordova";
 import { Loading, Confirm, Toast } from "vux";
 import { CheckByLocation } from "@/servers/api";
@@ -56,12 +57,8 @@ export default {
 
   mounted() {
     //安卓 ios登录储存token
-    dsBridge.call("getUserInfo", "web");
-    dsBridge.registerAsyn("loginInfo", function (arg1, responseCallback) {
-      localStorage.setItem("token", JSON.parse(arg1).accessToken);
-      // alert(localStorage.getItem("token"))
-      responseCallback("登录信息成功");
-    });
+
+
     bridge.register("yyTab", r => {
       this.$store.state.isApp = true;
     });

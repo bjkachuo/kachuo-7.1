@@ -11,19 +11,19 @@
       <div class="cart-panel" v-for="(item,index) in this.ListOne" :key="index">
         <div class="cart-header">
           <span @click="itemChange(item)"><check-icon :value.sync="item.checked" ></check-icon></span>
-          <span class="shop-name">{{ item.name }}</span>
+          <span class="shop-name">{{ item.shop_name }}</span>
         </div>
-        <cell v-for="good in item.arr">
+        <cell v-for="good in item.goods_list">
           <template slot="icon">
             <span @click="goodsChange(item)"><check-icon :value.sync="good.checked"></check-icon></span>
             <div class="gar-photo">
-              <img :src="good.goods_sx.thumb" alt />
+              <img :src="good.thumb" alt />
             </div>
           </template>
           <template slot="after-title">
             <div class="gar-body">
               <div class="gar-header">
-                <div class="gar-title">{{good.goods_sx.title}}</div>
+                <div class="gar-title">{{good.title}}</div>
               </div>
               <div class="gar-foot">
                 <div class="gar-price">￥<span>{{good.marketprice}}</span></div>
@@ -36,7 +36,7 @@
     </div>
     <div class="cart-tabbar">
       <label class="check-box">
-        <div>
+        <div @click="allClick">
           <check-icon :value.sync="checkAll"></check-icon>
         </div>
         <span>全选</span>
@@ -45,7 +45,7 @@
         合计:
         <span>{{this.price}}</span>
       </div>
-      <div class="button" v-if="toggle">去结算</div>
+      <div class="button" v-if="toggle" @click="ad">去结算</div>
       <div class="button del-button" v-if="!toggle">删除</div>
     </div>
   </div>
@@ -87,9 +87,12 @@ export default {
       item.checked = this.goodsIsAllChecked(item)
       this.itemIsAllChecked()
     },
+    allClick(){
+
+    },
     goodsIsAllChecked(item){
       let flag = true
-      item.arr.forEach(good=>{
+      item.goods_list.forEach(good=>{
         good.checked == false ? flag = false : null
       })
       return flag
@@ -102,7 +105,7 @@ export default {
       this.checkAll = flag
     },
     goodsAllChecked(item,flag){
-      item.arr.forEach(good=>{
+      item.goods_list.forEach(good=>{
         good.checked = flag
       })
     },
@@ -123,55 +126,17 @@ export default {
       ShopList({ page: 1 })
         .then(res => {
           console.log(res);
-          let obj = {}
 
-          res.data.result.forEach(item=>{
-            item.checked = true
-            obj[item.goods_sx.goods_owner] ? obj[item.goods_sx.goods_owner].arr.push(item) : obj[item.goods_sx.goods_owner] = { name:item.goods_sx.goods_owner,arr:[],checked:true }
-          })
+          let shops = Object.values(res.data.result)
+          this.ListOne = shops
 
-          let arr = Object.values(obj)
-          //模拟数据
-          arr.push({
-                arr:[{
-                      createtime: "1563240493",
-                      goods_sx:{
-                        decr_integral_pre: "20",
-                        decr_max_rate: "5",
-                        goods_owner: "微商城",
-                        incr_integral_pre: "20",
-                        marketprice: "570.00",
-                        scenic_id: "0",
-                        thumb: "https://core.kachuo.com/attachment/images/5/2019/10/yL1X6MR1mrRFvQxrzpR13uMmK7W103.jpg",
-                        title: "青花手绘盖碗-仙",
-                        type: "1"
-                      },
-                      integral:{
-                        decr_integral: 0,
-                        decr_money: 0,
-                        incr_integral: 13,
-                        real_price: 268
-                      },
-                      goodsid: "2754",
-                      id: "803",
-                      marketprice: "268.00",
-                      merch_pcate: "38",
-                      total: "1",
-                      checked:true,
-                }],
-                checked:true,
-                name:'前端模拟数据'
-              })
-          console.log('数组',arr);
-
-          this.ListOne = arr
           this.ListOne.forEach(item=>{
-            item.arr.forEach(good=>{
-              good.total = 1
+            item.checked = true
+            item.goods_list.forEach(good=>{
+              good.total = good.total - 0
+              good.checked = true
             })
           })
-
-
 
           console.log("购物车列表", this.ListOne);
 
@@ -203,7 +168,7 @@ export default {
     price(){
         let price = 0
         this.ListOne.forEach(item=>{
-          item.arr.forEach(good=>{
+          item.goods_list.forEach(good=>{
             if(good.checked == true){
               price += good.marketprice * good.total
             }
