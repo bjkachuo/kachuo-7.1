@@ -20,7 +20,7 @@
     </tab>
     <div class="tab-content">
       <b v-show="cur==0">
-        <div class="list-one" v-for="(item,index) in this.List" :key="index">
+        <div class="list-one" v-for="(item,index) in List" :key="index">
           <div class="img-wrap">
             <img :src="item.thumb" alt/>
           </div>
@@ -36,7 +36,7 @@
           </div>
           <confirm
             class="confirm-dialog"
-            v-model="show2"
+            v-model="isconfirm"
             title="确定要删除这件商品？"
             theme="android"
             @on-cancel="onCancel(index,item)"
@@ -63,7 +63,7 @@
       </b>
     </div>
     <actionsheet
-      v-model="show4"
+      v-model="isactionsheet"
       :menus="menus1"
       :close-on-clicking-mask="true"
       show-cancel
@@ -88,11 +88,12 @@
                     showLeftBack: true,
                     showRightMore: false
                 },
-                //confirm显示隐藏
-                show2: false,
+                //isconfirm显示隐藏
+                isconfirm: false,
                 //景区商品列表
                 List: [],
-                show4: false,
+                //isactionsheet显示隐藏
+                isactionsheet: false,
                 menus1: {
                     menu1: "下架",
                     menu2: "编辑",
@@ -113,10 +114,11 @@
         },
         watch: {},
         methods: {
+            //点击显示actionsheet
             show(item) {
-                this.show4 = !this.show4;
-                var a = item;
-                console.log(a);
+                this.isactionsheet = !this.isactionsheet;
+                // var a = item;
+                // console.log(a);
             },
             //跳转添加商品页
             addCommodity() {
@@ -126,13 +128,12 @@
             click(key, item) {
                 console.log(key, item)
                 if (key == "menu3") {
-                    console.log("我点了删除");
                     this.onDel()
                 }
             },
             //删除弹窗，方法
             onDel() {
-                this.show2 = !this.show2;
+                this.isconfirm = !this.isconfirm;
             },
             //点击取消事件
             onCancel(index,item) {
