@@ -617,11 +617,17 @@ export default [
     component: resolve => require(['@/components/pages/backStage/jingquBackstage/jingqushangcheng/jingquBsMall'], resolve),
 
   },
-  //景区后台商城添加商品
+  //景区后台商城添加商品页
   {
     path: '/jingquBsAddCommodity',
     name: 'JingquBsAddCommodity',
     component: resolve => require(['@/components/pages/backStage/jingquBackstage/jingqushangcheng/jingquBsAddCommodity'], resolve),
+  },
+  //景区后台商城编辑商品页
+  {
+    path: '/jingquBsEditCommodity',
+    name: 'jingquBsEditCommodity',
+    component: resolve => require(['@/components/pages/backStage/jingquBackstage/jingqushangcheng/jingquBsEditCommodity'], resolve),
   },
   //景区后台订单管理
   {

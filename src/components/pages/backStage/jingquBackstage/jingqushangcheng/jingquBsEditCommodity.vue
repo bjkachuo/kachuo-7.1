@@ -98,7 +98,7 @@
         data() {
             return {
                 TitleObjData: {
-                    titleContent: "添加商品",
+                    titleContent: "编辑商品",
                     showLeftBack: true,
                     showRightMore: false
                 },
@@ -232,7 +232,7 @@
                 this.form.goodsPhotoDetails = val;
             },
             //提交添加商品表单
-              submit() {
+            submit() {
                 JqBsAddGoods({
                     //商品名称
                     title: this.form.goodsName,
