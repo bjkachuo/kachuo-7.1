@@ -233,25 +233,25 @@
             },
             //提交添加商品表单
               submit() {
-                JqBsAddGoods({
+                  JqBsAddGoods({
                     //商品名称
-                    title: this.form.goodsName,
-                    //商品类目
-                    cates: this.form.goodsClass[1].toString(),
-                    //商品图片
-                    image: this.form.goodsPhoto.toArray(),
-                    //上架板块
-                    on_plate: this.form.UpperPlate.toString(),
-                    //商品详情图片
-                    content: this.form.goodsPhotoDetails.toArray(),
-                    //商品价格
-                    marketprice: this.form.goodsPrice,
-                    //运费价格
-                    dispatchprice: this.form.freight,
-                    //商品库存数量
-                    total: this.form.goodsNum,
-                    //商品上链
-                    is_yc:this.form.chain.toLocaleString()
+                      title: this.form.goodsName,
+                      //商品类目
+                      cates: this.form.goodsClass[1],
+                      //商品图片
+                      image: this.form.goodsPhoto,
+                      //上架板块
+                      on_plate: this.form.UpperPlate.join(),
+                      //商品详情图片
+                      content: this.form.goodsPhotoDetails,
+                      //商品价格
+                      marketprice: this.form.goodsPrice,
+                      //运费价格
+                      dispatchprice: this.form.freight,
+                      //商品库存数量
+                      total: this.form.goodsNum,
+                      //商品上链
+                      is_yc:this.form.chain.join()
 
                 }).then(res => {
                     console.log(res)

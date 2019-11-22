@@ -9,9 +9,9 @@
     <div class="addCommodity-content">
       <div class="up-avata">
         <p>
-          <span class="blod">添加商品图片</span>
+          <span class="blod">修改商品图片</span>
         </p>
-        <UploadImgOne v-on:getHeaderImgUrl="getImgVal" :plus="true" ref="upimg">
+        <UploadImgOne v-on:getHeaderImgUrl="getImgVal" :plus="true" ref="upimgTwo">
           <div slot="bg">
             <div class="up-avata-bg" v-if="!form.goodsPhoto">
               <div class="camera"></div>
@@ -46,7 +46,7 @@
       </div>
       <div class="up-avata">
         <p>
-          <span class="blod">添加商品详情页</span>
+          <span class="blod">修改商品详情页</span>
         </p>
         <UploadImgOne v-on:getHeaderImgUrl="getImgValTwo" :plus="true" ref="upimg">
           <div slot="bg">
@@ -91,7 +91,7 @@
     import Header from "@/components/common/Header";
     import {XInput, XTextarea, PopupPicker, Checklist, XButton} from "vux";
     import UploadImgOne from "@/components/common/UploadImgOne/UploadImgOne";
-    import {JqBsAddGoods} from "@/servers/api";
+    import {JqBsEditGoods} from "@/servers/api";
 
     export default {
         props: {},
@@ -122,48 +122,48 @@
                     freight: "",
                     //上链
                     chain: ["1"]
-
                 },
+                //商品详细
                 //选择商品类目
                 ChoiceGoodsClass: [
                     {
                         name: 'one',
                         value: '1',
                         parent: 0,
-                        id:1
+                        id: 1
                     },
                     {
                         name: 'two',
                         value: '2',
                         parent: 0,
-                        id:2
+                        id: 2
 
                     },
                     {
                         name: 'one-one',
                         value: '3',
                         parent: '1',
-                        id:3
+                        id: 3
                     }, {
                         name: 'one-two',
                         value: '4',
                         parent: '1',
-                        id:4
+                        id: 4
                     },
                     {
                         name: 'two-one',
                         value: '5',
                         parent: '2',
-                        id:5
+                        id: 5
                     }, {
                         name: 'two-two',
                         value: '6',
                         parent: '2',
-                        id:6
+                        id: 6
                     },
                 ],
                 //转键后新数组
-                newChoiceGoodsClass:[],
+                newChoiceGoodsClass: [],
                 //选择上架板块
                 UpperPlate: [
                     {
@@ -196,12 +196,29 @@
         created() {
         },
         mounted() {
+            console.log(this.$route.query.id)
+            //获取商品详细信息
+            this.$http.post("http://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=scenic.shop.edit_details&gid=" + this.$route.query.id).then(({data}) => {
+                console.log(data);
+                //商品头部照片回显
+                this.$refs.upimgTwo.imgUrl = data.data.goods.image[0];
+                this.form.goodsPhoto = data.data.goods.image;
+                this.form.goodsName = data.data.goods.title;
+                this.form.UpperPlate = data.data.goods.on_plate.split();
+                //商品详情照片回显
+                this.$refs.upimg.imgUrl = data.data.goods.content[0];
+                this.form.goodsPhotoDetails = data.data.goods.content[0];
+                this.form.goodsPrice = data.data.goods.marketprice;
+                this.form.goodsNum = data.data.goods.total;
+                this.form.freight = data.data.goods.dispatchprice;
+                this.form.chain = data.data.goods.is_yc.split();
+            });
             //获取景区商品类目
-            this.$http.post("http://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=scenic.shop.shopClass").then(({data})=>{
+            this.$http.post("http://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=scenic.shop.shopClass").then(({data}) => {
                 console.log(data);
                 this.ChoiceGoodsClass = data.data
                 this.newChoiceGoodsClass = this.ChoiceGoodsClass.map(item => {
-                    return {parent: item.pid,id:item.id,name:item.name,value:item.id};
+                    return {parent: item.pid, id: item.id, name: item.name, value: item.id};
                 });
                 console.log(this.newChoiceGoodsClass)
 
@@ -233,17 +250,19 @@
             },
             //提交添加商品表单
             submit() {
-                JqBsAddGoods({
+                JqBsEditGoods({
+                    //商品id
+                    id:this.$route.query.id,
                     //商品名称
                     title: this.form.goodsName,
                     //商品类目
-                    cates: this.form.goodsClass[1].toString(),
+                    cates: this.form.goodsClass[1],
                     //商品图片
-                    image: this.form.goodsPhoto.toArray(),
+                    image: this.form.goodsPhoto,
                     //上架板块
-                    on_plate: this.form.UpperPlate.toString(),
+                    on_plate: this.form.UpperPlate.join(),
                     //商品详情图片
-                    content: this.form.goodsPhotoDetails.toArray(),
+                    content: this.form.goodsPhotoDetails,
                     //商品价格
                     marketprice: this.form.goodsPrice,
                     //运费价格
@@ -251,8 +270,7 @@
                     //商品库存数量
                     total: this.form.goodsNum,
                     //商品上链
-                    is_yc:this.form.chain.toLocaleString()
-
+                    is_yc: this.form.chain.join()
                 }).then(res => {
                     console.log(res)
                 })

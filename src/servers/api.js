@@ -425,3 +425,6 @@ export const saveJqData = (data) => http.post("scenic.manage.scenicSet", data);
 
 //景区后台商家商品管理添加商品
 export const JqBsAddGoods = (data) => http.post("scenic.shop.addGoods", data);
+
+//景区后台商家商品管理编辑商品提交
+export const JqBsEditGoods = (data) => http.post("scenic.shop.saveGoods", data);

@@ -34,7 +34,7 @@
             </div>
           </div>
           <div class="bottom" style="height:34px">
-            <div class="bottom-two">
+            <div class="bottom-two" @click="goEdit(item.id)">
               <p>编辑</p>
             </div>
             <div class="bottom-one" @click="LowerShelf(index,item)">
@@ -61,10 +61,10 @@
             </div>
           </div>
           <div class="bottom">
-            <div class="bottom-two" @click="onDel()">
+            <div class="bottom-two" @click="onDel(item.id)">
               <p>删除</p>
             </div>
-            <div class="bottom-one">
+            <div class="bottom-one" @click="goEdit(item.id)">
               <p>编辑</p>
             </div>
             <div class="bottom-one" @click="UpShelf(index,item)">
@@ -74,18 +74,19 @@
           <!--          <div class="more-wrap" @click="show">-->
           <!--            <img src="../moremore.png" alt/>-->
           <!--          </div>-->
-          <confirm
-            class="confirm-dialog"
-            v-model="isconfirm"
-            title="确定要删除这件商品？"
-            theme="android"
-            @on-cancel="onCancel()"
-            @on-confirm="onConfirm()"
-          ></confirm>
 
         </div>
       </b>
     </div>
+    <confirm
+      class="confirm-dialog"
+      v-model="isconfirm"
+      title="确定要删除这件商品？"
+      theme="android"
+      @on-cancel="onCancel()"
+      @on-confirm="onConfirm()"
+    ></confirm>
+
     <!--    <actionsheet-->
     <!--      v-model="isactionsheet"-->
     <!--      :menus="menus1"-->
@@ -112,6 +113,8 @@
                 },
                 //isconfirm显示隐藏
                 isconfirm: false,
+                //comfirm选择的item
+                chooseItem:"",
                 //景区商品上架列表
                 List: [],
                 //景区商品下架列表
@@ -167,17 +170,29 @@
             addCommodity() {
                 this.$router.push("/jingquBsAddCommodity");
             },
+            //跳转编辑页面
+            goEdit(id){
+                this.$router.push("/jingquBsEditCommodity?id="+id);
+            },
             //删除弹窗，方法
-            onDel() {
+            onDel(id) {
                 this.isconfirm = !this.isconfirm;
+                this.chooseItem = id;
+                console.log(this.chooseItem)
             },
             //点击取消事件
             onCancel() {
-                console.log("我点了取消");
+                console.log("我点了取消",this.chooseItem);
+
             },
             //点击确认事件
             onConfirm() {
-                console.log("我点了确认");
+                console.log("我点了确认",this.chooseItem);
+                //确认删除操作
+                this.$http.post("http://core.kachuo.com//app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=scenic.shop.delGoods&id="+this.chooseItem).then(({data})=>{
+                    console.log(data);
+                    this.RefreshList();
+                })
             },
             //点击显示actionsheet
             // show(item) {
