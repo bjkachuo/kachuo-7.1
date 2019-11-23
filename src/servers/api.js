@@ -428,3 +428,9 @@ export const JqBsAddGoods = (data) => http.post("scenic.shop.addGoods", data);
 
 //景区后台商家商品管理编辑商品提交
 export const JqBsEditGoods = (data) => http.post("scenic.shop.saveGoods", data);
+
+//景区后台添加导游
+export const JqBsAddGuide = (data) => http.post("tourguide.index.add", data);
+
+//景区后台编辑导游
+export const JqBsEditGuide = (data) => http.post("tourguide.index.save", data);

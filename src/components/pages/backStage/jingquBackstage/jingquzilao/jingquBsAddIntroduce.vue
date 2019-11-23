@@ -24,6 +24,7 @@
 
 <script>
     import Header from "@/components/common/Header";
+    // import {quillRedefine} from 'vue-quill-editor-upload'
     // import { XTextarea } from "vux";
     import {quillEditor} from "vue-quill-editor";
     import {saveJqData} from "@/servers/api";
@@ -97,7 +98,7 @@
         },
         components: {
             Header,
-
+            // quillRedefine
             // XTextarea
         }
     };

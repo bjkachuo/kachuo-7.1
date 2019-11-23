@@ -1,7 +1,7 @@
 <template>
   <div class="wrap">
     <!-- <Header
-      :titleContent="TitleObjData.titleContent" 
+      :titleContent="TitleObjData.titleContent"
       :showLeftBack="TitleObjData.showLeftBack"
       :showRightMore="TitleObjData.showRightMore"
     ></Header>-->
@@ -18,7 +18,7 @@
       </div>
 
       <div class="head-right" style="float:right;font-size:16px;margin-top:10px;margin-right: 40px;" @click="goRegister">导游注册</div>
-      
+
       <!-- <div class="head-right" style="float:right;font-size:16px;margin-top:10px;margin-right:8px;" @click="goTourBs">导游后台</div> -->
     </div>
     <div class="normal-content" :style="conHei">
@@ -165,12 +165,11 @@ export default {
     };
   },
   mounted() {
-    console.log(sessionStorage.currentScenic);
     //获取导游列表
     this.$http
       .post(
         "https://core.kachuo.com/app/ewei_shopv2_app.php?i=8&c=site&a=entry&m=ewei_shopv2&do=mobile&r=tourguide.index.getlist&scenic_id=" +
-          sessionStorage.currentScenic
+          JSON.parse(sessionStorage.getItem("currentScenic"))
       )
       .then(({ data }) => {
         console.log(data);

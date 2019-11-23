@@ -608,7 +608,12 @@ export default [
     path: '/jingquBsAddguide',
     name: 'JingquBsAddguide',
     component: resolve => require(['@/components/pages/backStage/jingquBackstage/jingqudaoyou/jingquBsAddguide'], resolve),
-
+  },
+  //景区后台编辑导游
+  {
+    path: '/jingquBsEditguide',
+    name: 'JingquBsEditguide',
+    component: resolve => require(['@/components/pages/backStage/jingquBackstage/jingqudaoyou/jingquBsEditguide'], resolve),
   },
   //景区后台商城
   {

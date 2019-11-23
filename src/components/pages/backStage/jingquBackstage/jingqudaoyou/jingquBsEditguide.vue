@@ -69,14 +69,14 @@
     import UploadImgOne from "@/components/common/UploadImgOne/UploadImgOne";
     import {guideInfor} from "@/servers/api";
     import ImageUploaderBs from "@/components/common/ImageUploaderBs";
-    import { JqBsAddGuide } from "@/servers/api";
+    import {JqBsEditGuide} from "@/servers/api";
 
     export default {
         props: {},
         data() {
             return {
                 TitleObjData: {
-                    titleContent: "添加导游",
+                    titleContent: "编辑导游",
                     showLeftBack: true,
                     showRightMore: false
                 },
@@ -84,7 +84,7 @@
                     //导游头像
                     tour_path: "",
                     //导游姓名
-                    name:"",
+                    name: "",
                     //导游介绍
                     introduce: "",
                     //价格
@@ -102,10 +102,19 @@
         created() {
         },
         mounted() {
-            // //打印导演注册的全局id
-            // console.log(
-            //     JSON.parse(sessionStorage.getItem("userLoginInfo")).tourguide_id
-            // );
+            console.log(this.$route.query.id);
+            //获取导游详情
+            this.$http.post("http://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=tourguide.index.detail&id=" + this.$route.query.id).then(({data}) => {
+                console.log(data);
+                this.form.name = data.data.name;
+                this.form.tour_path = data.data.tour_path;
+                this.$refs.upimg.imgUrl = data.data.tour_path;
+                this.form.introduce = data.data.introduce;
+                this.form.price = data.data.price;
+                this.form.lowest_time = data.data.lowest_time.split();
+                this.form.phone = data.data.phone;
+
+            })
         },
         watch: {},
         methods: {
@@ -134,8 +143,9 @@
             },
             //提交表单
             submit() {
-                JqBsAddGuide({
-                    name:this.form.name,
+                JqBsEditGuide({
+                    id:this.$route.query.id,
+                    name: this.form.name,
                     scenic_id: JSON.parse(sessionStorage.getItem("userLoginInfo")).scenic_id,
                     tour_path: this.form.tour_path,
                     introduce: this.form.introduce,

@@ -21,73 +21,76 @@
     </tab>
     <div class="tab-content">
       <b v-show="cur==0">
-        <div class="list-one">
+        <div class="list-one" v-for="(item,index) in TList" :key="index">
           <div class="img-wrap">
-            <img src alt/>
-            <div class="state" style="background:#6B97FF">空闲</div>
+            <img :src="item.tour_path" alt/>
+            <!--            <div class="state" style="background:#6B97FF">空闲</div>-->
+            <div :class="'g-tag-'+item.status" v-if="item.status=='0'">空闲</div>
+            <div :class="'g-tag-'+item.status" v-if="item.status=='1'">期满</div>
+            <div :class="'g-tag-'+item.status" v-if="item.status=='2'">休息</div>
           </div>
           <div class="name-star-wrap">
-            <p>李小小</p>
+            <p>{{item.name}}</p>
             <div class="star-wrap">
-              <rater v-model="data42" active-color="#FF9900" :font-size="10" disabled></rater>
-              <span>(121)</span>
+              <rater v-model="item.score" active-color="#FF9900" :font-size="10" disabled></rater>
+              <span>({{item.score}})</span>
             </div>
           </div>
-          <div class="more-wrap" @click="show">
+          <div class="more-wrap" @click="show(item)">
             <img src="../moremore.png" alt/>
           </div>
         </div>
       </b>
       <b v-show="cur==1">
-        <div class="list-one">
+        <div class="list-one" v-for="(item,index) in TList" :key="index" v-if="item.status == 0">
           <div class="img-wrap">
-            <img src alt/>
-            <div class="state" style="background:#6B97FF">空闲</div>
+            <img :src="item.tour_path" alt/>
+            <div :class="'g-tag-'+0">空闲</div>
           </div>
           <div class="name-star-wrap">
-            <p>李中中</p>
+            <p>{{item.name}}</p>
             <div class="star-wrap">
-              <rater v-model="data42" active-color="#FF9900" :font-size="10" disabled></rater>
-              <span>(121)</span>
+              <rater v-model="item.score" active-color="#FF9900" :font-size="10" disabled></rater>
+              <span>({{item.score}})</span>
             </div>
           </div>
-          <div class="more-wrap" @click="show">
+          <div class="more-wrap" @click="show(item)">
             <img src="../moremore.png" alt/>
           </div>
         </div>
       </b>
       <b v-show="cur==2">
-        <div class="list-one">
+        <div class="list-one" v-for="(item,index) in TList" :key="index" v-if="item.status == 1">
           <div class="img-wrap">
-            <img src alt/>
-            <div class="state" style="background:#ff4d4d">期满</div>
+            <img :src="item.tour_path" alt/>
+            <div :class="'g-tag-'+1">期满</div>
           </div>
           <div class="name-star-wrap">
-            <p>李哪哪</p>
+            <p>{{item.name}}</p>
             <div class="star-wrap">
-              <rater v-model="data42" active-color="#FF9900" :font-size="10" disabled></rater>
-              <span>(121)</span>
+              <rater v-model="item.score" active-color="#FF9900" :font-size="10" disabled></rater>
+              <span>({{item.score}})</span>
             </div>
           </div>
-          <div class="more-wrap" @click="show">
+          <div class="more-wrap" @click="show(item)">
             <img src="../moremore.png" alt/>
           </div>
         </div>
       </b>
-      <b v-show="cur==3">
+      <b v-show="cur==3" v-for="(item,index) in TList" :key="index" v-if="item.status == 2">
         <div class="list-one">
           <div class="img-wrap">
-            <img src alt/>
-            <div class="state" style="background:#999999">休息</div>
+            <img :src="item.tour_path" alt/>
+            <div :class="'g-tag-'+2">休息</div>
           </div>
           <div class="name-star-wrap">
-            <p>李大大</p>
+            <p>{{item.name}}</p>
             <div class="star-wrap">
-              <rater v-model="data42" active-color="#FF9900" :font-size="10" disabled></rater>
-              <span>(121)</span>
+              <rater v-model="item.score" active-color="#FF9900" :font-size="10" disabled></rater>
+              <span>({{item.score}})</span>
             </div>
           </div>
-          <div class="more-wrap" @click="show">
+          <div class="more-wrap" @click="show(item)">
             <img src="../moremore.png" alt/>
           </div>
         </div>
@@ -103,12 +106,11 @@
     <confirm
       class="confirm-dialog"
       v-model="isconfirm"
-      title="确定要删除这件商品？"
-      theme="android"
+      title="确定要删除吗？"
+      theme="ios"
       @on-cancel="onCancel()"
       @on-confirm="onConfirm()"
     ></confirm>
-
   </div>
 </template>
 
@@ -134,18 +136,42 @@
                     menu1: "置顶",
                     menu2: "编辑",
                     menu3: "删除"
-                }
+                },
+                scenic_id: "",
+                //导演列表
+                TList: "",
+                //点击显示actionsheet时保存的item
+                guideItem: ""
             };
         },
         computed: {},
         created() {
         },
         mounted() {
+            //获取景区id
+            this.scenic_id = JSON.parse(sessionStorage.getItem("currentScenic"));
+            console.log(this.scenic_id)
+            //获取景区后台导游列表
+            this.$http.post("http://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=tourguide.index.getlist&scenic_id=" + this.scenic_id).then(({data}) => {
+                console.log(data);
+                this.TList = data.data.list;
+            })
         },
         watch: {},
         methods: {
-            show() {
+            //提示框
+            showTip(conttentTip) {
+                this.$vux.toast.text(conttentTip, "middle");
+                setTimeout(() => {
+                    this.$vux.toast.hide();
+                }, 1000);
+            },
+
+            //点击显示confirm
+            show(item) {
                 this.isactionsheet = !this.isactionsheet;
+                this.guideItem = item;
+                console.log(this.guideItem);
             },
             addGuide() {
                 this.$router.push("/jingquBsAddguide");
@@ -153,14 +179,24 @@
             // 点击Actionsheet事件
             click(key, item) {
                 console.log(key, item)
-                // if (key == "menu3") {
-                // }
+                if (key == "menu3") {
+                    //如果点了删除调用删除confirm
+                    this.onDel();
+                } else if (key == "menu1") {
+                    //点击导游置顶操作
+                      this.$http.post("http://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=tourguide.index.setIsTop&status="+1+"&id="+this.guideItem.id).then(({data})=>{
+                          console.log(data);
+                          this.Refresh();
+                          this.showTip("置顶成功");
+                      })
+                }else if(key == "menu2" ){
+                    alert("我要去编辑页面")
+                    this.$router.push("/jingquBsEditguide?id="+this.guideItem.id)
+                }
             },
             //删除弹窗，方法
             onDel(id) {
                 this.isconfirm = !this.isconfirm;
-                // this.chooseItem = id;
-                // console.log(this.chooseItem)
             },
             //点击取消事件
             onCancel() {
@@ -170,7 +206,22 @@
             //点击确认事件
             onConfirm() {
                 console.log("我点了确认");
+                //删除导游
+                this.$http.post("http://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=tourguide.index.del&id=" + this.guideItem.id).then(({data}) => {
+                    console.log(data)
+                    this.Refresh();
+                    this.showTip("删除成功");
+                })
 
+            },
+            //刷新列表方法
+            Refresh() {
+                //获取景区后台导游列表
+                this.$http.post("http://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=tourguide.index.getlist&scenic_id=" + this.scenic_id).then(({data}) => {
+                    console.log(data);
+                    this.TList = data.data.list;
+                    console.log("我刷新了列表")
+                })
             }
         },
         components: {
@@ -278,6 +329,100 @@
   .more-wrap img {
     width: 100%;
   }
+
+  .g-tag-0 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    text-align: center;
+    border-bottom-right-radius: 25px;
+    color: #ffffff;
+    font-size: 12px;
+    width: 40px;
+    height: 25px;
+    line-height: 25px;
+    box-sizing: border-box;
+    padding-right: 10px;
+    background-color: #6b97ff;
+  }
+
+  .g-tag-1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    text-align: center;
+    border-bottom-right-radius: 25px;
+    color: #ffffff;
+    font-size: 12px;
+    width: 40px;
+    height: 25px;
+    line-height: 25px;
+    box-sizing: border-box;
+    padding-right: 10px;
+
+    background-color: #ff4d4d;
+  }
+
+  .g-tag-2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    text-align: center;
+    border-bottom-right-radius: 25px;
+    color: #ffffff;
+    font-size: 12px;
+    width: 50px;
+    height: 25px;
+    line-height: 25px;
+    box-sizing: border-box;
+    padding-right: 10px;
+
+    background-color: #999;
+  }
+
+  /* confirm弹窗样式 */
+  .confirm-dialog /deep/ .weui-skin_android .weui-dialog__ft {
+    text-align: center;
+    padding: 0 15px 15px 15px;
+  }
+
+  .confirm-dialog /deep/ .weui-dialog__btn {
+    width: 110px;
+    height: 35px;
+    line-height: 35px;
+    border: 1px solid #3976ff;
+    border-radius: #3976ff;
+    text-align: center;
+    color: #3976ff;
+    font-size: 15px;
+    border-radius: 35px;
+    margin: 0 5px;
+  }
+
+  .confirm-dialog /deep/ .weui-dialog__btn:active {
+    background-color: transparent;
+  }
+
+  .confirm-dialog /deep/ .weui-dialog__btn_primary,
+  .confirm-dialog /deep/ .weui-dialog__btn_primary:active {
+    background-color: #3976ff;
+    color: #ffffff;
+  }
+
+  .confirm-dialog /deep/ .weui-skin_android .weui-dialog__title {
+    font-size: 18px;
+  }
+
+  .confirm-dialog /deep/ .weui-dialog__hd {
+    text-align: center;
+    padding: 30px 15px;
+  }
+
+  .confirm-dialog /deep/ .weui-skin_android .weui-dialog__bd {
+    padding: 5px 15px 0 15px;
+    min-height: 10px;
+  }
+
 </style>
 <style lang="less" scoped>
   /deep/ .vux-tab-wrap {
