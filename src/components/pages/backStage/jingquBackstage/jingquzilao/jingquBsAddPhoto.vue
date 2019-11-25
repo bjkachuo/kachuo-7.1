@@ -6,7 +6,7 @@
       :showLeftBack="TitleObjData.showLeftBack"
       :showRightMore="TitleObjData.showRightMore"
     ></Header>
-    <p class="Preservation">保存</p>
+    <p class="Preservation" @click="addImg">保存</p>
     <!-- <div class="jq-photo-wrap">
       <p>景区照片</p>
       <ImageUploaderBs></ImageUploaderBs>
@@ -30,6 +30,7 @@
 import Header from "@/components/common/Header";
 import ImageUploaderBs from "@/components/common/ImageUploaderBs";
 import UploadImgOne from "@/components/common/UploadImgOne/UploadImgOne";
+import {JqBsAddDate} from "@/servers/api";
 
 export default {
   props: {},
@@ -53,7 +54,15 @@ export default {
     //上传头像
     getImgVal(val) {
       this.form.tour_path = val;
-    }
+    },
+    //保存景区资料照片
+      addImg(){
+          JqBsAddDate({
+              advimg:this.form.tour_path
+          }).then(res=>{
+             console.log(res)
+          })
+      }
   },
   components: {
     Header,

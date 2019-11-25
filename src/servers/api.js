@@ -434,3 +434,7 @@ export const JqBsAddGuide = (data) => http.post("tourguide.index.add", data);
 
 //景区后台编辑导游
 export const JqBsEditGuide = (data) => http.post("tourguide.index.save", data);
+
+//景区后台景区资料各种上传
+export const JqBsAddDate = (data) => http.post("scenic.msg.saveScenic", data);
+
