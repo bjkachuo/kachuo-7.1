@@ -158,8 +158,18 @@
                         this.showTip("提交成功");
                         sessionStorage.goback = "yes";
                         this.$router.goBack();
-                    } else {
-                        this.showTip("请填写完整或检查网络");
+                    } else if (this.form.tour_path == "") {
+                        this.showTip("请上传导游照片");
+                    } else if (this.form.name == "") {
+                        this.showTip("请填写姓名");
+                    } else if (this.form.introduce == "") {
+                        this.showTip("请填写导游介绍");
+                    } else if (this.form.price == "") {
+                        this.showTip("请填写价格");
+                    } else if (this.form.lowest_time == "") {
+                        this.showTip("请选择时长");
+                    } else if (this.form.phone == "") {
+                        this.showTip("请填写联系方式");
                     }
                 });
             }
@@ -172,9 +182,7 @@
             PopupPicker,
             UploadImgOne
         },
-        watch: {
-
-        },
+        watch: {},
 
     };
 </script>

@@ -237,7 +237,7 @@
             '$route': function (to) {
                 if (sessionStorage.goback == "yes") {
                     sessionStorage.goback = ''
-                    this.Refresh();
+                    this.RefreshList();
                 }
             }
         },

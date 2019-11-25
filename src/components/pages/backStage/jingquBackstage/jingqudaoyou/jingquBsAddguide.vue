@@ -69,7 +69,7 @@
     import UploadImgOne from "@/components/common/UploadImgOne/UploadImgOne";
     import {guideInfor} from "@/servers/api";
     import ImageUploaderBs from "@/components/common/ImageUploaderBs";
-    import { JqBsAddGuide } from "@/servers/api";
+    import {JqBsAddGuide} from "@/servers/api";
 
     export default {
         props: {},
@@ -84,7 +84,7 @@
                     //导游头像
                     tour_path: "",
                     //导游姓名
-                    name:"",
+                    name: "",
                     //导游介绍
                     introduce: "",
                     //价格
@@ -135,7 +135,7 @@
             //提交表单
             submit() {
                 JqBsAddGuide({
-                    name:this.form.name,
+                    name: this.form.name,
                     scenic_id: JSON.parse(sessionStorage.getItem("userLoginInfo")).scenic_id,
                     tour_path: this.form.tour_path,
                     introduce: this.form.introduce,
@@ -148,8 +148,18 @@
                         this.showTip("提交成功");
                         sessionStorage.goback = "yes";
                         this.$router.goBack();
-                    } else {
-                        this.showTip("请填写完整或检查网络");
+                    } else if (this.form.tour_path == "") {
+                        this.showTip("请上传导游照片");
+                    } else if (this.form.name == "") {
+                        this.showTip("请填写姓名");
+                    } else if (this.form.introduce == "") {
+                        this.showTip("请填写导游介绍");
+                    } else if (this.form.price == "") {
+                        this.showTip("请填写价格");
+                    } else if (this.form.lowest_time == "") {
+                        this.showTip("请选择时长");
+                    } else if (this.form.phone == "") {
+                        this.showTip("请填写联系方式");
                     }
                 });
             }

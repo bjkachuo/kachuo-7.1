@@ -267,9 +267,26 @@
                         this.showTip("上架成功");
                         sessionStorage.goback = "yes";
                         this.$router.goBack();
-                    } else {
-                        this.showTip("请填写完整或检查网络");
+                    } else if (this.form.goodsPhoto == "") {
+                        this.showTip("请上传商品图片");
+                    } else if (this.form.goodsName == "") {
+                        this.showTip("请填写商品名称");
+                    } else if (this.form.goodsClass == "") {
+                        this.showTip("选择商品类目");
+                    } else if (this.form.UpperPlate == "") {
+                        this.showTip("选择上架板块");
+                    } else if (this.form.goodsPhotoDetails == "") {
+                        this.showTip("请上传商品详情图片");
+                    } else if (this.form.goodsPrice == "") {
+                        this.showTip("填写商品价格");
+                    } else if (this.form.goodsNum == "") {
+                        this.showTip("填写库存");
+                    } else if (this.form.freight == "") {
+                        this.showTip("填写运费");
+                    } else if (this.form.chain == "") {
+                        this.showTip("请选择上链信息");
                     }
+
 
                 })
             }
