@@ -145,6 +145,7 @@
             submit() {
                 JqBsEditGuide({
                     id:this.$route.query.id,
+                    //导游姓名不可修改，名字是实名认证得来
                     name: this.form.name,
                     scenic_id: JSON.parse(sessionStorage.getItem("userLoginInfo")).scenic_id,
                     tour_path: this.form.tour_path,
