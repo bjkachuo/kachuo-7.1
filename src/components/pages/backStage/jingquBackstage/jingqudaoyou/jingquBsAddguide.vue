@@ -146,6 +146,8 @@
                     console.log(res);
                     if (res.result == 1) {
                         this.showTip("提交成功");
+                        sessionStorage.goback = "yes";
+                        this.$router.goBack();
                     } else {
                         this.showTip("请填写完整或检查网络");
                     }

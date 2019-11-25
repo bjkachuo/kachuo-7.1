@@ -190,7 +190,6 @@
                           this.showTip("置顶成功");
                       })
                 }else if(key == "menu2" ){
-                    alert("我要去编辑页面")
                     this.$router.push("/jingquBsEditguide?id="+this.guideItem.id)
                 }
             },
@@ -231,6 +230,15 @@
             Rater,
             Actionsheet,
             Confirm
+        },
+        watch:{
+            '$route':function (to) {
+                if(sessionStorage.goback == "yes"){
+                    sessionStorage.goback = ''
+                    this.Refresh();
+                }
+            }
+
         }
     };
 </script>

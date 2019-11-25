@@ -597,6 +597,13 @@ export default [
     component: resolve => require(['@/components/pages/backStage/jingquBackstage/jingquzixun/jingquBsSearch'], resolve),
 
   },
+  //景区资讯发布页面
+  {
+    path: '/jingquBSInfoRelease',
+    name: 'jingquBSInfoRelease',
+    component: resolve => require(['@/components/pages/backStage/jingquBackstage/jingquzixun/jingquBSInfoRelease'], resolve),
+
+  },
   // 景区后台导游
   {
     path: '/jingquBsGuide',

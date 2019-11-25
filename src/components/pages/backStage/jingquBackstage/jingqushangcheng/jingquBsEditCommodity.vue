@@ -81,7 +81,7 @@
         ></popup-picker>
       </div>
       <div class="button" @click="submit">
-        <x-button>立即上架</x-button>
+        <x-button>修改完成</x-button>
       </div>
     </div>
   </div>
@@ -226,6 +226,14 @@
         },
         watch: {},
         methods: {
+            //提示框
+            showTip(conttentTip) {
+                this.$vux.toast.text(conttentTip, "middle");
+                setTimeout(() => {
+                    this.$vux.toast.hide();
+                }, 1000);
+            },
+
             //选择种类事件
             onChange(val) {
                 console.log("val change", val);
@@ -252,7 +260,7 @@
             submit() {
                 JqBsEditGoods({
                     //商品id
-                    id:this.$route.query.id,
+                    id: this.$route.query.id,
                     //商品名称
                     title: this.form.goodsName,
                     //商品类目
@@ -273,6 +281,14 @@
                     is_yc: this.form.chain.join()
                 }).then(res => {
                     console.log(res)
+                    if (res.result == 1) {
+                        this.showTip("编辑成功");
+                        sessionStorage.goback = "yes";
+                        this.$router.goBack();
+                    } else {
+                        this.showTip("请填写完整或检查网络");
+                    }
+
                 })
             }
 

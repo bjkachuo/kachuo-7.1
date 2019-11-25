@@ -130,40 +130,40 @@
                         name: 'one',
                         value: '1',
                         parent: 0,
-                        id:1
+                        id: 1
                     },
                     {
                         name: 'two',
                         value: '2',
                         parent: 0,
-                        id:2
+                        id: 2
 
                     },
                     {
                         name: 'one-one',
                         value: '3',
                         parent: '1',
-                        id:3
+                        id: 3
                     }, {
                         name: 'one-two',
                         value: '4',
                         parent: '1',
-                        id:4
+                        id: 4
                     },
                     {
                         name: 'two-one',
                         value: '5',
                         parent: '2',
-                        id:5
+                        id: 5
                     }, {
                         name: 'two-two',
                         value: '6',
                         parent: '2',
-                        id:6
+                        id: 6
                     },
                 ],
                 //转键后新数组
-                newChoiceGoodsClass:[],
+                newChoiceGoodsClass: [],
                 //选择上架板块
                 UpperPlate: [
                     {
@@ -197,11 +197,11 @@
         },
         mounted() {
             //获取景区商品类目
-            this.$http.post("http://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=scenic.shop.shopClass").then(({data})=>{
+            this.$http.post("http://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=scenic.shop.shopClass").then(({data}) => {
                 console.log(data);
                 this.ChoiceGoodsClass = data.data
                 this.newChoiceGoodsClass = this.ChoiceGoodsClass.map(item => {
-                    return {parent: item.pid,id:item.id,name:item.name,value:item.id};
+                    return {parent: item.pid, id: item.id, name: item.name, value: item.id};
                 });
                 console.log(this.newChoiceGoodsClass)
 
@@ -209,6 +209,14 @@
         },
         watch: {},
         methods: {
+            //提示框
+            showTip(conttentTip) {
+                this.$vux.toast.text(conttentTip, "middle");
+                setTimeout(() => {
+                    this.$vux.toast.hide();
+                }, 1000);
+            },
+
             //选择种类事件
             onChange(val) {
                 console.log("val change", val);
@@ -232,29 +240,37 @@
                 this.form.goodsPhotoDetails = val;
             },
             //提交添加商品表单
-              submit() {
-                  JqBsAddGoods({
+            submit() {
+                JqBsAddGoods({
                     //商品名称
-                      title: this.form.goodsName,
-                      //商品类目
-                      cates: this.form.goodsClass[1],
-                      //商品图片
-                      image: this.form.goodsPhoto,
-                      //上架板块
-                      on_plate: this.form.UpperPlate.join(),
-                      //商品详情图片
-                      content: this.form.goodsPhotoDetails,
-                      //商品价格
-                      marketprice: this.form.goodsPrice,
-                      //运费价格
-                      dispatchprice: this.form.freight,
-                      //商品库存数量
-                      total: this.form.goodsNum,
-                      //商品上链
-                      is_yc:this.form.chain.join()
+                    title: this.form.goodsName,
+                    //商品类目
+                    cates: this.form.goodsClass[1],
+                    //商品图片
+                    image: this.form.goodsPhoto,
+                    //上架板块
+                    on_plate: this.form.UpperPlate.join(),
+                    //商品详情图片
+                    content: this.form.goodsPhotoDetails,
+                    //商品价格
+                    marketprice: this.form.goodsPrice,
+                    //运费价格
+                    dispatchprice: this.form.freight,
+                    //商品库存数量
+                    total: this.form.goodsNum,
+                    //商品上链
+                    is_yc: this.form.chain.join()
 
                 }).then(res => {
                     console.log(res)
+                    if (res.result == 1) {
+                        this.showTip("上架成功");
+                        sessionStorage.goback = "yes";
+                        this.$router.goBack();
+                    } else {
+                        this.showTip("请填写完整或检查网络");
+                    }
+
                 })
             }
 

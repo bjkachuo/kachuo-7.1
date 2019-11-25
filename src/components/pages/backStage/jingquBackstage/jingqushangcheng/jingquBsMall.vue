@@ -114,7 +114,7 @@
                 //isconfirm显示隐藏
                 isconfirm: false,
                 //comfirm选择的item
-                chooseItem:"",
+                chooseItem: "",
                 //景区商品上架列表
                 List: [],
                 //景区商品下架列表
@@ -146,7 +146,6 @@
                 console.log(this.ListTwo)
             })
         },
-        watch: {},
         methods: {
             //商品下架
             LowerShelf(index, item) {
@@ -171,8 +170,8 @@
                 this.$router.push("/jingquBsAddCommodity");
             },
             //跳转编辑页面
-            goEdit(id){
-                this.$router.push("/jingquBsEditCommodity?id="+id);
+            goEdit(id) {
+                this.$router.push("/jingquBsEditCommodity?id=" + id);
             },
             //删除弹窗，方法
             onDel(id) {
@@ -182,14 +181,14 @@
             },
             //点击取消事件
             onCancel() {
-                console.log("我点了取消",this.chooseItem);
+                console.log("我点了取消", this.chooseItem);
 
             },
             //点击确认事件
             onConfirm() {
-                console.log("我点了确认",this.chooseItem);
+                console.log("我点了确认", this.chooseItem);
                 //确认删除操作
-                this.$http.post("http://core.kachuo.com//app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=scenic.shop.delGoods&id="+this.chooseItem).then(({data})=>{
+                this.$http.post("http://core.kachuo.com//app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=scenic.shop.delGoods&id=" + this.chooseItem).then(({data}) => {
                     console.log(data);
                     this.RefreshList();
                 })
@@ -233,7 +232,16 @@
             TabItem,
             Actionsheet,
             Confirm
-        }
+        },
+        watch: {
+            '$route': function (to) {
+                if (sessionStorage.goback == "yes") {
+                    sessionStorage.goback = ''
+                    this.Refresh();
+                }
+            }
+        },
+
     };
 </script>
 

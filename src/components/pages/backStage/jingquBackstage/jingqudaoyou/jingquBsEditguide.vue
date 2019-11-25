@@ -116,7 +116,6 @@
 
             })
         },
-        watch: {},
         methods: {
             //提示框
             showTip(conttentTip) {
@@ -144,7 +143,7 @@
             //提交表单
             submit() {
                 JqBsEditGuide({
-                    id:this.$route.query.id,
+                    id: this.$route.query.id,
                     //导游姓名不可修改，名字是实名认证得来
                     name: this.form.name,
                     scenic_id: JSON.parse(sessionStorage.getItem("userLoginInfo")).scenic_id,
@@ -157,6 +156,8 @@
                     console.log(res);
                     if (res.result == 1) {
                         this.showTip("提交成功");
+                        sessionStorage.goback = "yes";
+                        this.$router.goBack();
                     } else {
                         this.showTip("请填写完整或检查网络");
                     }
@@ -170,7 +171,11 @@
             ImageUploaderBs,
             PopupPicker,
             UploadImgOne
-        }
+        },
+        watch: {
+
+        },
+
     };
 </script>
 

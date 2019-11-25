@@ -7,7 +7,6 @@
       :showRightMore="TitleObjData.showRightMore"
     ></Header>
     <p class="Preservation" @click="passMsg">保存</p>
-    <!-- <x-textarea placeholder="请输入内容..." :show-counter="false" :rows="1" autosize></x-textarea> -->
     <quill-editor
       v-model="content"
       ref="myQuillEditor"
@@ -17,8 +16,6 @@
       @ready="onEditorReady($event)"
       @change="onEditorChange($event)"
     ></quill-editor>
-    <div v-html="this.text"></div>
-    {{this.content}}
   </div>
 </template>
 
@@ -34,7 +31,7 @@
         data() {
             return {
                 TitleObjData: {
-                    titleContent: "景区介绍",
+                    titleContent: "发布资讯",
                     showLeftBack: true,
                     showRightMore: false
                 },
@@ -144,20 +141,20 @@
                 })
             },
             //富文本转译
-/*
-            delHtml(origStr){
-                var delStr = "";
-                if(origStr.length == 0) return "";
-                // 只针对以上富文本内容做了匹配替换处理，当然你也可以根据具体的内容再加处理逻辑。
-                // g表示替换所有的&lt;
-                // gi表示忽略大小写替换所有的&lt;
-                // 只有&lt的话，表示只替换第一个&lt;
-                delStr = origStr.replace(/&lt;/g,"<");
-                delStr = delStr.replace(/&gt;/g,">");
-                delStr = delStr.replace(/&quot;/g,"'");
-                return delStr;
-            },
-*/
+            /*
+                        delHtml(origStr){
+                            var delStr = "";
+                            if(origStr.length == 0) return "";
+                            // 只针对以上富文本内容做了匹配替换处理，当然你也可以根据具体的内容再加处理逻辑。
+                            // g表示替换所有的&lt;
+                            // gi表示忽略大小写替换所有的&lt;
+                            // 只有&lt的话，表示只替换第一个&lt;
+                            delStr = origStr.replace(/&lt;/g,"<");
+                            delStr = delStr.replace(/&gt;/g,">");
+                            delStr = delStr.replace(/&quot;/g,"'");
+                            return delStr;
+                        },
+            */
         },
         components: {
             Header,

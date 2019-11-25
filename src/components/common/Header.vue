@@ -1,4 +1,4 @@
-<!-- 
+<!--
 头部组件
 接收三个参数：showBackOptions,showRightOptions,titleContent
 showBackOptions（布尔类型）：是否显示左侧返回操作
@@ -64,7 +64,7 @@ export default  {
       if(this.hideApp){
         if(this.$store.state.isApp) {
           this.$store.state.loadingWhite = true
-          alert(this.$store.state.isApp)
+          // alert(this.$store.state.isApp)
         }
       }
       this.$router.goBack();
