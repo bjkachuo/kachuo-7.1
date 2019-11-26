@@ -45,26 +45,17 @@
         合计:
         <span>{{this.price}}</span>
       </div>
-      <div class="button" v-if="toggle" @click="ad">去结算</div>
-      <div class="button del-button" v-if="!toggle">删除</div>
+      <div class="button" v-if="toggle" @click="Settlement">去结算</div>
+      <div class="button del-button" v-if="!toggle" @click="deletCar">删除</div>
     </div>
   </div>
 </template>
 
 <script>
-import { ShopList, goodsBucketRecomm, goodsBucketSubmit } from "@/servers/api";
-import {
-  XHeader,
-  Tabbar,
-  TabbarItem,
-  Cell,
-  XButton,
-  InlineXNumber,
-  CheckIcon
-} from "vux";
+import { ShopList, goodsBucketRecomm, goodsBucketSubmit ,deletCar} from "@/servers/api";
+import {XHeader, Tabbar, TabbarItem, Cell, XButton, InlineXNumber, CheckIcon} from "vux";
 export default {
-  name: "",
-  props: [""],
+
   data() {
     return {
       toggle: true,
@@ -83,12 +74,20 @@ export default {
       this.goodsAllChecked(item,itemFlag)
       this.itemIsAllChecked()
     },
+
     goodsChange(item){
       item.checked = this.goodsIsAllChecked(item)
       this.itemIsAllChecked()
     },
+    //结算
+    Settlement(){},
     allClick(){
-
+      this.ListOne.forEach(item=>{
+        item.checked = this.checkAll
+        item.goods_list.forEach(good=>{
+          good.checked = this.checkAll
+        })
+      })
     },
     goodsIsAllChecked(item){
       let flag = true
@@ -110,13 +109,31 @@ export default {
       })
     },
 
+    deletCar(){
+      let arr = []
+      this.ListOne.forEach(item=>{
+        item.goods_list.forEach(good=>{
+          good.checked ? arr.push(good.id) : null
+        })
+      })
+      deletCar({ids:arr}).then(res=>{
+        if(res.result == 1){
+          this.$store.commit("showToastInfo", {
+            type: "success",
+            text: res.msg,
+            show: true
+          })
+          this.getDataList()
 
+        }
+      })
+    },
     onEdit() {
       this.rText = "完成";
       this.toggle = !this.toggle;
     },
     back() {
-      this.$router.go(-1);
+      this.$router.goBack()
     },
     onOver() {
       this.rText = "编辑";
@@ -128,16 +145,16 @@ export default {
           console.log(res);
 
           let shops = Object.values(res.data.result)
-          this.ListOne = shops
 
-          this.ListOne.forEach(item=>{
+
+          shops.forEach(item=>{
             item.checked = true
             item.goods_list.forEach(good=>{
               good.total = good.total - 0
               good.checked = true
             })
           })
-
+          this.ListOne = shops
           console.log("购物车列表", this.ListOne);
 
         })

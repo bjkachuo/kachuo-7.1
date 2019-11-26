@@ -54,6 +54,8 @@ export const setAddress = (data) => http.post("member.address.setDefault", data)
 
 //购物车列表
 export const ShopList = (data) => http.post("goods.details.get_iShopList", data)
+//删除购物车
+export const deletCar = (data) => http.post("goods.details.del_shop", data)
 
 //我的订单
 export const GoodsList = (data) => http.post("goods.buy.get_IShopOrder", data);

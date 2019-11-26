@@ -6,23 +6,10 @@
       </navigation>
 
     <loading v-model="isLoading"></loading>
-    <confirm
-      v-model="showModel"
-      title="版本更新"
-      :show-cancel-button="isForceUpdata"
-      @on-cancel="onCancel"
-      @on-confirm="onConfirm"
-    >
+    <confirm v-model="showModel" title="版本更新" :show-cancel-button="isForceUpdata" @on-cancel="onCancel" @on-confirm="onConfirm">
       <p style="text-align:center;">{{modelContent}}</p>
     </confirm>
-    <toast
-      v-model="showToastFn.show"
-      position="middle"
-      is-show-mask
-      :type="showToastFn.type"
-      :text="showToastFn.text"
-      :time="showToastFn.time"
-    ></toast>
+    <toast v-model="showToastFn.show" position="middle" is-show-mask :type="showToastFn.type" :text="showToastFn.text" :time="showToastFn.time"></toast>
   </div>
 </template>
 
@@ -56,8 +43,6 @@ export default {
   },
 
   mounted() {
-    //安卓 ios登录储存token
-
 
     bridge.register("yyTab", r => {
       this.$store.state.isApp = true;
@@ -86,16 +71,6 @@ export default {
     appVersion();
     sessionStorage.setItem("closeFace", 0);
 
-
-
-
-  },
-
-  beforeRouteUpdate(to, from, next) {
-    console.log(to);
-    next(vm => {
-      console.log(vm);
-    });
   },
 
   computed: {
