@@ -26,7 +26,7 @@
     import Header from "@/components/common/Header";
     import {quillRedefine} from 'vue-quill-editor-upload'
     import {quillEditor} from "vue-quill-editor";
-    import {saveJqData} from "@/servers/api";
+    import {JqBsAddDate} from "@/servers/api";
 
 
     export default {
@@ -128,7 +128,7 @@
             }, // 内容改变事件
             //提交
             passMsg() {
-                saveJqData({
+                JqBsAddDate({
                     introduce: JSON.stringify(this.content)
                 }).then(res => {
                     console.log(res)
@@ -137,7 +137,7 @@
                         console.log(data)
                         this.text = data.data.introduce;
                         // this.text = this.delHtml(this.text);
-                        console.log(this.delHtml(this.text))
+                        // console.log(this.delHtml(this.text))
                         //
                     })
 

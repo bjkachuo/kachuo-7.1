@@ -23,7 +23,7 @@
     import Header from "@/components/common/Header";
     import {quillRedefine} from 'vue-quill-editor-upload'
     import {quillEditor} from "vue-quill-editor";
-    import {saveJqData} from "@/servers/api";
+    import {JqBsAddDate} from "@/servers/api";
 
 
     export default {
@@ -125,12 +125,13 @@
             }, // 内容改变事件
             //提交
             passMsg() {
-                saveJqData({
-                    introduce: JSON.stringify(this.content)
+                JqBsAddDate({
+                    // introduce: JSON.stringify(this.content)
+                    introduce: this.content
                 }).then(res => {
                     console.log(res)
                     //测试获取景区资料
-                    this.$http.post("http://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=scenic.manage.scenicGetDate&introduce").then(({data}) => {
+                    this.$http.post("http://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=scenic.msg.saveScenic&description").then(({data}) => {
                         console.log(data)
                         this.text = data.data.introduce;
                         this.text = this.unescape(this.text)();

@@ -23,7 +23,8 @@
       </div>
       <div class="line-mid"></div>
       <div class="line-bottom">
-        <p>无</p>
+        <p v-if="this.List.introduce==''">无</p>
+        <p v-if="this.List.introduce!==''">已添加</p>
       </div>
     </div>
     <div class="photo">
@@ -33,7 +34,9 @@
       </div>
       <div class="line-mid"></div>
       <div class="line-bottom">
-        <p>无</p>
+        <p v-if="this.List.services ==''">无</p>
+        <p v-if="this.List.services !==''">已添加</p>
+
       </div>
     </div>
     <div class="photo">
@@ -43,7 +46,8 @@
       </div>
       <div class="line-mid"></div>
       <div class="line-bottom">
-        <p>无</p>
+        <p v-if="this.List.security_tips ==''">无</p>
+        <p v-if="this.List.security_tips !==''">已添加</p>
       </div>
     </div>
     <div class="photo" style="height:126px">
@@ -88,11 +92,19 @@ export default {
       },
       show3:false,
       phone:"13856412313",
+        List:[]
     };
   },
   computed: {},
   created() {},
-  mounted() {},
+  mounted() {
+      this.$http.post("http://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=scenic.manage.scenicGetDate").then(({data})=>{
+          console.log(data);
+          this.List = data.data;
+          console.log(this.List)
+
+      })
+  },
   watch: {},
   methods: {
     //跳转添加景区照片页

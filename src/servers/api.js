@@ -422,9 +422,6 @@ export const buyTicket = (data) => http.post("scenic.ticket.buy_ticket", data);
 //购票支付
 export const buyTicketHd = (data) => http.post("scenic.ticket.hd", data);
 
-//景区后台景区资料保存接口
-export const saveJqData = (data) => http.post("scenic.manage.scenicSet", data);
-
 //景区后台商家商品管理添加商品
 export const JqBsAddGoods = (data) => http.post("scenic.shop.addGoods", data);
 
@@ -437,6 +434,9 @@ export const JqBsAddGuide = (data) => http.post("tourguide.index.add", data);
 //景区后台编辑导游
 export const JqBsEditGuide = (data) => http.post("tourguide.index.save", data);
 
-//景区后台景区资料各种上传
-export const JqBsAddDate = (data) => http.post("scenic.msg.saveScenic", data);
+//景区后台景区资料各种添加照片、介绍、服务项、安全提示手机号
+export const JqBsAddDate = (data) => http.post("scenic.manage.scenicSet", data);
+
+//景区后台景区资料各种更新(修改)照片、介绍、服务项、安全提示手机号
+export const JqBsEditDate = (data) => http.post("scenic.msg.saveScenic", data);
 

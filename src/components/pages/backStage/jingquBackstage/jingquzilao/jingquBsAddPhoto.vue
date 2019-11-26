@@ -58,7 +58,7 @@ export default {
     //保存景区资料照片
       addImg(){
           JqBsAddDate({
-              advimg:this.form.tour_path
+              uploadImg:this.form.tour_path.split()
           }).then(res=>{
              console.log(res)
           })
