@@ -558,30 +558,58 @@ export default [
     name: 'JingquBsDate',
     component: resolve => require(['@/components/pages/backStage/jingquBackstage/jingquzilao/jingquBsDate'], resolve),
   },
-  //景区照片添加页
+
+  //景区照片添加页+
   {
     path: '/jingquBsAddPhoto',
     name: 'JingquBsAddPhoto',
     component: resolve => require(['@/components/pages/backStage/jingquBackstage/jingquzilao/jingquBsAddPhoto'], resolve),
   },
-  //景区介绍添加页
+  //景区照片编辑页*
+  {
+    path: '/jingquBsEditPhoto',
+    name: 'jingquBsEditPhoto',
+    component: resolve => require(['@/components/pages/backStage/jingquBackstage/jingquzilao/jingquBsEditPhoto'], resolve),
+  },
+
+  //景区介绍添加页+
   {
     path: '/jingquBsAddIntroduce',
     name: 'JingquBsAddIntroduce',
     component: resolve => require(['@/components/pages/backStage/jingquBackstage/jingquzilao/jingquBsAddIntroduce'], resolve),
 
   },
-  //景区服务项添加页
+  //景区介绍编辑页*
+  {
+    path: '/jingquBsEditIntroduce',
+    name: 'jingquBsEditIntroduce',
+    component: resolve => require(['@/components/pages/backStage/jingquBackstage/jingquzilao/jingquBsEditIntroduce'], resolve),
+
+  },
+  //景区服务项添加页+
   {
     path: '/jingquBsAddService',
     name: 'JingquBsAddService',
     component: resolve => require(['@/components/pages/backStage/jingquBackstage/jingquzilao/jingquBsAddService'], resolve),
   },
-  //景区安全提示添加页
+  //景区服务项编辑页*
+  {
+    path: '/jingquBsEditService',
+    name: 'jingquBsEditService',
+    component: resolve => require(['@/components/pages/backStage/jingquBackstage/jingquzilao/jingquBsEditService'], resolve),
+  },
+  //景区安全提示添加页+
   {
     path: '/jingquBsAddSecurity',
     name: 'JingquBsAddSecurity',
     component: resolve => require(['@/components/pages/backStage/jingquBackstage/jingquzilao/jingquBsAddSecurity'], resolve),
+
+  },
+  //景区安全提示编辑页*
+  {
+    path: '/jingquBsEditSecurity',
+    name: 'jingquBsEditSecurity',
+    component: resolve => require(['@/components/pages/backStage/jingquBackstage/jingquzilao/jingquBsEditSecurity'], resolve),
 
   },
   //景区后台景区讯息页

@@ -7,7 +7,6 @@
       :showRightMore="TitleObjData.showRightMore"
     ></Header>
     <p class="Preservation" @click="passMsg">保存</p>
-    <!-- <x-textarea placeholder="请输入内容..." :show-counter="false" :rows="1" autosize></x-textarea> -->
     <quill-editor
       v-model="content"
       ref="myQuillEditor"
@@ -17,8 +16,8 @@
       @ready="onEditorReady($event)"
       @change="onEditorChange($event)"
     ></quill-editor>
-    <div v-html="this.text"></div>
-    {{this.content}}
+<!--    <div v-html="this.text"></div>-->
+<!--    {{this.content}}-->
   </div>
 </template>
 
@@ -44,7 +43,7 @@
                 // 必须初始化为对象 init  to Object
                 editorOption: {},
                 //图片上传地址
-                uploadUrl:"https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=util.uploader.uploadm",
+                uploadUrl: "https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=util.uploader.uploadm",
                 messages: [],
                 // editorOption: {
                 //     modules: {
@@ -70,12 +69,12 @@
                         res: (respnse) => {
                             //return图片url
                             console.log(respnse);
-                            return  respnse.data.files[0].url;
+                            return respnse.data.files[0].url;
                         },
                         // 可选参数 图片上传方式  默认为post
                         methods: 'POST',
                         // 可选参数 如果需要token验证，假设你的token有存放在sessionStorage
-                        token:localStorage.getItem("token"),
+                        token: localStorage.getItem("token"),
                         // 可选参数 文件的参数名 默认为img
                         name: 'file',
                         // 可选参数   图片限制大小，单位为Kb, 1M = 1024Kb
@@ -124,46 +123,30 @@
                 console.log("ready", this.messages);
             },
             onEditorChange() {
-                console.log(this.content,this.messages)
+                console.log(this.content, this.messages)
             }, // 内容改变事件
-            //提交
+            //提交景区介绍
             passMsg() {
                 JqBsAddDate({
-                    introduce: JSON.stringify(this.content)
+                    // introduce: JSON.stringify(this.content)
+                    introduce: this.content
                 }).then(res => {
                     console.log(res)
-                    //测试获取景区资料
-                    this.$http.post("http://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=scenic.manage.scenicGetDate&introduce").then(({data}) => {
-                        console.log(data)
-                        this.text = data.data.introduce;
-                        // this.text = this.delHtml(this.text);
-                        // console.log(this.delHtml(this.text))
-                        //
-                    })
+                    if (res.result == 1) {
+                        this.$vux.toast.text("添加成功");
+                        sessionStorage.goback = "yes";
+                        this.$router.goBack();
+                    } else if (this.content == "") {
+                        this.$vux.toast.text("请添加内容");
+                    }
 
                 })
             },
-            //富文本转译
-/*
-            delHtml(origStr){
-                var delStr = "";
-                if(origStr.length == 0) return "";
-                // 只针对以上富文本内容做了匹配替换处理，当然你也可以根据具体的内容再加处理逻辑。
-                // g表示替换所有的&lt;
-                // gi表示忽略大小写替换所有的&lt;
-                // 只有&lt的话，表示只替换第一个&lt;
-                delStr = origStr.replace(/&lt;/g,"<");
-                delStr = delStr.replace(/&gt;/g,">");
-                delStr = delStr.replace(/&quot;/g,"'");
-                return delStr;
-            },
-*/
         },
         components: {
             Header,
             quillRedefine,
             quillEditor
-
         }
     };
 </script>

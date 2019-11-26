@@ -7,16 +7,18 @@
       :showRightMore="TitleObjData.showRightMore"
     ></Header>
     <p class="Preservation" @click="passMsg">保存</p>
+    <div class="title">
+
+    </div>
     <quill-editor
       v-model="content"
       ref="myQuillEditor"
       :options="editorOption"
-      @blur="onEditorBlur($event)"
-      @focus="onEditorFocus($event)"
-      @ready="onEditorReady($event)"
       @change="onEditorChange($event)"
     ></quill-editor>
+    {{this.content}}
   </div>
+
 </template>
 
 <script>
@@ -24,8 +26,6 @@
     import {quillRedefine} from 'vue-quill-editor-upload'
     import {quillEditor} from "vue-quill-editor";
     import {JqBsAddDate} from "@/servers/api";
-
-
     export default {
         props: {},
         data() {
@@ -43,6 +43,8 @@
                 //图片上传地址
                 uploadUrl: "https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=util.uploader.uploadm",
                 messages: [],
+                //测试
+                test:""
                 // editorOption: {
                 //     modules: {
                 //         toolbar: [
@@ -50,7 +52,6 @@
                 //         ]
                 //     }
                 // }
-
             }
         },
         computed: {},
@@ -99,7 +100,6 @@
                         // 可选参数 重定义的事件，比如link等事件
                         // "Content-Type": "multipart/form-data",
                         // "Authorization": localStorage.getItem("token"),
-
                     }
                 }
             )
@@ -109,52 +109,41 @@
         },
         watch: {},
         methods: {
-            onEditorBlur() {
-                console.log("blur", this.messages);
-            },
-
-            onEditorFocus() {
-                console.log("focus", this.messages);
-            },
-
-            onEditorReady() {
-                console.log("ready", this.messages);
-            },
+            // onEditorBlur() {
+            //     console.log("blur", this.messages);
+            // },
+            //
+            // onEditorFocus() {
+            //     console.log("focus", this.messages);
+            // },
+            //
+            // onEditorReady() {
+            //     console.log("ready", this.messages);
+            // },
             onEditorChange() {
+                console.log(this.content)
                 console.log(this.messages)
+               // this.test =  this.$refs.myQuillEditor
+          // this.test = this.$refs["edit"].getContents()
+
+                // console.log(this.test)
+                // this.test = quill.getContents()
+                // console.log(this.test)
             }, // 内容改变事件
             //提交
             passMsg() {
                 JqBsAddDate({
-                    // introduce: JSON.stringify(this.content)
                     introduce: this.content
                 }).then(res => {
                     console.log(res)
-                    //测试获取景区资料
-                    this.$http.post("http://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=scenic.msg.saveScenic&description").then(({data}) => {
-                        console.log(data)
-                        this.text = data.data.introduce;
-                        this.text = this.unescape(this.text)();
-                        console.log(this.text)
-                    })
-
                 })
             },
-            unescape(html) {
-                return html
-                    .replace(html ? /&(?!#?\w+;)/g : /&/g, '&amp;')
-                    .replace(/&lt;/g, "<")
-                    .replace(/&gt;/g, ">")
-                    .replace(/&quot;/g, "\"")
-                    .replace(/&#39;/g, "\'");
-            }
 
         },
         components: {
             Header,
             quillRedefine,
             quillEditor
-
         }
     };
 </script>

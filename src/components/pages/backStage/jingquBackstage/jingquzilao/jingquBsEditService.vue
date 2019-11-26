@@ -1,5 +1,5 @@
 <template>
-  <div class="Security-wrap">
+  <div class="service-wrap">
     <Header
       style="margin-bottom: 46px;"
       :titleContent="TitleObjData.titleContent"
@@ -29,7 +29,7 @@
         data() {
             return {
                 TitleObjData: {
-                    titleContent: "安全提示",
+                    titleContent: "编辑服务项",
                     showLeftBack: true,
                     showRightMore: false
                 },
@@ -38,11 +38,11 @@
                 uploadUrl: "https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=util.uploader.uploadm",
                 messages: [],
                 // editorOption: {
-                //   modules: {
-                //     toolbar: [
-                //       ["image"] // toggled buttons
-                //     ]
-                //   }
+                //     modules: {
+                //         toolbar: [
+                //             ["image"] // toggled buttons
+                //         ]
+                //     }
                 // }
             }
         },
@@ -99,6 +99,12 @@
             console.log(this.editorOption)
         },
         mounted() {
+            //获取景区资料页信息
+            this.$http.post("http://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=scenic.manage.scenicGetDate").then(({data}) => {
+                console.log(data);
+                //照片回显
+                this.content = data.data.services;
+            })
         },
         watch: {},
         methods: {
@@ -116,13 +122,14 @@
             onEditorChange() {
                 console.log(this.content, this.messages)
             }, // 内容改变事件
+            //提交景区服务项
             passMsg() {
                 JqBsAddDate({
-                    security_tips: this.content
+                    services: this.content
                 }).then(res => {
                     console.log(res)
                     if (res.result == 1) {
-                        this.$vux.toast.text("添加成功");
+                        this.$vux.toast.text("修改成功");
                         sessionStorage.goback = "yes";
                         this.$router.goBack();
                     } else if (this.content == "") {
@@ -143,7 +150,7 @@
 </script>
 
 <style scoped lang="css">
-  .Security-wrap {
+  .service-wrap {
     height: 100%;
     width: 100%;
     overflow: hidden scroll;
@@ -192,5 +199,4 @@
     border-radius: 30%;
   }
 </style>
-
 

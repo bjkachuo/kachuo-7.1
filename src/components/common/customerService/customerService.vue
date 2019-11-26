@@ -18,7 +18,7 @@
         },
 
         created() {
-          this.usermobile = 'https://webchat.7moor.com/wapchat.html?accessId=2afa4960-b1df-11e9-9f4b-b35872e70bca&fromUrl=&urlTitle='+ this.GLOBAL.getSession("userLoginInfo").mobile
+          // this.usermobile = 'https://webchat.7moor.com/wapchat.html?accessId=2afa4960-b1df-11e9-9f4b-b35872e70bca&fromUrl=&urlTitle='+ this.GLOBAL.getSession("userLoginInfo").mobile
         }
 
     }

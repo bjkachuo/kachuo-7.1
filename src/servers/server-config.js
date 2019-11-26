@@ -4,8 +4,13 @@ dsBridge.call("getUserInfo", "web");
 dsBridge.registerAsyn("loginInfo", function (arg1, responseCallback) {
   if(localStorage.token){
     localStorage.setItem("token", JSON.parse(arg1).accessToken);
+    // alert('1'+localStorage.getItem("token"))
+    alert("hahaha1")
   }else{
     localStorage.setItem("token", JSON.parse(arg1).accessToken);
+    // alert('2'+localStorage.getItem("token"))
+    alert("hahaha2")
+
     window.location.reload()
   }
   responseCallback("登录信息成功");

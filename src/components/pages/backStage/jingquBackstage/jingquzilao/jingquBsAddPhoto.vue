@@ -58,9 +58,16 @@ export default {
     //保存景区资料照片
       addImg(){
           JqBsAddDate({
-              uploadImg:this.form.tour_path.split()
+              scenic_img:this.form.tour_path
           }).then(res=>{
-             console.log(res)
+              console.log(res)
+              if (res.result == 1){
+                  this.$vux.toast.text("添加成功");
+                  sessionStorage.goback = "yes";
+                  this.$router.goBack();
+              }else if (this.form.tour_path == "") {
+                  this.$vux.toast.text("请添加照片");
+              }
           })
       }
   },

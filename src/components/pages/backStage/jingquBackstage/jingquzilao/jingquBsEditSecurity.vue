@@ -29,7 +29,7 @@
         data() {
             return {
                 TitleObjData: {
-                    titleContent: "安全提示",
+                    titleContent: "编辑安全提示",
                     showLeftBack: true,
                     showRightMore: false
                 },
@@ -99,6 +99,13 @@
             console.log(this.editorOption)
         },
         mounted() {
+            //获取景区资料页信息
+            this.$http.post("http://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=scenic.manage.scenicGetDate").then(({data}) => {
+                console.log(data);
+                //照片回显
+                this.content = data.data.security_tips;
+            })
+
         },
         watch: {},
         methods: {
@@ -122,7 +129,7 @@
                 }).then(res => {
                     console.log(res)
                     if (res.result == 1) {
-                        this.$vux.toast.text("添加成功");
+                        this.$vux.toast.text("修改成功");
                         sessionStorage.goback = "yes";
                         this.$router.goBack();
                     } else if (this.content == "") {
