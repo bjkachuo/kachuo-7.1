@@ -8,35 +8,44 @@
     ></Header>
     <p class="Preservation" @click="goRelease">发布</p>
     <x-icon type="ios-search-strong" size="25" class="search-icon" @click="jumpSearch"></x-icon>
-    <div class="line-one">
-      <p class="operation" @click="show">...</p>
-      <div class="title">蓬莱阁旅游景区，是国家级5A级风景 区位于山东省蓬莱市，小城在蓬市，小城在蓬市，小城在蓬市，小城在蓬莱...</div>
-      <div class="img-list">
-        <div class="img-wrap">
-          <img src alt/>
-        </div>
-        <div class="img-wrap">
-          <img src alt/>
-        </div>
-        <div class="img-wrap">
-          <img src alt/>
+    <div style="margin-bottom: 10px;">
+      <div class="line-one" v-for="(item,index) in List" :key="index">
+        <p class="operation" @click="show(item)">...</p>
+        <div class="title">{{item.title}}</div>
+        <div class="img-list">
+          <img :src="item.image" alt/>
+          <!--        <div class="img-wrap">-->
+          <!--          <img src alt/>-->
+          <!--        </div>-->
+          <!--        <div class="img-wrap">-->
+          <!--          <img src alt/>-->
+          <!--        </div>-->
         </div>
       </div>
     </div>
     <actionsheet
-      v-model="show4"
+      v-model="isactionsheet"
       :menus="menus1"
       :close-on-clicking-mask="true"
       show-cancel
-      @onClickMask="console('on click mask')"
+      @on-click-menu="click"
     ></actionsheet>
+    <confirm
+      class="confirm-dialog"
+      v-model="isconfirm"
+      title="确定要删除吗？"
+      theme="ios"
+      @on-cancel="onCancel()"
+      @on-confirm="onConfirm()"
+    ></confirm>
+
   </div>
 </template>
 
 <script>
     import Header from "@/components/common/Header";
     import Search from "@/components/common/Search";
-    import {Actionsheet} from "vux";
+    import {Actionsheet, Confirm} from "vux";
 
     export default {
         props: {},
@@ -47,7 +56,14 @@
                     showLeftBack: true,
                     showRightMore: false
                 },
-                show4: false,
+                //是否显示actionsheet
+                isactionsheet: false,
+                //是否显示删除弹框
+                isconfirm: false,
+                //点击显示actionsheet时保存的item
+                ActiveItem: "",
+                //景区资讯列表
+                List: [],
                 menus1: {
                     menu1: "置顶",
                     menu2: "编辑",
@@ -59,34 +75,97 @@
         created() {
         },
         mounted() {
-            //获取景区咨询列表
-            // this.$http
-            //   .post(
-            //     "http://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=scenic.msg.getScenic"
-            //   )
-            //   .then(({ data }) => {
-            //     console.log(data);
-            //   });
+            //获取景区资讯列表页
+            this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=scenic.msg.scenicInformationList").then(({data}) => {
+                console.log(data)
+                this.List = data.data;
+            })
         },
-        watch: {},
         methods: {
+            //提示框
+            showTip(conttentTip) {
+                this.$vux.toast.text(conttentTip, "middle");
+                setTimeout(() => {
+                    this.$vux.toast.hide();
+                }, 1000);
+            },
+
             //跳转景区资讯发布页
             goRelease() {
                 this.$router.push("/jingquBSInfoRelease");
-
             },
             //跳转搜索
             jumpSearch() {
                 this.$router.push("/jingquBsSearch");
             },
-            show() {
-                this.show4 = !this.show4;
+            //actionsheet显示或隐藏
+            show(item) {
+                this.isactionsheet = !this.isactionsheet;
+                this.ActiveItem = item;
+                console.log(this.ActiveItem)
+            },
+            //点击删除显示或隐藏
+            onDel() {
+                this.isconfirm = !this.isconfirm;
+            },
+            // 点击Actionsheet事件
+            click(key, item) {
+                console.log(key, item)
+                if (key == "menu3") {
+                    //如果点了删除调用删除confirm
+                    this.onDel();
+                } else if (key == "menu1") {
+                    //点击资讯置顶操作
+                    this.$http.post("http://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.msg.scenicInformationTop&type=" + 1 + "&id=" + this.ActiveItem.id).then(({data}) => {
+                        console.log(data);
+                        this.showTip("置顶成功");
+                        this.Refresh();
+                    })
+                } else if (key == "menu2") {
+                    this.$router.push("/jingquBSInfoEdit?id=" + this.ActiveItem.id)
+                }
+            },
+            //点击取消事件
+            onCancel() {
+                console.log("我点了取消");
+
+            },
+            //点击确认事件
+            onConfirm() {
+                console.log("我点了确认");
+                //删除资讯
+                this.$http.post("http://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.msg.delScenicInformation&id=" + this.ActiveItem.id).then(({data}) => {
+                    console.log(data)
+                    this.Refresh();
+                    this.showTip("删除成功");
+                })
+
+            },
+
+            //刷新景区资讯列表方法
+            Refresh() {
+                this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=scenic.msg.scenicInformationList").then(({data}) => {
+                    this.List = data.data;
+                    console.log("刷新了景区资讯列表", this.List)
+                })
+
             }
         },
         components: {
             Header,
-            Actionsheet
+            Actionsheet,
+            Confirm
+        },
+        watch: {
+            '$route': function (to) {
+                if (sessionStorage.goback == "yes") {
+                    sessionStorage.goback = ''
+                    this.Refresh();
+                }
+            }
+
         }
+
     };
 </script>
 
@@ -108,15 +187,19 @@
     z-index: 9999;
     color: #333333;
   }
-
   .line-one {
     width: 100%;
-    height: 170px;
+    height: 150px;
     background: #ffffff;
-    margin-top: 56px;
+    margin-top: 10px;
     border-radius: 8px;
     position: relative;
     overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+  }
+  .line-one:nth-child(1){
+    margin-top: 56px;
   }
 
   .operation {
@@ -135,22 +218,23 @@
   }
 
   .title {
-    width: 70%;
-    height: 44px;
+    width: 250px;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    overflow: hidden;
-    margin: 12px 0 12px 5%;
+    -webkit-line-clamp: 3;
+    margin: 26px 0 12px 2%;
     font-size: 18px;
     color: #333333;
-    height: 54px;
+    height: 89px;
+    word-wrap: break-word;
+    word-break: break-all;
+    overflow: hidden;
   }
 
   .img-list {
-    width: 92%;
-    height: 72px;
-    margin: 0 auto;
+    width: 90px;
+    height: 90px;
+    margin: 36px 8% 0 0;
   }
 
   .img-wrap {
@@ -160,8 +244,51 @@
     margin: 0 0.66%;
   }
 
-  .img-wrap img {
+  .img-list img {
     width: 100%;
+  }
+
+  /* confirm弹窗样式 */
+  .confirm-dialog /deep/ .weui-skin_android .weui-dialog__ft {
+    text-align: center;
+    padding: 0 15px 15px 15px;
+  }
+
+  .confirm-dialog /deep/ .weui-dialog__btn {
+    width: 110px;
+    height: 35px;
+    line-height: 35px;
+    border: 1px solid #3976ff;
+    border-radius: #3976ff;
+    text-align: center;
+    color: #3976ff;
+    font-size: 15px;
+    border-radius: 35px;
+    margin: 0 5px;
+  }
+
+  .confirm-dialog /deep/ .weui-dialog__btn:active {
+    background-color: transparent;
+  }
+
+  .confirm-dialog /deep/ .weui-dialog__btn_primary,
+  .confirm-dialog /deep/ .weui-dialog__btn_primary:active {
+    background-color: #3976ff;
+    color: #ffffff;
+  }
+
+  .confirm-dialog /deep/ .weui-skin_android .weui-dialog__title {
+    font-size: 18px;
+  }
+
+  .confirm-dialog /deep/ .weui-dialog__hd {
+    text-align: center;
+    padding: 30px 15px;
+  }
+
+  .confirm-dialog /deep/ .weui-skin_android .weui-dialog__bd {
+    padding: 5px 15px 0 15px;
+    min-height: 10px;
   }
 </style>
 <style lang="less" scoped>

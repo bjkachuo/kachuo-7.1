@@ -25,9 +25,9 @@
 <script>
     import Header from "@/components/common/Header";
     import {XInput} from 'vux'
+    import {quillRedefine} from 'vue-quill-editor-upload'
+    import {quillEditor} from "vue-quill-editor";
 
-    // import { XTextarea } from "vux";
-    import { quillEditor } from "vue-quill-editor";
 
     export default {
         props: {},
@@ -68,8 +68,10 @@
         },
         components: {
             Header,
-            XInput
-            // XTextarea
+            XInput,
+            Header,
+            quillRedefine,
+            quillEditor
         }
     };
 </script>
