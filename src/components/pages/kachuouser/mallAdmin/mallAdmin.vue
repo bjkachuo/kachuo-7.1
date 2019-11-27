@@ -1,12 +1,10 @@
 <template>
   <div class="wrap">
 
-
     <div class="normal-content" :style="conHei">
       <orderList v-if="tabIndex == 0"></orderList>
       <cartment v-if="tabIndex == 1"></cartment>
     </div>
-
 
     <tabbar @on-index-change="tabChange">
       <tabbar-item  selected>
@@ -20,6 +18,7 @@
         <span slot="label">购物车</span>
       </tabbar-item>
     </tabbar>
+
   </div>
 </template>
 

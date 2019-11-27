@@ -90,7 +90,7 @@ const FACEUPLOADCONFIG = {
   }
 };
 
-import { faceCheck, getUserInfo } from "@/servers/api";
+import { faceCheck, getUserInfo,verification } from "@/servers/api";
 
 export default {
   props: {},
@@ -151,6 +151,13 @@ export default {
       dsBridge.call("scanning", "web");
       bridge.register("scanning", r => {
         alert(r)
+        verification({code:r}).then(res=>{
+          if(res.result == 1){
+             this.tip()
+          }else{
+            alert(JSON.stringify(res))
+          }
+        })
       });
     },
     tip() {
@@ -164,15 +171,8 @@ export default {
       }, 2000);
     }
   },
-  components: {
-    Header,
-    Tab,
-    TabItem,
-    Flexbox,
-    FlexboxItem,
-    Confirm
-  }
-};
+  components: {Header, Tab, TabItem, Flexbox, FlexboxItem, Confirm}
+}
 </script>
 <style scoped lang="css">
 .electronicsTicket-wrap {
@@ -193,72 +193,11 @@ export default {
   width: 100%;
   margin-top: 56px;
 }
-.t-content {
-  width: 92%;
-  height: 110px;
-  background: #ffffff;
-  margin: 0 auto 15px;
-  border-radius: 8px;
-}
-.t-left {
-  width: 66%;
-  height: 90px;
-  float: left;
-  margin: 8px 0 0 4%;
-}
-.img-wrap {
-  height: 90px;
-  width: 90px;
-  float: left;
-}
+
 .img-wrap img {
   width: 100%;
 }
-.txt-wrap {
-  width: 96px;
-  height: 101px;
-  float: left;
-  margin-left: 4%;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.t-one p {
-  font-size: 12px;
-  color: #222222;
-  font-weight: 600;
-}
-.t-two {
-  width: 60px;
-  height: 20px;
-  background: #b8cdff;
-  border-radius: 8px;
-  margin: 6px 0 11px;
-}
-.t-two p {
-  color: #ffffff;
-  line-height: 20px;
-  text-align: center;
-  font-size: 12px;
-}
-.t-three p {
-  font-size: 20px;
-  color: #ff3939;
-  font-weight: 800;
-}
-.t-right {
-  float: right;
-  width: 75px;
-  height: 30px;
-  border-radius: 15px;
-  background: #3976ff;
-  margin: 38px 4% 0 0;
-}
-.t-right p {
-  font-size: 16px;
-  color: #ffffff;
-  text-align: center;
-  line-height: 30px;
-}
+
 .explain-wrap {
   width: 92%;
   height: 110px;
@@ -301,29 +240,6 @@ export default {
   color: #999faa;
   text-align: center;
 }
-.p-wrap {
-  height: 80px;
-  width: 88%;
-  margin: 0 auto;
-}
-.add-wrap {
-  width: 15px;
-  height: 15px;
-  margin: 0 0 30px 0;
-}
-.add-wrap img {
-  width: 100%;
-  background: none;
-}
-.p-img-wrap {
-  width: 44px;
-  height: 44px;
-  margin: 0 auto 10px;
-}
-.p-img-wrap img {
-  background: none;
-  width: 100%;
-}
 .f-left {
   width: 81px;
   height: 14px;
@@ -335,7 +251,6 @@ export default {
   width: 100%;
 }
 .f-right {
-  /* width: 80px; */
   height: 15px;
   float: right;
   margin: 20px 4% 0 0;
@@ -443,7 +358,6 @@ export default {
 .flex-demo {
   text-align: center;
   color: #fff;
-  //   background-color: #20b907;
   border-radius: 4px;
   background-clip: padding-box;
   width: 60px;
@@ -459,8 +373,4 @@ export default {
 /deep/ .no {
   fill: #ccc;
 }
-// /deep/ Header {
-//   top: -43px;
-//   position: absolute;
-// }
 </style>

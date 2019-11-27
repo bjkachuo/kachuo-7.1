@@ -127,7 +127,6 @@ export default {
             show: true
           })
           this.getDataList()
-
         }
       })
     },
@@ -145,10 +144,8 @@ export default {
     getDataList() {
       ShopList({ page: 1 })
         .then(res => {
-          console.log(res);
 
           let shops = Object.values(res.data.result)
-
 
           shops.forEach(item=>{
             item.checked = true
@@ -166,20 +163,15 @@ export default {
         });
     }
   },
-  components: {
-    XHeader,
-    XButton,
-    Tabbar,
-    TabbarItem,
-    Cell,
-    InlineXNumber,
-    CheckIcon
-  },
+
+  components: { XHeader, XButton, Tabbar, TabbarItem, Cell, InlineXNumber, CheckIcon },
+
   mounted() {
     this.$nextTick(() => {
       console.log(1);
       this.getDataList();
     });
+
   },
   computed: {
     conHei() {

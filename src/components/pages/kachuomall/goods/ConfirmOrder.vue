@@ -16,35 +16,9 @@
         </div>
       </div>
       <div class="border"></div>
-
-      <div class="" v-for="(item,index) in this.ListOne" :key="index">
-        <div class="cart-header">
-          <span @click="itemChange(item)"><check-icon :value.sync="item.checked" ></check-icon></span>
-          <span class="shop-name">{{ item.shop_name }}</span>
-        </div>
-        <cell v-for="good in item.goods_list">
-          <template slot="icon">
-            <span @click="goodsChange(item)"><check-icon :value.sync="good.checked"></check-icon></span>
-            <div class="gar-photo">
-              <img :src="good.thumb" alt />
-            </div>
-          </template>
-          <template slot="after-title">
-            <div class="gar-body">
-              <div class="gar-header">
-                <div class="gar-title">{{good.title}}</div>
-              </div>
-              <div class="gar-foot">
-                <div class="gar-price">￥<span>{{good.marketprice}}</span></div>
-                <inline-x-number :min="0" width="30px" v-model="good.total"></inline-x-number>
-              </div>
-            </div>
-          </template>
-        </cell>
-      </div>
-      <div class="">
-        <div class="">
-          <img class="" :src="imgUrl" :alt="goodsDetails.title" />
+      <div class="goods-details-wrap">
+        <div class="goods-details-left">
+          <img class="goods-details-img" :src="imgUrl" :alt="goodsDetails.title" />
         </div>
         <div class="goods-details-mid">
           <p>{{goodsDetails.title}}</p>
@@ -320,8 +294,27 @@ export default {
   flex: 1;
   text-align: right;
 }
-
-
+.goods-details-wrap {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
+  padding: 15px;
+  box-sizing: border-box;
+  margin-top: 10px;
+  background: #fff;
+}
+.goods-details-img {
+  width: 60px;
+  height: 60px;
+  display: inline-block;
+}
+.goods-details-left {
+  flex: 1;
+}
 .goods-details-mid {
   flex: 2;
 }

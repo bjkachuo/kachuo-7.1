@@ -1,27 +1,8 @@
 <template>
   <div class="order-list-wrap">
-    <Header
-      :titleContent="TitleObjData.titleContent"
-      :showLeftBack="TitleObjData.showLeftBack"
-      :showRightMore="TitleObjData.showRightMore"
-      :hideApp="1"
-    ></Header>
-    <tab
-      active-color="#222"
-      :line-width="2"
-      default-color="#999"
-      bar-active-color="#3976FF"
-      v-model="index"
-      custom-bar-width="30px"
-      :scroll-threshold="5"
-    >
-      <tab-item
-        class="vux-center"
-        v-for="(item, index) in tabList"
-        :key="index"
-        @on-item-click="getItem(index);"
-        :class="{active:index == iscur}"
-      >
+    <Header :titleContent="TitleObjData.titleContent" :showLeftBack="TitleObjData.showLeftBack" :showRightMore="TitleObjData.showRightMore" :hideApp="1"></Header>
+    <tab active-color="#222" :line-width="2" default-color="#999" bar-active-color="#3976FF" v-model="index" custom-bar-width="30px" :scroll-threshold="5">
+      <tab-item class="vux-center" v-for="(item, index) in tabList" :key="index" @on-item-click="getItem(index);" :class="{active:index == iscur}">
         <div class="tab-item-text">{{item}}</div>
       </tab-item>
     </tab>
@@ -35,10 +16,10 @@
             </div>
           </template>
           <template slot="default">
-            <div class="div-status" v-if="item.status==0">待付款</div>
-            <div class="div-status" v-if="item.status==1">待发货</div>
-            <div class="div-status" v-if="item.status==2">待收货</div>
-            <div class="div-status" v-if="item.status==3">已完成</div>
+            <div class="div-status" v-if="item.status == 0">待付款</div>
+            <div class="div-status" v-if="item.status == 1">待发货</div>
+            <div class="div-status" v-if="item.status == 2">待收货</div>
+            <div class="div-status" v-if="item.status == 3">已完成</div>
           </template>
         </cell>
         <cell>
