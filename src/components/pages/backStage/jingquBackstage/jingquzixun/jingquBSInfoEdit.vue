@@ -45,7 +45,7 @@
         data() {
             return {
                 TitleObjData: {
-                    titleContent: "发布资讯",
+                    titleContent: "编辑资讯",
                     showLeftBack: true,
                     showRightMore: false
                 },
@@ -63,14 +63,8 @@
                 uploadUrl: "https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=util.uploader.uploadm",
                 messages: [],
                 //测试
-                test: ""
-                // editorOption: {
-                //     modules: {
-                //         toolbar: [
-                //             ["image"] // toggled buttons
-                //         ]
-                //     }
-                // }
+                test: "",
+                //
             }
         },
         computed: {},
@@ -125,6 +119,17 @@
             console.log(this.editorOption)
         },
         mounted() {
+            console.log(this.$route.query.id)
+            //获取景区资讯详情页
+            //获取景区资讯列表页
+            this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=scenic.msg.scenicInformationMsg&id="+this.$route.query.id).then(({data}) => {
+                console.log(data)
+                this.title = data.data.title;
+                this.content = data.data.content;
+                this.coverImg = data.data.image;
+                this.$refs.upimg.imgUrl = data.data.image;
+            })
+
         },
         watch: {},
         methods: {
@@ -136,17 +141,6 @@
             editor() {
                 return this.$refs.myQuillEditor.getContents()
             },
-            // onEditorBlur() {
-            //     console.log("blur", this.messages);
-            // },
-            //
-            // onEditorFocus() {
-            //     console.log("focus", this.messages);
-            // },
-            //
-            // onEditorReady() {
-            //     console.log("ready", this.messages);
-            // },
             //富文本内容改变时触发
             onEditorChange(editor) {
                 console.log(this.content)
@@ -162,6 +156,8 @@
             //提交
             passMsg() {
                 JqBsAddInfo({
+                    //id
+                    id:this.$route.query.id,
                     //标题
                     title: this.title,
                     //封面图
@@ -171,7 +167,7 @@
                 }).then(res => {
                     console.log(res)
                     if (res.result == 1) {
-                        this.$vux.toast.text("添加成功");
+                        this.$vux.toast.text("修改成功");
                         sessionStorage.goback = "yes";
                         this.$router.goBack();
                     } else if (this.title == "") {

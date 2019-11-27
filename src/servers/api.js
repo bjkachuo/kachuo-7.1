@@ -440,3 +440,5 @@ export const JqBsAddDate = (data) => http.post("scenic.manage.scenicSet", data);
 //景区后台景区资料各种更新(修改)照片、介绍、服务项、安全提示手机号
 export const JqBsEditDate = (data) => http.post("scenic.msg.saveScenic", data);
 
+//景区资讯发布(添加)
+export const JqBsAddInfo = (data) => http.post("scenic.msg.setScenicInformation", data);

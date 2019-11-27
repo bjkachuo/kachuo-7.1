@@ -626,11 +626,18 @@ export default [
     component: resolve => require(['@/components/pages/backStage/jingquBackstage/jingquzixun/jingquBsSearch'], resolve),
 
   },
-  //景区资讯发布页面
+  //景区资讯发布页面+
   {
     path: '/jingquBSInfoRelease',
     name: 'jingquBSInfoRelease',
     component: resolve => require(['@/components/pages/backStage/jingquBackstage/jingquzixun/jingquBSInfoRelease'], resolve),
+
+  },
+  //景区资讯发布后编辑页面*
+  {
+    path: '/jingquBSInfoEdit',
+    name: 'jingquBSInfoEdit',
+    component: resolve => require(['@/components/pages/backStage/jingquBackstage/jingquzixun/jingquBSInfoEdit'], resolve),
 
   },
   // 景区后台导游
