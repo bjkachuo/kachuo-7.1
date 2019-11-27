@@ -38,9 +38,6 @@
           </div>
         </div>
         <divider>认证服务由北京卡戳数字科技有限公司提供技术支持</divider>
-        <!-- <div class="piao-bottom">
-          <divider>认证服务由北京卡戳数字科技有限公司提供技术支持</divider>
-        </div>-->
       </div>
     </div>
   </div>
@@ -103,9 +100,6 @@ export default {
       return { height: document.documentElement.clientHeight - 50 + "px" };
     }
   },
-  created() {},
-
-  beforeMount() {},
 
   mounted() {
     //获取全局用户信息
@@ -119,21 +113,18 @@ export default {
   methods: {
     //跳转各种类型票
     getItem(link) {
-      if (JSON.parse(sessionStorage.getItem("userLoginInfo")).is_face == 0) {
-        this.$router.push("/facecheck");
-      } else {
+      // if (JSON.parse(sessionStorage.getItem("userLoginInfo")).is_face == 0) {
+      //   this.$router.push("/facecheck");
+      // } else {
         this.$router.push(link);
-      }
+      // }
     },
     //跳转在线购票
     olBuy() {
       this.$router.push("/onlineTicketing");
     },
-    //获取全局用户信息
-    getUserInfo() {}
   },
 
-  watch: {}
 };
 </script>
 <style lang='css' scoped>
@@ -224,73 +215,6 @@ export default {
   font-size: 12px;
   color: #666666;
 }
-.piao-bottom {
-  width: 345px;
-  height: 14px;
-  margin: 23% auto 0;
-}
-.btm-left {
-  height: 1px;
-  width: 25px;
-  background: #e1e7f5;
-  margin-top: 8px;
-  float: left;
-}
-.btm-mid {
-  height: 14px;
-  float: left;
-  font-size: 12px;
-  color: #cccccc;
-  text-align: center;
-  margin: 0 2%;
-}
-.btm-right {
-  height: 1px;
-  width: 25px;
-  background: #e1e7f5;
-  margin-top: 8px;
-  float: left;
-}
-
-/* .tickets-discount-wrap {
-  width: 100%;
-}
-.tickets-discount-list {
-  width: 100%;
-  height: auto;
-  overflow-y: scroll;
-  box-sizing: border-box;
-  margin-top: 50px;
-  background: #f9f9f9;
-}
-.ticketType-wrap {
-  width: 92%;
-  height: auto;
-  margin: 0 auto;
-}
-.t-left {
-  height: 100%;
-  width: 42%;
-  float: left;
-  margin-left: 3%;
-}
-.t-left p {
-  font-size: 18px;
-  color: rgba(34, 34, 34, 1);
-  font-weight: 800;
-  line-height: 79px;
-}
-.t-right {
-  width: 67px;
-  height: 54px;
-  float: right;
-  margin-top: 12px;
-  margin-right: 6%;
-}
-.t-right img {
-  width: 100%;
-  background: none;
-} */
 </style>
 <style lang="less" scoped>
 .vux-divider {
@@ -306,33 +230,4 @@ export default {
   bottom: 0px;
   font-size: 8px;
 }
-// /deep/ .vux-swiper {
-//   border-radius: 8px;
-// }
-// .custom {
-//   overflow: inherit;
-//   /deep/ .vux-indicator {
-//     right: 50%;
-//     margin-right: -32px;
-//     bottom: -27px;
-//   }
-//   /deep/ .vux-icon-dot {
-//     width: 15px !important;
-//     height: 3px !important;
-//   }
-// }
-// .flex-demo {
-//   text-align: center;
-//   width: 97%;
-//   height: 79px;
-//   background-color: #ffffff;
-//   border-radius: 4px;
-//   background-clip: padding-box;
-//   margin: 5px auto;
-// }
-// /deep/ .custom .vux-indicator {
-//   right: 50%;
-//   margin-right: -32px;
-//   bottom: 0px;
-// }
 </style>

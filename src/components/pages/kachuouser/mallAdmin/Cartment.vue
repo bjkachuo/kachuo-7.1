@@ -80,7 +80,10 @@ export default {
       this.itemIsAllChecked()
     },
     //结算
-    Settlement(){},
+    Settlement(){
+      sessionStorage.goodsOlder = JSON.stringify(this.ListOne)
+      this.$router.push('/orderlist/goodsOlder')
+    },
     allClick(){
       this.ListOne.forEach(item=>{
         item.checked = this.checkAll

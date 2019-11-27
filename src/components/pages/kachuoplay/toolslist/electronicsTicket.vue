@@ -1,11 +1,6 @@
 <template>
   <div class="electronicsTicket-wrap">
-    <Header
-      :titleContent="TitleObjData.titleContent"
-      :showLeftBack="TitleObjData.showLeftBack"
-      :showRightMore="TitleObjData.showRightMore"
-      style="top:-43px"
-    ></Header>
+    <Header :titleContent="TitleObjData.titleContent" :showLeftBack="TitleObjData.showLeftBack" :showRightMore="TitleObjData.showRightMore" style="top:-43px"></Header>
 
     <div class="tab-content">
       <b>
@@ -153,51 +148,10 @@ export default {
       console.log(this.text);
     },
     scanning() {
-      cordova.plugins.barcodeScanner.scan(
-        result => {
-          //如果识别不为空有数据
-          if (result.text != ""){
-            this.photo = 1;
-            console.log(result.text);
-            // alert("扫码成果" + result.text);
-            this.$vux.toast.show({
-              type: "success",
-              text: "扫码成功",
-              time: 1000
-            });
-          } else {
-            //如果未进行扫码识别返回
-            this.photo = 0;
-            // alert("取消扫码");
-            this.$vux.toast.show({
-              type: "cancel",
-              text: "取消扫码",
-              time: 1000
-            });
-          }
-        },
-        error => {
-          //扫码失败
-          this.photo = 0;
-          // alert("扫码失败" + error);
-          console.log(error);
-          this.$vux.toast.show({
-            type: "warn",
-            text: "扫码失败",
-            time: 1000
-          });
-        },
-        {
-          showFlipCameraButton: true,
-          showTorchButton: true,
-          prompt: "请用方框区域对准二维码",
-          resultDisplayDuration: 100,
-          formats: "QR_CODE,PDF_417,UPC_A,UPC_E,EAN_8,EAN_13,CODE_39",
-          orientation: "portrait",
-          disableAnimations: true,
-          disableSuccessBeep: false
-        }
-      );
+      dsBridge.call("scanning", "web");
+      bridge.register("scanning", r => {
+        alert(r)
+      });
     },
     tip() {
       this.$vux.toast.show({

@@ -403,8 +403,7 @@
     height: 90px;
     border-radius: 8px;
     background: #ffffff;
-    margin: 0 auto;
-    margin-bottom: 10px;
+    margin: 0 auto 10px;
     box-shadow: 0px 10px 20px 0px rgba(0, 101, 255, 0.06);
   }
 

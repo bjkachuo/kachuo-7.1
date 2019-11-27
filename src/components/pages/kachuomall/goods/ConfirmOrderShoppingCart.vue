@@ -154,42 +154,42 @@ export default {
     },
     // 获取商品详情
     getGoodsDetailsInfo() {
-      let goodsArr = JSON.parse(
-        sessionStorage.getItem("shoppingCartOrderList")
-      );
-      this.goodsArr = goodsArr;
-      let numArr = [],
-        goodsidArr = [],
-        shopidArr = [];
-      for (let i = 0; i < goodsArr.length; i++) {
-        numArr.push(goodsArr[i].num);
-        goodsidArr.push(goodsArr[i].goodsid);
-        shopidArr.push(goodsArr[i].shopid);
-      }
-      this.numArr = numArr;
-      this.goodsidArr = goodsidArr;
-      this.shopidArr = shopidArr;
+      // let goodsArr = JSON.parse(
+      //   sessionStorage.getItem("shoppingCartOrderList")
+      // );
+      // this.goodsArr = goodsArr;
+      // let numArr = [],
+      //   goodsidArr = [],
+      //   shopidArr = [];
+      // for (let i = 0; i < goodsArr.length; i++) {
+      //   numArr.push(goodsArr[i].num);
+      //   goodsidArr.push(goodsArr[i].goodsid);
+      //   shopidArr.push(goodsArr[i].shopid);
+      // }
+      // this.numArr = numArr;
+      // this.goodsidArr = goodsidArr;
+      // this.shopidArr = shopidArr;
     },
     // 获取默认收货地址
     getAddressDefaultFn() {
-      getAddressDefault({})
-        .then(res => {
-          if (res.result === 1) {
-            this.addressDetails = res.data[0];
-          } else {
-            this.$vux.confirm.show({
-              title: "提示",
-              content: "请先添加收货地址",
-              showCancelButton: false,
-              onConfirm: () => {
-                this.selAddress();
-              }
-            });
-          }
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      // getAddressDefault({})
+      //   .then(res => {
+      //     if (res.result === 1) {
+      //       this.addressDetails = res.data[0];
+      //     } else {
+      //       this.$vux.confirm.show({
+      //         title: "提示",
+      //         content: "请先添加收货地址",
+      //         showCancelButton: false,
+      //         onConfirm: () => {
+      //           this.selAddress();
+      //         }
+      //       });
+      //     }
+      //   })
+      //   .catch(err => {
+      //     console.log(err);
+      //   });
     }
   },
 

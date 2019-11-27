@@ -42,11 +42,14 @@
         <div class="line-three">
           <div v-for="(reco,index) in recommend" class="recommend">
             <p>
-              <i :class="reco[0][0].typename"></i>
-              <span>{{reco[0][0].typename}}</span>
+              <i :class="reco[0].typename"></i>
+              <span>{{reco[0].typename}}</span>
             </p>
-            <el-amap :vid="reco[0][0].typename" :center="center" :zoom="zoom" :plugin="plugin" :events="events" class="amap-demo">
-            </el-amap>
+            <div class="map" @click="mapclick">
+              <el-amap :vid="reco[0].typename" :center="[reco[0].latitude,reco[0].longitude]" :zoom='16' class="amap-demo">
+                <el-amap-marker v-for="(marker, index) in reco" :position="[marker.latitude,marker.longitude]"  :vid="index"></el-amap-marker>
+              </el-amap>
+            </div>
           </div>
         </div>
       </div>
@@ -83,6 +86,7 @@ export default {
       advSwiper: [],
       //推荐商家列表：
       recommend: [],
+
       //正儿八经商家列表:
       BusinessList: [],
       TitleObjData: {
@@ -101,23 +105,8 @@ export default {
     //获取推荐商家：
     this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.index.scenic_service")
       .then(({ data }) => {
-        data.data.recommend_business.forEach((item, i) => {
-          this.recommend.push(new Array());
-          let arr_index = -1;
-          item.forEach((goods, index) => {
-            if (index % 3 == 0) {
-              arr_index++;
-              this.recommend[i][arr_index] = [];
-            }
-            this.recommend[i][arr_index].push(goods);
-          });
-        });
-        // this.recommend = data.data.recommend_business;
-        console.log(this.recommend);
-        console.log(data);
+        this.recommend = data.data.recommend_business
       });
-
-
   },
 
   methods: {
@@ -161,7 +150,9 @@ export default {
         // alert("跳转游");
       }
     },
-
+    mapclick(){
+      console.log(1);
+    },
     //跳转列表页
     getItem(link) {
       this.$router.push(link);
@@ -308,6 +299,9 @@ img {
     padding-left: 15px;
     font-size: 16px;
     color: #000;
+  }
+  .map{
+    height: 165px;
   }
 }
 </style>

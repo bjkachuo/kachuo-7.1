@@ -255,16 +255,17 @@ export default [
     component: resolve => require(['@/components/pages/kachuouser/UserIntegral'], resolve),
 
   },
-  {
-    path: '/shoppingcart',
-    name: 'ShoppingCart',
-    component: resolve => require(['@/components/pages/kachuouser/ShoppingCart'], resolve),
-  },
   //商城管理
   {
     path: '/orderlist',
     name: 'OrderList',
     component: resolve => require(['@/components/pages/kachuouser/mallAdmin/mallAdmin'], resolve),
+  },
+  //商品订单
+  {
+    path: '/orderlist/goodsOlder',
+    name: 'goodsOlder',
+    component: resolve => require(['@/components/pages/kachuouser/mallAdmin/goodsOlder'], resolve),
   },
   //变现管理
   {

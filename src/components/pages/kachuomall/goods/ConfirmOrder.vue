@@ -3,9 +3,6 @@
     <Header :titleContent="TitleObjData.titleContent" :showLeftBack="TitleObjData.showLeftBack" :showRightMore="TitleObjData.showRightMore"></Header>
     <div class="confirm-order-content" :style="scenceGiftsContent">
       <div class="address-wrap" @click="selAddress">
-        <div class="address-left">
-          <span class="iconfont icondingwei"></span>
-        </div>
         <div class="address-mid">
           <p>
             <span>{{addressDetails.realname}}</span>
@@ -18,6 +15,7 @@
           <span class="iconfont iconyoujiantou"></span>
         </div>
       </div>
+      <div class="border"></div>
       <div class="goods-details-wrap">
         <div class="goods-details-left">
           <img class="goods-details-img" :src="imgUrl" :alt="goodsDetails.title" />
@@ -26,10 +24,6 @@
           <p>{{goodsDetails.title}}</p>
           <p style="color:#999999">已选</p>
           <p style="color:#B7090A">商品价格：¥{{goodsDetails.marketprice}}</p>
-          <!-- <p
-            style="color:#B7090A"
-            v-if="this.$route.query.priceback != undefined"
-          >¥{{this.$route.query.priceback}}</p>-->
         </div>
         <div class="goods-details-right">
           <p>数量：1</p>
@@ -57,15 +51,10 @@
           <span>¥0.00</span>
         </p>
         <p>
-          <span>积分抵扣</span>    
-          <span @click="ok"><check-icon :value.sync="demo1"></check-icon></span>   
-          <!-- <span><x-switch title=""></x-switch></span>       -->
-          <!-- <span><x-switch v-model="goodsDetails.marketprice" title="" :value-map="[goodsDetails.marketprice, this.value1]"></x-switch></span>       -->
+          <span>可用{{userInfo.credit1.toFixed(2)}}积分抵扣{{userInfo.credit1.toFixed(2)}}元</span>
+          <span @click="ok"><check-icon :value.sync="demo1"></check-icon></span>
         </p>
-        <!-- <p>
-          {{this.demo1}}
-          {{this.value2}}
-        </p> -->
+
       </div>
     </div>
     <div class="confirm-order-btn-wrap">
@@ -84,12 +73,11 @@
 </template>
 
 <script>
-import { XSwitch,CheckIcon } from "vux";
+import { XSwitch,CheckIcon,Cell } from "vux";
 import Header from "@/components/common/Header";
-import { getDetail, getAddressDefault, AddShop } from "@/servers/api";
+import { getDetail, getAddressDefault, AddShop, getUserInfo } from "@/servers/api";
 export default {
-  name: "",
-  props: [""],
+
   data() {
     return {
       demo1:false,
@@ -109,12 +97,16 @@ export default {
   components: {
     Header,
     XSwitch,
-    CheckIcon
+    CheckIcon,
+    Cell
   },
 
   computed: {
     scenceGiftsContent() {
       return { height: document.documentElement.clientHeight - 45 + "px" };
+    },
+    userInfo() {
+      return this.$store.state.userLoginInfo;
     }
   },
 
@@ -122,6 +114,12 @@ export default {
     this.getGoodsDetailsInfo();
     this.getAddressDefaultFn();
     this.value2 = this.goodsDetails.marketprice
+
+    getUserInfo({}).then(res => {
+      this.$store.commit("setUserLoginInfo", res.data);
+      this.GLOBAL.setSession("userLoginInfo", res.data);
+    });
+
   },
 
   methods: {
@@ -136,10 +134,6 @@ export default {
     },
     // 下单
     confirmOrder() {
-      console.log(this.goodsDetails.id);
-      console.log(this.computedPrice());
-      console.log(this.addressDetails.id);
-      console.log(this.checkOrderType());
       if (this.addressDetails.id) {
         AddShop({
           gid: this.goodsDetails.id,
@@ -260,7 +254,7 @@ export default {
   }
 };
 </script>
-<style lang='css' scoped>
+<style lang='less' scoped>
 .confirm-order-wrap {
   width: 100%;
   height: 100%;
@@ -286,9 +280,13 @@ export default {
   box-sizing: border-box;
   margin-top: 5px;
 }
-.address-left {
-  flex: 1;
+.border{
+  background-image: url("./border.png");
+  height: 3px;
+  background-size: 50% 50%;
+  background-repeat: repeat;
 }
+
 .address-mid {
   flex: 8;
 }
