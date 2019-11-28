@@ -266,8 +266,7 @@ import { timeTodate } from "@/assets/js/tools";
 import { Tab, TabItem, Cell, XButton } from "vux";
 
 export default {
-  name: "",
-  props: [""],
+
   data() {
     return {
       TitleObjData: {
@@ -470,6 +469,9 @@ export default {
 .vux-tab .vux-tab-item.vux-tab-selected {
   font-size: 16px;
   font-weight: bold;
+}
+.vux-tab-wrap{
+  margin-top: 46px;
 }
 .vux-tab-wrap /deep/ .vux-tab-container {
   box-shadow: 0px 10px 20px 0px rgba(0, 101, 255, 0.08);

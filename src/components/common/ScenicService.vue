@@ -45,7 +45,7 @@
               <i :class="reco[0].typename"></i>
               <span>{{reco[0].typename}}</span>
             </p>
-            <div class="map" @click="mapclick">
+            <div class="map" @click="mapclick(reco[0].typename)">
               <el-amap :vid="reco[0].typename" :center="[reco[0].latitude,reco[0].longitude]" :zoom='16' class="amap-demo">
                 <el-amap-marker v-for="(marker, index) in reco" :position="[marker.latitude,marker.longitude]"  :vid="index"></el-amap-marker>
               </el-amap>
@@ -150,8 +150,9 @@ export default {
         // alert("跳转游");
       }
     },
-    mapclick(){
-      console.log(1);
+    mapclick(name){
+      console.log(name);
+      dsBridge.call("scenicService", name);
     },
     //跳转列表页
     getItem(link) {

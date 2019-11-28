@@ -5,7 +5,6 @@ dsBridge.registerAsyn("loginInfo", function (arg1, responseCallback) {
   if(localStorage.token){
     localStorage.setItem("token", JSON.parse(arg1).accessToken);
   }else{
-
     localStorage.setItem("token", JSON.parse(arg1).accessToken);
     window.location.href = location.href+'&time='+((new Date()).getTime())
   }

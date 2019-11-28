@@ -253,19 +253,30 @@ export default [
     path: '/userintegral',
     name: 'UserIntegral',
     component: resolve => require(['@/components/pages/kachuouser/UserIntegral'], resolve),
-
   },
-  //商城管理
+  //购物车
   {
-    path: '/orderlist',
-    name: 'OrderList',
-    component: resolve => require(['@/components/pages/kachuouser/mallAdmin/mallAdmin'], resolve),
+    path: '/Cartment',
+    name: 'Cartment',
+    component: resolve => require(['@/components/pages/kachuouser/Cartment/Cartment'], resolve),
+  },
+  //购物车确认订单
+  {
+    path: '/Cartment/goodsOlder',
+    name: 'goodsOlder',
+    component: resolve => require(['@/components/pages/kachuouser/Cartment/goodsOlder'], resolve),
   },
   //商品订单
   {
-    path: '/orderlist/goodsOlder',
-    name: 'goodsOlder',
-    component: resolve => require(['@/components/pages/kachuouser/mallAdmin/goodsOlder'], resolve),
+    path: '/orderlist',
+    name: 'OrderList',
+    component: resolve => require(['@/components/pages/kachuouser/OrderList/OrderList'], resolve),
+  },
+  //我的门票
+  {
+    path: '/myAdmissionTicket',
+    name: 'myAdmissionTicket',
+    component: resolve => require(['@/components/pages/kachuouser/myAdmissionTicket/myAdmissionTicket'], resolve),
   },
   //变现管理
   {

@@ -244,7 +244,7 @@
           bottom: 0;
           width: 100%;
           left: -15px;
-          background-image: url("./border.png");
+          background-image: url("border.png");
           height: 3px;
           margin: 0 15px;
           background-size: 50% 50%;
@@ -301,7 +301,7 @@
           display: inline-block;
           vertical-align: middle;
           padding-right: 20px;
-          background: url(./rt_arrow2.png) right center no-repeat;
+          background: url(rt_arrow2.png) right center no-repeat;
           background-size: 12px 12px;
         }
       }

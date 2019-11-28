@@ -16,8 +16,8 @@
         <span slot="label">订单管理</span>
       </tabbar-item>
       <tabbar-item >
-        <img slot="icon" src="../tabBottom-icon/cart.png">
-        <img slot="icon-active" src="../tabBottom-icon/cart_h.png">
+<!--        <img slot="icon" src="../tabBottom-icon/cart.png">-->
+<!--        <img slot="icon-active" src="../tabBottom-icon/cart_h.png">-->
         <span slot="label">购物车</span>
       </tabbar-item>
 

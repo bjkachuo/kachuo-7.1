@@ -175,7 +175,7 @@ export default {
   },
   computed: {
     conHei() {
-      return { height: document.documentElement.clientHeight - 90 + "px" };
+      return { height: document.documentElement.clientHeight - 42 + "px" };
     },
     price(){
         let price = 0
@@ -198,7 +198,8 @@ export default {
   background: #f5f5f5;
   overflow: hidden;
   overflow-y: scroll;
-  padding: 15px 0;
+  padding: 15px 0 54px 0;
+  margin-top: 42px;
   box-sizing: border-box;
 }
 .cart-tabbar {
@@ -207,7 +208,7 @@ export default {
   padding: 10px 15px;
   left: 0;
   right: 0;
-  bottom: 48px;
+  bottom: 0px;
   overflow: hidden;
 }
 .cart-tabbar .button {
@@ -355,7 +356,7 @@ export default {
   display: inline-block;
   vertical-align: middle;
   padding-right: 20px;
-  background: url(./rt_arrow2.png) right center no-repeat;
+  background: url(rt_arrow2.png) right center no-repeat;
   background-size: 12px 12px;
 }
 .gar-price {

@@ -146,9 +146,14 @@
                 ],
                 dataListTwo: [
                     {
-                        name: "商城管理",
-                        link: "/orderlist",
+                        name: "购物车",
+                        link: "/Cartment",
                         imgSrc: require("@/assets/images/购物袋@2x.png")
+                    },
+                    {
+                      name: "商品订单",
+                      link: "/orderlist",
+                      imgSrc: require("@/assets/images/购物袋@2x.png")
                     },
                     {
                         name: "变现管理",
