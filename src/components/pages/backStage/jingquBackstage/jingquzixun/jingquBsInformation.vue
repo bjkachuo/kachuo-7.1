@@ -7,19 +7,31 @@
       :showRightMore="TitleObjData.showRightMore"
     ></Header>
     <p class="Preservation" @click="goRelease">发布</p>
-    <x-icon type="ios-search-strong" size="25" class="search-icon" @click="jumpSearch"></x-icon>
+<!--    <x-icon type="ios-search-strong" size="25" class="search-icon" @click="jumpSearch"></x-icon>-->
+    <div style="height:40px;">
+      <search
+        cancel-text
+        placeholder="请输入标题进行搜索"
+        @result-click="resultClick"
+        @on-change="getResult"
+        :results="results"
+        v-model="value"
+        position="absolute"
+        auto-scroll-to-top
+        top="46px"
+        @on-focus="onFocus"
+        @on-cancel="onCancel"
+        @on-submit="onSubmit"
+        ref="search">
+      </search>
+
+    </div>
     <div style="margin-bottom: 10px;">
       <div class="line-one" v-for="(item,index) in List" :key="index">
         <p class="operation" @click="show(item)">...</p>
         <div class="title">{{item.title}}</div>
         <div class="img-list">
           <img :src="item.image" alt/>
-          <!--        <div class="img-wrap">-->
-          <!--          <img src alt/>-->
-          <!--        </div>-->
-          <!--        <div class="img-wrap">-->
-          <!--          <img src alt/>-->
-          <!--        </div>-->
         </div>
       </div>
     </div>
@@ -35,7 +47,6 @@
       v-model="isconfirm"
       title="确定要删除吗？"
       theme="ios"
-      @on-cancel="onCancel()"
       @on-confirm="onConfirm()"
     ></confirm>
 
@@ -44,8 +55,8 @@
 
 <script>
     import Header from "@/components/common/Header";
-    import Search from "@/components/common/Search";
-    import {Actionsheet, Confirm} from "vux";
+    // import Search from "@/components/common/Search";
+    import {Actionsheet, Confirm, Search} from "vux";
 
     export default {
         props: {},
@@ -68,7 +79,12 @@
                     menu1: "置顶",
                     menu2: "编辑",
                     menu3: "删除"
-                }
+                },
+                //搜索相关
+                results: [],
+                //搜索相关
+                value: "",
+
             };
         },
         computed: {},
@@ -95,9 +111,9 @@
                 this.$router.push("/jingquBSInfoRelease");
             },
             //跳转搜索
-            jumpSearch() {
-                this.$router.push("/jingquBsSearch");
-            },
+            // jumpSearch() {
+            //     this.$router.push("/jingquBsSearch");
+            // },
             //actionsheet显示或隐藏
             show(item) {
                 this.isactionsheet = !this.isactionsheet;
@@ -125,11 +141,6 @@
                     this.$router.push("/jingquBSInfoEdit?id=" + this.ActiveItem.id)
                 }
             },
-            //点击取消事件
-            onCancel() {
-                console.log("我点了取消");
-
-            },
             //点击确认事件
             onConfirm() {
                 console.log("我点了确认");
@@ -140,6 +151,40 @@
                     this.showTip("删除成功");
                 })
 
+            },
+            //以下搜索相关事件
+            //点击搜索结果弹出（事件）
+            resultClick(item) {
+                window.alert('you click the result item: ' + JSON.stringify(item))
+                //下面加跳转的页面跳转的方法（带这id去编辑发布编辑详情）
+                this.$router.push()
+            },
+            //进行搜索下方出现的搜索框
+            getResult(val) {
+                this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=scenic.msg.scenicInformationList&search=" + this.value).then(({data}) => {
+                    console.log(data);
+                    this.List = data.data
+                })
+                console.log('on-change', val)
+                this.results = val ? getResult(this.value) : []
+            },
+            //点击回车时的弹框
+            onSubmit() {
+                this.$refs.search.setBlur();
+                this.$vux.toast.show({
+                    type: 'text',
+                    position: 'top',
+                    text: 'on submit'
+                })
+            },
+
+            //点击搜索框聚焦时
+            onFocus() {
+                console.log("点击了搜索");
+            },
+            //点击搜索右侧取消时
+            onCancel() {
+                console.log("点击了搜索框取消");
             },
 
             //刷新景区资讯列表方法
@@ -154,7 +199,8 @@
         components: {
             Header,
             Actionsheet,
-            Confirm
+            Confirm,
+            Search
         },
         watch: {
             '$route': function (to) {
@@ -167,6 +213,19 @@
         }
 
     };
+
+    //搜索方法
+    function getResult(val) {
+        // let rs = [];
+        // for (let i = 0; i < 20; i++) {
+        //     rs.push({
+        //         title: `${val}`,
+        //         other: i
+        //     });
+        // }
+        // return rs;
+    }
+
 </script>
 
 <style scoped lang="css">
@@ -187,6 +246,7 @@
     z-index: 9999;
     color: #333333;
   }
+
   .line-one {
     width: 100%;
     height: 150px;
@@ -198,8 +258,9 @@
     display: flex;
     justify-content: space-between;
   }
-  .line-one:nth-child(1){
-    margin-top: 56px;
+
+  .line-one:nth-child(1) {
+    /*margin-top: 56px;*/
   }
 
   .operation {
@@ -297,6 +358,10 @@
     z-index: 9999;
     top: 10px;
     right: 16%;
+  }
+
+  /deep/ .vux-search-fixed {
+    position: static;
   }
 </style>
 

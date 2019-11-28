@@ -442,5 +442,10 @@ export const JqBsEditDate = (data) => http.post("scenic.msg.saveScenic", data);
 
 //扫码验票
 export const verification = (data) => http.post("scenic.ticket.verification", data);
+
 //购物车订单下单
 export const createOrder = (data) => http.post("goods.buy.create_order", data);
+
+//景区资讯发布(添加)
+export const JqBsAddInfo = (data) => http.post("scenic.msg.setScenicInformation", data);
+

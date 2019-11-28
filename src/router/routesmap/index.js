@@ -254,7 +254,6 @@ export default [
     name: 'UserIntegral',
     component: resolve => require(['@/components/pages/kachuouser/UserIntegral'], resolve),
   },
-<<<<<<< Updated upstream
   //购物车
   {
     path: '/Cartment',
@@ -268,9 +267,6 @@ export default [
     component: resolve => require(['@/components/pages/kachuouser/Cartment/goodsOlder'], resolve),
   },
   //商品订单
-=======
-  //商城管理
->>>>>>> Stashed changes
   {
     path: '/orderlist',
     name: 'OrderList',
@@ -282,12 +278,12 @@ export default [
     name: 'myAdmissionTicket',
     component: resolve => require(['@/components/pages/kachuouser/myAdmissionTicket/myAdmissionTicket'], resolve),
   },
-  //商品订单
-  {
-    path: '/orderlist/goodsOlder',
-    name: 'goodsOlder',
-    component: resolve => require(['@/components/pages/kachuouser/mallAdmin/goodsOlder'], resolve),
-  },
+  // //商品订单
+  // {
+  //   path: '/orderlist/goodsOlder',
+  //   name: 'goodsOlder',
+  //   component: resolve => require(['@/components/pages/kachuouser/mallAdmin/goodsOlder'], resolve),
+  // },
   //变现管理
   {
     path: '/Liquidation',
