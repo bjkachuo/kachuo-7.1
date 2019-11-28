@@ -85,7 +85,7 @@ export default {
       this.$http.post("http://core.kachuo.com//app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=scenic.shop.totalOrder").then(({data})=>{
           console.log(data)
           this.SList = data.data.goods;
-          this.GList = data.data.goods;
+          this.GList = data.data.guide;
           console.log(this.SList,this.GList)
       })
   },

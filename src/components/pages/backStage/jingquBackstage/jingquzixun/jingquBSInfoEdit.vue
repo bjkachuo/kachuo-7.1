@@ -34,7 +34,7 @@
 
 <script>
     import Header from "@/components/common/Header";
-    import {quillRedefine} from 'vue-quill-editor-upload'
+    import {quillRedefine} from 'vue-quill-editor-upload';
     import {quillEditor} from "vue-quill-editor";
     import {JqBsAddInfo} from "@/servers/api";
     import {XInput} from 'vux'
