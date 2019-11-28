@@ -21,18 +21,6 @@
           <div class="f-left">
             <img src="./renlian.png" alt />
           </div>
-          <div class="f-right" v-if="this.face==1">
-            <div class="i-warp">
-              <x-icon type="ios-checkmark" size="15" class="yes"></x-icon>
-            </div>
-            <span>已通过</span>
-          </div>
-          <div class="f-right" v-else-if="this.face==0">
-            <div class="i-warp">
-              <x-icon type="ios-close" size="15" class="no"></x-icon>
-            </div>
-            <span>未通过</span>
-          </div>
         </div>
         <div class="binding-wrap">
           <div class="explain-one">
@@ -41,16 +29,15 @@
           <div class="text-bind">
             <p>扫描或输入其它平台购买的景区门票二维码、条形码或数字串码信息进行门票信息绑定</p>
           </div>
-          <div v-if="this.text == ''&& this.photo == 0">
+          <div v-if="!flag">
             <div class="scann" @click="scanning">
               <p>扫码识别</p>
-              <!-- <input type="file" accept="image/*" value="扫描识别"/> -->
             </div>
             <div class="num" @click="write">
               <p>门票编号</p>
             </div>
           </div>
-          <div v-if="this.text !=''|| this.photo == 1">
+          <div v-if="flag">
             <div class="numTwo">
               <p>已绑定</p>
             </div>
@@ -58,10 +45,10 @@
         </div>
       </b>
     </div>
-    <div class="CheckTickets" v-if="this.text == ''|| this.photo == 0">
+    <div class="CheckTickets" v-if="this.text == ''">
       <p>立即验票</p>
     </div>
-    <div class="CheckTicketsTwo" v-if="this.text !=''|| this.photo == 1" @click="tip">
+    <div class="CheckTicketsTwo" v-if="this.text !=''" @click="tip">
       <p>立即验票</p>
     </div>
     <confirm
@@ -72,8 +59,7 @@
       @on-cancel="onCancel"
       @on-confirm="onConfirm5"
       @on-show="onShow5"
-      @on-hide="onHide"
-      :input-attrs="{type: 'number'}"
+      :input-attrs="{type: 'text'}"
     ></confirm>
   </div>
 </template>
@@ -90,7 +76,7 @@ const FACEUPLOADCONFIG = {
   }
 };
 
-import { faceCheck, getUserInfo,verification } from "@/servers/api";
+import { getUserInfo,verification } from "@/servers/api";
 
 export default {
   props: {},
@@ -102,12 +88,9 @@ export default {
         showRightMore: false
       },
       show5: false,
-      //扫脸状态
-      face: 0,
       //输入的信息状态
       text: "",
-      //传入的图片状态
-      photo: 0,
+      flag :false,
       videoUploadUrl:
         "https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=member.realname.ticket_qrcode"
     };
@@ -132,43 +115,40 @@ export default {
       this.show5 = !this.show5;
       console.log("11111");
     },
-    onHide() {
-      console.log("on hide");
-    },
     onCancel() {
       console.log("on cancel");
     },
     onShow5() {
       this.$refs.confirm5.setInputValue("");
     },
-    onConfirm5(value) {
-      this.$refs.confirm5.setInputValue("");
-      this.$vux.toast.text("input value: " + value);
-      this.text = value;
-      console.log(this.text);
+    onConfirm5() {
+     this.text = this.$refs.confirm5.msg
     },
     scanning() {
       dsBridge.call("scanning", "web");
       bridge.register("scanning", r => {
         alert(r)
-        verification({code:r}).then(res=>{
-          if(res.result == 1){
-             this.tip()
-          }else{
-            alert(JSON.stringify(res))
-          }
-        })
+        this.text = r
       });
     },
     tip() {
-      this.$vux.toast.show({
-        type: "success",
-        text: "验票成功",
-        time: 1000
-      });
-      setTimeout(() => {
-        this.$router.push("/indextab");
-      }, 2000);
+      verification({code:this.text}).then(res=>{
+        if(res.result == 1){
+          this.flag = true
+          this.$vux.toast.show({
+            type: "success",
+            text: "验票成功",
+            time: 1000
+          });
+        }else{
+          alert(JSON.stringify(res))
+          this.$vux.toast.show({
+            type: "warn",
+            text: res.msg,
+            time: 1000
+          });
+        }
+      })
     }
   },
   components: {Header, Tab, TabItem, Flexbox, FlexboxItem, Confirm}

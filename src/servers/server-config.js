@@ -6,6 +6,7 @@ dsBridge.registerAsyn("loginInfo", function (arg1, responseCallback) {
     localStorage.setItem("token", JSON.parse(arg1).accessToken);
   }else{
     localStorage.setItem("token", JSON.parse(arg1).accessToken);
+    window.location.reload()
     window.location.href = location.href+'&time='+((new Date()).getTime())
   }
   responseCallback("登录信息成功");

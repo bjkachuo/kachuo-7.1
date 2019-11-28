@@ -135,7 +135,7 @@ const FACEUPLOADCONFIG = {
   }
 };
 
-import { faceCheck, getUserInfo } from "@/servers/api";
+import { getUserInfo } from "@/servers/api";
 
 export default {
   props: {},

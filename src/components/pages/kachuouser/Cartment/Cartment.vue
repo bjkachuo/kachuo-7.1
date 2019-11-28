@@ -82,7 +82,7 @@ export default {
     //结算
     Settlement(){
       sessionStorage.goodsOlder = JSON.stringify(this.ListOne)
-      this.$router.push('/orderlist/goodsOlder')
+      this.$router.push('/Cartment/goodsOlder')
     },
     allClick(){
       this.ListOne.forEach(item=>{
@@ -135,6 +135,11 @@ export default {
       this.toggle = !this.toggle;
     },
     back() {
+
+        if(this.$store.state.isApp) {
+          this.$store.state.loadingWhite = true
+          // alert(this.$store.state.isApp)
+        }
       this.$router.goBack()
     },
     onOver() {

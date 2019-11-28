@@ -14,85 +14,68 @@
         <div class="address-right">
           <span class="iconfont iconyoujiantou"></span>
         </div>
+        <div class="border"></div>
       </div>
-      <div class="border"></div>
-      <div class="goods-details-wrap">
-        <div class="goods-details-left">
-          <img class="goods-details-img" :src="imgUrl" :alt="goodsDetails.title" />
-        </div>
-        <div class="goods-details-mid">
-          <p>{{goodsDetails.title}}</p>
-          <p style="color:#999999">已选</p>
-          <p style="color:#B7090A">商品价格：¥{{goodsDetails.marketprice}}</p>
-        </div>
-        <div class="goods-details-right">
-          <p>数量：1</p>
-        </div>
-      </div>
-      <div class="goods-details-desc">
-        <p v-if="this.$route.query.price">
-          <span style="font-size:17px;color:#000">租赁价格：</span>
-          <span>¥{{this.$route.query.price}}</span>
-        </p>
-        <p v-if="!this.$route.query.price && !this.$route.query.priceback">
-          <span style="font-size:17px;color:#000">商品总额：</span>
-          <span>¥{{goodsDetails.marketprice}}</span>
-        </p>
-        <p v-if="this.$route.query.priceback">
-          <span style="font-size:17px;color:#000">寄卖价格：</span>
-          <span>¥{{this.$route.query.priceback}}</span>
-        </p>
-        <p>
-          <span>优惠</span>
-          <span>-¥0.00</span>
-        </p>
-        <p>
-          <span>运费</span>
-          <span>¥0.00</span>
-        </p>
-        <p>
-          <span>可用{{userInfo.credit1.toFixed(2)}}积分抵扣{{userInfo.credit1.toFixed(2)}}元</span>
-          <span @click="ok"><check-icon :value.sync="demo1"></check-icon></span>
-        </p>
 
+      <div class="cart-panel" v-for="(item,index) in this.ListOne" :key="index">
+        <div class="cart-header">
+
+          <span class="shop-name">{{ item.shop_name }}</span>
+        </div>
+        <cell v-for="good in item.goods_list">
+          <template slot="icon">
+
+            <div class="gar-photo">
+              <img :src="good.thumb" alt />
+            </div>
+          </template>
+          <template slot="after-title">
+            <div class="gar-body">
+              <div class="gar-header">
+                <div class="gar-title">{{good.title}}</div>
+              </div>
+              <div class="gar-foot">
+                <div class="gar-price">￥<span>{{good.marketprice}}</span></div>
+                <div>x{{good.total}}</div>
+              </div>
+            </div>
+          </template>
+        </cell>
       </div>
+      <div class="cell">
+        <cell title="运费" :value="dispatchprice" @click.native="onClick"></cell>
+        <checklist label-position="left" :options="commonList" v-model="integral" @on-change="change"></checklist>
+      </div>
+
     </div>
     <div class="confirm-order-btn-wrap">
-      <p class="confirm-order-desc" v-if="this.$route.query.price">应付：¥{{this.$route.query.price}}</p>
-      <p
-        class="confirm-order-desc"
-        v-if="!this.$route.query.price && !this.$route.query.priceback"
-      >应付：¥{{goodsDetails.marketprice}}</p>
-      <p
-        class="confirm-order-desc"
-        v-if="this.$route.query.priceback"
-      >应付：¥{{this.value2}}</p>
+      <p class="confirm-order-desc">应付：¥{{totalPrice}}</p>
       <p class="confirm-order-btn" @click="confirmOrder">立即下单</p>
     </div>
   </div>
 </template>
 
 <script>
-  import { XSwitch,CheckIcon,Cell } from "vux";
+  import { XSwitch,CheckIcon,Cell,Checklist } from "vux";
   import Header from "@/components/common/Header";
-  import { getDetail, getAddressDefault, AddShop, getUserInfo } from "@/servers/api";
+  import { getAddressDefault, getUserInfo,createOrder,order_pay } from "@/servers/api";
   export default {
-
-    name:'goodsOlder',
 
     data() {
       return {
-        demo1:false,
-        value1:"999999",
-        value2:"",
+        integral:[],
+        ListOne:[],
         TitleObjData: {
           titleContent: "确认订单",
           showLeftBack: true,
           showRightMore: false
         },
         addressDetails: {},
-        goodsDetails: {},
-        imgUrl: ""
+        dispatchprice:0,//运费
+        totalPrice:0,//应付
+        money:0,//总价
+        imgUrl: "",
+        orderList:{},
       };
     },
 
@@ -100,7 +83,8 @@
       Header,
       XSwitch,
       CheckIcon,
-      Cell
+      Cell,
+      Checklist
     },
 
     computed: {
@@ -109,14 +93,49 @@
       },
       userInfo() {
         return this.$store.state.userLoginInfo;
+      },
+      commonList(){
+        return ['可用'+this.userInfo.credit1.toFixed(2)+'积分抵扣'+this.userInfo.credit1.toFixed(2)+'元']
       }
     },
 
     mounted() {
-      this.getGoodsDetailsInfo();
-      this.getAddressDefaultFn();
-      this.value2 = this.goodsDetails.marketprice
 
+      this.getAddressDefaultFn();
+      /*遍历购物车中选中的商品*/
+      let data = JSON.parse(sessionStorage.goodsOlder)
+      let arr = []
+      let dispatchprice = 0 //运费
+      let totalPrice = 0
+      data.forEach(item=>{
+        if(item.checked == true){
+          arr.push(item)
+
+          item.goods_list.forEach(good=>{
+            dispatchprice += Number(good.dispatchprice)*good.total
+            totalPrice += Number(good.marketprice)*good.total
+            this.orderList[good.id] = good.total
+          })
+
+        }else{
+          let goodsArr = []
+          item.goods_list.forEach(good=>{
+            if(good.checked){
+              goodsArr.push(good)
+              dispatchprice += Number(good.dispatchprice)*good.total
+              totalPrice += Number(good.marketprice)*good.total
+              this.orderList.push({[good.id] : good.total})
+            }
+          })
+          goodsArr.length ? arr.push({shop_name:item.shop_name,goods_list:goodsArr}) : null
+        }
+      })
+      this.ListOne = arr
+      this.totalPrice = dispatchprice + totalPrice
+      this.money = dispatchprice + totalPrice
+      this.dispatchprice = dispatchprice
+
+      /*遍历购物车中选中的商品*/
       getUserInfo({}).then(res => {
         this.$store.commit("setUserLoginInfo", res.data);
         this.GLOBAL.setSession("userLoginInfo", res.data);
@@ -125,46 +144,51 @@
     },
 
     methods: {
-      ok(){
-        if(this.demo1 == false){
-          this.value2 = this.goodsDetails.marketprice
-          console.log("111111")
-        }else{
-          this.value2 = this.value1;
-          console.log("2222");
-        }
-      },
       // 下单
       confirmOrder() {
+        alert(this.addressDetails.id)
         if (this.addressDetails.id) {
-          AddShop({
-            gid: this.goodsDetails.id,
-            price: this.computedPrice(),
-            addressid: this.addressDetails.id,
-            type: this.checkOrderType()
+          createOrder({ addressid:this.addressDetails.id,shop_ids:this.orderList,use_integral: this.integral.length ? 1 : 0}).then(res=>{
+            alert(res)
+            if(res.data.skip_pay == 0){ //积分足够支付直接订单完成跳转到待发货
+            alert('积分足够支付直接订单完成跳转到待发货')
+            }else{
+              // res.data.ordersn
+              alert(JSON.stringify(res))
+
+              order_pay({paytype:21,order_sn:res.data.ordersn}).then(r=>{
+                alert(JSON.stringify(r))
+                let WXparams = {
+                  partnerid: r.data.url.partnerid, // merchant id
+                  prepayid: r.data.url.prepayid, // prepay id
+                  noncestr: r.data.url.noncestr, // nonce
+                  timestamp: r.data.url.timestamp.toString(), // timestamp
+                  sign: r.data.url.paySign, // signed string
+                  package: r.data.url.package // signed string
+                };
+
+
+                dsBridge.call("WXpay", JSON.stringify(WXparams));
+
+                bridge.register("payStatus", r => {
+                  if(r){
+                    this.$vux.toast.show({
+                      text: '支付成功',
+                      type: 'success',
+                      time: 2000
+                    })
+                  }else{
+                    this.$vux.toast.show({
+                      text: '支付失败,请重试!',
+                      type: 'warn',
+                      time: 2000
+                    })
+                  }
+                });
+
+              })
+            }
           })
-            .then(res => {
-              console.log(res);
-              if (res.result === 1) {
-                this.$router.push("/payment?orderid=" + res.data.result);
-              } else {
-                if (res.code === "50103") {
-                  this.$vux.confirm.show({
-                    title: "提示",
-                    content: "订单中该商品未付款，是否到订单中心查看？",
-                    onCancel: () => {
-                      return;
-                    },
-                    onConfirm: () => {
-                      this.$router.push("/orderlist");
-                    }
-                  });
-                }
-              }
-            })
-            .catch(err => {
-              console.log(err);
-            });
         } else {
           this.$vux.confirm.show({
             title: "提示",
@@ -176,56 +200,25 @@
           });
         }
       },
-      // 判断订单类型
-      // 1正常
-      // 2寄卖
-      // 3租赁
-      checkOrderType() {
-        if (this.$route.query.price) {
-          return 3;
-        } else if (this.$route.query.priceback) {
-          return 2;
-        } else {
-          return 1;
-        }
-      },
-      // 计算价格
-      computedPrice() {
-        if (this.$route.query.price) {
-          return this.$route.query.price;
-        } else if (this.$route.query.priceback) {
-          return this.$route.query.priceback;
-        } else {
-          // return this.goodsDetails.marketprice;
-          return this.value2 = this.goodsDetails.marketprice;
 
+      change(){
+
+        if(this.integral.length){//选中
+          this.totalPrice = this.userInfo.credit1 > this.totalPrice ? 0 : this.totalPrice - this.userInfo.credit1.toFixed(2)
+        }else{
+          this.totalPrice = this.money
         }
       },
       selAddress() {
         this.$router.push("/address?type=goods");
       },
-      // 获取商品详情
-      getGoodsDetailsInfo() {
-        getDetail({
-          goods_id: this.$route.query.id
-        })
-          .then(res => {
-            console.log(res);
-            if (res.result === 1) {
-              this.goodsDetails = res.data;
-              this.imgUrl = res.data.thumb_url[0];
-            }
-          })
-          .catch(err => {
-            console.log(err);
-          });
-      },
+
       // 获取默认收货地址
       getAddressDefaultFn() {
         getAddressDefault({})
           .then(res => {
             if (res.result === 1) {
-              this.addressDetails = res.data[0];
+              this.addressDetails = res.data.address;
             } else {
               this.$vux.confirm.show({
                 title: "提示",
@@ -262,31 +255,148 @@
     height: 100%;
     overflow: hidden;
     background: #f9f9f9;
+    .confirm-order-content {
+      width: 100%;
+      overflow-y: scroll;
+      margin-top: 50px;
+      padding-bottom: 60px;
+      .address-wrap {
+        position: relative;
+        border-radius: 8px;
+        box-shadow:0px 5px 10px 0px rgba(0,101,255,0.08);
+        min-height: 50px;
+        margin: 5px 15px 0;
+        background: #fff;
+        height: auto;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px;
+        box-sizing: border-box;
+        overflow: hidden;
+        .border{
+          position: absolute;
+          bottom: 0;
+          width: 100%;
+          left: -15px;
+          background-image: url("border.png");
+          height: 3px;
+          margin: 0 15px;
+          background-size: 50% 50%;
+          background-repeat: repeat;
+        }
+      }
+
+    }
+
+    .cart-panel {
+      background: rgba(255, 255, 255, 1);
+      box-shadow: 0px 10px 15px 0px rgba(0, 101, 255, 0.05);
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 10px 15px;
+      padding: 15px 0;
+      /deep/.weui-cell {
+        padding: 8px 15px;
+      }
+      .cart-tabbar {
+        background-color: #ffffff;
+        position: absolute;
+        padding: 10px 15px;
+        left: 0;
+        right: 0;
+        bottom: 48px;
+        overflow: hidden;
+      }
+      .cart-tabbar .button {
+        width: 100px;
+        height: 35px;
+        line-height: 35px;
+        background-color: #3976ff;
+        border-radius: 35px;
+        color: #ffffff;
+        text-align: center;
+        float: right;
+      }
+      .cart-tabbar .del-button {
+        color: #3976ff;
+        background-color: transparent;
+        box-shadow: 0 0 0 1px #3976ff;
+      }
+      .cart-tabbar .check-box {
+        float: left;
+      }
+      .cart-header {
+        padding: 0 10px;
+        margin-bottom: 10px;
+        .shop-name {
+          font-size: 16px;
+          font-weight: bold;
+          position: relative;
+          display: inline-block;
+          vertical-align: middle;
+          padding-right: 20px;
+          background: url(rt_arrow2.png) right center no-repeat;
+          background-size: 12px 12px;
+        }
+      }
+      .gar-photo {
+        width: 90px;
+        height: 90px;
+        margin-right: 15px;
+        img {
+          width: 90px;
+          height: 90px;
+          border-radius: 4px;
+        }
+      }
+      .gar-body {
+        height: 90px;
+        line-height: 1.4;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: justify;
+        -webkit-justify-content: space-between;
+        justify-content: space-between;
+        flex-direction: column;
+      }
+      .gar-foot {
+        position: relative;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: justify;
+        -webkit-justify-content: space-between;
+        justify-content: space-between;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+      }
+
+    }
+
   }
-  .confirm-order-content {
-    width: 100%;
-    overflow: hidden;
-    overflow-y: scroll;
-    margin-top: 50px;
-  }
-  .address-wrap {
-    width: 100%;
-    min-height: 50px;
-    background: #fff;
-    height: auto;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px;
-    box-sizing: border-box;
-    margin-top: 5px;
-  }
-  .border{
-    background-image: url("./border.png");
-    height: 3px;
-    background-size: 50% 50%;
-    background-repeat: repeat;
+
+
+  .cell{
+    margin: 0 15px;
+    /deep/ .weui-cell {
+      margin: 10px 0 ;
+      padding: 16px 15px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow:0px 5px 10px 0px rgba(0,101,255,0.08);
+    }
+    /deep/.weui-check_label{
+      margin: 0 ;
+    }
+    /deep/.weui-cells_checkbox .weui-cell__hd{
+      padding-right: 0;
+    }
   }
 
   .address-mid {
@@ -295,53 +405,6 @@
   .address-right {
     flex: 1;
     text-align: right;
-  }
-  .goods-details-wrap {
-    width: 100%;
-    height: 100px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    overflow: hidden;
-    padding: 15px;
-    box-sizing: border-box;
-    margin-top: 10px;
-    background: #fff;
-  }
-  .goods-details-img {
-    width: 60px;
-    height: 60px;
-    display: inline-block;
-  }
-  .goods-details-left {
-    flex: 1;
-  }
-  .goods-details-mid {
-    flex: 2;
-  }
-  .goods-details-right {
-    flex: 1;
-  }
-  .goods-details-desc {
-    width: 100%;
-    height: 200px;
-    padding-left: 15px;
-    box-sizing: border-box;
-    background: #fff;
-    margin-top: 10px;
-  }
-  .goods-details-desc p {
-    width: 100%;
-    height: 50px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #eee;
-    padding-right: 15px;
-    box-sizing: border-box;
-    color: #666666;
   }
   .confirm-order-btn-wrap {
     width: 100%;

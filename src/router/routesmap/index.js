@@ -278,12 +278,6 @@ export default [
     name: 'myAdmissionTicket',
     component: resolve => require(['@/components/pages/kachuouser/myAdmissionTicket/myAdmissionTicket'], resolve),
   },
-  // //商品订单
-  // {
-  //   path: '/orderlist/goodsOlder',
-  //   name: 'goodsOlder',
-  //   component: resolve => require(['@/components/pages/kachuouser/mallAdmin/goodsOlder'], resolve),
-  // },
   //变现管理
   {
     path: '/Liquidation',
@@ -467,23 +461,6 @@ export default [
     path: '/confirmordershoppingcart',
     name: 'ConfirmOrderShoppingCart',
     component: resolve => require(['@/components/pages/kachuomall/goods/ConfirmOrderShoppingCart'], resolve),
-  },
-  {
-    //门票认真人脸识别
-    path: '/facecheck',
-    name: 'facecheck',
-    component: resolve => require(['@/components/pages/facerecognition/face'], resolve),
-  },
-  {
-    //用于导演注册的人脸识别
-    path: '/faceTwo',
-    name: 'faceTwo',
-    component: resolve => require(['@/components/pages/facerecognition/faceTwo'], resolve),
-  },
-  {
-    path: '/face',
-    name: 'face',
-    component: resolve => require(['@/components/pages/facerecognition/face'], resolve),
   },
   {
     path: '/ticketsorder',

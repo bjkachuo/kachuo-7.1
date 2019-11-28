@@ -116,6 +116,8 @@ export const buyBackSubmit = (data) => http.post("goods.repurchase.submit", data
 
 // 购物车下单
 export const goodsBucketSubmit = (data) => http.post("goods.buy.add_gwcOrder", data);
+//
+export const order_pay = (data) => http.post("goods.buy.order_pay", data);
 
 // 购物车删除
 export const goodsBucketDelete = (data) => http.post("goods.details.del_shop", data);
@@ -340,9 +342,6 @@ export const getScenicMerchants = (data) => http.post("scenic.index", data);
 
 // 获取景区商家数据详情
 export const getScenicMerchantsDetails = (data) => http.post("scenic.index.business_info", data);
-
-// 人脸识别
-export const faceCheck = (data) => http.post("member.realname.faceRecognition", data);
 
 // 门票列表
 export const TicketsList = (data) => http.post("goods.buy.getDoorList", data);
