@@ -201,6 +201,8 @@
                     console.log(res);
                     if (res.result === 1){
                         this.showTip("操作成功");
+                        sessionStorage.goback = "yes";
+                        this.$router.goBack();
                     }else if(this.expressNum == ""){
                         this.showTip("请填写订单号成功");
                     }else if(this.selectedSend == ""){

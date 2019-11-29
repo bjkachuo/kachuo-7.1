@@ -16,10 +16,10 @@
     </div>
     <div class="timeline-demo">
       <timeline>
-        <timeline-item>
-          <h4 class="recent">【广东】 广州市 已发出</h4>
-          <p class="recent"> 2016-04-17 12:00:00</p>
-        </timeline-item>
+<!--        <timeline-item>-->
+<!--          <h4 class="recent">【广东】 广州市 已发出</h4>-->
+<!--          <p class="recent"> 2016-04-17 12:00:00</p>-->
+<!--        </timeline-item>-->
         <timeline-item>
           <h4> 申通快递员 广东广州 收件员 xxx 已揽件</h4>
           <p>2016-04-16 10:23:00</p>
@@ -56,7 +56,12 @@
 
             }
         },
-
+        mounted(){
+            console.log(this.$route.query.id);
+            this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=logistics.index.shop_order_logistics&order_id&order_id=" + this.$route.query.id).then(({data}) => {
+                console.log('物流信息:',data);
+            });
+        },
         components: {
             Header,
             Timeline,
@@ -133,5 +138,8 @@
 
   /deep/ .vux-timeline-item-tail {
     background-color: #E5E5E5;
+  }
+  /deep/ .vux-timeline-item-content{
+    padding: 0.1rem 0 3.5rem 2.2rem;
   }
 </style>

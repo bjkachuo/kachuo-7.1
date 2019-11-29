@@ -70,7 +70,7 @@
       <b v-show="cur==1">
         <flexbox orient="vertical">
           <flexbox-item>
-            <div class="order-content" v-for="(item,index) in this.goodsListOne" :key="index">
+            <div class="order-content" v-for="(item,index) in this.goodsListTwo" :key="index">
               <div class="content-top" @click="goAready">
                 <div class="img-wrap">
                   <img :src="item.image" alt/>
@@ -92,7 +92,7 @@
                 </div>
               </div>
               <div class="content-bottom">
-                <div class="bottom-one" @click="goGoodsLog">
+                <div class="bottom-one" @click="goGoodsLog(item.id)">
                   <p>查看物流</p>
                 </div>
               </div>
@@ -103,24 +103,24 @@
       <b v-show="cur==2">
         <flexbox orient="vertical">
           <flexbox-item>
-            <div class="order-content">
+            <div class="order-content" v-for="(item,index) in goodsListThree" :key="index">
               <div class="content-top" @click="goReturn">
                 <div class="img-wrap">
-                  <img src alt/>
+                  <img :src="item.image" alt/>
                   <div class="num">
-                    <p>共2件</p>
+                    <p>共{{item.count}}件</p>
                   </div>
                 </div>
                 <div class="mid-text">
                   <div class="text-one">
-                    <p class="name">收货人：安其拉3</p>
+                    <p class="name">收货人：{{item.nickname}}</p>
                     <p class="state">退款中</p>
                   </div>
                   <div class="text-two">
-                    <p>支付时间:2019-08-01 19:35</p>
+                    <p>支付时间:{{item.createtime}}</p>
                   </div>
                   <div class="text-three">
-                    <p>本单金额:￥400</p>
+                    <p>本单金额:￥{{item.price}}</p>
                   </div>
                 </div>
               </div>
@@ -136,24 +136,24 @@
       <b v-show="cur==3">
         <flexbox orient="vertical">
           <flexbox-item>
-            <div class="order-content">
+            <div class="order-content" v-for="(item,index) in goodsListThour" :key="index">
               <div class="content-top" @click="goReturned">
                 <div class="img-wrap">
-                  <img src alt/>
+                  <img :src="item.image" alt/>
                   <div class="num">
-                    <p>共2件</p>
+                    <p>共{{item.count}}件</p>
                   </div>
                 </div>
                 <div class="mid-text">
                   <div class="text-one">
-                    <p class="name">收货人：安其拉4</p>
+                    <p class="name">收货人：{{item.nickname}}</p>
                     <p class="state">已退款</p>
                   </div>
                   <div class="text-two">
-                    <p>支付时间:2019-08-01 19:35</p>
+                    <p>支付时间:{{item.createtime}}</p>
                   </div>
                   <div class="text-three">
-                    <p>本单金额:￥400</p>
+                    <p>本单金额:￥{{item.price}}</p>
                   </div>
                 </div>
               </div>
@@ -164,24 +164,24 @@
       <b v-show="cur==4">
         <flexbox orient="vertical">
           <flexbox-item>
-            <div class="order-content">
+            <div class="order-content" v-for="(item,index) in goodsListFive" :key="index">
               <div class="content-top" @click="goFinish">
                 <div class="img-wrap">
-                  <img src alt/>
+                  <img :src="item.image" alt/>
                   <div class="num">
-                    <p>共2件</p>
+                    <p>共{{item.count}}件</p>
                   </div>
                 </div>
                 <div class="mid-text">
                   <div class="text-one">
-                    <p class="name">收货人：安其拉5</p>
+                    <p class="name">收货人：{{item.nickname}}</p>
                     <p class="state">已完成</p>
                   </div>
                   <div class="text-two">
-                    <p>支付时间:2019-08-01 19:35</p>
+                    <p>支付时间:{{item.createtime}}</p>
                   </div>
                   <div class="text-three">
-                    <p>本单金额:￥400</p>
+                    <p>本单金额:￥{{item.price}}</p>
                   </div>
                 </div>
               </div>
@@ -212,6 +212,12 @@
                 goodsListOne: [],
                 //已发货订单列表
                 goodsListTwo: [],
+                //商品退款中列表
+                goodsListThree:[],
+                //商品已退款列表
+                goodsListThour:[],
+                //商品已完成列表
+                goodsListFive:[]
             };
 
         },
@@ -220,26 +226,41 @@
         },
         mounted() {
             //商品待发货列表
-            this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=scenic.shop.orderList&status="+1).then(({data}) => {
+            this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=scenic.shop.orderList&status=" + 1).then(({data}) => {
                 this.goodsListOne = data.data;
                 console.log("goodsListOne待发货订单列表:", this.goodsListOne);
             });
             //商品已发货列表
-            this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=scenic.shop.orderList&status="+2).then(({data}) => {
+            this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=scenic.shop.orderList&status=" + 2).then(({data}) => {
                 this.goodsListTwo = data.data;
                 console.log("goodsListTwo已发货订单列表:", this.goodsListTwo);
             });
+            //商品退款中列表
+            this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=scenic.shop.orderList&status=" + 4).then(({data}) => {
+                this.goodsListThree = data.data;
+                console.log("goodsListThree退款中订单列表:", this.goodsListThree);
+            });
+            //商品已退款列表
+            this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=scenic.shop.orderList&status=" + 5).then(({data}) => {
+                this.goodsListThour = data.data;
+                console.log("goodsListThour已退款订单列表:", this.goodsListThour);
+            });
+          //商品已完成列表
+            this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=scenic.shop.orderList&status=" + 3).then(({data}) => {
+                this.goodsListFive = data.data;
+                console.log("goodsListFive已完成订单列表:", this.goodsListFive);
+            });
+
         },
         filters: {
             formateDate(val) {
                 return timeTodate(val);
             }
         },
-        watch: {},
         methods: {
             //跳转待发货订单详情页面
             goWaitDetail(id) {
-                this.$router.push("/orderWaitPro?id="+id);
+                this.$router.push("/orderWaitPro?id=" + id);
                 console.log("去待发货");
             },
             //跳转已发货详情页面
@@ -264,11 +285,25 @@
             },
             //跳转发货页面
             goSend(id) {
-                this.$router.push("/jinquBsSendGoods?id="+id)
+                this.$router.push("/jinquBsSendGoods?id=" + id)
             },
             //跳转查看物流页面
-            goGoodsLog() {
-                this.$router.push("/jinquBsGoodsLogistics")
+            goGoodsLog(id) {
+                this.$router.push("/jinquBsGoodsLogistics?id="+id)
+            },
+            //刷新列表方法
+            Refresh(){
+                //刷新商品待发货列表
+                this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=scenic.shop.orderList&status=" + 1).then(({data}) => {
+                    this.goodsListOne = data.data;
+                    console.log("我刷新了待发货订单列表:", this.goodsListOne);
+                });
+                //刷新商品已发货列表
+                this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=scenic.shop.orderList&status=" + 2).then(({data}) => {
+                    this.goodsListTwo = data.data;
+                    console.log("我刷新了已发货订单列表:", this.goodsListTwo);
+                });
+
             }
         },
         components: {
@@ -277,7 +312,17 @@
             TabItem,
             Flexbox,
             FlexboxItem
+        },
+        watch: {
+            '$route': function (to) {
+                if (sessionStorage.goback == "yes") {
+                    sessionStorage.goback = ''
+                    this.Refresh();
+                }
+            }
+
         }
+
     };
 </script>
 

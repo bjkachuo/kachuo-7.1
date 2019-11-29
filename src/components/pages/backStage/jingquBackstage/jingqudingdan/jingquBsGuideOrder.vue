@@ -207,8 +207,7 @@
             //获取导游列表
             this.$http
                 .post(
-                    "http://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=tourguide.index.getlist&scenic_id=" +
-                    sessionStorage.getItem("currentScenic")
+                    "http://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.guide"
                 )
                 .then(({data}) => {
                     console.log('导游', data);

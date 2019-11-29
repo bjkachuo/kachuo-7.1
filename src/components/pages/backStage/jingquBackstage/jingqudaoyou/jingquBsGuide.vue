@@ -42,7 +42,7 @@
           </div>
       </b>
       <b v-show="cur==1">
-        <div class="list-one" v-for="(item,index) in TList" :key="index" v-if="item.status == 0">
+        <div class="list-one" v-for="(item,index) in KList" :key="index">
           <div class="img-wrap">
             <img :src="item.tour_path" alt/>
             <div :class="'g-tag-'+0">空闲</div>
@@ -60,7 +60,7 @@
         </div>
       </b>
       <b v-show="cur==2">
-        <div class="list-one" v-for="(item,index) in TList" :key="index" v-if="item.status == 1">
+        <div class="list-one" v-for="(item,index) in QList" :key="index">
           <div class="img-wrap">
             <img :src="item.tour_path" alt/>
             <div :class="'g-tag-'+1">期满</div>
@@ -77,7 +77,7 @@
           </div>
         </div>
       </b>
-      <b v-show="cur==3" v-for="(item,index) in TList" :key="index" v-if="item.status == 2">
+      <b v-show="cur==3" v-for="(item,index) in XList" :key="index">
         <div class="list-one">
           <div class="img-wrap">
             <img :src="item.tour_path" alt/>
@@ -138,8 +138,14 @@
                     menu3: "删除"
                 },
                 scenic_id: "",
-                //导演列表
+                //全部导演列表
                 TList: "",
+                //空闲导游列表
+                KList:"",
+                //休息导游列表
+                XList:"",
+                //期满导游
+                QList:"",
                 //点击显示actionsheet时保存的item
                 guideItem: ""
             };
@@ -151,12 +157,29 @@
             //获取景区id
             this.scenic_id = JSON.parse(sessionStorage.getItem("currentScenic"));
             console.log(this.scenic_id)
-            //获取景区后台导游列表
+            //获取景区后台导游全部列表
             this.$http.post("http://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.guide").then(({data}) => {
                 console.log(data);
                 this.TList = data.data;
-                console.log('列表这里',this.TList)
+                console.log('默认导游列表无状态全部导游',this.TList)
             })
+            //期满导游列表
+            this.$http.post("http://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.guide&status="+1).then(({data}) => {
+                console.log('期满导游：',data);
+                this.QList = data.data;
+            })
+            //休息导游列表
+            this.$http.post("http://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.guide&status="+2).then(({data}) => {
+                console.log('休息导游：',data);
+                this.XList =data.data;
+            })
+            //空闲导游列表
+            this.$http.post("http://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.guide&status="+0).then(({data}) => {
+                console.log('空闲导游：',data);
+                this.KList = data.data;
+
+            })
+
         },
         watch: {},
         methods: {
@@ -218,10 +241,27 @@
             Refresh() {
                 //获取景区后台导游列表
                 this.$http.post("http://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.guide").then(({data}) => {
-                    console.log(data);
                     this.TList = data.data;
-                    console.log("我刷新了列表")
+                    console.log("我刷新了全部列表")
+                });
+                //期满导游列表
+                this.$http.post("http://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.guide&status="+1).then(({data}) => {
+                    console.log('刷新期满导游：',data);
+                    this.QList = data.data;
                 })
+                //休息导游列表
+                this.$http.post("http://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.guide&status="+2).then(({data}) => {
+                    console.log('刷新休息导游：',data);
+                    this.XList =data.data;
+                })
+                //空闲导游列表
+                this.$http.post("http://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.guide&status="+0).then(({data}) => {
+                    console.log('刷新空闲导游：',data);
+                    this.KList = data.data;
+
+                })
+
+
             }
         },
         components: {
