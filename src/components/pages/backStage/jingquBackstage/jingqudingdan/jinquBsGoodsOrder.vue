@@ -213,10 +213,6 @@
             this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=scenic.shop.orderList").then(({data})=>{
                 console.log('商品订单列表',data)
             });
-            this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=tourguide.index.pandect&scenic_id="+sessionStorage.getItem("currentScenic")).then(({data})=>{
-                console.log('导游总览接口',data)
-            });
-` `
         },
         watch: {},
         methods: {

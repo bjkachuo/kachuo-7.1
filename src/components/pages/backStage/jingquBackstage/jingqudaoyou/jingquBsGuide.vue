@@ -21,25 +21,25 @@
     </tab>
     <div class="tab-content">
       <b v-show="cur==0">
-        <div class="list-one" v-for="(item,index) in TList" :key="index">
-          <div class="img-wrap">
-            <img :src="item.tour_path" alt/>
-            <!--            <div class="state" style="background:#6B97FF">空闲</div>-->
-            <div :class="'g-tag-'+item.status" v-if="item.status=='0'">空闲</div>
-            <div :class="'g-tag-'+item.status" v-if="item.status=='1'">期满</div>
-            <div :class="'g-tag-'+item.status" v-if="item.status=='2'">休息</div>
-          </div>
-          <div class="name-star-wrap">
-            <p>{{item.name}}</p>
-            <div class="star-wrap">
-              <rater v-model="item.score" active-color="#FF9900" :font-size="10" disabled></rater>
-              <span>({{item.score}})</span>
+          <div class="list-one" v-for="(item,index) in TList" :key="index">
+            <div class="img-wrap">
+              <img :src="item.tour_path" alt/>
+              <!--            <div class="state" style="background:#6B97FF">空闲</div>-->
+              <div :class="'g-tag-'+item.status" v-if="item.status=='0'">空闲</div>
+              <div :class="'g-tag-'+item.status" v-if="item.status=='1'">期满</div>
+              <div :class="'g-tag-'+item.status" v-if="item.status=='2'">休息</div>
+            </div>
+            <div class="name-star-wrap">
+              <p>{{item.name}}</p>
+              <div class="star-wrap">
+                <rater v-model="item.score" active-color="#FF9900" :font-size="10" disabled></rater>
+                <span>({{item.score}})</span>
+              </div>
+            </div>
+            <div class="more-wrap" @click="show(item)">
+              <img src="../moremore.png" alt/>
             </div>
           </div>
-          <div class="more-wrap" @click="show(item)">
-            <img src="../moremore.png" alt/>
-          </div>
-        </div>
       </b>
       <b v-show="cur==1">
         <div class="list-one" v-for="(item,index) in TList" :key="index" v-if="item.status == 0">
@@ -152,9 +152,10 @@
             this.scenic_id = JSON.parse(sessionStorage.getItem("currentScenic"));
             console.log(this.scenic_id)
             //获取景区后台导游列表
-            this.$http.post("http://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=tourguide.index.getlist&scenic_id=" + this.scenic_id).then(({data}) => {
+            this.$http.post("http://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.guide").then(({data}) => {
                 console.log(data);
-                this.TList = data.data.list;
+                this.TList = data.data;
+                console.log('列表这里',this.TList)
             })
         },
         watch: {},
@@ -184,7 +185,7 @@
                     this.onDel();
                 } else if (key == "menu1") {
                     //点击导游置顶操作
-                      this.$http.post("http://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=tourguide.index.setIsTop&status="+1+"&id="+this.guideItem.id).then(({data})=>{
+                      this.$http.post("http://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.guide.guideTop&type="+1+"&id="+this.guideItem.id).then(({data})=>{
                           console.log(data);
                           this.Refresh();
                           this.showTip("置顶成功");
@@ -216,9 +217,9 @@
             //刷新列表方法
             Refresh() {
                 //获取景区后台导游列表
-                this.$http.post("http://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=tourguide.index.getlist&scenic_id=" + this.scenic_id).then(({data}) => {
+                this.$http.post("http://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.guide").then(({data}) => {
                     console.log(data);
-                    this.TList = data.data.list;
+                    this.TList = data.data;
                     console.log("我刷新了列表")
                 })
             }

@@ -185,7 +185,8 @@ export default {
       },
       cur: 1, //默认选中第一个tab,
       //代接单
-      listOne: []
+      listOne: [],
+
     };
   },
   computed: {},
@@ -202,6 +203,17 @@ export default {
         this.listOne = data.data.list;
         console.log(this.listOne);
       });
+    //获取导游列表
+      this.$http
+          .post(
+              "http://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=tourguide.index.getlist&scenic_id=" +
+              sessionStorage.getItem("currentScenic")
+          )
+          .then(({ data }) => {
+              console.log('导游',data);
+
+          });
+
   },
   watch: {},
   methods: {
