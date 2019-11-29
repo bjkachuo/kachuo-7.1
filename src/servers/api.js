@@ -448,3 +448,6 @@ export const createOrder = (data) => http.post("goods.buy.create_order", data);
 //景区资讯发布(添加)
 export const JqBsAddInfo = (data) => http.post("scenic.msg.setScenicInformation", data);
 
+//景区后台商品发货
+export const JqBsSendGoods = (data) => http.post("scenic.shop.sendOrder", data);
+

@@ -23,33 +23,36 @@
       <b v-show="cur==0">
         <flexbox orient="vertical">
           <flexbox-item>
-            <div class="order-content">
-              <div class="content-top" @click="goWaitDetail">
+            <div class="order-content" v-for="(item,index) in this.goodsListOne" :key="index">
+              <div class="content-top" @click="goWaitDetail(item.id)">
                 <div class="img-wrap">
-                  <img src alt/>
+                  <img :src="item.image" alt/>
                   <div class="num">
-                    <p>共2件</p>
+                    <p>共{{item.count}}件</p>
                   </div>
                 </div>
                 <div class="mid-text">
                   <div class="text-one">
-                    <p class="name">收货人：安其拉1</p>
+                    <p class="name">收货人：{{item.nickname}}</p>
                     <p class="state">待发货</p>
                   </div>
                   <div class="text-two">
-                    <p>支付时间:2019-08-01 19:35</p>
+                    <p>支付时间:{{item.createtime | formateDate}}</p>
                   </div>
                   <div class="text-three">
-                    <p>本单金额:￥400</p>
+                    <p>本单金额:￥{{item.price}}</p>
                   </div>
                 </div>
               </div>
               <div class="content-bottom">
-                <div class="bottom-two" @click="goSend">
+                <div class="bottom-two" @click="goSend(item.id)">
                   <p>发货</p>
                 </div>
                 <div class="bottom-one">
-                  <p>联系买家</p>
+                  <!--                  <p>联系买家</p>-->
+                  <p>
+                    <a :href="'tel:' + item.mobile">联系用户</a>
+                  </p>
                 </div>
               </div>
             </div>
@@ -67,24 +70,24 @@
       <b v-show="cur==1">
         <flexbox orient="vertical">
           <flexbox-item>
-            <div class="order-content">
+            <div class="order-content" v-for="(item,index) in this.goodsListOne" :key="index">
               <div class="content-top" @click="goAready">
                 <div class="img-wrap">
-                  <img src alt/>
+                  <img :src="item.image" alt/>
                   <div class="num">
-                    <p>共2件</p>
+                    <p>共{{item.count}}件</p>
                   </div>
                 </div>
                 <div class="mid-text">
                   <div class="text-one">
-                    <p class="name">收货人：安其拉2</p>
+                    <p class="name">收货人：{{item.nickname}}</p>
                     <p class="state">已发货</p>
                   </div>
                   <div class="text-two">
-                    <p>支付时间:2019-08-01 19:35</p>
+                    <p>支付时间:{{item.createtime | formateDate}}</p>
                   </div>
                   <div class="text-three">
-                    <p>本单金额:￥400</p>
+                    <p>本单金额:￥{{item.price}}</p>
                   </div>
                 </div>
               </div>
@@ -193,6 +196,7 @@
 <script>
     import Header from "@/components/common/Header";
     import {Tab, TabItem, Flexbox, FlexboxItem} from "vux";
+    import {timeTodate} from "@/assets/js/tools";
 
     export default {
         props: {},
@@ -203,22 +207,39 @@
                     showLeftBack: true,
                     showRightMore: false
                 },
-                cur: 0 //默认选中第一个tab
+                cur: 0,//默认选中第一个tab
+                //待发货订单列表
+                goodsListOne: [],
+                //已发货订单列表
+                goodsListTwo: [],
             };
+
         },
         computed: {},
         created() {
         },
         mounted() {
-            this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=scenic.shop.orderList").then(({data})=>{
-                console.log('商品订单列表',data)
+            //商品待发货列表
+            this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=scenic.shop.orderList&status="+1).then(({data}) => {
+                this.goodsListOne = data.data;
+                console.log("goodsListOne待发货订单列表:", this.goodsListOne);
             });
+            //商品已发货列表
+            this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=scenic.shop.orderList&status="+2).then(({data}) => {
+                this.goodsListTwo = data.data;
+                console.log("goodsListTwo已发货订单列表:", this.goodsListTwo);
+            });
+        },
+        filters: {
+            formateDate(val) {
+                return timeTodate(val);
+            }
         },
         watch: {},
         methods: {
             //跳转待发货订单详情页面
-            goWaitDetail() {
-                this.$router.push("/orderWaitPro");
+            goWaitDetail(id) {
+                this.$router.push("/orderWaitPro?id="+id);
                 console.log("去待发货");
             },
             //跳转已发货详情页面
@@ -242,11 +263,11 @@
                 console.log("去已完成");
             },
             //跳转发货页面
-            goSend() {
-                this.$router.push("/jinquBsSendGoods")
+            goSend(id) {
+                this.$router.push("/jinquBsSendGoods?id="+id)
             },
             //跳转查看物流页面
-            goGoodsLog(){
+            goGoodsLog() {
                 this.$router.push("/jinquBsGoodsLogistics")
             }
         },
@@ -347,6 +368,10 @@
     font-weight: bold;
     color: #222222;
     font-family: PingFangSC-Bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 76%;
   }
 
   .state {
@@ -388,6 +413,14 @@
   }
 
   .bottom-one p {
+    font-size: 14px;
+    color: #3976ff;
+    line-height: 35px;
+    text-align: center;
+  }
+
+  .bottom-one a {
+    text-decoration: none;
     font-size: 14px;
     color: #3976ff;
     line-height: 35px;
