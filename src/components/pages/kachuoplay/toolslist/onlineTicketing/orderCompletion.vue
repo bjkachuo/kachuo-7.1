@@ -3,7 +3,7 @@
     <Header :titleContent="TitleObjData.titleContent" :showLeftBack="TitleObjData.showLeftBack" :showRightMore="TitleObjData.showRightMore" style="top:-43px"></Header>
     <div class="card1">
       <div class="head">
-          <div class="title">XXX景区门票</div>
+          <div class="title">景区门票</div>
           <div class="link">购票须知></div>
       </div>
       <div class="piao-contnet">
@@ -82,10 +82,9 @@
                     time: 2000
                   })
 
-
                   buyTicketHd({order_sn: res.data.order_sn})
                     .then(res => {
-                      res.result == 1 ? '成功':'失败'
+                      res.result == 1 ? this.$router.push('/completeTicket'):'失败'
                       alert(JSON.stringify(res))
                     })
                     .catch(err => {

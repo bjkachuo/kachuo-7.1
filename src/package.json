@@ -5,7 +5,7 @@
   "author": "lpb <273701801@qq.com>",
   "private": true,
   "scripts": {
-    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
+    "dev": "webpack-dev-server --inline --max-old-space-size=4096 --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
     "build": "cross-env NODE_ENV=production node build/build.js"
   },

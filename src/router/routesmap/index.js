@@ -272,6 +272,7 @@ export default [
     name: 'OrderList',
     component: resolve => require(['@/components/pages/kachuouser/OrderList/OrderList'], resolve),
   },
+
   //我的门票
   {
     path: '/myAdmissionTicket',
@@ -1074,6 +1075,13 @@ export default [
     name: 'onlineTicketing',
     component: resolve => require(['@/components/pages/kachuoplay/toolslist/onlineTicketing/onlineTicketing'], resolve),
   },
+  //购票订单完成
+  {
+    path: '/completeTicket',
+    name: 'completeTicket',
+    component: resolve => require(['@/components/pages/kachuoplay/toolslist/onlineTicketing/completeTicket'], resolve),
+  },
+  //购票订单填写
   {
     path: '/onlineTicketing/orderCompletion',
     name: 'orderCompletion',

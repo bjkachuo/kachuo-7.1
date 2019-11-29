@@ -36,6 +36,11 @@
           <span>销量：{{goodsData.sales}}</span>
           <span>库存：{{goodsData.total}}</span>
         </p>
+
+        <div class="shoucang">
+          <div class="icon"></div>
+          <div>收藏</div>
+        </div>
       </div>
       <div class="divider-area-wrap"></div>
 
@@ -126,8 +131,7 @@ import ChimeeMobilePlayer from "chimee-mobile-player";
 import "chimee-mobile-player/lib/chimee-mobile-player.browser.css";
 import Header from "@/components/common/Header";
 import VideoPlayer from "@/components/common/VideoPlayer";
-// import SwiperImg from "@/components/common/SwiperImgGoodDetails";
-import { getDetail } from "@/servers/api";
+import { getDetail,verifyGoodsDetalis } from "@/servers/api";
 import Divider from "@/components/common/DividedArea";
 import { vueCordovaFunction } from "@/assets/js/vuecordova";
 import bottomMenu from './bottomMenu'
@@ -310,21 +314,22 @@ export default {
       // console.log(this.goodsData);
     },
     blockChainInfoFn() {
-      let id = this.$route.query.id;
-      let flag = this.goodsData.is_forty;
-      let rule = this.goodsData.rule;
-      if (flag) {
-        this.$router.push(
-          "/blockinfoindex?id=" + id + "&flag=" + flag + "&rule=" + rule
-        );
-      } else {
-        this.$vux.toast.text("数据上链中...", "middle");
-        setTimeout(() => {
-          this.$vux.toast.hide();
-        }, 1000);
-      }
-    },
+      verifyGoodsDetalis({goods_id: this.$route.query.id}).then(res=>{
+        if(res.result == 0){
+          this.$vux.toast.text("暂无上链信息", "middle");
+        }else{
 
+          if (this.goodsData.is_forty) {
+            this.$router.push("/blockinfoindex?id=" + this.$route.query.id + "&flag=" + this.goodsData.is_forty + "&rule=" + this.goodsData.rule);
+          } else {
+            this.$vux.toast.text("数据上链中...", "middle");
+            setTimeout(() => {
+              this.$vux.toast.hide();
+            }, 1000);
+          }
+        }
+      })
+    },
     setForItem(name, id) {
       this.selName = name;
       setTimeout(() => {
@@ -436,6 +441,7 @@ export default {
 .goods-details-desc {
   background: #fff;
   width: 100%;
+  position: relative;
   box-shadow:0px 5px 10px 0px rgba(0,101,255,0.08);
   border-radius:8px;
   .goods-name {
@@ -464,6 +470,18 @@ export default {
     border-bottom: 1px solid #eee;
     padding: 0 15px;
     box-sizing: border-box;
+  }
+  .shoucang{
+    position: absolute;
+    top: 20px;
+    right: 27px;
+    .icon{
+      width: 22px;
+      height: 22px;
+      background-image: url("../../../../../assets/images/xignxing.png");
+      background-size: 100% 100%;
+      margin-left: 4px;
+    }
   }
 }
 

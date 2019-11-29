@@ -49,9 +49,6 @@ export const getAddressDetail = (data) => http.post("member.address.getDetail", 
 //添加、修改收货地址
 export const updateAddress = (data) => http.post("member.address.submit", data);
 
-//设置默认地址
-export const setAddress = (data) => http.post("member.address.setDefault", data);
-
 //购物车列表
 export const ShopList = (data) => http.post("goods.details.get_iShopList", data)
 //删除购物车
@@ -441,6 +438,12 @@ export const JqBsEditDate = (data) => http.post("scenic.msg.saveScenic", data);
 
 //扫码验票
 export const verification = (data) => http.post("scenic.ticket.verification", data);
+
+//我的门票列表
+export const myTicketOrdersList = (data) => http.post("scenic.ticket.orders_list", data);
+
+//获取购票订单详情
+export const getOrdersInfo = (data) => http.post("scenic.ticket.getOrdersInfo", data);
 
 //购物车订单下单
 export const createOrder = (data) => http.post("goods.buy.create_order", data);

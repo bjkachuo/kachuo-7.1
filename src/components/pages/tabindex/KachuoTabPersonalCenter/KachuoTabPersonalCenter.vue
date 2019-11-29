@@ -142,6 +142,11 @@
                         name: "商品收藏",
                         link: "/collection",
                         imgSrc: require("@/assets/images/标星@2x.png")
+                    },
+                    {
+                      name: "我的门票",
+                      link: "/myAdmissionTicket",
+                      imgSrc: require("@/assets/images/标星@2x.png")
                     }
                 ],
                 dataListTwo: [

@@ -1,13 +1,12 @@
 <template>
   <div class="good-details-boot">
     <p class="goods-action" @click="iframeShow = true">
-      <span style="font-size:14px;" class="iconfont iconkefu"></span>
+      <span style="font-size:14px;" class="kefu"></span>
       <span style="font-size:12px">客服</span>
     </p>
     <p class="goods-action" @click="collectGoods">
-      <span v-if="!collectState" style="font-size:14px" class="iconfont iconshoucang1"></span>
-      <span v-else-if="collectState" style="font-size:14px" class="iconfont iconshoucang-xuanzhong"></span>
-      <span style="font-size:12px">收藏</span>
+      <span  class="shoucang"></span>
+      <span style="font-size:12px">购物车</span>
     </p>
     <p class="goods-action-right" @click="addShoppingCart">
       <span>加入购物车</span>
@@ -46,9 +45,7 @@ export default {
   methods: {
     // 收藏
     collectGoods() {
-      this.$parent.collectState = !this.collectState;
-      let type = this.collectState === false ? 0 : 1;
-      this.collectionGoodsMethod(type);
+      this.$router.push('/Cartment')
     },
     collectionGoodsMethod(type) {
       CollectionGoods({ goodsid: this.$route.query.id, type: 1 })
@@ -76,12 +73,7 @@ export default {
     // 确认清单
     confirmOrder() {
       if (this.$route.query.price) {
-        this.$router.push(
-          "/confirmorder?id=" +
-            this.$route.query.id +
-            "&priceback=" +
-            this.$route.query.price
-        );
+        this.$router.push("/confirmorder?id=" + this.$route.query.id + "&priceback=" + this.$route.query.price);
       } else {
         this.$router.push("/confirmorder?id=" + this.$route.query.id);
       }
@@ -135,7 +127,6 @@ export default {
 }
 .goods-action {
   flex: 1;
-  height: 60%;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -149,6 +140,10 @@ export default {
 .goods-action-right {
   flex: 2;
   text-align: center;
+  height: 100%;
+  background-color: #000;
+  color: #fff;
+  line-height: 50px;
 }
 .goods-action-right-buy {
   height: 100%;
@@ -158,5 +153,19 @@ export default {
   background: #222;
   color: #fff;
   background: #3976ff;
+}
+.shoucang{
+  width: 22px;
+  height: 22px;
+  display: inline-block;
+  background-image: url("../../../../../assets/images/car.png");
+  background-size: 100% 100%;
+}
+.kefu{
+  width: 22px;
+  height: 22px;
+  display: inline-block;
+  background-image: url("../../../../../assets/images/kefu.png");
+  background-size: 100% 100%;
 }
 </style>

@@ -178,8 +178,6 @@ export default {
     }
   },
 
-  beforeMount() {},
-  beforeCreate() {},
   beforeMount() {
     this.initData();
   },
@@ -235,9 +233,7 @@ export default {
         });
     }
   },
-  beforeDestroy() {},
 
-  watch: {}
 };
 </script>
 <style lang='css' scoped>
