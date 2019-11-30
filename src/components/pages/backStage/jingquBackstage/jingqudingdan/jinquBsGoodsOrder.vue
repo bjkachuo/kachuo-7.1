@@ -216,8 +216,11 @@
                     showLeftBack: true,
                     showRightMore: false
                 },
+                //点击退款按钮显示弹窗
                 isconfirm: false,
                 cur: 0,//默认选中第一个tab
+                //点击同意退款时会改变的id
+                changeId:"",
                 //待发货订单列表
                 goodsListOne: [],
                 //已发货订单列表
@@ -269,10 +272,20 @@
 
         },
         methods: {
+            //提示框
+            showTip(conttentTip) {
+                this.$vux.toast.text(conttentTip, "middle");
+                setTimeout(() => {
+                    this.$vux.toast.hide();
+                }, 1000);
+            },
+
             //删除弹窗，方法
             onDel(item) {
                 this.isconfirm = !this.isconfirm;
-                console.log('点击同意退款时打印:',item)
+                console.log('点击同意退款时打印1:',item)
+                this.changeId = item.id;
+                console.log('点击同意退款时打印2:',this.changeId);
             },
             //点击取消事件
             onCancel() {
@@ -281,6 +294,12 @@
             //点击确认事件
             onConfirm() {
                 console.log("我点了确认");
+                //点击确认时同意退款功能
+                this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=scenic.shop.orderBackMoney&order_id="+this.changeId).then(({data})=>{
+                    console.log('同意退款打印：',data);
+                    this.showTip("退款成功");
+                    this.Refresh();
+                })
             },
             //跳转待发货订单详情页面
             goWaitDetail(id) {
@@ -327,6 +346,17 @@
                     this.goodsListTwo = data.data;
                     console.log("我刷新了已发货订单列表:", this.goodsListTwo);
                 });
+                //商品退款中列表
+                this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=scenic.shop.orderList&status=" + 4).then(({data}) => {
+                    this.goodsListThree = data.data;
+                    console.log("我刷新了退款中订单列表:", this.goodsListThree);
+                });
+                //商品已退款列表
+                this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=scenic.shop.orderList&status=" + 5).then(({data}) => {
+                    this.goodsListThour = data.data;
+                    console.log("我刷新了已退款订单列表:", this.goodsListThour);
+                });
+
 
             }
         },
