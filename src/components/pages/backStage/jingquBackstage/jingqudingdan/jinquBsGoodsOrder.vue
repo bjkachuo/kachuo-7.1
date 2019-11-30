@@ -104,7 +104,7 @@
         <flexbox orient="vertical">
           <flexbox-item>
             <div class="order-content" v-for="(item,index) in goodsListThree" :key="index">
-              <div class="content-top" @click="goReturn">
+              <div class="content-top" @click="goReturn(item.id)">
                 <div class="img-wrap">
                   <img :src="item.image" alt/>
                   <div class="num">
@@ -125,7 +125,7 @@
                 </div>
               </div>
               <div class="content-bottom">
-                <div class="bottom-one">
+                <div class="bottom-one" @click="onDel(item)">
                   <p>同意退款</p>
                 </div>
               </div>
@@ -137,7 +137,7 @@
         <flexbox orient="vertical">
           <flexbox-item>
             <div class="order-content" v-for="(item,index) in goodsListThour" :key="index">
-              <div class="content-top" @click="goReturned">
+              <div class="content-top" @click="goReturned(item.id)">
                 <div class="img-wrap">
                   <img :src="item.image" alt/>
                   <div class="num">
@@ -190,12 +190,21 @@
         </flexbox>
       </b>
     </div>
+    <confirm
+      class="confirm-dialog"
+      v-model="isconfirm"
+      title="确定同意退款？"
+      theme="ios"
+      @on-cancel="onCancel()"
+      @on-confirm="onConfirm()"
+    ></confirm>
+
   </div>
 </template>
 
 <script>
     import Header from "@/components/common/Header";
-    import {Tab, TabItem, Flexbox, FlexboxItem} from "vux";
+    import {Tab, TabItem, Flexbox, FlexboxItem,Confirm} from "vux";
     import {timeTodate} from "@/assets/js/tools";
 
     export default {
@@ -207,6 +216,7 @@
                     showLeftBack: true,
                     showRightMore: false
                 },
+                isconfirm: false,
                 cur: 0,//默认选中第一个tab
                 //待发货订单列表
                 goodsListOne: [],
@@ -259,6 +269,19 @@
 
         },
         methods: {
+            //删除弹窗，方法
+            onDel(item) {
+                this.isconfirm = !this.isconfirm;
+                console.log('点击同意退款时打印:',item)
+            },
+            //点击取消事件
+            onCancel() {
+                console.log("我点了取消");
+            },
+            //点击确认事件
+            onConfirm() {
+                console.log("我点了确认");
+            },
             //跳转待发货订单详情页面
             goWaitDetail(id) {
                 this.$router.push("/orderWaitPro?id=" + id);
@@ -270,13 +293,13 @@
                 console.log("去已发货");
             },
             //跳转退款中详情页面
-            goReturn() {
-                this.$router.push("/orderReturnPro");
+            goReturn(id) {
+                this.$router.push("/orderReturnPro?id="+id);
                 console.log("去退款中");
             },
             //跳转已退款详情页面
-            goReturned() {
-                this.$router.push("/orderReturnedPro");
+            goReturned(id) {
+                this.$router.push("/orderReturnedPro?id="+id);
                 console.log("去已退款");
             },
             //跳转已完成详情页面
@@ -312,7 +335,8 @@
             Tab,
             TabItem,
             Flexbox,
-            FlexboxItem
+            FlexboxItem,
+            Confirm
         },
         watch: {
             '$route': function (to) {
@@ -488,6 +512,49 @@
     line-height: 35px;
     text-align: center;
   }
+  /* confirm弹窗样式 */
+  .confirm-dialog /deep/ .weui-skin_android .weui-dialog__ft {
+    text-align: center;
+    padding: 0 15px 15px 15px;
+  }
+
+  .confirm-dialog /deep/ .weui-dialog__btn {
+    width: 110px;
+    height: 35px;
+    line-height: 35px;
+    border: 1px solid #3976ff;
+    border-radius: #3976ff;
+    text-align: center;
+    color: #3976ff;
+    font-size: 15px;
+    border-radius: 35px;
+    margin: 0 5px;
+  }
+
+  .confirm-dialog /deep/ .weui-dialog__btn:active {
+    background-color: transparent;
+  }
+
+  .confirm-dialog /deep/ .weui-dialog__btn_primary,
+  .confirm-dialog /deep/ .weui-dialog__btn_primary:active {
+    background-color: #3976ff;
+    color: #ffffff;
+  }
+
+  .confirm-dialog /deep/ .weui-skin_android .weui-dialog__title {
+    font-size: 18px;
+  }
+
+  .confirm-dialog /deep/ .weui-dialog__hd {
+    text-align: center;
+    padding: 30px 15px;
+  }
+
+  .confirm-dialog /deep/ .weui-skin_android .weui-dialog__bd {
+    padding: 5px 15px 0 15px;
+    min-height: 10px;
+  }
+
 </style>
 <style lang="less" scoped>
   /deep/ .vux-tab-wrap {
