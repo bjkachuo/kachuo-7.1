@@ -7,11 +7,11 @@
       :showRightMore="TitleObjData.showRightMore"
     ></Header>
     <div class="top">
-      <div class="top-left"><img src="" alt=""></div>
+      <div class="top-left"><img :src="this.List.image" alt=""></div>
       <div class="top-right">
-        <div><p style="font-size: 16px;color: #222222;font-weight: bold;">运输中</p></div>
-        <div style="margin-bottom: 20px;"><p style="font-size: 14px;color: #222222;">顺丰快递 3721809912181</p></div>
-        <div><p style="font-size: 14px;color: #666666;font-weight: 300;">快递员 某某某</p></div>
+        <div><p style="font-size: 16px;color: #222222;font-weight: bold;">订单状态:{{this.List.data[0].status}}</p></div>
+        <div style="margin-bottom: 20px;"><p style="font-size: 14px;color: #222222;">{{this.List.expresscom}} {{this.List.nu}}</p></div>
+<!--        <div><p style="font-size: 14px;color: #666666;font-weight: 300;">快递员 某某某</p></div>-->
       </div>
     </div>
     <div class="timeline-demo">
@@ -20,22 +20,22 @@
 <!--          <h4 class="recent">【广东】 广州市 已发出</h4>-->
 <!--          <p class="recent"> 2016-04-17 12:00:00</p>-->
 <!--        </timeline-item>-->
-        <timeline-item>
-          <h4> 申通快递员 广东广州 收件员 xxx 已揽件</h4>
-          <p>2016-04-16 10:23:00</p>
+        <timeline-item v-for="(item,index) in this.List.data" :key="index">
+          <h4> {{item.context}}</h4>
+          <p>{{item.time}}</p>
         </timeline-item>
-        <timeline-item>
-          <h4> 商家正在通知快递公司揽件</h4>
-          <p>2016-04-15 9:00:00</p>
-        </timeline-item>
-        <timeline-item>
-          <h4> 商家正在通知快递公司揽件</h4>
-          <p>2016-04-15 9:00:00</p>
-        </timeline-item>
-        <timeline-item>
-          <h4> 商家正在通知快递公司揽件</h4>
-          <p>2016-04-15 9:00:00</p>
-        </timeline-item>
+<!--        <timeline-item>-->
+<!--          <h4> 商家正在通知快递公司揽件</h4>-->
+<!--          <p>2016-04-15 9:00:00</p>-->
+<!--        </timeline-item>-->
+<!--        <timeline-item>-->
+<!--          <h4> 商家正在通知快递公司揽件</h4>-->
+<!--          <p>2016-04-15 9:00:00</p>-->
+<!--        </timeline-item>-->
+<!--        <timeline-item>-->
+<!--          <h4> 商家正在通知快递公司揽件</h4>-->
+<!--          <p>2016-04-15 9:00:00</p>-->
+<!--        </timeline-item>-->
       </timeline>
     </div>
   </div>
@@ -53,13 +53,16 @@
                     showLeftBack: true,
                     showRightMore: false
                 },
-
+                //物流详情
+                List:[]
             }
         },
         mounted(){
             console.log(this.$route.query.id);
             this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=logistics.index.get_order_logistics&order_id=" + this.$route.query.id).then(({data}) => {
                 console.log('物流信息:',data);
+                this.List = data.data;
+                console.log(this.List);
             });
         },
         components: {

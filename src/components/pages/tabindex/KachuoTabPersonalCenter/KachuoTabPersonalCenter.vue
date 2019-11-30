@@ -211,8 +211,8 @@
                         imgSrc: require("@/assets/images/daoyouht.png")
                     },
                     {
-                        name: "商家后台(改)",
-                        link: "/",
+                        name: "商家后台(新)",
+                        link: "/StoreBsIndex",
                         imgSrc: require("@/assets/images/daoyouht.png")
                     }
                 ],

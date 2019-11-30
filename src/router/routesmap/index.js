@@ -758,7 +758,9 @@ export default [
     name: 'jingquMessageAudit',
     component: resolve => require(['@/components/pages/backStage/jingquBackstage/jingquliuyan/jingquMessageAudit'], resolve),
   },
-  /**********************************************商家后台*********************************************************************/
+  /**********************************************商家后台*********************************************************************
+   //商家管理后台首页（新）
+
   //商家后台种类（要根据状态判断 如入驻时为1 则为吃吧或喝吧 2 为住吧）(此页面为没有状态时临时分类页便于调试)
   // {
   //   path: '/SjLinShiNavigation',
@@ -864,6 +866,15 @@ export default [
   //   component: resolve => require(['@/components/pages/backStage/businessBackstage/SjBsOrder'], resolve),
   //
   // },
+  //***********************************商家管理后台(新)***********************************************
+  //商家管理后台首页（新）
+  {
+    path: '/StoreBsIndex',
+    name: 'StoreBsIndex',
+    component: resolve => require(['@/components/pages/backStage/StoreBackstage/StoreBsIndex'], resolve),
+
+  },
+
   /*******************************************名家后台***************************************************/
   //名家后台首页
   {
