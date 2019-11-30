@@ -209,6 +209,11 @@
                         name: "名家后台",
                         link: "/famousPersonBsIndex",
                         imgSrc: require("@/assets/images/daoyouht.png")
+                    },
+                    {
+                        name: "商家后台(改)",
+                        link: "/",
+                        imgSrc: require("@/assets/images/daoyouht.png")
                     }
                 ],
                 tourState: 0

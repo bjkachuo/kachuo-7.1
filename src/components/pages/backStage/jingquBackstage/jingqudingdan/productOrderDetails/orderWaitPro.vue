@@ -147,9 +147,9 @@
                 //留言
                 this.message = this.List.remark;
                 //订单金额
-                this.price = this.List.price;
+                this.price = this.List.goodsprice;
                 //实付金额
-                this.realPrice = this.List.real_price;
+                this.realPrice = this.List.price;
                 //订单号
                 this.orderNum = this.List.ordersn;
                 //支付时间

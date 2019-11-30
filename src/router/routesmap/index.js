@@ -13,6 +13,13 @@ export default [
     name: 'registrationAgreement',
     component: resolve => require(['@/components/index/registrationAgreement'], resolve)
   },
+  //关于我们
+  {
+    path: '/aboutUsTwo',
+    name: 'aboutUsTwo',
+    component: resolve => require(['@/components/common/aboutUsTwo'], resolve)
+
+  },
   {
     path: '/login2',
     name: 'login2',
@@ -738,6 +745,12 @@ export default [
     path: '/jingquBsGuideOrder',
     name: 'jingquBsGuideOrder',
     component: resolve => require(['@/components/pages/backStage/jingquBackstage/jingqudingdan/jingquBsGuideOrder'], resolve),
+  },
+  //景区后台导游订单详情
+  {
+    path: '/jingquBsGuideOrderDetails',
+    name: 'jingquBsGuideOrderDetails',
+    component: resolve => require(['@/components/pages/backStage/jingquBackstage/jingqudingdan/guideOrderDetails/jingquBsGuideOrderDetails'], resolve),
   },
   //景区后台游客留言
   {

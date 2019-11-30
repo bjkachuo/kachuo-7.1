@@ -71,7 +71,7 @@
         <flexbox orient="vertical">
           <flexbox-item>
             <div class="order-content" v-for="(item,index) in this.goodsListTwo" :key="index">
-              <div class="content-top" @click="goAready">
+              <div class="content-top" @click="goAready(item.id)">
                 <div class="img-wrap">
                   <img :src="item.image" alt/>
                   <div class="num">
@@ -165,7 +165,7 @@
         <flexbox orient="vertical">
           <flexbox-item>
             <div class="order-content" v-for="(item,index) in goodsListFive" :key="index">
-              <div class="content-top" @click="goFinish">
+              <div class="content-top" @click="goFinish(item.id)">
                 <div class="img-wrap">
                   <img :src="item.image" alt/>
                   <div class="num">
@@ -256,6 +256,7 @@
             formateDate(val) {
                 return timeTodate(val);
             }
+
         },
         methods: {
             //跳转待发货订单详情页面
@@ -264,8 +265,8 @@
                 console.log("去待发货");
             },
             //跳转已发货详情页面
-            goAready() {
-                this.$router.push("/orderAlreadyPro");
+            goAready(id) {
+                this.$router.push("/orderAlreadyPro?id="+id);
                 console.log("去已发货");
             },
             //跳转退款中详情页面
@@ -279,8 +280,8 @@
                 console.log("去已退款");
             },
             //跳转已完成详情页面
-            goFinish() {
-                this.$router.push("/orderFinishPro");
+            goFinish(id) {
+                this.$router.push("/orderFinishPro?id="+id);
                 console.log("去已完成");
             },
             //跳转发货页面

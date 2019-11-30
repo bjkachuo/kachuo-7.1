@@ -6,12 +6,12 @@
         <x-icon type="ios-arrow-left" size="30" class="back"></x-icon>
       </div>
       <div class="h-mid">
-        <p>订单详情</p>
+        <p>导游订单详情</p>
       </div>
     </div>
     <div class="line-one">
       <div class="status">
-        <p>已完成</p>
+        <p>{{this.$route.query.status}}</p>
       </div>
       <div class="form-wrap">
         <div class="f-one">
@@ -20,68 +20,19 @@
           <x-input title="留言：" disabled v-model="message" class="bottom"></x-input>
         </div>
         <div class="f-one">
-          <div class="proInformation">
-            <div class="tit-wrap">
-              <p>商品信息</p>
-            </div>
-            <div style="width:92%;margin:0 auto 15px;height:1px;background:#E5E5E5;"></div>
-            <div class="pro-infor" v-for="(item,index) in List.goodsMsg" :key="index">
-              <div class="img-wrap">
-                <img :src="item.thumb" alt/>
-              </div>
-              <div class="pro-mid">
-                <div>
-                  <p>{{item.title}}</p>
-                </div>
-                <div style="margin-top:25px;">
-                  <p>￥{{item.price}}</p>
-                </div>
-              </div>
-              <div class="pro-right">
-                <p>x{{item.total}}</p>
-              </div>
-            </div>
-<!--            <div class="pro-infor">-->
-<!--              <div class="img-wrap">-->
-<!--                <img src alt/>-->
-<!--              </div>-->
-<!--              <div class="pro-mid">-->
-<!--                <div>-->
-<!--                  <p>李几已书法作品蓬莱仙阁赋李 几已书法作品蓬莱</p>-->
-<!--                </div>-->
-<!--                <div style="margin-top:25px;">-->
-<!--                  <p>￥600</p>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--              <div class="pro-right" style="margin-top:38px;">-->
-<!--                <p>x1</p>-->
-<!--              </div>-->
-<!--            </div>-->
-            <cell title="订单金额" class="mid">
-              <div>
-                <span>¥{{this.price}}</span>
-              </div>
-            </cell>
-            <cell title="实付金额" class="mid">
-              <div>
-                <span>¥{{this.price}}</span>
-              </div>
-            </cell>
-          </div>
-          <!-- <x-input title="预约时长:" disabled v-model="time" class="top"></x-input>
-          <x-input title="游客人数:" disabled v-model="personNum" class="bottom"></x-input>-->
+          <x-input title="预约时长:" disabled v-model="time" class="top"></x-input>
+          <x-input title="游客人数:" disabled v-model="personNum" class="bottom"></x-input>
         </div>
-        <!-- <div class="f-one">
+        <div class="f-one">
           <cell title="本单金额:" class="mid">
             <div>
               <span>¥{{this.price}}</span>
             </div>
           </cell>
-        </div> -->
+        </div>
         <div class="f-one">
           <x-input title="订单编号:" disabled v-model="orderNum" class="top"></x-input>
           <x-input title="支付时间:" disabled v-model="payTime"></x-input>
-          <x-input title="完成时间:" disabled v-model="finishtime"></x-input>
           <!-- <x-input title="取消时间:" disabled v-model="cancelTime" class="bottom"></x-input> -->
         </div>
         <div class="scever">
@@ -103,7 +54,7 @@
 </template>
 
 <script>
-    import {Cell, XInput} from "vux";
+    import { Cell, XInput } from "vux";
     import customerService from "@/components/common/customerService/customerService";
 
     export default {
@@ -122,14 +73,10 @@
                 personNum: "无",
                 //价格
                 price: "无",
-                //实付金额
-                realPrice: "无",
                 //订单编号
                 orderNum: "无",
                 //支付时间
                 payTime: "无",
-                //完成时间
-                finishtime: [],
                 //取消时间
                 cancelTime: "无",
                 //详情列表
@@ -137,33 +84,26 @@
             };
         },
         computed: {},
-        created() {
-        },
+        created() {},
         mounted() {
-            console.log('路由传递的id:', this.$route.query.id);
-            //获取订单详情
-            this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=scenic.shop.orderMsg&orderid=" + this.$route.query.id).then(({data}) => {
-                this.List = data.data;
-                console.log("获取订单详情:", this.List)
-                //联系人
-                this.person = this.List.address.realname;
-                //手机号
-                this.phone = this.List.address.mobile;
-                //留言
-                this.message = this.List.remark;
-                //订单金额
-                this.price = this.List.goodsprice;
-                //实付金额
-                this.realPrice = this.List.price;
-                //订单号
-                this.orderNum = this.List.ordersn;
-                //支付时间
-                this.payTime = this.List.createtime;
-                //发货时间
-                this.finishtime = this.List.finishtime;
-
-            })
-
+            console.log(this.$route.query);
+            this.$http
+                .post(
+                    "http://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.guide.guideOrderMsg&order_id=" +
+                    this.$route.query.id
+                )
+                .then(({ data }) => {
+                    console.log(data);
+                    this.List = data.data;
+                    this.person = this.List.name;
+                    this.phone = this.List.mobile;
+                    this.message = this.List.note;
+                    this.time = this.List.appoint_time;
+                    this.personNum = this.List.people;
+                    this.price = this.List.amount;
+                    this.orderNum = this.List.order_sn;
+                    this.payTime = this.List.paytime;
+                });
         },
         watch: {},
         methods: {
@@ -190,7 +130,6 @@
     background: #f5f5f5;
     overflow: hidden scroll;
   }
-
   .head {
     width: 100%;
     height: 46px;
@@ -200,26 +139,21 @@
     left: 0;
     background: rgba(122, 191, 238, 0);
   }
-
   .back {
     fill: #fefefe;
   }
-
   .h-left {
     float: left;
     margin: 7px 0px 0 2%;
   }
-
   .h-mid {
     float: left;
     margin: 10px 0 0 33%;
   }
-
   .h-mid p {
     font-size: 18px;
     color: #fefefe;
   }
-
   .line-one {
     width: 100%;
     height: 216px;
@@ -229,90 +163,47 @@
       rgba(57, 118, 255, 1) 100%
     );
   }
-
   .status {
     padding-top: 66px;
     margin-left: 5%;
     margin-bottom: 30px;
   }
-
   .status p {
     font-size: 30px;
     color: #ffffff;
   }
-
   .form-wrap {
     /* height: 500px; */
     width: 92%;
     margin: 0 auto;
     /* background: blueviolet; */
   }
-
   .f-one {
     width: 100%;
     /* height: 165px; */
     min-height: 45px;
     margin-bottom: 10px;
-    overflow: hidden;
   }
-
   .weui-cell {
     background: #fff;
   }
-
   .top {
     border-radius: 8px 8px 0 0;
   }
-
   .mid {
     border-radius: 8px;
   }
-
   .bottom {
     border-radius: 0 0 8px 8px;
   }
-
   .scever p {
     font-size: 12px;
     color: #999999;
     text-align: center;
     margin-top: 30px;
   }
-
   .scever span {
     color: #3976ff;
     text-decoration: underline;
-  }
-
-  .proInformation {
-    background: #fff;
-    border-radius: 8px;
-    overflow: hidden;
-  }
-
-  .tit-wrap {
-    margin: 15px 0 14.5px 4.64%;
-  }
-
-  .pro-infor {
-    width: 92%;
-    height: 90px;
-    margin-bottom: 25px;
-    display: flex;
-    justify-content: space-around;
-  }
-
-  .img-wrap {
-    width: 90px;
-    height: 90px;
-  }
-
-  .img-wrap img {
-    width: 100%;
-  }
-
-  .pro-mid {
-    width: 185.5px;
-    height: 90px;
   }
 </style>

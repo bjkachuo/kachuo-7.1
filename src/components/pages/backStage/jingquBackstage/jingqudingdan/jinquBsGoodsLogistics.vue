@@ -58,7 +58,7 @@
         },
         mounted(){
             console.log(this.$route.query.id);
-            this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=logistics.index.shop_order_logistics&order_id&order_id=" + this.$route.query.id).then(({data}) => {
+            this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=logistics.index.shop_order_logistics&order_id=" + this.$route.query.id).then(({data}) => {
                 console.log('物流信息:',data);
             });
         },

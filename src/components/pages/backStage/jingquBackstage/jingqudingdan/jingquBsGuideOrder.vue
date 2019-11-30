@@ -62,24 +62,20 @@
           <flexbox-item>
             <div
               class="order-content"
-              v-for="(item,index) in this.listOne"
+              v-for="(item,index) in this.ListOne"
               :key="index"
-              v-if="item.status == 1"
             >
-              <div class="content-top" @click="goOrderTwo(index)">
+              <div class="content-top" @click="goOrderTwo(item.id)">
                 <div class="img-wrap">
-                  <img :src="item.avatar" alt/>
-                  <!-- <div class="num">
-                    <p>联系游客</p>
-                  </div>-->
+                  <img :src="item.tour_path" alt/>
                 </div>
                 <div class="mid-text">
                   <div class="text-one">
-                    <p class="name">预约人:{{item.realname}}</p>
+                    <p class="name">预约人:{{item.name}}</p>
                     <p class="state" style="color:#FF8585;">服务中</p>
                   </div>
                   <div class="text-two">
-                    <p>支付时间：{{item.add_time}}</p>
+                    <p>支付时间：{{item.paytime}}</p>
                   </div>
                   <div class="text-three">
                     <p>本单金额:￥{{item.amount}}</p>
@@ -87,9 +83,6 @@
                 </div>
               </div>
               <div class="content-bottom">
-                <!-- <div class="bottom-two">
-                  <p>订单完成</p>
-                </div>-->
                 <div class="bottom-one">
                   <p>
                     <a :href="'tel:' + item.mobile">联系用户</a>
@@ -105,24 +98,23 @@
           <flexbox-item>
             <div
               class="order-content"
-              v-for="(item,index) in this.listOne"
+              v-for="(item,index) in this.ListTwo"
               :key="index"
-              v-if="item.status == 2"
             >
-              <div class="content-top" @click="goOrderThr(index)">
+              <div class="content-top" @click="goOrderThr(item.id)">
                 <div class="img-wrap">
-                  <img :src="item.avatar" alt/>
+                  <img :src="item.tour_path" alt/>
                   <!-- <div class="num">
                     <p>联系游客</p>
                   </div>-->
                 </div>
                 <div class="mid-text">
                   <div class="text-one">
-                    <p class="name">预约人:{{item.realname}}</p>
+                    <p class="name">预约人:{{item.name}}</p>
                     <p class="state" style="color:#999999;">已取消</p>
                   </div>
                   <div class="text-two">
-                    <p>支付时间：{{item.add_time}}</p>
+                    <p>支付时间：{{item.paytime}}</p>
                   </div>
                   <div class="text-three">
                     <p>本单金额:￥{{item.amount}}</p>
@@ -138,24 +130,23 @@
           <flexbox-item>
             <div
               class="order-content"
-              v-for="(item,index) in this.listOne"
+              v-for="(item,index) in this.ListThree"
               :key="index"
-              v-if="item.status == 6"
             >
-              <div class="content-top" @click="goOrderFour(index)">
+              <div class="content-top" @click="goOrderFour(item.id)">
                 <div class="img-wrap">
-                  <img :src="item.avatar" alt/>
+                  <img :src="item.tour_path" alt/>
                   <!-- <div class="num">
                     <p>联系游客</p>
                   </div>-->
                 </div>
                 <div class="mid-text">
                   <div class="text-one">
-                    <p class="name">预约人:{{item.realname}}</p>
+                    <p class="name">预约人:{{item.name}}</p>
                     <p class="state" style="color:#999999;">已完成</p>
                   </div>
                   <div class="text-two">
-                    <p>支付时间：{{item.add_time}}</p>
+                    <p>支付时间：{{item.paytime}}</p>
                   </div>
                   <div class="text-three">
                     <p>本单金额:￥{{item.amount}}</p>
@@ -186,7 +177,12 @@
                 cur: 1, //默认选中第一个tab,
                 //代接单
                 listOne: [],
-
+                //服务中
+                ListOne:[],
+                //已取消
+                ListTwo:[],
+                //已完成
+                ListThree:[],
             };
         },
         computed: {},
@@ -204,14 +200,34 @@
                     this.listOne = data.data.list;
                     console.log(this.listOne);
                 });
-            //获取导游列表
+            //获取导游服务中列表
             this.$http
                 .post(
-                    "http://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.guide"
+                    "http://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.guide.guideOrderList&status="+7
                 )
                 .then(({data}) => {
-                    console.log('导游', data);
+                    console.log('服务中：', data);
+                    this.ListOne = data.data;
 
+                });
+            //获取导游已取消列表
+            this.$http
+                .post(
+                    "http://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.guide.guideOrderList&status="+2
+                )
+                .then(({data}) => {
+                    console.log('已取消：', data);
+                    this.ListTwo = data.data;
+
+                });
+            //获取导游已完成列表
+            this.$http
+                .post(
+                    "http://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.guide.guideOrderList&status="+6
+                )
+                .then(({data}) => {
+                    console.log('已完成：', data)
+                    this.ListThree = data.data;
                 });
 
         },
@@ -228,32 +244,32 @@
             //   });
             // },
             //进行中
-            goOrderTwo(index) {
+            goOrderTwo(id) {
                 this.$router.push({
-                    path: "/orderDetails",
+                    path: "/jingquBsGuideOrderDetails",
                     query: {
                         status: "进行中",
-                        listOne: this.listOne[index]
+                        id: id
                     }
                 });
             },
             //已取消
-            goOrderThr(index) {
+            goOrderThr(id) {
                 this.$router.push({
-                    path: "/orderDetails",
+                    path: "/jingquBsGuideOrderDetails",
                     query: {
                         status: "已取消",
-                        listOne: this.listOne[index]
+                        id: id
                     }
                 });
             },
             //已完成
-            goOrderFour(index) {
+            goOrderFour(id) {
                 this.$router.push({
-                    path: "/orderDetails",
+                    path: "/jingquBsGuideOrderDetails",
                     query: {
                         status: "已完成",
-                        listOne: this.listOne[index]
+                        id: id
                     }
                 });
             }
