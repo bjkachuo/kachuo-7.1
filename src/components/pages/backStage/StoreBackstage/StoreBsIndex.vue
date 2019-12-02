@@ -51,7 +51,7 @@
                 <p>店铺信息</p>
               </div>
             </flexbox-item>
-            <flexbox-item>
+            <flexbox-item @click.native="goCashCoupon">
               <div class="flex-demoTwo">
                 <div class="img-wrap-two">
                   <img src="./bs.png" alt="">
@@ -155,6 +155,10 @@
             //跳转用户评论
             goUserReviews(){
                 this.$router.push("/UserReviews")
+            },
+            //跳转代金券
+            goCashCoupon(){
+                this.$router.push("/cashCoupon")
             }
         },
         components: {

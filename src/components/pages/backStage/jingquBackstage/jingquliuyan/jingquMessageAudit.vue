@@ -61,14 +61,6 @@
                 {{item.content}}
               </p>
             </div>
-            <!--            <div class="bottom-wrap">-->
-            <!--              <div class="no">-->
-            <!--                <p>不合格</p>-->
-            <!--              </div>-->
-            <!--              <div class="yes">-->
-            <!--                <p>合格</p>-->
-            <!--              </div>-->
-            <!--            </div>-->
           </div>
         </div>
 
@@ -89,14 +81,6 @@
                 {{item.content}}
               </p>
             </div>
-            <!--            <div class="bottom-wrap">-->
-            <!--              <div class="no">-->
-            <!--                <p>不合格</p>-->
-            <!--              </div>-->
-            <!--              <div class="yes">-->
-            <!--                <p>合格</p>-->
-            <!--              </div>-->
-            <!--            </div>-->
           </div>
         </div>
 

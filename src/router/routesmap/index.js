@@ -902,6 +902,18 @@ export default [
     name: 'UserReviews',
     component: resolve => require(['@/components/pages/backStage/StoreBackstage/UserReviews/UserReviews'], resolve),
   },
+  //商家管理后台代金券（新）
+  {
+    path: '/cashCoupon',
+    name: 'cashCoupon',
+    component: resolve => require(['@/components/pages/backStage/StoreBackstage/cashCoupon/cashCoupon'], resolve),
+  },
+  //商家管理后台添加代金券（新）
+  {
+    path: '/addCash',
+    name: 'addCash',
+    component: resolve => require(['@/components/pages/backStage/StoreBackstage/cashCoupon/addCash'], resolve),
+  },
 
   /*******************************************名家后台***************************************************/
   //名家后台首页
