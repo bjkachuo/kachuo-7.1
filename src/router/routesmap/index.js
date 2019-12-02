@@ -896,6 +896,12 @@ export default [
     name: 'goodsRecommend',
     component: resolve => require(['@/components/pages/backStage/StoreBackstage/GoodsRecommend/goodsRecommend'], resolve),
   },
+  //商家管理后台用户评论页（新）
+  {
+    path: '/UserReviews',
+    name: 'UserReviews',
+    component: resolve => require(['@/components/pages/backStage/StoreBackstage/UserReviews/UserReviews'], resolve),
+  },
 
   /*******************************************名家后台***************************************************/
   //名家后台首页

@@ -67,7 +67,7 @@
                 <p>推荐商品</p>
               </div>
             </flexbox-item>
-            <flexbox-item>
+            <flexbox-item @click.native="goUserReviews">
               <div class="flex-demoTwo">
                 <div class="img-wrap-two">
                   <img src="./bs.png" alt="">
@@ -151,6 +151,10 @@
             //跳转商家推荐
             goRecommend(){
                 this.$router.push("/goodsRecommend")
+            },
+            //跳转用户评论
+            goUserReviews(){
+                this.$router.push("/UserReviews")
             }
         },
         components: {
