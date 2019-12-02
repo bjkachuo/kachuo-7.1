@@ -759,7 +759,6 @@ export default [
     component: resolve => require(['@/components/pages/backStage/jingquBackstage/jingquliuyan/jingquMessageAudit'], resolve),
   },
   /**********************************************商家后台*********************************************************************
-   //商家管理后台首页（新）
 
   //商家后台种类（要根据状态判断 如入驻时为1 则为吃吧或喝吧 2 为住吧）(此页面为没有状态时临时分类页便于调试)
   // {
@@ -872,7 +871,30 @@ export default [
     path: '/StoreBsIndex',
     name: 'StoreBsIndex',
     component: resolve => require(['@/components/pages/backStage/StoreBackstage/StoreBsIndex'], resolve),
-
+  },
+  //商家管理后台输入码后查询结果（新）
+  {
+    path: '/queryResults',
+    name: 'queryResults',
+    component: resolve => require(['@/components/pages/backStage/StoreBackstage/StoreBsQueryResults/queryResults'], resolve),
+  },
+  //商家管理后台代金券历史记录（新）
+  {
+    path: '/historicalRecord',
+    name: 'historicalRecord',
+    component: resolve => require(['@/components/pages/backStage/StoreBackstage/StoreBsHistorical/historicalRecord'], resolve),
+  },
+  //商家管理后台代店铺信息页（新）
+  {
+    path: '/storeInfomation',
+    name: 'storeInfomation',
+    component: resolve => require(['@/components/pages/backStage/StoreBackstage/StoreBsInfo/storeInfomation'], resolve),
+  },
+  //商家管理后台商家推荐页（新）
+  {
+    path: '/goodsRecommend',
+    name: 'goodsRecommend',
+    component: resolve => require(['@/components/pages/backStage/StoreBackstage/GoodsRecommend/goodsRecommend'], resolve),
   },
 
   /*******************************************名家后台***************************************************/

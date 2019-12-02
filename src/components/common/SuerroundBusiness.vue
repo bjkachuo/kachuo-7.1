@@ -546,7 +546,7 @@ img {
   line-height: 4px;
 } */
 </style>
-<style lang="less">
+<style lang="less" scoped>
 .weui-cell {
   .weui-cell__ft {
     color: #666666;

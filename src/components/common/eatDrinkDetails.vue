@@ -1010,7 +1010,7 @@ video {
 }
 </style>
 <style lang="less" scoped>
-/deep/ .vux-x-dialog-absolute .weui-dialogP {
+/deep/ .vux-x-dialog-absolute .weui-dialog P {
   position: fixed;
 }
 /deep/ .vux-x-dialog-absolute .weui-dialog {

@@ -1,9 +1,9 @@
 <template>
   <div>
-    <x-header class="customStyle" style="width: 100%;position: absolute;left: 0;top: 0;z-index: 100;font-size: 20px;background:#3976FF">
+    <x-header class="customStyle" style="width: 100%;position: fixed;left: 0;top: 0;z-index: 100;font-size: 20px;">
       {{titleContent}}
       <a slot="right">{{rightText}}</a>
-      <x-icon slot="overwrite-left" type="ios-arrow-left" size="35" style="fill:#fff;position:relative;top:-2px;left:-10px;" size="24" @click="back"></x-icon>
+      <x-icon slot="overwrite-left" type="ios-arrow-left" size="35" style="fill:#222222;position:relative;top:-2px;left:-10px;" size="24" @click="back"></x-icon>
     </x-header>
   </div>
 </template>
@@ -33,11 +33,11 @@
 
 <style scoped lang="less">
   .customStyle /deep/ .vux-header-title{
-    color: #fff;
+    color: #222222;
     font-weight: 500!important;
   }
   .customStyle /deep/ .vux-header-right a{
     font-size: 16px;
-    color: #fff;
+    color: #222222;
   }
 </style>
