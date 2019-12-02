@@ -112,7 +112,7 @@ export default {
   margin: 5px 0 0 4%;
 }
 </style>
-// <style lang="less" scoped>
+<style lang="less" scoped>
 .up-avata {
   padding-bottom: 16px;
   background-color: #fff;
