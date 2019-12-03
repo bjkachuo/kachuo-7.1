@@ -199,14 +199,8 @@
                         link: "/jingquBsIndex",
                         imgSrc: require("@/assets/images/图片@2x.png")
                     },
-                    // {
-                    //     name: "商家后台",
-                    //     // link: "/businessBsIndex",
-                    //     link: "/SjLinShiNavigation",
-                    //     imgSrc: require("@/assets/images/daoyouht.png")
-                    // },
                     {
-                        name: "商家后台(新)",
+                        name: "商家后台",
                         link: "/StoreBsIndex",
                         imgSrc: require("@/assets/images/daoyouht.png")
                     },
