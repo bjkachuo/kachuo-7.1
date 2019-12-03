@@ -9,37 +9,39 @@
     ></Header>
     <p class="Preservation" @click="submit">提交</p>
     <div class="input-wrap" style="margin-top: 56px;background: #fff;">
-      <x-input title="店铺名称" placeholder="请填写店铺名称"  :show-clear="false" v-model="name"></x-input>
+      <x-input title="店铺地址"></x-input>
+      <x-textarea placeholder="请填写店铺详细地址" :max="100" v-model="address"></x-textarea>
     </div>
   </div>
 </template>
 
 <script>
     import Header from "@/components/pages/backStage/StoreBackstage/BsHederWhite";
-    import { XInput } from 'vux'
+    import { XTextarea ,XInput} from 'vux'
 
     export default {
         props: {},
         data() {
             return {
                 TitleObjData: {
-                    titleContent: "编辑店铺名称",
+                    titleContent: "编辑店铺地址",
                     showLeftBack: true,
                     showRightMore: false
                 },
-                name:""
+                address:""
             }
         },
         computed: {},
         watch: {},
         methods: {
-          //提交操作
+            //提交操作
             submit(){
                 alert("提交");
             }
         },
         components: {
             Header,
+            XTextarea,
             XInput
         },
         filters: {}

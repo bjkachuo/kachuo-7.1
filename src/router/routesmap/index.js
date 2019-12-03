@@ -896,7 +896,42 @@ export default [
     name: 'StoreEditName',
     component: resolve => require(['@/components/pages/backStage/StoreBackstage/StoreBsInfo/StoreEditName/StoreEditName'], resolve),
   },
-
+  //商家管理后台编辑店铺LOGO（新）
+  {
+    path: '/StoreEditLogo',
+    name: 'StoreEditLogo',
+    component: resolve => require(['@/components/pages/backStage/StoreBackstage/StoreBsInfo/StoreEditLogo/StoreEditLogo'], resolve),
+  },
+  //商家管理后台编辑店铺照片（新）
+  {
+    path: '/StoreEditPhoto',
+    name: 'StoreEditPhoto',
+    component: resolve => require(['@/components/pages/backStage/StoreBackstage/StoreBsInfo/StoreEditPhoto/StoreEditPhoto'], resolve),
+  },
+  //商家管理后台编辑店铺电话（新）
+  {
+    path: '/StoreEditPhone',
+    name: 'StoreEditPhone',
+    component: resolve => require(['@/components/pages/backStage/StoreBackstage/StoreBsInfo/StoreEditPhone/StoreEditPhone'], resolve),
+  },
+  //商家管理后台编辑店铺地址（新）
+  {
+    path: '/StoreEditAddress',
+    name: 'StoreEditAddress',
+    component: resolve => require(['@/components/pages/backStage/StoreBackstage/StoreBsInfo/StoreEditAddress/StoreEditAddress'], resolve),
+  },
+  //商家管理后台主营分类（新）
+  {
+    path: '/StoreEditMain',
+    name: 'StoreEditMain',
+    component: resolve => require(['@/components/pages/backStage/StoreBackstage/StoreBsInfo/StoreEditMain/StoreEditMain'], resolve),
+  },
+  //商家管理后台店铺介绍（新）
+  {
+    path: '/StoreEditIntroduce',
+    name: 'StoreEditIntroduce',
+    component: resolve => require(['@/components/pages/backStage/StoreBackstage/StoreBsInfo/StoreEditIntroduce/StoreEditIntroduce'], resolve),
+  },
   //商家管理后台商家推荐页（新）
   {
     path: '/goodsRecommend',

@@ -9,7 +9,7 @@
     ></Header>
     <p class="Preservation" @click="submit">提交</p>
     <div class="input-wrap" style="margin-top: 56px;background: #fff;">
-      <x-input title="店铺名称" placeholder="请填写店铺名称"  :show-clear="false" v-model="name"></x-input>
+      <x-input title="商家电话" placeholder="请填写商家电话" mask="999 9999 9999" v-model="phone" :max="13" is-type="china-mobile"></x-input>
     </div>
   </div>
 </template>
@@ -23,17 +23,17 @@
         data() {
             return {
                 TitleObjData: {
-                    titleContent: "编辑店铺名称",
+                    titleContent: "编辑商家电话",
                     showLeftBack: true,
                     showRightMore: false
                 },
-                name:""
+                phone:""
             }
         },
         computed: {},
         watch: {},
         methods: {
-          //提交操作
+            //提交操作
             submit(){
                 alert("提交");
             }
