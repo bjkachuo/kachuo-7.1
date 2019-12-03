@@ -14,7 +14,7 @@
             <div class="img-wrap"><img src="../bs.png" alt=""></div>
             <div class="name-wrap">
               <p>木子菲菲</p>
-              <span><rater v-model="star" margin="6" font-size="8"></rater></span>
+              <span><rater v-model="star" :margin="6" :font-size="8"></rater></span>
             </div>
           </div>
           <div class="line-one-right">
@@ -33,7 +33,7 @@
             <div class="img-wrap"><img src="../bs.png" alt=""></div>
             <div class="name-wrap">
               <p>木子菲菲</p>
-              <span><rater v-model="star" margin="6" font-size="8"></rater></span>
+              <span><rater v-model="star" :margin="6" :font-size="8"></rater></span>
             </div>
           </div>
           <div class="line-one-right">
@@ -52,7 +52,7 @@
             <div class="img-wrap"><img src="../bs.png" alt=""></div>
             <div class="name-wrap">
               <p>木子菲菲</p>
-              <span><rater v-model="star" margin="6" font-size="8"></rater></span>
+              <span><rater v-model="star" :margin="6" :font-size="8"></rater></span>
             </div>
           </div>
           <div class="line-one-right">
@@ -71,7 +71,7 @@
             <div class="img-wrap"><img src="../bs.png" alt=""></div>
             <div class="name-wrap">
               <p>木子菲菲</p>
-              <span><rater v-model="star" margin="6" font-size="8"></rater></span>
+              <span><rater v-model="star" :margin="6" :font-size="8"></rater></span>
             </div>
           </div>
           <div class="line-one-right">
@@ -90,7 +90,7 @@
             <div class="img-wrap"><img src="../bs.png" alt=""></div>
             <div class="name-wrap">
               <p>木子菲菲</p>
-              <span><rater v-model="star" margin="6" font-size="8"></rater></span>
+              <span><rater v-model="star" :margin="6" :font-size="8"></rater></span>
             </div>
           </div>
           <div class="line-one-right">
@@ -109,7 +109,121 @@
             <div class="img-wrap"><img src="../bs.png" alt=""></div>
             <div class="name-wrap">
               <p>木子菲菲</p>
-              <span><rater v-model="star" margin="6" font-size="8"></rater></span>
+              <span><rater v-model="star" :margin="6" :font-size="8"></rater></span>
+            </div>
+          </div>
+          <div class="line-one-right">
+            <p>2019-05-24</p>
+          </div>
+        </div>
+        <div class="line-two">
+          <p>蓬莱阁旅游景区，是国家级5A级风景区，位于山东省蓬 莱市，小城在海边，渤海与黄海在此分界，蓬莱阁</p>
+        </div>
+        <div style="height: 1px;width: 92%;margin: 0 auto 10px;background:#E5E5E5"></div>
+        <div style="width: 65px;height: 30px;border: 1px solid #CCCCCC;border-radius: 15px; float: right"><p style="font-size: 14px;color: #999999;text-align: center;line-height: 30px;">回复</p></div>
+      </div>
+      <div class="card">
+        <div class="line-one">
+          <div class="line-one-left">
+            <div class="img-wrap"><img src="../bs.png" alt=""></div>
+            <div class="name-wrap">
+              <p>木子菲菲</p>
+              <span><rater v-model="star" :margin="6" :font-size="8"></rater></span>
+            </div>
+          </div>
+          <div class="line-one-right">
+            <p>2019-05-24</p>
+          </div>
+        </div>
+        <div class="line-two">
+          <p>蓬莱阁旅游景区，是国家级5A级风景区，位于山东省蓬 莱市，小城在海边，渤海与黄海在此分界，蓬莱阁</p>
+        </div>
+        <div style="height: 1px;width: 92%;margin: 0 auto 10px;background:#E5E5E5"></div>
+        <div style="width: 65px;height: 30px;border: 1px solid #CCCCCC;border-radius: 15px; float: right"><p style="font-size: 14px;color: #999999;text-align: center;line-height: 30px;">回复</p></div>
+      </div>
+      <div class="card">
+        <div class="line-one">
+          <div class="line-one-left">
+            <div class="img-wrap"><img src="../bs.png" alt=""></div>
+            <div class="name-wrap">
+              <p>木子菲菲</p>
+              <span><rater v-model="star" :margin="6" :font-size="8"></rater></span>
+            </div>
+          </div>
+          <div class="line-one-right">
+            <p>2019-05-24</p>
+          </div>
+        </div>
+        <div class="line-two">
+          <p>蓬莱阁旅游景区，是国家级5A级风景区，位于山东省蓬 莱市，小城在海边，渤海与黄海在此分界，蓬莱阁</p>
+        </div>
+        <div style="height: 1px;width: 92%;margin: 0 auto 10px;background:#E5E5E5"></div>
+        <div style="width: 65px;height: 30px;border: 1px solid #CCCCCC;border-radius: 15px; float: right"><p style="font-size: 14px;color: #999999;text-align: center;line-height: 30px;">回复</p></div>
+      </div>
+      <div class="card">
+        <div class="line-one">
+          <div class="line-one-left">
+            <div class="img-wrap"><img src="../bs.png" alt=""></div>
+            <div class="name-wrap">
+              <p>木子菲菲</p>
+              <span><rater v-model="star" :margin="6" :font-size="8"></rater></span>
+            </div>
+          </div>
+          <div class="line-one-right">
+            <p>2019-05-24</p>
+          </div>
+        </div>
+        <div class="line-two">
+          <p>蓬莱阁旅游景区，是国家级5A级风景区，位于山东省蓬 莱市，小城在海边，渤海与黄海在此分界，蓬莱阁</p>
+        </div>
+        <div style="height: 1px;width: 92%;margin: 0 auto 10px;background:#E5E5E5"></div>
+        <div style="width: 65px;height: 30px;border: 1px solid #CCCCCC;border-radius: 15px; float: right"><p style="font-size: 14px;color: #999999;text-align: center;line-height: 30px;">回复</p></div>
+      </div>
+      <div class="card">
+        <div class="line-one">
+          <div class="line-one-left">
+            <div class="img-wrap"><img src="../bs.png" alt=""></div>
+            <div class="name-wrap">
+              <p>木子菲菲</p>
+              <span><rater v-model="star" :margin="6" :font-size="8"></rater></span>
+            </div>
+          </div>
+          <div class="line-one-right">
+            <p>2019-05-24</p>
+          </div>
+        </div>
+        <div class="line-two">
+          <p>蓬莱阁旅游景区，是国家级5A级风景区，位于山东省蓬 莱市，小城在海边，渤海与黄海在此分界，蓬莱阁</p>
+        </div>
+        <div style="height: 1px;width: 92%;margin: 0 auto 10px;background:#E5E5E5"></div>
+        <div style="width: 65px;height: 30px;border: 1px solid #CCCCCC;border-radius: 15px; float: right"><p style="font-size: 14px;color: #999999;text-align: center;line-height: 30px;">回复</p></div>
+      </div>
+      <div class="card">
+        <div class="line-one">
+          <div class="line-one-left">
+            <div class="img-wrap"><img src="../bs.png" alt=""></div>
+            <div class="name-wrap">
+              <p>木子菲菲</p>
+              <span><rater v-model="star" :margin="6" :font-size="8"></rater></span>
+            </div>
+          </div>
+          <div class="line-one-right">
+            <p>2019-05-24</p>
+          </div>
+        </div>
+        <div class="line-two">
+          <p>蓬莱阁旅游景区，是国家级5A级风景区，位于山东省蓬 莱市，小城在海边，渤海与黄海在此分界，蓬莱阁</p>
+        </div>
+        <div style="height: 1px;width: 92%;margin: 0 auto 10px;background:#E5E5E5"></div>
+        <div style="width: 65px;height: 30px;border: 1px solid #CCCCCC;border-radius: 15px; float: right"><p style="font-size: 14px;color: #999999;text-align: center;line-height: 30px;">回复</p></div>
+      </div>
+      <div class="card">
+        <div class="line-one">
+          <div class="line-one-left">
+            <div class="img-wrap"><img src="../bs.png" alt=""></div>
+            <div class="name-wrap">
+              <p>木子菲菲</p>
+              <span><rater v-model="star" :margin="6" :font-size="8"></rater></span>
             </div>
           </div>
           <div class="line-one-right">

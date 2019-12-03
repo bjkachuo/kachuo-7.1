@@ -49,7 +49,7 @@
                 //店铺名称
                 storeName: "山城麻辣串串香",
                 //店铺LOGO
-                storeLogo: "../bs.png",
+                storeLogo: "",
                 //店铺照片
                 storePhoto: "未上传",
                 //店铺电话
