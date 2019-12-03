@@ -173,8 +173,8 @@ import { timeTodate } from "@/assets/js/tools";
 import { Tab, TabItem, Cell,XButton } from 'vux'
 
 export default {
-  name: "",
-  props: [""],
+  name: "orderList2",
+
   data() {
     return {
       TitleObjData: {

@@ -128,8 +128,7 @@ export default {
       this.$vux.loading.show({
         text: "正在上传"
       });
-      axios
-        .post(this.videoUploadUrl, this.formData, config)
+      axios.post(this.videoUploadUrl, this.formData, config)
         .then(res => {
           if (res.data.result === 1) {
             this.$vux.loading.hide();

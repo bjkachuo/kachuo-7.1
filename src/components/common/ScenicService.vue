@@ -45,9 +45,9 @@
               <i :class="reco[0].typename"></i>
               <span>{{reco[0].typename}}</span>
             </p>
-            <div class="map" @touchstart="mapclick(reco[0].typename)">
-              <el-amap :vid="reco[0].typename" :center="[reco[0].latitude,reco[0].longitude]" :zoom='16' class="amap-demo">
-                <el-amap-marker v-for="(marker, index) in reco" :position="[marker.latitude,marker.longitude]"  :vid="index"></el-amap-marker>
+            <div class="map" @touchstart="mapclick($event,reco[0].typename)" @touchend="touchend($event,reco[0].typename)">
+              <el-amap :vid="reco[0].typename" :center="[reco[0].longitude,reco[0].latitude]" :zoom='15' class="amap-demo">
+                <el-amap-marker v-for="(marker, index) in reco" :position="[marker.longitude,marker.latitude]"  :vid="reco[0].typename + index"></el-amap-marker>
               </el-amap>
             </div>
           </div>
@@ -82,6 +82,10 @@ export default {
       ],
       //商家type
       typeNum: "",
+      clientXs:0,
+      clientXe:0,
+      clientYs:0,
+      clientYe:0,
       //轮播图
       advSwiper: [],
       //推荐商家列表：
@@ -150,9 +154,24 @@ export default {
         // alert("跳转游");
       }
     },
-    mapclick(name){
-      console.log(name);
-      dsBridge.call("scenicService", name);
+    mapclick(e,name){
+      console.log(e);
+      console.log(e.changedTouches[0].clientX);
+
+      this.clientXs = e.changedTouches[0].clientX
+      this.clientYs = e.changedTouches[0].clientY
+
+
+
+    },
+    touchend(e,name){
+
+      console.log(e.changedTouches[0].clientX);
+      this.clientXe = e.changedTouches[0].clientX
+      this.clientYe = e.changedTouches[0].clientY
+      if(this.clientXe == this.clientXs && this.clientYe == this.clientYs){
+        dsBridge.call("scenicService", name);
+      }
     },
     //跳转列表页
     getItem(link) {

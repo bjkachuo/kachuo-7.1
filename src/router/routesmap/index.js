@@ -275,7 +275,7 @@ export default [
   },
   //商品订单
   {
-    path: '/orderlist',
+    path: '/OrderList',
     name: 'OrderList',
     component: resolve => require(['@/components/pages/kachuouser/OrderList/OrderList'], resolve),
   },

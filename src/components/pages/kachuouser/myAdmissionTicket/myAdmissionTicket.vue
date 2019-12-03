@@ -7,17 +7,28 @@
       </tab-item>
     </tab>
     <swiper v-model="index" :height="conSty" :show-dots="false" :threshold="150">
-      <swiper-item v-for="(item, index) in tabList" :key="index">
+      <swiper-item v-for="(item, index) in data" :key="index">
         <scroller scrollbar-y>
           <div class="swiper-item">
-            <div class="list-item">
+            <div class="list-item" v-for="(item2,index2) in item">
               <div class="list-item-top">
                 <div class="list-item-top-left">
                   <img alt="" :src="img">
                 </div>
                 <div class="list-item-top-right">
-                  <div></div>
+                  <div class="title-box">
+                    <div class="title">{{item2.TicketName}}</div>
+                    <div class="status">已使用</div>
+                  </div>
+                  <div class="list-item-top-right-bottom">
+                    <div>成人票x{{item2.TotalNum}}</div>
+                    <div class="date">游玩日期：{{item2.OrdersDate}}</div>
+                    <div class="total"><span>总计</span><span class="price">{{item2.Price}}</span></div>
+                  </div>
                 </div>
+              </div>
+              <div class="border-box">
+                <div class="btn-menu">申请退款</div>
               </div>
             </div>
           </div>
@@ -28,6 +39,7 @@
 </template>
 
 <script>
+  import axios from "axios";
   import Header from "@/components/common/Header";
   import { myTicketOrdersList } from "@/servers/api";
   import { timeTodate } from "@/assets/js/tools";
@@ -51,8 +63,9 @@
         getData: [],
         bigList: [],
         currentTab:{},
-
-        img: require("@/assets/images/indexImg.jpeg")
+        Url:'https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.ticket.orders_list',
+        img: require("@/assets/images/indexImg.jpeg"),
+        data:[[],[],[],[],[],[]]
       };
     },
 
@@ -78,10 +91,15 @@
 
     methods: {
       getStatusData(){
-        myTicketOrdersList({ Status:this.tabList[1].id ,PageSize : 10,	PageIndex:0}).then(res=>{
-          console.log(res);
-          // this.dataList.push()
-        })
+
+        axios.post(this.Url, { Status:this.tabList[this.index].id ,PageSize : 10,	PageIndex:0 }, {timeout: 10000, headers: {"Content-Type": "multipart/form-data", Authorization: 'fdbcbeced45587bb29fa37526644abba'}})
+          .then(res => {
+            console.log(res);
+            this.data[this.index] = res.data.data.Data.OrdersList
+          })
+          .catch(err => {
+            console.log(err);
+          });
       }
     },
 
@@ -114,17 +132,72 @@
       box-shadow: 0px 10px 20px 0px rgba(0, 101, 255, 0.08);
     }
   }
-
+  /*背水一战13移速 体力饱满5 六级速度宝石4 帽子衣服速度4 烹饪10 脱兔10*/
   .list-item{
       margin: 10px 15px;
       border-radius: 8px;
       border:1px solid rgba(229,229,229,1);
-      padding: 15px;
+      padding: 15px 15px 0 15px;
       background-color: #fff;
       .list-item-top{
+        display: flex;
         .list-item-top-left{
           width: 74px;
           height: 74px;
+        }
+        .list-item-top-right{
+          position: relative;
+          flex: 1;
+          .title-box{
+              margin-left: 10px;
+              height: 44px;
+            .title{
+              font-size: 14px;
+              font-weight: 500;
+              color: #222;
+              width: 160px;
+              display: -webkit-box;
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 2;
+              overflow: hidden;
+              float: left;
+            }
+            .status{
+              color: #ccc;
+              float: right;
+              font-size: 12px;
+            }
+          }
+          .list-item-top-right-bottom{
+            margin-left: 10px;
+            font-size: 10px;
+            color: #999;
+          }
+          .total{
+            color: #222;
+            position: absolute;
+            display:table-cell;
+            vertical-align:bottom;
+            right: 0;
+            bottom: 0;
+            .price{
+              font-size: 18px;
+            }
+          }
+        }
+      }
+      .border-box{
+        border-top: 1px solid #e5e5e5;
+        overflow: hidden;
+        margin-top: 15px;
+        .btn-menu{
+          line-height: 25px;
+          padding: 0 10px;
+          border: 1px solid #e5e5e5;
+          display: inline-block;
+          float: right;
+          margin: 8px 0;
+          border-radius: 4px;
         }
       }
   }
