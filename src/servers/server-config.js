@@ -3,10 +3,10 @@ import VueRouter from 'vue-router';
 dsBridge.call("getUserInfo", "web");
 dsBridge.registerAsyn("loginInfo", function (arg1, responseCallback) {
   if(localStorage.token){
-    alert("111111");
+
     localStorage.setItem("token", JSON.parse(arg1).accessToken);
   }else{
-    alert("222222");
+
     localStorage.setItem("token", JSON.parse(arg1).accessToken);
     window.location.reload()
     window.location.href = location.href+'&time='+((new Date()).getTime())
