@@ -214,7 +214,7 @@
   .button-wrap {
     display: flex;
     margin: 9px auto 0;
-    width: 29%;
+    width: 22%;
   }
 
   .img-wrap {

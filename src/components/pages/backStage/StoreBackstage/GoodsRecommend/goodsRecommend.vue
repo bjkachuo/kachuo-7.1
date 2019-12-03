@@ -94,7 +94,7 @@
           <!--若有一个是空显示灰色按钮-->
           <div class="up-before" v-if="this.goodsName =='' || this.goodsPhoto ==''">提交</div>
           <!--若都已经填写显示蓝色按钮-->
-          <div class="up-behind" v-if="this.goodsName !='' && this.goodsPhoto !=''">提交</div>
+          <div class="up-behind" @click="Submit" v-if="this.goodsName !='' && this.goodsPhoto !=''">提交</div>
         </div>
       </x-dialog>
     </div>
@@ -160,6 +160,10 @@
             onConfirm() {
                 console.log("我点了确认");
             },
+            //添加商品提交
+            Submit(){
+                alert("提交！！")
+            }
 
         },
         components: {
