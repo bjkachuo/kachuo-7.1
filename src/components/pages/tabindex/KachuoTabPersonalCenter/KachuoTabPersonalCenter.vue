@@ -206,15 +206,15 @@
                     //     imgSrc: require("@/assets/images/daoyouht.png")
                     // },
                     {
+                        name: "商家后台(新)",
+                        link: "/StoreBsIndex",
+                        imgSrc: require("@/assets/images/daoyouht.png")
+                    },
+                    {
                         name: "名家后台",
                         link: "/famousPersonBsIndex",
                         imgSrc: require("@/assets/images/daoyouht.png")
                     },
-                    {
-                        name: "商家后台(新)",
-                        link: "/StoreBsIndex",
-                        imgSrc: require("@/assets/images/daoyouht.png")
-                    }
                 ],
                 tourState: 0
             };
