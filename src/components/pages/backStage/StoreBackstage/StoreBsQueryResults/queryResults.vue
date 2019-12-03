@@ -19,6 +19,7 @@
         <div class="price"><span>90<span>元</span></span></div>
       </div>
     </div>
+    <div class="done" @click="done">立即核销</div>
   </div>
 </template>
 
@@ -38,7 +39,11 @@
         },
         computed: {},
         watch: {},
-        methods: {},
+        methods: {
+            done(){
+                alert("核销！！")
+            }
+        },
         components: {
             Header
         },
@@ -111,5 +116,18 @@
     font-size: 12px;
     color: #222222;
     font-weight: bold;
+  }
+  .done{
+    width: 92%;
+    height: 44px;
+    background: #3976FF;
+    color: #FFFFFF;
+    font-size: 14px;
+    text-align: center;
+    line-height: 44px;
+    position: fixed;
+    bottom: 10px;
+    left: 4%;
+    border-radius: 8px;
   }
 </style>

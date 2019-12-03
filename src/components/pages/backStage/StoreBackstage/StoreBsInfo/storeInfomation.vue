@@ -9,25 +9,26 @@
     ></Header>
     <div class="line-one">
       <group>
-        <cell title="店铺名称" value="山城麻辣串串香" is-link></cell>
-        <cell title="店铺LOGO图" is-link>
-          <img child="after-title" width="40" height="40" style="display:block;margin-right:5px;height: 40px;width: 40px" src="../bs.png">
+        <cell title="店铺名称" :value="storeName" is-link @click.native="goName"></cell>
+        <cell title="店铺LOGO图" is-link @click.native="goLogo">
+          <img child="after-title" width="40" height="40"
+               style="display:block;margin-right:5px;height: 40px;width: 40px" :src="storeLogo">
         </cell>
-        <cell title="店铺照片" value="未上传" is-link></cell>
+        <cell title="店铺照片" :value="storePhoto" is-link @click.native="goPhoto"></cell>
       </group>
 
     </div>
     <div class="line-two">
       <group>
-        <cell title="商家电话" value="17610879603" is-link></cell>
-        <cell title="商家地址 " value="蓬莱市滨海区北京路..." is-link></cell>
+        <cell title="商家电话" :value="storePhone" is-link @click.native="goPhone"></cell>
+        <cell title="商家地址 " :value="storeAddress" is-link @click.native="goAdress"></cell>
       </group>
     </div>
     <div class="line-three">
-      <cell title="主营分类" value="串串香/火锅" is-link></cell>
+      <cell title="主营分类" :value="storeMain" is-link @click.native="goMain"></cell>
     </div>
     <div class="line-three">
-      <cell title="店铺介绍" value="未填写" is-link></cell>
+      <cell title="店铺介绍" :value="storeIntroduce" is-link @click.native="goIntroduce"></cell>
     </div>
   </div>
 </template>
@@ -45,12 +46,58 @@
                     showLeftBack: true,
                     showRightMore: false
                 },
-
+                //店铺名称
+                storeName: "山城麻辣串串香",
+                //店铺LOGO
+                storeLogo: "",
+                //店铺照片
+                storePhoto: "未上传",
+                //店铺电话
+                storePhone: "17610879603",
+                //店铺地址(入驻时有直接获取)
+                storeAddress: "蓬莱市滨海区北京路...",
+                //店铺主营
+                storeMain: "串串香/火锅",
+                //店铺介绍
+                storeIntroduce: "未填写"
             }
         },
         computed: {},
         watch: {},
-        methods: {},
+        methods: {
+            //跳转店铺编辑名称
+            goName() {
+                this.$router.push('/StoreEditName')
+            },
+            //跳转店铺编辑logo
+            goLogo() {
+                this.$router.push('/StoreEditLogo')
+            },
+            //跳转店铺照片
+            goPhoto() {
+                this.$router.push('/StoreEditPhoto')
+            },
+            //跳转店铺电话
+            goPhone() {
+                this.$router.push('/StoreEditPhone')
+            },
+            //跳转店铺地址(入驻时有直接获取)
+            goAdress() {
+                console.log("入驻时有直接获取")
+                // this.$router.push('/StoreEditAddress')
+            },
+            //跳转店铺主营分类
+            goMain() {
+                this.$router.push('/StoreEditMain')
+            },
+            //跳转店铺介绍
+            goIntroduce() {
+                this.$router.push('/StoreEditIntroduce')
+            }
+
+
+
+        },
         components: {
             Header,
             Cell,

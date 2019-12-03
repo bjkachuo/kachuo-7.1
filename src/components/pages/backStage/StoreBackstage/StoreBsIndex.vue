@@ -18,8 +18,8 @@
               <p>输码验证</p>
             </div>
           </flexbox-item>
-          <flexbox-item>
-            <div class="flex-demo">
+          <flexbox-item @click.native="scanning">
+            <div class="flex-demo" >
               <div class="img-wrap">
                 <img src="./sj2.png" alt="">
               </div>
@@ -109,12 +109,22 @@
                 },
                 //confirm显示或隐藏
                 isShowConfirm: false,
-
+                //原生返回的数据
+                text:""
             }
         },
         computed: {},
         watch: {},
         methods: {
+            //扫码代金券码
+            scanning(){
+                dsBridge.call("scanning", "web");
+                bridge.register("scanning", r => {
+                    alert(r)
+                    //储存原生返回数据进行后续操作
+                    this.text = r;
+                });
+            },
             //点击显示Confirm
             showConfirm() {
                 console.log("我点到了");

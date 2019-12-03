@@ -28,7 +28,7 @@
           </div>
           <div class="up"></div>
           <div class="down"></div>
-          <div class="del"><p style="font-size: 14px;color: #222222;line-height: 30px;text-align: center;">删除</p></div>
+          <div class="del" @click="onDel"><p style="font-size: 14px;color: #222222;line-height: 30px;text-align: center;">删除</p></div>
         </div>
       </b>
       <b v-show="cur==1">
@@ -51,11 +51,20 @@
         <div class="text-wrap" @click="open"><p>添加推荐</p></div>
       </div>
     </div>
+    <confirm
+      class="confirm-dialog"
+      v-model="isconfirm"
+      title="确定要删除此推荐商品？"
+      theme="android"
+      @on-cancel="onCancel()"
+      @on-confirm="onConfirm()"
+    ></confirm>
+
   </div>
 </template>
 <script>
     import Header from "@/components/pages/backStage/StoreBackstage/BsHederWhite";
-    import {Tab, TabItem} from "vux";
+    import {Tab, TabItem,Confirm} from "vux";
 
     export default {
         props: {},
@@ -67,6 +76,9 @@
                     showLeftBack: true,
                     showRightMore: false
                 },
+                //删除显示隐藏
+                isconfirm: false,
+
             }
         },
         computed: {},
@@ -75,12 +87,28 @@
             //去添加页
             open() {
                 this.$router.push('/addCash')
-            }
+            },
+            //删除弹窗，方法
+            onDel() {
+                this.isconfirm = !this.isconfirm;
+            },
+            //点击取消事件
+            onCancel() {
+                console.log("我点了取消");
+
+            },
+            //点击确认事件
+            onConfirm() {
+                console.log("我点了确认");
+            },
+
+
         },
         components: {
             Header,
             Tab,
-            TabItem
+            TabItem,
+            Confirm
         },
         filters: {}
     }
@@ -186,7 +214,7 @@
   .button-wrap {
     display: flex;
     margin: 9px auto 0;
-    width: 29%;
+    width: 22%;
   }
 
   .img-wrap {
@@ -207,6 +235,48 @@
     color: #666666;
     font-size: 14px;
   }
+  /* confirm弹窗样式 */
+  .confirm-dialog /deep/ .weui-skin_android .weui-dialog__ft {
+    text-align: center;
+    padding: 0 15px 15px 15px;
+  }
+
+  .confirm-dialog /deep/ .weui-dialog__btn {
+    width: 110px;
+    height: 35px;
+    line-height: 35px;
+    border: 1px solid #3976ff;
+    border-radius: #3976ff;
+    text-align: center;
+    color: #3976ff;
+    font-size: 15px;
+    border-radius: 35px;
+    margin: 0 5px;
+  }
+
+  .confirm-dialog /deep/ .weui-dialog__btn:active {
+    background-color: transparent;
+  }
+  .confirm-dialog /deep/ .weui-dialog__btn_primary,
+  .confirm-dialog /deep/ .weui-dialog__btn_primary:active {
+    background-color: #3976ff;
+    color: #ffffff;
+  }
+
+  .confirm-dialog /deep/ .weui-skin_android .weui-dialog__title {
+    font-size: 18px;
+  }
+
+  .confirm-dialog /deep/ .weui-dialog__hd {
+    text-align: center;
+    padding: 30px 15px;
+  }
+
+  .confirm-dialog /deep/ .weui-skin_android .weui-dialog__bd {
+    padding: 5px 15px 0 15px;
+    min-height: 10px;
+  }
+
 
 </style>
 <style lang="less" scoped>
@@ -218,4 +288,8 @@
     font-size: 16px;
     font-weight: bold;
   }
+  /deep/ .vux-x-dialog-absolute .weui-dialog{
+    position: fixed;
+  }
+
 </style>

@@ -149,6 +149,7 @@ export default {
           });
         }
       })
+
     }
   },
   components: {Header, Tab, TabItem, Flexbox, FlexboxItem, Confirm}
