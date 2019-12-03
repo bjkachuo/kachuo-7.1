@@ -9,25 +9,25 @@
     ></Header>
     <div class="line-one">
       <group>
-        <cell title="店铺名称" value="山城麻辣串串香" is-link></cell>
+        <cell title="店铺名称" :value="storeName" is-link @click.native="goName"></cell>
         <cell title="店铺LOGO图" is-link>
-          <img child="after-title" width="40" height="40" style="display:block;margin-right:5px;height: 40px;width: 40px" src="../bs.png">
+          <img child="after-title" width="40" height="40" style="display:block;margin-right:5px;height: 40px;width: 40px" :src="storeLogo">
         </cell>
-        <cell title="店铺照片" value="未上传" is-link></cell>
+        <cell title="店铺照片" :value="storePhoto" is-link></cell>
       </group>
 
     </div>
     <div class="line-two">
       <group>
-        <cell title="商家电话" value="17610879603" is-link></cell>
-        <cell title="商家地址 " value="蓬莱市滨海区北京路..." is-link></cell>
+        <cell title="商家电话" :value="storePhone" is-link></cell>
+        <cell title="商家地址 " :value="storeAdress" is-link></cell>
       </group>
     </div>
     <div class="line-three">
-      <cell title="主营分类" value="串串香/火锅" is-link></cell>
+      <cell title="主营分类" :value="storeMain" is-link></cell>
     </div>
     <div class="line-three">
-      <cell title="店铺介绍" value="未填写" is-link></cell>
+      <cell title="店铺介绍" :value="storeIntroduce" is-link></cell>
     </div>
   </div>
 </template>
@@ -45,12 +45,30 @@
                     showLeftBack: true,
                     showRightMore: false
                 },
-
+                //店铺名称
+                storeName:"山城麻辣串串香",
+                //店铺LOGO
+                storeLogo:"../bs.png",
+                //店铺照片
+                storePhoto:"未上传",
+                //店铺电话
+                storePhone:"17610879603",
+                //店铺地址
+                storeAdress:"蓬莱市滨海区北京路...",
+                //店铺主营
+                storeMain:"串串香/火锅",
+                //店铺介绍
+                storeIntroduce:"未填写"
             }
         },
         computed: {},
         watch: {},
-        methods: {},
+        methods: {
+          //跳转店铺信息页
+            goName(){
+                this.$router.push('/StoreEditName')
+            }
+        },
         components: {
             Header,
             Cell,

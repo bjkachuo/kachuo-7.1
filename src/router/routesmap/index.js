@@ -890,6 +890,13 @@ export default [
     name: 'storeInfomation',
     component: resolve => require(['@/components/pages/backStage/StoreBackstage/StoreBsInfo/storeInfomation'], resolve),
   },
+  //商家管理后台编辑店铺名称（新）
+  {
+    path: '/StoreEditName',
+    name: 'StoreEditName',
+    component: resolve => require(['@/components/pages/backStage/StoreBackstage/StoreBsInfo/StoreEditName/StoreEditName'], resolve),
+  },
+
   //商家管理后台商家推荐页（新）
   {
     path: '/goodsRecommend',
