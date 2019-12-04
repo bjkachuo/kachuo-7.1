@@ -1,49 +1,40 @@
 <template>
   <div class="tab-item-paly-content">
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.2/css/swiper.css"
-    />
-    <div class="line-one">
-      <flexbox :gutter="0" wrap="wrap">
-        <flexbox-item :span="1/3">
-          <div class="flex-demo flex-one" @click="Ticket">门票认证</div>
-        </flexbox-item>
-        <flexbox-item :span="1/3">
-          <div class="flex-demo flex-two" @click="Navigation">智慧导航</div>
-        </flexbox-item>
-        <flexbox-item :span="1/3">
-          <div class="flex-demo flex-three" @click="service">游园服务</div>
-        </flexbox-item>
-        <flexbox-item :span="1/3">
-          <div class="flex-demo flex-four" @click="Remember">记住的</div>
-        </flexbox-item>
-        <flexbox-item :span="1/3">
-          <div class="flex-demo flex-five" @click="Understand">了解的</div>
-        </flexbox-item>
-        <flexbox-item :span="1/3">
-          <div class="flex-demo flex-six" @click="TakeAway">带走的</div>
-        </flexbox-item>
-      </flexbox>
+    <div class="banner"></div>
 
-      <!-- <div class="line-one-a">
-        <div class="navs">门票认证</div>
-        <div class="navs">智慧导航</div>
-        <div class="navs">游园服务</div>
-      </div>-->
-      <!-- <div class="line-one-content"></div> -->
-      <!-- <flexbox>
-        <flexbox-item v-for="(item,index) in dataList" :key="index">
-          <div class="flex-demo" @click="getItem(item.link)">
-            <div class="img-wrap">
-              <img :src="item.imgSrc" alt />
-            </div>
-            <p>{{item.name}}</p>
-          </div>
-        </flexbox-item>
-      </flexbox>-->
-      <!-- <div class="line-one-box">
-      </div>-->
+
+
+
+    <div class="line-one">
+<!--      <flexbox :gutter="0" wrap="wrap">-->
+<!--        <flexbox-item :span="1/3">-->
+<!--          <div class="flex-demo flex-one" @click="Ticket">门票认证</div>-->
+<!--        </flexbox-item>-->
+<!--        <flexbox-item :span="1/3">-->
+<!--          <div class="flex-demo flex-two" @click="Navigation">智慧导航</div>-->
+<!--        </flexbox-item>-->
+<!--        <flexbox-item :span="1/3">-->
+<!--          <div class="flex-demo flex-three" @click="service">游园服务</div>-->
+<!--        </flexbox-item>-->
+<!--        <flexbox-item :span="1/3">-->
+<!--          <div class="flex-demo flex-four" @click="Remember">记住的</div>-->
+<!--        </flexbox-item>-->
+<!--        <flexbox-item :span="1/3">-->
+<!--          <div class="flex-demo flex-five" @click="Understand">了解的</div>-->
+<!--        </flexbox-item>-->
+<!--        <flexbox-item :span="1/3">-->
+<!--          <div class="flex-demo flex-six" @click="TakeAway">带走的</div>-->
+<!--        </flexbox-item>-->
+<!--      </flexbox>-->
+      <div class="banner"></div>
+      <ul class="goods-type">
+        <li v-for="item in cellListTools">
+          <div class="goods-type-icon" :class="item.icon" @click="goodsTypeGo(item.link)"></div>
+          <div style="text-align: center">{{item.title}}</div>
+        </li>
+      </ul>
+
+
     </div>
     <div style="width:92%;margin: 15px auto 10px;">
       <swiper auto height="70px" class="custom">
@@ -70,14 +61,8 @@
             <div class="goods-box">
               <div v-for="(item,i) in swiperItem" class="goods" @click="details(item.id,item.type)">
                 <img :src="item.video_image" alt="">
-                <div
-                  style="font-size: 14px;color: #000;overflow: hidden;text-overflow:ellipsis; white-space: nowrap;padding-top: 10px;margin: 0 5px">
-                  {{item.name}}
-                </div>
-                <div
-                  style="font-size: 10px;color: #666;overflow: hidden;text-overflow:ellipsis; white-space: nowrap;line-height: 35px;margin: 0 5px">
-                  {{item.product}}
-                </div>
+                <div style="font-size: 14px;color: #000;overflow: hidden;text-overflow:ellipsis; white-space: nowrap;padding-top: 10px;margin: 0 5px">{{item.name}}</div>
+                <div style="font-size: 10px;color: #666;overflow: hidden;text-overflow:ellipsis; white-space: nowrap;line-height: 35px;margin: 0 5px">{{item.product}}</div>
               </div>
             </div>
           </swiper-item>
@@ -88,7 +73,7 @@
 </template>
 
 <script>
-    import FunctionAreas from "@/components/layout/FunctionAreas";
+
     import AdvertiseSwiper from "@/components/layout/AdvertiseSwiper";
     import Cell from "@/components/common/CellNoBorder";
     import SwiperAdvEat from "@/components/common/SwiperAdvEat";
@@ -103,11 +88,34 @@
     } from "vux";
 
     export default {
-
         data() {
             return {
                 //推荐商家列表：
                 recommend: [],
+                cellListTools: [
+                  {
+                    title: "品类视频",
+                    icon: "shipin",
+                    link: "/goodsVideoclassify?title=品类视频"
+                  },
+                  {
+                    title: "游园消费",
+                    icon: "youyuan",
+                    link: "/scenceconsum?title=景区消费&carousel=4"
+                  },
+                  {
+                    title: "景区好礼",
+                    icon: "haoli",
+                    link: "/scencegifts?title=景区好礼&carousel=5"
+                  },
+                  {
+                    title: "名家妙藏",
+                    icon: "miaocang",
+                    link: "/famouscollection?title=名家妙藏&carousel=6"
+                  }
+                ],
+
+
                 dataList: [
                     {
                         imgUrl:
@@ -181,25 +189,25 @@
               return "失败";
             }
           }),
-            this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.index.scenic_service")
-                .then(({data}) => {
+          this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.index.scenic_service")
+              .then(({data}) => {
 
-                    data.data.recommend_business.forEach((item, i) => {
-                        this.recommend.push(new Array)
-                        let arr_index = -1
-                        item.forEach((goods, index) => {
-                            if (index % 3 == 0) {
-                                arr_index++
-                                this.recommend[i][arr_index] = []
-                            }
-                            this.recommend[i][arr_index].push(goods)
-                        })
-                    })
+                  data.data.recommend_business.forEach((item, i) => {
+                      this.recommend.push(new Array)
+                      let arr_index = -1
+                      item.forEach((goods, index) => {
+                          if (index % 3 == 0) {
+                              arr_index++
+                              this.recommend[i][arr_index] = []
+                          }
+                          this.recommend[i][arr_index].push(goods)
+                      })
+                  })
 
 
-                    console.log(this.recommend);
-                    console.log(data);
-                });
+                  console.log(this.recommend);
+                  console.log(data);
+              });
         },
         methods: {
             //跳转门票认证
@@ -216,6 +224,9 @@
                     }
                 });
 
+            },
+            goodsTypeGo(link) {
+              this.$router.push(link);
             },
             //跳转游园服务
             service() {
@@ -285,7 +296,30 @@
 </script>
 <style lang="less" scoped>
   .tab-item-paly-content {
-    margin-top: 5px;
+    .banner{
+      width: 100%;
+      height: 0;
+      padding-top: 53.333%;
+      background-image: url("index-tab.png");
+      background-size: 100% 100%;
+    }
+    .goods-type {
+      width: 92%;
+      margin: 55px auto 0;
+      border-radius: 8px;
+      background-color: #fff;
+      height: 100px;
+      display: flex;
+      li {
+        flex: 1;
+        .goods-type-icon {
+          width: 44px;
+          height: 44px;
+          margin: 12px auto 8px;
+          background-size: 100% 100%;
+        }
+      }
+    }
   }
 
   .line-one {
@@ -297,15 +331,6 @@
     overflow: hidden;
   }
 
-  .line-one-a {
-    width: 100%;
-    height: 70px;
-    margin-bottom: 1px;
-    background: red;
-  }
-
-  .navs {
-  }
 
   .line-two {
     width: 92%;

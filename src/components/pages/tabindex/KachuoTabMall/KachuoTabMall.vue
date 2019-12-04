@@ -164,9 +164,7 @@
                     });
             },
             goodsTypeGo(link) {
-                // alert(link)
                 this.$router.push(link);
-                // console.log(link);
             }
             // classification(){
             //   this.$router.push("/goodsSlassification")
@@ -232,29 +230,23 @@
     background-color: #fff;
     height: 100px;
     display: flex;
-
     li {
       flex: 1;
-
       .goods-type-icon {
         width: 44px;
         height: 44px;
         margin: 12px auto 8px;
         background-size: 100% 100%;
       }
-
       .shipin {
         background-image: url("./shipin.png");
       }
-
       .youyuan {
         background-image: url("./youyuan.png");
       }
-
       .haoli {
         background-image: url("./haoli.png");
       }
-
       .miaocang {
         background-image: url("./miaocang.png");
       }

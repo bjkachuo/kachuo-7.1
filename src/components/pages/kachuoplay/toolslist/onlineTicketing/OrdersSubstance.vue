@@ -1,32 +1,28 @@
 <template>
   <div class="wrap">
     <Header :titleContent="TitleObjData.titleContent" :showLeftBack="TitleObjData.showLeftBack" :showRightMore="TitleObjData.showRightMore"></Header>
-    <div class="refund" :style="scenceConsumHeight">
+    <p class="content" :style="scenceConsumHeight" v-html="content">
 
-    </div>
+    </p>
   </div>
-
 </template>
 
 <script>
   import Header from "@/components/common/Header";
     export default {
-        name: "refund",
+        name: "OrdersSubstance",
+
+        components:{ Header },
 
         data(){
           return{
             TitleObjData: {
-              titleContent: "申请退款",
+              titleContent: "购票须知",
               showLeftBack: true,
               showRightMore: false
-            }
+            },
+            content:sessionStorage.OrdersSubstance,
           }
-        },
-
-        components:{ Header },
-
-        methods:{
-
         },
 
       computed: {
@@ -38,11 +34,8 @@
 </script>
 
 <style scoped lang="less">
-  .wrap{
-    background-color: #F5F5F5;
-    .refund{
-
-    }
-  }
-
+.content{
+  margin: 46px 15px 0;
+  text-indent: 2em;
+}
 </style>

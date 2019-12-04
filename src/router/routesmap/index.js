@@ -289,7 +289,7 @@ export default [
   //门票申请退款
   {
     path: '/myAdmissionTicket/refund',
-    name: 'myAdmissionTicket',
+    name: 'ticketRefund',
     component: resolve => require(['@/components/pages/kachuouser/myAdmissionTicket/refund'], resolve),
   },
   //变现管理
@@ -1144,6 +1144,12 @@ export default [
     path: '/onlineTicketing',
     name: 'onlineTicketing',
     component: resolve => require(['@/components/pages/kachuoplay/toolslist/onlineTicketing/onlineTicketing'], resolve),
+  },
+  //购票须知
+  {
+    path: '/onlineTicketing/OrdersSubstance',
+    name: 'OrdersSubstance',
+    component: resolve => require(['@/components/pages/kachuoplay/toolslist/onlineTicketing/OrdersSubstance'], resolve),
   },
   //购票订单完成
   {

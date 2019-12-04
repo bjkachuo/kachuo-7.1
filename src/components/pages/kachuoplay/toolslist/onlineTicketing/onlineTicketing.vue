@@ -19,7 +19,7 @@
             </div>
           </div>
         </div>
-        <div class="t-right" @click="order(item.Id)">
+        <div class="t-right" @click="order(item.Id,item.OrdersSubstance)">
           <p>购票</p>
         </div>
       </div>
@@ -47,9 +47,7 @@ export default {
   mounted() {
     //获取票列表
     this.$http
-      .post(
-        "http://core.kachuo.com/app/ewei_shopv2_app.php?i=8&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.ticket.getlist"
-      )
+      .post("http://core.kachuo.com/app/ewei_shopv2_app.php?i=8&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.ticket.getlist")
       .then(({ data }) => {
         console.log(data);
         this.dataListOne = data.data;
@@ -57,7 +55,8 @@ export default {
       });
   },
   methods: {
-    order(Id){
+    order(Id,content){
+      sessionStorage.OrdersSubstance = content
       this.$router.push('/onlineTicketing/orderCompletion?id='+Id)
     }
   },

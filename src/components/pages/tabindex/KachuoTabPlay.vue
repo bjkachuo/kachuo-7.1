@@ -2,7 +2,7 @@
   <div>
     <FaceToast></FaceToast>
     <div class="tab-item-paly-wrap">
-      <TabItemPlayHeader v-if="!$store.state.isApp"></TabItemPlayHeader>
+<!--      <TabItemPlayHeader v-if="!$store.state.isApp"></TabItemPlayHeader>-->
       <TabItemPlayContent></TabItemPlayContent>
     </div>
   </div>

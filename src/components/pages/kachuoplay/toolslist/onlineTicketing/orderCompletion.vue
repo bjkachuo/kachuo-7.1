@@ -4,7 +4,7 @@
     <div class="card1">
       <div class="head">
           <div class="title">景区门票</div>
-          <div class="link">购票须知></div>
+          <div class="link" @click="OrdersSubstance">购票须知></div>
       </div>
       <div class="piao-contnet">
         <div class="title">游玩日期</div>
@@ -104,9 +104,9 @@
                 alert(JSON.parse(err))
               });
           },
-          WeixinPay(res) {
-
-          },
+          OrdersSubstance(){
+            this.$router.push('/onlineTicketing/OrdersSubstance')
+          }
         },
 
         mounted() {

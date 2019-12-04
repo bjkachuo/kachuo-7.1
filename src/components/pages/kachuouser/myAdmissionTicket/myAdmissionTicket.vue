@@ -91,7 +91,7 @@
     methods: {
       getStatusData(){
         if(this.data[this.index].length !=0 ) return
-        axios.post(this.Url, { Status:this.tabList[this.index].id ,PageSize : 10,	PageIndex:this.tabList[this.index].PageIndex }, {timeout: 10000, headers: {"Content-Type": "multipart/form-data", Authorization: '9daf9189546b57613ba56bc2a8e7f41e'}})
+        axios.post(this.Url, { Status:this.tabList[this.index].id ,PageSize : 10,	PageIndex:this.tabList[this.index].PageIndex })
           .then(res => {
             res.data.data.Data.OrdersList.forEach(item=>{
               this.data[this.index].push(item)
@@ -107,7 +107,7 @@
       },
 
       loadMore(){
-        axios.post(this.Url, { Status:this.tabList[this.index].id ,PageSize : 10,	PageIndex:this.tabList[this.index].PageIndex }, {timeout: 10000, headers: {"Content-Type": "multipart/form-data", Authorization: '9daf9189546b57613ba56bc2a8e7f41e'}})
+        axios.post(this.Url, { Status:this.tabList[this.index].id ,PageSize : 10,	PageIndex:this.tabList[this.index].PageIndex })
           .then(res => {
             res.data.data.Data.OrdersList.forEach(item=>{
               this.data[this.index].push(item)
@@ -123,7 +123,6 @@
       },
 
       onScrollBottom(){
-        console.log(1);
         if(this.loadingFlag){
           this.loadingFlag = false
           this.tabList[this.index].PageIndex ++
@@ -131,7 +130,7 @@
         }
       },
       refund(){
-        this.$router.push()
+        this.$router.push('/myAdmissionTicket/refund')
       }
     },
 
