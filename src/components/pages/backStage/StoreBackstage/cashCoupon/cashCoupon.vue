@@ -19,16 +19,18 @@
     </tab>
     <div class="tab-content">
       <b v-show="cur==0">
-        <div class="card">
+        <div class="card" v-for="(item,index) in List" :key="index" v-if="item.status == 1">
           <div style="margin: 10px 0 0 4.51%;">
-            <div class="line-one">100元代金券</div>
-            <div class="line-two">周一至周五全天使用 酒水不可用 可叠加使用</div>
-            <div class="line-three"><span style="color: #222222;font-size: 10px;float: left">有效期至2019-12-30</span><span
-              style="color: #FFA238;font-size: 18px;float: right;font-weight: bold;line-height: 12px;">￥90</span></div>
+            <div class="line-one">{{item.coupon_type}}代金券</div>
+            <div class="line-two">{{item.use_date}}可u用 {{item.use_range}} {{item.use_number}}</div>
+            <div class="line-three"><span style="color: #222222;font-size: 10px;float: left;visibility: hidden">有效期至2019-12-30</span><span
+              style="color: #FFA238;font-size: 18px;float: right;font-weight: bold;line-height: 12px;">￥{{item.price}}</span>
+            </div>
           </div>
           <div class="up"></div>
           <div class="down"></div>
-          <div class="del" @click="onDel"><p style="font-size: 14px;color: #222222;line-height: 30px;text-align: center;">删除</p></div>
+          <div class="del" @click="onDel"><p
+            style="font-size: 14px;color: #222222;line-height: 30px;text-align: center;">删除</p></div>
         </div>
       </b>
       <b v-show="cur==1">
@@ -36,7 +38,8 @@
           <div style="margin: 10px 0 0 4.51%;">
             <div class="line-one">100元代金券</div>
             <div class="line-two">周一至周五全天使用 酒水不可用 可叠加使用</div>
-            <div class="line-three"><span style="color: #222222;font-size: 10px;float: left">有效期至2019-12-30</span></div>
+            <div class="line-three"><span style="color: #222222;font-size: 10px;float: left;visibility: hidden;">有效期至2019-12-30</span>
+            </div>
           </div>
           <div class="up"></div>
           <div class="down"></div>
@@ -64,7 +67,7 @@
 </template>
 <script>
     import Header from "@/components/pages/backStage/StoreBackstage/BsHederWhite";
-    import {Tab, TabItem,Confirm} from "vux";
+    import {Tab, TabItem, Confirm} from "vux";
 
     export default {
         props: {},
@@ -78,11 +81,81 @@
                 },
                 //删除显示隐藏
                 isconfirm: false,
-
+                //数据
+                List: []
             }
         },
         computed: {},
-        watch: {},
+        mounted() {
+            //调取优惠券列表
+            this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=business.coupon.index").then(({data}) => {
+                console.log('原数据', data.data.list);
+                this.List = data.data.list;
+                //转换面额
+                this.List.forEach(item => {
+                    switch (item.coupon_type) {
+                        case '1':
+                            item.coupon_type = '10元'
+                            break;
+                        case '2':
+                            item.coupon_type = '20元'
+                            break;
+                        case '3':
+                            item.coupon_type = '30元'
+                            break;
+                        case '4':
+                            item.coupon_type = '50元'
+                            break;
+                        case '5':
+                            item.coupon_type = '100元'
+                    }
+
+                })
+                //转换使用时间
+                this.List.forEach(item => {
+                    switch (item.use_date) {
+                        case '1':
+                            item.use_date = '周一至周五'
+                            break;
+                        case '2':
+                            item.use_date = '周六、周日'
+                            break;
+                        case '3':
+                            item.use_date = '周一至周日'
+                    }
+
+                });
+                //转换使用张数
+                this.List.forEach(item => {
+                    switch (item.use_number) {
+                        case '1':
+                            item.use_number = '不限张数'
+                            break;
+                        case '2':
+                            item.use_number = '单次可使用1张'
+                            break;
+                        case '3':
+                            item.use_number = '单次可使用2张'
+                            break;
+                        case '4':
+                            item.use_number = '单次可使用3张'
+                    }
+
+                });
+                //转换使用范围
+                this.List.forEach(item => {
+                    switch (item.use_range) {
+                        case '1':
+                            item.use_range = '全场可用'
+                            break;
+                        case '2':
+                            item.use_range = '部分商品可用'
+                    }
+
+                });
+                console.log('购物券列表：', this.List)
+            });
+        },
         methods: {
             //去添加页
             open() {
@@ -101,8 +174,76 @@
             onConfirm() {
                 console.log("我点了确认");
             },
+            //刷新方法
+            Refresh() {
+                this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=business.coupon.index").then(({data}) => {
+                    this.List = data.data.list;
+                    //转换面额
+                    this.List.forEach(item => {
+                        switch (item.coupon_type) {
+                            case '1':
+                                item.coupon_type = '10元'
+                                break;
+                            case '2':
+                                item.coupon_type = '20元'
+                                break;
+                            case '3':
+                                item.coupon_type = '30元'
+                                break;
+                            case '4':
+                                item.coupon_type = '50元'
+                                break;
+                            case '5':
+                                item.coupon_type = '100元'
+                        }
 
+                    })
+                    //转换使用时间
+                    this.List.forEach(item => {
+                        switch (item.use_date) {
+                            case '1':
+                                item.use_date = '周一至周五'
+                                break;
+                            case '2':
+                                item.use_date = '周六、周日'
+                                break;
+                            case '3':
+                                item.use_date = '周一至周日'
+                        }
 
+                    });
+                    //转换使用张数
+                    this.List.forEach(item => {
+                        switch (item.use_number) {
+                            case '1':
+                                item.use_number = '不限张数'
+                                break;
+                            case '2':
+                                item.use_number = '单次可使用1张'
+                                break;
+                            case '3':
+                                item.use_number = '单次可使用2张'
+                                break;
+                            case '4':
+                                item.use_number = '单次可使用3张'
+                        }
+
+                    });
+                    //转换使用范围
+                    this.List.forEach(item => {
+                        switch (item.use_range) {
+                            case '1':
+                                item.use_range = '全场可用'
+                                break;
+                            case '2':
+                                item.use_range = '部分商品可用'
+                        }
+
+                    });
+                    console.log('我刷新了优惠券列表：', this.List)
+                });
+
+            }
         },
         components: {
             Header,
@@ -110,7 +251,17 @@
             TabItem,
             Confirm
         },
-        filters: {}
+        filters: {},
+        watch: {
+            '$route': function (to) {
+                if (sessionStorage.goback == "yes") {
+                    //清空sessionStorage.goback；
+                    sessionStorage.goback = ''
+                    //例如重新调取一下列表页接口(或自定义刷新接口)；
+                    this.Refresh();
+                }
+            }
+        }
     }
 </script>
 
@@ -124,7 +275,7 @@
 
   .tab-content {
     width: 100%;
-    height: 85%;
+    height: 80%;
     overflow: hidden scroll;
     padding-top: 10px;
   }
@@ -192,7 +343,7 @@
   }
 
   .line-two {
-    font-size: 10px;
+    font-size: 0.6vw;
     color: #999999;
     font-weight: normal;
     margin-bottom: 18px;
@@ -235,6 +386,7 @@
     color: #666666;
     font-size: 14px;
   }
+
   /* confirm弹窗样式 */
   .confirm-dialog /deep/ .weui-skin_android .weui-dialog__ft {
     text-align: center;
@@ -257,6 +409,7 @@
   .confirm-dialog /deep/ .weui-dialog__btn:active {
     background-color: transparent;
   }
+
   .confirm-dialog /deep/ .weui-dialog__btn_primary,
   .confirm-dialog /deep/ .weui-dialog__btn_primary:active {
     background-color: #3976ff;
@@ -288,7 +441,8 @@
     font-size: 16px;
     font-weight: bold;
   }
-  /deep/ .vux-x-dialog-absolute .weui-dialog{
+
+  /deep/ .vux-x-dialog-absolute .weui-dialog {
     position: fixed;
   }
 
