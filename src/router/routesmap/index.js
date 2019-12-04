@@ -286,6 +286,12 @@ export default [
     name: 'myAdmissionTicket',
     component: resolve => require(['@/components/pages/kachuouser/myAdmissionTicket/myAdmissionTicket'], resolve),
   },
+  //门票申请退款
+  {
+    path: '/myAdmissionTicket/refund',
+    name: 'myAdmissionTicket',
+    component: resolve => require(['@/components/pages/kachuouser/myAdmissionTicket/refund'], resolve),
+  },
   //变现管理
   {
     path: '/Liquidation',

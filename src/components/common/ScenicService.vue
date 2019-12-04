@@ -45,10 +45,11 @@
               <i :class="reco[0].typename"></i>
               <span>{{reco[0].typename}}</span>
             </p>
-            <div class="map" @touchstart="mapclick($event,reco[0].typename)" @touchend="touchend($event,reco[0].typename)">
-              <el-amap :vid="reco[0].typename" :center="[reco[0].longitude,reco[0].latitude]" :zoom='15' class="amap-demo">
+            <div class="map">
+              <el-amap :vid="reco[0].typename" :center="[reco[0].longitude,reco[0].latitude]" :zoom='16' class="amap-demo">
                 <el-amap-marker v-for="(marker, index) in reco" :position="[marker.longitude,marker.latitude]"  :vid="reco[0].typename + index"></el-amap-marker>
               </el-amap>
+              <div class="mask" @touchstart="mapclick(reco[0].typename)"></div>
             </div>
           </div>
         </div>
@@ -82,10 +83,7 @@ export default {
       ],
       //商家type
       typeNum: "",
-      clientXs:0,
-      clientXe:0,
-      clientYs:0,
-      clientYe:0,
+
       //轮播图
       advSwiper: [],
       //推荐商家列表：
@@ -154,24 +152,8 @@ export default {
         // alert("跳转游");
       }
     },
-    mapclick(e,name){
-      console.log(e);
-      console.log(e.changedTouches[0].clientX);
-
-      this.clientXs = e.changedTouches[0].clientX
-      this.clientYs = e.changedTouches[0].clientY
-
-
-
-    },
-    touchend(e,name){
-
-      console.log(e.changedTouches[0].clientX);
-      this.clientXe = e.changedTouches[0].clientX
-      this.clientYe = e.changedTouches[0].clientY
-      if(this.clientXe == this.clientXs && this.clientYe == this.clientYs){
-        dsBridge.call("scenicService", name);
-      }
+    mapclick(name){
+      dsBridge.call("scenicService", name);
     },
     //跳转列表页
     getItem(link) {
@@ -322,6 +304,15 @@ img {
   }
   .map{
     height: 165px;
+    position: relative;
+    .mask{
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+    }
   }
 }
 </style>

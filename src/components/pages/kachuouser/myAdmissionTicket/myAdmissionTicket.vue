@@ -6,11 +6,11 @@
         <div class="tab-item-text">{{item.name}}</div>
       </tab-item>
     </tab>
-    <swiper v-model="index" :height="conSty" :show-dots="false" :threshold="150">
+    <swiper v-model="index" :height="conSty" :show-dots="false" :threshold="150" >
       <swiper-item v-for="(item, index) in data" :key="index">
-        <scroller scrollbar-y>
+        <scroller scrollbar-y @on-scroll-bottom="onScrollBottom" ref="scroll" :height="conSty" :scroll-bottom-offset="200" >
           <div class="swiper-item">
-            <div class="list-item" v-for="(item2,index2) in item">
+            <div class="list-item" v-for="(item2,index2) in item" :key="index+'_'+index2">
               <div class="list-item-top">
                 <div class="list-item-top-left">
                   <img alt="" :src="img">
@@ -18,17 +18,17 @@
                 <div class="list-item-top-right">
                   <div class="title-box">
                     <div class="title">{{item2.TicketName}}</div>
-                    <div class="status">已使用</div>
+                    <div class="status">{{Status[item2.Status]}}</div>
                   </div>
                   <div class="list-item-top-right-bottom">
                     <div>成人票x{{item2.TotalNum}}</div>
                     <div class="date">游玩日期：{{item2.OrdersDate}}</div>
-                    <div class="total"><span>总计</span><span class="price">{{item2.Price}}</span></div>
+                    <div class="total"><span>总计</span><span class="price">￥{{item2.Price}}</span></div>
                   </div>
                 </div>
               </div>
-              <div class="border-box">
-                <div class="btn-menu">申请退款</div>
+              <div class="border-box" v-if="item2.Status == 1">
+                <div class="btn-menu" @click="refund">申请退款</div>
               </div>
             </div>
           </div>
@@ -37,13 +37,12 @@
     </swiper>
   </div>
 </template>
-
 <script>
   import axios from "axios";
   import Header from "@/components/common/Header";
   import { myTicketOrdersList } from "@/servers/api";
   import { timeTodate } from "@/assets/js/tools";
-  import { Tab, TabItem, Cell, XButton,Swiper, SwiperItem } from "vux";
+  import { Tab, TabItem, Cell, XButton,Swiper, SwiperItem,Scroller } from "vux";
 
   export default {
 
@@ -56,7 +55,7 @@
           showLeftBack: true,
           showRightMore: false
         },
-        tabList: [{name:"全部",id:''}, {name:'待支付',id: 1},{name:"待出行",id:2}, {name:"退款中",id:5}, {name:"已使用",id:3}, {name:"已取消",id:6}],
+        tabList: [{name:"全部",id:'',PageIndex:1}, {name:'待支付',id: 1,PageIndex:1},{name:"待出行",id:2,PageIndex:1}, {name:"已使用",id:3,PageIndex:1},{name:"退款中",id:4,PageIndex:1},{name:"已取消",id:5,PageIndex:1}],
         index: 0,
         iscur: 0,
         dataList: [],
@@ -65,24 +64,24 @@
         currentTab:{},
         Url:'https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=site&a=entry&m=ewei_shopv2&do=mobile&r=scenic.ticket.orders_list',
         img: require("@/assets/images/indexImg.jpeg"),
-        data:[[],[],[],[],[],[]]
+        data:[[],[],[],[],[],[]],
+        Status: {
+          1:'待支付',
+          2:'待出行',
+          3:'已使用',
+          4:'退款中',
+          5:'已取消',
+        },
+        loadingFlag:true
       };
     },
 
-    components: {
-      Header,
-      Tab,
-      TabItem,
-      Swiper,
-      SwiperItem,
-      Cell,
-      XButton
-    },
+    components: {Header, Tab, TabItem, Swiper, SwiperItem, Cell, Scroller, XButton},
 
     computed: {
       conSty() {
         return document.documentElement.clientHeight - 90 + "px"
-      }
+      },
     },
 
     mounted() {
@@ -91,21 +90,54 @@
 
     methods: {
       getStatusData(){
-
-        axios.post(this.Url, { Status:this.tabList[this.index].id ,PageSize : 10,	PageIndex:0 }, {timeout: 10000, headers: {"Content-Type": "multipart/form-data", Authorization: 'fdbcbeced45587bb29fa37526644abba'}})
+        if(this.data[this.index].length !=0 ) return
+        axios.post(this.Url, { Status:this.tabList[this.index].id ,PageSize : 10,	PageIndex:this.tabList[this.index].PageIndex }, {timeout: 10000, headers: {"Content-Type": "multipart/form-data", Authorization: '9daf9189546b57613ba56bc2a8e7f41e'}})
           .then(res => {
-            console.log(res);
-            this.data[this.index] = res.data.data.Data.OrdersList
+            res.data.data.Data.OrdersList.forEach(item=>{
+              this.data[this.index].push(item)
+            })
+            this.$nextTick(()=>{
+              this.$refs.scroll[this.index].reset()
+              this.loadingFlag = true
+            })
           })
           .catch(err => {
             console.log(err);
           });
+      },
+
+      loadMore(){
+        axios.post(this.Url, { Status:this.tabList[this.index].id ,PageSize : 10,	PageIndex:this.tabList[this.index].PageIndex }, {timeout: 10000, headers: {"Content-Type": "multipart/form-data", Authorization: '9daf9189546b57613ba56bc2a8e7f41e'}})
+          .then(res => {
+            res.data.data.Data.OrdersList.forEach(item=>{
+              this.data[this.index].push(item)
+            })
+            this.$nextTick(()=>{
+              this.$refs.scroll[this.index].reset()
+              this.loadingFlag = true
+            })
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      },
+
+      onScrollBottom(){
+        console.log(1);
+        if(this.loadingFlag){
+          this.loadingFlag = false
+          this.tabList[this.index].PageIndex ++
+          this.loadMore()
+        }
+      },
+      refund(){
+        this.$router.push()
       }
     },
 
     watch: {
       index:function (to) {
-
+        this.getStatusData()
       }
     }
   };
