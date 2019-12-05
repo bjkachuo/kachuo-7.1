@@ -22,8 +22,8 @@
 
           <div class="card" v-for="(item,index) in List" :key="index">
             <div style="margin: 10px 0 0 4.51%;">
-              <div class="line-one">{{item.coupon_type}}代金券</div>
-              <div class="line-two">{{item.use_date}}可用 {{item.use_range}} {{item.use_number}}</div>
+              <div class="line-one">{{item.denomination_tit}}代金券</div>
+              <div class="line-two">{{item.use_date_tit}}可用 {{item.use_range_tit}} {{item.use_number_tit}}</div>
               <div class="line-three"><span style="color: #222222;font-size: 10px;float: left;visibility: hidden">有效期至2019-12-30</span><span
                 style="color: #FFA238;font-size: 18px;float: right;font-weight: bold;line-height: 12px;">￥{{item.price}}</span>
               </div>
@@ -39,8 +39,8 @@
         <b v-show="cur==1">
           <div class="card" v-for="(item,index) in ListTwo" :key="index">
             <div style="margin: 10px 0 0 4.51%;">
-              <div class="line-one">{{item.coupon_type}}元代金券</div>
-              <div class="line-two">{{item.use_date}}可用 {{item.use_range}} {{item.use_number}}</div>
+              <div class="line-one">{{item.denomination_tit}}元代金券</div>
+              <div class="line-two">{{item.use_date_tit}}可用 {{item.use_range_tit}} {{item.use_number_tit}}</div>
               <div class="line-three"><span style="color: #222222;font-size: 10px;float: left;visibility: hidden;">有效期至2019-12-30</span>
               </div>
             </div>
@@ -101,135 +101,11 @@
             this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=business.coupon.index&status=" + '1').then(({data}) => {
                 console.log(data);
                 this.List = data.data.list;
-                //转换面额
-                this.List.forEach(item => {
-                    switch (item.coupon_type) {
-                        case '1':
-                            item.coupon_type = '10元'
-                            break;
-                        case '2':
-                            item.coupon_type = '20元'
-                            break;
-                        case '3':
-                            item.coupon_type = '30元'
-                            break;
-                        case '4':
-                            item.coupon_type = '50元'
-                            break;
-                        case '5':
-                            item.coupon_type = '100元'
-                    }
-
-                })
-                //转换使用时间
-                this.List.forEach(item => {
-                    switch (item.use_date) {
-                        case '1':
-                            item.use_date = '周一至周五'
-                            break;
-                        case '2':
-                            item.use_date = '周六、周日'
-                            break;
-                        case '3':
-                            item.use_date = '周一至周日'
-                    }
-
-                });
-                //转换使用张数
-                this.List.forEach(item => {
-                    switch (item.use_number) {
-                        case '1':
-                            item.use_number = '不限张数'
-                            break;
-                        case '2':
-                            item.use_number = '单次可使用1张'
-                            break;
-                        case '3':
-                            item.use_number = '单次可使用2张'
-                            break;
-                        case '4':
-                            item.use_number = '单次可使用3张'
-                    }
-
-                });
-                //转换使用范围
-                this.List.forEach(item => {
-                    switch (item.use_range) {
-                        case '1':
-                            item.use_range = '全场可用'
-                            break;
-                        case '2':
-                            item.use_range = '部分商品可用'
-                    }
-
-                });
                 console.log('购物券上架列表：', this.List)
             });
             //调取优惠券删除列表
             this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=business.coupon.index&status=" + '-1').then(({data}) => {
                 this.ListTwo = data.data.list;
-                //转换面额
-                this.ListTwo.forEach(item => {
-                    switch (item.coupon_type) {
-                        case '1':
-                            item.coupon_type = '10元'
-                            break;
-                        case '2':
-                            item.coupon_type = '20元'
-                            break;
-                        case '3':
-                            item.coupon_type = '30元'
-                            break;
-                        case '4':
-                            item.coupon_type = '50元'
-                            break;
-                        case '5':
-                            item.coupon_type = '100元'
-                    }
-
-                })
-                //转换使用时间
-                this.ListTwo.forEach(item => {
-                    switch (item.use_date) {
-                        case '1':
-                            item.use_date = '周一至周五'
-                            break;
-                        case '2':
-                            item.use_date = '周六、周日'
-                            break;
-                        case '3':
-                            item.use_date = '周一至周日'
-                    }
-
-                });
-                //转换使用张数
-                this.ListTwo.forEach(item => {
-                    switch (item.use_number) {
-                        case '1':
-                            item.use_number = '不限张数'
-                            break;
-                        case '2':
-                            item.use_number = '单次可使用1张'
-                            break;
-                        case '3':
-                            item.use_number = '单次可使用2张'
-                            break;
-                        case '4':
-                            item.use_number = '单次可使用3张'
-                    }
-
-                });
-                //转换使用范围
-                this.ListTwo.forEach(item => {
-                    switch (item.use_range) {
-                        case '1':
-                            item.use_range = '全场可用'
-                            break;
-                        case '2':
-                            item.use_range = '部分商品可用'
-                    }
-
-                });
                 console.log('购物券已删除列表：', this.ListTwo)
             });
         },
@@ -271,139 +147,13 @@
                 //刷新上架列表
                 this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=business.coupon.index&status=" + '1').then(({data}) => {
                     this.List = data.data.list;
-                    //转换面额
-                    this.List.forEach(item => {
-                        switch (item.coupon_type) {
-                            case '1':
-                                item.coupon_type = '10元'
-                                break;
-                            case '2':
-                                item.coupon_type = '20元'
-                                break;
-                            case '3':
-                                item.coupon_type = '30元'
-                                break;
-                            case '4':
-                                item.coupon_type = '50元'
-                                break;
-                            case '5':
-                                item.coupon_type = '100元'
-                        }
-
-                    })
-                    //转换使用时间
-                    this.List.forEach(item => {
-                        switch (item.use_date) {
-                            case '1':
-                                item.use_date = '周一至周五'
-                                break;
-                            case '2':
-                                item.use_date = '周六、周日'
-                                break;
-                            case '3':
-                                item.use_date = '周一至周日'
-                        }
-
-                    });
-                    //转换使用张数
-                    this.List.forEach(item => {
-                        switch (item.use_number) {
-                            case '1':
-                                item.use_number = '不限张数'
-                                break;
-                            case '2':
-                                item.use_number = '单次可使用1张'
-                                break;
-                            case '3':
-                                item.use_number = '单次可使用2张'
-                                break;
-                            case '4':
-                                item.use_number = '单次可使用3张'
-                        }
-
-                    });
-                    //转换使用范围
-                    this.List.forEach(item => {
-                        switch (item.use_range) {
-                            case '1':
-                                item.use_range = '全场可用'
-                                break;
-                            case '2':
-                                item.use_range = '部分商品可用'
-                        }
-
-                    });
                     console.log('我刷新了上架列表：', this.List)
                 });
                 //刷新删除列表
                 this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=business.coupon.index&status=" + '-1').then(({data}) => {
                     this.ListTwo = data.data.list;
-                    //转换面额
-                    this.ListTwo.forEach(item => {
-                        switch (item.coupon_type) {
-                            case '1':
-                                item.coupon_type = '10元'
-                                break;
-                            case '2':
-                                item.coupon_type = '20元'
-                                break;
-                            case '3':
-                                item.coupon_type = '30元'
-                                break;
-                            case '4':
-                                item.coupon_type = '50元'
-                                break;
-                            case '5':
-                                item.coupon_type = '100元'
-                        }
-
-                    })
-                    //转换使用时间
-                    this.ListTwo.forEach(item => {
-                        switch (item.use_date) {
-                            case '1':
-                                item.use_date = '周一至周五'
-                                break;
-                            case '2':
-                                item.use_date = '周六、周日'
-                                break;
-                            case '3':
-                                item.use_date = '周一至周日'
-                        }
-
-                    });
-                    //转换使用张数
-                    this.ListTwo.forEach(item => {
-                        switch (item.use_number) {
-                            case '1':
-                                item.use_number = '不限张数'
-                                break;
-                            case '2':
-                                item.use_number = '单次可使用1张'
-                                break;
-                            case '3':
-                                item.use_number = '单次可使用2张'
-                                break;
-                            case '4':
-                                item.use_number = '单次可使用3张'
-                        }
-
-                    });
-                    //转换使用范围
-                    this.ListTwo.forEach(item => {
-                        switch (item.use_range) {
-                            case '1':
-                                item.use_range = '全场可用'
-                                break;
-                            case '2':
-                                item.use_range = '部分商品可用'
-                        }
-
-                    });
                     console.log('我刷新了删除列表：', this.ListTwo)
                 });
-
-
             }
         },
         components: {

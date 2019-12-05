@@ -18,6 +18,7 @@
 <script>
     import Header from "@/components/pages/backStage/StoreBackstage/BsHederWhite";
     import { XTextarea ,XInput} from 'vux'
+    import {StoreBsAddInfo} from "@/servers/api";
 
     export default {
         props: {},
@@ -34,9 +35,28 @@
         computed: {},
         watch: {},
         methods: {
+            //提示框
+            showTip(conttentTip) {
+                this.$vux.toast.text(conttentTip, "middle");
+                setTimeout(() => {
+                    this.$vux.toast.hide();
+                }, 1000);
+            },
             //提交操作
             submit(){
-                alert("提交");
+                StoreBsAddInfo({
+                    introduce:this.introduce,
+                }).then(res=>{
+                    console.log(res);
+                    if (res.result == 1){
+                        this.showTip("成功");
+                        sessionStorage.goback = "yes";
+                        this.$router.goBack();
+                    }else if(this.introduce == "") {
+                        this.showTip("请填写内容");
+                    }
+                })
+
             }
         },
         components: {

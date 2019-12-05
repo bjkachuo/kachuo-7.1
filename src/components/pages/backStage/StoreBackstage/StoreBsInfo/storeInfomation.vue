@@ -11,10 +11,11 @@
       <group>
         <cell title="店铺名称" :value="storeName" is-link @click.native="goName"></cell>
         <cell title="店铺LOGO图" is-link @click.native="goLogo">
-          <img child="after-title" width="40" height="40"
-               style="display:block;margin-right:5px;height: 40px;width: 40px" :src="storeLogo">
+          <img child="after-title" width="40" height="40" style="display:block;margin-right:5px;height: 40px;width: 40px" :src="this.storeLogo">
         </cell>
-        <cell title="店铺照片" :value="storePhoto" is-link @click.native="goPhoto"></cell>
+        <cell title="店铺照片" :value="storePhoto" is-link @click.native="goPhoto">
+          <img child="after-title" width="40" height="40" style="display:block;margin-right:5px;height: 40px;width: 40px" :src="this.storePhoto">
+        </cell>
       </group>
 
     </div>
@@ -46,6 +47,8 @@
                     showLeftBack: true,
                     showRightMore: false
                 },
+                //数据列表
+                List:[],
                 //店铺名称
                 storeName: "山城麻辣串串香",
                 //店铺LOGO
@@ -63,7 +66,23 @@
             }
         },
         computed: {},
-        watch: {},
+        mounted(){
+            this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=business.index.getBusiness").then(({data})=>{
+                console.log('店铺基本信息列表：',data);
+                this.List = data.data.business;
+                console.log('this.List:',this.List)
+                this.storeName = this.List.name;
+                this.storePhone = this.List.phone;
+                this.storeAddress = this.List.address;
+                //未定
+                // this.storeMain = this.List.content;
+                this.storeIntroduce = this.List.introduce;
+                this.storeLogo =this.List.logo;
+                this.storePhoto =this.List.image[0];
+
+
+            })
+        },
         methods: {
             //跳转店铺编辑名称
             goName() {
@@ -93,10 +112,25 @@
             //跳转店铺介绍
             goIntroduce() {
                 this.$router.push('/StoreEditIntroduce')
+            },
+            //刷新方法
+            Refresh(){
+                this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=business.index.getBusiness").then(({data})=>{
+                    console.log('刷新店铺基本信息列表：',data);
+                    this.List = data.data.business;
+                    console.log('this.List:',this.List)
+                    this.storeName = this.List.name;
+                    this.storePhone = this.List.phone;
+                    this.storeAddress = this.List.address;
+                    //未定
+                    // this.storeMain = this.List.content;
+                    this.storeIntroduce = this.List.introduce;
+                    this.storeLogo =this.List.logo;
+                    this.storePhoto =this.List.image[0];
+
+                })
+
             }
-
-
-
         },
         components: {
             Header,
@@ -104,7 +138,18 @@
             CellBox,
             Group
         },
-        filters: {}
+        filters: {},
+        watch: {
+            '$route': function (to) {
+                if (sessionStorage.goback == "yes") {
+                    //清空sessionStorage.goback；
+                    sessionStorage.goback = ''
+                    //例如重新调取一下列表页接口(或自定义刷新接口)；
+                    this.Refresh();
+                }
+            }
+        }
+
     }
 </script>
 
