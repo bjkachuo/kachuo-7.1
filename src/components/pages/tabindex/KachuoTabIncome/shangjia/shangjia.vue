@@ -3,7 +3,7 @@
       <Header style="margin-bottom: 46px" :titleContent="TitleObjData.titleContent" :showLeftBack="TitleObjData.showLeftBack" :showRightMore="TitleObjData.showRightMore"></Header>
       <div class="content">
         <div class="up-avata">
-          <p><span class="blod">上传头像</span><span>(温馨提示：照片不能大于1M)</span></p>
+          <p><span class="blod">上传商家LOGO图片</span><span>(温馨提示：照片不能大于1M)</span></p>
 
           <UploadImgOne  v-on:getHeaderImgUrl="getImgVal" :plus="true">
             <div slot="bg">
@@ -83,7 +83,8 @@
               shop_address:'',
               shop_bank:'',
               shop_bank_cardnumber:'',
-              shop_business_pic:''
+              shop_business_pic:'',
+                scenic_id:88
             },
           }
         },
@@ -153,7 +154,7 @@
           color: #222;
         }
         span{
-          font-size: 14px;
+          font-size: 12px;
           color: #999;
         }
       }
