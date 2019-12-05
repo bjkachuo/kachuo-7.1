@@ -1,51 +1,53 @@
 <template>
-  <div class="tab-item-paly-content">
+  <div class="tab-item-paly-content" @scroll="scroll($event)">
     <div class="banner"></div>
 
 
 
 
     <div class="line-one">
-<!--      <flexbox :gutter="0" wrap="wrap">-->
-<!--        <flexbox-item :span="1/3">-->
-<!--          <div class="flex-demo flex-one" @click="Ticket">门票认证</div>-->
-<!--        </flexbox-item>-->
-<!--        <flexbox-item :span="1/3">-->
-<!--          <div class="flex-demo flex-two" @click="Navigation">智慧导航</div>-->
-<!--        </flexbox-item>-->
-<!--        <flexbox-item :span="1/3">-->
-<!--          <div class="flex-demo flex-three" @click="service">游园服务</div>-->
-<!--        </flexbox-item>-->
-<!--        <flexbox-item :span="1/3">-->
-<!--          <div class="flex-demo flex-four" @click="Remember">记住的</div>-->
-<!--        </flexbox-item>-->
-<!--        <flexbox-item :span="1/3">-->
-<!--          <div class="flex-demo flex-five" @click="Understand">了解的</div>-->
-<!--        </flexbox-item>-->
-<!--        <flexbox-item :span="1/3">-->
-<!--          <div class="flex-demo flex-six" @click="TakeAway">带走的</div>-->
-<!--        </flexbox-item>-->
-<!--      </flexbox>-->
-      <div class="banner"></div>
       <ul class="goods-type">
         <li v-for="item in cellListTools">
           <div class="goods-type-icon" :class="item.icon" @click="goodsTypeGo(item.link)"></div>
           <div style="text-align: center">{{item.title}}</div>
         </li>
       </ul>
-
-
     </div>
+    <div class="line-two">
+      <flexbox :gutter="0" wrap="wrap">
+        <flexbox-item :span="1/3">
+          <div class="flex-demo" @click="Remember">
+            <div class="sp1">记住的</div>
+            <div class="sp2">一字文化视频</div>
+          </div>
+        </flexbox-item>
+        <flexbox-item :span="1/3">
+          <div class="flex-demo" @click="Understand">
+            <div class="sp1">了解的</div>
+            <div class="sp2">符号故事视频</div>
+          </div>
+        </flexbox-item>
+        <flexbox-item :span="1/3">
+          <div class="flex-demo" @click="TakeAway">
+            <div class="sp1">带走的</div>
+            <div class="sp2">景区自营商城</div>
+          </div>
+        </flexbox-item>
+      </flexbox>
+    </div>
+
+
+
     <div style="width:92%;margin: 15px auto 10px;">
       <swiper auto height="70px" class="custom">
         <swiper-item class="black">
-          <img src="../indexone.png" alt/>
+          <img src="./swiper.png" alt/>
         </swiper-item>
         <swiper-item class="black">
-          <img src="../../../assets/images/6-min.png" alt/>
+          <img src="./swiper.png" alt/>
         </swiper-item>
         <swiper-item class="black">
-          <img src="../../../assets/images/1-min.png" alt/>
+          <img src="./swiper.png" alt/>
         </swiper-item>
       </swiper>
     </div>
@@ -54,15 +56,14 @@
     <div class="line-three">
 
       <div v-for="(reco,index) in recommend" class="recommend">
-        <p><i :class="reco[0][0].typename"></i><span>{{reco[0][0].typename}}</span><span
-          style="float: right;margin-right: 10px;">更多</span></p>
+        <p><i :class="reco[0][0].typename"></i><span class="title">{{reco[0][0].typename}}</span><span class="more" @click="more(reco[0][0].typename)">更多<x-icon type="ios-arrow-right" size="10"></x-icon></span></p>
         <swiper auto height="345px" interval="3000">
           <swiper-item v-for="(swiperItem,ii) in reco">
             <div class="goods-box">
               <div v-for="(item,i) in swiperItem" class="goods" @click="details(item.id,item.type)">
+                <div class="score">4.5分</div>
                 <img :src="item.video_image" alt="">
-                <div style="font-size: 14px;color: #000;overflow: hidden;text-overflow:ellipsis; white-space: nowrap;padding-top: 10px;margin: 0 5px">{{item.name}}</div>
-                <div style="font-size: 10px;color: #666;overflow: hidden;text-overflow:ellipsis; white-space: nowrap;line-height: 35px;margin: 0 5px">{{item.product}}</div>
+                <div style="font-size: 14px;color: #000;padding-top: 10px;margin: 0 5px;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow: hidden   ">{{item.name}}</div>
               </div>
             </div>
           </swiper-item>
@@ -74,18 +75,9 @@
 
 <script>
 
-    import AdvertiseSwiper from "@/components/layout/AdvertiseSwiper";
     import Cell from "@/components/common/CellNoBorder";
-    import SwiperAdvEat from "@/components/common/SwiperAdvEat";
-    import {
-        Flexbox,
-        FlexboxItem,
-        Tab,
-        TabItem,
-        Scroller,
-        Swiper,
-        SwiperItem
-    } from "vux";
+
+    import { Flexbox, FlexboxItem, Tab, TabItem, Scroller, Swiper, SwiperItem } from "vux";
 
     export default {
         data() {
@@ -94,53 +86,48 @@
                 recommend: [],
                 cellListTools: [
                   {
-                    title: "品类视频",
-                    icon: "shipin",
-                    link: "/goodsVideoclassify?title=品类视频"
+                    title: "门票认证",
+                    icon: "门票认证",
+                    link: "/ticketsdiscount"
                   },
                   {
-                    title: "游园消费",
-                    icon: "youyuan",
-                    link: "/scenceconsum?title=景区消费&carousel=4"
+                    title: "智慧导航",
+                    icon: "智慧导航",
+                    link: "/intelligentnavigation"
                   },
                   {
-                    title: "景区好礼",
-                    icon: "haoli",
-                    link: "/scencegifts?title=景区好礼&carousel=5"
+                    title: "游园服务",
+                    icon: "游园服务",
+                    link: "/scenicService"
                   },
                   {
-                    title: "名家妙藏",
-                    icon: "miaocang",
-                    link: "/famouscollection?title=名家妙藏&carousel=6"
+                    title: "景区发布",
+                    icon: "景区发布",
+                    link: "/scencerelease"
                   }
                 ],
 
-
                 dataList: [
                     {
-                        imgUrl:
-                            "http://f.hiphotos.baidu.com/image/pic/item/359b033b5bb5c9eab0b192c9db39b6003af3b35e.jpg",
+                        imgUrl: "http://f.hiphotos.baidu.com/image/pic/item/359b033b5bb5c9eab0b192c9db39b6003af3b35e.jpg",
                         name: "门票认证",
                         link: "/ticketsdiscount",
                         imgSrc: require("@/assets/images/券@2x.png")
                     },
                     {
-                        imgUrl:
-                            "http://f.hiphotos.baidu.com/image/pic/item/359b033b5bb5c9eab0b192c9db39b6003af3b35e.jpg",
+                        imgUrl: "http://f.hiphotos.baidu.com/image/pic/item/359b033b5bb5c9eab0b192c9db39b6003af3b35e.jpg",
                         name: "智慧导航",
                         link: "/intelligentnavigation",
                         imgSrc: require("@/assets/images/坐标@2x.png")
                     },
                     {
-                        imgUrl:
-                            "http://f.hiphotos.baidu.com/image/pic/item/359b033b5bb5c9eab0b192c9db39b6003af3b35e.jpg",
+                        imgUrl: "http://f.hiphotos.baidu.com/image/pic/item/359b033b5bb5c9eab0b192c9db39b6003af3b35e.jpg",
                         name: "游园服务",
                         link: "/scenicService",
                         imgSrc: require("@/assets/images/吃喝玩乐@2x.png")
                     },
                     {
-                        imgUrl:
-                            "http://f.hiphotos.baidu.com/image/pic/item/359b033b5bb5c9eab0b192c9db39b6003af3b35e.jpg",
+                        imgUrl: "http://f.hiphotos.baidu.com/image/pic/item/359b033b5bb5c9eab0b192c9db39b6003af3b35e.jpg",
                         name: "带走的",
                         link: "/takeaway?carousel=2",
                         imgSrc: require("@/assets/images/带走的@2x.png")
@@ -167,10 +154,7 @@
             };
         },
         components: {
-            FunctionAreas,
-            AdvertiseSwiper,
             Cell,
-            SwiperAdvEat,
             Flexbox,
             FlexboxItem,
             Tab,
@@ -214,6 +198,9 @@
             Ticket() {
                 this.$router.push("/ticketsdiscount")
             },
+            scroll(e){
+              console.log(e);
+            },
             //跳转智慧导航
             Navigation() {
                 //原生安卓 ios 跳转智慧导航
@@ -226,12 +213,18 @@
 
             },
             goodsTypeGo(link) {
-              this.$router.push(link);
+              if(link == '/intelligentnavigation'){
+                console.log(1);
+                this.Navigation()
+              }else{
+                this.$router.push(link);
+              }
+
             },
             //跳转游园服务
             service() {
-                this.$router.push("/scenicService");
-              // dsBridge.call("navigation", "service")
+                // this.$router.push("/scenicService");
+              dsBridge.call("navigation", "service")
             },
             //跳转记住的
             Remember() {
@@ -285,7 +278,14 @@
                 }
             },
             getItem(link) {
-                this.$router.push(link);
+               this.$router.push(link);
+            },
+            more(type){
+              if(type == '吃吧') this.$router.push('/businessList?type=1&name=吃吧');
+              if(type == '喝吧') this.$router.push('/businessList?type=2&name=喝吧');
+              if(type == '玩吧') this.$router.push('/businessList?type=3&name=玩吧');
+              if(type == '住吧') this.$router.push('/businessList?type=4&name=住吧');
+              if(type == '游吧') this.$router.push('/TourList');
             },
             onItemClick(index) {
                 console.log(index);
@@ -296,6 +296,8 @@
 </script>
 <style lang="less" scoped>
   .tab-item-paly-content {
+    height: 100%;
+    overflow: hidden;
     .banner{
       width: 100%;
       height: 0;
@@ -303,72 +305,102 @@
       background-image: url("index-tab.png");
       background-size: 100% 100%;
     }
+    .line-one{
+      height: 55px;
+      position: relative;
+    }
     .goods-type {
       width: 92%;
-      margin: 55px auto 0;
+      margin: 0 auto;
       border-radius: 8px;
+      left: 4%;
       background-color: #fff;
-      height: 100px;
+      position: absolute;
+      top: -40px;
       display: flex;
+      box-shadow:0px 0px 8px 0px rgba(0, 0, 0, 0.06);
+      padding-bottom: 15px;
       li {
         flex: 1;
         .goods-type-icon {
-          width: 44px;
-          height: 44px;
-          margin: 12px auto 8px;
+          width: 50px;
+          height: 50px;
+          margin: 15px auto 8px;
           background-size: 100% 100%;
+        }
+        .门票认证{
+          background-image: url("./门票认证.png");
+        }
+        .景区发布{
+          background-image: url("./景区发布.png");
+        }
+        .智慧导航{
+          background-image: url("./智慧导航.png");
+        }
+        .游园服务{
+          background-image: url("./游园服务.png");
         }
       }
     }
   }
-
-  .line-one {
-    width: 92%;
-    height: 142px;
-    background: #ffffff;
-    margin: 0 auto 10px;
-    border-radius: 8px;
-    overflow: hidden;
-  }
-
-
-  .line-two {
-    width: 92%;
-    height: 69px;
-    /* background: gold; */
-    margin: 0 auto;
-    border-radius: 8px;
-  }
-
   .recommend {
     width: 92%;
-    height: 210px;
+    height: 170px;
     background: rgba(255, 255, 255, 1);
     box-shadow: 0px 10px 20px 0px rgba(0, 101, 255, 0.08);
     border-radius: 8px;
-    /* margin-bottom: 10px; */
     overflow: hidden;
     margin: 0 auto 15px;
-
+    .title{
+      font-size: 16px;
+      color: #333;
+      font-weight: bold;
+    }
+    .more{
+      float: right;
+      margin-top: 12px;
+      display: inline-block;
+      line-height: 23px;
+      height:23px;
+      width: 60px;
+      text-align: center;
+      border:1px solid #999;
+      border-radius:11px;
+      margin-right: 5px;
+      color: #999;
+      font-size: 12px;
+    }
     p {
       line-height: 45px;
       padding-left: 15px;
       font-size: 16px;
       color: #000;
     }
-
     .goods-box {
       .goods {
         border-radius: 4px;
         overflow: hidden;
-        background: rgba(245, 245, 245, 1);
-        width: 30%;
+        width: 28%;
         float: left;
-        margin-left: 2.5%;
-
+        font-size: 13px;
+        color: #222;
+        margin-left: 4%;
+        position: relative;
+        .score{
+          width:40px;
+          position: absolute;
+          left: 0;
+          top: 0;
+          text-align: center;
+          color: #fff;
+          font-size: 10px;
+          line-height: 22px;
+          background:rgba(57,118,255,1);
+          border-radius:4px 0px 8px 0px;
+        }
         img {
           width: 100%;
-          height: 95px;
+          height: 63px;
         }
       }
     }
@@ -381,95 +413,35 @@
   @import "../../../../node_modules/vux/src/styles/center.less";
 
   .flex-demo {
-    // text-align: center;
     color: rgba(255, 255, 255, 1);
-    text-shadow: 0px 8px 8px rgba(0, 0, 0, 0.24); // background-color: #20b907;
     background-clip: padding-box;
     width: 98%;
-    height: 70px;
+    padding-top: 20px;
     margin: 1px;
-    // margin-top: 23%;
-    background: cadetblue;
     font-size: 16px;
-    line-height: 2;
-    text-indent: 8px;
-  }
-
-  .flex-one {
-    background: linear-gradient(90deg,
-    rgba(255, 82, 101, 1) 0%,
-    rgba(255, 113, 99, 1) 100%);
+    text-align: center;
+    .sp1{
+      color: #333;
+      font-size: 15px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    .sp2{
+      color: #999;
+      font-size: 11px;
+    }
   }
 
 
   .line-three {
     width: 99%;
-    /* height: 208px; */
     border-radius: 5px;
-    /* background: darkgreen; */
     overflow: hidden;
     margin-left: 4px;
     margin-top: 10px;
-
     /deep/ .vux-indicator {
       display: none;
     }
-
-    /* margin-bottom: 35px; */
-  }
-
-  .flex-two {
-    background: linear-gradient(90deg,
-    rgba(253, 111, 99, 1) 0%,
-    rgba(255, 113, 99, 1) 100%);
-  }
-
-  .flex-three {
-    background: linear-gradient(90deg,
-    rgba(252, 128, 99, 1) 100%,
-    rgba(252, 112, 99, 1) 0%);
-  }
-
-  .flex-four {
-    background: linear-gradient(90deg,
-    rgba(98, 144, 255, 1) 0%,
-    rgba(48, 168, 255, 1) 100%);
-  }
-
-  .flex-five {
-    background: linear-gradient(90deg,
-    rgba(48, 168, 255, 1) 0%,
-    rgba(48, 168, 255, 1) 100%);
-  }
-
-  .flex-six {
-    background: linear-gradient(90deg,
-    rgba(48, 194, 255, 1) 100%,
-    rgba(48, 168, 255, 1) 0%);
-  }
-
-  .flex-demo .img-wrap {
-    width: 28px;
-    height: 28px;
-    margin-left: 13px;
-    margin-bottom: 9px;
-  }
-
-  .flex-demo .img-wrap img {
-    background: none;
-    width: 100%;
-  }
-
-  .flex-demo p {
-    font-size: 12px;
-  }
-
-  .flex-demo-two {
-    background-color: #ffffff;
-    border-radius: 8px;
-    background-clip: padding-box;
-    height: 69px;
-    overflow: hidden;
   }
 
   .flex-demo-two-content-wrap {
@@ -629,9 +601,7 @@
     overflow: inherit;
     // border-radius: 8px;
     /deep/ .vux-indicator {
-      right: 50%;
-      margin-right: -32px;
-      bottom: -27px;
+     display: none;
     }
 
     /deep/ .vux-icon-dot {

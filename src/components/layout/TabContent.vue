@@ -1,5 +1,5 @@
 <template>
-  <div :style="conHeight">
+  <div :style="conHeight"  @scroll="scroll">
     <KachuoTabPlay v-if="getCurrentTabItem === 0"></KachuoTabPlay>
     <KachuoTabMall v-if="getCurrentTabItem === 1"></KachuoTabMall>
     <KachuoTabCash v-if="getCurrentTabItem === 2"></KachuoTabCash>
@@ -55,6 +55,14 @@ export default {
   methods: {
     getContentHeight(){
       this.conHeight.height = document.documentElement.clientHeight - 46 + 'px';
+    },
+    scroll(e){
+      console.log(e.target.scrollTop);
+      if(e.target.scrollTop > 136){
+        //bottom
+      }else{
+        //top
+      }
     }
   },
   computed: {

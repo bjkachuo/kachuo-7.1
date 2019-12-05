@@ -162,7 +162,7 @@ export default {
   }
 .offer{
   width: 92%;
-  margin: 15px auto 10px;
+  margin: 59px auto 10px;
   padding-top: 31.8%;
   background-image: url("./banner.png");
   background-size: 100% 100%;

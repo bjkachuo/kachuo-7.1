@@ -764,113 +764,6 @@ export default [
     name: 'jingquMessageAudit',
     component: resolve => require(['@/components/pages/backStage/jingquBackstage/jingquliuyan/jingquMessageAudit'], resolve),
   },
-  /**********************************************商家后台*********************************************************************
-
-  //商家后台种类（要根据状态判断 如入驻时为1 则为吃吧或喝吧 2 为住吧）(此页面为没有状态时临时分类页便于调试)
-  // {
-  //   path: '/SjLinShiNavigation',
-  //   name: 'SjLinShiNavigation',
-  //   component: resolve => require(['@/components/pages/backStage/businessBackstage/SjLinShiNavigation'], resolve),
-  // },
-  // //吃吧或喝吧商家后台首页
-  // {
-  //   path: '/EatOrDrinkbusinessBsIndex',
-  //   name: 'EatOrDrinkbusinessBsIndex',
-  //   component: resolve => require(['@/components/pages/backStage/businessBackstage/eatDrinkBS/EatOrDrinkBusinessBsIndex'], resolve),
-  //
-  // },
-  // //吃吧或喝吧商家后台店铺信息页面
-  // {
-  //   path: '/EatOrDrinkStoreInformation',
-  //   name: 'EatOrDrinkStoreInformation',
-  //   component: resolve => require(['@/components/pages/backStage/businessBackstage/eatDrinkBS/EatOrDrinkStoreInformation'], resolve),
-  // },
-  // //吃吧或喝吧商家后台商品管理页面
-  // {
-  //   path: '/EatOrDrinkCommodityManagement',
-  //   name: 'EatOrDrinkCommodityManagement',
-  //   component: resolve => require(['@/components/pages/backStage/businessBackstage/eatDrinkBS/EatOrDrinkCommodityManagement'], resolve),
-  // },
-  // //吃吧或喝吧商家后台商品管理添加商品页面#########
-  // {
-  //   path: '/EatOrDrinkAddCommodity',
-  //   name: 'EatOrDrinkAddCommodity',
-  //   component: resolve => require(['@/components/pages/backStage/businessBackstage/eatDrinkBS/EatOrDrinkAddCommodity'], resolve),
-  //
-  // },
-  // //吃吧或喝吧商家后台订单管理页面
-  // {
-  //   path: '/EatOrDrinkOrderManagement',
-  //   name: 'EatOrDrinkOrderManagement',
-  //   component: resolve => require(['@/components/pages/backStage/businessBackstage/eatDrinkBS/EatOrDrinkOrderManagement'], resolve),
-  // },
-  // //吃吧或喝吧商家后台订单详情页面##########
-  // {
-  //   path: '/EatOrDrinkOrderDetails',
-  //   name: 'EatOrDrinkOrderDetails',
-  //   component: resolve => require(['@/components/pages/backStage/businessBackstage/eatDrinkBS/EatOrDrinkOrderDetails'], resolve),
-  //
-  // },
-  // //住吧商家后台首页
-  // {
-  //   path: '/LiveBusinessBsIndex',
-  //   name: 'LiveBusinessBsIndex',
-  //   component: resolve => require(['@/components/pages/backStage/businessBackstage/liveBS/LiveBusinessBsIndex'], resolve),
-  //
-  // },
-  // //住吧商家后台店铺信息页面
-  // {
-  //   path: '/LiveStoreInformation',
-  //   name: 'LiveStoreInformation',
-  //   component: resolve => require(['@/components/pages/backStage/businessBackstage/liveBS/LiveStoreInformation'], resolve),
-  // },
-  // //住吧商家后台商品管理页
-  // {
-  //   path: '/LiveCommodityManagement',
-  //   name: 'LiveCommodityManagement',
-  //   component: resolve => require(['@/components/pages/backStage/businessBackstage/liveBS/LiveCommodityManagement'], resolve),
-  //
-  // },
-  // //住吧商家后台订单管理页
-  // {
-  //   path: '/LiveOrderManagement',
-  //   name: 'LiveOrderManagement',
-  //   component: resolve => require(['@/components/pages/backStage/businessBackstage/liveBS/LiveOrderManagement'], resolve),
-  //
-  // },
-  /*********************************************************************************************************************/
-  //商家后台首页
-  // {
-  //   path: '/businessBsIndex',
-  //   name: 'businessBsIndex',
-  //   component: resolve => require(['@/components/pages/backStage/businessBackstage/businessBsIndex'], resolve),
-  //
-  // },
-  // //商家后台店铺信息页面
-  // {
-  //   path: '/StoreInformation',
-  //   name: 'StoreInformation',
-  //   component: resolve => require(['@/components/pages/backStage/businessBackstage/StoreInformation'], resolve),
-  // },
-  // //商家后台商品管理页面
-  // {
-  //   path: '/CommodityManagement',
-  //   name: 'CommodityManagement',
-  //   component: resolve => require(['@/components/pages/backStage/businessBackstage/CommodityManagement'], resolve),
-  // },
-  // //商家后台商品添加页面
-  // {
-  //   path: '/SjAddCommodity',
-  //   name: 'SjAddCommodity',
-  //   component: resolve => require(['@/components/pages/backStage/businessBackstage/SjAddCommodity'], resolve),
-  // },
-  // //商家后台订单管理页面
-  // {
-  //   path: '/SjBsOrder',
-  //   name: 'SjBsOrder',
-  //   component: resolve => require(['@/components/pages/backStage/businessBackstage/SjBsOrder'], resolve),
-  //
-  // },
   //***********************************商家管理后台(新)***********************************************
   //商家管理后台首页（新）
   {
@@ -896,6 +789,48 @@ export default [
     name: 'storeInfomation',
     component: resolve => require(['@/components/pages/backStage/StoreBackstage/StoreBsInfo/storeInfomation'], resolve),
   },
+  //商家管理后台编辑店铺名称（新）
+  {
+    path: '/StoreEditName',
+    name: 'StoreEditName',
+    component: resolve => require(['@/components/pages/backStage/StoreBackstage/StoreBsInfo/StoreEditName/StoreEditName'], resolve),
+  },
+  //商家管理后台编辑店铺LOGO（新）
+  {
+    path: '/StoreEditLogo',
+    name: 'StoreEditLogo',
+    component: resolve => require(['@/components/pages/backStage/StoreBackstage/StoreBsInfo/StoreEditLogo/StoreEditLogo'], resolve),
+  },
+  //商家管理后台编辑店铺照片（新）
+  {
+    path: '/StoreEditPhoto',
+    name: 'StoreEditPhoto',
+    component: resolve => require(['@/components/pages/backStage/StoreBackstage/StoreBsInfo/StoreEditPhoto/StoreEditPhoto'], resolve),
+  },
+  //商家管理后台编辑店铺电话（新）
+  {
+    path: '/StoreEditPhone',
+    name: 'StoreEditPhone',
+    component: resolve => require(['@/components/pages/backStage/StoreBackstage/StoreBsInfo/StoreEditPhone/StoreEditPhone'], resolve),
+  },
+  //商家管理后台编辑店铺地址（新）
+  {
+    path: '/StoreEditAddress',
+    name: 'StoreEditAddress',
+    component: resolve => require(['@/components/pages/backStage/StoreBackstage/StoreBsInfo/StoreEditAddress/StoreEditAddress'], resolve),
+  },
+  //商家管理后台主营分类（新）
+  {
+    path: '/StoreEditMain',
+    name: 'StoreEditMain',
+    component: resolve => require(['@/components/pages/backStage/StoreBackstage/StoreBsInfo/StoreEditMain/StoreEditMain'], resolve),
+  },
+  //商家管理后台店铺介绍（新）
+  {
+    path: '/StoreEditIntroduce',
+    name: 'StoreEditIntroduce',
+    component: resolve => require(['@/components/pages/backStage/StoreBackstage/StoreBsInfo/StoreEditIntroduce/StoreEditIntroduce'], resolve),
+  },
   //商家管理后台商家推荐页（新）
   {
     path: '/goodsRecommend',
@@ -919,6 +854,63 @@ export default [
     path: '/addCash',
     name: 'addCash',
     component: resolve => require(['@/components/pages/backStage/StoreBackstage/cashCoupon/addCash'], resolve),
+  },
+  /*******************************************名家后台***************************************************/
+  //名家后台首页
+  {
+    path: '/famousPersonBsIndex',
+    name: 'famousPersonBsIndex',
+    component: resolve => require(['@/components/pages/backStage/FamousPersonBackstage/famousPersonBsIndex'], resolve),
+
+  },
+  //名家后台个人信息页
+  {
+    path: '/famousPersonInformation',
+    name: 'famousPersonInformation',
+    component: resolve => require(['@/components/pages/backStage/FamousPersonBackstage/famousPersonInformation/famousPersonInformation'], resolve),
+
+  },
+  //名家后台名家动态页
+  {
+    path: '/famousPersonDynamic',
+    name: 'famousPersonDynamic',
+    component: resolve => require(['@/components/pages/backStage/FamousPersonBackstage/famousPersonDynamic/famousPersonDynamic'], resolve),
+
+  },
+  //名家后台发布动态页
+  {
+    path: '/famousPersonRelease',
+    name: 'famousPersonRelease',
+    component: resolve => require(['@/components/pages/backStage/FamousPersonBackstage/famousPersonDynamic/famousPersonRelease'], resolve),
+
+  },
+  //名家后台留言审核页
+  {
+    path: '/famousPersonMessageAudit',
+    name: 'famousPersonMessageAudit',
+    component: resolve => require(['@/components/pages/backStage/FamousPersonBackstage/famousPersonMessageAudit/famousPersonMessageAudit'], resolve),
+
+  },
+  //名家后台商品管理页
+  {
+    path: '/famousPersonManagement',
+    name: 'famousPersonManagement',
+    component: resolve => require(['@/components/pages/backStage/FamousPersonBackstage/famousPersonManagement/famousPersonManagement'], resolve),
+
+  },
+  //名家后台商品添加页
+  {
+    path: '/famousPersonManagementAdd',
+    name: 'famousPersonManagementAdd',
+    component: resolve => require(['@/components/pages/backStage/FamousPersonBackstage/famousPersonManagement/famousPersonManagementAdd'], resolve),
+
+  },
+  //名家后台商品订单管理页
+  {
+    path: '/famousPersonOrder',
+    name: 'famousPersonOrder',
+    component: resolve => require(['@/components/pages/backStage/FamousPersonBackstage/famousPersonOrder/famousPersonOrder'], resolve),
+
   },
 
   /*******************************************名家后台***************************************************/

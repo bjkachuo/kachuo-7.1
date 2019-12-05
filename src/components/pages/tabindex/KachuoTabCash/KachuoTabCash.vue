@@ -2,7 +2,7 @@
   <div class="tab-item-mall-wrap">
     <TabItemCashHeader v-if="!$store.state.isApp"></TabItemCashHeader>
     <!--    <TabItemMallAdvertise></TabItemMallAdvertise>-->
-    <div style="width:92%;margin: 15px auto 10px;">
+    <div style="width:92%;margin: 59px auto 10px;">
       <swiper auto height="110px" class="custom">
         <swiper-item class="black">
           <img src="./bianone.jpg" alt/>

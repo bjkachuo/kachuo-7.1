@@ -27,7 +27,6 @@
                 cordova: Vue.cordova,
                 badgeNum: 0,
                 timer: '',
-
             };
         },
         components: {
@@ -103,10 +102,10 @@
                     }
                 }
             }
+
             //end
         },
-        created() {
-        },
+
         mounted() {
             //安卓判断是否显示底部
             bridge.register("youyuan", r => {

@@ -167,10 +167,7 @@ export default {
   mounted() {
     //获取导游列表
     this.$http
-      .post(
-        "https://core.kachuo.com/app/ewei_shopv2_app.php?i=8&c=site&a=entry&m=ewei_shopv2&do=mobile&r=tourguide.index.getlist&scenic_id=" +
-          JSON.parse(sessionStorage.getItem("currentScenic"))
-      )
+      .post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=8&c=site&a=entry&m=ewei_shopv2&do=mobile&r=tourguide.index.getlist&scenic_id=" + JSON.parse(sessionStorage.getItem("currentScenic")))
       .then(({ data }) => {
         console.log(data);
         this.TList = data.data.list;
@@ -185,11 +182,11 @@ export default {
     customerService
   },
   computed: {
-    // conHei() {
-    //   return {
-    //     height: document.documentElement.clientHeight - 90 + "px"
-    //   };
-    // }
+    conHei() {
+      return {
+        height: document.documentElement.clientHeight - 90 + "px"
+      };
+    }
   }
 };
 </script>
