@@ -182,6 +182,8 @@
                         this.showTip("添加成功");
                         sessionStorage.goback = "yes";
                         this.$router.goBack();
+                    }else {
+                        this.showTip("错误");
                     }
                 })
             }
