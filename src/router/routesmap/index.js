@@ -261,6 +261,7 @@ export default [
     name: 'UserIntegral',
     component: resolve => require(['@/components/pages/kachuouser/UserIntegral'], resolve),
   },
+
   //购物车
   {
     path: '/Cartment',
@@ -274,6 +275,7 @@ export default [
     component: resolve => require(['@/components/pages/kachuouser/Cartment/goodsOlder'], resolve),
   },
   //商品订单
+
   {
     path: '/OrderList',
     name: 'OrderList',
@@ -291,6 +293,12 @@ export default [
     path: '/myAdmissionTicket/refund',
     name: 'ticketRefund',
     component: resolve => require(['@/components/pages/kachuouser/myAdmissionTicket/refund'], resolve),
+  },
+  //商品订单
+  {
+    path: '/orderlist/goodsOlder',
+    name: 'goodsOlder',
+    component: resolve => require(['@/components/pages/kachuouser/mallAdmin/goodsOlder'], resolve),
   },
   //变现管理
   {

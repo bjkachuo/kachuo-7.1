@@ -82,7 +82,9 @@ export default {
     //结算
     Settlement(){
       sessionStorage.goodsOlder = JSON.stringify(this.ListOne)
+
       this.$router.push('/Cartment/goodsOlder')
+
     },
     allClick(){
       this.ListOne.forEach(item=>{

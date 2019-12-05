@@ -45,11 +45,11 @@
               <i :class="reco[0].typename"></i>
               <span>{{reco[0].typename}}</span>
             </p>
-            <div class="map">
-              <el-amap :vid="reco[0].typename" :center="[reco[0].longitude,reco[0].latitude]" :zoom='16' class="amap-demo">
-                <el-amap-marker v-for="(marker, index) in reco" :position="[marker.longitude,marker.latitude]"  :vid="reco[0].typename + index"></el-amap-marker>
+
+            <div class="map" @click="mapclick">
+              <el-amap :vid="reco[0].typename" :center="[reco[0].latitude,reco[0].longitude]" :zoom='16' class="amap-demo">
+                <el-amap-marker v-for="(marker, index) in reco" :position="[marker.latitude,marker.longitude]"  :vid="index"></el-amap-marker>
               </el-amap>
-              <div class="mask" @touchstart="mapclick(reco[0].typename)"></div>
             </div>
           </div>
         </div>
@@ -152,6 +152,7 @@ export default {
         // alert("跳转游");
       }
     },
+
     mapclick(name){
       dsBridge.call("scenicService", name);
     },
