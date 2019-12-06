@@ -128,30 +128,6 @@ export default {
       dsBridge.call("scanning", "web");
       bridge.register("scanning", r => {
         alert(r)
-<<<<<<< Updated upstream
-        this.text = r
-      });
-    },
-    tip() {
-      verification({code:this.text}).then(res=>{
-        if(res.result == 1){
-          this.flag = true
-          this.$vux.toast.show({
-            type: "success",
-            text: "验票成功",
-            time: 1000
-          });
-        }else{
-          alert(JSON.stringify(res))
-          this.$vux.toast.show({
-            type: "warn",
-            text: res.msg,
-            time: 1000
-          });
-        }
-      })
-
-=======
       });
     },
     tip() {
@@ -163,7 +139,7 @@ export default {
       setTimeout(() => {
         this.$router.push("/indextab");
       }, 2000);
->>>>>>> Stashed changes
+
     }
   },
   components: {Header, Tab, TabItem, Flexbox, FlexboxItem, Confirm}

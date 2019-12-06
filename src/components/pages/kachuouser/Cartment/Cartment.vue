@@ -82,13 +82,9 @@ export default {
     //结算
     Settlement(){
       sessionStorage.goodsOlder = JSON.stringify(this.ListOne)
-<<<<<<< Updated upstream:src/components/pages/kachuouser/Cartment/Cartment.vue
 
       this.$router.push('/Cartment/goodsOlder')
 
-=======
-      this.$router.push('/orderlist/goodsOlder')
->>>>>>> Stashed changes:src/components/pages/kachuouser/mallAdmin/Cartment.vue
     },
     allClick(){
       this.ListOne.forEach(item=>{
