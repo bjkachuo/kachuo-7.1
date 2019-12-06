@@ -13,56 +13,18 @@
         <div class="text-wrap" @click="open"><p>添加推荐</p></div>
       </div>
     </div>
-    <div class="card">
+    <div class="card" v-for="(item,index) in lists" :key="index">
       <div class="left">
-        <div style="width: 74px;height:74px;border-radius:8px;margin-right:4%;"><img src="" alt=""
-                                                                                     style="width:100%;border-radius:8px;height: 100%;">
-        </div>
-        <div style="width: 56%;"><p style="font-size: 14px;color: #222222;">麻辣牛肉串</p></div>
+        <div style="width: 74px;height:74px;border-radius:8px;margin-right:4%;"><img :src="item.image[0]" alt="" style="width:100%;border-radius:8px;height: 100%;"></div>
+        <div style="width: 56%;"><p style="font-size: 14px;color: #222222;">{{item.name}}</p></div>
       </div>
       <div class="right"
            style="width: 80px;height: 30px;border-radius: 15px;border:1px solid #CCCCCC;background: #FFFFFF;margin: 64px 4% 0 0;"
-           @click="onDel">
+           @click="onDel(item)">
         <p style="font-size: 14px;color: #999999;text-align: center;line-height: 28px;">删除</p>
       </div>
     </div>
-    <div class="card">
-      <div class="left">
-        <div style="width: 74px;height:74px;border-radius:8px;margin-right:4%;"><img src="" alt=""
-                                                                                     style="width:100%;border-radius:8px;height: 100%;">
-        </div>
-        <div style="width: 56%;"><p style="font-size: 14px;color: #222222;">麻辣牛肉串</p></div>
-      </div>
-      <div class="right"
-           style="width: 80px;height: 30px;border-radius: 15px;border:1px solid #CCCCCC;background: #FFFFFF;margin: 64px 4% 0 0;" @click="onDel">
-        <p
-          style="font-size: 14px;color: #999999;text-align: center;line-height: 28px;">删除</p></div>
-    </div>
-    <div class="card">
-      <div class="left">
-        <div style="width: 74px;height:74px;border-radius:8px;margin-right:4%;"><img src="" alt=""
-                                                                                     style="width:100%;border-radius:8px;height: 100%;">
-        </div>
-        <div style="width: 56%;"><p style="font-size: 14px;color: #222222;">麻辣牛肉串</p></div>
-      </div>
-      <div class="right"
-           style="width: 80px;height: 30px;border-radius: 15px;border:1px solid #CCCCCC;background: #FFFFFF;margin: 64px 4% 0 0;" @click="onDel">
-        <p
-          style="font-size: 14px;color: #999999;text-align: center;line-height: 28px;">删除</p></div>
-    </div>
-    <div class="card">
-      <div class="left">
-        <div style="width: 74px;height:74px;border-radius:8px;margin-right:4%;"><img src="" alt=""
-                                                                                     style="width:100%;border-radius:8px;height: 100%;">
-        </div>
-        <div style="width: 56%;"><p style="font-size: 14px;color: #222222;">麻辣牛肉串</p></div>
-      </div>
-      <div class="right"
-           style="width: 80px;height: 30px;border-radius: 15px;border:1px solid #CCCCCC;background: #FFFFFF;margin: 64px 4% 0 0;" @click="onDel">
-        <p
-          style="font-size: 14px;color: #999999;text-align: center;line-height: 28px;">删除</p></div>
-    </div>
-    <div v-transfer-dom>
+
       <x-dialog v-model="showDialogStyle" hide-on-blur
                 :dialog-style="{'max-width': '100%', width: '100%', height: '50%', 'background-color': 'transparent'}">
         <p style="color:#fff;text-align:right;margin-right: 34px;" @click="showDialogStyle = false">
@@ -97,7 +59,7 @@
           <div class="up-behind" @click="Submit" v-if="this.goodsName !='' && this.goodsPhoto !=''">提交</div>
         </div>
       </x-dialog>
-    </div>
+
     <confirm
       class="confirm-dialog"
       v-model="isconfirm"
@@ -113,12 +75,10 @@
     import Header from "@/components/pages/backStage/StoreBackstage/BsHederWhite";
     import {XDialog, TransferDomDirective as TransferDom, Group, XInput, Confirm} from 'vux'
     import UploadImgOne from "@/components/common/UploadImgOne/UploadImgOne";
+    import {StoreBsAddGoods} from "@/servers/api";
 
     export default {
-        props: {},
-        directives: {
-            TransferDom
-        },
+
         data() {
             return {
                 TitleObjData: {
@@ -133,13 +93,34 @@
                 //商品名称
                 goodsName: "",
                 //商品图片
-                goodsPhoto: ""
-
+                goodsPhoto: "",
+                //推荐商品列表
+                lists:[],
+                //临时item
+                activeItem:""
             }
         },
-        computed: {},
-        watch: {},
+
+        mounted(){
+            //获取推荐列表
+                this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=business.goods.lists").then(({data})=>{
+                    console.log('推荐列表',data);
+                    this.lists = data.data.list;
+                    // data.data.list.forEach((item,i)=>{
+                    //     this.lists.push(item)
+                    //     console.log('push后的数组',this.lists)
+                    // })
+                })
+        },
         methods: {
+            //提示框
+            showTip(conttentTip) {
+                this.$vux.toast.text(conttentTip, "middle");
+                setTimeout(() => {
+                    this.$vux.toast.hide();
+                }, 1000);
+            },
+
             open() {
                 this.showDialogStyle = true;
             },
@@ -148,8 +129,10 @@
                 this.goodsPhoto = val;
             },
             //删除弹窗，方法
-            onDel() {
+            onDel(item) {
                 this.isconfirm = !this.isconfirm;
+                this.activeItem = item;
+                console.log("打印activeItem",this.activeItem);
             },
             //点击取消事件
             onCancel() {
@@ -159,10 +142,39 @@
             //点击确认事件
             onConfirm() {
                 console.log("我点了确认");
+                this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=business.goods.del&id="+this.activeItem.id).then(({data})=>{
+                    console.log(data);
+                    if (data.data.result == 1){
+                        this.showTip("删除成功");
+                        this.Refresh();
+                    }
+                })
             },
             //添加商品提交
-            Submit(){
-                alert("提交！！")
+            Submit() {
+                StoreBsAddGoods({
+                    name: this.goodsName,
+                    image: this.goodsPhoto.split()
+                }).then(res => {
+                    console.log(res);
+                    if (res.result == 1) {
+                        this.showTip("添加成功");
+                        this.showDialogStyle = false;
+                        this.Refresh();
+                        this.$refs.upimg.imgUrl  = "";
+                        this.goodsPhoto = "";
+                    }else{
+                        this.showTip("添加错误");
+                    }
+                })
+            },
+            //刷新列表方法
+            Refresh(){
+                this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=business.goods.lists").then(({data})=>{
+                    console.log('刷新推荐列表',data);
+                    this.lists = data.data.list;
+                })
+
             }
 
         },
@@ -402,7 +414,8 @@
       }
     }
   }
-  /deep/ .vux-x-dialog-absolute .weui-dialog{
+
+  /deep/ .vux-x-dialog-absolute .weui-dialog {
     position: fixed;
   }
 
