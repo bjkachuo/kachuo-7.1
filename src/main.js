@@ -82,9 +82,6 @@ Vue.use(VueLazyload);
 // vux组件库
 import Vuex from 'vuex';
 Vue.use(Vuex);
-// 使用微信插件
-import { WechatPlugin } from 'vux';
-Vue.use(WechatPlugin);
 
 // VueBetterScroll
 import VueBetterScroll from 'vue2-better-scroll';
@@ -116,9 +113,6 @@ Vue.use(ConfigPlugin, {
 import FastClick from 'fastclick';
 FastClick.attach(document.body);
 
-// vue中使用cordova插件
-import VueCordova from 'vue-cordova';
-Vue.use(VueCordova);
 
 // 判断android用户是否点击两次返回键推出app
 import { eventBackButton } from '@/assets/js/quitapp';
@@ -147,9 +141,7 @@ new Vue({
   router,
   store,
   data: () => {
-    return {
-      cordova: Vue.cordova
-    }
+    return {}
   },
   render: h => h(App)
 }).$mount('#app-box')
@@ -174,9 +166,8 @@ Vue.use(VueQuillEditor, {
   placeholder: '请输入内容',
 });
 //微信授权登录
-import wechatAuth from './servers/wechatAuth'//微信登录插件
+
 const qs= require('qs');
 
-Vue.use(wechatAuth, {appid: 'XXXXXXXXX'});
 
 

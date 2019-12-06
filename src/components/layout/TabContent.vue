@@ -57,11 +57,11 @@ export default {
       this.conHeight.height = document.documentElement.clientHeight - 46 + 'px';
     },
     scroll(e){
-      console.log(e.target.scrollTop);
       if(e.target.scrollTop > 136){
+        this.$store.state.nativeHead = 'white'
         //bottom
       }else{
-        //top
+        this.$store.state.nativeHead = 'transparent'
       }
     }
   },
@@ -73,7 +73,6 @@ export default {
   },
   watch: {
     haha: (to, from) => {
-      console.log(to);
       this.getCurrentTabItem = to
     }
   }

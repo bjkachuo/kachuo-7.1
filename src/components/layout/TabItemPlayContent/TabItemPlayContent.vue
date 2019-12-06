@@ -2,9 +2,6 @@
   <div class="tab-item-paly-content" @scroll="scroll($event)">
     <div class="banner"></div>
 
-
-
-
     <div class="line-one">
       <ul class="goods-type">
         <li v-for="item in cellListTools">
@@ -198,9 +195,6 @@
             Ticket() {
                 this.$router.push("/ticketsdiscount")
             },
-            scroll(e){
-              console.log(e);
-            },
             //跳转智慧导航
             Navigation() {
                 //原生安卓 ios 跳转智慧导航
@@ -221,11 +215,7 @@
               }
 
             },
-            //跳转游园服务
-            service() {
-                // this.$router.push("/scenicService");
-              dsBridge.call("navigation", "service")
-            },
+
             //跳转记住的
             Remember() {
                 this.$router.push("/remember?type=5&branch=1");
@@ -291,7 +281,11 @@
                 console.log(index);
             }
         },
-        watch: {}
+        watch: {
+          '$store.state.nativeHead':function (to) {
+            dsBridge.call("nativeHead", to);
+          }
+        }
     };
 </script>
 <style lang="less" scoped>

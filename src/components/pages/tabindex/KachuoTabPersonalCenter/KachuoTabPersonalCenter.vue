@@ -183,6 +183,11 @@
                         imgSrc: require("@/assets/images/客服@2x.png")
                     },
                     {
+                      name: "我的代金券",
+                      link: "myCashCoupon",
+                      imgSrc: require("@/assets/images/图片@2x.png")
+                    },
+                    {
                         name: "云相册",
                         link: "/photoalbum",
                         imgSrc: require("@/assets/images/图片@2x.png")

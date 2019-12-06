@@ -49,7 +49,8 @@
         },
 
       mounted() {
-        getOrdersInfo({ordersid:123}).then(res=>{
+        alert(this.$route.query.ordersid)
+        getOrdersInfo({ordersid:this.$route.query.ordersid}).then(res=>{
           this.detile = res.data
         })
       }

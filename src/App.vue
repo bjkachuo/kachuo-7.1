@@ -165,17 +165,4 @@ export default {
   transition: all 0.4s ease;
 }
 
-/*.slide-left-enter,*/
-/*.slide-right-leave-active {*/
-/*  opacity: 0;*/
-/*  -webkit-transform: translate(100%, 0);*/
-/*  transform: translate(100%, 0);*/
-/*}*/
-
-/*.slide-left-leave-active,*/
-/*.slide-right-enter {*/
-/*  opacity: 0.5;*/
-/*  -webkit-transform: translate(-100%, 0);*/
-/*  transform: translate(-100% 0);*/
-/*}*/
 </style>

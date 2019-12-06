@@ -64,7 +64,6 @@ export default  {
       if(this.hideApp){
         if(this.$store.state.isApp) {
           this.$store.state.loadingWhite = true
-          // alert(this.$store.state.isApp)
         }
       }
       this.$router.goBack();

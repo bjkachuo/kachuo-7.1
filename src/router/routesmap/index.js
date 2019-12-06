@@ -306,11 +306,31 @@ export default [
     name: 'ConsignContent',
     component: resolve => require(['@/components/pages/kachuouser/Liquidation/ConsignContent'], resolve),
   },
+  //商品收藏
   {
     path: '/collection',
     name: 'Collection',
     component: resolve => require(['@/components/pages/kachuouser/Collection'], resolve),
   },
+  //我的代金券
+  {
+    path: '/myCashCoupon',
+    name: 'MyCashCoupon',
+    component: resolve => require(['@/components/pages/kachuouser/myCashCoupon/myCashCoupon'], resolve),
+  },
+  //代金券详情
+  {
+    path: '/cashCoupon/detile',
+    name: 'CashCouponDetile',
+    component: resolve => require(['@/components/pages/kachuouser/myCashCoupon/detile'], resolve),
+  },
+  //代金券详情
+  {
+    path: '/cashCoupon/refund',
+    name: 'CashCouponRefund',
+    component: resolve => require(['@/components/pages/kachuouser/myCashCoupon/refund'], resolve),
+  },
+  //云相册
   {
     path: '/photoalbum',
     name: 'PhotoAlbum',

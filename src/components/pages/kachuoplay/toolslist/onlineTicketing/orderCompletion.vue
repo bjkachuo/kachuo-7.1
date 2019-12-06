@@ -61,7 +61,7 @@
         methods:{
           confirmOrder(){
             buyTicket({ticket:this.$route.query.id,idCard:this.ruleCode,date:this.selected.Date,type:1}).then(res=>{
-              console.log(res);
+              alert(JSON.stringify(res));
               let WXparams = {
                 partnerid: res.data.pay.partnerid, // merchant id
                 prepayid: res.data.pay.prepayid, // prepay id
@@ -83,9 +83,9 @@
                   })
 
                   buyTicketHd({order_sn: res.data.order_sn})
-                    .then(res => {
-                      res.result == 1 ? this.$router.push('/completeTicket'):'失败'
-                      alert(JSON.stringify(res))
+                    .then(res2 => {
+                      res2.result == 1 ? this.$router.push('/completeTicket?ordersid=' + res.data.ordersid):'失败'
+                      alert(JSON.stringify(res2))
                     })
                     .catch(err => {
                       alert(JSON.stringify(err))
@@ -129,10 +129,12 @@
       padding: 16px;
       border-bottom: 1px solid #ddd;
       .title{
-
+        font-size: 16px;
+        color: #222;
       }
       .link{
-
+        color: #308DFF;
+        font-size: 11px;
       }
     }
     .piao-contnet{
