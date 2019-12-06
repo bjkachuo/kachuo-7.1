@@ -49,32 +49,32 @@
                 },
                 //券面额选项
                 list1: [
-                    {
-                        name: '10元',
-                        value: '1',
-                        parent: 0
-                    },
-                    {
-                        name: '20元',
-                        value: '2',
-                        parent: 0
-                    },
-                    {
-                        name: '30元',
-                        value: '3',
-                        parent: 0
-                    },
-                    {
-                        name: '50元',
-                        value: '4',
-                        parent: 0
-                    },
-                    {
-                        name: '100元',
-                        value: '5',
-                        parent: 0
-                    },
-
+                    // {
+                    //     name: '10元',
+                    //     value: '1',
+                    //     parent: 0
+                    // },
+                    // {
+                    //     name: '20元',
+                    //     value: '2',
+                    //     parent: 0
+                    // },
+                    // {
+                    //     name: '30元',
+                    //     value: '3',
+                    //     parent: 0
+                    // },
+                    // {
+                    //     name: '50元',
+                    //     value: '4',
+                    //     parent: 0
+                    // },
+                    // {
+                    //     name: '100元',
+                    //     value: '5',
+                    //     parent: 0
+                    // },
+                    //
                 ],
                 //券面额
                 facePrice: [],
@@ -82,61 +82,61 @@
                 price: "",
                 //使用时间选项
                 list2: [
-                    {
-                        name: '周一至周五',
-                        value: '1',
-                        parent: 0
-                    },
-                    {
-                        name: '周六、周日',
-                        value: '2',
-                        parent: 0
-                    },
-                    {
-                        name: '周一至周日',
-                        value: '3',
-                        parent: 0
-                    }
+                    // {
+                    //     name: '周一至周五',
+                    //     value: '1',
+                    //     parent: 0
+                    // },
+                    // {
+                    //     name: '周六、周日',
+                    //     value: '2',
+                    //     parent: 0
+                    // },
+                    // {
+                    //     name: '周一至周日',
+                    //     value: '3',
+                    //     parent: 0
+                    // }
                 ],
                 //时间选项
                 time: [],
                 //适用范围选项
                 list3: [
-                    {
-                        name: '全场可用',
-                        value: '1',
-                        parent: 0
-                    },
-                    {
-                        name: '部分商品可用',
-                        value: '2',
-                        parent: 0
-                    },
+                    // {
+                    //     name: '全场可用',
+                    //     value: '1',
+                    //     parent: 0
+                    // },
+                    // {
+                    //     name: '部分商品可用',
+                    //     value: '2',
+                    //     parent: 0
+                    // },
                 ],
                 //适用范围
                 range: [],
                 //使用限制选项
                 list4: [
-                    {
-                        name: '不限张数',
-                        value: '1',
-                        parent: 0
-                    },
-                    {
-                        name: '单次可使用1张',
-                        value: '2',
-                        parent: 0
-                    },
-                    {
-                        name: '单次可使用2张',
-                        value: '3',
-                        parent: 0
-                    },
-                    {
-                        name: '单次可使用3张',
-                        value: '4',
-                        parent: 0
-                    },
+                    // {
+                    //     name: '不限张数',
+                    //     value: '1',
+                    //     parent: 0
+                    // },
+                    // {
+                    //     name: '单次可使用1张',
+                    //     value: '2',
+                    //     parent: 0
+                    // },
+                    // {
+                    //     name: '单次可使用2张',
+                    //     value: '3',
+                    //     parent: 0
+                    // },
+                    // {
+                    //     name: '单次可使用3张',
+                    //     value: '4',
+                    //     parent: 0
+                    // },
 
                 ],
                 //使用限制
@@ -145,6 +145,32 @@
         },
         computed: {},
         watch: {},
+        mounted(){
+            //获取分类
+            this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=business.coupon.get_class").then(({data})=>{
+                console.log(data);
+                this.list1 = data.data.config.denomination;
+                this.list1 = this.list1.map(item => {
+                    return {name:item.name,value:item.value.toString(),parent:0};
+                });
+                this.list2 = data.data.config.time;
+                this.list2 = this.list2.map(item => {
+                    return {name:item.name,value:item.value.toString(),parent:0};
+                });
+
+                this.list3 = data.data.config.range;
+                this.list3 = this.list3.map(item => {
+                    return {name:item.name,value:item.value.toString(),parent:0};
+                });
+
+                this.list4 = data.data.config.num;
+                this.list4 = this.list4.map(item => {
+                    return {name:item.name,value:item.value.toString(),parent:0};
+                });
+
+                console.log(this.list1)
+            })
+        },
         methods: {
             //提示框
             showTip(conttentTip) {
@@ -167,7 +193,7 @@
                 // alert("可以提交啦！！！");
                 StoreBsAddCash({
                     //优惠券面额
-                    coupon_type: this.facePrice.join(),
+                    denomination: this.facePrice.join(),
                     //输入的价格
                     price: this.price,
                     //时间选项

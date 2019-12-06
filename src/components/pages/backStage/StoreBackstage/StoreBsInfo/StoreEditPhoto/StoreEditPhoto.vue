@@ -27,6 +27,7 @@
 <script>
     import Header from "@/components/pages/backStage/StoreBackstage/BsHederWhite";
     import UploadImgOne from "@/components/common/UploadImgOne/UploadImgOne";
+    import {StoreBsAddInfo} from "@/servers/api";
 
     export default {
         props: {},
@@ -43,14 +44,32 @@
         computed: {},
         watch: {},
         methods: {
+            //提示框
+            showTip(conttentTip) {
+                this.$vux.toast.text(conttentTip, "middle");
+                setTimeout(() => {
+                    this.$vux.toast.hide();
+                }, 1000);
+            },
             //上传Logo
             getImgVal(val) {
                 this.photo = val;
             },
-
             //提交操作
             submit(){
-                alert("提交");
+                StoreBsAddInfo({
+                    image:this.photo.split(),
+                }).then(res=>{
+                    console.log(res);
+                    if (res.result == 1){
+                        this.showTip("成功");
+                        sessionStorage.goback = "yes";
+                        this.$router.goBack();
+                    }else if(this.photo == "") {
+                        this.showTip("请选择照片");
+                    }
+                })
+
             }
 
         },

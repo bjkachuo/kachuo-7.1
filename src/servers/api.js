@@ -456,3 +456,9 @@ export const JqBsSendGoods = (data) => http.post("scenic.shop.sendOrder", data);
 
 //商家后台添加代金券
 export const StoreBsAddCash = (data) => http.post("business.coupon.add", data);
+
+//商家后上传基本信息图片（传不同参数）
+export const StoreBsAddInfo = (data) => http.post("business.index.save", data);
+
+//商家后台添加商品推荐
+export const StoreBsAddGoods = (data) => http.post("business.goods.add", data);
