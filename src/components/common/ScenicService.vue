@@ -45,10 +45,16 @@
               <i :class="reco[0].typename"></i>
               <span>{{reco[0].typename}}</span>
             </p>
+<<<<<<< Updated upstream
 
             <div class="map" @click="mapclick(reco[0].typename)">
               <el-amap :vid="reco[0].typename" :center="[reco[0].longitude,reco[0].latitude]" :zoom='16' class="amap-demo">
                 <el-amap-marker v-for="(marker, index) in reco" :position="[marker.longitude,marker.latitude]"  :vid="index"></el-amap-marker>
+=======
+            <div class="map" @click="mapclick">
+              <el-amap :vid="reco[0].typename" :center="[reco[0].latitude,reco[0].longitude]" :zoom='16' class="amap-demo">
+                <el-amap-marker v-for="(marker, index) in reco" :position="[marker.latitude,marker.longitude]"  :vid="index"></el-amap-marker>
+>>>>>>> Stashed changes
               </el-amap>
             </div>
           </div>
@@ -152,9 +158,14 @@ export default {
         // alert("跳转游");
       }
     },
+<<<<<<< Updated upstream
 
     mapclick(name){
       dsBridge.call("scenicService", name);
+=======
+    mapclick(){
+      console.log(1);
+>>>>>>> Stashed changes
     },
     //跳转列表页
     getItem(link) {
@@ -305,6 +316,7 @@ img {
   }
   .map{
     height: 165px;
+<<<<<<< Updated upstream
     position: relative;
     .mask{
       position: absolute;
@@ -314,6 +326,8 @@ img {
       left: 0;
       top: 0;
     }
+=======
+>>>>>>> Stashed changes
   }
 }
 </style>

@@ -18,39 +18,47 @@
       <tab-item @click.native="cur=1" :class="{active:cur==1}">已删除</tab-item>
     </tab>
     <div class="tab-content">
-        <b v-show="cur==0">
-
-          <div class="card" v-for="(item,index) in List" :key="index">
-            <div style="margin: 10px 0 0 4.51%;">
-              <div class="line-one">{{item.denomination_tit}}代金券</div>
-              <div class="line-two">{{item.use_date_tit}}可用 {{item.use_range_tit}} {{item.use_number_tit}}</div>
-              <div class="line-three"><span style="color: #222222;font-size: 10px;float: left;visibility: hidden">有效期至2019-12-30</span><span
-                style="color: #FFA238;font-size: 18px;float: right;font-weight: bold;line-height: 12px;">￥{{item.price}}</span>
+      <b v-show="cur==0">
+        <scroller lock-x height="512px" @on-scroll-bottom="onScrollBottom" ref="scrollerBottom" :scroll-bottom-offst="20">
+          <div class="scroll-area">
+            <div class="card" v-for="(item,index) in List" :key="index">
+              <div style="margin: 10px 0 0 4.51%;">
+                <div class="line-one">{{item.denomination_tit}}代金券</div>
+                <div class="line-two">{{item.use_date_tit}}可用 {{item.use_range_tit}} {{item.use_number_tit}}</div>
+                <div class="line-three"><span style="color: #222222;font-size: 10px;float: left;visibility: hidden">有效期至2019-12-30</span><span
+                  style="color: #FFA238;font-size: 18px;float: right;font-weight: bold;line-height: 12px;">￥{{item.price}}</span>
+                </div>
               </div>
+              <div class="up"></div>
+              <div class="down"></div>
+              <div class="del" @click="onDel(item)"><p
+                style="font-size: 14px;color: #222222;line-height: 30px;text-align: center;">删除</p></div>
             </div>
-            <div class="up"></div>
-            <div class="down"></div>
-            <div class="del" @click="onDel(item)"><p
-              style="font-size: 14px;color: #222222;line-height: 30px;text-align: center;">删除</p></div>
           </div>
-
-
-        </b>
-        <b v-show="cur==1">
-          <div class="card" v-for="(item,index) in ListTwo" :key="index">
-            <div style="margin: 10px 0 0 4.51%;">
-              <div class="line-one">{{item.denomination_tit}}元代金券</div>
-              <div class="line-two">{{item.use_date_tit}}可用 {{item.use_range_tit}} {{item.use_number_tit}}</div>
-              <div class="line-three"><span style="color: #222222;font-size: 10px;float: left;visibility: hidden;">有效期至2019-12-30</span>
+          <load-more tip="loading"></load-more>
+        </scroller>
+      </b>
+      <b v-show="cur==1">
+        <scroller lock-x height="512px" @on-scroll-bottom="onScrollBottomTwo" ref="scrollerBottom"
+                  :scroll-bottom-offst="20">
+          <div class="scroll-area">
+            <div class="card" v-for="(item,index) in ListTwo" :key="index">
+              <div style="margin: 10px 0 0 4.51%;">
+                <div class="line-one">{{item.denomination_tit}}元代金券</div>
+                <div class="line-two">{{item.use_date_tit}}可用 {{item.use_range_tit}} {{item.use_number_tit}}</div>
+                <div class="line-three"><span style="color: #222222;font-size: 10px;float: left;visibility: hidden;">有效期至2019-12-30</span>
+                </div>
               </div>
+              <div class="up"></div>
+              <div class="down"></div>
+              <div class="del-two"><p
+                style="font-size: 18px;color: #CCCCCC;line-height: 30px;text-align: center;font-weight: bold;">
+                ￥{{item.price}}</p></div>
             </div>
-            <div class="up"></div>
-            <div class="down"></div>
-            <div class="del-two"><p
-              style="font-size: 18px;color: #CCCCCC;line-height: 30px;text-align: center;font-weight: bold;">
-              ￥{{item.price}}</p></div>
           </div>
-        </b>
+          <load-more tip="loading"></load-more>
+        </scroller>
+      </b>
     </div>
     <div class="add">
       <div class="button-wrap">
@@ -91,26 +99,93 @@
                 ListTwo: [],
                 //用于删除的活动ID
                 activeId: "",
-                //分页
+                //上架分页
+                page: 1,
+                //下架分页
+                pageTwo: 1
             }
         },
-        computed: {
-        },
+        computed: {},
         mounted() {
+            //上拉
+            this.$nextTick(() => {
+                this.$refs.scrollerBottom.reset({top: 0})
+            })
             //调取优惠券上架列表
-            this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=business.coupon.index&status=" + '1').then(({data}) => {
+            this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=business.coupon.index&status=" + '1' + "&page=" + this.page).then(({data}) => {
                 console.log(data);
                 this.List = data.data.list;
                 console.log('购物券上架列表：', this.List)
             });
             //调取优惠券删除列表
-            this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=business.coupon.index&status=" + '-1').then(({data}) => {
+            this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=business.coupon.index&status=" + '-1' + "&page=" + this.pageTwo).then(({data}) => {
                 this.ListTwo = data.data.list;
                 console.log('购物券已删除列表：', this.ListTwo)
             });
         },
         methods: {
+            //上架列表上拉
+            onScrollBottom() {
+                if (this.onFetching) {
+                    // do nothing
+                } else {
+                    this.onFetching = true
+                    setTimeout(() => {
+                        this.$nextTick(() => {
+                            this.$refs.scrollerBottom.reset()
+                        })
+                        this.onFetching = false
+                    }, 2000)
+                    console.log(this.page)
+                    //调取优惠券上架列表
+                    this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=business.coupon.index&status=" + '1' + "&page=" + this.page).then(({data}) => {
+                        this.page += 1;
+                        this.List = this.List.concat(data.data.list);
+                        console.log('上拉刷新上架列表：', this.List)
+                        if (data.data.list == '') {
+                            this.$vux.toast.show({
+                                type: "text",
+                                text: '没有更多了',
+                                position: "middle",
+                                time: 1000
+                            });
+                        }
+                    });
 
+                }
+            },
+            //删除上拉
+            onScrollBottomTwo() {
+                if (this.onFetching) {
+                    // do nothing
+                } else {
+                    this.onFetching = true
+                    setTimeout(() => {
+                        this.$nextTick(() => {
+                            this.$refs.scrollerBottom.reset()
+                        })
+                        this.onFetching = false
+                    }, 2000)
+                    console.log(this.pageTwo)
+                    //调取优惠券上架列表
+                    this.$http.post("https://core.kachuo.com/app/ewei_shopv2_app.php?i=5&c=entry&m=ewei_shopv2&do=mobile&r=business.coupon.index&status=" + '-1' + "&page=" + this.pageTwo).then(({data}) => {
+                        this.pageTwo += 1;
+                        this.ListTwo = this.ListTwo.concat(data.data.list);
+                        console.log('上拉刷新删除列表：', this.ListTwo)
+                        if (data.data.list == '') {
+                            this.$vux.toast.show({
+                                type: "text",
+                                text: '没有更多了',
+                                position: "middle",
+                                time: 1000
+                            });
+                        }
+
+                    });
+
+                }
+
+            },
             //去添加页
             open() {
                 this.$router.push('/addCash')

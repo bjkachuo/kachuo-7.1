@@ -128,6 +128,7 @@ export default {
       dsBridge.call("scanning", "web");
       bridge.register("scanning", r => {
         alert(r)
+<<<<<<< Updated upstream
         this.text = r
       });
     },
@@ -150,6 +151,19 @@ export default {
         }
       })
 
+=======
+      });
+    },
+    tip() {
+      this.$vux.toast.show({
+        type: "success",
+        text: "验票成功",
+        time: 1000
+      });
+      setTimeout(() => {
+        this.$router.push("/indextab");
+      }, 2000);
+>>>>>>> Stashed changes
     }
   },
   components: {Header, Tab, TabItem, Flexbox, FlexboxItem, Confirm}

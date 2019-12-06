@@ -97,7 +97,6 @@
 <script>
     import Header from "@/components/pages/backStage/StoreBackstage/BsHeaderBlue";
     import {Flexbox, FlexboxItem, Confirm} from 'vux'
-
     export default {
         props: {},
         data() {
