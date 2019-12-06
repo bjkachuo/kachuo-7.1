@@ -13,15 +13,17 @@
         <div class="text-wrap" @click="open"><p>添加推荐</p></div>
       </div>
     </div>
-    <div class="card" v-for="(item,index) in lists" :key="index">
-      <div class="left">
-        <div style="width: 74px;height:74px;border-radius:8px;margin-right:4%;"><img :src="item.image[0]" alt="" style="width:100%;border-radius:8px;height: 100%;"></div>
-        <div style="width: 56%;"><p style="font-size: 14px;color: #222222;">{{item.name}}</p></div>
-      </div>
-      <div class="right"
-           style="width: 80px;height: 30px;border-radius: 15px;border:1px solid #CCCCCC;background: #FFFFFF;margin: 64px 4% 0 0;"
-           @click="onDel(item)">
-        <p style="font-size: 14px;color: #999999;text-align: center;line-height: 28px;">删除</p>
+    <div style="margin-top:110px;">
+      <div class="card" v-for="(item,index) in lists" :key="index">
+        <div class="left">
+          <div style="width: 74px;height:74px;border-radius:8px;margin-right:4%;"><img :src="item.image[0]" alt="" style="width:100%;border-radius:8px;height: 100%;"></div>
+          <div style="width: 56%;"><p style="font-size: 14px;color: #222222;">{{item.name}}</p></div>
+        </div>
+        <div class="right"
+             style="width: 80px;height: 30px;border-radius: 15px;border:1px solid #CCCCCC;background: #FFFFFF;margin: 64px 4% 0 0;"
+             @click="onDel(item)">
+          <p style="font-size: 14px;color: #999999;text-align: center;line-height: 28px;">删除</p>
+        </div>
       </div>
     </div>
 
@@ -174,9 +176,7 @@
                     console.log('刷新推荐列表',data);
                     this.lists = data.data.list;
                 })
-
             }
-
         },
         components: {
             Header,
@@ -206,6 +206,8 @@
     margin: 56px auto 10px;
     border-radius: 8px;
     overflow: hidden;
+    position: fixed;
+    left: 4%;
   }
 
   .button-wrap {
